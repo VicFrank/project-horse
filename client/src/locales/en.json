@@ -44,7 +44,7 @@
     "chest_drops": "Chest Drops",
     "games": "Games",
     "heroes": "Heroes",
-    "report_a_bug": "Report A Bug",
+    "report_a_bug": "Report a bug",
     "play_now": "Play Now",
     "language": "Language",
     "tournament": "Tournament",
@@ -129,12 +129,6 @@
   "not_found": "Page not found",
   "credits": {
     "page_title": "Our Team",
-    "sunsfan_credit": "SUNSfan - Project Lead {contact}",
-    "contact": "Contact",
-    "credits": [
-      "VicFrank - Website"
-    ],
-    "copyright": "© 2020 Double Edge Studios LLC",
-    "our_team": "Our Team"
+    "copyright": "© 2020 Double Edge Studios LLC"
   }
 }

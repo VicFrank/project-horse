@@ -53,6 +53,7 @@
 
 <script>
 import SidebarToggle from "./SidebarToggle.vue";
+
 export default {
   components: {
     SidebarToggle,

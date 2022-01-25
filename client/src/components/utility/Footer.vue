@@ -51,5 +51,14 @@ footer {
   height: 40px;
 
   background-color: rgb(26, 35, 43);
+  color: #cecece;
+}
+
+a {
+  color: #0b86c4;
+}
+
+.fa {
+  color: #0b86c4;
 }
 </style>
