@@ -12,6 +12,7 @@ const keys = require("./config/keys");
 const gamesRouter = require("./routes/games");
 const playersRouter = require("./routes/players");
 const authRouter = require("./routes/auth");
+const steamRouter = require("./routes/steam");
 
 const players = require("./db/players");
 
@@ -116,6 +117,7 @@ app.use(express.static(path.join(__dirname, "client/dist")));
 app.use("/api/games", gamesRouter);
 app.use("/api/players", playersRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/steam", steamRouter);
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/client/dist/index.html"));

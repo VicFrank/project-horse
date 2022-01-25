@@ -1,27 +1,26 @@
 <template>
-  <div>
-    <div v-if="playerFound">
-      <h1>{{ player.username }}</h1>
-    </div>
-    <div v-else>
-      <h2>v-t="'profile.not_found'"</h2>
-    </div>
-  </div>
+  <h1>Profile</h1>
 </template>
 
 <script>
+// import ProgressBar from "../../utility/ProgressBar";
+
 export default {
+  // components: {
+  //   ProgressBar,
+  // },
+
   data: () => ({
     error: "",
     games: [],
-    player: {},
+    playerStats: {},
     gamesLoading: true,
-    playerFound: false,
+    secondsUntilReset: 0,
   }),
 
   computed: {
     steamID() {
-      return this.$route.params.steam_id;
+      return this.$store.state.auth.userSteamID;
     },
   },
 
@@ -36,7 +35,6 @@ export default {
     fetch(`/api/players/${this.steamID}/stats`)
       .then((res) => res.json())
       .then((player) => {
-        if (player.steam_id) this.playerFound = true;
         this.player = player;
       });
   },

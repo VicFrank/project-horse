@@ -49,4 +49,34 @@ module.exports = {
       throw error;
     }
   },
+
+  async getGames(limit = 100, offset = 0, hours) {
+    let whereClause = "";
+    if (hours) {
+      whereClause = "AND created_at >= NOW() - $3 * INTERVAL '1 HOURS'";
+    }
+    const sql_query = `
+      WITH recent_games AS (
+        SELECT * FROM games
+        ${whereClause}
+        ORDER BY created_at DESC
+        LIMIT $1 OFFSET $2
+      )
+      SELECT * FROM recent_games rg
+      JOIN game_players gp
+      USING (game_id)
+      ORDER BY created_at DESC
+    `;
+    try {
+      if (hours) {
+        const { rows } = await query(sql_query, [limit, offset, hours]);
+        return rows;
+      } else {
+        const { rows } = await query(sql_query, [limit, offset]);
+        return rows;
+      }
+    } catch (error) {
+      throw error;
+    }
+  },
 };

@@ -8,9 +8,6 @@ Vue.use(BootstrapVue);
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import router from "./router/router";
 import store from "./store/index.js";
-import filters from "./filters/filters";
-
-filters.create(Vue);
 
 new Vue({
   router,

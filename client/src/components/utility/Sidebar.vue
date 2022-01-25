@@ -37,7 +37,7 @@
             </router-link>
           </li>
 
-          <li class="sidebar-nav__item">
+          <!-- <li class="sidebar-nav__item">
             <router-link
               to="/profile/battle_pass"
               class="sidebar-nav__link sidebar-nav__link_battlepass"
@@ -53,7 +53,7 @@
               exact-active-class="active"
               v-t="'navigation.armory'"
             ></router-link>
-          </li>
+          </li> -->
 
           <li class="sidebar-nav__item">
             <router-link
@@ -88,14 +88,14 @@
               v-t="'navigation.match_history'"
             ></router-link>
           </li>
-          <li class="sidebar-nav__item">
+          <!-- <li class="sidebar-nav__item">
             <router-link
               to="/profile/subscriptions"
               class="sidebar-nav__link sidebar-nav__link_subscriptions"
               exact-active-class="active"
               v-t="'navigation.my_subscriptions'"
             ></router-link>
-          </li>
+          </li> -->
           <li v-if="isAdmin" class="sidebar-nav__item">
             <router-link
               to="/admin"

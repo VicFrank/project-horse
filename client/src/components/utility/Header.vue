@@ -9,6 +9,11 @@
       </div>
       <ul class="navbar-nav mx-auto flex-row d-none d-lg-flex text-uppercase">
         <li class="nav-item">
+          <router-link class="nav-link" to="/games">
+            {{ $t("navigation.games") }}
+          </router-link>
+        </li>
+        <li class="nav-item">
           <router-link class="nav-link" to="/changelog">
             {{ $t("navigation.change_log") }}
           </router-link>

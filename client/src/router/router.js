@@ -7,6 +7,15 @@ const LoginRedirect = () => import("../components/pages/misc/LoginRedirect");
 const Home = () => import("../components/pages/home/Home");
 const Credits = () => import("../components/pages/credits/Credits");
 const Changelog = () => import("../components/pages/changelog/Changelog");
+const Admin = () => import("../components/pages/admin/Admin");
+
+const Games = () => import("../components/pages/games/Games");
+
+const Profile = () => import("../components/pages/profile/Profile");
+const Achievements = () =>
+  import("../components/pages/achievements/Achievements");
+
+// const PlayerPage = () => import("../components/pages/player/PlayerPage");
 
 Vue.use(VueRouter);
 
@@ -16,7 +25,15 @@ const routes = [
   { path: "/", component: Home },
   { path: "/credits", component: Credits },
   { path: "/changelog", component: Changelog },
+  { path: "/admin", component: Admin },
   { path: "/redirect", component: LoginRedirect },
+  { path: "/games", component: Games },
+  { path: "/profile", component: Profile, meta: { requiresAuth: true } },
+  {
+    path: "/profile/achievements",
+    component: Achievements,
+    meta: { requiresAuth: true },
+  },
 ];
 
 const router = new VueRouter({
