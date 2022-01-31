@@ -1,16 +1,17 @@
 <template>
   <div>
     <h1 class="page-title">Profile</h1>
+    <DailyQuests></DailyQuests>
   </div>
 </template>
 
 <script>
-// import ProgressBar from "../../utility/ProgressBar";
+import DailyQuests from "../quests/DailyQuests.vue";
 
 export default {
-  // components: {
-  //   ProgressBar,
-  // },
+  components: {
+    DailyQuests,
+  },
 
   data: () => ({
     error: "",
@@ -22,6 +23,8 @@ export default {
 
   computed: {
     steamID() {
+      console.log(this.$store.state.auth.username);
+      console.log(this.$store.state.auth.username);
       return this.$store.state.auth.userSteamID;
     },
   },
@@ -38,6 +41,9 @@ export default {
       .then((res) => res.json())
       .then((player) => {
         this.player = player;
+      })
+      .catch((err) => {
+        console.error("Error fetching player stats", err);
       });
   },
 };

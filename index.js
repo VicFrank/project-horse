@@ -12,6 +12,9 @@ const keys = require("./config/keys");
 const gamesRouter = require("./routes/games");
 const playersRouter = require("./routes/players");
 const authRouter = require("./routes/auth");
+const cosmeticsRouter = require("./routes/cosmetics");
+const questsRouter = require("./routes/quests");
+const logsRouter = require("./routes/logs");
 const steamRouter = require("./routes/steam");
 
 const players = require("./db/players");
@@ -30,7 +33,7 @@ passport.serializeUser(async (user, next) => {
 
   const playerExists = await players.doesPlayerExist(steamid);
   if (!playerExists) {
-    await players.createNewPlayer(steamid, username);
+    await players.createPlayer(steamid, username);
   }
 
   const { user_type } = await players.getPlayer(steamid);
@@ -49,7 +52,7 @@ passport.deserializeUser((obj, next) => {
 });
 
 const baseUrl = process.env.IS_PRODUCTION
-  ? "https://www.pathofguardians.com"
+  ? "https://www.projecthorse.com"
   : "http://localhost:3000";
 passport.use(
   new SteamStrategy(
@@ -117,6 +120,9 @@ app.use(express.static(path.join(__dirname, "client/dist")));
 app.use("/api/games", gamesRouter);
 app.use("/api/players", playersRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/cosmetics", cosmeticsRouter);
+app.use("/api/quests", questsRouter);
+app.use("/api/logs", logsRouter);
 app.use("/api/steam", steamRouter);
 
 app.get("*", (req, res) => {

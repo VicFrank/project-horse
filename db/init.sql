@@ -93,7 +93,7 @@ CREATE INDEX idx_hero_abilities_ability_name ON hero_abilities (ability_name);
 
 CREATE TABLE IF NOT EXISTS cosmetics (
   cosmetic_id SERIAL PRIMARY KEY,
-  in_game_name TEXT UNIQUE,
+  cosmetic_name TEXT UNIQUE,
   cosmetic_type TEXT,
   equip_group TEXT,
   cost_coins INTEGER,

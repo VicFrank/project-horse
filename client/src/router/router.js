@@ -1,5 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import store from "../store";
+import i18n from "../i18n";
 
 const NotFound = () => import("../components/pages/misc/NotFound");
 const LoginRedirect = () => import("../components/pages/misc/LoginRedirect");
@@ -48,25 +50,35 @@ const router = new VueRouter({
   },
 });
 
-// router.beforeEach((to, from, next) => {
-//   if (to.matched.some((record) => record.meta.requiresAuth)) {
-//     if (store.getters.loggedIn) {
-//       next();
-//     } else {
-//       next("");
-//     }
-//   } else {
-//     next();
-//   }
-//   if (to.matched.some((record) => record.meta.requiresAdmin)) {
-//     if (store.getters.isAdmin) {
-//       next();
-//     } else {
-//       next("");
-//     }
-//   } else {
-//     next();
-//   }
-// });
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (store.getters.loggedIn) {
+      next();
+    } else {
+      next("");
+    }
+  } else {
+    next();
+  }
+  if (to.matched.some((record) => record.meta.requiresAdmin)) {
+    if (store.getters.isAdmin) {
+      next();
+    } else {
+      next("");
+    }
+  } else {
+    next();
+  }
+});
+
+router.beforeEach((to, from, next) => {
+  const lang = store.getters.lang;
+  if (lang && lang !== i18n.locale) {
+    i18n.locale = lang;
+    next();
+  } else {
+    next();
+  }
+});
 
 export default router;

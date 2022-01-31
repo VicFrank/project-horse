@@ -24,8 +24,8 @@
                 </p>
               </div>
               <div class="rewards">
-                <p v-if="quest.poggers_reward > 0" class="pog-text">
-                  {{ quest.poggers_reward }} POGGERS
+                <p v-if="quest.coins_reward > 0" class="pog-text">
+                  {{ quest.coins_reward }} POGGERS
                 </p>
                 <p class="quest-xp-text">{{ quest.xp_reward }} XP</p>
               </div>
@@ -81,7 +81,7 @@ export default {
           quest_name: "Sample Achievement",
           quest_description: "This is just a placeholder",
           required_amount: 1000,
-          poggers_reward: 200,
+          coins_reward: 200,
           xp_reward: 100,
           capped_quest_progress: 500,
           quest_completed: true,
@@ -91,7 +91,7 @@ export default {
           quest_name: "Sample Achievement",
           quest_description: "This is just a placeholder",
           required_amount: 1000,
-          poggers_reward: 200,
+          coins_reward: 200,
           xp_reward: 100,
           capped_quest_progress: 500,
           quest_completed: true,
@@ -101,7 +101,7 @@ export default {
           quest_name: "Sample Achievement",
           quest_description: "This is just a placeholder",
           required_amount: 1000,
-          poggers_reward: 200,
+          coins_reward: 200,
           xp_reward: 100,
           capped_quest_progress: 500,
           quest_completed: true,
@@ -111,7 +111,7 @@ export default {
           quest_name: "Sample Achievement",
           quest_description: "This is just a placeholder",
           required_amount: 1000,
-          poggers_reward: 200,
+          coins_reward: 200,
           xp_reward: 100,
           capped_quest_progress: 500,
           quest_completed: true,
@@ -121,7 +121,7 @@ export default {
           quest_name: "Sample Achievement",
           quest_description: "This is just a placeholder",
           required_amount: 1000,
-          poggers_reward: 200,
+          coins_reward: 200,
           xp_reward: 100,
           capped_quest_progress: 500,
           quest_completed: true,

@@ -15,11 +15,28 @@
                 class="profile-picture"
                 alt="Profile Picture"
               />
-              <div class="notification">
+              <div class="notification" v-if="hasBattlePass">
                 <span class="custom-badge">{{ bpLevel }}</span>
               </div>
             </div>
           </router-link>
+        </div>
+
+        <div class="row">
+          <ProgressBar
+            class="bp-progress mt-1"
+            :progress="500"
+            :required="1000"
+          />
+        </div>
+
+        <div class="d-flex justify-content-center align-items-center mt-1">
+          <img
+            src="../../assets/images/pogcoin_gold.png"
+            class="coins-img mr-1"
+            alt="Coins"
+          />
+          {{ coins }}
         </div>
 
         <ul class="sidebar-nav">
@@ -30,14 +47,14 @@
               exact-active-class="active"
             >
               {{ $t("navigation.profile") }}
-              <b-badge v-if="numDailys > 0" variant="primary" class="ml-1">
-                {{ numDailys }}
-                <span class="sr-only">unclaimed achievements</span>
+              <b-badge v-if="numDailies > 0" variant="primary" class="ml-1">
+                {{ numDailies }}
+                <span class="sr-only">Unclaimed Daily Quests</span>
               </b-badge>
             </router-link>
           </li>
 
-          <!-- <li class="sidebar-nav__item">
+          <li class="sidebar-nav__item">
             <router-link
               to="/profile/battle_pass"
               class="sidebar-nav__link sidebar-nav__link_battlepass"
@@ -53,7 +70,7 @@
               exact-active-class="active"
               v-t="'navigation.armory'"
             ></router-link>
-          </li> -->
+          </li>
 
           <li class="sidebar-nav__item">
             <router-link
@@ -68,7 +85,7 @@
                 class="ml-1"
               >
                 {{ numAchievements }}
-                <span class="sr-only">unclaimed achievements</span>
+                <span class="sr-only">Unclaimed Achievements</span>
               </b-badge>
             </router-link>
           </li>
@@ -88,14 +105,6 @@
               v-t="'navigation.match_history'"
             ></router-link>
           </li>
-          <!-- <li class="sidebar-nav__item">
-            <router-link
-              to="/profile/subscriptions"
-              class="sidebar-nav__link sidebar-nav__link_subscriptions"
-              exact-active-class="active"
-              v-t="'navigation.my_subscriptions'"
-            ></router-link>
-          </li> -->
           <li v-if="isAdmin" class="sidebar-nav__item">
             <router-link
               to="/admin"
@@ -161,10 +170,7 @@
 <script>
 import { gsap, Power4 } from "gsap";
 import LoginButton from "./LoginButton";
-
-import dayjs from "dayjs";
-const relativeTime = require("dayjs/plugin/relativeTime");
-dayjs.extend(relativeTime);
+import ProgressBar from "./ProgressBar";
 
 export default {
   name: "sidebar",
@@ -173,6 +179,7 @@ export default {
 
   components: {
     LoginButton,
+    ProgressBar,
   },
 
   mounted() {
@@ -239,33 +246,23 @@ export default {
     loggedIn() {
       return this.$store.getters.loggedIn;
     },
+    coins() {
+      return this.$store.getters.coins;
+    },
+    hasBattlePass() {
+      return this.$store.getters.hasBattlePass;
+    },
     bpLevel() {
       return this.$store.getters.bpLevel;
-    },
-    bpLevelProgress() {
-      return this.$store.getters.bpLevelProgress;
-    },
-    bpLevelRequired() {
-      return this.$store.getters.bpLevelRequired;
-    },
-    bpTier() {
-      return this.$store.getters.bpTier;
     },
     isAdmin() {
       return this.$store.getters.isAdmin;
     },
-    poggers() {
-      return this.$store.getters.poggers;
-    },
     numAchievements() {
       return this.$store.state.auth.achievementsToClaim;
     },
-    numDailys() {
-      return this.$store.state.auth.dailysToClaim;
-    },
-    upgradeExpiration() {
-      const expiration = this.$store.state.auth.upgradeExpiration;
-      return dayjs(String(expiration)).fromNow();
+    numDailies() {
+      return this.$store.state.auth.dailiesToClaim;
     },
   },
   watch: {
@@ -446,6 +443,11 @@ export default {
   height: 40px;
 }
 
+.coins-img {
+  width: 20px;
+  height: 20px;
+}
+
 .bp-progress {
   margin: auto;
   width: 75%;
@@ -530,12 +532,5 @@ export default {
   height: 20px;
   background-repeat: no-repeat;
   background-image: url("../../assets/images/icons/history.svg");
-}
-
-.sidebar-nav__link_subscriptions:before {
-  width: 20px;
-  height: 20px;
-  background-repeat: no-repeat;
-  background-image: url("../../assets/images/icons/newspaper-solid.svg");
 }
 </style>

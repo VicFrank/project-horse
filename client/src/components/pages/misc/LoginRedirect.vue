@@ -12,7 +12,7 @@ export default {
           const { photos, id, isAdmin } = res.user;
 
           this.$store.commit({
-            type: "setUser",
+            type: "SET_USER",
             steamID: id,
             picture: photos[2].value,
             isAdmin,
@@ -27,7 +27,7 @@ export default {
           }
         } else {
           this.$store.commit({
-            type: "setNotLoggedIn",
+            type: "LOG_OUT",
           });
           this.$router.push("");
         }

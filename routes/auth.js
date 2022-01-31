@@ -11,7 +11,7 @@ const CLIENT_ID = keys.patreon.oauth.clientID;
 const SECRET = keys.patreon.oauth.secret;
 const SCOPE = `users`;
 const REDIRECT_URL = process.env.IS_PRODUCTION
-  ? "https://www.pathofguardians.com/api/auth/patreon/callback"
+  ? "https://www.projecthorse.com/api/auth/patreon/callback"
   : "http://localhost:8080/api/auth/patreon/callback";
 
 const oauthClient = oauth(CLIENT_ID, SECRET);
@@ -92,9 +92,13 @@ router.get("/steam/success", (req, res) => {
 //   request.  The first step in Steam authentication will involve redirecting
 //   the user to steamcommunity.com.  After authenticating, Steam will redirect the
 //   user back to this application at /auth/steam/return
-router.get("/steam", passport.authenticate("steam", { failureRedirect: "/" }), function (req, res) {
-  res.redirect("/");
-});
+router.get(
+  "/steam",
+  passport.authenticate("steam", { failureRedirect: "/" }),
+  function (req, res) {
+    res.redirect("/");
+  }
+);
 
 router.get("/logout", function (req, res) {
   req.logout();

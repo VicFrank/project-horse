@@ -8,17 +8,17 @@
         </router-link>
       </div>
       <ul class="navbar-nav mx-auto flex-row d-none d-lg-flex text-uppercase">
-        <li class="nav-item">
+        <li class="nav-item mx-3">
           <router-link class="nav-link" to="/games">
             {{ $t("navigation.games") }}
           </router-link>
         </li>
-        <li class="nav-item">
+        <li class="nav-item mx-3">
           <router-link class="nav-link" to="/changelog">
             {{ $t("navigation.change_log") }}
           </router-link>
         </li>
-        <li class="nav-item">
+        <li class="nav-item mx-3">
           <router-link class="nav-link" to="/credits">
             {{ $t("navigation.credits") }}
           </router-link>
