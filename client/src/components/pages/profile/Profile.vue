@@ -1,5 +1,7 @@
 <template>
-  <h1>Profile</h1>
+  <div>
+    <h1 class="page-title">Profile</h1>
+  </div>
 </template>
 
 <script>
