@@ -25,7 +25,7 @@
     "patreon": "^0.4.1",
     "patreon-oauth": "^1.0.0",
     "pg": "^8.7.1",
-    "stripe": "^8.194.0"
+    "stripe": "^8.201.0"
   },
   "devDependencies": {
     "concurrently": "^6.5.1",

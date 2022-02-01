@@ -607,6 +607,22 @@ module.exports = {
     }
   },
 
+  async realMoneyPurchase(steamid, item, amount) {
+    try {
+      if (item === "COINS") {
+        await players.modifyCoins(steamid, amount);
+      } else if (item === "XP") {
+        await players.addBattlePassXp(steamid, amount);
+      } else if (item === "BATTLE_PASS") {
+        await players.addBattlePassTier(steamid, 1, 31 * amount);
+      } else {
+        throw new Error("Bad item type");
+      }
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async buyCosmetic(steamid, cosmeticID) {
     try {
       const cosmetic = await Cosmetics.getCosmetic(cosmeticID);

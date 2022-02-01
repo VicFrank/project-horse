@@ -16,6 +16,7 @@ const cosmeticsRouter = require("./routes/cosmetics");
 const battlepassRouter = require("./routes/battlepass");
 const questsRouter = require("./routes/quests");
 const logsRouter = require("./routes/logs");
+const paymentsRouter = require("./routes/payments");
 const steamRouter = require("./routes/steam");
 
 const players = require("./db/players");
@@ -124,7 +125,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/cosmetics", cosmeticsRouter);
 app.use("/api/battle_pass", battlepassRouter);
 app.use("/api/quests", questsRouter);
-app.use("/api/logs", logsRouter);
+app.use("/api/payments", paymentsRouter);
 app.use("/api/steam", steamRouter);
 
 app.get("*", (req, res) => {
