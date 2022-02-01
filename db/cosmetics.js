@@ -137,13 +137,13 @@ module.exports = {
       const { rows: itemRewards } = await query(
         `SELECT * FROM chest_item_rewards`
       );
-      const { rows: poggerRewards } = await query(
-        `SELECT * FROM chest_pogger_rewards`
+      const { rows: coinRewards } = await query(
+        `SELECT * FROM chest_coin_rewards`
       );
       const { rows: bonusRewards } = await query(
         `SELECT * FROM chest_bonus_rewards`
       );
-      return [...itemRewards, ...poggerRewards, ...bonusRewards];
+      return [...itemRewards, ...coinRewards, ...bonusRewards];
     } catch (error) {
       throw error;
     }
@@ -155,15 +155,15 @@ module.exports = {
         `SELECT * FROM chest_item_rewards WHERE cosmetic_id = $1`,
         [chestID]
       );
-      const { rows: poggerRewards } = await query(
-        `SELECT * FROM chest_pogger_rewards WHERE cosmetic_id = $1`,
+      const { rows: coinRewards } = await query(
+        `SELECT * FROM chest_coin_rewards WHERE cosmetic_id = $1`,
         [chestID]
       );
       const { rows: bonusRewards } = await query(
         `SELECT * FROM chest_bonus_rewards WHERE cosmetic_id = $1`,
         [chestID]
       );
-      return [...itemRewards, ...poggerRewards, ...bonusRewards];
+      return [...itemRewards, ...coinRewards, ...bonusRewards];
     } catch (error) {
       throw error;
     }

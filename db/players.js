@@ -2,6 +2,7 @@ const { query } = require("./index");
 const Cosmetics = require("./cosmetics");
 const Logs = require("./logs");
 const Quests = require("./quests");
+const BattlePasses = require("./battlepass");
 
 module.exports = {
   // --------------------------------------------------
@@ -197,10 +198,12 @@ module.exports = {
         [steamid, username]
       );
 
-      // TODO: Initialize quests
-      // await this.createInitialDailyQuests(steamid, 3);
-      // await this.createInitialWeeklyQuests(steamid, 3);
-      // await this.initializeAchievements(steamid);
+      await this.createInitialDailyQuests(steamid, 3);
+      await this.createInitialWeeklyQuests(steamid, 3);
+      await this.initializeAchievements(steamid);
+
+      const activeBattlePass = await BattlePasses.getActiveBattlePass();
+      await this.createBattlePass(steamid, activeBattlePass.id);
 
       return rows[0];
     } catch (error) {}
@@ -222,14 +225,12 @@ module.exports = {
   },
 
   async modifyCoins(steamID, coins) {
+    if (coins === 0) return;
     try {
-      const queryText = `
-        UPDATE players
-        SET coins = coins + $1
-        WHERE steam_id = $2
-        RETURNING *
-      `;
-      const { rows } = await query(queryText, [coins, steamID]);
+      await query(queryText, [
+        `UPDATE players SET coins = coins + $1 WHERE steam_id = $2 RETURNING *`,
+        steamID,
+      ]);
     } catch (error) {
       throw error;
     }
@@ -238,9 +239,7 @@ module.exports = {
   async addPlayerLog(steamid, event) {
     try {
       await query(
-        `
-        INSERT INTO player_logs (steam_id, log_event)
-        VALUES ($1, $2)`,
+        `INSERT INTO player_logs (steam_id, log_event) VALUES ($1, $2)`,
         [steamid, event]
       );
       return;
@@ -252,6 +251,156 @@ module.exports = {
   // --------------------------------------------------
   // Player Battle Pass Functions
   // --------------------------------------------------
+
+  /**
+   * Add a battle pass to the player's inventory. Only one battle pass can be active at a time.
+   * A new battle pass is created every month.
+   */
+  async createBattlePass(steamid, bpID) {
+    try {
+      const { rows } = await query(
+        `INSERT INTO player_battle_pass (steam_id, battle_pass_id) VALUES ($1, $2) RETURNING *`,
+        [steamid, bpID]
+      );
+      return rows[0];
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getActiveBattlePass(steamid) {
+    try {
+      const activeBattlePass = await BattlePasses.getActiveBattlePass();
+      const { rows } = await query(
+        `SELECT * FROM player_battle_pass WHERE steam_id = $1 AND battle_pass_id = $2`,
+        [steamid, activeBattlePass.battle_pass_id]
+      );
+      return rows[0];
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  /**
+   * Gives Battle Pass Experience, and handles giving awards
+   * based on levels gained. This is the only way you should
+   * ever add battle pass exp to a player, to ensure they get
+   * their rewards.
+   * @param {*} steamid
+   * @param {*} xp
+   */
+  async addBattlePassXp(steamid, xp) {
+    if (xp <= 0) return;
+
+    try {
+      const { rows } = await query(
+        `
+        UPDATE player_battle_pass
+        SET total_xp = total_xp + $2
+        WHERE steam_id = $1
+        RETURNING *
+      `,
+        [steamid, xp]
+      );
+
+      if (rows.length === 0) throw new Error("No battle pass found");
+
+      // Give rewards for every level of the battle pass that we passed
+      const {
+        bp_level: previousLevel,
+        total_xp: totalXp,
+        battle_pass_id,
+      } = rows[0];
+
+      // Get the level we were at, and the level we are at now
+      const currentLevel = BattlePasses.calculateBattlePassLevel(
+        battle_pass_id,
+        totalXp
+      );
+
+      // We haven't gained any levels, we're done here
+      if (previousLevel === currentLevel) return;
+
+      // Update the level in the database
+      const { rows: updatedBP } = await query(
+        `
+        UPDATE player_battle_pass
+        SET bp_level = $2
+        WHERE steam_id = $1
+        RETURNING *
+      `,
+        [steamid, currentLevel]
+      );
+
+      const rewards = await BattlePasses.getBattlePassRewardsFromRange(
+        previousLevel + 1,
+        currentLevel
+      );
+      const { cosmetics, coins } = rewards;
+
+      for (const reward of cosmetics) {
+        const { cosmetic_id, amount } = reward;
+        for (let i = 0; i < amount; i++) {
+          await this.giveCosmetic(steamid, cosmetic_id);
+        }
+      }
+
+      if (coins > 0) await this.modifyCoins(steamid, coins);
+
+      return updatedBP;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  /**
+   * Awards battle pass experience to a player after a game
+   * (capped) at (20 wins of xp) per day
+   *
+   * BASELINE:
+   * 50 XP per win (capped at 20 wins)
+   * 200 XP bonus for the first win of the day (250 total)
+   *
+   * @param {string} steamid
+   * @param {boolean} winner
+   * @param {number} bonusMultiplier
+   */
+  async givePostGameXp(steamid, winner, bonusMultiplier = 1) {
+    try {
+      const games = await this.getBasicGamesToday(steamid);
+
+      const numRecentGames = games.reduce(
+        (acc, game) => (game.won ? acc + 1 : acc + 0.5),
+        0
+      );
+      const hasWonToday = games.some((game) => game.won);
+
+      let reward = 0;
+      if (numRecentGames > 20) {
+        return;
+      } else if (!hasWonToday && winner) {
+        reward = 200;
+      } else {
+        reward = 50;
+      }
+
+      // Earn half xp for losing
+      if (!winner) reward = reward * 0.5;
+
+      reward = Math.floor(reward * bonusMultiplier);
+
+      await Logs.addTransactionLog(steamid, "game_xp", {
+        winner,
+        reward,
+      });
+
+      await this.addBattlePassXp(steamid, reward);
+
+      return reward;
+    } catch (error) {
+      throw error;
+    }
+  },
 
   // --------------------------------------------------
   // Player Cosmetics Functions
@@ -373,20 +522,14 @@ module.exports = {
       }
 
       // Update battle pass
-      // if (transactionData.battlePass) {
-      //   const { battlePass } = transactionData;
-      //   const { upgradeTier, upgradeDays, bonusExp } = battlePass;
+      if (transactionData.battlePass) {
+        const { battlePass } = transactionData;
+        const { bonusExp } = battlePass;
 
-      //   const xpToAdd = bonusExp || 0;
+        const xpToAdd = bonusExp || 0;
 
-      //   if (xpToAdd != 0) {
-      //     await this.addBattlePassExp(steamID, xpToAdd);
-      //   }
-
-      //   if (upgradeTier != undefined && upgradeDays) {
-      //     await this.addBattlePassTier(steamID, upgradeTier, upgradeDays);
-      //   }
-      // }
+        if (xpToAdd > 0) await this.addBattlePassXp(steamid, xpToAdd);
+      }
 
       // Add or remove misc/cosmetic items
       if (transactionData.items) {
@@ -430,6 +573,7 @@ module.exports = {
     }
   },
 
+  // TODO: Define items that can be consumed, determine what rewards they should give
   async consumeItem(steamid, cosmeticID) {
     try {
       const cosmetic = await Cosmetics.getCosmetic(cosmeticID);
@@ -445,6 +589,7 @@ module.exports = {
       if (!hasCosmetic) throw new Error("You don't own this item");
 
       // TODO: Get the amount of xp the item should give
+      const xp = 0;
 
       // Log the transaction
       await Logs.addTransactionLog(steamid, "consume_item", {
@@ -454,9 +599,9 @@ module.exports = {
 
       // remove the item
       await this.removeCosmetic(steamid, cosmeticID);
-      // await this.addBattlePassExp(steamid, experience);
+      await this.addBattlePassXp(steamid, xp);
 
-      return experience;
+      return xp;
     } catch (error) {
       throw error;
     }
@@ -466,9 +611,7 @@ module.exports = {
     try {
       const cosmetic = await Cosmetics.getCosmetic(cosmeticID);
 
-      if (!cosmetic) {
-        throw new Error("Invalid cosmeticID");
-      }
+      if (!cosmetic) throw new Error(`Invalid cosmeticID ${cosmeticID}`);
       // Make sure the player has enough coins
       const coins = await this.getCoins(steamid);
       const price = cosmetic.cost;
@@ -731,13 +874,15 @@ module.exports = {
    */
   async getAllQuestsForPlayer(steamID) {
     try {
-      const sql_query = `
-      SELECT * FROM quests q
-      JOIN player_quests USING (quest_id)
-      WHERE steam_id = $1
-	    ORDER BY quest_id
-      `;
-      const { rows } = await query(sql_query, [steamID]);
+      const { rows } = await query(
+        `
+        SELECT * FROM quests q
+        JOIN player_quests USING (quest_id)
+        WHERE steam_id = $1
+        ORDER BY quest_id
+      `,
+        [steamID]
+      );
       return rows;
     } catch (error) {
       throw error;
@@ -748,11 +893,11 @@ module.exports = {
    * Creates three random daily quests for the user.
    * This function should only be called when a player is
    * created for the first time.
-   * @param {string} steamID
+   * @param {string} steamid
    */
-  async createInitialDailyQuests(steamID, numQuests) {
+  async createInitialDailyQuests(steamid, numQuests) {
     try {
-      const currentQuests = await this.getDailyQuests(steamID);
+      const currentQuests = await this.getDailyQuests(steamid);
       if (currentQuests.length > 0)
         throw new Error("Player Daily Quests have already been initialized!");
 
@@ -764,16 +909,39 @@ module.exports = {
       let newQuests = [];
       let index = 1;
       for (const quest of questsToInsert) {
-        const insert_query = `
-          INSERT INTO player_quests (steam_id, quest_id, quest_index)
-          VALUES($1, $2, $3)
-          RETURNING *;
-        `;
-        const { rows } = await query(insert_query, [
-          steamID,
-          quest.quest_id,
-          index,
-        ]);
+        const { rows } = await query(
+          `INSERT INTO player_quests (steam_id, quest_id, quest_index) VALUES($1, $2, $3) RETURNING *`,
+          [steamid, quest.quest_id, index]
+        );
+        newQuests.push(rows[0]);
+
+        index++;
+      }
+
+      return newQuests;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async createInitialWeeklyQuests(steamid, numQuests) {
+    try {
+      const currentQuests = await this.getWeeklyQuestsIncludeHidden(steamid);
+      if (currentQuests.length > 0)
+        throw new Error("Player Weekly Quests have already been initialized!");
+
+      // Randomly choose three weekly quests
+      const allQuests = await Quests.getAllWeeklyQuests();
+      const questsToInsert = this.randomSample(allQuests, numQuests);
+
+      // Add the new quests
+      let newQuests = [];
+      let index = 1;
+      for (const quest of questsToInsert) {
+        const { rows } = await query(
+          `INSERT INTO player_quests (steam_id, quest_id, quest_index) VALUES($1, $2, $3) RETURNING *`,
+          [steamid, quest.quest_id, index]
+        );
         newQuests.push(rows[0]);
 
         index++;
@@ -793,7 +961,7 @@ module.exports = {
     try {
       const allAchievements = await Quests.getAllAchievements();
 
-      for (quest of allAchievements) {
+      for (const quest of allAchievements) {
         await query(
           `INSERT INTO player_quests (steam_id, quest_id) VALUES($1, $2)`,
           [steamid, quest.quest_id]
@@ -827,8 +995,8 @@ module.exports = {
     }
   },
 
-  // Randomly choose a new quest
-  async chooseNewQuest(currentQuests, allQuests) {
+  // Randomly choose a new quest that doesn't share a stat with another active quest
+  chooseNewQuest(currentQuests, allQuests) {
     const currentQuestIDs = currentQuests.map((quest) => quest.quest_id);
     const currentQuestStats = currentQuests.map((quest) => quest.stat);
     const newQuests = allQuests.filter((quest) => {
@@ -859,19 +1027,17 @@ module.exports = {
       const interval = isWeekly ? 24 * 7 : 23;
 
       // Make sure the player has the quest, and that it's at least 24 hours old
-      let sql_query = `
-      SELECT
-      created < current_timestamp - $3 * INTERVAL '1 HOURS' as can_reroll
-      FROM player_quests
-      JOIN quests
-      USING (quest_id)
-      WHERE is_achievement = FALSE AND steam_id = $1 AND quest_id = $2
-      `;
-      const { rows: createdRows } = await query(sql_query, [
-        steamID,
-        questID,
-        interval,
-      ]);
+      const { rows: createdRows } = await query(
+        `
+        SELECT
+        created < current_timestamp - $3 * INTERVAL '1 HOURS' as can_reroll
+        FROM player_quests
+        JOIN quests
+        USING (quest_id)
+        WHERE is_achievement = FALSE AND steam_id = $1 AND quest_id = $2
+      `,
+        [steamID, questID, interval]
+      );
 
       if (createdRows.length === 0)
         throw new Error(`Player does not have quest with ID ${questID}`);
@@ -892,25 +1058,23 @@ module.exports = {
       const questToAddID = questToAdd.quest_id;
 
       // Log the reroll
-      await logs.addTransactionLog(steamID, "quest_reroll", {
+      await Logs.addTransactionLog(steamID, "quest_reroll", {
         steamID,
         oldQuest: questID,
         newQuest: questToAddID,
       });
 
       // Update the quest
-      sql_query = `
+      const { rows: newQuestRows } = await query(
+        `
         UPDATE player_quests
         SET (quest_id, quest_progress, created, claimed) =
         ($3, DEFAULT, DEFAULT, DEFAULT)
         WHERE steam_id = $1 AND quest_id = $2
         RETURNING *
-      `;
-      const { rows: newQuestRows } = await query(sql_query, [
-        steamID,
-        questID,
-        questToAddID,
-      ]);
+    `,
+        [steamID, questID, questToAddID]
+      );
 
       return { ...newQuestRows[0], success: true };
     } catch (error) {
@@ -944,7 +1108,7 @@ module.exports = {
    * Only claims if the player has made enough progress to claim
    * and the quest has not been already claimed
    * */
-  async claimQuestReward(steamID, questID) {
+  async claimQuestReward(steamid, questID) {
     try {
       let quest = await Quests.getQuest(questID);
 
@@ -955,7 +1119,8 @@ module.exports = {
 
       // Get the quest rewards and requirements for the DB,
       // and make sure the quest is actually complete
-      let sql_query = `
+      const { rows } = await query(
+        `
         SELECT pq.quest_progress, pq.claimed, q.required_amount,
           q.coin_reward, q.xp_reward, is_achievement,
           created < current_timestamp - $3 * INTERVAL '1 HOURS' as can_reroll
@@ -963,8 +1128,9 @@ module.exports = {
         JOIN quests q
         USING (quest_id)
         WHERE steam_id = $1 AND quest_id = $2
-      `;
-      const { rows } = await query(sql_query, [steamID, questID, interval]);
+        `,
+        [steamid, questID, interval]
+      );
 
       if (rows.length === 0)
         throw new Error(`Player does not have quest with ID ${questID}`);
@@ -981,41 +1147,29 @@ module.exports = {
       if (questProgress < required)
         throw new Error(`Quest is not completed, ${questProgress}/${required}`);
       if (claimed) throw new Error(`Quest ${questID} has already been claimed`);
-      if (!this.playerHasQuest(steamID, questID))
+      if (!this.playerHasQuest(steamid, questID))
         throw new Error("Player does not have quest");
 
       // Log the transaction
-      await logs.addTransactionLog(steamID, "claim_quest", {
-        steamID,
-        questID,
-        coins,
-        xp,
-      });
+      const questEvent = { steamid, questID, coins, xp };
+      await Logs.addTransactionLog(steamid, "claim_quest", questEvent);
 
       // Set the quest as claimed
       await query(
         `
-      UPDATE player_quests
-      SET claimed = TRUE
-      WHERE steam_id = $1 AND quest_id = $2
-      RETURNING *`,
-        [steamID, questID]
+        UPDATE player_quests
+        SET claimed = TRUE
+        WHERE steam_id = $1 AND quest_id = $2
+        RETURNING *
+        `,
+        [steamid, questID]
       );
 
       // Reroll if possible
-      if (canReroll) {
-        await this.rerollQuest(steamID, questID);
-      }
+      if (canReroll) await this.rerollQuest(steamid, questID);
 
-      // Add the rewarded coins
-      await query(
-        `UPDATE players SET coins = coins + $2 WHERE steam_id = $1
-    `,
-        [steamID, coins]
-      );
-
-      // Add the rewarded xp to the battle pass
-      await this.addBattlePassExp(steamID, xp);
+      await this.modifyCoins(steamid, coins);
+      await this.addBattlePassXp(steamid, xp);
 
       return { xp, coins, success: true };
     } catch (error) {
@@ -1023,7 +1177,7 @@ module.exports = {
     }
   },
 
-  async getNumDailyQuests(steamID) {
+  async getNumDailyQuests(steamid) {
     try {
       return 2;
     } catch (error) {
@@ -1039,7 +1193,7 @@ module.exports = {
     try {
       const { rows } = await query(
         `
-        SELECT pq.*, q.*, p.patreon_level,
+        SELECT pq.*, q.*,
           LEAST(quest_progress, required_amount) as capped_quest_progress,
           quest_progress >= required_amount as quest_completed,
           created < current_timestamp - interval '23 hours' as can_reroll
@@ -1066,19 +1220,69 @@ module.exports = {
     try {
       const { rows } = await query(
         `
-      SELECT pq.*, q.*, p.patreon_level,
-        LEAST(quest_progress, required_amount) as capped_quest_progress,
-        quest_progress >= required_amount as quest_completed,
-        created < current_timestamp - interval '23 hours' as can_reroll
-      FROM player_quests pq
-      JOIN quests q
-      USING (quest_id)
-      JOIN players p
-      USING (steam_id)
-      WHERE steam_id = $1 AND q.is_achievement = FALSE AND is_weekly = FALSE
-      ORDER BY quest_index DESC
+        SELECT pq.*, q.*,
+          LEAST(quest_progress, required_amount) as capped_quest_progress,
+          quest_progress >= required_amount as quest_completed,
+          created < current_timestamp - interval '23 hours' as can_reroll
+        FROM player_quests pq
+        JOIN quests q
+        USING (quest_id)
+        JOIN players p
+        USING (steam_id)
+        WHERE steam_id = $1 AND q.is_achievement = FALSE AND is_weekly = FALSE
+        ORDER BY quest_index DESC
       `,
         [steamid]
+      );
+
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getWeeklyQuests(steamID) {
+    try {
+      const { rows } = await query(
+        `
+        SELECT pq.*, q.*,
+          LEAST(quest_progress, required_amount) as capped_quest_progress,
+          quest_progress >= required_amount as quest_completed,
+          created < current_timestamp - interval '168 hours' as can_reroll
+        FROM player_quests pq
+        JOIN quests q
+        USING (quest_id)
+        JOIN players p
+        USING (steam_id)
+        WHERE steam_id = $1 AND q.is_achievement = FALSE AND is_weekly = TRUE
+        ORDER BY quest_index DESC
+      `,
+        [steamID]
+      );
+
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getWeeklyQuestsIncludeHidden(steamID) {
+    try {
+      const { rows } = await query(
+        `
+        SELECT pq.*, q.*,
+          LEAST(quest_progress, required_amount) as capped_quest_progress,
+          quest_progress >= required_amount as quest_completed,
+          created < current_timestamp - interval '168 hours' as can_reroll
+        FROM player_quests pq
+        JOIN quests q
+        USING (quest_id)
+        JOIN players p
+        USING (steam_id)
+        WHERE steam_id = $1 AND q.is_achievement = FALSE AND is_weekly = TRUE
+        ORDER BY quest_index DESC
+      `,
+        [steamID]
       );
 
       return rows;

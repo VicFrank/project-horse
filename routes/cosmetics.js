@@ -12,16 +12,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-// router.get("/battle_pass", async (req, res) => {
-//   try {
-//     const battlePass = await cosmetics.getBattlePass();
-//     res.status(201).send(battlePass);
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).json({ error: error.toString() });
-//   }
-// });
-
 router.get("/chest_rewards", async (req, res) => {
   try {
     const rows = await cosmetics.getAllChestRewards();

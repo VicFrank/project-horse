@@ -6,7 +6,6 @@ DROP TABLE IF EXISTS hero_abilities CASCADE;
 DROP TABLE IF EXISTS cosmetics CASCADE;
 DROP TABLE IF EXISTS player_cosmetics CASCADE;
 DROP TABLE IF EXISTS battle_pass CASCADE;
-DROP TABLE IF EXISTS battle_pass_rewards CASCADE;
 DROP TABLE IF EXISTS player_battle_pass CASCADE;
 DROP TABLE IF EXISTS quests CASCADE;
 DROP TABLE IF EXISTS player_quests CASCADE;
@@ -104,32 +103,41 @@ CREATE TABLE IF NOT EXISTS cosmetics (
 CREATE TABLE IF NOT EXISTS player_cosmetics (
   cosmetic_id INTEGER REFERENCES cosmetics (cosmetic_id) ON UPDATE CASCADE,
   steam_id TEXT REFERENCES players (steam_id) ON UPDATE CASCADE,
-  created TIMESTAMPTZ DEFAULT Now(),
+  created TIMESTAMPTZ DEFAULT NOW(),
   equipped BOOLEAN DEFAULT FALSE
 );
 
 DROP TABLE IF EXISTS battle_pass CASCADE;
 CREATE TABLE IF NOT EXISTS battle_pass (
   battle_pass_id SERIAL PRIMARY KEY,
-  bp_name TEXT,
-  bp_start_date TIMESTAMPTZ,
-  bp_end_date TIMESTAMPTZ
+  is_active BOOLEAN DEFAULT FALSE,
+  created TIMESTAMPTZ DEFAULT NOW()
 );
 
-DROP TABLE IF EXISTS battle_pass_rewards CASCADE;
-CREATE TABLE IF NOT EXISTS battle_pass_rewards (
+DROP TABLE IF EXISTS battle_pass_levels CASCADE;
+CREATE TABLE IF NOT EXISTS battle_pass_levels (
   battle_pass_id INTEGER REFERENCES battle_pass (battle_pass_id) ON UPDATE CASCADE,
-  level INTEGER NOT NULL,
+  bp_level INTEGER NOT NULL,
+  next_level_xp INTEGER NOT NULL,
+  total_xp INTEGER NOT NULL,
+  coins_reward INTEGER,
+
+  CONSTRAINT battle_pass_levels_pkey PRIMARY KEY (bp_version, bp_level)
+);
+
+DROP TABLE IF EXISTS battle_pass_cosmetic_rewards CASCADE;
+CREATE TABLE IF NOT EXISTS battle_pass_cosmetic_rewards (
+  battle_pass_id INTEGER REFERENCES battle_pass (battle_pass_id) ON UPDATE CASCADE,
+  bp_level INTEGER NOT NULL,
   cosmetic_id INTEGER REFERENCES cosmetics (cosmetic_id) ON UPDATE CASCADE,
-  coins INTEGER,
-  misc TEXT
+  amount INTEGER DEFAULT 1
 );
 
 DROP TABLE IF EXISTS player_battle_pass CASCADE;
 CREATE TABLE IF NOT EXISTS player_battle_pass (
   steam_id TEXT REFERENCES players (steam_id) ON UPDATE CASCADE,
-  battlePass_id INTEGER REFERENCES battle_pass (battle_pass_id) ON UPDATE CASCADE,
-  bp_level INTEGER DEFAULT 0,
+  battle_pass_id INTEGER REFERENCES battle_pass (battle_pass_id) ON UPDATE CASCADE,
+  bp_level INTEGER DEFAULT 1,
   total_xp INTEGER DEFAULT 0
 );
 
