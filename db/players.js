@@ -357,44 +357,67 @@ module.exports = {
    * Awards battle pass experience to a player after a game
    * (capped) at (20 wins of xp) per day
    *
-   * BASELINE:
-   * 50 XP per win (capped at 20 wins)
-   * 200 XP bonus for the first win of the day (250 total)
-   *
+   * Rewards:
+   * 1st: 300 XP | ?? Coins
+   * 2nd: 180 XP | ?? Coins
+   * 3rd: 120 XP | ?? Coins
+   * 4th: 90 XP  | ?? Coins
+   * 5th: 60 XP  | ?? Coins
+   * 6th: 40 XP  | ?? Coins
+   * 7th: 20 XP  | ?? Coins
+   * 8th: 10 XP  | ?? Coins
    * @param {string} steamid
-   * @param {boolean} winner
+   * @param {number} placement
    * @param {number} bonusMultiplier
    */
-  async givePostGameXp(steamid, winner, bonusMultiplier = 1) {
+  async givePostGameRewards(steamid, placement) {
     try {
-      const games = await this.getBasicGamesToday(steamid);
+      const rewards = {
+        1: {
+          xp: 300,
+          coins: 0,
+        },
+        2: {
+          xp: 180,
+          coins: 0,
+        },
+        3: {
+          xp: 120,
+          coins: 0,
+        },
+        4: {
+          xp: 90,
+          coins: 0,
+        },
+        5: {
+          xp: 60,
+          coins: 0,
+        },
+        6: {
+          xp: 40,
+          coins: 0,
+        },
+        7: {
+          xp: 20,
+          coins: 0,
+        },
+        8: {
+          xp: 10,
+          coins: 0,
+        },
+      };
 
-      const numRecentGames = games.reduce(
-        (acc, game) => (game.won ? acc + 1 : acc + 0.5),
-        0
-      );
-      const hasWonToday = games.some((game) => game.won);
-
-      let reward = 0;
-      if (numRecentGames > 20) {
-        return;
-      } else if (!hasWonToday && winner) {
-        reward = 200;
-      } else {
-        reward = 50;
-      }
-
-      // Earn half xp for losing
-      if (!winner) reward = reward * 0.5;
-
-      reward = Math.floor(reward * bonusMultiplier);
+      const reward = rewards[placement];
+      const { coins, xp } = reward;
 
       await Logs.addTransactionLog(steamid, "game_xp", {
-        winner,
-        reward,
+        placement,
+        coins,
+        xp,
       });
 
       await this.addBattlePassXp(steamid, reward);
+      await this.modifyCoins(steamid, coins);
 
       return reward;
     } catch (error) {

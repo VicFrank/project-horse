@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS battle_pass_levels (
   total_xp INTEGER NOT NULL,
   coins_reward INTEGER,
 
-  CONSTRAINT battle_pass_levels_pkey PRIMARY KEY (bp_version, bp_level)
+  CONSTRAINT battle_pass_levels_pkey PRIMARY KEY (battle_pass_id, bp_level)
 );
 
 DROP TABLE IF EXISTS battle_pass_cosmetic_rewards CASCADE;
@@ -200,6 +200,8 @@ CREATE TABLE IF NOT EXISTS player_logs (
   log_time TIMESTAMPTZ DEFAULT NOW()
 );
 
+DROP TABLE IF EXISTS votes;
+DROP TABLE IF EXISTS poll_options;
 DROP TABLE IF EXISTS polls;
 CREATE TABLE IF NOT EXISTS polls (
   poll_id SERIAL PRIMARY KEY,
@@ -207,7 +209,6 @@ CREATE TABLE IF NOT EXISTS polls (
   poll_description TEXT
 );
 
-DROP TABLE IF EXISTS poll_options;
 CREATE TABLE IF NOT EXISTS poll_options (
   option_id SERIAL UNIQUE NOT NULL,
   poll_id INTEGER REFERENCES polls (poll_id),
@@ -217,7 +218,6 @@ CREATE TABLE IF NOT EXISTS poll_options (
   CONSTRAINT poll_options_pkey PRIMARY KEY (poll_id, option_id)
 );
 
-DROP TABLE IF EXISTS votes;
 CREATE TABLE IF NOT EXISTS votes (
   poll_id INTEGER REFERENCES polls (poll_id),
   steam_id TEXT REFERENCES players (steam_id),

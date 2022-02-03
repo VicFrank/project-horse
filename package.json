@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@paypal/checkout-server-sdk": "^1.0.3",
     "apicache": "^1.6.3",
     "axios": "^0.24.0",
     "body-parser": "^1.19.1",
@@ -24,7 +25,9 @@
     "passport-steam": "^1.0.17",
     "patreon": "^0.4.1",
     "patreon-oauth": "^1.0.0",
+    "paypal-rest-sdk": "^1.8.1",
     "pg": "^8.7.1",
+    "redis": "^4.0.3",
     "stripe": "^8.201.0"
   },
   "devDependencies": {
