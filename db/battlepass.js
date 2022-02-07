@@ -15,14 +15,20 @@ module.exports = {
           [battlePassID, level, nextLevelXp, totalXp, coins]
         );
         for (const cosmetic of cosmetics) {
+          const { cosmetic_id } = await query(
+            `SELECT * FROM cosmetics WHERE cosmetic_name = $1`,
+            [cosmetic]
+          );
           await query(
             `
             INSERT INTO battle_pass_cosmetic_rewards (battle_pass_id, bp_level, cosmetic_id)
             VALUES ($1, $2, $3)`,
-            [battlePassID, level, cosmetic]
+            [battlePassID, level, cosmetic_id]
           );
         }
       }
+
+      return rows;
     } catch (error) {
       throw error;
     }
