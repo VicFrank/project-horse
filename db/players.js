@@ -236,6 +236,18 @@ module.exports = {
     }
   },
 
+  async modifyMMR(steamID, mmr) {
+    if (mmr === 0) return;
+    try {
+      await query(queryText, [
+        `UPDATE players SET mmr = mmr + $1 WHERE steam_id = $2 RETURNING *`,
+        steamID,
+      ]);
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async addPlayerLog(steamid, event) {
     try {
       await query(

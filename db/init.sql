@@ -2,7 +2,11 @@ DROP TABLE IF EXISTS games CASCADE;
 DROP TABLE IF EXISTS players CASCADE;
 DROP TABLE IF EXISTS game_players CASCADE;
 DROP TABLE IF EXISTS game_player_heroes CASCADE;
+DROP TABLE IF EXISTS abilities CASCADE;
 DROP TABLE IF EXISTS hero_abilities CASCADE;
+DROP TABLE IF EXISTS combat_results CASCADE;
+DROP TABLE IF EXISTS combat_players CASCADE;
+
 DROP TABLE IF EXISTS cosmetics CASCADE;
 DROP TABLE IF EXISTS player_cosmetics CASCADE;
 DROP TABLE IF EXISTS battle_pass CASCADE;
@@ -60,8 +64,8 @@ CREATE TABLE IF NOT EXISTS game_players (
   place INTEGER,
 
   mmr_change INTEGER DEFAULT 0,
-  coins INTEGER DEFAULT 0,
-  xp INTEGER DEFAULT 0
+  coins_change INTEGER DEFAULT 0,
+  xp_change INTEGER DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS game_player_heroes (
@@ -80,16 +84,40 @@ CREATE TABLE IF NOT EXISTS game_player_heroes (
 DROP INDEX IF EXISTS idx_game_player_heroes_hero_name;
 CREATE INDEX idx_game_player_heroes_hero_name ON game_player_heroes (hero_name);
 
+CREATE TABLE IF NOT EXISTS abilities (
+  ability_name TEXT PRIMARY KEY,
+  element TEXT
+);
+
 CREATE TABLE IF NOT EXISTS hero_abilities (
   hero_ability_id SERIAL PRIMARY KEY,
   game_player_hero_id INTEGER REFERENCES game_player_heroes (game_player_hero_id) ON UPDATE CASCADE,
+  ability_name TEXT REFERENCES abilities (ability_name) ON UPDATE CASCADE,
 
-  ability_name TEXT,
-  ability_level INTEGER
+  ability_level INTEGER,
+  slot_index INTEGER
 );
 DROP INDEX IF EXISTS idx_hero_abilities_ability_name;
 CREATE INDEX idx_hero_abilities_ability_name ON hero_abilities (ability_name);
 
+CREATE TABLE IF NOT EXISTS combat_results (
+  combat_results_id SERIAL PRIMARY KEY,
+  game_id INTEGER REFERENCES games (game_id) ON UPDATE CASCADE,
+
+  round_number INTEGER NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS combat_players (
+  combat_results_id INTEGER REFERENCES combat_results (combat_results_id) ON UPDATE CASCADE,
+  player TEXT REFERENCES players (steam_id) ON UPDATE CASCADE,
+
+  damage_taken INTEGER,
+  is_dummy BOOLEAN
+);
+
+--------------------------------------------------------------------------------
+-- Cosmetics
+--------------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS cosmetics (
   cosmetic_id SERIAL PRIMARY KEY,
   cosmetic_name TEXT UNIQUE,

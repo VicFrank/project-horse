@@ -3,9 +3,12 @@ const { getMatchRatingChange } = require("../mmr/mmr");
 const Players = require("./players");
 
 module.exports = {
+  /**
+   * When a player is eliminated/wins, upsert the game and add their stats
+   */
   async createGamePlayer(event) {
-    const { matchID, steamID, username, ranked, place, rounds, players } =
-      event;
+    const { matchID, steamID, username, ranked, place, rounds } = event;
+    const { players, endTime, heroes } = event;
 
     try {
       await this.upsertGame(matchID, ranked);
@@ -18,17 +21,79 @@ module.exports = {
         const losers = players.filter(
           (p) => p.hasLost && p.steamID !== steamID
         );
-
         mmrChange = getMatchRatingChange(currentMMR, winners, losers);
       }
 
-      await query(
-        `INSERT INTO game_players(game_id, steam_id, rounds, place, mmr_change)
-         values ($1, $2, $3, $4, $5)`,
-        [matchID, steamID, rounds, place, mmrChange]
+      const { rows: gamePlayerRows } = await query(
+        `INSERT INTO game_players(game_id, steam_id, rounds, place, end_time, mmr_change)
+         VALUES ($1, $2, $3, $4, $5, $6)
+         RETURNING *`,
+        [matchID, steamID, rounds, place, endTime, mmrChange]
       );
+      const gamePlayerId = gamePlayerRows[0].id;
+
+      await Players.modifyMMR(steamID, mmrChange);
+
+      for (const hero of heroes) {
+        const { rows: heroRows } = await query(
+          `INSERT INTO game_player_heroes(game_player_id, hero_name, hero_level)
+           VALUES ($1, $2, $3)`,
+          [gamePlayerId, hero.name, hero.level]
+        );
+        const heroId = heroRows[0].id;
+
+        for (const ability of hero.abilities) {
+          await this.upsertAbility(ability.name, ability.element);
+          await query(
+            `INSERT INTO hero_abilities(game_player_hero_id, ability_name, ability_level, slot_index)
+             VALUES ($1, $2)`,
+            [heroId, ability.name, ability.level, ability.slot]
+          );
+        }
+      }
 
       return { matchID, steamID, mmrChange };
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  /**
+   * When a game is finished, record post game stats, round results
+   */
+  async addGameResults(results) {
+    const { matchID, roundResults, duration, ranked, cheatsEnabled } = results;
+
+    try {
+      await this.upsertGame(matchID, ranked);
+      await query(
+        `UPDATE games SET duration = $1, chests_enabled = $2, ranked = $3 WHERE id = $4`,
+        [duration, cheatsEnabled, ranked, matchID]
+      );
+
+      for (const round of roundResults) {
+        for (const combat of round.combats) {
+          const { rows: combatResultRows } = await query(
+            `INSERT INTO combat_results(game_id, round_number)
+             VALUES ($1, $2)`,
+            [matchID, round.roundNumber]
+          );
+          const combatResultId = combatResultRows[0].id;
+
+          for (const player of combat.combatants) {
+            await query(
+              `INSERT INTO combat_players(combat_result_id, steam_id, damage_taken, is_dummy)
+               VALUES ($1, $2, $3, $4)`,
+              [
+                combatResultId,
+                player.steamID,
+                player.damageTaken,
+                player.isDummy,
+              ]
+            );
+          }
+        }
+      }
     } catch (error) {
       throw error;
     }
@@ -38,11 +103,27 @@ module.exports = {
     try {
       const { rows } = await query(
         `INSERT INTO games(game_id, ranked)
-         values ($1, $2)
-         on conflict(game_id)
-         do UPDATE SET ranked = $2
+         VALUES ($1, $2)
+         ON CONFLICT(game_id)
+         DO NOTHING
          RETURNING *`,
         [matchID, ranked]
+      );
+      return rows[0];
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async upsertAbility(abilityName, element) {
+    try {
+      const { rows } = await query(
+        `INSERT INTO abilities(ability_name, element)
+         VALUES ($1, $2)
+         ON CONFLICT(ability_name)
+         DO UPDATE SET element = $2
+         RETURNING *`,
+        [abilityName, element]
       );
       return rows[0];
     } catch (error) {
