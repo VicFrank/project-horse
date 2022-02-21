@@ -198,15 +198,27 @@ module.exports = {
         [steamid, username]
       );
 
-      await this.createInitialDailyQuests(steamid, 3);
-      await this.createInitialWeeklyQuests(steamid, 3);
-      await this.initializeAchievements(steamid);
+      // await this.createInitialDailyQuests(steamid, 3);
+      // await this.createInitialWeeklyQuests(steamid, 3);
+      // await this.initializeAchievements(steamid);
 
-      const activeBattlePass = await BattlePasses.getActiveBattlePass();
-      await this.createBattlePass(steamid, activeBattlePass.id);
+      // const activeBattlePass = await BattlePasses.getActiveBattlePass();
+      // await this.createBattlePass(steamid, activeBattlePass.id);
 
       return rows[0];
-    } catch (error) {}
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async upsertPlayer(steamid, username) {
+    try {
+      const existingPlayer = await this.getPlayer(steamid);
+      if (!existingPlayer) return this.createPlayer(steamid, username);
+      else return existingPlayer;
+    } catch (error) {
+      throw error;
+    }
   },
 
   async setUserType(steamid, userType) {

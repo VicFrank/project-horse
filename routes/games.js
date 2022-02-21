@@ -24,10 +24,25 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", auth.adminAuth, async (req, res) => {
+router.post("/players", auth.adminAuth, async (req, res) => {
+  const { data } = req.body;
   try {
-    throw new Error("Not implemented");
-    res.status(201).send({ message: `Created game with ID ${insertedGameID}` });
+    const parsedData = JSON.parse(data);
+    const created = await games.createGamePlayer(parsedData);
+    res.status(201).send({ message: `Recorded game`, ...created });
+  } catch (error) {
+    console.log(data);
+    console.log(error);
+    res.status(500).send({ message: "Server Error" });
+  }
+});
+
+router.post("/", auth.adminAuth, async (req, res) => {
+  const { data } = req.body;
+  try {
+    const parsedData = JSON.parse(data);
+    await games.addGameResults(parsedData);
+    res.status(201).send({ message: `Created game` });
   } catch (error) {
     console.log(JSON.stringify(req.body));
     console.log(error);
@@ -37,11 +52,9 @@ router.post("/", auth.adminAuth, async (req, res) => {
 
 router.get("/:gameid", cache("1 hour"), async (req, res) => {
   try {
-    const gameid = parseInt(req.params.gameid);
-
-    throw new Error("Not implemented");
-
-    res.status(200).json(result);
+    const gameID = req.params.gameid;
+    const game = await games.getGame(gameID);
+    res.status(200).json(game);
   } catch (error) {
     console.log(error);
     res.status(500).send({ message: "Server Error" });

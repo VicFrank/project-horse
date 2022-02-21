@@ -7,8 +7,11 @@ module.exports = {
    * When a player is eliminated/wins, upsert the game and add their stats
    */
   async createGamePlayer(event) {
-    const { matchID, steamID, username, ranked, place, rounds } = event;
-    const { players, endTime, heroes } = event;
+    const { matchID, playerID, username, ranked, place, rounds } = event;
+    const { players, endTime, heroes, team, wins } = event;
+    let { steamID } = event;
+
+    if (steamID === 0) steamID = playerID;
 
     try {
       await this.upsertGame(matchID, ranked);
@@ -16,38 +19,45 @@ module.exports = {
       const currentMMR = player.mmr;
       let mmrChange = 0;
 
-      if (ranked) {
-        const winners = players.filter((p) => !p.hasLost);
-        const losers = players.filter(
-          (p) => p.hasLost && p.steamID !== steamID
-        );
-        mmrChange = getMatchRatingChange(currentMMR, winners, losers);
-      }
+      // if (ranked) {
+      //   const winners = players.filter((p) => !p.hasLost);
+      //   const losers = players.filter(
+      //     (p) => p.hasLost && p.steamID !== steamID
+      //   );
+      //   mmrChange = getMatchRatingChange(currentMMR, winners, losers);
+      //   mmrChange = 0;
+      // }
 
       const { rows: gamePlayerRows } = await query(
-        `INSERT INTO game_players(game_id, steam_id, rounds, place, end_time, mmr_change)
-         VALUES ($1, $2, $3, $4, $5, $6)
+        `INSERT INTO game_players
+         (game_id, steam_id, rounds, place, end_time, mmr_change, team, wins)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
          RETURNING *`,
-        [matchID, steamID, rounds, place, endTime, mmrChange]
+        [matchID, steamID, rounds, place, endTime, mmrChange, team, wins]
       );
-      const gamePlayerId = gamePlayerRows[0].id;
+      const gamePlayerId = gamePlayerRows[0].game_player_id;
 
       await Players.modifyMMR(steamID, mmrChange);
 
       for (const hero of heroes) {
         const { rows: heroRows } = await query(
-          `INSERT INTO game_player_heroes(game_player_id, hero_name, hero_level)
-           VALUES ($1, $2, $3)`,
-          [gamePlayerId, hero.name, hero.level]
+          `INSERT INTO game_player_heroes(game_player_id, hero_name, tier)
+           VALUES ($1, $2, $3)
+           RETURNING *`,
+          [gamePlayerId, hero.name, hero.tier]
         );
-        const heroId = heroRows[0].id;
+        const heroId = heroRows[0].game_player_hero_id;
 
-        for (const ability of hero.abilities) {
-          await this.upsertAbility(ability.name, ability.element);
+        for (const [i, ability] of hero.abilities.entries()) {
+          await this.upsertAbility(
+            ability.name,
+            ability.element,
+            ability.isUltimate
+          );
           await query(
             `INSERT INTO hero_abilities(game_player_hero_id, ability_name, ability_level, slot_index)
-             VALUES ($1, $2)`,
-            [heroId, ability.name, ability.level, ability.slot]
+             VALUES ($1, $2, $3, $4)`,
+            [heroId, ability.name, ability.level, i]
           );
         }
       }
@@ -62,34 +72,34 @@ module.exports = {
    * When a game is finished, record post game stats, round results
    */
   async addGameResults(results) {
-    const { matchID, roundResults, duration, ranked, cheatsEnabled } = results;
+    const { matchID, duration, rounds, ranked, cheatsEnabled } = results;
 
     try {
       await this.upsertGame(matchID, ranked);
       await query(
-        `UPDATE games SET duration = $1, chests_enabled = $2, ranked = $3 WHERE id = $4`,
-        [duration, cheatsEnabled, ranked, matchID]
+        `UPDATE games SET
+        (duration, rounds, ranked, cheats_enabled) =
+        ($1, $2, $3, $4)
+         WHERE game_id = $5`,
+        [duration, rounds, ranked, cheatsEnabled, matchID]
       );
 
-      for (const round of roundResults) {
-        for (const combat of round.combats) {
+      for (const round of results.roundResults) {
+        for (const combat of round.combatResults) {
           const { rows: combatResultRows } = await query(
-            `INSERT INTO combat_results(game_id, round_number)
-             VALUES ($1, $2)`,
-            [matchID, round.roundNumber]
+            `INSERT INTO combat_results(game_id, round_number, duration)
+             VALUES ($1, $2, $3)
+             RETURNING *`,
+            [matchID, round.round, round.duration]
           );
-          const combatResultId = combatResultRows[0].id;
+          const combatResultId = combatResultRows[0].combat_results_id;
 
-          for (const player of combat.combatants) {
+          for (const player of combat.participants) {
+            if (player.steamID === 0) player.steamID = player.playerID;
             await query(
-              `INSERT INTO combat_players(combat_result_id, steam_id, damage_taken, is_dummy)
+              `INSERT INTO combat_players(combat_results_id, steam_id, damage_taken, ghost)
                VALUES ($1, $2, $3, $4)`,
-              [
-                combatResultId,
-                player.steamID,
-                player.damageTaken,
-                player.isDummy,
-              ]
+              [combatResultId, player.steamID, player.damageTaken, player.ghost]
             );
           }
         }
@@ -115,15 +125,15 @@ module.exports = {
     }
   },
 
-  async upsertAbility(abilityName, element) {
+  async upsertAbility(abilityName, element, isUltimate) {
     try {
       const { rows } = await query(
-        `INSERT INTO abilities(ability_name, element)
-         VALUES ($1, $2)
+        `INSERT INTO abilities(ability_name, element, is_ultimate)
+         VALUES ($1, $2, $3)
          ON CONFLICT(ability_name)
          DO UPDATE SET element = $2
          RETURNING *`,
-        [abilityName, element]
+        [abilityName, element, isUltimate]
       );
       return rows[0];
     } catch (error) {
@@ -137,16 +147,10 @@ module.exports = {
       whereClause = "AND created_at >= NOW() - $3 * INTERVAL '1 HOURS'";
     }
     const sql_query = `
-      WITH recent_games AS (
-        SELECT * FROM games
-        ${whereClause}
-        ORDER BY created_at DESC
-        LIMIT $1 OFFSET $2
-      )
-      SELECT * FROM recent_games rg
-      JOIN game_players gp
-      USING (game_id)
+      SELECT * FROM games
+      ${whereClause}
       ORDER BY created_at DESC
+      LIMIT $1 OFFSET $2      
     `;
     try {
       if (hours) {
@@ -156,6 +160,111 @@ module.exports = {
         const { rows } = await query(sql_query, [limit, offset]);
         return rows;
       }
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getGame(gameID) {
+    try {
+      // Game
+      const { rows: games } = await query(
+        `
+          SELECT g.*
+          FROM games AS g
+          WHERE game_id = $1
+        `,
+        [gameID]
+      );
+      const game = games[0];
+
+      // Players
+      const { rows: gamePlayers } = await query(
+        `
+          SELECT gp.steam_id, gp.rounds, gp.wins, gp.losses, gp.end_time, gp.place, gp.team,
+            gp.game_player_id, p.username
+          FROM game_players AS gp
+          JOIN players AS p
+          USING (steam_id)
+          WHERE game_id = $1
+        `,
+        [gameID]
+      );
+
+      for (const player of gamePlayers) {
+        const { rows: gamePlayerHeroes } = await query(
+          `
+            SELECT h.hero_name, h.tier, game_player_hero_id
+            FROM game_player_heroes AS h
+            WHERE game_player_id = $1
+          `,
+          [player.game_player_id]
+        );
+        delete player.game_player_id;
+
+        for (const hero of gamePlayerHeroes) {
+          const { rows: heroAbilities } = await query(
+            `
+              SELECT ha.ability_level, ha.slot_index, a.*
+              FROM hero_abilities AS ha
+              JOIN abilities AS a
+              USING (ability_name)
+              WHERE game_player_hero_id = $1
+            `,
+            [hero.game_player_hero_id]
+          );
+          delete hero.game_player_hero_id;
+
+          hero.abilities = heroAbilities;
+        }
+
+        player.heroes = gamePlayerHeroes;
+      }
+
+      // Rounds
+      const { rows: combatResults } = await query(
+        `
+          SELECT combat_results_id, duration, round_number FROM combat_results
+          WHERE game_id = $1
+        `,
+        [gameID]
+      );
+
+      for (const combat of combatResults) {
+        const { rows: combatPlayers } = await query(
+          `
+            SELECT steam_id, damage_taken, ghost FROM combat_players
+            WHERE combat_results_id = $1
+          `,
+          [combat.combat_results_id]
+        );
+        delete combat.combat_results_id;
+
+        combat.participants = combatPlayers;
+      }
+
+      // get all unique round numbers from combats
+      const roundNumbers = combatResults.map((combat) => combat.round_number);
+      const uniqueRoundNumbers = [...new Set(roundNumbers)].sort();
+
+      const rounds = [];
+
+      for (const roundNumber of uniqueRoundNumbers) {
+        const round = {
+          round: roundNumber,
+          combatResults: combatResults
+            .filter((result) => result.round_number === roundNumber)
+            .map(({ round_number, ...result }) => result),
+        };
+
+        rounds.push(round);
+      }
+
+      return {
+        ...game,
+        players: gamePlayers,
+        rounds: rounds,
+      };
     } catch (error) {
       throw error;
     }

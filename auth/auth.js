@@ -1,11 +1,15 @@
 const keys = require("../config/keys");
 
 function checkServerKey(req) {
-  const server_key = req.get("X-Dota-Server-Key");
-  const dedicatedServerKey = process.env.IS_PRODUCTION ? keys.dedicatedServerKey : keys.toolsKey;
-  const testKey = keys.dedicatedServerKey_Old;
+  const serverKey = req.body.server_key;
+  const serverKeyParam = req.params.server_key;
+  const dedicatedServerKey = process.env.IS_PRODUCTION
+    ? keys.dedicatedServerKey
+    : keys.toolsKey;
 
-  return server_key === dedicatedServerKey || server_key === testKey;
+  return (
+    serverKey === dedicatedServerKey || serverKeyParam === dedicatedServerKey
+  );
 }
 
 function checkUserAuth(req) {
@@ -31,7 +35,9 @@ module.exports = {
     } else if (req.user && req.user.isAdmin) {
       return next();
     } else {
-      res.status(403).send({ message: `You are not authorized to add/change data` });
+      res
+        .status(403)
+        .send({ message: `You are not authorized to add/change data` });
       return;
     }
   },

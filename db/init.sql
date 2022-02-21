@@ -41,10 +41,10 @@ CREATE TABLE IF NOT EXISTS players (
 CREATE INDEX ix_players_mmr ON players (mmr);
 
 CREATE TABLE IF NOT EXISTS games (
-  game_id SERIAL PRIMARY KEY,
+  game_id TEXT PRIMARY KEY,
   rounds INTEGER,
   ranked BOOLEAN,
-  duration INTEGER,
+  duration DOUBLE PRECISION,
   cheats_enabled BOOLEAN,
 
   created_at TIMESTAMPTZ DEFAULT Now()
@@ -54,14 +54,15 @@ CREATE INDEX idx_games_created_at ON games (created_at);
 
 CREATE TABLE IF NOT EXISTS game_players (
   game_player_id SERIAL PRIMARY KEY,
-  game_id INTEGER REFERENCES games (game_id) ON UPDATE CASCADE,
+  game_id TEXT REFERENCES games (game_id) ON UPDATE CASCADE,
   steam_id TEXT REFERENCES players (steam_id) ON UPDATE CASCADE,
 
   rounds INTEGER,
   wins INTEGER,
   losses INTEGER,
-  end_time INTEGER,
+  end_time DOUBLE PRECISION,
   place INTEGER,
+  team INTEGER,
 
   mmr_change INTEGER DEFAULT 0,
   coins_change INTEGER DEFAULT 0,
@@ -73,7 +74,7 @@ CREATE TABLE IF NOT EXISTS game_player_heroes (
   game_player_id INTEGER REFERENCES game_players (game_player_id) ON UPDATE CASCADE,
 
   hero_name TEXT NOT NULL,
-  hero_level INTEGER,
+  tier INTEGER NOT NULL,
   total_damage_dealt INTEGER,
   total_physical_damage INTEGER,
   total_magical_damage INTEGER,
@@ -86,6 +87,7 @@ CREATE INDEX idx_game_player_heroes_hero_name ON game_player_heroes (hero_name);
 
 CREATE TABLE IF NOT EXISTS abilities (
   ability_name TEXT PRIMARY KEY,
+  is_ultimate BOOLEAN,
   element TEXT
 );
 
@@ -102,17 +104,18 @@ CREATE INDEX idx_hero_abilities_ability_name ON hero_abilities (ability_name);
 
 CREATE TABLE IF NOT EXISTS combat_results (
   combat_results_id SERIAL PRIMARY KEY,
-  game_id INTEGER REFERENCES games (game_id) ON UPDATE CASCADE,
+  game_id TEXT REFERENCES games (game_id) ON UPDATE CASCADE,
 
+  duration DOUBLE PRECISION NOT NULL,
   round_number INTEGER NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS combat_players (
   combat_results_id INTEGER REFERENCES combat_results (combat_results_id) ON UPDATE CASCADE,
-  player TEXT REFERENCES players (steam_id) ON UPDATE CASCADE,
+  steam_id TEXT REFERENCES players (steam_id) ON UPDATE CASCADE,
 
   damage_taken INTEGER,
-  is_dummy BOOLEAN
+  ghost BOOLEAN
 );
 
 --------------------------------------------------------------------------------
