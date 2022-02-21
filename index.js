@@ -23,7 +23,7 @@ const players = require("./db/players");
 
 const { pool } = require("./db/index");
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 
 const app = express();
 
@@ -55,7 +55,7 @@ passport.deserializeUser((obj, next) => {
 
 const baseUrl = process.env.IS_PRODUCTION
   ? "https://www.projecthorse.com"
-  : "http://localhost:3000";
+  : "http://localhost:4000";
 passport.use(
   new SteamStrategy(
     {
@@ -125,6 +125,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/cosmetics", cosmeticsRouter);
 app.use("/api/battle_pass", battlepassRouter);
 app.use("/api/quests", questsRouter);
+app.use("/api/logs", logsRouter);
 app.use("/api/payments", paymentsRouter);
 app.use("/api/steam", steamRouter);
 
