@@ -29,6 +29,7 @@ DROP TABLE IF EXISTS player_quests CASCADE;
 CREATE TABLE IF NOT EXISTS players (
   steam_id TEXT PRIMARY KEY,
   username TEXT,
+  profile_picture TEXT,
   mmr INTEGER DEFAULT 1000,
   coins INTEGER DEFAULT 0 CHECK (coins >= 0),
   user_type TEXT DEFAULT 'USER',

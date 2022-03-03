@@ -115,7 +115,7 @@ export default {
           }
         )
         .then((quests) => {
-          this.loading = false;
+          // this.loading = false;
           this.quests = quests;
         })
         .catch((err) => {

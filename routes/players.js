@@ -48,7 +48,6 @@ router.get("/:steamid/games", async (req, res) => {
   try {
     const steamid = req.params.steamid;
     const limit = req.query.limit;
-    throw new Error("Not implemented");
     const recentMatches = await players.getGames(steamid, limit);
     res.status(200).json(recentMatches);
   } catch (error) {

@@ -187,6 +187,7 @@ module.exports = {
           JOIN players AS p
           USING (steam_id)
           WHERE game_id = $1
+          ORDER BY gp.place ASC
         `,
         [gameID]
       );

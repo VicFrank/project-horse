@@ -115,7 +115,7 @@ module.exports = {
       whereClause = "AND created_at >= NOW() - $4 * INTERVAL '1 HOURS'";
     }
     try {
-      const sql_query = `
+      const gamesQuery = `
       SELECT g.*, gp.*
       FROM game_players gp
       JOIN games g
@@ -128,7 +128,7 @@ module.exports = {
       LIMIT $2 OFFSET $3;
       `;
       if (hours) {
-        const { rows } = await query(sql_query, [
+        const { rows } = await query(gamesQuery, [
           steamid,
           limit,
           offset,
@@ -136,7 +136,7 @@ module.exports = {
         ]);
         return rows;
       } else {
-        const { rows } = await query(sql_query, [steamid, limit, offset]);
+        const { rows } = await query(gamesQuery, [steamid, limit, offset]);
         return rows;
       }
     } catch (error) {

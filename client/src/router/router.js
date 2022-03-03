@@ -12,12 +12,15 @@ const Changelog = () => import("../components/pages/changelog/Changelog");
 const Admin = () => import("../components/pages/admin/Admin");
 
 const Games = () => import("../components/pages/games/Games");
+const Game = () => import("../components/pages/games/Game");
 
 const Profile = () => import("../components/pages/profile/Profile");
 const Achievements = () =>
   import("../components/pages/achievements/Achievements");
 
-// const PlayerPage = () => import("../components/pages/player/PlayerPage");
+const PlayerPage = () => import("../components/pages/player/PlayerPage");
+const PlayerGamesList = () =>
+  import("../components/pages/player/PlayerGamesList");
 
 Vue.use(VueRouter);
 
@@ -30,6 +33,9 @@ const routes = [
   { path: "/admin", component: Admin },
   { path: "/redirect", component: LoginRedirect },
   { path: "/games", component: Games },
+  { path: "/games/:game_id", component: Game },
+  { path: "/players/:steam_id", component: PlayerPage },
+  { path: "/players/:steam_id/games", component: PlayerGamesList },
   { path: "/profile", component: Profile, meta: { requiresAuth: true } },
   {
     path: "/profile/achievements",

@@ -1,5 +1,5 @@
 <template>
-  <table class="table" style="width: 600px">
+  <table class="table">
     <tbody>
       <template v-if="loading">
         <tr v-for="i in placeholderRows" :key="i" class="animate-pulse">
@@ -28,7 +28,7 @@
 </template>
  
 <script>
-import { hhmmss, dateFromNow } from "../../../../filters/filters";
+import { hhmmss, dateFromNow } from "../../../filters/filters";
 export default {
   props: {
     games: Array,

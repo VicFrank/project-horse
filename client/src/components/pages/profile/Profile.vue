@@ -1,16 +1,24 @@
 <template>
   <div>
     <h1 class="page-title">Profile</h1>
-    <DailyQuests></DailyQuests>
+    <DailyQuests class="mb-5"></DailyQuests>
+    <h2>Recent Games</h2>
+    <PlayerGamesList
+      :games="games"
+      :loading="gamesLoading"
+      :placeholderRows="3"
+    ></PlayerGamesList>
   </div>
 </template>
 
 <script>
 import DailyQuests from "../quests/DailyQuests.vue";
+import PlayerGamesList from "../player/PlayerGamesList.vue";
 
 export default {
   components: {
     DailyQuests,
+    PlayerGamesList,
   },
 
   data: () => ({
@@ -30,12 +38,12 @@ export default {
   },
 
   created() {
-    // fetch(`/api/players/${this.steamID}/games?limit=3`)
-    //   .then((res) => res.json())
-    //   .then((games) => {
-    //     this.gamesLoading = false;
-    //     this.games = games;
-    //   });
+    fetch(`/api/players/${this.steamID}/games?limit=3`)
+      .then((res) => res.json())
+      .then((games) => {
+        this.gamesLoading = false;
+        this.games = games;
+      });
 
     fetch(`/api/players/${this.steamID}/stats`)
       .then((res) => res.json())

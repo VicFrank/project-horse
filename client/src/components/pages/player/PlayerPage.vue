@@ -2,6 +2,11 @@
   <div>
     <div v-if="playerFound">
       <h1>{{ player.username }}</h1>
+      <PlayerGamesList
+        :games="games"
+        :loading="gamesLoading"
+        :placeholderRows="100"
+      ></PlayerGamesList>
     </div>
     <div v-else>
       <h2>v-t="'profile.not_found'"</h2>
@@ -10,7 +15,13 @@
 </template>
 
 <script>
+import PlayerGamesList from "./PlayerGamesList.vue";
+
 export default {
+  components: {
+    PlayerGamesList,
+  },
+
   data: () => ({
     error: "",
     games: [],
@@ -26,12 +37,12 @@ export default {
   },
 
   created() {
-    // fetch(`/api/players/${this.steamID}/games?limit=3`)
-    //   .then((res) => res.json())
-    //   .then((games) => {
-    //     this.gamesLoading = false;
-    //     this.games = games;
-    //   });
+    fetch(`/api/players/${this.steamID}/games?limit=3`)
+      .then((res) => res.json())
+      .then((games) => {
+        this.gamesLoading = false;
+        this.games = games;
+      });
 
     fetch(`/api/players/${this.steamID}/stats`)
       .then((res) => res.json())
