@@ -1,4 +1,5 @@
 <template>
+  <!-- TODO - Make rows collapsible to view detailed hero/ability stats -->
   <tr>
     <td class="col1">
       {{ player.place }}
