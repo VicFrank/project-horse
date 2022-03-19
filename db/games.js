@@ -49,11 +49,7 @@ module.exports = {
         const heroId = heroRows[0].game_player_hero_id;
 
         for (const [i, ability] of hero.abilities.entries()) {
-          await this.upsertAbility(
-            ability.name,
-            ability.element,
-            ability.isUltimate
-          );
+          await this.upsertAbility(ability.name, ability.isUltimate);
           await query(
             `INSERT INTO hero_abilities(game_player_hero_id, ability_name, ability_level, slot_index)
              VALUES ($1, $2, $3, $4)`,
@@ -125,15 +121,15 @@ module.exports = {
     }
   },
 
-  async upsertAbility(abilityName, element, isUltimate) {
+  async upsertAbility(abilityName, isUltimate) {
     try {
       const { rows } = await query(
-        `INSERT INTO abilities(ability_name, element, is_ultimate)
-         VALUES ($1, $2, $3)
+        `INSERT INTO abilities(ability_name, is_ultimate)
+         VALUES ($1, $2)
          ON CONFLICT(ability_name)
-         DO UPDATE SET element = $2
+         DO UPDATE SET is_ultimate = $2
          RETURNING *`,
-        [abilityName, element, isUltimate]
+        [abilityName, isUltimate]
       );
       return rows[0];
     } catch (error) {

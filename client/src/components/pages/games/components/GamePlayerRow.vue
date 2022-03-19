@@ -10,11 +10,11 @@
     </td>
     <!-- <div class="col3">God</div> -->
     <td class="d-flex col4">
-      <HeroImage
+      <HeroAndAbilities
         v-for="hero of player.heroes"
-        :key="hero.hero_name"
-        :hero="hero.hero_name"
-      ></HeroImage>
+        :key="player.steam_id + hero.hero_name"
+        :hero="hero"
+      ></HeroAndAbilities>
     </td>
     <td class="col5">
       {{ player.rounds }}
@@ -24,11 +24,11 @@
 </template>
 
 <script>
-import HeroImage from "./HeroImage.vue";
+import HeroAndAbilities from "./HeroAndAbilities.vue";
 
 export default {
   components: {
-    HeroImage,
+    HeroAndAbilities,
   },
 
   props: {
@@ -48,7 +48,7 @@ export default {
   width: 50px;
 }
 .col4 {
-  width: 300px;
+  text-align: left;
 }
 .col5 {
   width: 50px;

@@ -1,11 +1,12 @@
 <template>
-  <b-img v-bind:src="getHeroPath(hero)" v-bind:alt="hero" />
+  <b-img :height="height" v-bind:src="getHeroPath(hero)" v-bind:alt="hero" />
 </template>
 
 <script>
 export default {
   props: {
     hero: String,
+    height: String,
     small: {
       type: Boolean,
       default: false,
