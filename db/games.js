@@ -7,14 +7,12 @@ module.exports = {
    * When a player is eliminated/wins, upsert the game and add their stats
    */
   async createGamePlayer(event) {
-    const { matchID, playerID, username, ranked, place, rounds } = event;
-    const { players, endTime, heroes, team, wins } = event;
-    let { steamID } = event;
-
-    if (steamID === 0) steamID = playerID;
+    const { matchID, steamID, username, ranked, place } = event;
+    const { players, rounds, endTime, heroes, team, wins, losses } = event;
 
     try {
       await this.upsertGame(matchID, ranked);
+      console.log(steamID, username);
       const player = await Players.upsertPlayer(steamID, username);
       const currentMMR = player.mmr;
       let mmrChange = 0;
@@ -28,12 +26,13 @@ module.exports = {
       //   mmrChange = 0;
       // }
 
+      // prettier-ignore
       const { rows: gamePlayerRows } = await query(
         `INSERT INTO game_players
-         (game_id, steam_id, rounds, place, end_time, mmr_change, team, wins)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+         (game_id, steam_id, rounds, place, end_time, mmr_change, team, wins, losses)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
          RETURNING *`,
-        [matchID, steamID, rounds, place, endTime, mmrChange, team, wins]
+        [matchID, steamID, rounds, place, endTime, mmrChange, team, wins, losses]
       );
       const gamePlayerId = gamePlayerRows[0].game_player_id;
 
@@ -49,7 +48,11 @@ module.exports = {
         const heroId = heroRows[0].game_player_hero_id;
 
         for (const [i, ability] of hero.abilities.entries()) {
-          await this.upsertAbility(ability.name, ability.isUltimate);
+          await this.upsertAbility(
+            ability.name,
+            ability.isUltimate,
+            ability.icon
+          );
           await query(
             `INSERT INTO hero_abilities(game_player_hero_id, ability_name, ability_level, slot_index)
              VALUES ($1, $2, $3, $4)`,
@@ -121,15 +124,15 @@ module.exports = {
     }
   },
 
-  async upsertAbility(abilityName, isUltimate) {
+  async upsertAbility(abilityName, isUltimate, icon) {
     try {
       const { rows } = await query(
-        `INSERT INTO abilities(ability_name, is_ultimate)
-         VALUES ($1, $2)
+        `INSERT INTO abilities(ability_name, is_ultimate, icon)
+         VALUES ($1, $2, $3)
          ON CONFLICT(ability_name)
-         DO UPDATE SET is_ultimate = $2
+         DO UPDATE SET (is_ultimate, icon) = ($2, $3)
          RETURNING *`,
-        [abilityName, isUltimate]
+        [abilityName, isUltimate, icon]
       );
       return rows[0];
     } catch (error) {

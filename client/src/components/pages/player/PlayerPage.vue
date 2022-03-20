@@ -5,7 +5,7 @@
       <PlayerGamesList
         :games="games"
         :loading="gamesLoading"
-        :placeholderRows="100"
+        :placeholderRows="3"
       ></PlayerGamesList>
     </div>
     <div v-else>
@@ -27,7 +27,7 @@ export default {
     games: [],
     player: {},
     gamesLoading: true,
-    playerFound: false,
+    playerFound: true,
   }),
 
   computed: {

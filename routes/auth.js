@@ -11,7 +11,7 @@ const CLIENT_ID = keys.patreon.oauth.clientID;
 const SECRET = keys.patreon.oauth.secret;
 const SCOPE = `users`;
 const REDIRECT_URL = process.env.IS_PRODUCTION
-  ? "https://www.projecthorse.com/api/auth/patreon/callback"
+  ? "https://www.abilityarena.com/api/auth/patreon/callback"
   : "http://localhost:8080/api/auth/patreon/callback";
 
 const oauthClient = oauth(CLIENT_ID, SECRET);

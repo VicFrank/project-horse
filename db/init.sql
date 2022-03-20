@@ -88,6 +88,7 @@ CREATE INDEX idx_game_player_heroes_hero_name ON game_player_heroes (hero_name);
 
 CREATE TABLE IF NOT EXISTS abilities (
   ability_name TEXT PRIMARY KEY,
+  icon TEXT,
   is_ultimate BOOLEAN
 );
 

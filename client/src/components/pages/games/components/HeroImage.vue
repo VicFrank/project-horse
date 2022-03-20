@@ -6,7 +6,7 @@
 export default {
   props: {
     hero: String,
-    height: String,
+    height: Number,
     small: {
       type: Boolean,
       default: false,

@@ -54,7 +54,7 @@ passport.deserializeUser((obj, next) => {
 });
 
 const baseUrl = process.env.IS_PRODUCTION
-  ? "https://www.projecthorse.com"
+  ? "https://www.abilityarena.com"
   : "http://localhost:4000";
 passport.use(
   new SteamStrategy(
