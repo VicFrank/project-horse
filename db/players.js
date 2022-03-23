@@ -198,9 +198,9 @@ module.exports = {
         [steamid, username]
       );
 
-      // await this.createInitialDailyQuests(steamid, 3);
+      await this.createInitialDailyQuests(steamid, 3);
       // await this.createInitialWeeklyQuests(steamid, 3);
-      // await this.initializeAchievements(steamid);
+      await this.initializeAchievements(steamid);
 
       // const activeBattlePass = await BattlePasses.getActiveBattlePass();
       // await this.createBattlePass(steamid, activeBattlePass.id);

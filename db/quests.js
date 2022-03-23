@@ -54,6 +54,9 @@ module.exports = {
     }
   },
 
+  /**
+   * @param {String} stat
+   */
   async getAllQuestsWithStat(stat) {
     try {
       const { rows } = await query(`SELECT * FROM quests WHERE stat = $1`, [
@@ -65,66 +68,19 @@ module.exports = {
     }
   },
 
-  /**
-   * Creates a new quest, either a daily quest or achievement
-   * @param {*} QuestValues
-   */
-  async addNewQuest({
-    name,
-    isAchievement,
-    description,
-    poggers: coins,
-    xp,
-    stat,
-    requiredAmount,
-    title,
-    isWeekly,
-  }) {
+  async createQuest(quest) {
+    const { name, coins, xp, stat, requiredAmount, description } = quest;
+    let { isAchievement, isWeekly, hidden } = quest;
     if (!isWeekly) isWeekly = false;
+    if (!hidden) hidden = false;
+    if (!isAchievement) isAchievement = false;
     try {
-      const sql_query = `
-      INSERT INTO quests (quest_name, is_achievement, quest_description,
-        coin_reward, xp_reward, stat, required_amount, title_reward, is_weekly)
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-      RETURNING *
-      `;
-      const { rows } = await query(sql_query, [
-        name,
-        isAchievement,
-        description,
-        coins,
-        xp,
-        stat,
-        requiredAmount,
-        title,
-        isWeekly,
-      ]);
-      return rows[0];
-    } catch (error) {
-      throw error;
-    }
-  },
-
-  async removeQuest({
-    name,
-    isAchievement,
-    description,
-    poggers: coins,
-    xp,
-    stat,
-    requiredAmount,
-    title,
-    isWeekly,
-  }) {
-    if (!isWeekly) isWeekly = false;
-    try {
-      await query(
-        `
-      DELETE FROM quests WHERE 
-      quest_name = $1 AND is_achievement = $2 AND quest_description = $3 AND
-      coin_reward = $4 AND xp_reward = $5 AND stat = $6 AND
-      required_amount = $7 AND title_reward = $8 AND is_weekly = $9
-      `,
+      const { rows } = await query(
+        `INSERT INTO quests (quest_name, is_achievement, quest_description,
+          coin_reward, xp_reward, stat, required_amount, is_weekly, is_hidden)
+          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+        RETURNING *
+        `,
         [
           name,
           isAchievement,
@@ -133,7 +89,45 @@ module.exports = {
           xp,
           stat,
           requiredAmount,
-          title,
+          isWeekly,
+          hidden,
+        ]
+      );
+      return rows[0];
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async bulkCreateQuests(quests) {
+    // TODO: Add transaction
+    try {
+      for (const quest of quests) {
+        await this.createQuest(quest);
+      }
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async removeQuest(quest) {
+    const { name, description, coins, xp, stat, requiredAmount } = quest;
+    const { isAchievement, isWeekly } = quest;
+    if (!isWeekly) isWeekly = false;
+    try {
+      await query(
+        `DELETE FROM quests WHERE 
+        quest_name = $1 AND is_achievement = $2 AND quest_description = $3 AND
+        coin_reward = $4 AND xp_reward = $5 AND stat = $6 AND required_amount = $7 AND is_weekly = $8
+        `,
+        [
+          name,
+          isAchievement,
+          description,
+          coins,
+          xp,
+          stat,
+          requiredAmount,
           isWeekly,
         ]
       );

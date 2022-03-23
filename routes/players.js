@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const players = require("../db/players");
+const quests = require("../db/quests");
 const auth = require("../auth/auth");
 const apicache = require("apicache");
 
@@ -135,8 +136,8 @@ router.post("/:steamid/daily_quests/claim", auth.userAuth, async (req, res) => {
 router.get("/:steamid/achievements", async (req, res) => {
   try {
     const steamid = req.params.steamid;
-    const dailyQuests = await quests.getActiveAchievementsForPlayer(steamid);
-    res.status(200).json(dailyQuests);
+    const achievements = await quests.getActiveAchievementsForPlayer(steamid);
+    res.status(200).json(achievements);
   } catch (error) {
     console.log(error);
     res.status(500).send({ message: "Server Error" });

@@ -41,6 +41,10 @@ CREATE TABLE IF NOT EXISTS players (
 );
 CREATE INDEX ix_players_mmr ON players (mmr);
 
+--------------------------------------------------------------------------------
+-- Games
+--------------------------------------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS games (
   game_id TEXT PRIMARY KEY,
   rounds INTEGER,
@@ -177,6 +181,7 @@ CREATE TABLE IF NOT EXISTS quests (
   quest_id SERIAL PRIMARY KEY,
   quest_name TEXT NOT NULL,
   is_achievement BOOLEAN NOT NULL,
+  is_hidden BOOLEAN DEFAULT FALSE,
   is_weekly BOOLEAN DEFAULT FALSE,
   quest_description TEXT,
   coin_reward INTEGER DEFAULT 0,
@@ -224,13 +229,9 @@ CREATE TABLE IF NOT EXISTS chest_bonus_rewards (
   CONSTRAINT chest_bonus_rewards_pkey PRIMARY KEY (cosmetic_id, cum_sum)
 );
 
-DROP TABLE IF EXISTS player_logs;
-CREATE TABLE IF NOT EXISTS player_logs (
-  steam_id TEXT REFERENCES players (steam_id) ON UPDATE CASCADE,
-  log_event TEXT NOT NULL,
-  log_data JSON,
-  log_time TIMESTAMPTZ DEFAULT NOW()
-);
+--------------------------------------------------------------------------------
+-- Polls
+--------------------------------------------------------------------------------
 
 DROP TABLE IF EXISTS votes;
 DROP TABLE IF EXISTS poll_options;
@@ -256,4 +257,16 @@ CREATE TABLE IF NOT EXISTS votes (
   vote INTEGER REFERENCES poll_options (option_id),
 
   CONSTRAINT vote_pkey PRIMARY KEY (poll_id, steam_id)
+);
+
+--------------------------------------------------------------------------------
+-- Misc
+--------------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS player_logs;
+CREATE TABLE IF NOT EXISTS player_logs (
+  steam_id TEXT REFERENCES players (steam_id) ON UPDATE CASCADE,
+  log_event TEXT NOT NULL,
+  log_data JSON,
+  log_time TIMESTAMPTZ DEFAULT NOW()
 );

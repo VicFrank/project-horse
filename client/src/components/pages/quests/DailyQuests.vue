@@ -22,11 +22,7 @@
           class="col-sm-12 col-md-12 col-lg-4 col-xl-4"
         >
           <div class="single-quest">
-            <i18n :path="`quests.${quest.quest_name}`" tag="p">
-              <template v-slot:x>{{
-                quest.required_amount.toLocaleString()
-              }}</template>
-            </i18n>
+            <p>{{ quest.quest_name }}</p>
             <button
               v-on:click="claimQuest(quest)"
               v-if="quest.quest_completed && !quest.claimed"

@@ -12,7 +12,6 @@ module.exports = {
 
     try {
       await this.upsertGame(matchID, ranked);
-      console.log(steamID, username);
       const player = await Players.upsertPlayer(steamID, username);
       const currentMMR = player.mmr;
       let mmrChange = 0;

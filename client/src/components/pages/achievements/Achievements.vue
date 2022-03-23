@@ -76,64 +76,12 @@ export default {
       return percent;
     },
     getAchievements() {
-      this.achievements = [
-        {
-          quest_name: "Sample Achievement",
-          quest_description: "This is just a placeholder",
-          required_amount: 1000,
-          coins_reward: 200,
-          xp_reward: 100,
-          capped_quest_progress: 500,
-          quest_completed: true,
-          claimed: true,
-        },
-        {
-          quest_name: "Sample Achievement",
-          quest_description: "This is just a placeholder",
-          required_amount: 1000,
-          coins_reward: 200,
-          xp_reward: 100,
-          capped_quest_progress: 500,
-          quest_completed: true,
-          claimed: true,
-        },
-        {
-          quest_name: "Sample Achievement",
-          quest_description: "This is just a placeholder",
-          required_amount: 1000,
-          coins_reward: 200,
-          xp_reward: 100,
-          capped_quest_progress: 500,
-          quest_completed: true,
-          claimed: true,
-        },
-        {
-          quest_name: "Sample Achievement",
-          quest_description: "This is just a placeholder",
-          required_amount: 1000,
-          coins_reward: 200,
-          xp_reward: 100,
-          capped_quest_progress: 500,
-          quest_completed: true,
-          claimed: true,
-        },
-        {
-          quest_name: "Sample Achievement",
-          quest_description: "This is just a placeholder",
-          required_amount: 1000,
-          coins_reward: 200,
-          xp_reward: 100,
-          capped_quest_progress: 500,
-          quest_completed: true,
-          claimed: true,
-        },
-      ];
-      // fetch(`/api/players/${this.$store.state.auth.userSteamID}/achievements`)
-      //   .then(res => res.json())
-      //   .then(quests => {
-      //     this.loading = false;
-      //     this.achievements = quests;
-      //   });
+      fetch(`/api/players/${this.$store.state.auth.userSteamID}/achievements`)
+        .then((res) => res.json())
+        .then((quests) => {
+          this.loading = false;
+          this.achievements = quests;
+        });
     },
   },
 };
