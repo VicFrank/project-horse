@@ -17,6 +17,7 @@ const Game = () => import("../components/pages/games/Game");
 const Profile = () => import("../components/pages/profile/Profile");
 const MatchHistory = () => import("../components/pages/profile/MatchHistory");
 const Achievements = () => import("../components/pages/profile/Achievements");
+const MyStats = () => import("../components/pages/profile/Stats");
 
 const PlayerPage = () => import("../components/pages/player/PlayerPage");
 const PlayerGamesList = () =>
@@ -45,6 +46,11 @@ const routes = [
   {
     path: "/profile/achievements",
     component: Achievements,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/profile/stats",
+    component: MyStats,
     meta: { requiresAuth: true },
   },
 ];
