@@ -13,9 +13,9 @@ router.get("/paypal", auth.adminAuth, async (req, res) => {
   }
 });
 
-router.get("/players/:steamid", auth.adminAuth, async (req, res) => {
+router.get("/players/:steamID", auth.adminAuth, async (req, res) => {
   try {
-    const steamID = req.params.steamid;
+    const steamID = req.params.steamID;
     const logs = await playerLogs.getLogsForPlayer(steamID);
     res.status(201).send(logs);
   } catch (error) {

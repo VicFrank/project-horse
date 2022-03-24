@@ -24,8 +24,8 @@
                 </p>
               </div>
               <div class="rewards">
-                <p v-if="quest.coins_reward > 0" class="pog-text">
-                  {{ quest.coins_reward }} POGGERS
+                <p v-if="quest.coin_reward > 0" class="pog-text">
+                  {{ quest.coin_reward }} COINS
                 </p>
                 <p class="quest-xp-text">{{ quest.xp_reward }} XP</p>
               </div>

@@ -30,15 +30,15 @@ const app = express();
 // Steam OpenID Passport stuff
 passport.serializeUser(async (user, next) => {
   // create the user if they don't yet exist
-  const steamid = user.id;
+  const steamID = user.id;
   const username = user.displayName;
 
-  const playerExists = await players.doesPlayerExist(steamid);
+  const playerExists = await players.doesPlayerExist(steamID);
   if (!playerExists) {
-    await players.createPlayer(steamid, username);
+    await players.createPlayer(steamID, username);
   }
 
-  const { user_type } = await players.getPlayer(steamid);
+  const { user_type } = await players.getPlayer(steamID);
 
   // add db info to the user
   user = {

@@ -14,9 +14,9 @@ const {
 const stripeClient = require("../common/stripe-client");
 const keys = require("../config/keys");
 
-router.post("/paypal/:steamid", auth.userAuth, async (req, res) => {
+router.post("/paypal/:steamID", auth.userAuth, async (req, res) => {
   try {
-    const steamID = req.params.steamid;
+    const steamID = req.params.steamID;
     const orderID = req.body.orderID;
     const itemID = req.body.itemID;
     const paypalType = req.body.paypalType;
@@ -296,12 +296,12 @@ router.post("/stripe/cancel_subscription", async (req, res) => {
 });
 
 router.get(
-  "/stripe/subscriptions/:steamid",
+  "/stripe/subscriptions/:steamID",
   auth.userAuth,
   async (req, res) => {
     try {
-      const steamid = req.params.steamid;
-      const subscription = await players.getStripeSubscription(steamid);
+      const steamID = req.params.steamID;
+      const subscription = await players.getStripeSubscription(steamID);
 
       const { customer_id } = subscription;
 

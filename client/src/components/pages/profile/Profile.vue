@@ -2,7 +2,7 @@
   <div>
     <h1 class="page-title">Profile</h1>
     <DailyQuests class="mb-5"></DailyQuests>
-    <h2>Recent Games</h2>
+    <h2 v-if="games.length > 0">Recent Games</h2>
     <PlayerGamesList
       :games="games"
       :loading="gamesLoading"
@@ -31,8 +31,6 @@ export default {
 
   computed: {
     steamID() {
-      console.log(this.$store.state.auth.username);
-      console.log(this.$store.state.auth.username);
       return this.$store.state.auth.userSteamID;
     },
   },

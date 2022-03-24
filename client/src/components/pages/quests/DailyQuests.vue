@@ -101,6 +101,7 @@ export default {
       return `Can refresh ${time}`;
     },
     getDailyQuests() {
+      // time request
       fetch(`/api/players/${this.$store.state.auth.userSteamID}/daily_quests`)
         .then(
           (res) => res.json(),
@@ -111,7 +112,7 @@ export default {
           }
         )
         .then((quests) => {
-          // this.loading = false;
+          this.loading = false;
           this.quests = quests;
         })
         .catch((err) => {

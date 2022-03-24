@@ -6,9 +6,9 @@ module.exports = {
   /**
    * When a player is eliminated/wins, upsert the game and add their stats
    */
-  async createGamePlayer(event) {
-    const { matchID, steamID, username, ranked, place } = event;
-    const { players, rounds, endTime, heroes, team, wins, losses } = event;
+  async createGamePlayer(postGamePlayerData) {
+    const { matchID, steamID, username, ranked, place } = postGamePlayerData;
+    const { rounds, endTime, heroes, team, wins, losses } = postGamePlayerData;
 
     try {
       await this.upsertGame(matchID, ranked);
@@ -16,14 +16,16 @@ module.exports = {
       const currentMMR = player.mmr;
       let mmrChange = 0;
 
-      // if (ranked) {
-      //   const winners = players.filter((p) => !p.hasLost);
-      //   const losers = players.filter(
-      //     (p) => p.hasLost && p.steamID !== steamID
-      //   );
-      //   mmrChange = getMatchRatingChange(currentMMR, winners, losers);
-      //   mmrChange = 0;
-      // }
+      // TODO: Add players to post game data that is sent from dota
+      const { players } = postGamePlayerData;
+      if (ranked && players) {
+        const winners = players.filter((p) => !p.hasLost);
+        const losers = players.filter(
+          (p) => p.hasLost && p.steamID !== steamID
+        );
+        mmrChange = getMatchRatingChange(currentMMR, winners, losers);
+        mmrChange = 0;
+      }
 
       // prettier-ignore
       const { rows: gamePlayerRows } = await query(
@@ -59,6 +61,8 @@ module.exports = {
           );
         }
       }
+
+      await Players.addGameQuestProgress(event);
 
       return { matchID, steamID, mmrChange };
     } catch (error) {

@@ -23,7 +23,7 @@ module.exports = [
     xp: 500,
     coins: 30,
     stat: "first_place",
-    requiredAmount: 5,
+    requiredAmount: 10,
     hidden: false,
   },
   {
@@ -32,7 +32,7 @@ module.exports = [
     xp: 2000,
     coins: 125,
     stat: "first_place",
-    requiredAmount: 10,
+    requiredAmount: 20,
     hidden: false,
   },
   {
@@ -40,8 +40,8 @@ module.exports = [
     description: "Win 100 rounds",
     xp: 500,
     coins: 50,
-    stat: "won_rounds",
-    requiredAmount: 1,
+    stat: "rounds_won",
+    requiredAmount: 100,
     hidden: false,
   },
   {
@@ -49,8 +49,8 @@ module.exports = [
     description: "Win 1000 rounds",
     xp: 500,
     coins: 30,
-    stat: "won_rounds",
-    requiredAmount: 5,
+    stat: "rounds_won",
+    requiredAmount: 1000,
     hidden: false,
   },
   {
@@ -58,8 +58,8 @@ module.exports = [
     description: "Win 9999 rounds",
     xp: 2000,
     coins: 125,
-    stat: "won_rounds",
-    requiredAmount: 10,
+    stat: "rounds_won",
+    requiredAmount: 9999,
     hidden: false,
   },
   {

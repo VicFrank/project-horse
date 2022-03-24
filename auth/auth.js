@@ -17,8 +17,8 @@ function checkUserAuth(req) {
     return true;
   }
   if (req.isAuthenticated()) {
-    const steamid = req.params.steamid;
-    if (steamid === req.user.id || req.user.isAdmin) {
+    const steamID = req.params.steamID;
+    if (steamID === req.user.id || req.user.isAdmin) {
       return true;
     }
   }

@@ -139,9 +139,9 @@ module.exports = {
   /**
    * Gets all 3 daily quests from a player, regardless
    * of their battle pass tier
-   * @param {String} steamid
+   * @param {String} steamID
    */
-  async getAllDailyQuestsForPlayer(steamid) {
+  async getAllDailyQuestsForPlayer(steamID) {
     try {
       const { rows } = await query(
         `
@@ -154,7 +154,7 @@ module.exports = {
       WHERE steam_id = $1 AND q.is_achievement = FALSE AND is_weekly = FALSE
       ORDER BY quest_index DESC
       `,
-        [steamid]
+        [steamID]
       );
 
       return rows;
@@ -163,7 +163,7 @@ module.exports = {
     }
   },
 
-  async getAchievementsForPlayer(steamid) {
+  async getAchievementsForPlayer(steamID) {
     try {
       const { rows } = await query(
         `
@@ -175,7 +175,7 @@ module.exports = {
       WHERE q.is_achievement = TRUE AND steam_id = $1
 	    ORDER BY quest_id
       `,
-        [steamid]
+        [steamID]
       );
       return rows;
     } catch (error) {
@@ -185,9 +185,9 @@ module.exports = {
 
   /**
    * Only shows the highest active tier of achievements
-   * @param {String} steamid
+   * @param {String} steamID
    */
-  async getActiveAchievementsForPlayer(steamid) {
+  async getActiveAchievementsForPlayer(steamID) {
     try {
       const { rows } = await query(
         `
@@ -199,7 +199,7 @@ module.exports = {
         WHERE q.is_achievement = TRUE AND steam_id = $1
         ORDER BY quest_id
       `,
-        [steamid]
+        [steamID]
       );
 
       // Group by stat
