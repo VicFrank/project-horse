@@ -1384,7 +1384,7 @@ module.exports = {
   },
 
   async addGameQuestProgress(postGamePlayerData) {
-    const { steamID, winner, heroes } = postGamePlayerData;
+    const { steamID, place, heroes, wins } = postGamePlayerData;
     const activeQuests = await this.getAllQuestsForPlayer(steamID);
     const abilities = heroes.reduce(
       (acc, hero) => acc.concat(hero.abilities),

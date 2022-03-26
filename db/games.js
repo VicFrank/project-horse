@@ -7,8 +7,10 @@ module.exports = {
    * When a player is eliminated/wins, upsert the game and add their stats
    */
   async createGamePlayer(postGamePlayerData) {
-    const { matchID, steamID, username, ranked, place } = postGamePlayerData;
+    const { matchID, steamID, username, place } = postGamePlayerData;
     const { rounds, endTime, heroes, team, wins, losses } = postGamePlayerData;
+    const { god } = postGamePlayerData;
+    const ranked = true;
 
     try {
       await this.upsertGame(matchID, ranked);
@@ -30,10 +32,10 @@ module.exports = {
       // prettier-ignore
       const { rows: gamePlayerRows } = await query(
         `INSERT INTO game_players
-         (game_id, steam_id, rounds, place, end_time, mmr_change, team, wins, losses)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+         (game_id, steam_id, rounds, place, end_time, mmr_change, team, wins, losses, god)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
          RETURNING *`,
-        [matchID, steamID, rounds, place, endTime, mmrChange, team, wins, losses]
+        [matchID, steamID, rounds, place, endTime, mmrChange, team, wins, losses, god]
       );
       const gamePlayerId = gamePlayerRows[0].game_player_id;
 
@@ -62,7 +64,7 @@ module.exports = {
         }
       }
 
-      await Players.addGameQuestProgress(event);
+      if (ranked) await Players.addGameQuestProgress(postGamePlayerData);
 
       return { matchID, steamID, mmrChange };
     } catch (error) {
@@ -74,7 +76,8 @@ module.exports = {
    * When a game is finished, record post game stats, round results
    */
   async addGameResults(results) {
-    const { matchID, duration, rounds, ranked, cheatsEnabled } = results;
+    const { matchID, duration, rounds, ranked, cheatsEnabled, roundResults } =
+      results;
 
     try {
       await this.upsertGame(matchID, ranked);
@@ -86,7 +89,7 @@ module.exports = {
         [duration, rounds, ranked, cheatsEnabled, matchID]
       );
 
-      for (const round of results.roundResults) {
+      for (const round of roundResults) {
         for (const combat of round.combatResults) {
           const { rows: combatResultRows } = await query(
             `INSERT INTO combat_results(game_id, round_number, duration)

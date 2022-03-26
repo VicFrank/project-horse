@@ -68,6 +68,8 @@ CREATE TABLE IF NOT EXISTS game_players (
   end_time DOUBLE PRECISION,
   place INTEGER,
   team INTEGER,
+  god TEXT,
+  total_level INTEGER,
 
   mmr_change INTEGER DEFAULT 0,
   coins_change INTEGER DEFAULT 0,

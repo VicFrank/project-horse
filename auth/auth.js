@@ -2,13 +2,16 @@ const keys = require("../config/keys");
 
 function checkServerKey(req) {
   const serverKey = req.body.server_key;
-  const serverKeyParam = req.params.server_key;
+  const serverKey2 = req.get("server_key");
+  const serverKey3 = req.params.server_key;
   const dedicatedServerKey = process.env.IS_PRODUCTION
     ? keys.dedicatedServerKey
     : keys.toolsKey;
 
   return (
-    serverKey === dedicatedServerKey || serverKeyParam === dedicatedServerKey
+    serverKey === dedicatedServerKey ||
+    serverKey2 === dedicatedServerKey ||
+    serverKey3 === dedicatedServerKey
   );
 }
 
