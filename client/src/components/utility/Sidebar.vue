@@ -56,7 +56,7 @@
 
           <li class="sidebar-nav__item">
             <router-link
-              to="/profile/battle_pass"
+              to="/profile/battlepass"
               class="sidebar-nav__link sidebar-nav__link_battlepass"
               exact-active-class="active"
               v-t="'navigation.battle_pass'"

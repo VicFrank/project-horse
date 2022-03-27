@@ -103,6 +103,11 @@
     "page_title": "Change Log",
     "update": "Update"
   },
+  "battle_pass": {
+    "page_title": "Battle Pass",
+    "level": "Level",
+    "level_tooltip": "Total Exp: {total_xp}<br> Next Level: {next_level}"
+  },
   "payment": {
     "page_title": "Payment",
     "alipay_title": "Alipay Payment",
