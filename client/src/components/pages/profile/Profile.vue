@@ -1,8 +1,17 @@
 <template>
   <div>
     <h1 class="page-title">Profile</h1>
+
+    <!-- Daily Quests -->
     <DailyQuests class="mb-5"></DailyQuests>
-    <h2 v-if="games.length > 0">Recent Games</h2>
+
+    <!-- Recent Games -->
+    <div class="d-flex justify-content-between align-items-center">
+      <h2 v-if="games.length > 0">Recent Games</h2>
+      <router-link to="/profile/games" class="blue"
+        ><i class="fas fa-plus mr-1"></i>View All</router-link
+      >
+    </div>
     <PlayerGamesList
       :games="games"
       :loading="gamesLoading"
