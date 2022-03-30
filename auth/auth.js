@@ -8,6 +8,8 @@ function checkServerKey(req) {
     ? keys.dedicatedServerKey
     : keys.toolsKey;
 
+  if (serverKey2) console.log(serverKey2);
+
   return (
     serverKey === dedicatedServerKey ||
     serverKey2 === dedicatedServerKey ||
