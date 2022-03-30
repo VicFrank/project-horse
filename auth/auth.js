@@ -8,7 +8,9 @@ function checkServerKey(req) {
     ? keys.dedicatedServerKey
     : keys.toolsKey;
 
+  if (serverKey) console.log(serverKey);
   if (serverKey2) console.log(serverKey2);
+  if (serverKey3) console.log(serverKey3);
 
   return (
     serverKey === dedicatedServerKey ||
