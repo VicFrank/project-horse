@@ -9,10 +9,12 @@
     </td>
     <td class="col6">{{ player.wins }} - {{ player.losses || "?" }}</td>
     <td class="col2">
-      <!-- TODO: Add profile Picture -->
-      <router-link :to="'/players/' + player.steam_id">
-        {{ player.username }}
-      </router-link>
+      <div>
+        <router-link :to="'/players/' + player.steam_id">
+          {{ player.username }}
+        </router-link>
+        <div class="text-muted">{{ player.god }}</div>
+      </div>
     </td>
     <!-- <div class="col3">God</div> -->
     <td class="d-flex col4 pr-3">

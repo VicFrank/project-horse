@@ -187,7 +187,7 @@ module.exports = {
       const { rows: gamePlayers } = await query(
         `
           SELECT gp.steam_id, gp.rounds, gp.wins, gp.losses, gp.end_time, gp.place, gp.team,
-            gp.game_player_id, p.username
+            gp.game_player_id, gp.god, p.username
           FROM game_players AS gp
           JOIN players AS p
           USING (steam_id)
