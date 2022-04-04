@@ -43,7 +43,7 @@ passport.serializeUser(async (user, next) => {
   // add db info to the user
   user = {
     ...user,
-    isAdmin: user_type === "admin",
+    isAdmin: user_type === "ADMIN",
   };
 
   next(null, user);

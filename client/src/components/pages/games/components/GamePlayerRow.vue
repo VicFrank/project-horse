@@ -2,12 +2,19 @@
   <!-- TODO - Make rows collapsible to view detailed hero/ability stats -->
   <tr>
     <td class="col1">
-      {{ player.place }}
+      <div>{{ getRankString(player.place) }}</div>
     </td>
     <td class="col5">
       {{ player.rounds }}
     </td>
-    <td class="col6">{{ player.wins }} - {{ player.losses || "?" }}</td>
+    <td class="col6">{{ player.wins }} - {{ player.losses }}</td>
+    <td v-if="showMMR">
+      <div>{{ player.mmr }}</div>
+      <span v-if="player.mmr_change >= 0" class="win">
+        +{{ player.mmr_change }}
+      </span>
+      <span v-else class="loss"> -{{ player.mmr_change }} </span>
+    </td>
     <td class="col2">
       <div>
         <router-link :to="'/players/' + player.steam_id">
@@ -31,6 +38,7 @@
 
 <script>
 import HeroAndAbilities from "./HeroAndAbilities.vue";
+import { getRankString } from "../../../../filters/filters";
 
 export default {
   components: {
@@ -39,6 +47,11 @@ export default {
 
   props: {
     player: Object,
+    showMMR: Boolean,
+  },
+
+  methods: {
+    getRankString,
   },
 };
 </script>

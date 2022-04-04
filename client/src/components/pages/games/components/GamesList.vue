@@ -1,5 +1,14 @@
 <template>
   <table class="table" style="width: 600px">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Duration</th>
+        <th>Rounds</th>
+        <th>Ranked</th>
+      </tr>
+    </thead>
+
     <tbody>
       <template v-if="loading">
         <tr v-for="i in placeholderRows" :key="i" class="animate-pulse">

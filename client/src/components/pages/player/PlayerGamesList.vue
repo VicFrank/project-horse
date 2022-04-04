@@ -2,6 +2,15 @@
   <div>
     <h2 class="page-title">My Games</h2>
     <table class="table">
+      <thead>
+        <tr>
+          <th>God</th>
+          <th>Result</th>
+          <th>Rounds</th>
+          <th>Ranked</th>
+        </tr>
+      </thead>
+
       <tbody>
         <template v-if="loading">
           <tr v-for="i in placeholderRows" :key="i" class="animate-pulse">
@@ -16,11 +25,21 @@
             tag="tr"
           >
             <td>{{ game.god }}</td>
-            <td>{{ dateFromNow(game.created_at) }}</td>
             <td>
-              {{ hhmmss(game.duration) }}
+              {{ getRankString(game.place) }}
+              <template v-if="game.mmr_change != undefined">
+                <span v-if="game.mmr_change >= 0" class="win">
+                  +{{ game.mmr_change }}
+                </span>
+                <span v-else class="loss"> -{{ game.mmr_change }} </span>
+              </template>
+              <div class="text-muted">{{ dateFromNow(game.created_at) }}</div>
             </td>
-            <td>{{ game.rounds || "?" }} Rounds</td>
+            <td>
+              {{ game.rounds || "?" }} Rounds
+
+              <div class="text-muted">{{ hhmmss(game.duration) }}</div>
+            </td>
             <td>{{ game.ranked ? "Ranked" : "Unranked" }}</td>
           </router-link>
         </template>
@@ -30,7 +49,7 @@
 </template>
  
 <script>
-import { hhmmss, dateFromNow } from "../../../filters/filters";
+import { hhmmss, dateFromNow, getRankString } from "../../../filters/filters";
 export default {
   props: {
     games: Array,
@@ -44,6 +63,7 @@ export default {
   methods: {
     hhmmss,
     dateFromNow,
+    getRankString,
   },
 };
 </script>

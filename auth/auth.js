@@ -16,9 +16,8 @@ function checkServerKey(req) {
 }
 
 function checkUserAuth(req) {
-  if (checkServerKey(req)) {
-    return true;
-  }
+  if (checkServerKey(req)) return true;
+  if (req.user?.isAdmin) return true;
   if (req.isAuthenticated()) {
     const steamID = req.params.steamID;
     if (steamID === req.user.id || req.user.isAdmin) {
@@ -32,10 +31,13 @@ module.exports = {
   isAuthenticatedUser: function (req) {
     return checkUserAuth(req);
   },
+  isAdmin: function (req) {
+    return req.user?.isAdmin;
+  },
   adminAuth: function (req, res, next) {
     if (checkServerKey(req)) {
       return next();
-    } else if (req.user && req.user.isAdmin) {
+    } else if (req.user?.isAdmin) {
       return next();
     } else {
       res

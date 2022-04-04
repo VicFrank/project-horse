@@ -29,6 +29,18 @@ export function localizeNumber(value) {
     return value.toLocaleString();
   }
 }
+export function getRankString(rank) {
+  switch (rank) {
+    case 1:
+      return "1st";
+    case 2:
+      return "2nd";
+    case 3:
+      return "3rd";
+    default:
+      return `${rank}th`;
+  }
+}
 export function round(value, decimals) {
   {
     if (!value) {
