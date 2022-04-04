@@ -18,7 +18,6 @@ module.exports = {
       const currentMMR = player.mmr;
       let mmrChange = 0;
 
-      // TODO: Add players to post game data that is sent from dota
       const { players } = postGamePlayerData;
       if (ranked && players) {
         const winners = players.filter((p) => !p.hasLost);
@@ -26,7 +25,6 @@ module.exports = {
           (p) => p.hasLost && p.steamID !== steamID
         );
         mmrChange = getMatchRatingChange(currentMMR, winners, losers);
-        mmrChange = 0;
       }
 
       // prettier-ignore
