@@ -31,7 +31,7 @@ module.exports = {
       const { rows: gamePlayerRows } = await query(
         `INSERT INTO game_players
          (game_id, steam_id, rounds, place, end_time, mmr, mmr_change, team, wins, losses, god)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
          RETURNING *`,
         [matchID, steamID, rounds, place, endTime, currentMMR, mmrChange, team, wins, losses, god]
       );
