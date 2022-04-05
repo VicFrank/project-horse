@@ -71,7 +71,7 @@ export default {
 
 <style scoped>
 .game-table {
-  max-width: 1001px;
+  max-width: 1061px;
   margin: auto;
 }
 </style>
