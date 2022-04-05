@@ -28,7 +28,9 @@ router.post("/players", auth.adminAuth, async (req, res) => {
   const { data } = req.body;
   try {
     const parsedData = JSON.parse(data);
+    const gameID = parsedData.matchID;
     const created = await games.createGamePlayer(parsedData);
+    apicache.clear(`/games-${gameID}`);
     res.status(201).send({ message: `Recorded game`, ...created });
   } catch (error) {
     console.log(data);
@@ -41,7 +43,9 @@ router.post("/", auth.adminAuth, async (req, res) => {
   const { data } = req.body;
   try {
     const parsedData = JSON.parse(data);
+    const gameID = parsedData.matchID;
     await games.addGameResults(parsedData);
+    apicache.clear(`/games-${gameID}`);
     res.status(201).send({ message: `Created game` });
   } catch (error) {
     console.log(JSON.stringify(req.body));
@@ -53,8 +57,9 @@ router.post("/", auth.adminAuth, async (req, res) => {
 router.get("/:gameid", cache("1 hour"), async (req, res) => {
   try {
     const gameID = req.params.gameid;
-    const game = await games.getGame(gameID);
+    req.apicacheGroup = `game-${gameID}`;
 
+    const game = await games.getGame(gameID);
     if (!game) return res.status(404).send({ message: "Game not found" });
     if (!auth.isAdmin(req)) {
       for (const player of game.players) {

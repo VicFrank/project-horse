@@ -20,9 +20,9 @@ module.exports = {
 
       const { players } = postGamePlayerData;
       if (ranked && players) {
-        const winners = players.filter((p) => !p.hasLost);
+        const winners = players.filter((p) => p.hasLost === false);
         const losers = players.filter(
-          (p) => p.hasLost && p.steamID !== steamID
+          (p) => p.hasLost === true && p.steamID !== steamID
         );
         mmrChange = getMatchRatingChange(currentMMR, winners, losers);
       }

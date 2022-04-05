@@ -5,7 +5,8 @@
       <div>{{ getRankString(player.place) }}</div>
     </td>
     <td class="col5">
-      {{ player.rounds }}
+      <div>{{ player.rounds }}</div>
+      <div class="text-muted">{{ hhmmss(player.end_time) }}</div>
     </td>
     <td class="col6">{{ player.wins }} - {{ player.losses }}</td>
     <td v-if="showMMR">
@@ -38,7 +39,7 @@
 
 <script>
 import HeroAndAbilities from "./HeroAndAbilities.vue";
-import { getRankString } from "../../../../filters/filters";
+import { getRankString, hhmmss } from "../../../../filters/filters";
 
 export default {
   components: {
@@ -52,6 +53,7 @@ export default {
 
   methods: {
     getRankString,
+    hhmmss,
   },
 };
 </script>
