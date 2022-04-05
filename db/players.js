@@ -252,10 +252,10 @@ module.exports = {
   async modifyMMR(steamID, mmr) {
     if (mmr === 0) return;
     try {
-      await query(queryText, [
+      await query(
         `UPDATE players SET mmr = mmr + $1 WHERE steam_id = $2 RETURNING *`,
-        steamID,
-      ]);
+        [steamID]
+      );
     } catch (error) {
       throw error;
     }
