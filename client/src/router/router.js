@@ -21,6 +21,7 @@ const MyStats = () => import("../components/pages/profile/Stats");
 const BattlePass = () =>
   import("../components/pages/profile/battlepass/BattlePass");
 
+const Leaderboard = () => import("../components/pages/leaderboard/Leaderboard");
 const PlayerPage = () => import("../components/pages/player/PlayerPage");
 const PlayerGamesList = () =>
   import("../components/pages/player/PlayerGamesList");
@@ -37,6 +38,7 @@ const routes = [
   { path: "/redirect", component: LoginRedirect },
   { path: "/games", component: Games },
   { path: "/games/:game_id", component: Game },
+  { path: "/leaderboard", component: Leaderboard },
   { path: "/players/:steam_id", component: PlayerPage },
   { path: "/players/:steam_id/games", component: PlayerGamesList },
   { path: "/profile", component: Profile, meta: { requiresAuth: true } },

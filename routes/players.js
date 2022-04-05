@@ -297,4 +297,14 @@ router.post("/:steamID/use_item/:itemid", auth.userAuth, async (req, res) => {
   }
 });
 
+router.get("/leaderboard", auth.userAuth, async (req, res) => {
+  try {
+    const leaderboard = await players.getLeaderboard();
+    res.status(200).json(leaderboard);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Server Error" });
+  }
+});
+
 module.exports = router;

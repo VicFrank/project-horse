@@ -36,6 +36,10 @@ module.exports = {
       ORDER BY mmr DESC
       LIMIT 100
       `);
+      // add index to rows
+      for (let i = 0; i < rows.length; i++) {
+        rows[i].rank = i + 1;
+      }
       return rows;
     } catch (error) {
       throw error;
