@@ -20,7 +20,9 @@ module.exports = {
 
       const { players } = postGamePlayerData;
       if (ranked && players) {
-        const winners = players.filter((p) => p.hasLost === false);
+        const winners = players.filter(
+          (p) => p.hasLost === false && p.steamID !== steamID
+        );
         const losers = players.filter(
           (p) => p.hasLost === true && p.steamID !== steamID
         );

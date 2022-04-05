@@ -18,7 +18,7 @@ const getMatchRatingChange = (currentMMR, winners, losers) => {
   // "lost" to all players higher than us.
   let ratingChange = 0;
   for (const winner of winners) {
-    ratingChange += getEloRatingChange(winner.mmr, currentMMR);
+    ratingChange -= getEloRatingChange(winner.mmr, currentMMR);
   }
   for (const loser of losers) {
     ratingChange += getEloRatingChange(currentMMR, loser.mmr);

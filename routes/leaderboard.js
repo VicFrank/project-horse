@@ -8,7 +8,6 @@ const cache = apicache.middleware;
 
 router.get("/", cache("1 minutes"), auth.userAuth, async (req, res) => {
   try {
-    console.log("ldearboard");
     const leaderboard = await players.getLeaderboard();
     res.status(200).json(leaderboard);
   } catch (error) {
