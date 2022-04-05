@@ -254,7 +254,7 @@ module.exports = {
     try {
       await query(
         `UPDATE players SET mmr = mmr + $1 WHERE steam_id = $2 RETURNING *`,
-        [steamID]
+        [mmr, steamID]
       );
     } catch (error) {
       throw error;
