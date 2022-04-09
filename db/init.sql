@@ -52,7 +52,8 @@ CREATE TABLE IF NOT EXISTS games (
   duration DOUBLE PRECISION,
   cheats_enabled BOOLEAN,
 
-  created_at TIMESTAMPTZ DEFAULT Now()
+  created_at TIMESTAMPTZ DEFAULT Now(),
+  end_time TIMESTAMPTZ
 );
 DROP INDEX IF EXISTS idx_games_created_at;
 CREATE INDEX idx_games_created_at ON games (created_at);

@@ -107,6 +107,13 @@
   "games": {
     "page_title": "Games"
   },
+  "gods": {
+    "page_title": "Gods",
+    "god": "God",
+    "pick_rate": "Pick Rate",
+    "avg_place": "Avg Place",
+    "placements": "Placements"
+  },
   "battle_pass": {
     "page_title": "Battle Pass",
     "level": "Level",

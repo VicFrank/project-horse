@@ -14,6 +14,8 @@ const Admin = () => import("../components/pages/admin/Admin");
 const Games = () => import("../components/pages/games/Games");
 const Game = () => import("../components/pages/games/Game");
 
+const Gods = () => import("../components/pages/stats/Gods");
+
 const Profile = () => import("../components/pages/profile/Profile");
 const MatchHistory = () => import("../components/pages/profile/MatchHistory");
 const Achievements = () => import("../components/pages/profile/Achievements");
@@ -38,9 +40,11 @@ const routes = [
   { path: "/redirect", component: LoginRedirect },
   { path: "/games", component: Games },
   { path: "/games/:game_id", component: Game },
+  { path: "/gods/", component: Gods },
   { path: "/leaderboard", component: Leaderboard },
   { path: "/players/:steam_id", component: PlayerPage },
   { path: "/players/:steam_id/games", component: PlayerGamesList },
+
   { path: "/profile", component: Profile, meta: { requiresAuth: true } },
   {
     path: "/profile/games",

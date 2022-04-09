@@ -19,6 +19,7 @@ const logsRouter = require("./routes/logs");
 const paymentsRouter = require("./routes/payments");
 const steamRouter = require("./routes/steam");
 const leaderboardRouter = require("./routes/leaderboard");
+const statsRouter = require("./routes/stats");
 
 const players = require("./db/players");
 
@@ -130,6 +131,7 @@ app.use("/api/logs", logsRouter);
 app.use("/api/payments", paymentsRouter);
 app.use("/api/steam", steamRouter);
 app.use("/api/leaderboard", leaderboardRouter);
+app.use("/api/stats", statsRouter);
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/client/dist/index.html"));
