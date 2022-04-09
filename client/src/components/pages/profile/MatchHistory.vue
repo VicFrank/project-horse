@@ -1,5 +1,13 @@
 <template>
-  <PlayerGamesList v-bind:games="games" :loading="loading"></PlayerGamesList>
+  <div>
+    <h1 class="page-title">{{ $t("profile.my_games") }}</h1>
+    <PlayerGamesList
+      v-bind:games="games"
+      :loading="loading"
+      class="m-auto"
+      style="max-width: 710px"
+    ></PlayerGamesList>
+  </div>
 </template>
 
 <script>

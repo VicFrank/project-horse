@@ -48,6 +48,7 @@
     "play_now": "Play Now",
     "language": "Language",
     "tournament": "Tournament",
+    "leaderboard": "Leaderboard",
     "en": "English",
     "cn": "汉语",
     "ru": "русский"
@@ -102,6 +103,9 @@
   "changelog": {
     "page_title": "Change Log",
     "update": "Update"
+  },
+  "games": {
+    "page_title": "Games"
   },
   "battle_pass": {
     "page_title": "Battle Pass",

@@ -1,11 +1,13 @@
 <template>
   <div>
     <div v-if="playerFound">
-      <h1>{{ player.username }}</h1>
+      <h1 class="page-title">{{ player.username }}</h1>
       <PlayerGamesList
         :games="games"
         :loading="gamesLoading"
-        :placeholderRows="3"
+        :placeholderRows="20"
+        class="m-auto"
+        style="max-width: 710px"
       ></PlayerGamesList>
     </div>
     <div v-else>
@@ -37,7 +39,7 @@ export default {
   },
 
   created() {
-    fetch(`/api/players/${this.steamID}/games?limit=3`)
+    fetch(`/api/players/${this.steamID}/games?limit=20`)
       .then((res) => res.json())
       .then((games) => {
         this.gamesLoading = false;

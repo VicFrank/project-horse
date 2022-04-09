@@ -2,6 +2,7 @@
   <table class="table" style="width: 600px">
     <thead>
       <tr>
+        <th>Match Id</th>
         <th>Date</th>
         <th>Duration</th>
         <th>Rounds</th>
@@ -18,19 +19,19 @@
         </tr>
       </template>
       <template v-else>
-        <router-link
-          v-for="game in games"
-          :key="game.game_id"
-          :to="'/games/' + game.game_id"
-          tag="tr"
-        >
+        <tr v-for="game in games" :key="game.game_id">
+          <td>
+            <router-link :to="'/games/' + game.game_id">{{
+              game.game_id
+            }}</router-link>
+          </td>
           <td>{{ dateFromNow(game.created_at) }}</td>
           <td>
             {{ hhmmss(game.duration) }}
           </td>
           <td>{{ game.rounds || "?" }} Rounds</td>
           <td>{{ game.ranked ? "Ranked" : "Unranked" }}</td>
-        </router-link>
+        </tr>
       </template>
     </tbody>
   </table>

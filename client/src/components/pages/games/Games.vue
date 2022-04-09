@@ -1,9 +1,13 @@
 <template>
-  <GamesList
-    :games="games"
-    :loading="loading"
-    :placeholderRows="100"
-  ></GamesList>
+  <div>
+    <h1 class="page-title">{{ $t("games.page_title") }}</h1>
+    <GamesList
+      :games="games"
+      :loading="loading"
+      :placeholderRows="100"
+      class="m-auto"
+    ></GamesList>
+  </div>
 </template>
 
 <script>

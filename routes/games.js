@@ -30,7 +30,7 @@ router.post("/players", auth.adminAuth, async (req, res) => {
     const parsedData = JSON.parse(data);
     const gameID = parsedData.matchID;
     const created = await games.createGamePlayer(parsedData);
-    apicache.clear(`games-${gameID}`);
+    apicache.clear(`game-${gameID}`);
     res.status(201).send({ message: `Recorded game`, ...created });
   } catch (error) {
     console.log(data);
@@ -45,7 +45,7 @@ router.post("/", auth.adminAuth, async (req, res) => {
     const parsedData = JSON.parse(data);
     const gameID = parsedData.matchID;
     await games.addGameResults(parsedData);
-    apicache.clear(`games-${gameID}`);
+    apicache.clear(`game-${gameID}`);
     res.status(201).send({ message: `Created game` });
   } catch (error) {
     console.log(JSON.stringify(req.body));
