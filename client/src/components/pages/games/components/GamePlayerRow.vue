@@ -14,7 +14,7 @@
       <span v-if="player.mmr_change >= 0" class="win">
         +{{ player.mmr_change }}
       </span>
-      <span v-else class="loss"> -{{ player.mmr_change }} </span>
+      <span v-else class="loss"> {{ player.mmr_change }} </span>
     </td>
     <td class="col2">
       <div>
