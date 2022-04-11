@@ -94,7 +94,6 @@ module.exports = {
   async bulkCreateCosmetics(cosmetics) {
     try {
       await tx.default(pool, async (db) => {
-        console.log("in tx");
         for (const cosmetic of cosmetics) {
           const { rows } = await db.query(
             `SELECT * FROM cosmetics WHERE cosmetic_name = $1`,

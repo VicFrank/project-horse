@@ -7,7 +7,8 @@ module.exports = {
    * When a player is eliminated/wins, upsert the game and add their stats
    */
   async createGamePlayer(postGamePlayerData) {
-    const { matchID, steamID, username, place, god } = postGamePlayerData;
+    const { matchID, steamID, username, place, god, ranked } =
+      postGamePlayerData;
     const { rounds, endTime, heroes, team, wins, losses } = postGamePlayerData;
 
     try {

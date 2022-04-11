@@ -244,10 +244,10 @@ module.exports = {
   async modifyCoins(steamID, coins) {
     if (coins === 0) return;
     try {
-      await query(queryText, [
+      await query(
         `UPDATE players SET coins = coins + $1 WHERE steam_id = $2 RETURNING *`,
-        steamID,
-      ]);
+        [coins, steamID]
+      );
     } catch (error) {
       throw error;
     }
@@ -1164,6 +1164,7 @@ module.exports = {
 
       // Get the quest rewards and requirements for the DB,
       // and make sure the quest is actually complete
+      console.log(steamID, questID, interval);
       const { rows } = await query(
         `
         SELECT pq.quest_progress, pq.claimed, q.required_amount,
