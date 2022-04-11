@@ -3,7 +3,7 @@
     <h1 class="page-title">Battle Pass</h1>
     <div class="timeline">
       <ul class="battlepass-timeline">
-        <li v-for="i in 100" :key="i">
+        <li v-for="i in 50" :key="i">
           <div
             class="timeline-container"
             v-bind:class="{ left: i % 2 === 0, right: i % 2 === 1 }"
@@ -12,8 +12,8 @@
               <span
                 v-b-tooltip.hover.html
                 :title="`${$t('battle_pass.level_tooltip', {
-                  total_xp: 1000 * i,
-                  next_level: 1000,
+                  total_xp: getLevelTotalXP(i),
+                  next_level: getNextLevelXP(i),
                 })}`"
               >
                 {{ $t("battle_pass.level") }} {{ i }}
@@ -70,13 +70,11 @@ export default {
   }),
 
   created() {
-    fetch(`/api/cosmetics/battle_pass`)
+    fetch(`/api/battle_pass/levels`)
       .then((res) => res.json())
       .then((rewards) => {
-        // remove level 0 from the rewards
-        rewards.shift();
         this.rewards = rewards;
-        // this.loading = false;
+        this.loading = false;
       })
       .catch((err) => (this.error = err));
   },
@@ -111,7 +109,8 @@ export default {
     },
     getItemImage(level) {
       const cosmetic_id = this.getRewardItem(level);
-      if (!cosmetic_id || cosmetic_id === null) return false;
+      if (!cosmetic_id || cosmetic_id === null)
+        return require("./images/bp_placeholder.png");
 
       return require(`./images/${cosmetic_id}.png`);
     },

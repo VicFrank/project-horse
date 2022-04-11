@@ -82,11 +82,11 @@ module.exports = {
         SELECT * FROM battle_pass_levels
         LEFT JOIN battle_pass_cosmetic_rewards
         USING (battle_pass_id, bp_level)
-        ORDER BY bp_level
-        WHERE battle_pass_id = $1`,
+        WHERE battle_pass_id = $1
+        ORDER BY bp_level`,
         [battlePassID]
       );
-      return rows[0];
+      return rows;
     } catch (error) {
       throw error;
     }
