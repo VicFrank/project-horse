@@ -33,6 +33,16 @@ module.exports = {
       const gods = rows.map((row) => ({
         ...row,
         pick_rate: row.god_freq / numGames,
+        placements: [
+          row.first_place / row.god_freq,
+          row.second_place / row.god_freq,
+          row.third_place / row.god_freq,
+          row.fourth_place / row.god_freq,
+          row.fifth_place / row.god_freq,
+          row.sixth_place / row.god_freq,
+          row.seventh_place / row.god_freq,
+          row.eighth_place / row.god_freq,
+        ],
       }));
       return gods;
     } catch (error) {

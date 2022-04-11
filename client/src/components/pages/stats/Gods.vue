@@ -1,9 +1,17 @@
 <template>
   <div>
     <h1 class="page-title">{{ $t("gods.page_title") }}</h1>
-    <b-table :fields="fields" :items="gods" responsive class="m-auto">
+    <b-table
+      :fields="fields"
+      :items="gods"
+      responsive
+      class="m-auto"
+      style="max-width: 600px"
+    >
       <template #cell(god)="data">
-        {{ data.item.god }}
+        <div class="text-left p-2">
+          {{ data.item.god }}
+        </div>
       </template>
       <template #cell(pick_rate)="data">
         {{ percentage(data.item.pick_rate, 1) }}
@@ -12,6 +20,8 @@
             :max="1"
             :value="data.item.pick_rate"
             class="mt-1 progress-bar"
+            v-b-tooltip.hover
+            :title="data.item.god_freq"
           ></PercentBar>
         </div>
       </template>
@@ -26,7 +36,7 @@
         </div>
       </template>
       <template #cell(placements)="data">
-        <PlacemementGraph :placements="data.placements"></PlacemementGraph>
+        <PlacemementGraph :placements="data.item.placements"></PlacemementGraph>
       </template>
     </b-table>
   </div>
