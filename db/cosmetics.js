@@ -1,4 +1,5 @@
-const { query } = require("./index");
+const tx = require(`pg-tx`);
+const { query, pool } = require("./index");
 
 module.exports = {
   async getAllCosmetics() {
@@ -19,6 +20,18 @@ module.exports = {
         [cosmeticID]
       );
       return rows[0];
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async exists(cosmeticName) {
+    try {
+      const { rows } = await query(
+        `SELECT * FROM cosmetics WHERE cosmetic_name = $1`,
+        [cosmeticName]
+      );
+      return rows.length > 0;
     } catch (error) {
       throw error;
     }
@@ -64,20 +77,49 @@ module.exports = {
 
   async createCosmetic(name, type, equipGroup, coins, cost, rarity) {
     try {
-      const sql_query = `
+      const { rows } = await query(
+        `
         INSERT INTO cosmetics (cosmetic_name, cosmetic_type, equip_group, cost_coins, cost_usd, rarity)
         VALUES ($1, $2, $3, $4, $5, $6)
         RETURNING *
-      `;
-      const { rows } = await query(sql_query, [
-        name,
-        type,
-        equipGroup,
-        coins,
-        cost,
-        rarity,
-      ]);
+      `,
+        [name, type, equipGroup, coins, cost, rarity]
+      );
       return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async bulkCreateCosmetics(cosmetics) {
+    try {
+      await tx.default(pool, async (db) => {
+        console.log("in tx");
+        for (const cosmetic of cosmetics) {
+          const { rows } = await db.query(
+            `SELECT * FROM cosmetics WHERE cosmetic_name = $1`,
+            [cosmetic.name]
+          );
+          if (rows.length > 0)
+            throw new Error(`Cosmetic ${cosmetic.name} already exists`);
+
+          console.log(`Creating cosmetic ${cosmetic.name}...`);
+          await db.query(
+            `
+            INSERT INTO cosmetics (cosmetic_name, cosmetic_type, equip_group, cost_coins, cost_usd, rarity)
+            VALUES ($1, $2, $3, $4, $5, $6)
+          `,
+            [
+              cosmetic.name,
+              cosmetic.type,
+              cosmetic.equip_group,
+              cosmetic.coins,
+              cosmetic.cost_usd,
+              cosmetic.rarity,
+            ]
+          );
+        }
+      });
     } catch (error) {
       throw error;
     }

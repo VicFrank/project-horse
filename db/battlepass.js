@@ -1,16 +1,19 @@
-const { query } = require("./index");
+const { query, pool } = require("./index");
+const tx = require(`pg-tx`);
 
 module.exports = {
   async createBattlePass(levels) {
     try {
-      const { rows } = await query(`INSERT INTO battle_pass RETURNING *`);
+      const { rows } = await query(
+        `INSERT INTO battle_pass DEFAULT VALUES RETURNING *`
+      );
       const battlePassID = rows[0].battle_pass_id;
 
       for (const levelData of levels) {
         const { level, nextLevelXp, totalXp, cosmetics, coins } = levelData;
         await query(
           `
-            INSERT INTO battle_pass_levels (battle_pass_id, bp_level, next_level_xp, total_xp, coins)
+            INSERT INTO battle_pass_levels (battle_pass_id, bp_level, next_level_xp, total_xp, coins_reward)
             VALUES ($1, $2, $3, $4, $5)`,
           [battlePassID, level, nextLevelXp, totalXp, coins]
         );
@@ -28,7 +31,7 @@ module.exports = {
         }
       }
 
-      return rows;
+      return rows[0];
     } catch (error) {
       throw error;
     }
@@ -40,6 +43,7 @@ module.exports = {
         `UPDATE battle_pass SET is_active = true WHERE battle_pass_id = $1`,
         [battlePassID]
       );
+      console.log(`Battle pass ${battlePassID} is now active`);
     } catch (error) {
       throw error;
     }
@@ -131,6 +135,22 @@ module.exports = {
       );
 
       return { coins, cosmetics };
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  // ONLY FOR TESTING
+  async deleteBattlePasses() {
+    try {
+      await tx.default(pool, async (db) => {
+        await db.query(`DELETE FROM player_battle_pass`);
+        await db.query(`DELETE FROM battle_pass_cosmetic_rewards`);
+        await db.query(`DELETE FROM battle_pass_levels`);
+        await db.query(`DELETE FROM battle_pass`);
+      });
+
+      return;
     } catch (error) {
       throw error;
     }

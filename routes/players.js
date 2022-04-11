@@ -214,7 +214,7 @@ router.post(
       const steamID = req.params.steamID;
       const cosmetic_id = req.params.cosmetic_id;
       const equip = req.query.equip == "true";
-      const playerInfo = await players.equipCosmetics(
+      const playerInfo = await players.equipCosmetic(
         steamID,
         cosmetic_id,
         equip
@@ -233,7 +233,7 @@ router.put(
   async (req, res) => {
     try {
       const cosmetic_id = req.params.cosmetic_id;
-      const playerInfo = await players.equipCosmetics(cosmetic_id, true);
+      const playerInfo = await players.equipCosmetic(cosmetic_id, true);
       res.status(200).json(playerInfo);
     } catch (error) {
       console.log(error);
@@ -248,7 +248,7 @@ router.delete(
   async (req, res) => {
     try {
       const cosmetic_id = req.params.cosmetic_id;
-      const playerInfo = await players.equipCosmetics(cosmetic_id, false);
+      const playerInfo = await players.equipCosmetic(cosmetic_id, false);
       res.status(200).json(playerInfo);
     } catch (error) {
       console.log(error);
@@ -260,7 +260,7 @@ router.delete(
 router.get("/:steamID/battle_pass", auth.userAuth, async (req, res) => {
   try {
     const steamID = req.params.steamID;
-    const playerInfo = await players.getPlayerBattlePass(steamID);
+    const playerInfo = await players.getActiveBattlePass(steamID);
     res.status(200).json(playerInfo);
   } catch (error) {
     console.log(error);

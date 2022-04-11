@@ -207,8 +207,8 @@ module.exports = {
       // await this.createInitialWeeklyQuests(steamID, 3);
       await this.initializeAchievements(steamID);
 
-      // const activeBattlePass = await BattlePasses.getActiveBattlePass();
-      // await this.createBattlePass(steamID, activeBattlePass.id);
+      const activeBattlePass = await BattlePasses.getActiveBattlePass();
+      await this.createBattlePass(steamID, activeBattlePass.id);
 
       return rows[0];
     } catch (error) {
@@ -402,41 +402,18 @@ module.exports = {
   async givePostGameRewards(steamID, placement) {
     try {
       const rewards = {
-        1: {
-          xp: 300,
-          coins: 0,
-        },
-        2: {
-          xp: 180,
-          coins: 0,
-        },
-        3: {
-          xp: 120,
-          coins: 0,
-        },
-        4: {
-          xp: 90,
-          coins: 0,
-        },
-        5: {
-          xp: 60,
-          coins: 0,
-        },
-        6: {
-          xp: 40,
-          coins: 0,
-        },
-        7: {
-          xp: 20,
-          coins: 0,
-        },
-        8: {
-          xp: 10,
-          coins: 0,
-        },
+        1: { xp: 300, coins: 0 },
+        2: { xp: 180, coins: 0 },
+        3: { xp: 120, coins: 0 },
+        4: { xp: 90, coins: 0 },
+        5: { xp: 60, coins: 0 },
+        6: { xp: 40, coins: 0 },
+        7: { xp: 20, coins: 0 },
+        8: { xp: 10, coins: 0 },
       };
 
       const reward = rewards[placement];
+      if (!reward) return { xp: 0, coins: 0 };
       const { coins, xp } = reward;
 
       await Logs.addTransactionLog(steamID, "game_xp", {

@@ -1,8 +1,8 @@
 const quests = require("../db/quests");
 
-const achievements = require("./quests/achievements");
-const dailyQuests = require("./quests/daily_quests");
-// const weeklyQuests = require("./quests/weekly_quests");
+const achievements = require("./data/quests/achievements");
+const dailyQuests = require("./data/quests/daily_quests");
+// const weeklyQuests = require("./data/quests/weekly_quests");
 
 async function InitializeQuests() {
   try {
