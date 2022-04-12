@@ -83,6 +83,38 @@ export default {
           this.achievements = quests;
         });
     },
+    claimQuest(quest) {
+      const { quest_id } = quest;
+      // show the quest as claimed in the ui
+      this.achievements = this.achievements.map((achievement) =>
+        achievement.quest_id === quest_id
+          ? { ...achievement, claimed: true }
+          : achievement
+      );
+      fetch(
+        `/api/players/${this.$store.state.auth.userSteamID}/achievements/claim?questID=${quest_id}`,
+        { method: "post" }
+      )
+        .then((res) => {
+          if (!res.ok) throw Error(res.statusText);
+          return res;
+        })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.success) {
+            this.getAchievements();
+            this.$store.dispatch("refreshPlayer");
+          }
+        })
+        .catch((err) => {
+          this.error = err;
+          window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+          });
+        });
+    },
   },
 };
 </script>

@@ -64,6 +64,7 @@ export default {
           });
 
           this.$store.dispatch("REFRESH_PLAYER");
+          this.$store.dispatch("REFRESH_BATTLE_PASS");
         } else {
           this.$store.commit({
             type: "LOG_OUT",

@@ -25,6 +25,18 @@ module.exports = {
     }
   },
 
+  async getCosmeticByName(cosmeticName) {
+    try {
+      const { rows } = await query(
+        `SELECT * FROM cosmetics WHERE cosmetic_name = $1`,
+        [cosmeticName]
+      );
+      return rows[0];
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async exists(cosmeticName) {
     try {
       const { rows } = await query(

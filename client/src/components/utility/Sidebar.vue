@@ -15,7 +15,7 @@
                 class="profile-picture"
                 alt="Profile Picture"
               />
-              <div class="notification" v-if="hasBattlePass">
+              <div class="notification">
                 <span class="custom-badge">{{ bpLevel }}</span>
               </div>
             </div>
@@ -25,8 +25,8 @@
         <div class="row">
           <ProgressBar
             class="bp-progress mt-1"
-            :progress="500"
-            :required="1000"
+            :progress="progress"
+            :required="required"
           />
         </div>
 
@@ -212,11 +212,14 @@ export default {
     coins() {
       return this.$store.getters.coins;
     },
-    hasBattlePass() {
-      return this.$store.getters.hasBattlePass;
-    },
     bpLevel() {
       return this.$store.getters.bpLevel;
+    },
+    required() {
+      return this.$store.getters.bpLevelRequired;
+    },
+    progress() {
+      return this.$store.getters.bpLevelProgress;
     },
     isAdmin() {
       return this.$store.getters.isAdmin;

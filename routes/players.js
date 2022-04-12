@@ -144,7 +144,7 @@ router.get("/:steamID/achievements", async (req, res) => {
   }
 });
 
-// /api/players/:steamID/daily_quests/claim?questID=:questid
+// /api/players/:steamID/achievements/claim?questID=:questid
 router.post("/:steamID/achievements/claim", auth.userAuth, async (req, res) => {
   try {
     const steamID = req.params.steamID;

@@ -65,11 +65,12 @@ module.exports = {
       const { rows } = await query(
         `
         SELECT * FROM battle_pass_levels
+        WHERE battle_pass_id = $1
         ORDER BY bp_level
-        WHERE battle_pass_id = $1`,
+        `,
         [battlePassID]
       );
-      return rows[0];
+      return rows;
     } catch (error) {
       throw error;
     }
@@ -93,9 +94,7 @@ module.exports = {
   },
 
   /**
-   * Expects a battle pass from getBattlePass, ordered by level
-   * Calculates what level you would be at given a certain amount
-   * of xp.
+   * Calculates what level you would be at given a certain amount of xp.
    * @param {*} battlePassId
    * @param {*} totalXP
    */
@@ -111,6 +110,33 @@ module.exports = {
         lastLevel++;
       }
       return lastLevel;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  /**
+   * Get the required xp at a certain level of the battle pass
+   */
+  async getRequirementsAtLevel(battlePassId, level) {
+    try {
+      const { rows } = await query(
+        `
+        SELECT next_level_xp, total_xp, coins_reward FROM battle_pass_levels
+        WHERE battle_pass_id = $1 and bp_level = $2`,
+        [battlePassId, level]
+      );
+
+      if (rows.length > 0) return rows[0];
+
+      // every level after 50 takes 1000 xp
+      const level50 = 28000;
+      const totalXp = level50 + (level - 50) * 1000;
+      return {
+        total_xp: totalXp,
+        next_level_xp: 1000,
+        coins_reward: 0,
+      };
     } catch (error) {
       throw error;
     }

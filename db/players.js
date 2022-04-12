@@ -304,7 +304,14 @@ module.exports = {
         `SELECT * FROM player_battle_pass WHERE steam_id = $1 AND battle_pass_id = $2`,
         [steamID, activeBattlePass.battle_pass_id]
       );
-      return rows[0];
+      const requirements = await BattlePasses.getRequirementsAtLevel(
+        activeBattlePass.battle_pass_id,
+        rows[0].bp_level
+      );
+      return {
+        ...rows[0],
+        requirements,
+      };
     } catch (error) {
       throw error;
     }
@@ -342,7 +349,7 @@ module.exports = {
       } = rows[0];
 
       // Get the level we were at, and the level we are at now
-      const currentLevel = BattlePasses.calculateBattlePassLevel(
+      const currentLevel = await BattlePasses.calculateBattlePassLevel(
         battle_pass_id,
         totalXp
       );
@@ -370,7 +377,7 @@ module.exports = {
       for (const reward of cosmetics) {
         const { cosmetic_id, amount } = reward;
         for (let i = 0; i < amount; i++) {
-          await this.giveCosmetic(steamID, cosmetic_id);
+          await this.giveCosmeticByID(steamID, cosmetic_id);
         }
       }
 
@@ -488,6 +495,12 @@ module.exports = {
     }
   },
 
+  /**
+   * Checks if a player has a cosmetic with the given ID
+   * @param {string} steamID
+   * @param {number} cosmeticID
+   * @returns
+   */
   async hasCosmetic(steamID, cosmeticID) {
     try {
       const allCosmetics = await this.getAllCosmetics(steamID);
@@ -499,19 +512,62 @@ module.exports = {
     }
   },
 
-  async giveUniqueCosmetic(steamID, cosmeticID) {
+  async giveCosmeticByID(steamID, cosmeticID) {
     try {
-      const hasCosmetic = await this.hasCosmetic(steamID, cosmeticID);
-      if (hasCosmetic) return false;
-      await this.giveCosmetic(steamID, cosmeticID);
+      await query(
+        `
+        INSERT INTO player_cosmetics (steam_id, cosmetic_id)
+        VALUES ($1, $2)
+        `,
+        [steamID, cosmeticID]
+      );
     } catch (error) {
       throw error;
     }
   },
 
-  async removeCosmetic(steamID, cosmeticID) {
+  async giveCosmeticByName(steamID, name) {
     try {
-      const queryText = `
+      const cosmetic = await Cosmetics.getCosmeticByName(name);
+      if (!cosmetic) return false;
+      await query(
+        `
+        INSERT INTO player_cosmetics (steam_id, cosmetic_id)
+        VALUES ($1, $2)
+        `,
+        [steamID, cosmetic.cosmetic_id]
+      );
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async giveUniqueCosmeticByName(steamID, cosmeticName) {
+    try {
+      const cosmetic = await Cosmetics.getCosmeticByName(cosmeticName);
+      if (!cosmetic) return false;
+      const hasCosmetic = await this.hasCosmetic(steamID, cosmetic.cosmetic_id);
+      if (hasCosmetic) return false;
+      await this.giveCosmeticByID(steamID, cosmetic.cosmetic_id);
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async giveUniqueCosmeticByID(steamID, cosmeticID) {
+    try {
+      const hasCosmetic = await this.hasCosmetic(steamID, cosmeticID);
+      if (hasCosmetic) return false;
+      await this.giveCosmeticByID(steamID, cosmeticID);
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async removeCosmeticByID(steamID, cosmeticID) {
+    try {
+      const { rows } = await query(
+        `
         WITH deleted AS
           (DELETE FROM player_cosmetics
           WHERE ctid IN (
@@ -520,9 +576,9 @@ module.exports = {
             WHERE steam_id = $1 AND cosmetic_id = $2
             LIMIT 1)
           RETURNING *)
-          SELECT count(*) FROM deleted;
-        `;
-      const { rows } = await query(queryText, [steamID, cosmeticID]);
+          SELECT count(*) FROM deleted;`,
+        [steamID, cosmeticID]
+      );
       const rowsDeleted = rows[0].count;
       if (rowsDeleted == 0)
         throw new Error("Tried to remove non-existent cosmetic");
@@ -542,12 +598,13 @@ module.exports = {
       // Add or remove coins
       if (transactionData.coins) {
         const { coins } = transactionData;
-        const queryText = `
+        await query(
+          `
           UPDATE players
           SET coins = coins + $1
-          WHERE steam_id = $2
-        `;
-        await query(queryText, [coins, steamID]);
+          WHERE steam_id = $2`,
+          [coins, steamID]
+        );
       }
 
       // Update battle pass
@@ -556,7 +613,6 @@ module.exports = {
         const { bonusExp } = battlePass;
 
         const xpToAdd = bonusExp || 0;
-
         if (xpToAdd > 0) await this.addBattlePassXp(steamID, xpToAdd);
       }
 
@@ -568,27 +624,29 @@ module.exports = {
         for (const [cosmeticID, amount] of entries) {
           if (amount > 0) {
             for (let i = 0; i < amount; i++) {
-              queryText = `
-              INSERT INTO player_cosmetics
-              (steam_id, cosmetic_id) VALUES
-              ($1, $2)
-              `;
-              await query(queryText, [steamID, cosmeticID]);
+              await query(
+                `
+                INSERT INTO player_cosmetics
+                (steam_id, cosmetic_id) VALUES
+                ($1, $2)`,
+                [steamID, cosmeticID]
+              );
             }
           } else if (amount < 0) {
             for (let i = 0; i < amount * -1; i++) {
-              const queryText = `
-              WITH deleted AS
-                (DELETE FROM player_cosmetics
-                WHERE ctid IN (
-                  SELECT ctid
-                  FROM player_cosmetics
-                  WHERE steam_id = $1 AND cosmetic_id = $2
-                  LIMIT 1)
-                RETURNING *)
-                SELECT count(*) FROM deleted;
-              `;
-              const { rows } = await query(queryText, [steamID, cosmeticID]);
+              const { rows } = await query(
+                `
+                WITH deleted AS
+                  (DELETE FROM player_cosmetics
+                  WHERE ctid IN (
+                    SELECT ctid
+                    FROM player_cosmetics
+                    WHERE steam_id = $1 AND cosmetic_id = $2
+                    LIMIT 1)
+                  RETURNING *)
+                  SELECT count(*) FROM deleted;`,
+                [steamID, cosmeticID]
+              );
               const rowsDeleted = rows[0].count;
               if (rowsDeleted == 0) {
                 throw new Error("Tried to remove non-existent cosmetic");
@@ -603,9 +661,10 @@ module.exports = {
   },
 
   // TODO: Define items that can be consumed, determine what rewards they should give
-  async consumeItem(steamID, cosmeticID) {
+  // TODO: Put this in a transaction
+  async consumeItem(steamID, cosmeticName) {
     try {
-      const cosmetic = await Cosmetics.getCosmetic(cosmeticID);
+      const cosmetic = await Cosmetics.getCosmetic(cosmeticName);
 
       if (!cosmetic) throw new Error("Tried to consume non-existent item");
 
@@ -614,7 +673,7 @@ module.exports = {
         cosmetic.cosmetic_type === "Chest XP";
       if (!consumable) throw new Error("Tried to consume non-consumable item");
 
-      const hasCosmetic = await this.hasCosmetic(steamID, cosmeticID);
+      const hasCosmetic = await this.hasCosmetic(steamID, cosmetic.cosmetic_id);
       if (!hasCosmetic) throw new Error("You don't own this item");
 
       // TODO: Get the amount of xp the item should give
@@ -623,11 +682,11 @@ module.exports = {
       // Log the transaction
       await Logs.addTransactionLog(steamID, "consume_item", {
         steamID: steamID,
-        cosmeticID,
+        cosmeticName,
       });
 
       // remove the item
-      await this.removeCosmetic(steamID, cosmeticID);
+      await this.removeCosmeticByID(steamID, cosmetic.cosmetic_id);
       await this.addBattlePassXp(steamID, xp);
 
       return xp;
@@ -1164,7 +1223,6 @@ module.exports = {
 
       // Get the quest rewards and requirements for the DB,
       // and make sure the quest is actually complete
-      console.log(steamID, questID, interval);
       const { rows } = await query(
         `
         SELECT pq.quest_progress, pq.claimed, q.required_amount,

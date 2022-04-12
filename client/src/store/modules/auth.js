@@ -7,12 +7,11 @@ const state = {
   coins: 0,
   achievementsToClaim: 0,
   dailiesToClaim: 0,
-  // battlePass: {
-  //   level: null,
-  //   progress: null,
-  //   required: null,
-  // },
-  battlePass: null,
+  battlePass: {
+    level: null,
+    progress: null,
+    required: null,
+  },
 };
 
 // getters
@@ -25,7 +24,6 @@ const getters = {
   coins: (state) => state.coins,
 
   battlePass: (state) => state.battlePass,
-  hasBattlePass: (state) => state.battlePass !== null,
   bpLevel: (state) => state.battlePass?.level ?? 0,
   bpLevelProgress: (state) => state.battlePass?.progress,
   bpLevelRequired: (state) => state.battlePass?.required,
@@ -59,7 +57,7 @@ const mutations = {
   SAVE_COINS(state, coins) {
     state.coins = coins;
   },
-  SAVE_BATTLE_PASS(state, { battlePass }) {
+  SAVE_BATTLE_PASS(state, battlePass) {
     state.battlePass = battlePass;
   },
 };
@@ -95,11 +93,14 @@ const actions = {
       });
   },
   REFRESH_BATTLE_PASS({ commit, state }) {
-    fetch(`/api/players/${state.userSteamID}`)
+    fetch(`/api/players/${state.userSteamID}/battle_pass`)
       .then((res) => res.json())
-      .then((player) => {
-        const { level, progress, required } = player.battlePass;
-        commit("SAVE_BATTLE_PASS", { level, progress, required });
+      .then((battlePass) => {
+        const { bp_level, total_xp, requirements } = battlePass;
+        const { next_level_xp, total_xp: requiredSoFar } = requirements;
+        const progress = total_xp - requiredSoFar;
+        const required = next_level_xp;
+        commit("SAVE_BATTLE_PASS", { level: bp_level, progress, required });
       })
       .catch((err) => {
         throw new Error(`API: ${err}`);
