@@ -190,49 +190,12 @@ export default {
   },
   computed: {
     borderStyle() {
-      if (this.bpLevel < 10) {
-        // no border
-        return {
-          borderStyle: "solid",
-          borderColor: "white",
-          borderWidth: "1px",
-        };
-      } else if (this.bpLevel < 30) {
-        // border1
-        return {
-          borderStyle: "solid",
-          borderColor: "#4B69FF",
-          borderWidth: "1px",
-        };
-      } else if (this.bpLevel < 50) {
-        // border2
-        return {
-          borderStyle: "solid",
-          borderColor: "#8847FF",
-          borderWidth: "1px",
-        };
-      } else if (this.bpLevel < 70) {
-        // border3
-        return {
-          borderStyle: "solid",
-          borderColor: "#D32CE6",
-          borderWidth: "1px",
-        };
-      } else if (this.bpLevel < 90) {
-        // border4
-        return {
-          borderStyle: "solid",
-          borderColor: "#EFAA15",
-          borderWidth: "1px",
-        };
-      } else {
-        // border5
-        return {
-          borderStyle: "solid",
-          borderColor: "#EFAA15",
-          borderWidth: "1px",
-        };
-      }
+      // TODO: Different style based on equipped avatar border
+      return {
+        borderStyle: "solid",
+        borderColor: "white",
+        borderWidth: "1px",
+      };
     },
     open() {
       return this.$store.state.ui.sidebarOpen;

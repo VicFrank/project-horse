@@ -8,22 +8,25 @@
         </router-link>
       </div>
       <ul class="navbar-nav mx-auto flex-row d-none d-lg-flex text-uppercase">
-        <li class="nav-item mx-2">
+        <li class="nav-item mr-2">
           <router-link class="nav-link" to="/games">
             {{ $t("navigation.games") }}
           </router-link>
         </li>
-        <li class="nav-item mx-2">
-          <router-link class="nav-link" to="/leaderboard">
+        <b-nav-item-dropdown text="STATS" class="mx-2">
+          <b-dropdown-item to="/leaderboard">
             {{ $t("navigation.leaderboard") }}
-          </router-link>
-        </li>
+          </b-dropdown-item>
+          <b-dropdown-item to="/gods">
+            {{ $t("navigation.gods") }}
+          </b-dropdown-item>
+        </b-nav-item-dropdown>
         <li class="nav-item mx-2">
           <router-link class="nav-link" to="/changelog">
             {{ $t("navigation.change_log") }}
           </router-link>
         </li>
-        <li class="nav-item mx-2">
+        <li class="nav-item ml-2">
           <router-link class="nav-link" to="/credits">
             {{ $t("navigation.credits") }}
           </router-link>
