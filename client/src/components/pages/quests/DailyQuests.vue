@@ -160,7 +160,7 @@ export default {
           if (res.success) {
             // refresh the daily quests
             this.getDailyQuests();
-            this.$store.dispatch("refreshPlayer");
+            this.$store.dispatch("REFRESH_BATTLE_PASS");
           }
         })
         .catch((err) => {
