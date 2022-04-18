@@ -53,11 +53,32 @@ module.exports = {
         [steamID]
       );
       const player = rows[0];
-      if (player) {
-        const rank = await this.getLeaderboardPosition(player.mmr);
-        player.rank = rank;
+
+      // Return a default player if the player doesn't exist
+      if (!player) {
+        return {
+          steam_id: steamID,
+          username: "",
+          mmr: 1000,
+          coins: 0,
+          user_type: "USER",
+          patreon_level: 0,
+          doesNotExist: true,
+        };
       }
-      return player;
+
+      const rank = await this.getLeaderboardPosition(player.mmr);
+
+      const achievements = await Quests.getAchievementsForPlayer(steamID);
+      const achievementsToClaim = achievements.filter((achievement) => {
+        return achievement.quest_completed && !achievement.claimed;
+      }).length;
+
+      return {
+        ...player,
+        rank,
+        achievementsToClaim,
+      };
     } catch (error) {
       throw error;
     }

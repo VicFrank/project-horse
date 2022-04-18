@@ -68,14 +68,12 @@ const actions = {
     fetch(`/api/players/${state.userSteamID}`)
       .then((res) => res.json())
       .then((player) => {
-        // TODO: Initialize player state
-        // TODO: refresh battle pass state
-        const { username, user_type } = player;
+        const { username, user_type, coins, achievementsToClaim } = player;
         commit("SAVE_USER", {
           username,
           isAdmin: user_type === "ADMIN",
-          achievementsToClaim: 0,
-          coins: 0,
+          achievementsToClaim,
+          coins,
         });
       })
       .catch((err) => {

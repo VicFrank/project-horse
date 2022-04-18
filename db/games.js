@@ -146,24 +146,27 @@ module.exports = {
   },
 
   async getGames(limit = 100, offset = 0, hours) {
+    let args = [limit, offset];
     let whereClause = "";
     if (hours) {
       whereClause = "AND created_at >= NOW() - $3 * INTERVAL '1 HOURS'";
+      args.push(hours);
     }
-    const sql_query = `
-      SELECT * FROM games
-      ${whereClause}
-      ORDER BY created_at DESC
-      LIMIT $1 OFFSET $2      
-    `;
+
     try {
-      if (hours) {
-        const { rows } = await query(sql_query, [limit, offset, hours]);
-        return rows;
-      } else {
-        const { rows } = await query(sql_query, [limit, offset]);
-        return rows;
-      }
+      // get games and number of players
+      const { rows } = await query(
+        `
+          SELECT games.*, count(game_players.game_player_id) as players
+          FROM games
+          JOIN game_players USING (game_id)
+          GROUP BY games.game_id
+          ${whereClause}
+          ORDER BY created_at DESC
+          LIMIT $1 OFFSET $2`,
+        args
+      );
+      return rows;
     } catch (error) {
       throw error;
     }

@@ -4,6 +4,7 @@
       <tr>
         <th>Match Id</th>
         <th>Date</th>
+        <th>Players</th>
         <th>Duration</th>
         <th>Rounds</th>
         <th>Ranked</th>
@@ -26,6 +27,13 @@
             }}</router-link>
           </td>
           <td>{{ dateFromNow(game.created_at) }}</td>
+          <!-- text-muted if game.players < 8 -->
+          <td>
+            <span v-if="game.players < 8" class="text-muted">
+              {{ game.players }}/8
+            </span>
+            <span v-else>{{ game.players }}/8</span>
+          </td>
           <td>
             {{ hhmmss(game.duration) }}
           </td>

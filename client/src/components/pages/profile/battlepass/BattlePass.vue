@@ -90,10 +90,10 @@ export default {
       return number % 2 === 0;
     },
     getRewards(level) {
-      return this.rewards[level - 1];
+      return this.rewards.find((reward) => reward.bp_level === level);
     },
     getRewardItem(level) {
-      const reward = this.rewards[level - 1].cosmetic_id;
+      const reward = this.getRewards(level)?.cosmetic_name;
       return reward;
     },
     getLevelTotalXP(level) {
@@ -105,14 +105,14 @@ export default {
       return this.getRewards(level).next_level_xp;
     },
     hasItemReward(level) {
-      return this.rewards[level - 1].cosmetic_id !== null;
+      return this.getRewards(level)?.cosmetic_id !== null;
     },
     getItemImage(level) {
       const cosmetic_id = this.getRewardItem(level);
       if (!cosmetic_id || cosmetic_id === null)
         return require("./images/bp_placeholder.png");
-
-      return require(`./images/${cosmetic_id}.png`);
+      // return require(`./images/${cosmetic_name}.png`);
+      return require(`../../../../assets/cosmetics/${cosmetic_id}.png`);
     },
   },
 };

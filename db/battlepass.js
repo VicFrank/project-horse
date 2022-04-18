@@ -17,16 +17,17 @@ module.exports = {
             VALUES ($1, $2, $3, $4, $5)`,
           [battlePassID, level, nextLevelXp, totalXp, coins]
         );
-        for (const cosmetic of cosmetics) {
-          const { cosmetic_id } = await query(
+        for (const cosmeticName of cosmetics) {
+          const queryResult = await query(
             `SELECT * FROM cosmetics WHERE cosmetic_name = $1`,
-            [cosmetic]
+            [cosmeticName]
           );
+          const cosmeticID = queryResult.rows[0].cosmetic_id;
           await query(
             `
             INSERT INTO battle_pass_cosmetic_rewards (battle_pass_id, bp_level, cosmetic_id)
             VALUES ($1, $2, $3)`,
-            [battlePassID, level, cosmetic_id]
+            [battlePassID, level, cosmeticID]
           );
         }
       }
@@ -80,9 +81,12 @@ module.exports = {
     try {
       const { rows } = await query(
         `
-        SELECT * FROM battle_pass_levels
+        SELECT battle_pass_levels.*, battle_pass_cosmetic_rewards.amount, cosmetics.*
+        FROM battle_pass_levels
         LEFT JOIN battle_pass_cosmetic_rewards
         USING (battle_pass_id, bp_level)
+        JOIN cosmetics
+        USING (cosmetic_id)
         WHERE battle_pass_id = $1
         ORDER BY bp_level`,
         [battlePassID]

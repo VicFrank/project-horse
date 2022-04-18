@@ -68,5 +68,6 @@ async function deleteBattlePasses() {
 }
 
 (async () => {
+  await deleteBattlePasses();
   await initializeBattlePass();
 })();

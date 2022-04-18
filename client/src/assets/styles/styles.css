@@ -401,3 +401,8 @@ td a:hover {
   position: absolute;
   background-repeat: no-repeat;
 }
+
+/* Bootstrap Vue */
+.modal-content {
+  background-color: #13171d;
+}
