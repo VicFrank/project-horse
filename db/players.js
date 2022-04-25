@@ -54,18 +54,7 @@ module.exports = {
       );
       const player = rows[0];
 
-      // Return a default player if the player doesn't exist
-      if (!player) {
-        return {
-          steam_id: steamID,
-          username: "",
-          mmr: 1000,
-          coins: 0,
-          user_type: "USER",
-          patreon_level: 0,
-          doesNotExist: true,
-        };
-      }
+      if (!player) return null;
 
       const rank = await this.getLeaderboardPosition(player.mmr);
 
