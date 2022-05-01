@@ -8,7 +8,7 @@
       >
         <div
           class="bar-inner"
-          v-bind:style="{ height: 100 * rate + '%' }"
+          v-bind:style="{ height: graphHeight(rate) + '%' }"
         ></div>
       </div>
       <div class="bar-label">{{ index + 1 }}</div>
@@ -27,6 +27,10 @@ export default {
   methods: {
     percentage,
     getRankString,
+    graphHeight(rate) {
+      rate = Math.min(1, rate / 0.3);
+      return 100 * rate;
+    },
   },
 };
 </script>
