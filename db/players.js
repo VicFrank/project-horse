@@ -226,11 +226,24 @@ module.exports = {
     }
   },
 
+  async updateUsername(steamID, username) {
+    try {
+      const { rows } = await query(
+        `UPDATE players SET username = $2 WHERE steam_id = $1 RETURNING *`,
+        [steamID, username]
+      );
+      return rows[0];
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async upsertPlayer(steamID, username) {
     try {
       const existingPlayer = await this.getPlayer(steamID);
       if (!existingPlayer) return this.createPlayer(steamID, username);
-      else return existingPlayer;
+      await this.updateUsername(steamID, username);
+      return existingPlayer;
     } catch (error) {
       throw error;
     }
