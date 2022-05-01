@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="page-title" v-t="'achievements.page_title'"></h1>
-    <div class="container">
+    <div>
       <b-alert v-if="error != ''" show variant="danger" dismissible>{{
         error
       }}</b-alert>

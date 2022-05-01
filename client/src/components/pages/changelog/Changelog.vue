@@ -1,22 +1,16 @@
 <template>
   <div>
     <h1 class="page-title" v-t="'changelog.page_title'"></h1>
-    <div class="container">
-      <div class="row">
-        <div class="col-xl-12">
-          <div class="pl-3 change-log">
-            <div v-for="change of changes" :key="change.timestamp">
-              <h3 v-if="change.title">{{ change.title }}</h3>
-              <h4>
-                {{ $t("changelog.update") }}:
-                {{ getTime(change.timestamp * 1000) }}
-              </h4>
-              <ul>
-                <li v-for="line of change.lines" :key="line">{{ line }}</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+    <div class="pl-3 change-log">
+      <div v-for="change of changes" :key="change.timestamp">
+        <h3 v-if="change.title">{{ change.title }}</h3>
+        <h4>
+          {{ $t("changelog.update") }}:
+          {{ getTime(change.timestamp * 1000) }}
+        </h4>
+        <ul>
+          <li v-for="line of change.lines" :key="line">{{ line }}</li>
+        </ul>
       </div>
     </div>
   </div>

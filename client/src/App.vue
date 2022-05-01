@@ -10,7 +10,7 @@
         <div class="main-content">
           <div class="main-layout__content">
             <div class="content">
-              <router-view class="container" />
+              <router-view class="container" style="overflow-x: auto" />
             </div>
           </div>
         </div>

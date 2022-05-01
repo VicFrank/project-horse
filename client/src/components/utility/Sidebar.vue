@@ -154,14 +154,6 @@
             v-t="'navigation.change_log'"
           ></router-link>
         </li>
-        <li class="sidebar-nav__item d-lg-none">
-          <router-link
-            to="/faq"
-            class="sidebar-nav__link"
-            exact-active-class="active"
-            v-t="'navigation.faq'"
-          ></router-link>
-        </li>
       </ul>
     </div>
   </div>
