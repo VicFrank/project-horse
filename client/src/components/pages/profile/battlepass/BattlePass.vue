@@ -112,7 +112,7 @@ export default {
       if (!cosmetic_id || cosmetic_id === null)
         return require("./images/bp_placeholder.png");
       // return require(`./images/${cosmetic_name}.png`);
-      return require(`../../../../assets/cosmetics/${cosmetic_id}.png`);
+      return require(`../../../../assets/images/cosmetics/${cosmetic_id}.png`);
     },
   },
 };

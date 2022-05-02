@@ -77,20 +77,16 @@
     "bp_sellout_link": "BP Accelerator",
     "reset_in": "Resets in"
   },
+  "armory": {
+    "page_title": "Armory"
+  },
   "filters": {
-    "Companions": "Companions",
-    "Companions FX": "Companions FX",
     "Chests": "Chests",
     "Battle Pass": "Battle Pass",
-    "Announcer": "Announcer",
     "Equipped": "Equipped",
+    "Arenas": "Arenas",
+    "Gods": "Gods",
     "All": "All",
-    "Common": "Common",
-    "Uncommon": "Uncommon",
-    "Rare": "Rare",
-    "Mythical": "Mythical",
-    "Legendary": "Legendary",
-    "Ancient": "Ancient",
     "XP": "XP"
   },
   "achievements": {
