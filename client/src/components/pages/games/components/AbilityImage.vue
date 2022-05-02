@@ -8,7 +8,7 @@
       class="ability-image"
       v-bind:class="borderColor"
     />
-    <div class="level-container">
+    <div v-if="level != null" class="level-container">
       <span class="level-icon" v-bind:class="levelColor">{{ level }}</span>
     </div>
   </div>
@@ -67,7 +67,6 @@ export default {
 <style scoped>
 .ability-container {
   position: relative;
-  width: 100%;
 }
 
 .level-container {

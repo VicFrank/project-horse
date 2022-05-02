@@ -20,6 +20,9 @@
           <b-dropdown-item to="/gods">
             {{ $t("navigation.gods") }}
           </b-dropdown-item>
+          <b-dropdown-item to="/abilities">
+            {{ $t("navigation.abilities") }}
+          </b-dropdown-item>
         </b-nav-item-dropdown>
         <li class="nav-item mx-2">
           <router-link class="nav-link" to="/changelog">

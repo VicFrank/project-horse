@@ -14,25 +14,33 @@
         </div>
       </template>
       <template #cell(pick_rate)="data">
-        {{ percentage(data.item.pick_rate, 1) }}
-        <div class="percentage-holder">
-          <PercentBar
-            :max="1"
-            :value="data.item.pick_rate"
-            class="mt-1 progress-bar"
-            v-b-tooltip.hover
-            :title="data.item.god_freq"
-          ></PercentBar>
+        <div class="percent-td">
+          <div class="text-left">
+            {{ percentage(data.item.pick_rate, 1) }}
+          </div>
+          <div class="percentage-holder">
+            <PercentBar
+              :max="1"
+              :value="data.item.pick_rate"
+              class="mt-1 progress-bar"
+              v-b-tooltip.hover
+              :title="data.item.god_freq"
+            ></PercentBar>
+          </div>
         </div>
       </template>
       <template #cell(avg_place)="data">
-        {{ round(data.item.avg_place, 2) }}
-        <div class="percentage-holder">
-          <PercentBar
-            :max="8"
-            :value="data.item.avg_place"
-            class="mt-1 progress-bar"
-          ></PercentBar>
+        <div class="percent-td">
+          <div class="text-left">
+            {{ round(data.item.avg_place, 2) }}
+          </div>
+          <div class="percentage-holder">
+            <PercentBar
+              :max="8"
+              :value="data.item.avg_place"
+              class="mt-1 progress-bar"
+            ></PercentBar>
+          </div>
         </div>
       </template>
       <template #cell(placements)="data">
@@ -101,7 +109,10 @@ export default {
 
 <style scoped>
 .percentage-holder {
-  width: 100px;
   margin: auto;
+}
+
+.percent-td {
+  padding: 0 15px;
 }
 </style>

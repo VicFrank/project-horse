@@ -40,6 +40,7 @@
     "games": "Games",
     "heroes": "Heroes",
     "gods": "Gods",
+    "abilities": "Abilities",
     "report_a_bug": "Report a bug",
     "play_now": "Play Now",
     "language": "Language",
@@ -108,6 +109,13 @@
     "pick_rate": "Pick Rate",
     "avg_place": "Avg Place",
     "placements": "Placements"
+  },
+  "stats": {
+    "abilities": "Abilities",
+    "ability_name": "Ability",
+    "pick_rate": "Pick Rate",
+    "first_place_rate": "1st Rate",
+    "top_four_freq": "Top 4 Rate"
   },
   "battle_pass": {
     "page_title": "Battle Pass",

@@ -3,13 +3,15 @@ const { query } = require("./index");
 module.exports = {
   async getGodsStats(hours = 3600) {
     try {
-      const gamesQuery = await query(`SELECT COUNT(*) FROM games`);
+      // const numGames = gamesQuery.rows[0].count;
+      const gamesQuery = await query(
+        `SELECT COUNT(*) FROM games WHERE created_at >  NOW() - $1 * INTERVAL '1 HOUR'`,
+        [hours]
+      );
       const numGames = gamesQuery.rows[0].count;
-      // const numGames = await query(
-      //   `SELECT COUNT(*) FROM games WHERE end_time > NOW() - INTERVAL '${hours} hours'`
-      // )
 
-      const { rows } = await query(`
+      const { rows } = await query(
+        `
         SELECT
           count(*) AS god_freq,
           god,
@@ -26,10 +28,12 @@ module.exports = {
         JOIN games
         USING (game_id)
         WHERE games.ranked = true
-        -- AND games.end_time > NOW() - INTERVAL '${hours} hours'
+        AND games.created_at > NOW() - $1 * INTERVAL '1 HOUR'
         GROUP BY god
         ORDER BY avg_place ASC
-      `);
+      `,
+        [hours]
+      );
       const gods = rows.map((row) => ({
         ...row,
         pick_rate: row.god_freq / numGames,
