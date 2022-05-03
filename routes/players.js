@@ -208,7 +208,7 @@ router.get("/:steamID/cosmetics", async (req, res) => {
     const steamID = req.params.steamID;
     const filter = req.query.filter;
     const onlyEquipped = filter === "equipped";
-    const playerInfo = await players.getAllCosmetics(steamID, onlyEquipped);
+    const playerInfo = await players.getPlayerCosmetics(steamID, onlyEquipped);
     res.status(200).json(playerInfo);
   } catch (error) {
     console.log(error);

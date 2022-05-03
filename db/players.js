@@ -526,7 +526,7 @@ module.exports = {
    */
   async hasCosmetic(steamID, cosmeticID) {
     try {
-      const allCosmetics = await this.getAllCosmetics(steamID);
+      const allCosmetics = await this.getPlayerCosmetics(steamID);
       return allCosmetics.some(
         (cosmetic) => cosmetic.cosmetic_id === cosmeticID
       );
@@ -775,7 +775,7 @@ module.exports = {
   async getRandomReward(steamID, rarity, bucket = []) {
     try {
       const potentialRewards = await Cosmetics.getCosmeticsByRarity(rarity);
-      const existingItems = await this.getAllCosmetics(steamID);
+      const existingItems = await this.getPlayerCosmetics(steamID);
 
       potentialRewards = potentialRewards.filter((cosmetic) => {
         const alreadyHasItem = existingItems.some((existingCosmetic) => {

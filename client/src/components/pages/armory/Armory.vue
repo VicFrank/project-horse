@@ -48,19 +48,19 @@
               <div class="cosmetic" @click="$bvModal.show(`modal-${i}`)">
                 <div class="cosmetic__picture">
                   <img
-                    v-bind:src="cosmeticImageSrc(cosmetic.cosmetic_id)"
-                    :alt="cosmetic.cosmetic_id"
+                    v-bind:src="cosmeticImageSrc(cosmetic.cosmetic_name)"
+                    :alt="cosmetic.cosmetic_name"
                   />
-                  <!-- <img
+                  <img
                     v-if="cosmetic.equipped"
                     src="../../../assets/images/cosmetics/equipped.png"
                     class="equipped-overlay"
                     alt
-                  /> -->
+                  />
                 </div>
                 <div class="cosmetic__descr">
                   <div class="cosmetic__name">
-                    {{ $t(`cosmetics.${cosmetic.cosmetic_id}`) }}
+                    {{ cosmetic.cosmetic_name }}
                   </div>
                   <div class="text-muted">
                     {{ $t(`cosmetics.${cosmetic.cosmetic_type}`) }}
@@ -70,7 +70,7 @@
               <b-modal
                 :id="`modal-${i}`"
                 :ref="`modal-${i}`"
-                :title="$t(`cosmetics.${cosmetic.cosmetic_id}`)"
+                :title="cosmetic.cosmetic_name"
                 centered
                 hide-footer
                 @hide="onHide"
@@ -78,7 +78,7 @@
                 <template v-if="cosmetic.cosmetic_type !== 'Chest'">
                   <div class="text-center mb-2">
                     <img
-                      v-bind:src="cosmeticImageSrc(cosmetic.cosmetic_id)"
+                      v-bind:src="cosmeticImageSrc(cosmetic.cosmetic_name)"
                       :alt="cosmetic.cosmetic_id"
                     />
                   </div>
@@ -203,141 +203,139 @@ export default {
     },
   },
 
-  getPlayerCosmetics() {
-    fetch(`/api/players/${this.$store.state.auth.userSteamID}/cosmetics`)
-      .then((res) => res.json())
-      .then((cosmetics) => {
-        const sortedCosmetics = cosmetics.sort((c1, c2) => {
-          if (this.isConsumableOrChest(c1) && !this.isConsumableOrChest(c2)) {
-            return -1;
-          } else if (
-            this.isConsumableOrChest(c2) &&
-            !this.isConsumableOrChest(c1)
-          ) {
-            return 1;
-          } else if (
-            this.isConsumableOrChest(c1) &&
-            this.isConsumableOrChest(c2)
-          ) {
-            return c1.cosmetic_id.localeCompare(c2.cosmetic_id);
-          }
-          const c1type = c1.cosmetic_type;
-          const c2type = c2.cosmetic_type;
-          if (c1type == c2type) {
-            return c1.cosmetic_id.localeCompare(c2.cosmetic_id);
-          }
-          return c1type.localeCompare(c2type);
+  methods: {
+    getPlayerCosmetics() {
+      fetch(`/api/players/${this.$store.state.auth.userSteamID}/cosmetics`)
+        .then((res) => res.json())
+        .then((cosmetics) => {
+          const sortedCosmetics = cosmetics.sort((c1, c2) => {
+            if (this.isConsumableOrChest(c1) && !this.isConsumableOrChest(c2)) {
+              return -1;
+            } else if (
+              this.isConsumableOrChest(c2) &&
+              !this.isConsumableOrChest(c1)
+            ) {
+              return 1;
+            } else if (
+              this.isConsumableOrChest(c1) &&
+              this.isConsumableOrChest(c2)
+            ) {
+              return c1.cosmetic_name.localeCompare(c2.cosmetic_name);
+            }
+            const c1type = c1.cosmetic_type;
+            const c2type = c2.cosmetic_type;
+            if (c1type == c2type) {
+              return c1.cosmetic_name.localeCompare(c2.cosmetic_name);
+            }
+            return c1type.localeCompare(c2type);
+          });
+          this.cosmetics = sortedCosmetics;
+          this.filteredCosmetics = sortedCosmetics;
+          this.updateFilteredCosmetics();
+          this.loading = false;
+        })
+        .catch((err) => {
+          this.showError = true;
+          this.error = err;
+          this.loading = false;
         });
-        this.cosmetics = sortedCosmetics;
-        this.filteredCosmetics = sortedCosmetics;
-        this.updateFilteredCosmetics();
-        this.loading = false;
-      })
-      .catch((err) => {
-        this.showError = true;
-        this.error = err;
-        this.loading = false;
-      });
-  },
-  isConsumableOrChest(cosmetic) {
-    return (
-      cosmetic.cosmetic_type === "Chest" ||
-      cosmetic.cosmetic_type === "Consumable"
-    );
-  },
-  isUsable(cosmetic) {
-    return cosmetic.cosmetic_type === "Consumable";
-  },
-  hideModal(i) {
-    this.$refs[`modal-${i}`][0].hide();
-  },
-  hideAllModals() {
-    for (const modal of Object.values(this.$refs)) {
-      if (modal[0] && modal[0].hide) modal[0].hide();
-    }
-  },
-  open() {
-    this.needReload = true;
-  },
-  onHide() {
-    if (this.needReload) {
+    },
+    isConsumableOrChest(cosmetic) {
+      return (
+        cosmetic.cosmetic_type === "Chest" ||
+        cosmetic.cosmetic_type === "Consumable"
+      );
+    },
+    isUsable(cosmetic) {
+      return cosmetic.cosmetic_type === "Consumable";
+    },
+    hideModal(i) {
+      this.$refs[`modal-${i}`][0].hide();
+    },
+    hideAllModals() {
+      for (const modal of Object.values(this.$refs)) {
+        if (modal[0] && modal[0].hide) modal[0].hide();
+      }
+    },
+    open() {
+      this.needReload = true;
+    },
+    onHide() {
+      if (this.needReload) {
+        this.needReload = false;
+        this.hideAllModals();
+        this.getPlayerCosmetics();
+      }
+    },
+    claim() {
       this.needReload = false;
       this.hideAllModals();
       this.getPlayerCosmetics();
-    }
-  },
-  claim() {
-    this.needReload = false;
-    this.hideAllModals();
-    this.getPlayerCosmetics();
-  },
-  equippable(cosmetic) {
-    const type = cosmetic.cosmetic_type;
-    const equippableTypes = ["Avatar", "Finisher", "Arena"];
-    return equippableTypes.includes(type);
-  },
-  cosmeticImageSrc(cosmeticID) {
-    return require(`../../../assets/images/cosmetics/${cosmeticID}.png`);
-  },
-  toggleFilter(name) {
-    this.filters = this.filters.map((filter) => ({
-      ...filter,
-      active: filter.name === name,
-    }));
+    },
+    equippable(cosmetic) {
+      const type = cosmetic.cosmetic_type;
+      const equippableTypes = ["Avatar", "Finisher", "Arena"];
+      return equippableTypes.includes(type);
+    },
+    cosmeticImageSrc(cosmeticID) {
+      return require(`../../../assets/images/cosmetics/${cosmeticID}.png`);
+    },
+    toggleFilter(name) {
+      this.filters = this.filters.map((filter) => ({
+        ...filter,
+        active: filter.name === name,
+      }));
 
-    this.currentFilter = name;
-    this.updateFilteredCosmetics();
-  },
-  updateFilteredCosmetics() {
-    this.filteredCosmetics = filterCosmetics(
-      this.cosmetics,
-      this.currentFilter,
-      this.searchText
-    );
-  },
-  equipCosmetic(cosmetic, equip, i) {
-    const cosmeticID = cosmetic.cosmetic_id;
-
-    fetch(
-      `/api/players/${this.steamID}/cosmetics/${cosmeticID}/equip?equip=${equip}`,
-      { method: "post" }
-    )
-      .then((res) => {
-        if (!res.ok) throw Error(res.statusText);
-        return res;
-      })
-      .then((res) => res.json())
-      .then(() => {
-        this.getPlayerCosmetics();
-        this.hideModal(i);
-      })
-      .catch((err) => {
-        this.error = err;
-        this.showError = true;
-      });
-  },
-  consumeItem(cosmetic) {
-    const cosmeticID = cosmetic.cosmetic_id;
-
-    fetch(`/api/players/${this.steamID}/use_item/${cosmeticID}`, {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.error) {
-          this.error = res.error;
-          this.showError = true;
-        } else {
-          this.success = true;
-          this.$store.dispatch("REFRESH_BATTLE_PASS");
+      this.currentFilter = name;
+      this.updateFilteredCosmetics();
+    },
+    updateFilteredCosmetics() {
+      this.filteredCosmetics = filterCosmetics(
+        this.cosmetics,
+        this.currentFilter,
+        this.searchText
+      );
+    },
+    equipCosmetic(cosmetic, equip, i) {
+      fetch(
+        `/api/players/${this.steamID}/cosmetics/${cosmetic.cosmetic_id}/equip?equip=${equip}`,
+        { method: "post" }
+      )
+        .then((res) => {
+          if (!res.ok) throw Error(res.statusText);
+          return res;
+        })
+        .then((res) => res.json())
+        .then(() => {
           this.getPlayerCosmetics();
-        }
+          this.hideModal(i);
+        })
+        .catch((err) => {
+          this.error = err;
+          this.showError = true;
+        });
+    },
+    consumeItem(cosmetic) {
+      fetch(`/api/players/${this.steamID}/use_item/${cosmetic.cosmetic_id}`, {
+        method: "post",
+        headers: { "Content-Type": "application/json" },
       })
-      .catch((err) => {
-        this.error = err;
-        this.showError = true;
-      });
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.error) {
+            this.error = res.error;
+            this.showError = true;
+          } else {
+            this.success = true;
+            this.$store.dispatch("REFRESH_BATTLE_PASS");
+            this.getPlayerCosmetics();
+          }
+        })
+        .catch((err) => {
+          this.error = err;
+          this.showError = true;
+        });
+    },
   },
 };
 </script>

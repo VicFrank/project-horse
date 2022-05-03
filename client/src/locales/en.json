@@ -77,8 +77,20 @@
     "bp_sellout_link": "BP Accelerator",
     "reset_in": "Resets in"
   },
+  "cosmetics": {
+    "Chest": "Chest",
+    "Avatar": "Avatar",
+    "Consumable": "Consumable",
+    "Finisher": "Finisher",
+    "Arena": "Arena",
+    "God": "God"
+  },
   "armory": {
-    "page_title": "Armory"
+    "page_title": "Armory",
+    "cancel": "Cancel",
+    "equip": "Equip",
+    "unequip": "Unequip",
+    "use": "Use"
   },
   "filters": {
     "Chests": "Chests",

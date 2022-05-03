@@ -3,15 +3,15 @@
     <img
       v-if="!opened"
       class="chest-image clickable"
-      v-bind:src="cosmeticImageSrc(cosmetic.cosmetic_id)"
-      :alt="cosmetic.cosmetic_id"
+      v-bind:src="cosmeticImageSrc(cosmetic.cosmetic_name)"
+      :alt="cosmetic.cosmetic_name"
       @click="open"
     />
     <img
       v-else
       class="chest-image"
-      v-bind:src="openedImage(cosmetic.cosmetic_id)"
-      :alt="cosmetic.cosmetic_id"
+      v-bind:src="openedImage(cosmetic.cosmetic_name)"
+      :alt="cosmetic.cosmetic_name"
     />
     <div v-if="items.length > 0" class="mt-2">
       <div class="h2 text-center blue">Items</div>
@@ -21,11 +21,11 @@
           :key="item.cosmetic_id"
           class="text-center mb-2"
         >
-          <div class="mb-2">{{ $t(`cosmetics.${item.cosmetic_id}`) }}</div>
+          <div class="mb-2">{{ `cosmetics.${item.cosmetic_name}` }}</div>
           <img
             class="reward-image mb-1"
-            v-bind:src="cosmeticImageSrc(item.cosmetic_id)"
-            :alt="item.cosmetic_id"
+            v-bind:src="cosmeticImageSrc(item.cosmetic_name)"
+            :alt="item.cosmetic_name"
           />
           <div class="text-muted">{{ item.rarity }}</div>
         </div>
@@ -72,9 +72,9 @@ export default {
       this.$emit("claim");
     },
     open() {
-      const cosmeticID = this.cosmetic.cosmetic_id;
+      const { cosmetic_id, cosmetic_type } = this.cosmetic;
 
-      if (this.cosmetic.cosmetic_type !== "Chest") {
+      if (cosmetic_type !== "Chest") {
         this.error = "Tried to open an item that wasn't a chest";
         this.showError = true;
         return;
@@ -84,7 +84,7 @@ export default {
       audio.volume = 0.08;
       audio.play();
 
-      fetch(`/api/players/${this.steamID}/open_chest/${cosmeticID}`, {
+      fetch(`/api/players/${this.steamID}/open_chest/${cosmetic_id}`, {
         method: "post",
       })
         .then((res) => {
@@ -103,11 +103,11 @@ export default {
           this.showError = true;
         });
     },
-    cosmeticImageSrc(cosmeticID) {
-      return require(`../../../assets/images/cosmetics/${cosmeticID}.png`);
+    cosmeticImageSrc(cosmeticName) {
+      return require(`../../../assets/images/cosmetics/${cosmeticName}.png`);
     },
-    openedImage(cosmeticID) {
-      return require(`../../../assets/images/cosmetics/${cosmeticID}_open.png`);
+    openedImage(cosmeticName) {
+      return require(`../../../assets/images/cosmetics/${cosmeticName}_open.png`);
     },
   },
 };
