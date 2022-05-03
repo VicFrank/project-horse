@@ -1,14 +1,10 @@
 const { query } = require("./index");
+const games = require("./games");
 
 module.exports = {
   async getGodsStats(hours = 3600) {
     try {
-      // const numGames = gamesQuery.rows[0].count;
-      const gamesQuery = await query(
-        `SELECT COUNT(*) FROM games WHERE created_at >  NOW() - $1 * INTERVAL '1 HOUR'`,
-        [hours]
-      );
-      const numGames = gamesQuery.rows[0].count;
+      const numGames = await games.getNumGames(hours);
 
       const { rows } = await query(
         `

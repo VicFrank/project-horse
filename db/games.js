@@ -172,6 +172,19 @@ module.exports = {
     }
   },
 
+  async getNumGames(hours) {
+    try {
+      const gamesQuery = await query(
+        `SELECT COUNT(*) FROM games WHERE created_at >  NOW() - $1 * INTERVAL '1 HOUR'`,
+        [hours]
+      );
+      const numGames = gamesQuery.rows[0].count;
+      return numGames;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async getGame(gameID) {
     try {
       // Game

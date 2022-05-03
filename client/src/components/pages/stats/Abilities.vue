@@ -22,12 +22,12 @@
       <template #cell(freq)="data">
         <div class="percent-td">
           <div class="text-left">
-            {{ percentage(data.item.freq / maxFreq, 1) }}
+            {{ percentage(data.item.freq / data.item.numGames, 1) }}
           </div>
           <div class="percentage-holder">
             <PercentBar
-              :max="1"
-              :value="data.item.freq / maxFreq"
+              :max="maxFreq"
+              :value="data.item.freq / data.item.numGames"
               class="mt-1 progress-bar"
               v-b-tooltip.hover
               :title="data.item.freq"
@@ -38,12 +38,12 @@
       <template #cell(winner_freq)="data">
         <div class="percent-td">
           <div class="text-left">
-            {{ percentage(data.item.winner_freq / maxWinnerFreq, 1) }}
+            {{ percentage(data.item.winner_freq / data.item.numGames, 1) }}
           </div>
           <div class="percentage-holder">
             <PercentBar
-              :max="1"
-              :value="data.item.winner_freq / maxWinnerFreq"
+              :max="maxWinnerFreq"
+              :value="data.item.winner_freq / data.item.numGames"
               class="mt-1 progress-bar"
               v-b-tooltip.hover
               :title="data.item.winner_freq"
@@ -54,12 +54,12 @@
       <template #cell(top_four_freq)="data">
         <div class="percent-td">
           <div class="text-left">
-            {{ percentage(data.item.top_four_freq / maxTopFourFreq, 1) }}
+            {{ percentage(data.item.top_four_freq / data.item.numGames, 1) }}
           </div>
           <div class="percentage-holder">
             <PercentBar
-              :max="1"
-              :value="data.item.top_four_freq / maxTopFourFreq"
+              :max="maxTopFourFreq"
+              :value="data.item.top_four_freq / data.item.numGames"
               class="mt-1 progress-bar"
               v-b-tooltip.hover
               :title="data.item.top_four_freq"
@@ -111,7 +111,7 @@ export default {
         key: "top_four_freq",
         label: this.$i18n.t("stats.top_four_freq"),
         thClass: "table-head text-left",
-        sortable: false,
+        sortable: true,
       },
     ];
 
@@ -129,17 +129,23 @@ export default {
   computed: {
     maxFreq() {
       return this.abilities.reduce((max, ability) => {
-        return ability.freq > max ? ability.freq : max;
+        return ability.freq / ability.numGames > max
+          ? ability.freq / ability.numGames
+          : max;
       }, 0);
     },
     maxWinnerFreq() {
       return this.abilities.reduce((max, ability) => {
-        return ability.winner_freq > max ? ability.winner_freq : max;
+        return ability.winner_freq / ability.numGames > max
+          ? ability.winner_freq / ability.numGames
+          : max;
       }, 0);
     },
     maxTopFourFreq() {
       return this.abilities.reduce((max, ability) => {
-        return ability.top_four_freq > max ? ability.top_four_freq : max;
+        return ability.top_four_freq / ability.numGames > max
+          ? ability.top_four_freq / ability.numGames
+          : max;
       }, 0);
     },
   },

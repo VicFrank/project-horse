@@ -1,4 +1,5 @@
 const { query } = require("./index");
+const games = require("./games");
 
 const getAbilityFreqs = async (hours) => {
   try {
@@ -113,16 +114,17 @@ module.exports = {
       const winnerAbilityFreqs = await getWinnerAbilityFreqs(hours);
       const topFourAbilityFreqs = await getTopFourAbilityFreqs(hours);
       const abilities = await this.getAbilities();
+      const numGames = await games.getNumGames(hours);
 
       // combine the three arrays
       const combined = abilityFreqs.map((ability) => {
         const icon = abilities.find(
           (a) => a.ability_name === ability.ability_name
         ).icon;
-        console.log(icon);
         return {
           ability_name: ability.ability_name,
-          icon: icon,
+          icon,
+          numGames,
           freq: Number(ability.freq),
           winner_freq: Number(
             winnerAbilityFreqs.find(
