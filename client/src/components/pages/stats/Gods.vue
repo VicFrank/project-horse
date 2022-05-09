@@ -6,7 +6,7 @@
       :items="gods"
       responsive
       class="m-auto"
-      style="max-width: 600px"
+      style="max-width: 700px"
     >
       <template #cell(god)="data">
         <div class="text-left p-2">
