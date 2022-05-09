@@ -2,9 +2,9 @@
   <table class="table">
     <thead>
       <tr>
-        <th>Match Id</th>
+        <th class="text-left">Match Id</th>
+        <th class="text-left">God</th>
         <th>Result</th>
-        <th>God</th>
         <th>Rounds</th>
         <th>Ranked</th>
       </tr>
@@ -18,10 +18,14 @@
       </template>
       <template v-else>
         <tr v-for="game in games" :key="game.game_id">
-          <td>
-            <router-link :to="'/games/' + game.game_id">{{
+          <td class="text-left">
+            <router-link class="ml-3" :to="'/games/' + game.game_id">{{
               game.game_id
             }}</router-link>
+          </td>
+          <td class="text-left">
+            <GodImage :god="game.god" :height="60" class="mr-2 ml-2" />
+            {{ game.god }}
           </td>
           <td>
             {{ getRankString(game.place) }}
@@ -33,7 +37,6 @@
             </template>
             <div class="text-muted">{{ dateFromNow(game.created_at) }}</div>
           </td>
-          <td>{{ game.god }}</td>
           <td>
             {{ game.rounds || "?" }} Rounds
             <div class="text-muted">{{ hhmmss(game.duration) }}</div>
@@ -46,8 +49,12 @@
 </template>
  
 <script>
+import GodImage from "../games/components/GodImage.vue";
 import { hhmmss, dateFromNow, getRankString } from "../../../filters/filters";
 export default {
+  components: {
+    GodImage,
+  },
   props: {
     games: Array,
     loading: Boolean,
