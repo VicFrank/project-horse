@@ -145,7 +145,7 @@ module.exports = [
   },
   {
     level: 25,
-    cosmetics: ["double_down"],
+    cosmetics: ["doubledown"],
     nextLevelXp: 7500,
     coins: 0,
   },

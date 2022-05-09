@@ -103,6 +103,16 @@ module.exports = {
     }
   },
 
+  async deleteAllCosmetics() {
+    try {
+      await query("DELETE FROM battle_pass_cosmetic_rewards");
+      await query("DELETE FROM player_cosmetics");
+      await query("DELETE FROM cosmetics");
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async bulkCreateCosmetics(cosmetics) {
     try {
       await tx.default(pool, async (db) => {

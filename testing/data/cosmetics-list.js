@@ -294,7 +294,7 @@ module.exports = [
   },
   {
     // Leaderboard Reward
-    name: "hat_wizardhat",
+    name: "hat_champion",
     type: "Avatar Hat (Leaderboard)",
     equip_group: "avatar_hat",
     coins: -1,

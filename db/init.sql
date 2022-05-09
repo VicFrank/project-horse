@@ -136,7 +136,7 @@ CREATE TABLE IF NOT EXISTS cosmetics (
   cosmetic_type TEXT,
   equip_group TEXT,
   cost_coins INTEGER,
-  cost_usd INTEGER,
+  cost_usd DOUBLE PRECISION,
   rarity TEXT
 );
 

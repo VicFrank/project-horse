@@ -11,6 +11,17 @@ async function initializeCosmetics() {
   }
 }
 
+async function clearCosmetics() {
+  try {
+    console.log("Deleting all cosmetics...");
+    await cosmetics.deleteAllCosmetics();
+    console.log("Cosmetics Deleted");
+  } catch (error) {
+    throw error;
+  }
+}
+
 (async function () {
+  await clearCosmetics();
   await initializeCosmetics();
 })();
