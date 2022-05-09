@@ -29,11 +29,11 @@
             {{ $t("navigation.change_log") }}
           </router-link>
         </li>
-        <li class="nav-item ml-2">
+        <!-- <li class="nav-item ml-2">
           <router-link class="nav-link" to="/credits">
             {{ $t("navigation.credits") }}
           </router-link>
-        </li>
+        </li> -->
       </ul>
       <div class="d-flex align-items-center">
         <div class="d-flex align-items-center">
