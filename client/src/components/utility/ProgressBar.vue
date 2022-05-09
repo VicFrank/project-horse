@@ -28,7 +28,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .progress-bar {
   background-color: rgba(188, 188, 188, 0.3);
   display: block;
@@ -49,5 +49,6 @@ export default {
 .current-progress {
   background-image: linear-gradient(to right, #0b86c4, #42728a);
   height: 20px;
+  transition: width 0.5s;
 }
 </style>

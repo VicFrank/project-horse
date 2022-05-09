@@ -174,7 +174,7 @@ router.post("/:steamID/transaction", auth.adminAuth, async (req, res) => {
     const playerExists = await players.doesPlayerExist(steamID);
     if (!playerExists)
       return res.status(404).send({ message: "Player not found" });
-    await players.itemTransaction(steamID, itemTransaction);
+    await players.doItemTransaction(steamID, itemTransaction);
     res.status(200).send({ message: "Transaction Complete" });
   } catch (error) {
     res

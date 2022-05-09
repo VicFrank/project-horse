@@ -42,16 +42,17 @@
             >Patreon Level {{ playerData.patreon_level }}</b-list-group-item
           >
           <b-list-group-item>MMR {{ playerData.mmr }}</b-list-group-item>
-          <!-- <b-list-group-item>
+          <b-list-group-item>
             Battle Pass XP:
-            {{ playerData.battlePass.total_experience }}
+            <!-- {{ playerData.battlePass.total_experience }} -->
+            (TODO: List current xp here)
             <b-button v-b-modal.give-bp variant="success" size="sm" class="ml-5"
               >+</b-button
             >
             <b-modal id="give-bp" title="Give Battle Pass XP" @ok="giveBP">
               <b-form-input type="number" v-model="bp"></b-form-input>
             </b-modal>
-          </b-list-group-item> -->
+          </b-list-group-item>
         </b-list-group>
       </b-card>
 
@@ -261,8 +262,14 @@ export default {
           this.loading = false;
           this.success = res.message;
           this.getPlayerData(this.steamID);
+          console.log(
+            this.steamID,
+            this.yourSteamID,
+            this.steamID === this.yourSteamID
+          );
           if (this.steamID === this.yourSteamID)
-            this.$store.dispatch("REFRESH_PLAYER");
+            this.$store.dispatch("REFRESH_COINS");
+          this.$store.dispatch("REFRESH_BATTLE_PASS");
         })
         .catch((err) => {
           this.error == err;

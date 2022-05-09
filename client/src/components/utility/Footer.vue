@@ -43,7 +43,7 @@
 export default {};
 </script>
 
-<style>
+<style scoped>
 footer {
   bottom: 0;
 
