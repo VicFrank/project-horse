@@ -10,6 +10,7 @@
     >
       <template #cell(god)="data">
         <div class="text-left p-2">
+          <GodImage :god="data.item.god" :height="60" class="mr-2" />
           {{ data.item.god }}
         </div>
       </template>
@@ -53,12 +54,14 @@
 <script>
 import PercentBar from "../../utility/PercentBar.vue";
 import PlacemementGraph from "./components/PlacementGraph.vue";
+import GodImage from "../games/components/GodImage.vue";
 import { percentage, round } from "../../../filters/filters";
 
 export default {
   components: {
     PercentBar,
     PlacemementGraph,
+    GodImage,
   },
 
   data: () => ({

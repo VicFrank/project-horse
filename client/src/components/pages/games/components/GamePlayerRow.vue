@@ -17,11 +17,14 @@
       <span v-else class="loss"> {{ player.mmr_change }} </span>
     </td>
     <td class="col2">
-      <div>
-        <router-link :to="'/players/' + player.steam_id">
-          {{ player.username }}
-        </router-link>
-        <div class="text-muted">{{ player.god }}</div>
+      <div class="d-flex">
+        <GodImage :god="player.god" :height="30" class="mr-2" />
+        <div>
+          <router-link :to="'/players/' + player.steam_id">
+            {{ player.username }}
+          </router-link>
+          <div class="text-muted">{{ player.god }}</div>
+        </div>
       </div>
     </td>
     <!-- <div class="col3">God</div> -->
@@ -38,11 +41,13 @@
 </template>
 
 <script>
+import GodImage from "./GodImage.vue";
 import HeroAndAbilities from "./HeroAndAbilities.vue";
 import { getRankString, hhmmss } from "../../../../filters/filters";
 
 export default {
   components: {
+    GodImage,
     HeroAndAbilities,
   },
 
