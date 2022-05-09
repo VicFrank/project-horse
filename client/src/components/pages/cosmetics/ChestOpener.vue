@@ -3,7 +3,7 @@
     <img
       v-if="!opened"
       class="chest-image clickable"
-      v-bind:src="cosmeticImageSrc(cosmetic.cosmetic_name)"
+      v-bind:src="cosmeticImageSrc(cosmetic)"
       :alt="cosmetic.cosmetic_name"
       @click="open"
     />
@@ -24,7 +24,7 @@
           <div class="mb-2">{{ `cosmetics.${item.cosmetic_name}` }}</div>
           <img
             class="reward-image mb-1"
-            v-bind:src="cosmeticImageSrc(item.cosmetic_name)"
+            v-bind:src="cosmeticImageSrc(item)"
             :alt="item.cosmetic_name"
           />
           <div class="text-muted">{{ item.rarity }}</div>
@@ -103,8 +103,12 @@ export default {
           this.showError = true;
         });
     },
-    cosmeticImageSrc(cosmeticName) {
-      return require(`../../../assets/images/cosmetics/${cosmeticName}.png`);
+    cosmeticImageSrc(cosmetic) {
+      const { cosmetic_name, cosmetic_type } = cosmetic;
+      const includedTypes = ["Card Frame", "Chest", "Finisher", "Consumable"];
+      if (includedTypes.includes(cosmetic_type))
+        return require(`../../../assets/images/cosmetics/${cosmetic_name}.png`);
+      else return require(`../../../assets/images/cosmetics/placeholder.png`);
     },
     openedImage(cosmeticName) {
       return require(`../../../assets/images/cosmetics/${cosmeticName}_open.png`);

@@ -371,7 +371,7 @@ module.exports = [
   },
   {
     // Battle Pass Reward
-    name: "double_down",
+    name: "doubledown",
     type: "Consumable",
     coins: -1,
     cost_usd: -1,
@@ -380,7 +380,7 @@ module.exports = [
   },
   {
     // Plus Reward
-    name: "plus_double_down",
+    name: "plus_doubledown",
     type: "Consumable",
     coins: -1,
     cost_usd: -1,
@@ -783,6 +783,14 @@ module.exports = [
     cost_usd: -1,
     equip_group: "terrain",
     rarity: "Common",
+  },
+  {
+    name: "terrain_god_gambler",
+    type: "Terrain",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "terrain",
+    rarity: "Immortal",
   },
   {
     name: "terrain_god_pa",

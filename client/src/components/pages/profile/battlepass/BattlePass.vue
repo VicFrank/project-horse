@@ -108,11 +108,10 @@ export default {
       return this.getRewards(level)?.cosmetic_id !== null;
     },
     getItemImage(level) {
-      const cosmetic_id = this.getRewardItem(level);
-      if (!cosmetic_id || cosmetic_id === null)
-        return require("./images/bp_placeholder.png");
+      const cosmeticName = this.getRewardItem(level);
+      if (!cosmeticName) return require("./images/bp_placeholder.png");
       // return require(`./images/${cosmetic_name}.png`);
-      return require(`../../../../assets/images/cosmetics/${cosmetic_id}.png`);
+      return require(`../../../../assets/images/cosmetics/${cosmeticName}.png`);
     },
   },
 };

@@ -48,7 +48,7 @@
               <div class="cosmetic" @click="$bvModal.show(`modal-${i}`)">
                 <div class="cosmetic__picture">
                   <img
-                    v-bind:src="cosmeticImageSrc(cosmetic.cosmetic_name)"
+                    v-bind:src="cosmeticImageSrc(cosmetic)"
                     :alt="cosmetic.cosmetic_name"
                   />
                   <img
@@ -78,7 +78,7 @@
                 <template v-if="cosmetic.cosmetic_type !== 'Chest'">
                   <div class="text-center mb-2">
                     <img
-                      v-bind:src="cosmeticImageSrc(cosmetic.cosmetic_name)"
+                      v-bind:src="cosmeticImageSrc(cosmetic)"
                       :alt="cosmetic.cosmetic_id"
                     />
                   </div>
@@ -273,12 +273,14 @@ export default {
       this.getPlayerCosmetics();
     },
     equippable(cosmetic) {
-      const type = cosmetic.cosmetic_type;
-      const equippableTypes = ["Avatar", "Finisher", "Arena"];
-      return equippableTypes.includes(type);
+      return cosmetic.equip_group != "";
     },
-    cosmeticImageSrc(cosmeticID) {
-      return require(`../../../assets/images/cosmetics/${cosmeticID}.png`);
+    cosmeticImageSrc(cosmetic) {
+      const { cosmetic_name, cosmetic_type } = cosmetic;
+      const includedTypes = ["Card Frame", "Chest", "Finisher", "Consumable"];
+      if (includedTypes.includes(cosmetic_type))
+        return require(`../../../assets/images/cosmetics/${cosmetic_name}.png`);
+      else return require(`../../../assets/images/cosmetics/placeholder.png`);
     },
     toggleFilter(name) {
       this.filters = this.filters.map((filter) => ({

@@ -61,7 +61,7 @@ module.exports = [
   },
   {
     level: 11,
-    cosmetics: ["double_down"],
+    cosmetics: ["doubledown"],
     nextLevelXp: 1800,
     coins: 0,
   },
@@ -109,7 +109,7 @@ module.exports = [
   },
   {
     level: 19,
-    cosmetics: ["finisher_fx_gambler"],
+    cosmetics: ["finisher_god_gambler"],
     nextLevelXp: 4600,
     coins: 0,
   },
@@ -175,7 +175,7 @@ module.exports = [
   },
   {
     level: 30,
-    cosmetics: ["arena_gambler"],
+    cosmetics: ["terrain_god_gambler"],
     nextLevelXp: 10500,
     coins: 0,
   },
@@ -235,7 +235,7 @@ module.exports = [
   },
   {
     level: 40,
-    cosmetics: ["god_gambler"],
+    cosmetics: ["card_gambler"],
     nextLevelXp: 18000,
     coins: 0,
   },
