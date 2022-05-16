@@ -63,7 +63,7 @@ async function setChestRewards() {
       let cumSumOdds = 0;
       for (const reward of rewards) {
         let { odds, item_name } = reward;
-        if (odds < 0) odds = 100 / chestDrops.length;
+        if (odds < 0) odds = 100 / rewards.length;
         const cosmetic = await cosmetics.getCosmeticByName(item_name);
         if (!cosmetic) throw new Error(`Cosmetic ${item_name} does not exist`);
         const cosmeticID = cosmetic.cosmetic_id;
