@@ -262,11 +262,6 @@ export default {
           this.loading = false;
           this.success = res.message;
           this.getPlayerData(this.steamID);
-          console.log(
-            this.steamID,
-            this.yourSteamID,
-            this.steamID === this.yourSteamID
-          );
           if (this.steamID === this.yourSteamID)
             this.$store.dispatch("REFRESH_COINS");
           this.$store.dispatch("REFRESH_BATTLE_PASS");

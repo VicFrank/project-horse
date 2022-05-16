@@ -285,8 +285,8 @@ router.post(
     try {
       const steamID = req.params.steamID;
       const chestid = req.params.chestid;
-      const rows = await players.openChest(steamID, chestid);
-      res.status(200).json(rows);
+      const reward = await players.openChest(steamID, chestid);
+      res.status(200).json(reward);
     } catch (error) {
       console.log(error);
       res.status(500).send({ error: error.message });

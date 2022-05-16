@@ -12,25 +12,4 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/chest_rewards", async (req, res) => {
-  try {
-    const rows = await cosmetics.getAllChestRewards();
-    res.status(201).send(rows);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: error.toString() });
-  }
-});
-
-router.get("/chest_rewards/:chest_id", async (req, res) => {
-  try {
-    const chestID = req.params.chest_id;
-    const rows = await cosmetics.getPotentialChestRewards(chestID);
-    res.status(201).send(rows);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: error.toString() });
-  }
-});
-
 module.exports = router;

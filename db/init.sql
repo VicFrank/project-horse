@@ -177,6 +177,7 @@ DROP TABLE IF EXISTS player_battle_pass CASCADE;
 CREATE TABLE IF NOT EXISTS player_battle_pass (
   steam_id TEXT REFERENCES players (steam_id) ON UPDATE CASCADE,
   battle_pass_id INTEGER REFERENCES battle_pass (battle_pass_id) ON UPDATE CASCADE,
+  unlocked BOOLEAN DEFAULT FALSE,
   bp_level INTEGER DEFAULT 1,
   total_xp INTEGER DEFAULT 0
 );
@@ -206,32 +207,24 @@ CREATE TABLE IF NOT EXISTS player_quests (
   CONSTRAINT player_quests_pkey PRIMARY KEY (steam_id, quest_id)
 );
 
-DROP TABLE IF EXISTS chest_item_rewards;
-CREATE TABLE IF NOT EXISTS chest_item_rewards (
-  cosmetic_id INTEGER REFERENCES cosmetics (cosmetic_id),
-  reward_rarity TEXT NOT NULL,
-  reward_odds INTEGER NOT NULL,
+DROP TABLE IF EXISTS drop_type_rewards;
+CREATE TABLE IF NOT EXISTS drop_type_rewards (
+  drop_type TEXT NOT NULL,
+  reward_cosmetic_id INTEGER REFERENCES cosmetics (cosmetic_id),
+  cum_sum_odds DOUBLE PRECISION NOT NULL,
 
-  CONSTRAINT chest_item_rewards_pkey PRIMARY KEY (cosmetic_id, reward_rarity)
+  CONSTRAINT drop_type_rewards_pkey PRIMARY KEY (drop_type, reward_cosmetic_id)
 );
 
-DROP TABLE IF EXISTS chest_coin_rewards;
-CREATE TABLE IF NOT EXISTS chest_coin_rewards (
-  cosmetic_id INTEGER REFERENCES cosmetics (cosmetic_id),
-  cum_sum INTEGER NOT NULL,
-  coins INTEGER NOT NULL,
+DROP TABLE IF EXISTS chest_drop_types;
+CREATE TABLE IF NOT EXISTS chest_drop_types (
+  chest_cosmetic_id INTEGER REFERENCES cosmetics (cosmetic_id),
+  drop_type TEXT NOT NULL,
+  cum_sum_odds DOUBLE PRECISION NOT NULL,
 
-  CONSTRAINT chest_coin_rewards_pkey PRIMARY KEY (cosmetic_id, cum_sum)
+  CONSTRAINT chest_drop_types_pkey PRIMARY KEY (chest_cosmetic_id, drop_type, cum_sum_odds)
 );
 
-DROP TABLE IF EXISTS chest_bonus_rewards;
-CREATE TABLE IF NOT EXISTS chest_bonus_rewards (
-  cosmetic_id INTEGER REFERENCES cosmetics (cosmetic_id),
-  cum_sum INTEGER NOT NULL,
-  reward_id INTEGER REFERENCES cosmetics (cosmetic_id),
-
-  CONSTRAINT chest_bonus_rewards_pkey PRIMARY KEY (cosmetic_id, cum_sum)
-);
 
 --------------------------------------------------------------------------------
 -- Polls

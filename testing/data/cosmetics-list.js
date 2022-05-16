@@ -372,7 +372,7 @@ module.exports = [
   {
     // Battle Pass Reward
     name: "doubledown",
-    type: "Consumable",
+    type: "Game Consumable",
     coins: -1,
     cost_usd: -1,
     equip_group: "",
@@ -381,7 +381,7 @@ module.exports = [
   {
     // Plus Reward
     name: "plus_doubledown",
-    type: "Consumable",
+    type: "Game Consumable",
     coins: -1,
     cost_usd: -1,
     equip_group: "",
@@ -846,12 +846,25 @@ module.exports = [
     coins: -1,
     cost_usd: -1,
     equip_group: "",
-    rarity: "common",
+    rarity: "Common",
   },
   {
     name: "chest_god",
     type: "Chest",
     coins: 10000,
+    cost_usd: -1,
+    equip_group: "",
+    rarity: "Immortal",
+  },
+  /**
+   * *************************
+   * Placeholders
+   * *************************
+   */
+  {
+    name: "gold_placeholder",
+    type: "",
+    coins: -1,
     cost_usd: -1,
     equip_group: "",
     rarity: "Immortal",

@@ -37,6 +37,18 @@ module.exports = {
     }
   },
 
+  async getCosmeticName(cosmeticID) {
+    try {
+      const { rows } = await query(
+        `SELECT cosmetic_name FROM cosmetics WHERE cosmetic_name = $1`,
+        [cosmeticID]
+      );
+      return rows[0]?.cosmetic_name;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async exists(cosmeticName) {
     try {
       const { rows } = await query(
@@ -146,15 +158,58 @@ module.exports = {
     }
   },
 
-  async addChestItemReward(chestID, rarity, odds) {
+  // Initialize chests
+  async addDropTypeRewards(dropType, rewardCosmeticID, cumSumOdds) {
     try {
-      const { rows } = await query(
+      await query(
         `
-      INSERT INTO chest_item_rewards (cosmetic_id, reward_rarity, reward_odds)
+      INSERT INTO drop_type_rewards (drop_type, reward_cosmetic_id, cum_sum_odds)
       VALUES ($1, $2, $3)
       RETURNING *
     `,
-        [chestID, rarity, odds]
+        [dropType, rewardCosmeticID, cumSumOdds]
+      );
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async addChestDropType(chestCosmeticID, dropType, cumSumOdds) {
+    try {
+      await query(
+        `
+      INSERT INTO chest_drop_types (chest_cosmetic_id, drop_type, cum_sum_odds)
+      VALUES ($1, $2, $3)
+      RETURNING *
+    `,
+        [chestCosmeticID, dropType, cumSumOdds]
+      );
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async clearChestDrops() {
+    try {
+      await query("DELETE FROM chest_drop_types");
+      await query("DELETE FROM drop_type_rewards");
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  // --------------------------------------------------
+  // Chests
+  // --------------------------------------------------
+  async getChestDropTypes(chestCosmeticID) {
+    try {
+      const { rows } = await query(
+        `
+      SELECT * FROM chest_drop_types
+      WHERE chest_cosmetic_id = $1
+      ORDER BY cum_sum_odds ASC
+    `,
+        [chestCosmeticID]
       );
       return rows;
     } catch (error) {
@@ -162,15 +217,15 @@ module.exports = {
     }
   },
 
-  async addChestCoinsReward(chestID, coins, cumSum) {
+  async getDropTypeRewards(dropType) {
     try {
       const { rows } = await query(
         `
-      INSERT INTO chest_coin_rewards (cosmetic_id, coins, cum_sum)
-      VALUES ($1, $2, $3)
-      RETURNING *
+      SELECT * FROM drop_type_rewards
+      WHERE drop_type = $1
+      ORDER BY cum_sum_odds ASC
     `,
-        [chestID, coins, cumSum]
+        [dropType]
       );
       return rows;
     } catch (error) {
@@ -178,55 +233,13 @@ module.exports = {
     }
   },
 
-  async addChestBonusReward(chestID, reward, cumSum) {
+  async getRandomChestDropType(chestCosmeticID) {
     try {
-      const { rows } = await query(
-        `
-      INSERT INTO chest_bonus_rewards
-      (cosmetic_id, reward_id, cum_sum)
-      VALUES ($1, $2, $3)
-      RETURNING *
-    `,
-        [chestID, reward, cumSum]
-      );
-      return rows;
-    } catch (error) {
-      throw error;
-    }
-  },
-
-  async getAllChestRewards() {
-    try {
-      const { rows: itemRewards } = await query(
-        `SELECT * FROM chest_item_rewards`
-      );
-      const { rows: coinRewards } = await query(
-        `SELECT * FROM chest_coin_rewards`
-      );
-      const { rows: bonusRewards } = await query(
-        `SELECT * FROM chest_bonus_rewards`
-      );
-      return [...itemRewards, ...coinRewards, ...bonusRewards];
-    } catch (error) {
-      throw error;
-    }
-  },
-
-  async getPotentialChestRewards(chestID) {
-    try {
-      const { rows: itemRewards } = await query(
-        `SELECT * FROM chest_item_rewards WHERE cosmetic_id = $1`,
-        [chestID]
-      );
-      const { rows: coinRewards } = await query(
-        `SELECT * FROM chest_coin_rewards WHERE cosmetic_id = $1`,
-        [chestID]
-      );
-      const { rows: bonusRewards } = await query(
-        `SELECT * FROM chest_bonus_rewards WHERE cosmetic_id = $1`,
-        [chestID]
-      );
-      return [...itemRewards, ...coinRewards, ...bonusRewards];
+      const dropTypes = await this.getChestDropTypes(chestCosmeticID);
+      const roll = Math.random() * 100;
+      for (const type of dropTypes) {
+        if (roll <= type.cum_sum_odds) return type.drop_type;
+      }
     } catch (error) {
       throw error;
     }

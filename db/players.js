@@ -301,6 +301,24 @@ module.exports = {
   },
 
   // --------------------------------------------------
+  // Player Plus functions
+  // --------------------------------------------------
+  async addPlusDays(steamID, days) {
+    try {
+      await query(
+        `UPDATE players SET plus_expiration = (
+          CASE WHEN plus_expiration < NOW() THEN NOW() + $1 * INTERVAL '1 DAY'
+          ELSE plus_expiration + $1 * INTERVAL '1 DAY' END
+        )
+        WHERE steam_id = $2 RETURNING *`,
+        [days, steamID]
+      );
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  // --------------------------------------------------
   // Player Battle Pass Functions
   // --------------------------------------------------
 
@@ -335,6 +353,22 @@ module.exports = {
         ...rows[0],
         requirements,
       };
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  // TODO: update the table, add logic
+  async unlockBattlePass(steamID) {
+    try {
+      const { rows } = await query(
+        `UPDATE player_battle_pass
+         SET unlocked = true
+         WHERE steam_id = $1
+         RETURNING *`,
+        [steamID]
+      );
+      return rows[0];
     } catch (error) {
       throw error;
     }
@@ -683,24 +717,75 @@ module.exports = {
     }
   },
 
-  // TODO: Define items that can be consumed, determine what rewards they should give
-  // TODO: Put this in a transaction
   async consumeItem(steamID, cosmeticName) {
     try {
       const cosmetic = await Cosmetics.getCosmetic(cosmeticName);
 
       if (!cosmetic) throw new Error("Tried to consume non-existent item");
-
-      const consumable =
-        cosmetic.cosmetic_type === "XP" ||
-        cosmetic.cosmetic_type === "Chest XP";
-      if (!consumable) throw new Error("Tried to consume non-consumable item");
+      if (cosmetic.cosmetic_type !== "Consumable")
+        throw new Error("Tried to consume non-consumable item");
 
       const hasCosmetic = await this.hasCosmetic(steamID, cosmetic.cosmetic_id);
       if (!hasCosmetic) throw new Error("You don't own this item");
 
       // TODO: Get the amount of xp the item should give
-      const xp = 0;
+      let xp = 0;
+      switch (cosmeticName) {
+        case "get_xp_250":
+          xp = 250;
+          break;
+        case "get_xp_500":
+          xp = 500;
+          break;
+        case "get_xp_1000":
+          xp = 1000;
+          break;
+        case "get_xp_2500":
+          xp = 2500;
+          break;
+        case "get_xp_10k":
+          xp = 10000;
+          break;
+        case "buy_xp_5000":
+          xp = 5000;
+          break;
+        case "buy_xp_1000":
+          xp = 1000;
+          break;
+        case "buy_xp_300":
+          xp = 300;
+          break;
+      }
+
+      // Handle plus extensions
+      switch (cosmeticName) {
+        case "plus_year_package":
+          // add two god chests
+          const godChest = await Cosmetics.getCosmeticByName("chest_god");
+          this.doItemTransaction(steamID, {
+            items: {
+              [godChest.cosmetic_id]: 2,
+            },
+          });
+          this.addPlusDays(steamID, 365);
+          break;
+        case "plus_1day":
+          this.addPlusDays(steamID, 1);
+          break;
+        case "plus_2day":
+          this.addPlusDays(steamID, 2);
+          break;
+        case "plus_4day":
+          this.addPlusDays(steamID, 4);
+          break;
+        case "plus_month":
+          this.addPlusDays(steamID, 30);
+          break;
+      }
+
+      if (cosmeticName === "buy_bp") {
+        this.unlockBattlePass(steamID);
+      }
 
       // Log the transaction
       await Logs.addTransactionLog(steamID, "consume_item", {
@@ -721,11 +806,11 @@ module.exports = {
   async realMoneyPurchase(steamID, item, amount) {
     try {
       if (item === "COINS") {
-        await players.modifyCoins(steamID, amount);
+        await this.modifyCoins(steamID, amount);
       } else if (item === "XP") {
-        await players.addBattlePassXp(steamID, amount);
+        await this.addBattlePassXp(steamID, amount);
       } else if (item === "BATTLE_PASS") {
-        await players.addBattlePassTier(steamID, 1, 31 * amount);
+        await this.addBattlePassTier(steamID, 1, 31 * amount);
       } else {
         throw new Error("Bad item type");
       }
@@ -772,36 +857,6 @@ module.exports = {
     }
   },
 
-  async getRandomReward(steamID, rarity, bucket = []) {
-    try {
-      const potentialRewards = await Cosmetics.getCosmeticsByRarity(rarity);
-      const existingItems = await this.getPlayerCosmetics(steamID);
-
-      potentialRewards = potentialRewards.filter((cosmetic) => {
-        const alreadyHasItem = existingItems.some((existingCosmetic) => {
-          return cosmetic.cosmetic_id === existingCosmetic.cosmetic_id;
-        });
-        // the bucket tracks what we're rewarding in this chest
-        const inBucket = bucket.some((existingCosmetic) => {
-          return cosmetic.cosmetic_id === existingCosmetic.cosmetic_id;
-        });
-        const isChest = cosmetic.cosmetic_type === "Chest";
-
-        return !alreadyHasItem && !inBucket && !isChest;
-      });
-
-      if (potentialRewards.length === 0) return null;
-
-      // get a random element from the array
-      const randomIndex = Math.floor(Math.random() * potentialRewards.length);
-      const randomCosmetic = potentialRewards[randomIndex];
-
-      return randomCosmetic;
-    } catch (error) {
-      throw error;
-    }
-  },
-
   async doesPlayerHaveItem(steamID, cosmeticID) {
     try {
       const { rows } = await query(
@@ -815,30 +870,38 @@ module.exports = {
     }
   },
 
-  async generateRandomChestRewards(chestID) {
+  async getRandomChestReward(steamID, chestCosmeticID) {
     try {
-      const { rows: itemRewards } = await query(
-        `SELECT * FROM chest_item_rewards
-        WHERE cosmetic_id = $1`,
-        [chestID]
-      );
-      const { rows: coinRewards } = await query(
-        `SELECT * FROM chest_coin_rewards
-        WHERE cosmetic_id = $1
-        ORDER BY cum_sum `,
-        [chestID]
-      );
-      const { rows: bonusRewards } = await query(
-        `SELECT * FROM chest_bonus_rewards
-        WHERE cosmetic_id = $1
-        ORDER BY cum_sum `,
-        [chestID]
-      );
-      return {
-        itemRewards,
-        coinRewards,
-        bonusRewards,
-      };
+      const dropType = await Cosmetics.getRandomChestDropType(chestCosmeticID);
+      if (!dropType)
+        throw new Error(`No drop type found for chest ${chestCosmeticID}`);
+      const dropTypeRewards = await Cosmetics.getDropTypeRewards(dropType);
+
+      console.log(dropTypeRewards);
+
+      const roll = Math.random() * 100;
+      console.log(roll);
+      for (const reward of dropTypeRewards) {
+        if (roll <= reward.cum_sum_odds) {
+          const rewardID = reward.reward_cosmetic_id;
+          const rewardCosmetic = await Cosmetics.getCosmetic(rewardID);
+          if (rewardCosmetic.cosmetic_name === "gold_placeholder") {
+            // hard code the gold rewards here
+            const coins = Math.floor(Math.random() * 100) + 50;
+            return { coins };
+          } else if (rewardCosmetic.cosmetic_type === "Consumable") {
+            // we can win as many consumables as we want
+            return { items: { [rewardID]: 1 } };
+          }
+          // otherwise, give pity coins. For now, let's just give them 100
+          const hasItem = await this.doesPlayerHaveItem(steamID, rewardID);
+          if (hasItem) {
+            return { coins: 100 };
+          } else return { items: { [rewardID]: 1 } };
+        }
+      }
+
+      throw new Error(`Failed to find a reward for chest ${chestCosmeticID}`);
     } catch (error) {
       throw error;
     }
@@ -849,115 +912,32 @@ module.exports = {
       const hasChest = await this.doesPlayerHaveItem(steamID, chestID);
       if (!hasChest) throw new Error("You don't have this item");
 
-      await Logs.addTransactionLog(steamID, "open_chest", {
-        steamID: steamID,
-        chestID,
-      });
+      Logs.addTransactionLog(steamID, "open_chest", { steamID, chestID });
+      this.addQuestProgressByStat(steamID, "chests_opened", 1);
 
-      // Increment chest opening progress
-      // this.addQuestProgressByStat(steamID, "chests_opened", 1);
-
-      const { itemRewards, coinRewards, bonusRewards } =
-        await this.generateRandomChestRewards(chestID);
-
-      let chestItems = [];
-      let pityCoins = 0;
-      let pityCoinRarities = {};
-      for (const itemReward of itemRewards) {
-        let { reward_rarity, reward_odds } = itemReward;
-
-        while (reward_odds > 0) {
-          const rewardProbability = reward_odds;
-          // generate a random number (1-100) (inclusive)
-          const roll = Math.floor(Math.random() * 100) + 1;
-
-          if (rewardProbability >= roll) {
-            const randomReward = await this.getRandomReward(
-              steamID,
-              reward_rarity,
-              chestItems
-            );
-
-            if (randomReward !== null) {
-              chestItems.push(randomReward);
-            } else {
-              // If you already have the item, convert it to coins
-              switch (reward_rarity) {
-                case "Common":
-                  pityCoins += 30;
-                  pityCoinRarities["Common"] = 30;
-                  break;
-                case "Uncommon":
-                  pityCoins += 60;
-                  pityCoinRarities["Uncommon"] = 60;
-                  break;
-                case "Rare":
-                  pityCoins += 125;
-                  pityCoinRarities["Rare"] = 125;
-                  break;
-                case "Mythical":
-                  pityCoins += 300;
-                  pityCoinRarities["Mythical"] = 300;
-                  break;
-                case "Legendary":
-                  pityCoins += 800;
-                  pityCoinRarities["Legendary"] = 800;
-                  break;
-              }
-            }
-          }
-          reward_odds -= 100;
-        }
-      }
-
-      let chestCoins = 0;
-      chestCoins;
-
-      // generate a random number (1-100) (inclusive)
-      let roll = Math.floor(Math.random() * 100) + 1;
-
-      for (const itemReward of coinRewards) {
-        const { cum_sum, coins } = itemReward;
-
-        if (cum_sum >= roll) {
-          chestCoins += coins;
-          break;
-        }
-      }
-
-      // Choose a potential bonus reward
-      roll = Math.floor(Math.random() * 100) + 1;
-
-      for (const itemReward of bonusRewards) {
-        const { cum_sum, reward_id } = itemReward;
-
-        if (cum_sum >= roll) {
-          const bonusReward = await Cosmetics.getCosmetic(reward_id);
-          chestItems.push(bonusReward);
-          break;
-        }
-      }
-
-      let items = {};
+      const rewardsTransaction = await this.getRandomChestReward(
+        steamID,
+        chestID
+      );
 
       // consume this chest as part of the transaction
-      items[chestID] = "-1";
-
-      const transaction = {
-        coins: chestCoins + pityCoins,
-        items,
-        companions,
-      };
+      rewardsTransaction.items = { ...rewardsTransaction.items, [chestID]: -1 };
 
       // add the rewards to the player
-      await this.itemTransaction(steamID, transaction);
+      await this.doItemTransaction(steamID, rewardsTransaction);
 
-      return {
-        items: chestItems,
-        coins: chestCoins,
-        pityCoins,
-        pityCoinRarities,
-      };
+      // get the names of the rewarded items
+      const itemIDs = Object.keys(rewardsTransaction.items);
+      const items = [];
+      for (const id of itemIDs) {
+        if (id !== chestID) {
+          const item = await Cosmetics.getCosmetic(id);
+          items.push(item);
+        }
+      }
+
+      rewardsTransaction.items = items;
+      return rewardsTransaction;
     } catch (error) {
       throw error;
     }

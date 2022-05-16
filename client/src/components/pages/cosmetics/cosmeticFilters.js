@@ -11,44 +11,19 @@ const filterCosmetics = (
         return true;
       }
 
-      const { cosmetic_type, equip_group, equipped } = cosmetic;
-      if (currentFilter === "Companions") {
-        if (equip_group === "companion") {
-          return true;
-        }
-      }
-      if (currentFilter === "Companions FX") {
-        if (equip_group === "companion_fx") {
-          return true;
-        }
-      }
+      const { cosmetic_type, equipped } = cosmetic;
       if (currentFilter === "Chests") {
-        if (cosmetic_type === "Chest") {
-          return true;
-        }
+        if (cosmetic_type === "Chest") return true;
       }
-      if (currentFilter === "Battle Pass") {
-        if (
-          cosmetic_type === "Battlepass FX" ||
-          cosmetic_type === "Avatar" ||
-          cosmetic_type === "Border"
-        ) {
-          return true;
-        }
+      if (currentFilter === "Arenas") {
+        if (cosmetic_type === "Terrain FX") return true;
       }
-      if (currentFilter === "Announcer") {
-        if (equip_group === "announcer") {
-          return true;
-        }
+      if (currentFilter === "Gods") {
+        if (cosmetic_type === "Card Frame") return true;
       }
-      if (currentFilter === "XP") {
-        if (
-          cosmetic_type === "XP" ||
-          cosmetic_type === "Chest XP" ||
-          cosmetic_type == "BP Accelerator"
-        ) {
+      if (currentFilter === "Consumable") {
+        if (cosmetic_type === "Consumable" || cosmetic_type === "Chest")
           return true;
-        }
       }
       if (currentFilter === "Equipped") {
         return equipped;

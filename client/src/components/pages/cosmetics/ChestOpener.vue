@@ -14,14 +14,13 @@
       :alt="cosmetic.cosmetic_name"
     />
     <div v-if="items.length > 0" class="mt-2">
-      <div class="h2 text-center blue">Items</div>
       <div>
         <div
           v-for="item of items"
           :key="item.cosmetic_id"
           class="text-center mb-2"
         >
-          <div class="mb-2">{{ `cosmetics.${item.cosmetic_name}` }}</div>
+          <div class="mb-2">{{ item.cosmetic_name }}</div>
           <img
             class="reward-image mb-1"
             v-bind:src="cosmeticImageSrc(item)"
@@ -30,6 +29,10 @@
           <div class="text-muted">{{ item.rarity }}</div>
         </div>
       </div>
+    </div>
+    <div v-if="coins">
+      <div class="h2 text-center blue">Coins</div>
+      <div class="text-center">{{ coins }}</div>
     </div>
     <b-alert v-model="showError" variant="danger" dismissible>
       {{ error }}
@@ -54,6 +57,7 @@ export default {
     error: "",
     showError: false,
     items: [],
+    coins: 0,
     opened: false,
   }),
   props: {
@@ -94,8 +98,9 @@ export default {
         .then((res) => res.json())
         .then((res) => {
           this.items = res.items;
+          this.coins = res.coins;
           this.opened = true;
-          this.$store.dispatch("REFRESH_COINS");
+          if (res.coins) this.$store.dispatch("REFRESH_COINS");
           this.$emit("open");
         })
         .catch((err) => {
@@ -105,7 +110,13 @@ export default {
     },
     cosmeticImageSrc(cosmetic) {
       const { cosmetic_name, cosmetic_type } = cosmetic;
-      const includedTypes = ["Card Frame", "Chest", "Finisher", "Consumable"];
+      const includedTypes = [
+        "Card Frame",
+        "Chest",
+        "Finisher",
+        "Consumable",
+        "Game Consumable",
+      ];
       if (includedTypes.includes(cosmetic_type))
         return require(`../../../assets/images/cosmetics/${cosmetic_name}.png`);
       else return require(`../../../assets/images/cosmetics/placeholder.png`);
