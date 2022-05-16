@@ -877,10 +877,7 @@ module.exports = {
         throw new Error(`No drop type found for chest ${chestCosmeticID}`);
       const dropTypeRewards = await Cosmetics.getDropTypeRewards(dropType);
 
-      console.log(dropTypeRewards);
-
       const roll = Math.random() * 100;
-      console.log(roll);
       for (const reward of dropTypeRewards) {
         if (roll <= reward.cum_sum_odds) {
           const rewardID = reward.reward_cosmetic_id;

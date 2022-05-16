@@ -52,7 +52,8 @@ async function setChestRewards() {
       const chestID = chest.cosmetic_id;
       let cumSumOdds = 0;
       for (const drop of chestDrops) {
-        const { type, odds } = drop;
+        let { type, odds } = drop;
+        if (odds < 0) odds = 100 / chestDrops.length;
         cumSumOdds += odds;
         await cosmetics.addChestDropType(chestID, type, cumSumOdds);
       }
@@ -61,7 +62,8 @@ async function setChestRewards() {
     for (const [type, rewards] of Object.entries(typeOdds)) {
       let cumSumOdds = 0;
       for (const reward of rewards) {
-        const { odds, item_name } = reward;
+        let { odds, item_name } = reward;
+        if (odds < 0) odds = 100 / chestDrops.length;
         const cosmetic = await cosmetics.getCosmeticByName(item_name);
         if (!cosmetic) throw new Error(`Cosmetic ${item_name} does not exist`);
         const cosmeticID = cosmetic.cosmetic_id;
@@ -75,7 +77,7 @@ async function setChestRewards() {
   }
 }
 (async function () {
-  await clearCosmetics();
-  await initializeCosmetics();
+  // await clearCosmetics();
+  // await initializeCosmetics();
   await setChestRewards();
 })();
