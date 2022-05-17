@@ -153,11 +153,20 @@
     "waiting_for_process": "Waiting for payment to be processed...",
     "payment_issue": "There may have been an issue processing your payment.",
     "success_1": "It may take a very short period of time to add your items to your account.",
-    "success_2": "If you have an issue receiving your XP/POGGERS, please {contact_us}",
+    "success_2": "If you have an issue receiving your XP/Coins, please {contact_us}",
     "contact_us": "contact us",
     "processing": "Processing payment...",
     "loading": "Loading...",
     "pay_with_stripe": "Pay with Stripe"
+  },
+  "store": {
+    "page_title": "Store",
+    "sales": "Sales",
+    "buy": "Buy",
+    "buy_coins": "Buy Coins",
+    "buy_bp": "Upgrade Your Battle Pass",
+    "already_own": "You already own this item!",
+    "get_more_coins": "Get more Coins"
   },
   "not_found": "Page not found",
   "credits": {
