@@ -39,19 +39,10 @@ const filterCosmetics = (
     })
     .filter((cosmetic) => {
       // Text Search Filter
-      if (!searchText) {
-        return true;
-      }
-      const { cosmetic_id } = cosmetic;
-      const name = cosmetic_id;
+      if (!searchText) return true;
+      const { cosmetic_name } = cosmetic;
       const search = searchText.toLowerCase();
-      if (
-        search === "" ||
-        name.includes(search) ||
-        cosmetic_id.includes(search)
-      ) {
-        return true;
-      }
+      if (cosmetic_name.includes(search)) return true;
       return false;
     });
 };

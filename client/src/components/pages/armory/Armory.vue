@@ -153,6 +153,7 @@ export default {
       currentFilter: "All",
       cosmetics: [],
       filteredCosmetics: [],
+      activeRarityFilters: [],
       loading: true,
       showError: false,
       error: "",
@@ -301,6 +302,7 @@ export default {
       this.filteredCosmetics = filterCosmetics(
         this.cosmetics,
         this.currentFilter,
+        this.activeRarityFilters,
         this.searchText
       );
     },
