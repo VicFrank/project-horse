@@ -717,9 +717,9 @@ module.exports = {
     }
   },
 
-  async consumeItem(steamID, cosmeticName) {
+  async consumeItem(steamID, cosmeticID) {
     try {
-      const cosmetic = await Cosmetics.getCosmetic(cosmeticName);
+      const cosmetic = await Cosmetics.getCosmetic(cosmeticID);
 
       if (!cosmetic) throw new Error("Tried to consume non-existent item");
       if (cosmetic.cosmetic_type !== "Consumable")
@@ -727,6 +727,8 @@ module.exports = {
 
       const hasCosmetic = await this.hasCosmetic(steamID, cosmetic.cosmetic_id);
       if (!hasCosmetic) throw new Error("You don't own this item");
+
+      const cosmeticName = cosmetic.cosmetic_name;
 
       // TODO: Get the amount of xp the item should give
       let xp = 0;

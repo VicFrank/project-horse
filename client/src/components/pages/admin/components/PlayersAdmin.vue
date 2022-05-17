@@ -88,36 +88,42 @@
       <b-card title="Cosmetics">
         <b-button v-b-toggle.collapse-1 variant="primary">Give Items</b-button>
         <b-collapse id="collapse-1" class="mt-2 mb-2">
+          <b-form-input
+            v-model="cosmeticsFilter"
+            placeholder="Search Items..."
+          ></b-form-input>
           <b-card>
-            <b-form-select
-              v-model="selected"
-              :options="options"
-              multiple
-              :select-size="20"
-            ></b-form-select>
-            <div class="mt-3">
-              <strong>{{ selected }}</strong>
-            </div>
-            <b-button variant="success" class="mt-2" @click="addCosmeticItem"
-              >Add</b-button
+            <div
+              v-for="option of filteredOptions"
+              :key="option.value.cosmetic_id"
+              class="d-flex align-items-center my-1"
             >
+              <b-button
+                :disabled="loading"
+                variant="success"
+                class="mr-3"
+                @click="addItem(option.value)"
+                >Add</b-button
+              >
+              <div>{{ option.text }}</div>
+            </div>
           </b-card>
         </b-collapse>
+        <h4 class="card-title">Inventory</h4>
         <b-list-group-item
           v-for="cosmetic in cosmetics"
           :key="cosmetic.cosmetic_id + cosmetic.created + cosmetic.equipped"
-          class="mt-2"
         >
-          {{ cosmetic.cosmetic_name }}
-          <span v-if="cosmetic.equipped">: Equipped</span>
           <b-button
             v-b-modal.delete-item
             variant="danger"
             size="sm"
-            class="ml-5"
+            class="mr-3"
             @click="setItem(cosmetic)"
             >x</b-button
           >
+          {{ cosmetic.cosmetic_name }}
+          <span v-if="cosmetic.equipped">: Equipped</span>
         </b-list-group-item>
       </b-card>
       <b-modal id="delete-item" title="Delete Item" @ok="deleteItem">
@@ -133,9 +139,11 @@ export default {
   data: () => ({
     error: "",
     steamID: "",
+    cosmeticsFilter: "",
     playerData: {},
     cosmetics: [],
     options: [],
+    filteredOptions: [],
     selected: [],
     loading: false,
     success: "",
@@ -154,10 +162,7 @@ export default {
           value: cosmetic,
           text: cosmetic.cosmetic_name,
         }));
-        this.options.push({
-          value: null,
-          text: "Select a cosmetic to add...",
-        });
+        this.filteredOptions = this.options;
       })
       .catch((err) => (this.error = err));
   },
@@ -165,6 +170,19 @@ export default {
   computed: {
     yourSteamID() {
       return this.$store.state.auth.userSteamID;
+    },
+  },
+
+  watch: {
+    cosmeticsFilter: function () {
+      if (!this.cosmeticsFilter) this.filteredOptions = this.options;
+      else {
+        this.filteredOptions = this.options.filter((option) => {
+          return option.text
+            .toLowerCase()
+            .includes(this.cosmeticsFilter.toLowerCase());
+        });
+      }
     },
   },
 
@@ -199,32 +217,26 @@ export default {
         .catch((err) => (this.error = err));
     },
     deleteItem() {
-      const itemToDelete = this.currentItem;
-      const items = {};
-      items[itemToDelete.cosmetic_id] = "-1";
-
       const transaction = {
         itemTransaction: {
-          items,
+          items: {
+            [this.currentItem.cosmetic_id]: -1,
+          },
         },
       };
 
       this.currentItem = {};
       this.doTransaction(transaction);
     },
-    addCosmeticItem() {
-      const selectedItems = this.selected;
-      let items = {};
-      for (const item of selectedItems) {
-        items[item.cosmetic_id] = "1";
-      }
+    addItem(item) {
       const transaction = {
         itemTransaction: {
-          items,
+          items: {
+            [item.cosmetic_id]: 1,
+          },
         },
       };
 
-      this.selected = [];
       this.doTransaction(transaction);
     },
     giveCoins() {

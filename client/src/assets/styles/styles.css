@@ -608,8 +608,9 @@ td a:hover {
   position: relative;
   z-index: 2;
   display: block;
-  width: 100%;
-  height: auto;
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
 }
 
 .cosmetic__descr {

@@ -101,6 +101,7 @@ export default {
           this.coins = res.coins;
           this.opened = true;
           if (res.coins) this.$store.dispatch("REFRESH_COINS");
+          this.showError = false;
           this.$emit("open");
         })
         .catch((err) => {
