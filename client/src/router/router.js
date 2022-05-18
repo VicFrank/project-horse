@@ -11,6 +11,9 @@ const Credits = () => import("../components/pages/credits/Credits");
 const Changelog = () => import("../components/pages/changelog/Changelog");
 const Admin = () => import("../components/pages/admin/Admin");
 
+const Store = () => import("../components/pages/store/Store");
+const Checkout = () => import("../components/pages/store/Checkout");
+
 const Games = () => import("../components/pages/games/Games");
 const Game = () => import("../components/pages/games/Game");
 
@@ -47,6 +50,8 @@ const routes = [
   { path: "/leaderboard", component: Leaderboard },
   { path: "/players/:steam_id", component: PlayerPage },
   { path: "/players/:steam_id/games", component: PlayerGamesList },
+  { path: "/store", component: Store },
+  { path: "/checkout/:item_id", component: Checkout },
 
   { path: "/profile", component: Profile, meta: { requiresAuth: true } },
   {

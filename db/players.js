@@ -828,7 +828,7 @@ module.exports = {
       if (!cosmetic) throw new Error(`Invalid cosmeticID ${cosmeticID}`);
       // Make sure the player has enough coins
       const coins = await this.getCoins(steamID);
-      const price = cosmetic.cost;
+      const price = cosmetic.cost_coins;
 
       if (coins < price) throw new Error("Not enough coins!");
       if (price < 1) throw new Error("Item is not purchaseable with coins");
@@ -836,9 +836,7 @@ module.exports = {
       // Don't allow purchasing duplicate cosmetics (with some exceptions)
       const cosmeticType = cosmetic.cosmetic_type;
       const canBuyMultiple =
-        cosmeticType == "BP Accelerator" ||
-        cosmeticType == "Chest" ||
-        cosmeticType == "XP";
+        cosmeticType == "Consumable" || cosmeticType == "Chest";
 
       if (!canBuyMultiple) {
         const hasCosmetic = await this.hasCosmetic(steamID, cosmeticID);
@@ -853,7 +851,7 @@ module.exports = {
 
       // Do the transaction
       await this.modifyCoins(steamID, -price);
-      await this.giveCosmetic(steamID, cosmeticID);
+      await this.giveCosmeticByID(steamID, cosmeticID);
     } catch (error) {
       throw error;
     }

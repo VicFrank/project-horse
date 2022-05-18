@@ -184,18 +184,18 @@ router.post("/:steamID/transaction", auth.adminAuth, async (req, res) => {
 });
 
 router.post(
-  "/:steamID/buy_item/:cosmetic_id",
+  "/:steamID/buy_item/:cosmeticID",
   auth.userAuth,
   async (req, res) => {
     try {
-      const steamID = req.params.steamID;
-      const cosmetic_id = req.params.cosmetic_id;
+      const { steamID, cosmeticID } = req.params;
       const playerExists = await players.doesPlayerExist(steamID);
       if (!playerExists)
         return res.status(404).send({ message: "Player not found" });
-      await players.buyCosmetic(steamID, cosmetic_id);
+      await players.buyCosmetic(steamID, cosmeticID);
       res.status(200).send({ message: "Transaction Complete" });
     } catch (error) {
+      console.error(error);
       res
         .status(500)
         .json({ message: "Transaction Failed", error: error.toString() });

@@ -4,7 +4,10 @@
     <div class="container">
       <div class="row">
         <div class="sale">
-          <router-link to="/checkout">
+          <router-link
+            v-if="cosmetics.length > 0"
+            :to="getCheckoutLink('buy_bp')"
+          >
             <img
               src="./images/Battle_Pass_Icons_tickets.jpg"
               alt="Battle Pass Shop"
@@ -15,7 +18,10 @@
           </div>
         </div>
         <div class="sale">
-          <router-link to="/checkout">
+          <router-link
+            v-if="cosmetics.length > 0"
+            :to="getCheckoutLink('plus_year_package')"
+          >
             <img
               src="./images/Battle_Pass_Icons_tickets.jpg"
               alt="Battle Pass Shop"
@@ -25,27 +31,21 @@
             <h3>Upgrade to Plus</h3>
           </div>
         </div>
-        <div class="sale">
-          <router-link to="/checkout">
-            <img
-              src="./images/Battle_Pass_Icons_tickets.jpg"
-              alt="Battle Pass Shop"
-            />
-          </router-link>
-          <div class="overlay">
-            <h3>Buy Battle Pass Exp</h3>
-          </div>
-        </div>
       </div>
       <div class="row">
-        <b-alert v-model="showError" variant="danger" dismissible>
+        <b-alert
+          v-model="showError"
+          style="width: 100%"
+          variant="danger"
+          dismissible
+        >
           {{ error }}
         </b-alert>
 
         <div class="cosmetics">
           <div
             class="cosmetics__item"
-            v-for="cosmetic in filteredCosmetics"
+            v-for="cosmetic in shopCosmetics"
             :key="cosmetic.cosmetic_id"
           >
             <div
@@ -55,7 +55,7 @@
               <div>
                 <img
                   v-bind:src="cosmeticImageSrc(cosmetic)"
-                  :alt="cosmetic.cosmetic_id"
+                  :alt="cosmetic.cosmetic_name"
                   class="preview-image"
                 />
               </div>
@@ -69,7 +69,7 @@
                 <div class="cosmetic__price">
                   <span class="cosmetic-price">
                     <template v-if="cosmetic.cost_coins > 0">
-                      {{ cosmetic.cost_coins }} Coins
+                      {{ cosmetic.cost_coins.toLocaleString() }} Coins
                     </template>
                     <template v-else>${{ cosmetic.cost_usd }}</template>
                   </span>
@@ -121,12 +121,12 @@
                   v-if="cosmetic.cost_usd > 0"
                   class="mr-2"
                   variant="primary"
-                  to="checkout"
+                  :to="getCheckoutLink(cosmetic.cosmetic_name)"
                   >{{ $t("store.buy") }}</b-button
                 >
                 <b-button
                   v-else
-                  :disabled="conis < cosmetic.cost_coins"
+                  :disabled="coins < cosmetic.cost_coins"
                   class="mr-2"
                   variant="primary"
                   v-b-modal.modal-confirm-purchase
@@ -142,6 +142,11 @@
         </div>
       </div>
     </div>
+    <ConfirmPurchase
+      :cosmetic="currentCosmetic"
+      v-on:buy="buyItem"
+      v-on:cancel="hideModal"
+    />
   </div>
 </template>
 
@@ -157,13 +162,14 @@ export default {
     CosmeticDescription,
   },
 
-  date: () => ({
+  data: () => ({
     error: "",
     showError: false,
     success: false,
     loading: false,
     currentCosmetic: {},
     cosmetics: [],
+    shopCosmetics: [],
   }),
 
   computed: {
@@ -194,8 +200,11 @@ export default {
     fetch(`/api/cosmetics`)
       .then((res) => res.json())
       .then((cosmetics) => {
-        const purchaseableCosmetics = cosmetics
-          .filter((cosmetic) => cosmetic.cost_coins > 0)
+        this.cosmetics = cosmetics;
+        this.shopCosmetics = cosmetics
+          .filter(
+            (cosmetic) => cosmetic.cost_coins > 0 || cosmetic.cost_usd > 0
+          )
           .sort((c1, c2) => {
             if (this.isConsumableOrChest(c1) && !this.isConsumableOrChest(c2)) {
               return -1;
@@ -213,13 +222,10 @@ export default {
               if (c1Chest != c2Chest) {
                 return c2Chest - c1Chest;
               }
-              return c1.cosmetic_id.localeCompare(c2.cosmetic_id);
+              return c1.cosmetic_name.localeCompare(c2.cosmetic_name);
             }
-            return c1type.localeCompare(c2type);
+            return c1.cosmetic_type.localeCompare(c2.cosmetic_type);
           });
-
-        this.cosmetics = purchaseableCosmetics;
-        this.filteredCosmetics = purchaseableCosmetics;
       })
       .catch((err) => {
         this.error = err;
@@ -236,6 +242,13 @@ export default {
         cosmetic.cosmetic_type === "Chest" ||
         cosmetic.cosmetic_type === "Consumable"
       );
+    },
+    getCheckoutLink(cosmeticName) {
+      const cosmetic = this.cosmetics.find(
+        (c) => c.cosmetic_name === cosmeticName
+      );
+      if (cosmetic) return `checkout/${cosmetic.cosmetic_id}`;
+      return "checkout";
     },
     buyItem(cosmetic) {
       const { cosmetic_id, cost_coins } = cosmetic;
@@ -256,6 +269,7 @@ export default {
         .then((res) => {
           this.loading = false;
           document.documentElement.scrollTop = 0;
+          console.log(res);
           if (res.error) {
             this.error = res.error;
             this.showError = true;

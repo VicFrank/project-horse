@@ -152,12 +152,12 @@ router.post("/webhooks/paypal", async (req, res) => {
 });
 
 router.post("/stripe/intents", async (req, res) => {
-  const { name, amount, steamID } = req.body;
+  const { cosmeticID, amount, steamID } = req.body;
 
-  const itemData = await cosmetics.getItemPrice(name);
+  const itemData = await cosmetics.getCosmetic(cosmeticID);
+  if (!itemData) return res.status(400).send({ message: "Invalid Item ID" });
+
   const { cost_usd } = itemData;
-
-  if (!itemData) return res.status(400).send({ message: "Invalid ItemID" });
   if (amount / 100 !== cost_usd)
     return res.status(400).send({ message: "Invalid Payment Amount" });
 
@@ -165,7 +165,7 @@ router.post("/stripe/intents", async (req, res) => {
     amount,
     currency: "usd",
     payment_method_types: ["card"],
-    metadata: { steamID, itemID: name, isPaymentIntent: true },
+    metadata: { steamID, itemID: cosmeticID, isPaymentIntent: true },
   });
 
   res.send(paymentIntent);

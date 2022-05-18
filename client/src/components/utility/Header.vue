@@ -13,6 +13,11 @@
             {{ $t("navigation.games") }}
           </router-link>
         </li>
+        <li class="nav-item mr-2">
+          <router-link class="nav-link" to="/store">
+            {{ $t("navigation.store") }}
+          </router-link>
+        </li>
         <b-nav-item-dropdown text="STATS" class="mx-2">
           <b-dropdown-item to="/leaderboard">
             {{ $t("navigation.leaderboard") }}
@@ -37,7 +42,7 @@
       </ul>
       <div class="d-flex align-items-center">
         <div class="d-flex align-items-center">
-          <div>
+          <!-- <div>
             <b-button
               class="d-none d-md-flex mr-3"
               href="#"
@@ -45,7 +50,7 @@
               variant="secondary"
               v-t="'navigation.report_a_bug'"
             ></b-button>
-          </div>
+          </div> -->
           <div>
             <b-button
               class="d-none d-md-flex"
@@ -53,8 +58,7 @@
               target="_blank"
               variant="primary"
               v-t="'navigation.play_now'"
-              >PLAY NOW</b-button
-            >
+            ></b-button>
           </div>
         </div>
       </div>

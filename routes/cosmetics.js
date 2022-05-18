@@ -12,4 +12,15 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    const cosmetic = await cosmetics.getCosmetic(id);
+    res.status(201).send(cosmetic);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.toString() });
+  }
+});
+
 module.exports = router;
