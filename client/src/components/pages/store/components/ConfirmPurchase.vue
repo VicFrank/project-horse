@@ -23,13 +23,15 @@ export default {
   },
   methods: {
     buy() {
-      const name = this.$i18n.t(`cosmetics.${this.cosmetic.cosmetic_id}`);
-      this.$bvToast.toast(`Added ${name} to your armory`, {
-        title: `Notification`,
-        toaster: "b-toaster-bottom-left",
-        solid: true,
-        appendToast: true,
-      });
+      this.$bvToast.toast(
+        `Added ${this.cosmetic.cosmetic_name} to your armory`,
+        {
+          title: `Notification`,
+          toaster: "b-toaster-bottom-left",
+          solid: true,
+          appendToast: true,
+        }
+      );
 
       this.$refs["modal-confirm-purchase"].hide();
       this.$emit("buy", this.cosmetic);
