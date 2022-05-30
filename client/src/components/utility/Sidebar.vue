@@ -32,8 +32,8 @@
 
         <div class="d-flex justify-content-center align-items-center mt-1">
           <img
-            src="../../assets/images/pogcoin_gold.png"
-            class="coins-img mr-1"
+            src="../../assets/images/coin1.png"
+            class="coins-img"
             alt="Coins"
           />
           {{ coins }}

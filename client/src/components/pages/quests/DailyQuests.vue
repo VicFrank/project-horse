@@ -41,7 +41,7 @@
               <span v-if="quest.poggers_reward > 0" class="pog-text mr-3">
                 <img
                   class="pogcoin"
-                  src="../../../assets/images/pogcoin_gold.png"
+                  src="../../../assets/images/coin1.png"
                   alt="Pog Coin"
                 />
                 {{ quest.poggers_reward }} POGGERS
