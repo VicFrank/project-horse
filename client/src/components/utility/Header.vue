@@ -4,7 +4,11 @@
       <div class="d-flex align-items-center">
         <SidebarToggle class="navbar-nav mr-1"></SidebarToggle>
         <router-link to="/" class="navbar-brand">
-          <img src="../../assets/images/logo.png" alt="POG" />
+          <img
+            style="height: 45px; width: 100px"
+            src="../../assets/images/logo transparent.png"
+            alt="Ability Arena"
+          />
         </router-link>
       </div>
       <ul class="navbar-nav mx-auto flex-row d-none d-lg-flex text-uppercase">
