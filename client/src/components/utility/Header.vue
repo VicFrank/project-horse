@@ -5,8 +5,9 @@
         <SidebarToggle class="navbar-nav mr-1"></SidebarToggle>
         <router-link to="/" class="navbar-brand">
           <img
-            style="height: 45px; width: 100px"
-            src="../../assets/images/logo transparent.png"
+            style="height: 40px"
+            class="ml-2"
+            src="../../assets/images/logo_small.png"
             alt="Ability Arena"
           />
         </router-link>

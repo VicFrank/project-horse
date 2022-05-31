@@ -2,7 +2,7 @@ const { query } = require("./index");
 const games = require("./games");
 
 module.exports = {
-  async getGodsStats(hours = 3600) {
+  async getGodsStats(hours = 720) {
     try {
       const numGames = await games.getNumGames(hours);
 

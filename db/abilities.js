@@ -108,7 +108,7 @@ module.exports = {
       throw error;
     }
   },
-  async getAbilityStats(hours = 9999) {
+  async getAbilityStats(hours = 720) {
     try {
       const abilityFreqs = await getAbilityFreqs(hours);
       const winnerAbilityFreqs = await getWinnerAbilityFreqs(hours);
