@@ -14,6 +14,7 @@ const getAbilityFreqs = async (hours, steamID) => {
         JOIN game_players USING (game_player_id)
         JOIN games USING (game_id)
         WHERE games.created_at > NOW() - $1 * INTERVAL '1 HOUR'
+          AND ranked = true
           ${steamID ? `AND game_players.steam_id = $2` : ""}
         GROUP BY ability_name
         ORDER BY freq DESC
@@ -39,6 +40,7 @@ const getWinnerAbilityFreqs = async (hours, steamID) => {
         JOIN games USING (game_id)
         WHERE games.created_at > NOW() - $1 * INTERVAL '1 HOUR'
           AND game_players.place = 1
+          AND ranked = true
           ${steamID ? `AND game_players.steam_id = $2` : ""}
         GROUP BY ability_name
         ORDER BY freq DESC
@@ -64,6 +66,7 @@ const getTopFourAbilityFreqs = async (hours, steamID) => {
         JOIN games USING (game_id)
         WHERE games.created_at > NOW() - $1 * INTERVAL '1 HOUR'
           AND game_players.place <= 4
+          AND ranked = true
           ${steamID ? `AND game_players.steam_id = $2` : ""}
         GROUP BY ability_name
         ORDER BY freq DESC
@@ -158,9 +161,9 @@ module.exports = {
   },
   async getPlayerAbilityStats(steamID, hours = 720) {
     try {
-      const abilityFreqs = await getAbilityFreqs(hours);
-      const winnerAbilityFreqs = await getWinnerAbilityFreqs(hours);
-      const topFourAbilityFreqs = await getTopFourAbilityFreqs(hours);
+      const abilityFreqs = await getAbilityFreqs(hours, steamID);
+      const winnerAbilityFreqs = await getWinnerAbilityFreqs(hours, steamID);
+      const topFourAbilityFreqs = await getTopFourAbilityFreqs(hours, steamID);
       const abilities = await this.getAbilities();
       const numGames = await players.getNumGames(steamID, hours);
 
