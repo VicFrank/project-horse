@@ -96,7 +96,7 @@ module.exports = {
     }
   },
 
-  async getNumGames(hours, steamID) {
+  async getNumGames(steamID, hours) {
     try {
       const gamesQuery = await query(
         `SELECT COUNT(*) FROM

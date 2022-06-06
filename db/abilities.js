@@ -162,7 +162,7 @@ module.exports = {
       const winnerAbilityFreqs = await getWinnerAbilityFreqs(hours);
       const topFourAbilityFreqs = await getTopFourAbilityFreqs(hours);
       const abilities = await this.getAbilities();
-      const numGames = await players.getNumGames(hours, steamID);
+      const numGames = await players.getNumGames(steamID, hours);
 
       // combine the three arrays
       const combined = abilityFreqs.map((ability) => {
