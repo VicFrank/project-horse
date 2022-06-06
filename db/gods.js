@@ -1,5 +1,6 @@
 const { query } = require("./index");
 const games = require("./games");
+const players = require("./players");
 
 module.exports = {
   async getGodsStats(hours = 720) {
@@ -52,7 +53,7 @@ module.exports = {
 
   async getPlayerGodsStats(steamID, hours = 720) {
     try {
-      const numGames = await games.getNumGames(hours);
+      const numGames = await players.getNumGames(steamID, hours);
 
       const { rows } = await query(
         `
