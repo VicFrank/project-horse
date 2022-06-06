@@ -25,7 +25,7 @@
           </td>
           <td class="text-left">
             <GodImage :god="game.god" :height="60" class="mr-2 ml-2" />
-            {{ game.god }}
+            {{ $t(`gods.${game.god}`) }}
           </td>
           <td>
             {{ getRankString(game.place) }}

@@ -9,7 +9,7 @@
     <template #cell(god)="data">
       <div class="text-left p-2">
         <GodImage :god="data.item.god" :height="60" class="mr-2" />
-        {{ data.item.god }}
+        {{ $t(`gods.${data.item.god}`) }}
       </div>
     </template>
     <template #cell(pick_rate)="data">

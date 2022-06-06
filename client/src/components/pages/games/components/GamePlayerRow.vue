@@ -23,7 +23,7 @@
           <router-link :to="'/players/' + player.steam_id">
             {{ player.username }}
           </router-link>
-          <div class="text-muted">{{ player.god }}</div>
+          <div class="text-muted">{{ $t(`gods.${player.god}`) }}</div>
         </div>
       </div>
     </td>

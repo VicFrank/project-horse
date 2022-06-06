@@ -14,7 +14,9 @@
           :small="true"
           :size="48"
         ></AbilityImage>
-        <span class="ml-2">{{ data.item.icon }}</span>
+        <span class="ml-2">{{
+          $t(`abilities.${data.item.ability_name}`)
+        }}</span>
       </div>
     </template>
     <template #cell(freq)="data">
