@@ -692,3 +692,7 @@ td a:hover {
 .modal-content {
   background-color: #13171d;
 }
+
+.nav-link.active {
+  background-color: black !important;
+}

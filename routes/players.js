@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const players = require("../db/players");
+const abilities = require("../db/abilities");
+const gods = require("../db/gods");
 const quests = require("../db/quests");
 const auth = require("../auth/auth");
 const apicache = require("apicache");
@@ -48,6 +50,30 @@ router.get("/:steamID/stats", async (req, res) => {
     const stats = await players.getStats(steamID);
     if (!stats) return res.status(404).send({ message: "Player not found" });
     if (!auth.isAuthenticatedUser(req)) delete stats.mmr;
+    res.status(200).json(stats);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Server Error" });
+  }
+});
+
+router.get("/:steamID/ability_stats", async (req, res) => {
+  try {
+    const steamID = req.params.steamID;
+    const stats = await abilities.getPlayerAbilityStats(steamID, 9999);
+    if (!stats) return res.status(404).send({ message: "Player not found" });
+    res.status(200).json(stats);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Server Error" });
+  }
+});
+
+router.get("/:steamID/god_stats", async (req, res) => {
+  try {
+    const steamID = req.params.steamID;
+    const stats = await gods.getPlayerGodsStats(steamID, 9999);
+    if (!stats) return res.status(404).send({ message: "Player not found" });
     res.status(200).json(stats);
   } catch (error) {
     console.log(error);

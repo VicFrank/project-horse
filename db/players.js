@@ -82,10 +82,84 @@ module.exports = {
       const player = rows[0];
       if (!player) return null;
 
+      const numGames = await this.getNumTotalNumGames(steamID);
+      const results = await this.getGameResults(steamID);
       const rank = await this.getLeaderboardPosition(player.mmr);
+
       player.rank = rank;
+      player.games = numGames;
+      player.results = results;
 
       return player;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getNumGames(hours, steamID) {
+    try {
+      const gamesQuery = await query(
+        `SELECT COUNT(*) FROM
+        games JOIN game_players USING (game_id)
+        WHERE created_at > NOW() - $1 * INTERVAL '1 HOUR'
+          AND game_players.steam_id = $2`,
+        [hours, steamID]
+      );
+      const numGames = gamesQuery.rows[0].count;
+      return numGames;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getNumTotalNumGames(steamID) {
+    try {
+      const gamesQuery = await query(
+        `SELECT COUNT(*) FROM
+        games JOIN game_players USING (game_id)
+        WHERE ranked = TRUE AND game_players.steam_id = $1`,
+        [steamID]
+      );
+      const numGames = gamesQuery.rows[0].count;
+      return numGames;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getGameResults(steamID) {
+    try {
+      const gamesQuery = await query(
+        `SELECT 
+          count(*) as games,
+          count(*) FILTER (WHERE place = 1) AS first_place,
+          count(*) FILTER (WHERE place = 2) AS second_place,
+          count(*) FILTER (WHERE place = 3) AS third_place,
+          count(*) FILTER (WHERE place = 4) AS fourth_place,
+          count(*) FILTER (WHERE place = 5) AS fifth_place,
+          count(*) FILTER (WHERE place = 6) AS sixth_place,
+          count(*) FILTER (WHERE place = 7) AS seventh_place,
+          count(*) FILTER (WHERE place = 8) AS eighth_place,
+          TRUNC (SUM(place)::decimal / count(*)::decimal, 2) AS avg_place
+        FROM games JOIN game_players USING (game_id)
+        WHERE ranked = TRUE AND game_players.steam_id = $1`,
+        [steamID]
+      );
+      const result = gamesQuery.rows[0];
+      const placements = [
+        result.first_place / result.games,
+        result.second_place / result.games,
+        result.third_place / result.games,
+        result.fourth_place / result.games,
+        result.fifth_place / result.games,
+        result.sixth_place / result.games,
+        result.seventh_place / result.games,
+        result.eighth_place / result.games,
+      ];
+      return {
+        avg_place: result.avg_place,
+        placements,
+      };
     } catch (error) {
       throw error;
     }

@@ -1,8 +1,11 @@
 const { query } = require("./index");
 const games = require("./games");
+const players = require("./players");
 
-const getAbilityFreqs = async (hours) => {
+const getAbilityFreqs = async (hours, steamID) => {
   try {
+    const args = [hours];
+    if (steamID) args.push(steamID);
     const { rows } = await query(
       `
         SELECT ability_name, COUNT(*) AS freq
@@ -11,10 +14,11 @@ const getAbilityFreqs = async (hours) => {
         JOIN game_players USING (game_player_id)
         JOIN games USING (game_id)
         WHERE games.created_at > NOW() - $1 * INTERVAL '1 HOUR'
+          ${steamID ? `AND game_players.steam_id = $2` : ""}
         GROUP BY ability_name
         ORDER BY freq DESC
       `,
-      [hours]
+      args
     );
     return rows;
   } catch (error) {
@@ -22,8 +26,10 @@ const getAbilityFreqs = async (hours) => {
   }
 };
 
-const getWinnerAbilityFreqs = async (hours) => {
+const getWinnerAbilityFreqs = async (hours, steamID) => {
   try {
+    const args = [hours];
+    if (steamID) args.push(steamID);
     const { rows } = await query(
       `
         SELECT ability_name, COUNT(*) AS freq
@@ -33,10 +39,11 @@ const getWinnerAbilityFreqs = async (hours) => {
         JOIN games USING (game_id)
         WHERE games.created_at > NOW() - $1 * INTERVAL '1 HOUR'
           AND game_players.place = 1
+          ${steamID ? `AND game_players.steam_id = $2` : ""}
         GROUP BY ability_name
         ORDER BY freq DESC
       `,
-      [hours]
+      args
     );
     return rows;
   } catch (error) {
@@ -44,8 +51,10 @@ const getWinnerAbilityFreqs = async (hours) => {
   }
 };
 
-const getTopFourAbilityFreqs = async (hours) => {
+const getTopFourAbilityFreqs = async (hours, steamID) => {
   try {
+    const args = [hours];
+    if (steamID) args.push(steamID);
     const { rows } = await query(
       `
         SELECT ability_name, COUNT(*) AS freq
@@ -55,10 +64,11 @@ const getTopFourAbilityFreqs = async (hours) => {
         JOIN games USING (game_id)
         WHERE games.created_at > NOW() - $1 * INTERVAL '1 HOUR'
           AND game_players.place <= 4
+          ${steamID ? `AND game_players.steam_id = $2` : ""}
         GROUP BY ability_name
         ORDER BY freq DESC
       `,
-      [hours]
+      args
     );
     return rows;
   } catch (error) {
@@ -115,6 +125,44 @@ module.exports = {
       const topFourAbilityFreqs = await getTopFourAbilityFreqs(hours);
       const abilities = await this.getAbilities();
       const numGames = await games.getNumGames(hours);
+
+      // combine the three arrays
+      const combined = abilityFreqs.map((ability) => {
+        const icon = abilities.find(
+          (a) => a.ability_name === ability.ability_name
+        ).icon;
+        return {
+          ability_name: ability.ability_name,
+          icon,
+          numGames,
+          freq: Number(ability.freq),
+          winner_freq: Number(
+            winnerAbilityFreqs.find(
+              (winnerAbility) =>
+                winnerAbility.ability_name === ability.ability_name
+            )?.freq ?? 0
+          ),
+          top_four_freq: Number(
+            topFourAbilityFreqs.find(
+              (topFourAbility) =>
+                topFourAbility.ability_name === ability.ability_name
+            )?.freq ?? 0
+          ),
+        };
+      });
+
+      return combined;
+    } catch (error) {
+      throw error;
+    }
+  },
+  async getPlayerAbilityStats(steamID, hours = 720) {
+    try {
+      const abilityFreqs = await getAbilityFreqs(hours);
+      const winnerAbilityFreqs = await getWinnerAbilityFreqs(hours);
+      const topFourAbilityFreqs = await getTopFourAbilityFreqs(hours);
+      const abilities = await this.getAbilities();
+      const numGames = await players.getNumGames(hours, steamID);
 
       // combine the three arrays
       const combined = abilityFreqs.map((ability) => {
