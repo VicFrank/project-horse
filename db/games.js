@@ -1,5 +1,8 @@
 const { query } = require("./index");
-const { getMatchRatingChange } = require("../mmr/mmr");
+const {
+  getMatchRatingChange,
+  getMatchLadderRatingChange,
+} = require("../mmr/mmr");
 const Players = require("./players");
 
 module.exports = {
@@ -16,6 +19,7 @@ module.exports = {
       const player = await Players.upsertPlayer(steamID, username);
       const currentMMR = player.mmr;
       let mmrChange = 0;
+      let ladderRatingChange = 0;
 
       const { players } = postGamePlayerData;
       if (ranked && players) {
@@ -26,6 +30,7 @@ module.exports = {
           (p) => p.hasLost === true && p.steamID !== steamID
         );
         mmrChange = getMatchRatingChange(currentMMR, winners, losers);
+        ladderRatingChange = getMatchLadderRatingChange(currentMMR, place);
       }
 
       // prettier-ignore
@@ -39,6 +44,7 @@ module.exports = {
       const gamePlayerId = gamePlayerRows[0].game_player_id;
 
       await Players.modifyMMR(steamID, mmrChange);
+      await Players.modifyLadderRating(steamID, ladderRatingChange);
 
       for (const hero of heroes) {
         const { rows: heroRows } = await query(

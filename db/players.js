@@ -341,10 +341,10 @@ module.exports = {
   async modifyCoins(steamID, coins) {
     if (coins === 0) return;
     try {
-      await query(
-        `UPDATE players SET coins = coins + $1 WHERE steam_id = $2 RETURNING *`,
-        [coins, steamID]
-      );
+      await query(`UPDATE players SET coins = coins + $1 WHERE steam_id = $2`, [
+        coins,
+        steamID,
+      ]);
     } catch (error) {
       throw error;
     }
@@ -353,9 +353,21 @@ module.exports = {
   async modifyMMR(steamID, mmr) {
     if (mmr === 0) return;
     try {
+      await query(`UPDATE players SET mmr = mmr + $1 WHERE steam_id = $2`, [
+        mmr,
+        steamID,
+      ]);
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async modifyLadderRating(steamID, ratingChange) {
+    if (ratingChange === 0) return;
+    try {
       await query(
-        `UPDATE players SET mmr = mmr + $1 WHERE steam_id = $2 RETURNING *`,
-        [mmr, steamID]
+        `UPDATE players SET ladder_mmr = ladder_mmr + $1 WHERE steam_id = $2`,
+        [ratingChange, steamID]
       );
     } catch (error) {
       throw error;

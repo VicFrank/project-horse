@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS players (
   username TEXT,
   profile_picture TEXT,
   mmr INTEGER DEFAULT 1000,
+  ladder_mmr INTEGER DEFAULT 0,
   coins INTEGER DEFAULT 0 CHECK (coins >= 0),
   user_type TEXT DEFAULT 'USER',
   patreon_level INTEGER DEFAULT 0,
