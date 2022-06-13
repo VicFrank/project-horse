@@ -19,6 +19,8 @@ module.exports = {
       const player = await Players.upsertPlayer(steamID, username);
       const currentMMR = player.mmr;
       let mmrChange = 0;
+      let xpChange = 0;
+      let coinsChange = 0;
       let ladderRatingChange = 0;
 
       const { players } = postGamePlayerData;
@@ -33,13 +35,20 @@ module.exports = {
         ladderRatingChange = getMatchLadderRatingChange(currentMMR, place);
       }
 
+      if (ranked) {
+        const { xp, coins } = await Players.givePostGameRewards(steamID, place);
+        xpChange = xp;
+        coinsChange = coins;
+        await Players.addGameQuestProgress(postGamePlayerData);
+      }
+
       // prettier-ignore
       const { rows: gamePlayerRows } = await query(
         `INSERT INTO game_players
-         (game_id, steam_id, rounds, place, end_time, mmr, mmr_change, team, wins, losses, god)
+         (game_id, steam_id, rounds, place, end_time, mmr, mmr_change, team, wins, losses, god, xp_change, coins_change)
          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
          RETURNING *`,
-        [matchID, steamID, rounds, place, endTime, currentMMR, mmrChange, team, wins, losses, god]
+        [matchID, steamID, rounds, place, endTime, currentMMR, mmrChange, team, wins, losses, god, xpChange, coinsChange]
       );
       const gamePlayerId = gamePlayerRows[0].game_player_id;
 
@@ -69,7 +78,8 @@ module.exports = {
         }
       }
 
-      if (ranked) await Players.addGameQuestProgress(postGamePlayerData);
+      // async but we don't need to await
+      players.tryCompleteLoginQuest(steamID);
 
       return { matchID, steamID, mmrChange };
     } catch (error) {

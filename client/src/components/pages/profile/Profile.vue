@@ -2,6 +2,8 @@
   <div>
     <h1 class="page-title">Profile</h1>
 
+    <LoginQuests class="mb-5"></LoginQuests>
+
     <!-- Daily Quests -->
     <DailyQuests class="mb-5"></DailyQuests>
 
@@ -22,11 +24,13 @@
 
 <script>
 import DailyQuests from "../quests/DailyQuests.vue";
+import LoginQuests from "../quests/LoginQuests.vue";
 import PlayerGamesList from "../player/PlayerGamesList.vue";
 
 export default {
   components: {
     DailyQuests,
+    LoginQuests,
     PlayerGamesList,
   },
 

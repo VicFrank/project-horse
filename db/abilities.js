@@ -197,4 +197,23 @@ module.exports = {
       throw error;
     }
   },
+  async getGabenWinStats() {
+    try {
+      const { rows } = await query(
+        `
+        SELECT ability_name, count(*)
+        FROM games
+        JOIN game_players USING (game_id)
+        JOIN game_player_heroes USING (game_player_id)
+        JOIN hero_abilities USING (game_player_hero_id)
+        WHERE place = 1 and ability_level = 9
+        GROUP BY ability_name
+        ORDER BY count(*) desc;
+      `
+      );
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
 };

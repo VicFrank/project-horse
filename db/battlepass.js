@@ -1,5 +1,6 @@
 const { query, pool } = require("./index");
 const tx = require(`pg-tx`);
+const Cosmetics = require("./cosmetics");
 
 module.exports = {
   async createBattlePass(levels) {
@@ -152,17 +153,45 @@ module.exports = {
         `SELECT coins_reward FROM battle_pass_levels WHERE bp_level >= $1 AND bp_level <= $2`,
         [minLevel, maxLevel]
       );
-      const coins = rows.reduce((acc, cur) => {
+      let coins = rows.reduce((acc, cur) => {
         return acc + cur.coins_reward;
       }, 0);
 
-      const { rows: cosmetics } = await query(
+      let { rows: cosmetics } = await query(
         `
         SELECT cosmetic_id, amount
         FROM battle_pass_cosmetic_rewards
         WHERE bp_level >= $1 AND bp_level <= $2`,
         [minLevel, maxLevel]
       );
+
+      if (maxLevel > 50) {
+        const goldChest = await Cosmetics.getCosmeticByName("chest_gold");
+        const basicChest = await Cosmetics.getCosmeticByName("chest_basic");
+        for (let i = 51; i <= maxLevel; i++) {
+          if (i === 100) {
+            const diamondGamblerAvatar = await Cosmetics.getCosmeticByName(
+              "avatar_gambler_diamond"
+            );
+            cosmetics.push({
+              cosmetic_id: diamondGamblerAvatar.cosmetic_id,
+              amount: 1,
+            });
+          } else if (i === 1000) {
+            const gabenAvatar = await Cosmetics.getCosmeticByName(
+              "avatar_gaben"
+            );
+            cosmetics.push({
+              cosmetic_id: gabenAvatar.cosmetic_id,
+              amount: 1,
+            });
+          } else if (i % 10 === 0) {
+            cosmetics.push({ cosmetic_id: goldChest.cosmetic_id, amount: 1 });
+          } else if (i % 5 === 0) {
+            cosmetics.push({ cosmetic_id: basicChest.cosmetic_id, amount: 1 });
+          }
+        }
+      }
 
       return { coins, cosmetics };
     } catch (error) {

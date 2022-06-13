@@ -3,6 +3,7 @@ const Cosmetics = require("./cosmetics");
 const Logs = require("./logs");
 const Quests = require("./quests");
 const BattlePasses = require("./battlepass");
+const quests = require("./quests");
 
 module.exports = {
   // --------------------------------------------------
@@ -24,6 +25,16 @@ module.exports = {
         [limit, offset]
       );
       return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  // This is just for doing bulk operations over all steam ids
+  async getAllSteamIds() {
+    try {
+      const { rows } = await query(`SELECT steam_id from players`);
+      return rows.map((row) => row.steam_id);
     } catch (error) {
       throw error;
     }
@@ -288,7 +299,7 @@ module.exports = {
       );
 
       await this.createInitialDailyQuests(steamID, 3);
-      // await this.createInitialWeeklyQuests(steamID, 3);
+      await this.resetLoginQuests(steamID);
       await this.initializeAchievements(steamID);
 
       const activeBattlePass = await BattlePasses.getActiveBattlePass();
@@ -534,7 +545,6 @@ module.exports = {
 
   /**
    * Awards battle pass experience to a player after a game
-   * (capped) at (20 wins of xp) per day
    *
    * Rewards:
    * 1st: 300 XP | ?? Coins
@@ -816,7 +826,6 @@ module.exports = {
 
       const cosmeticName = cosmetic.cosmetic_name;
 
-      // TODO: Get the amount of xp the item should give
       let xp = 0;
       switch (cosmeticName) {
         case "get_xp_250":
@@ -1547,6 +1556,123 @@ module.exports = {
           break;
       }
       await this.incrementQuestProgress(steamID, questID, progress);
+    }
+  },
+
+  //////////////////////////////////////////////////////////////////////////////
+  // Player login quests (aka "weekly quests")
+  //////////////////////////////////////////////////////////////////////////////
+
+  async resetLoginQuests(steamID) {
+    try {
+      await query(`DELETE FROM player_login_quests WHERE steam_id = $1`, [
+        steamID,
+      ]);
+      const loginQuests = await quests.getLoginQuests();
+
+      for (const quest of loginQuests) {
+        await query(
+          `INSERT INTO player_login_quests (steam_id, login_quest_id) VALUES ($1, $2)`,
+          [steamID, quest.login_quest_id]
+        );
+      }
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getLoginQuests(steamID) {
+    try {
+      const { rows } = await query(
+        `
+        SELECT * FROM player_login_quests
+        JOIN login_quests
+        USING (login_quest_id)
+        WHERE steam_id = $1
+        ORDER BY day`,
+        [steamID]
+      );
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getLoginQuest(steamID, loginID) {
+    try {
+      const { rows } = await query(
+        `
+        SELECT * FROM player_login_quests
+        JOIN login_quests
+        USING (login_quest_id)
+        WHERE steam_id = $1 AND login_quest_id = $2`,
+        [steamID, loginID]
+      );
+      return rows[0];
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getDaysSinceLoginQuestClaimed(steamID) {
+    try {
+      const { rows } = await query(
+        `
+        SELECT
+        (NOW()::date - last_login_quest_claimed::date) as days_since_last_claim
+        FROM players
+        WHERE steam_id = $1`,
+        [steamID]
+      );
+      return rows[0].days_since_last_claim;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async claimLoginQuest(steamID, loginQuestID) {
+    try {
+      const quest = await this.getLoginQuest(steamID, loginQuestID);
+      if (!quest.completed) return false;
+      await query(
+        `UPDATE player_login_quests SET claimed = TRUE WHERE steam_id = $1 AND login_quest_id = $2`,
+        [steamID, loginQuestID]
+      );
+      const { coin_reward, xp_reward } = quest;
+
+      await this.modifyCoins(steamID, coin_reward);
+      await this.addBattlePassXp(steamID, xp_reward);
+
+      await query(
+        `UPDATE players SET last_login_quest_claimed = NOW() WHERE steam_id = $1`,
+        [steamID]
+      );
+
+      return true;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async tryCompleteLoginQuest(steamID) {
+    try {
+      const daysSinceClaimed = await this.getDaysSinceLoginQuestClaimed(
+        steamID
+      );
+      if (daysSinceClaimed === 0) return false;
+
+      const loginQuests = await this.getLoginQuests(steamID);
+      const loginQuest = loginQuests.find((quest) => !quest.completed);
+      if (!loginQuest) return false;
+
+      await query(
+        `UPDATE player_login_quests SET completed = TRUE WHERE steam_id = $1 AND login_quest_id = $2`,
+        [steamID, loginQuest.login_quest_id]
+      );
+
+      return true;
+    } catch (error) {
+      throw error;
     }
   },
 };

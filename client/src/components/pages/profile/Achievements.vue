@@ -119,7 +119,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .achievement {
   position: relative;
   margin: 0.75em auto;
@@ -154,31 +154,5 @@ export default {
 
 .rewards {
   width: 25%;
-}
-
-.quest-xp-text {
-  background-image: linear-gradient(
-    to bottom,
-    #8f6b29 11%,
-    #fde08d 46%,
-    #df9f28 83%
-  );
-  font-size: 20px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.pog-text {
-  background-image: linear-gradient(to bottom, #53b5e7 11%, #b3b9bf 83%);
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: 0.5px;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 </style>

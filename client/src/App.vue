@@ -52,7 +52,7 @@ export default {
     this.unwatch = this.$store.watch(
       (state, getters) => getters.bpLevel,
       (newValue, oldValue) => {
-        if (newValue > oldValue) {
+        if (oldValue && newValue > oldValue) {
           this.$bvToast.toast(`Battle Pass leveled up to level ${newValue}!`, {
             title: `Notification`,
             toaster: "b-toaster-bottom-left",

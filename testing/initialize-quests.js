@@ -1,8 +1,10 @@
 const quests = require("../db/quests");
+const players = require("../db/players");
 
 const achievements = require("./data/quests/achievements");
 const dailyQuests = require("./data/quests/daily_quests");
 // const weeklyQuests = require("./data/quests/weekly_quests");
+const loginQuests = require("./data/quests/login_quests");
 
 async function InitializeQuests() {
   try {
@@ -19,6 +21,23 @@ async function InitializeQuests() {
   }
 }
 
+async function InitializeLoginQuests() {
+  try {
+    for (const quest of loginQuests) {
+      const { day, coins, xp } = quest;
+      await quests.createLoginQuest(day, coins, xp);
+    }
+    const steamIDs = await players.getAllSteamIds();
+    for (const steamID of steamIDs) {
+      await players.resetLoginQuests(steamID);
+    }
+    console.log("Login quests initialized");
+  } catch (error) {
+    throw error;
+  }
+}
+
 (async function () {
-  await InitializeQuests();
+  // await InitializeQuests();
+  await InitializeLoginQuests();
 })();

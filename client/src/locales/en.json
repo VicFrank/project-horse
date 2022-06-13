@@ -212,7 +212,9 @@
     "donkeyAghanim": "Donkey Aghanim",
     "gambler": "Gambler",
     "phantomAssassin": "Phantom Assassin",
-    "alchemist": "Alchemist"
+    "alchemist": "Alchemist",
+    "kanna": "Kanna",
+    "crystalMaiden": "Crystal Maiden"
   },
   "abilities": {
     "custom_abaddon_aphotic_shield": "Aphotic Shield",

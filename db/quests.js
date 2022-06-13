@@ -100,7 +100,6 @@ module.exports = {
   },
 
   async bulkCreateQuests(quests) {
-    // TODO: Add transaction
     try {
       for (const quest of quests) {
         await this.createQuest(quest);
@@ -234,6 +233,37 @@ module.exports = {
       }
 
       return activeAchievements;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  //////////////////////////////////////////////////////////////////////////////
+  // Login Quests (aka "Weekly Quests")
+  // These are quests that you complete simply by claiming them each day
+  //////////////////////////////////////////////////////////////////////////////
+
+  async createLoginQuest(day, coins, xp) {
+    try {
+      const { rows } = await query(
+        `INSERT INTO login_quests (day, coin_reward, xp_reward)
+        VALUES ($1, $2, $3)
+        RETURNING *
+        `,
+        [day, coins, xp]
+      );
+      return rows[0];
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getLoginQuests() {
+    try {
+      const { rows } = await query(
+        `SELECT * FROM login_quests ORDER BY day ASC`
+      );
+      return rows;
     } catch (error) {
       throw error;
     }

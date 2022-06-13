@@ -14,6 +14,10 @@ DROP TABLE IF EXISTS player_battle_pass CASCADE;
 DROP TABLE IF EXISTS quests CASCADE;
 DROP TABLE IF EXISTS player_quests CASCADE;
 
+DROP TABLE IF EXISTS login_quests;
+DROP TABLE IF EXISTS player_login_quests;
+DROP TABLE IF EXISTS player_login_quest_status;
+
 -- DROP TABLE IF EXISTS "session" CASCADE;
 -- CREATE TABLE IF NOT EXISTS "session" (
 --   "sid" varchar NOT NULL COLLATE "default",
@@ -35,9 +39,8 @@ CREATE TABLE IF NOT EXISTS players (
   coins INTEGER DEFAULT 0 CHECK (coins >= 0),
   user_type TEXT DEFAULT 'USER',
   patreon_level INTEGER DEFAULT 0,
-
   plus_expiration TIMESTAMPTZ,
-
+  last_login_quest_claimed TIMESTAMPTZ,
   created_at TIMESTAMPTZ DEFAULT Now()
 );
 CREATE INDEX ix_players_mmr ON players (mmr);
@@ -206,6 +209,23 @@ CREATE TABLE IF NOT EXISTS player_quests (
   quest_index INTEGER,
 
   CONSTRAINT player_quests_pkey PRIMARY KEY (steam_id, quest_id)
+);
+
+-- Quests that you claim every day you login
+CREATE TABLE IF NOT EXISTS login_quests (
+  login_quest_id SERIAL PRIMARY KEY,
+  day INTEGER NOT NULL UNIQUE,
+  coin_reward INTEGER DEFAULT 0,
+  xp_reward INTEGER DEFAULT 0
+);
+
+-- Every day, if you play a game, or login to the site, you complete
+-- the quest for that 24 hour period
+CREATE TABLE IF NOT EXISTS player_login_quests (
+  steam_id TEXT REFERENCES players (steam_id) ON UPDATE CASCADE,
+  login_quest_id INTEGER REFERENCES login_quests (login_quest_id) ON UPDATE CASCADE,
+  claimed BOOLEAN DEFAULT FALSE,
+  completed BOOLEAN DEFAULT FALSE
 );
 
 DROP TABLE IF EXISTS drop_type_rewards;

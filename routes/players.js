@@ -193,6 +193,45 @@ router.post("/:steamID/achievements/claim", auth.userAuth, async (req, res) => {
   }
 });
 
+router.get("/:steamID/login_quests", async (req, res) => {
+  try {
+    const steamID = req.params.steamID;
+    const quests = await players.getLoginQuests(steamID);
+    res.status(200).json(quests);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Server Error" });
+  }
+});
+
+router.post(
+  "/:steamID/login_quests/try_complete",
+  auth.userAuth,
+  async (req, res) => {
+    try {
+      const steamID = req.params.steamID;
+      const completed = await players.tryCompleteLoginQuest(steamID);
+      res.status(200).json(completed);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({ error: error.toString() });
+    }
+  }
+);
+
+// /api/players/:steamID/login_quests/claim?questID=:questid
+router.post("/:steamID/login_quests/claim", auth.userAuth, async (req, res) => {
+  try {
+    const steamID = req.params.steamID;
+    const questID = req.query.questID;
+    const completed = await players.claimLoginQuest(steamID, questID);
+    res.status(200).json(completed);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ error: error.toString() });
+  }
+});
+
 router.post("/:steamID/transaction", auth.adminAuth, async (req, res) => {
   try {
     const steamID = req.params.steamID;

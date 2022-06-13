@@ -1,5 +1,4 @@
 <template>
-  <!-- TODO - Make rows collapsible to view detailed hero/ability stats -->
   <tr>
     <td class="col1">
       <div>{{ getRankString(player.place) }}</div>

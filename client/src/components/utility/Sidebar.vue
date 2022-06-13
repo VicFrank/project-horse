@@ -182,7 +182,6 @@ export default {
   },
   computed: {
     borderStyle() {
-      // TODO: Different style based on equipped avatar border
       return {
         borderStyle: "solid",
         borderColor: "white",
