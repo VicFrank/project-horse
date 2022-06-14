@@ -122,7 +122,7 @@
             @click="setItem(cosmetic)"
             >x</b-button
           >
-          {{ cosmetic.cosmetic_name }}
+          {{ $t(`cosmetics.${cosmetic.cosmetic_name}`) }}
           <span v-if="cosmetic.equipped">: Equipped</span>
         </b-list-group-item>
       </b-card>

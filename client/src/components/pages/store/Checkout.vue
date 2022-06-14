@@ -2,17 +2,19 @@
   <div>
     <h1 class="page-title" v-t="'store.checkout_title'"></h1>
     <div class="container text-center">
-      <b-button to="/store" class="mb-3">{{
-        $t("store.back_to_store")
-      }}</b-button>
-
-      <div>
-        Hi, this is still a work in progress, don't actually try to buy anything
-        lmao
+      <div class="item-card">
+        <div class="item-card-img">
+          <img
+            v-bind:src="cosmeticImageSrc(item)"
+            :alt="item.cosmetic_name"
+            class="preview-image"
+          />
+        </div>
+        <div class="item-card-body">
+          <div class="mb-2">{{ $t(`cosmetics.${item.cosmetic_name}`) }}</div>
+          <div class="text-muted">${{ item.cost_usd }}</div>
+        </div>
       </div>
-
-      <h3>{{ item.cosmetic_name }}</h3>
-      <div class="text-muted">${{ item.cost_usd }}</div>
 
       <template v-if="loggedIn">
         <div v-if="loading" class="d-flex justify-content-center mb-3">
@@ -39,6 +41,12 @@
       <template v-else>
         <LoginButton></LoginButton>
       </template>
+    </div>
+
+    <div class="text-center mt-4">
+      <b-button class="mx-auto" to="/store">{{
+        $t("store.back_to_store")
+      }}</b-button>
     </div>
   </div>
 </template>
@@ -83,6 +91,19 @@ export default {
       this.error = error;
       this.showError = true;
     },
+    cosmeticImageSrc(cosmetic) {
+      const { cosmetic_name, cosmetic_type } = cosmetic;
+      const includedTypes = [
+        "Card Frame",
+        "Chest",
+        "Finisher",
+        "Consumable",
+        "Game Consumable",
+      ];
+      if (includedTypes.includes(cosmetic_type))
+        return require(`../../../assets/images/cosmetics/${cosmetic_name}.png`);
+      else return require(`../../../assets/images/cosmetics/placeholder.png`);
+    },
   },
 
   created() {
@@ -106,5 +127,33 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.preview-image {
+  width: 100%;
+}
+
+.item-card {
+  width: 300px;
+  display: flex;
+  align-items: center;
+
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.item-card-img {
+  width: 200px;
+  height: auto;
+}
+
+.item-card-body {
+  width: 100%;
+  text-align: right;
+  color: #333;
+}
 </style>

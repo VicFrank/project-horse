@@ -15,7 +15,8 @@
         <div v-else>
           <div>
             {{ $t("store.payment_success") }}
-            {{ item.cosmetic_name }} {{ $t("store.added_to_account") }}
+            {{ $t(`cosmetics.${item.cosmetic_name}`) }}
+            {{ $t("store.added_to_account") }}
           </div>
           <b-button to="store" variant="primary" class="mt-3">{{
             $t("store.back_to_store")

@@ -60,7 +60,7 @@
                 </div>
                 <div class="cosmetic__descr">
                   <div class="cosmetic__name">
-                    {{ cosmetic.cosmetic_name }}
+                    {{ $t(`cosmetics.${cosmetic.cosmetic_name}`) }}
                   </div>
                   <div class="text-muted">
                     {{ cosmetic.cosmetic_type }}

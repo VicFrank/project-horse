@@ -61,7 +61,7 @@
               </div>
               <div class="cosmetic__descr">
                 <div class="cosmetic__name mb-1">
-                  {{ cosmetic.cosmetic_name }}
+                  {{ $t(`cosmetics.${cosmetic.cosmetic_name}`) }}
                 </div>
                 <div class="text-muted">
                   {{ cosmetic.cosmetic_type }}
@@ -84,7 +84,7 @@
               hide-footer
             >
               <p class="text-center h4">
-                {{ cosmetic.cosmetic_name }}
+                {{ $t(`cosmetics.${cosmetic.cosmetic_name}`) }}
               </p>
               <div class="text-center text-muted mb-3">
                 {{ cosmetic.cosmetic_type }}

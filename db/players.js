@@ -546,15 +546,6 @@ module.exports = {
   /**
    * Awards battle pass experience to a player after a game
    *
-   * Rewards:
-   * 1st: 300 XP | ?? Coins
-   * 2nd: 180 XP | ?? Coins
-   * 3rd: 120 XP | ?? Coins
-   * 4th: 90 XP  | ?? Coins
-   * 5th: 60 XP  | ?? Coins
-   * 6th: 40 XP  | ?? Coins
-   * 7th: 20 XP  | ?? Coins
-   * 8th: 10 XP  | ?? Coins
    * @param {string} steamID
    * @param {number} placement
    * @param {number} bonusMultiplier
@@ -562,14 +553,14 @@ module.exports = {
   async givePostGameRewards(steamID, placement) {
     try {
       const rewards = {
-        1: { xp: 300, coins: 0 },
-        2: { xp: 180, coins: 0 },
-        3: { xp: 120, coins: 0 },
-        4: { xp: 90, coins: 0 },
-        5: { xp: 60, coins: 0 },
-        6: { xp: 40, coins: 0 },
-        7: { xp: 20, coins: 0 },
-        8: { xp: 10, coins: 0 },
+        1: { xp: 300, coins: 50 },
+        2: { xp: 180, coins: 30 },
+        3: { xp: 120, coins: 20 },
+        4: { xp: 90, coins: 15 },
+        5: { xp: 60, coins: 10 },
+        6: { xp: 40, coins: 7 },
+        7: { xp: 20, coins: 4 },
+        8: { xp: 10, coins: 2 },
       };
 
       const reward = rewards[placement];

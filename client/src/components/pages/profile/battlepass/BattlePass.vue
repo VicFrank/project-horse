@@ -37,7 +37,9 @@
                     hide-header
                     hide-footer
                   >
-                    <h2 class="mb-2 text-center">{{ getRewardItem(i) }}</h2>
+                    <h2 class="mb-2 text-center">
+                      {{ getTranslatedItemName(i) }}
+                    </h2>
 
                     <div class="text-center">
                       <div>
@@ -95,6 +97,11 @@ export default {
     getRewardItem(level) {
       const reward = this.getRewards(level)?.cosmetic_name;
       return reward;
+    },
+    getTranslatedItemName(level) {
+      const name = this.getRewards(level)?.cosmetic_name;
+      const translationString = `cosmetics.${name}`;
+      return this.$i18n.t(translationString);
     },
     getLevelTotalXP(level) {
       if (!this.getRewards(level)) return null;

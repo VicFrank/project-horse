@@ -23,8 +23,9 @@ export default {
   },
   methods: {
     buy() {
+      const translationString = `cosmetics.${this.cosmetic.cosmetic_name}`;
       this.$bvToast.toast(
-        `Added ${this.cosmetic.cosmetic_name} to your armory`,
+        `Added ${this.$i18n.t(translationString)} to your armory`,
         {
           title: `Notification`,
           toaster: "b-toaster-bottom-left",

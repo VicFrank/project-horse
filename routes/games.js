@@ -26,6 +26,7 @@ router.get("/", async (req, res) => {
 
 router.post("/players", auth.adminAuth, async (req, res) => {
   const { data } = req.body;
+  console.log(data);
   try {
     const parsedData = JSON.parse(data);
     const gameID = parsedData.matchID;
@@ -41,6 +42,7 @@ router.post("/players", auth.adminAuth, async (req, res) => {
 
 router.post("/", auth.adminAuth, async (req, res) => {
   const { data } = req.body;
+  console.log(data);
   try {
     const parsedData = JSON.parse(data);
     const gameID = parsedData.matchID;

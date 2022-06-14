@@ -20,7 +20,7 @@
           :key="item.cosmetic_id"
           class="text-center mb-2"
         >
-          <div class="mb-2">{{ item.cosmetic_name }}</div>
+          <div class="mb-2">{{ $t(`cosmetics.${item.cosmetic_name}`) }}</div>
           <img
             class="reward-image mb-1"
             v-bind:src="cosmeticImageSrc(item)"
