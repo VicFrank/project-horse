@@ -46,7 +46,7 @@ module.exports = {
       const { rows: gamePlayerRows } = await query(
         `INSERT INTO game_players
          (game_id, steam_id, rounds, place, end_time, mmr, mmr_change, team, wins, losses, god, xp_change, coins_change)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
          RETURNING *`,
         [matchID, steamID, rounds, place, endTime, currentMMR, mmrChange, team, wins, losses, god, xpChange, coinsChange]
       );
@@ -79,7 +79,7 @@ module.exports = {
       }
 
       // async but we don't need to await
-      players.tryCompleteLoginQuest(steamID);
+      Players.tryCompleteLoginQuest(steamID);
 
       return { matchID, steamID, mmrChange };
     } catch (error) {

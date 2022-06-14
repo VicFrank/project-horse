@@ -49,6 +49,19 @@ module.exports = {
     }
   },
 
+  async getCosmeticPrice(cosmeticID) {
+    try {
+      const { rows } = await query(
+        `SELECT cost_usd FROM cosmetics WHERE cosmetic_id = $1`,
+        [cosmeticID]
+      );
+      const item = rows[0];
+      return item?.cost_usd;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async exists(cosmeticName) {
     try {
       const { rows } = await query(

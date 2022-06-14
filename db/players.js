@@ -573,7 +573,7 @@ module.exports = {
         xp,
       });
 
-      await this.addBattlePassXp(steamID, reward);
+      await this.addBattlePassXp(steamID, xp);
       await this.modifyCoins(steamID, coins);
 
       return reward;

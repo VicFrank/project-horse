@@ -51,7 +51,7 @@ router.post("/paypal/:steamID", auth.userAuth, async (req, res) => {
     // make sure this is a valid payment
     // this returns a float, so round
     const paidAmount = Math.floor(order.result.purchase_units[0].amount.value);
-    const itemData = await cosmetics.getItemPrice(itemID);
+    const itemData = await cosmetics.getCosmeticPrice(itemID);
     const { cost_usd, reward, item_type } = itemData;
 
     if (!itemData) return res.status(400).send({ message: "Invalid ItemID" });
@@ -178,7 +178,7 @@ async function stripePaymentIntentSucceeded(intent) {
 
   // Handle payments purchasing a specific item
   if (itemID) {
-    const itemData = await cosmetics.getItemPrice(itemID);
+    const itemData = await cosmetics.getCosmeticPrice(itemID);
     const { item_type, reward } = itemData;
 
     try {
@@ -201,7 +201,7 @@ async function stripeChargeSucceeded(intent) {
 
   // Handle payments purchasing a specific item
   if (itemID) {
-    const itemData = await cosmetics.getItemPrice(itemID);
+    const itemData = await cosmetics.getCosmeticPrice(itemID);
     const steamID = intent.metadata.steamID;
     const { item_type, reward } = itemData;
 
@@ -272,7 +272,7 @@ async function handleStripeSubscription(session) {
 }
 
 async function isValidStripeTransaction(itemID, amount) {
-  const itemData = await cosmetics.getItemPrice(itemID);
+  const itemData = await cosmetics.getCosmeticPrice(itemID);
   const { cost_usd } = itemData;
 
   if (!itemData || amount / 100 != cost_usd) return false;
