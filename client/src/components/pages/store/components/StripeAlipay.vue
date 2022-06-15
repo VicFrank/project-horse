@@ -34,12 +34,12 @@ export default {
         amount: this.item.cost_usd * 100,
         currency: "usd",
         metadata: {
-          itemID: this.item.item_id,
+          itemID: this.item.cosmetic_id,
           steamID: this.$store.state.auth.userSteamID,
         },
         redirect: {
-          // return_url: `https://www.abilityarena.com/alipay_payment?item_id=${this.item.item_id}`
-          return_url: `http://localhost:8080/alipay_payment?item_id=${this.item.item_id}`,
+          // return_url: `https://www.abilityarena.com/alipay_payment?item_id=${this.item.cosmetic_id}`
+          return_url: `http://localhost:8080/alipay_payment?item_id=${this.item.cosmetic_id}`,
         },
       })
       .then((result) => {

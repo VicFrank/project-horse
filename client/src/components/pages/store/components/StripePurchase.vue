@@ -9,6 +9,7 @@
     >
       {{ $t("store.pay_with_stripe") }}
       <b-spinner
+        small
         v-if="awaitingPayment"
         :label="$t('store.loading')"
       ></b-spinner>
@@ -37,7 +38,9 @@ export default {
   }),
 
   async created() {
-    const stripe = window.Stripe(this.keys.dev);
+    const isDev = window.webpackHotUpdate;
+    const key = isDev ? this.keys.dev : this.keys.prod;
+    const stripe = window.Stripe(key);
     this.stripe = stripe;
     const elements = stripe.elements();
     this.paymentIntent = await this.createIntent();

@@ -50,13 +50,13 @@ router.post("/paypal/:steamID", auth.userAuth, async (req, res) => {
 
     // make sure this is a valid payment
     // this returns a float, so round
-    const paidAmount = Math.floor(order.result.purchase_units[0].amount.value);
-    const itemData = await cosmetics.getCosmeticPrice(itemID);
-    const { cost_usd, reward, item_type } = itemData;
+    const paidAmount = order.result.purchase_units[0].amount.value;
+    const itemData = await cosmetics.getCosmetic(itemID);
+    const { cost_usd } = itemData;
 
     if (!itemData) return res.status(400).send({ message: "Invalid ItemID" });
-    if (paidAmount !== cost_usd)
-      return res.status(400).send({ message: "Invalid Payment" });
+    if (paidAmount != cost_usd)
+      return res.status(400).send({ message: "Invalid Payment Amount" });
 
     // Call PayPal to capture the order
     request = new checkoutNodeJssdk.orders.OrdersCaptureRequest(orderID);
@@ -71,7 +71,8 @@ router.post("/paypal/:steamID", auth.userAuth, async (req, res) => {
       return res.send(500);
     }
 
-    await players.realMoneyPurchase(steamID, item_type, reward);
+    const transaction = { items: { [itemID]: 1 } };
+    await players.doItemTransaction(steamID, transaction);
 
     res.status(200).send({ message: `Payment Success` });
   } catch (error) {
@@ -175,15 +176,14 @@ router.post("/stripe/intents", async (req, res) => {
 // because apparently in production the charge succeeded webhook was not working
 async function stripePaymentIntentSucceeded(intent) {
   const { steamID, itemID } = intent.metadata;
+  console.log("stripe payment intent succeeded", steamID, itemID);
 
   // Handle payments purchasing a specific item
   if (itemID) {
-    const itemData = await cosmetics.getCosmeticPrice(itemID);
-    const { item_type, reward } = itemData;
-
     try {
       await logs.addTransactionLog(steamID, "stripe", { intent });
-      await players.realMoneyPurchase(steamID, item_type, reward);
+      const transaction = { items: { [itemID]: 1 } };
+      await players.doItemTransaction(steamID, transaction);
     } catch (error) {
       console.log(error);
     }
@@ -201,13 +201,13 @@ async function stripeChargeSucceeded(intent) {
 
   // Handle payments purchasing a specific item
   if (itemID) {
-    const itemData = await cosmetics.getCosmeticPrice(itemID);
     const steamID = intent.metadata.steamID;
-    const { item_type, reward } = itemData;
+    console.log("stripe charge succeeded", steamID, itemID);
 
     try {
       await logs.addTransactionLog(steamID, "stripe", { intent });
-      await players.realMoneyPurchase(steamID, item_type, reward);
+      const transaction = { items: { [itemID]: 1 } };
+      await players.doItemTransaction(steamID, transaction);
     } catch (error) {
       console.log(error);
     }
@@ -272,7 +272,7 @@ async function handleStripeSubscription(session) {
 }
 
 async function isValidStripeTransaction(itemID, amount) {
-  const itemData = await cosmetics.getCosmeticPrice(itemID);
+  const itemData = await cosmetics.getCosmetic(itemID);
   const { cost_usd } = itemData;
 
   if (!itemData || amount / 100 != cost_usd) return false;
@@ -376,7 +376,7 @@ router.post("/stripe/webhook", async (req, res) => {
       secret
     );
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res.status(400).send("Webhook Error");
     return;
   }

@@ -30,29 +30,33 @@ export default {
       success: "",
       showSuccess: false,
       processingPayment: false,
-      credentials: {
-        expensive: {
-          sandbox:
+      loading: false,
+      credentials: null,
+      keys: {
+        dev: {
+          cheap:
             "AYAmQijTIaUAckei3KBH9rJh7Vea0lmIuUZclFx5RWUfhaG6OfcG7w_IOZclheI431gFF0ETdwfhnWbU",
-          production:
-            "ARyCiFJGaPqBv5V0OJNPloAOgwUDp-YOu2cLtrp8fdTLlpBCaIfbXhnFHfVuMylXG9iyPaKCw2SR2D4V",
+          expensive:
+            "AYAmQijTIaUAckei3KBH9rJh7Vea0lmIuUZclFx5RWUfhaG6OfcG7w_IOZclheI431gFF0ETdwfhnWbU",
         },
-        cheap: {
-          sandbox:
-            "AYAmQijTIaUAckei3KBH9rJh7Vea0lmIuUZclFx5RWUfhaG6OfcG7w_IOZclheI431gFF0ETdwfhnWbU",
-          production:
+        prod: {
+          cheap:
             "AZJSuJyzSWP6mBtWjYUohMjjdj7NaMFacv7MAIhCG5Bjm12tmkoeYkJwwPxPh1ZPqXROCJAxpFM7M3wY",
+          expensive:
+            "ARyCiFJGaPqBv5V0OJNPloAOgwUDp-YOu2cLtrp8fdTLlpBCaIfbXhnFHfVuMylXG9iyPaKCw2SR2D4",
         },
       },
     };
   },
 
   mounted() {
+    const isDev = window.webpackHotUpdate;
+    this.credentials = isDev ? this.keys.dev : this.keys.prod;
     const script = document.createElement("script");
     const clientID =
       this.paypalType === "cheap"
-        ? this.credentials.cheap.sandbox
-        : this.credentials.expensive.sandbox;
+        ? this.credentials.cheap
+        : this.credentials.expensive;
     script.src = `https://www.paypal.com/sdk/js?client-id=${clientID}`;
     script.addEventListener("load", this.setLoaded);
     document.body.appendChild(script);
@@ -62,7 +66,7 @@ export default {
     setLoaded() {
       // "this" doesn't work in window.paypal because javascript sucks
       const steamID = this.$store.state.auth.userSteamID;
-      const itemID = this.item.item_id;
+      const itemID = this.item.cosmetic_id;
       const cost_usd = this.item.cost_usd;
       const paypalType = this.paypalType;
       const _this = this;

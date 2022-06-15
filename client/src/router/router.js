@@ -13,6 +13,8 @@ const Admin = () => import("../components/pages/admin/Admin");
 
 const Store = () => import("../components/pages/store/Store");
 const Checkout = () => import("../components/pages/store/Checkout");
+const PaymentSuccess = () => import("../components/pages/store/PaymentSuccess");
+const AlipayPayment = () => import("../components/pages/store/AlipayPayment");
 
 const Games = () => import("../components/pages/games/Games");
 const Game = () => import("../components/pages/games/Game");
@@ -52,6 +54,17 @@ const routes = [
   { path: "/players/:steam_id/games", component: PlayerGamesList },
   { path: "/store", component: Store },
   { path: "/checkout/:item_id", component: Checkout },
+  { path: "/payment_success/", component: PaymentSuccess },
+  {
+    path: "/alipay_payment/",
+    component: AlipayPayment,
+    props: (route) => ({
+      source: route.query.source,
+      livemode: route.query.livemode,
+      clientSecret: route.query.client_secret,
+      itemID: route.query.item_id,
+    }),
+  },
 
   { path: "/profile", component: Profile, meta: { requiresAuth: true } },
   {
