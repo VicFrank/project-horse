@@ -78,9 +78,8 @@ export default {
       const today = new Date();
       const day = today.getDay();
       const diff = (day < 1 ? 7 : 0) + 1 - day;
-      const monday = new Date(today.getTime() + diff * 24 * 60 * 60 * 1000);
-      const days = monday.getDate() - today.getDate();
-      return days === 0 ? 7 : days;
+
+      return 7 + diff;
     },
     getLoginQuests() {
       // time request

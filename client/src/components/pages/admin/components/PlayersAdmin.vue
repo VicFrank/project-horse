@@ -30,28 +30,41 @@
       >
         <b-list-group flush>
           <b-list-group-item>
-            Coins {{ playerData.coins }}
-            <b-button v-b-modal.modal-1 variant="success" size="sm" class="ml-5"
-              >+</b-button
-            >
+            <b-button v-b-modal.modal-1 variant="success" size="sm">+</b-button>
+            Coins <span class="text-muted">{{ playerData.coins }}</span>
             <b-modal id="modal-1" title="Give Coins" @ok="giveCoins">
               <b-form-input type="number" v-model="coins"></b-form-input>
             </b-modal>
           </b-list-group-item>
-          <b-list-group-item
-            >Patreon Level {{ playerData.patreon_level }}</b-list-group-item
-          >
-          <b-list-group-item>MMR {{ playerData.mmr }}</b-list-group-item>
           <b-list-group-item>
-            Battle Pass XP:
-            <!-- {{ playerData.battlePass.total_experience }} -->
-            (TODO: List current xp here)
-            <b-button v-b-modal.give-bp variant="success" size="sm" class="ml-5"
-              >+</b-button
-            >
+            <b-button v-b-modal.give-bp variant="success" size="sm">+</b-button>
+            Battle Pass XP
+            <span class="text-muted">{{ battlePass.total_xp }}</span>
             <b-modal id="give-bp" title="Give Battle Pass XP" @ok="giveBP">
               <b-form-input type="number" v-model="bp"></b-form-input>
             </b-modal>
+          </b-list-group-item>
+          <b-list-group-item>
+            Battle Pass Level
+            <span class="text-muted">{{ battlePass.bp_level }}</span>
+          </b-list-group-item>
+          <b-list-group-item>
+            Type
+            <span class="text-muted">{{ playerData.user_type }}</span>
+          </b-list-group-item>
+          <b-list-group-item>
+            Has Plus
+            <span class="text-muted">{{
+              playerData.has_plus ? "Yes" : "No"
+            }}</span>
+          </b-list-group-item>
+          <b-list-group-item>
+            MMR
+            <span class="text-muted">{{ playerData.mmr }}</span>
+          </b-list-group-item>
+          <b-list-group-item>
+            Ladder MMR
+            <span class="text-muted">{{ playerData.ladder_mmr }}</span>
           </b-list-group-item>
         </b-list-group>
       </b-card>
@@ -110,9 +123,10 @@
           </b-card>
         </b-collapse>
         <h4 class="card-title">Inventory</h4>
-        <b-list-group-item
+        <div
           v-for="cosmetic in cosmetics"
           :key="cosmetic.cosmetic_id + cosmetic.created + cosmetic.equipped"
+          class="d-flex align-items-center my-1"
         >
           <b-button
             v-b-modal.delete-item
@@ -123,12 +137,13 @@
             >x</b-button
           >
           {{ $t(`cosmetics.${cosmetic.cosmetic_name}`) }}
+          <span class="text-muted mx-1">{{ cosmetic.cosmetic_name }}</span>
           <span v-if="cosmetic.equipped">: Equipped</span>
-        </b-list-group-item>
+        </div>
       </b-card>
       <b-modal id="delete-item" title="Delete Item" @ok="deleteItem">
         <p>Delete this item from this player's inventory?</p>
-        {{ currentItem }}
+        <pre style="color: white">{{ currentItem }}</pre>
       </b-modal>
     </template>
   </div>
@@ -142,6 +157,7 @@ export default {
     cosmeticsFilter: "",
     playerData: {},
     cosmetics: [],
+    battlePass: {},
     options: [],
     filteredOptions: [],
     selected: [],
@@ -213,6 +229,13 @@ export default {
         .then((res) => res.json())
         .then((cosmetics) => {
           this.cosmetics = cosmetics;
+        })
+        .catch((err) => (this.error = err));
+
+      fetch(`/api/players/${steamID}/battle_pass`)
+        .then((res) => res.json())
+        .then((battlePass) => {
+          this.battlePass = battlePass;
         })
         .catch((err) => (this.error = err));
     },
