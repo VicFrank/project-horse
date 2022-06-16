@@ -17,9 +17,14 @@
                 })}`"
               >
                 {{ $t("battle_pass.level") }} {{ i }}
-                <i class="fas fa-info-circle info-icon"></i>
+                <i v-if="getLevelLocked(i)" class="fas fa-lock info-icon"></i>
               </span>
-              <div class="lvl-wrapper">
+              <div
+                v-bind:class="{
+                  'lvl-wrapper': true,
+                  'lvl-locked': i >= bpLevel || getLevelLocked(i),
+                }"
+              >
                 <template v-if="loading">
                   <img src="./images/bp_placeholder.png" alt="placeholder" />
                 </template>
@@ -50,7 +55,7 @@
                           class="mb-2"
                         />
                       </div>
-                      (Cosmetic description goes here)
+                      {{ getTranslatedDescription(i) }}
                     </div>
                   </b-modal>
                 </template>
@@ -85,6 +90,9 @@ export default {
     bpLevel() {
       return this.$store.getters.bpLevel;
     },
+    bpUpgraded() {
+      return this.$store.getters.bpUpgraded;
+    },
   },
 
   methods: {
@@ -103,6 +111,11 @@ export default {
       const translationString = `cosmetics.${name}`;
       return this.$i18n.t(translationString);
     },
+    getTranslatedDescription(level) {
+      const name = this.getRewards(level)?.cosmetic_name;
+      const translationString = `cosmetic_descriptions.${name}`;
+      return this.$i18n.t(translationString);
+    },
     getLevelTotalXP(level) {
       if (!this.getRewards(level)) return null;
       return this.getRewards(level).total_xp;
@@ -110,6 +123,11 @@ export default {
     getNextLevelXP(level) {
       if (!this.getRewards(level)) return null;
       return this.getRewards(level).next_level_xp;
+    },
+    getLevelLocked(level) {
+      if (!this.getRewards(level)) return false;
+      if (this.bpUpgraded) return false;
+      return !this.getRewards(level).free;
     },
     hasItemReward(level) {
       return this.getRewards(level)?.cosmetic_id !== null;

@@ -17,8 +17,9 @@ export default {
   },
   methods: {
     getDescription() {
-      // return this.$i18n.t(`cosmetic_descriptions.${this.cosmetic.cosmetic_id}`);
-      return "TODO: Add descriptions";
+      return this.$i18n.t(
+        `cosmetic_descriptions.${this.cosmetic.cosmetic_name}`
+      );
     },
   },
 };

@@ -16,30 +16,36 @@
         </div>
       </div>
 
-      <template v-if="loggedIn">
-        <div v-if="loading" class="d-flex justify-content-center mb-3">
-          <b-spinner label="Loading..."></b-spinner>
-        </div>
-        <b-card v-else class="mt-3" style="max-width: 300px; margin: auto">
-          <StripePurchase
-            class="my-3"
-            :item="item"
-            v-on:purchaseSuccess="onPurchaseSuccess"
-            v-on:error="onError"
-          />
-          <StripeAlipay :item="item" class="mb-3" />
-          <PaypalPurchase
-            :item="item"
-            :paypalType="paypalType"
-            v-on:purchaseSuccess="onPurchaseSuccess"
-          />
-          <b-alert v-model="showError" variant="danger" dismissible>{{
-            error
-          }}</b-alert>
-        </b-card>
+      <template v-if="item.cosmetic_name === 'buy_bp'" && bpUpgraded>
+        <div>upgraded: {{ bpUpgraded }}</div>
+        <div>You have already upgraded your battle pass!</div>
       </template>
       <template v-else>
-        <LoginButton></LoginButton>
+        <template v-if="loggedIn">
+          <div v-if="loading" class="d-flex justify-content-center mb-3">
+            <b-spinner label="Loading..."></b-spinner>
+          </div>
+          <b-card v-else class="mt-3" style="max-width: 300px; margin: auto">
+            <StripePurchase
+              class="my-3"
+              :item="item"
+              v-on:purchaseSuccess="onPurchaseSuccess"
+              v-on:error="onError"
+            />
+            <StripeAlipay :item="item" class="mb-3" />
+            <PaypalPurchase
+              :item="item"
+              :paypalType="paypalType"
+              v-on:purchaseSuccess="onPurchaseSuccess"
+            />
+            <b-alert v-model="showError" variant="danger" dismissible>{{
+              error
+            }}</b-alert>
+          </b-card>
+        </template>
+        <template v-else>
+          <LoginButton></LoginButton>
+        </template>
       </template>
     </div>
 
@@ -77,6 +83,9 @@ export default {
   computed: {
     loggedIn() {
       return this.$store.getters.loggedIn;
+    },
+    bpUpgraded() {
+      return this.$store.getters.bpUpgraded;
     },
     paypalType() {
       return this.item.cost_usd < 12 ? "cheap" : "expensive";

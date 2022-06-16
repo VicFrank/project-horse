@@ -11,7 +11,8 @@ module.exports = {
       const battlePassID = rows[0].battle_pass_id;
 
       for (const levelData of levels) {
-        const { level, nextLevelXp, totalXp, cosmetics, coins } = levelData;
+        const { level, nextLevelXp, totalXp, cosmetics, coins, free } =
+          levelData;
         await query(
           `
             INSERT INTO battle_pass_levels (battle_pass_id, bp_level, next_level_xp, total_xp, coins_reward)
@@ -23,12 +24,13 @@ module.exports = {
             `SELECT * FROM cosmetics WHERE cosmetic_name = $1`,
             [cosmeticName]
           );
-          const cosmeticID = queryResult.rows[0].cosmetic_id;
+          const { cosmetic_id } = queryResult.rows[0];
+          console.log(free);
           await query(
             `
-            INSERT INTO battle_pass_cosmetic_rewards (battle_pass_id, bp_level, cosmetic_id)
-            VALUES ($1, $2, $3)`,
-            [battlePassID, level, cosmeticID]
+            INSERT INTO battle_pass_cosmetic_rewards (battle_pass_id, bp_level, free, cosmetic_id)
+            VALUES ($1, $2, $3, $4)`,
+            [battlePassID, level, free, cosmetic_id]
           );
         }
       }
@@ -82,7 +84,10 @@ module.exports = {
     try {
       const { rows } = await query(
         `
-        SELECT battle_pass_levels.*, battle_pass_cosmetic_rewards.amount, cosmetics.*
+        SELECT
+          battle_pass_levels.*,
+          battle_pass_cosmetic_rewards.amount, battle_pass_cosmetic_rewards.free,
+          cosmetics.*
         FROM battle_pass_levels
         LEFT JOIN battle_pass_cosmetic_rewards
         USING (battle_pass_id, bp_level)
@@ -159,7 +164,7 @@ module.exports = {
 
       let { rows: cosmetics } = await query(
         `
-        SELECT cosmetic_id, amount
+        SELECT cosmetic_id, amount, free
         FROM battle_pass_cosmetic_rewards
         WHERE bp_level >= $1 AND bp_level <= $2`,
         [minLevel, maxLevel]
@@ -175,6 +180,7 @@ module.exports = {
             );
             cosmetics.push({
               cosmetic_id: diamondGamblerAvatar.cosmetic_id,
+              free: false,
               amount: 1,
             });
           } else if (i === 1000) {
@@ -183,12 +189,21 @@ module.exports = {
             );
             cosmetics.push({
               cosmetic_id: gabenAvatar.cosmetic_id,
+              free: false,
               amount: 1,
             });
           } else if (i % 10 === 0) {
-            cosmetics.push({ cosmetic_id: goldChest.cosmetic_id, amount: 1 });
+            cosmetics.push({
+              cosmetic_id: goldChest.cosmetic_id,
+              free: false,
+              amount: 1,
+            });
           } else if (i % 5 === 0) {
-            cosmetics.push({ cosmetic_id: basicChest.cosmetic_id, amount: 1 });
+            cosmetics.push({
+              cosmetic_id: basicChest.cosmetic_id,
+              free: false,
+              amount: 1,
+            });
           }
         }
       }

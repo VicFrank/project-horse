@@ -11,6 +11,7 @@ const state = {
     level: null,
     progress: null,
     required: null,
+    upgraded: null,
   },
 };
 
@@ -27,6 +28,7 @@ const getters = {
   bpLevel: (state) => state.battlePass?.level ?? 0,
   bpLevelProgress: (state) => state.battlePass?.progress,
   bpLevelRequired: (state) => state.battlePass?.required,
+  bpUpgraded: (state) => state.battlePass?.upgraded,
 
   achievementsToClaim: (state) => state.achievementsToClaim,
   dailiesToClaim: (state) => state.dailiesToClaim,
@@ -94,11 +96,17 @@ const actions = {
     fetch(`/api/players/${state.userSteamID}/battle_pass`)
       .then((res) => res.json())
       .then((battlePass) => {
-        const { bp_level, total_xp, requirements } = battlePass;
+        const { bp_level, total_xp, requirements, unlocked } = battlePass;
         const { next_level_xp, total_xp: requiredSoFar } = requirements;
         const progress = total_xp - requiredSoFar;
         const required = next_level_xp;
-        commit("SAVE_BATTLE_PASS", { level: bp_level, progress, required });
+
+        commit("SAVE_BATTLE_PASS", {
+          level: bp_level,
+          progress,
+          required,
+          upgraded: unlocked,
+        });
       })
       .catch((err) => {
         throw new Error(`API: ${err}`);

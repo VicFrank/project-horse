@@ -110,7 +110,6 @@ export default {
       )
         .then((res) => res.json())
         .then((completed) => {
-          console.log(completed);
           if (completed) this.getLoginQuests();
         });
     },

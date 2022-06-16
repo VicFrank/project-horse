@@ -457,17 +457,38 @@ module.exports = {
     }
   },
 
-  // TODO: update the table, add logic
   async unlockBattlePass(steamID) {
     try {
-      const { rows } = await query(
+      const battlePass = await this.getActiveBattlePass(steamID);
+      if (battlePass.unlocked)
+        throw new Error("Your battle pass is already unlocked");
+
+      await query(
         `UPDATE player_battle_pass
          SET unlocked = true
-         WHERE steam_id = $1
-         RETURNING *`,
+         WHERE steam_id = $1`,
         [steamID]
       );
-      return rows[0];
+
+      // get all the non-free battle pass rewards we haven't claimed yet
+      const isUnlocked = battlePass.unlocked;
+      const bpLevel = battlePass.bp_level;
+
+      const rewards = await BattlePasses.getBattlePassRewardsFromRange(
+        0,
+        bpLevel
+      );
+      const { cosmetics } = rewards;
+
+      for (const reward of cosmetics) {
+        const { cosmetic_id, amount, free } = reward;
+        if (free || isUnlocked) {
+          for (let i = 0; i < amount; i++) {
+            await this.giveCosmeticByID(steamID, cosmetic_id);
+          }
+        }
+      }
+      return;
     } catch (error) {
       throw error;
     }
@@ -530,10 +551,15 @@ module.exports = {
       );
       const { cosmetics, coins } = rewards;
 
+      const battlePass = this.getActiveBattlePass(steamID);
+      const isUnlocked = battlePass.unlocked;
+
       for (const reward of cosmetics) {
-        const { cosmetic_id, amount } = reward;
-        for (let i = 0; i < amount; i++) {
-          await this.giveCosmeticByID(steamID, cosmetic_id);
+        const { cosmetic_id, amount, free } = reward;
+        if (free || isUnlocked) {
+          for (let i = 0; i < amount; i++) {
+            await this.giveCosmeticByID(steamID, cosmetic_id);
+          }
         }
       }
 

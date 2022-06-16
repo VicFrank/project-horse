@@ -15,7 +15,15 @@
                 class="profile-picture"
                 alt="Profile Picture"
               />
-              <div class="notification">
+              <div class="bp-icon">
+                <img
+                  v-if="bpUpgraded"
+                  src="../../assets/images/battlepass_logo.png"
+                  alt="Battle Pass"
+                  style="width: auto; height: 40px"
+                />
+              </div>
+              <div class="bp-level">
                 <span class="custom-badge">{{ bpLevel }}</span>
               </div>
             </div>
@@ -206,6 +214,9 @@ export default {
     bpLevel() {
       return this.$store.getters.bpLevel;
     },
+    bpUpgraded() {
+      return this.$store.getters.bpUpgraded;
+    },
     required() {
       return this.$store.getters.bpLevelRequired;
     },
@@ -380,7 +391,7 @@ export default {
   visibility: visible;
 }
 
-.notification {
+.bp-level {
   position: absolute;
   text-align: center;
 
@@ -391,6 +402,17 @@ export default {
 
   background-color: #0b86c4;
   border-radius: 50%;
+
+  float: right;
+}
+
+.bp-icon {
+  position: absolute;
+  text-align: center;
+
+  height: 40px;
+  bottom: -15px;
+  left: 20px;
 
   float: right;
 }

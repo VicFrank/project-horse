@@ -174,6 +174,7 @@ CREATE TABLE IF NOT EXISTS battle_pass_cosmetic_rewards (
   battle_pass_id INTEGER REFERENCES battle_pass (battle_pass_id) ON UPDATE CASCADE,
   bp_level INTEGER NOT NULL,
   cosmetic_id INTEGER REFERENCES cosmetics (cosmetic_id) ON UPDATE CASCADE,
+  free BOOLEAN DEFAULT TRUE,
   amount INTEGER DEFAULT 1
 );
 
