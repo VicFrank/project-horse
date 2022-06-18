@@ -25,7 +25,6 @@ module.exports = {
             [cosmeticName]
           );
           const { cosmetic_id } = queryResult.rows[0];
-          console.log(free);
           await query(
             `
             INSERT INTO battle_pass_cosmetic_rewards (battle_pass_id, bp_level, free, cosmetic_id)

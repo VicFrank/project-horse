@@ -29,6 +29,7 @@ const Achievements = () => import("../components/pages/profile/Achievements");
 const MyStats = () => import("../components/pages/profile/Stats");
 const BattlePass = () =>
   import("../components/pages/profile/battlepass/BattlePass");
+const MyGods = () => import("../components/pages/profile/MyGods");
 
 const Leaderboard = () => import("../components/pages/leaderboard/Leaderboard");
 const PlayerPage = () => import("../components/pages/player/PlayerPage");
@@ -90,6 +91,11 @@ const routes = [
   {
     path: "/profile/armory",
     component: Armory,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/profile/gods",
+    component: MyGods,
     meta: { requiresAuth: true },
   },
 ];

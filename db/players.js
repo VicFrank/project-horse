@@ -60,7 +60,8 @@ module.exports = {
   async getPlayer(steamID) {
     try {
       const { rows } = await query(
-        `SELECT *,
+        `SELECT
+          players.*,
           plus_expiration IS NOT NULL AND plus_expiration > NOW() as has_plus
          FROM players WHERE steam_id = $1`,
         [steamID]
@@ -406,10 +407,12 @@ module.exports = {
     try {
       await query(
         `UPDATE players SET plus_expiration = (
-          CASE WHEN plus_expiration < NOW() THEN NOW() + $1 * INTERVAL '1 DAY'
-          ELSE plus_expiration + $1 * INTERVAL '1 DAY' END
+          CASE WHEN plus_expiration < NOW() OR plus_expiration IS NULL
+            THEN NOW() + $1 * INTERVAL '1 DAY'
+          ELSE
+            plus_expiration + $1 * INTERVAL '1 DAY' END
         )
-        WHERE steam_id = $2 RETURNING *`,
+        WHERE steam_id = $2`,
         [days, steamID]
       );
     } catch (error) {
@@ -611,6 +614,86 @@ module.exports = {
   },
 
   // --------------------------------------------------
+  // Player God Functions
+  // --------------------------------------------------
+
+  async getGods(steamID) {
+    const getAllGods = async () => {
+      try {
+        const { rows } = await query(
+          `SELECT * from gods WHERE god_enabled = true`
+        );
+        return rows;
+      } catch (error) {
+        throw error;
+      }
+    };
+    const getPlayerGods = async () => {
+      try {
+        const { rows } = await query(
+          `SELECT * FROM player_gods WHERE steam_id = $1`,
+          [steamID]
+        );
+        return rows;
+      } catch (error) {
+        throw error;
+      }
+    };
+    const getGodCards = async () => {
+      try {
+        const { rows } = await query(
+          `SELECT player_cosmetics.*, cosmetics.cosmetic_name
+          FROM player_cosmetics JOIN cosmetics USING (cosmetic_id)
+          WHERE steam_id = $1 AND cosmetic_type = 'Card Frame'`,
+          [steamID]
+        );
+        return rows;
+      } catch (error) {
+        throw error;
+      }
+    };
+
+    try {
+      const allGods = await getAllGods();
+      const playerGods = await getPlayerGods();
+      const godCards = await getGodCards();
+
+      for (const god of allGods) {
+        const hasGod = godCards.some(
+          (card) => card.cosmetic_name.substring(5) === god.god_name
+        );
+        const isBanned = playerGods.some(
+          (playerGod) => playerGod.god_name === god.god_name && playerGod.banned
+        );
+        const isFree = god.free;
+        god.owned = hasGod || isFree;
+        god.banned = isBanned;
+      }
+      return allGods;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async setGodBanned(steamID, godName, banned) {
+    try {
+      // Upsert the god into the player_gods table
+      const { rows } = await query(
+        `
+        INSERT INTO player_gods (steam_id, god_name, banned)
+        VALUES ($1, $2, $3)
+        ON CONFLICT (steam_id, god_name) DO UPDATE
+        SET banned = $3
+        RETURNING *`,
+        [steamID, godName, banned]
+      );
+      return rows[0];
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  // --------------------------------------------------
   // Player Cosmetics Functions
   // --------------------------------------------------
   async getPlayerCosmetics(steamID, onlyEquipped = false) {
@@ -796,13 +879,7 @@ module.exports = {
         for (const [cosmeticID, amount] of entries) {
           if (amount > 0) {
             for (let i = 0; i < amount; i++) {
-              await query(
-                `
-                INSERT INTO player_cosmetics
-                (steam_id, cosmetic_id) VALUES
-                ($1, $2)`,
-                [steamID, cosmeticID]
-              );
+              await this.giveCosmeticByID(steamID, cosmeticID);
             }
           } else if (amount < 0) {
             for (let i = 0; i < amount * -1; i++) {

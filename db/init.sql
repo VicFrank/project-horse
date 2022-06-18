@@ -98,6 +98,22 @@ CREATE TABLE IF NOT EXISTS game_player_heroes (
 DROP INDEX IF EXISTS idx_game_player_heroes_hero_name;
 CREATE INDEX idx_game_player_heroes_hero_name ON game_player_heroes (hero_name);
 
+DROP TABLE IF EXISTS gods;
+CREATE TABLE IF NOT EXISTS gods (
+  god_name TEXT PRIMARY KEY,
+  free BOOLEAN DEFAULT FALSE,
+  god_enabled BOOLEAN DEFAULT TRUE
+);
+
+DROP TABLE IF EXISTS player_gods;
+CREATE TABLE IF NOT EXISTS player_gods (
+  god_name TEXT REFERENCES gods (god_name) ON UPDATE CASCADE,
+  steam_id TEXT REFERENCES players (steam_id) ON UPDATE CASCADE,
+  banned BOOLEAN DEFAULT FALSE,
+
+  CONSTRAINT player_gods_pkey PRIMARY KEY (god_name, steam_id)
+);
+
 CREATE TABLE IF NOT EXISTS abilities (
   ability_name TEXT PRIMARY KEY,
   icon TEXT,

@@ -93,30 +93,6 @@ router.get("/:steamID/games", async (req, res) => {
   }
 });
 
-router.get("/:steamID/heroes", cache("5 minutes"), async (req, res) => {
-  try {
-    const steamID = req.params.steamID;
-    throw new Error("Not implemented");
-    const playerInfo = await players.getHeroStats(steamID);
-    res.status(200).json(playerInfo);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({ message: "Server Error" });
-  }
-});
-
-router.get("/:steamID/records", cache("5 minutes"), async (req, res) => {
-  try {
-    const steamID = req.params.steamID;
-    throw new Error("Not implemented");
-    const playerInfo = await players.getRecords(steamID);
-    res.status(200).json(playerInfo);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({ message: "Server Error" });
-  }
-});
-
 router.get("/:steamID/daily_quests", auth.userAuth, async (req, res) => {
   try {
     const steamID = req.params.steamID;
@@ -275,6 +251,29 @@ router.get("/:steamID/cosmetics", async (req, res) => {
     const onlyEquipped = filter === "equipped";
     const playerInfo = await players.getPlayerCosmetics(steamID, onlyEquipped);
     res.status(200).json(playerInfo);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Server Error" });
+  }
+});
+
+router.get("/:steamID/gods", async (req, res) => {
+  try {
+    const steamID = req.params.steamID;
+    const gods = await players.getGods(steamID);
+    res.status(200).json(gods);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Server Error" });
+  }
+});
+
+router.post("/:steamID/gods/:name/ban", auth.userAuth, async (req, res) => {
+  try {
+    const { steamID, name } = req.params;
+    const { banned } = req.query;
+    const god = await players.setGodBanned(steamID, name, banned);
+    res.status(200).json(god);
   } catch (error) {
     console.log(error);
     res.status(500).send({ message: "Server Error" });

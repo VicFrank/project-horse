@@ -4,6 +4,8 @@ const state = {
   username: "",
   profilePictureLink: "",
   isAdmin: false,
+  hasPlus: false,
+  plus_expiration: null,
   coins: 0,
   achievementsToClaim: 0,
   dailiesToClaim: 0,
@@ -22,7 +24,9 @@ const getters = {
   profilePictureLink: (state) => state.profilePictureLink,
   loggedIn: (state) => state.userSteamID !== "",
   isAdmin: (state) => state.isAdmin,
+  hasPlus: (state) => state.hasPlus,
   coins: (state) => state.coins,
+  plus_expiration: (state) => state.plus_expiration,
 
   battlePass: (state) => state.battlePass,
   bpLevel: (state) => state.battlePass?.level ?? 0,
@@ -49,12 +53,17 @@ const mutations = {
     state.loggedIn = false;
     state.battlePass = null;
   },
-  SAVE_USER(state, { username, isAdmin, achievementsToClaim, coins }) {
+  SAVE_USER(
+    state,
+    { username, isAdmin, achievementsToClaim, coins, hasPlus, plusExpiration }
+  ) {
     state.username = username;
     state.loggedIn = true;
     state.isAdmin = isAdmin;
     state.achievementsToClaim = achievementsToClaim;
     state.coins = coins;
+    state.hasPlus = hasPlus;
+    state.plusExpiration = plusExpiration;
   },
   SAVE_COINS(state, coins) {
     state.coins = coins;
@@ -70,12 +79,21 @@ const actions = {
     fetch(`/api/players/${state.userSteamID}`)
       .then((res) => res.json())
       .then((player) => {
-        const { username, user_type, coins, achievementsToClaim } = player;
+        const {
+          username,
+          user_type,
+          coins,
+          achievementsToClaim,
+          has_plus,
+          plus_expiration,
+        } = player;
         commit("SAVE_USER", {
           username,
           isAdmin: user_type === "ADMIN",
           achievementsToClaim,
           coins,
+          hasPlus: has_plus,
+          plusExpiration: plus_expiration,
         });
       })
       .catch((err) => {

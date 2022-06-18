@@ -30,6 +30,17 @@
           </router-link>
         </div>
 
+        <div class="d-flex justify-content-center align-items-center mt-1">
+          <img
+            v-if="hasPlus"
+            src="../../assets/images/bp_tier1.png"
+            class="custom-badge-img"
+            alt="Plus Badge"
+            v-b-tooltip.hover
+            :title="`Plus Expires ${plusExpiration}`"
+          />
+        </div>
+
         <div class="row">
           <ProgressBar
             class="bp-progress mt-1"
@@ -77,6 +88,15 @@
               class="sidebar-nav__link sidebar-nav__link_armory"
               exact-active-class="active"
               v-t="'navigation.armory'"
+            ></router-link>
+          </li>
+
+          <li class="sidebar-nav__item">
+            <router-link
+              to="/profile/gods"
+              class="sidebar-nav__link sidebar-nav__link_gods"
+              exact-active-class="active"
+              v-t="'navigation.gods'"
             ></router-link>
           </li>
 
@@ -169,6 +189,10 @@
 
 <script>
 import { gsap, Power4 } from "gsap";
+import dayjs from "dayjs";
+const relativeTime = require("dayjs/plugin/relativeTime");
+dayjs.extend(relativeTime);
+
 import LoginButton from "./LoginButton";
 import ProgressBar from "./ProgressBar";
 
@@ -217,6 +241,9 @@ export default {
     bpUpgraded() {
       return this.$store.getters.bpUpgraded;
     },
+    hasPlus() {
+      return this.$store.getters.hasPlus;
+    },
     required() {
       return this.$store.getters.bpLevelRequired;
     },
@@ -231,6 +258,10 @@ export default {
     },
     numDailies() {
       return this.$store.state.auth.dailiesToClaim;
+    },
+    plusExpiration() {
+      const expiration = this.$store.state.auth.plusExpiration;
+      return dayjs(expiration).fromNow();
     },
   },
   watch: {
@@ -464,11 +495,11 @@ export default {
   background-image: url("../../assets/images/icons/columns.svg");
 }
 
-.sidebar-nav__link_battlepass:before {
+.sidebar-nav__link_gods:before {
   width: 20px;
   height: 20px;
   background-repeat: no-repeat;
-  background-image: url("../../assets/images/icons/book.svg");
+  background-image: url("../../assets/images/icons/newspaper-solid.svg");
 }
 
 .sidebar-nav__link_achievements:before {

@@ -77,7 +77,7 @@ async function setChestRewards() {
   }
 }
 (async function () {
-  // await clearCosmetics();
-  // await initializeCosmetics();
+  await clearCosmetics();
+  await initializeCosmetics();
   await setChestRewards();
 })();

@@ -70,7 +70,7 @@
               <b-modal
                 :id="`modal-${i}`"
                 :ref="`modal-${i}`"
-                :title="cosmetic.cosmetic_name"
+                :title="$t(`cosmetics.${cosmetic.cosmetic_name}`)"
                 centered
                 hide-footer
                 @hide="onHide"

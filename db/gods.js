@@ -99,4 +99,48 @@ module.exports = {
       throw error;
     }
   },
+
+  async getAllGods() {
+    try {
+      const { rows } = await query(`SELECT * FROM gods`);
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async setDisabled(name, disabled) {
+    try {
+      const { rows } = await query(
+        `UPDATE gods SET god_enabled = $2 WHERE god_name = $1`,
+        [name, disabled]
+      );
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async delete(name) {
+    try {
+      const { rows } = await query(`DELETE FROM gods WHERE god_name = $1`, [
+        name,
+      ]);
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async setIsFree(name, isFree) {
+    try {
+      const { rows } = await query(
+        `UPDATE gods SET is_free = $1 WHERE god_name = $2`,
+        [isFree, name]
+      );
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
 };

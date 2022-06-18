@@ -39,5 +39,5 @@ async function InitializeLoginQuests() {
 
 (async function () {
   // await InitializeQuests();
-  await InitializeLoginQuests();
+  // await InitializeLoginQuests();
 })();
