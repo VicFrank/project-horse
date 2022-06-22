@@ -19,7 +19,7 @@
         >
           {{ $t(`gods.${god.god_name}`) }}
         </div>
-        <div v-if="god.error" class="text-danger">Error</div>
+        <!-- <div v-if="god.error" class="text-danger">Error</div>
         <b-button
           variant="secondary"
           size="sm"
@@ -29,7 +29,7 @@
           <template v-if="god.banned">{{ $t("gods.unban") }}</template>
           <template v-if="!god.banned">{{ $t("gods.ban") }}</template>
           <b-spinner small v-if="god.loading" :label="Loading"></b-spinner>
-        </b-button>
+        </b-button> -->
       </div>
     </div>
   </div>
