@@ -78,7 +78,7 @@ const getMatchLadderRatingChange = (currentMMR, place) => {
   // there are certain rank thresholds you cannot fall below
   const currentRankFloor = getCurrentRankFloor(currentMMR);
   const newRating = Math.max(currentMMR + baseRatingChange, currentRankFloor);
-  return newRating;
+  return newRating - currentMMR;
 };
 
 module.exports = {
