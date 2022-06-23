@@ -18,7 +18,7 @@
     <td class="col2">
       <div class="d-flex">
         <GodImage :god="player.god" :height="30" class="mr-2" />
-        <div>
+        <div :title="player.username">
           <router-link :to="'/players/' + player.steam_id">
             {{ player.username }}
           </router-link>
@@ -69,7 +69,7 @@ export default {
 .col2 {
   padding: 12px !important;
   text-align: left;
-  width: 200px;
+  max-width: 200px;
 }
 .col3 {
   width: 50px;
