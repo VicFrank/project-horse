@@ -80,7 +80,7 @@ module.exports = {
       return {
         ...player,
         rank,
-        achievementsToClaim,
+        achievements_to_claim: achievementsToClaim,
       };
     } catch (error) {
       throw error;

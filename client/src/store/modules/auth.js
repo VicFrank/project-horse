@@ -83,14 +83,14 @@ const actions = {
           username,
           user_type,
           coins,
-          achievementsToClaim,
+          achievements_to_claim,
           has_plus,
           plus_expiration,
         } = player;
         commit("SAVE_USER", {
           username,
           isAdmin: user_type === "ADMIN",
-          achievementsToClaim,
+          achievementsToClaim: achievements_to_claim,
           coins,
           hasPlus: has_plus,
           plusExpiration: plus_expiration,
