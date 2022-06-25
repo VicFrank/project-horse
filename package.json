@@ -21,6 +21,7 @@
     "express": "^4.17.3",
     "express-session": "^1.17.2",
     "morgan": "^1.10.0",
+    "node-cron": "^3.0.1",
     "passport": "^0.5.2",
     "passport-steam": "^1.0.17",
     "patreon": "^0.4.1",
@@ -29,7 +30,8 @@
     "pg": "^8.7.3",
     "pg-tx": "^1.0.1",
     "redis": "^4.0.4",
-    "stripe": "^8.211.0"
+    "stripe": "^8.211.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "concurrently": "^6.5.1",

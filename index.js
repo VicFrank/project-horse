@@ -161,3 +161,11 @@ process.on("SIGINT", () => {
     });
   });
 });
+
+// Cron job to reset login quests every week, on Monday at 12:00 AM
+const cron = require("node-cron");
+
+cron.schedule("0 0 0 * * 1", async () => {
+  console.log("Resetting login quests...");
+  await players.resetAllLoginQuests();
+});

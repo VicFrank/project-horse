@@ -1685,6 +1685,16 @@ module.exports = {
     }
   },
 
+  async resetAllLoginQuests() {
+    try {
+      await query(
+        `UPDATE player_login_quests SET (completed, claimed) = (false, false)`
+      );
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async getLoginQuests(steamID) {
     try {
       const { rows } = await query(
