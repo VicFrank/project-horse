@@ -1690,6 +1690,7 @@ module.exports = {
       await query(
         `UPDATE player_login_quests SET (completed, claimed) = (false, false)`
       );
+      await query(`UPDATE players SET last_login_quest_claimed = NULL`);
     } catch (error) {
       throw error;
     }
