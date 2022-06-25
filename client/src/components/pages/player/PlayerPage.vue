@@ -2,6 +2,7 @@
   <div>
     <div v-if="playerFound">
       <h1 class="page-title">{{ player.username }}</h1>
+      <div v-if="!player.username" style="height: 48px"></div>
 
       <b-tabs style="max-width: 700px; margin: auto">
         <b-tab title="Games" active>
@@ -13,10 +14,10 @@
             style="max-width: 710px"
           ></PlayerGamesList>
         </b-tab>
-        <b-tab title="Gods">
+        <b-tab title="Gods" lazy>
           <GodStats :gods="godStats"></GodStats>
         </b-tab>
-        <b-tab title="Abilities">
+        <b-tab title="Abilities" lazy>
           <AbilityStats :abilities="abilityStats"></AbilityStats>
         </b-tab>
       </b-tabs>

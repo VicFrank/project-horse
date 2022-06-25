@@ -3,7 +3,7 @@ const Cosmetics = require("./cosmetics");
 const Logs = require("./logs");
 const Quests = require("./quests");
 const BattlePasses = require("./battlepass");
-const quests = require("./quests");
+const mmr = require("../mmr/mmr");
 
 module.exports = {
   // --------------------------------------------------
@@ -51,6 +51,11 @@ module.exports = {
       for (let i = 0; i < rows.length; i++) {
         rows[i].rank = i + 1;
       }
+      // add band and pips to each player
+      for (const player of rows) {
+        player.badge = mmr.getRankBadge(player.mmr);
+        player.pips = mmr.getRankPips(player.mmr);
+      }
       return rows;
     } catch (error) {
       throw error;
@@ -76,6 +81,9 @@ module.exports = {
       const achievementsToClaim = achievements.filter((achievement) => {
         return achievement.quest_completed && !achievement.claimed;
       }).length;
+
+      player.badge = mmr.getRankBadge(player.mmr);
+      player.pips = mmr.getRankPips(player.mmr);
 
       return {
         ...player,
@@ -1664,7 +1672,7 @@ module.exports = {
       await query(`DELETE FROM player_login_quests WHERE steam_id = $1`, [
         steamID,
       ]);
-      const loginQuests = await quests.getLoginQuests();
+      const loginQuests = await Quests.getLoginQuests();
 
       for (const quest of loginQuests) {
         await query(

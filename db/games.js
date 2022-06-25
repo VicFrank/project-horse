@@ -1,9 +1,6 @@
 const { query } = require("./index");
-const {
-  getMatchRatingChange,
-  getMatchLadderRatingChange,
-} = require("../mmr/mmr");
 const Players = require("./players");
+const mmr = require("../mmr/mmr");
 
 module.exports = {
   /**
@@ -31,8 +28,8 @@ module.exports = {
         const losers = players.filter(
           (p) => p.hasLost === true && p.steamID !== steamID
         );
-        mmrChange = getMatchRatingChange(currentMMR, winners, losers);
-        ladderRatingChange = getMatchLadderRatingChange(currentMMR, place);
+        mmrChange = mmr.getMatchRatingChange(currentMMR, winners, losers);
+        ladderRatingChange = mmr.getMatchLadderRatingChange(currentMMR, place);
       }
 
       if (ranked) {
@@ -256,6 +253,8 @@ module.exports = {
         }
 
         player.heroes = gamePlayerHeroes;
+        player.badge = mmr.getRankBadge(player.mmr);
+        player.pips = mmr.getRankPips(player.mmr);
       }
 
       // Rounds

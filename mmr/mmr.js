@@ -47,7 +47,7 @@ const getCurrentRankFloor = (currentMMR) => {
   else return 4500; // immortal
 };
 
-const getCurrentRank = (mmr) => {
+const getRankBadge = (mmr) => {
   if (mmr < 500) return "Herald";
   if (mmr < 1000) return "Guardian";
   if (mmr < 1500) return "Crusader";
@@ -56,6 +56,45 @@ const getCurrentRank = (mmr) => {
   if (mmr < 3500) return "Ancient";
   if (mmr < 4500) return "Divine";
   else return "Immortal";
+};
+
+const getRankPips = (mmr) => {
+  if (mmr < 100) return 1;
+  if (mmr < 200) return 2;
+  if (mmr < 300) return 3;
+  if (mmr < 400) return 4;
+  if (mmr < 500) return 5;
+  if (mmr < 600) return 1;
+  if (mmr < 700) return 2;
+  if (mmr < 800) return 3;
+  if (mmr < 900) return 4;
+  if (mmr < 1000) return 5;
+  if (mmr < 1100) return 1;
+  if (mmr < 1200) return 2;
+  if (mmr < 1300) return 3;
+  if (mmr < 1400) return 4;
+  if (mmr < 1500) return 5;
+  if (mmr < 1600) return 1;
+  if (mmr < 1700) return 2;
+  if (mmr < 1800) return 3;
+  if (mmr < 1900) return 4;
+  if (mmr < 2000) return 5;
+  if (mmr < 2100) return 1;
+  if (mmr < 2200) return 2;
+  if (mmr < 2300) return 3;
+  if (mmr < 2400) return 4;
+  if (mmr < 2500) return 5;
+  if (mmr < 2700) return 1;
+  if (mmr < 2900) return 2;
+  if (mmr < 3100) return 3;
+  if (mmr < 3300) return 4;
+  if (mmr < 3500) return 5;
+  if (mmr < 3700) return 1;
+  if (mmr < 3900) return 2;
+  if (mmr < 4100) return 3;
+  if (mmr < 4300) return 4;
+  if (mmr < 4500) return 5;
+  return 0;
 };
 
 const getMatchRatingChange = (currentMMR, winners, losers) => {
@@ -84,4 +123,6 @@ const getMatchLadderRatingChange = (currentMMR, place) => {
 module.exports = {
   getMatchRatingChange,
   getMatchLadderRatingChange,
+  getRankBadge,
+  getRankPips,
 };
