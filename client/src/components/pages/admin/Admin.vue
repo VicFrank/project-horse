@@ -8,6 +8,9 @@
             <b-tab title-link-class="tab" title="Players" active>
               <PlayersAdmin />
             </b-tab>
+            <b-tab title-link-class="tab" title="Gods" lazy>
+              <GodsAdmin />
+            </b-tab>
           </b-tabs>
         </b-card>
       </div>
@@ -17,9 +20,11 @@
 
 <script>
 import PlayersAdmin from "./components/PlayersAdmin";
+import GodsAdmin from "./components/GodsAdmin";
 export default {
   components: {
     PlayersAdmin,
+    GodsAdmin,
   },
 };
 </script>

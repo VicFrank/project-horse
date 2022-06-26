@@ -102,19 +102,7 @@ module.exports = {
 
   async getAllGods() {
     try {
-      const { rows } = await query(`SELECT * FROM gods`);
-      return rows;
-    } catch (error) {
-      throw error;
-    }
-  },
-
-  async setDisabled(name, disabled) {
-    try {
-      const { rows } = await query(
-        `UPDATE gods SET god_enabled = $2 WHERE god_name = $1`,
-        [name, disabled]
-      );
+      const { rows } = await query(`SELECT * FROM gods ORDER BY god_name`);
       return rows;
     } catch (error) {
       throw error;
@@ -132,13 +120,37 @@ module.exports = {
     }
   },
 
+  async setEnabled(name, enabled) {
+    try {
+      const { rows } = await query(
+        `UPDATE gods SET god_enabled = $2 WHERE god_name = $1 returning *`,
+        [name, enabled]
+      );
+      return rows[0];
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async setIsFree(name, isFree) {
     try {
       const { rows } = await query(
-        `UPDATE gods SET is_free = $1 WHERE god_name = $2`,
+        `UPDATE gods SET free = $1 WHERE god_name = $2 returning *`,
         [isFree, name]
       );
-      return rows;
+      return rows[0];
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async setPlusExclusive(name, isPlus) {
+    try {
+      const { rows } = await query(
+        `UPDATE gods SET plus_exclusive = $1 WHERE god_name = $2 returning *`,
+        [isPlus, name]
+      );
+      return rows[0];
     } catch (error) {
       throw error;
     }

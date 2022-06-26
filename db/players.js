@@ -665,6 +665,7 @@ module.exports = {
       const allGods = await getAllGods();
       const playerGods = await getPlayerGods();
       const godCards = await getGodCards();
+      const player = await this.getPlayer(steamID);
 
       for (const god of allGods) {
         const hasGod = godCards.some(
@@ -673,9 +674,10 @@ module.exports = {
         const isBanned = playerGods.some(
           (playerGod) => playerGod.god_name === god.god_name && playerGod.banned
         );
-        const isFree = god.free;
-        god.owned = hasGod || isFree;
+        god.owned =
+          hasGod || god.free || (player.has_plus && god.plus_exclusive);
         god.banned = isBanned;
+        god.plus_exclusive = god.plus_exclusive;
       }
       return allGods;
     } catch (error) {
