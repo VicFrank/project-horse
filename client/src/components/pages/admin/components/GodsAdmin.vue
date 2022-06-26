@@ -62,7 +62,7 @@ export default {
   }),
 
   created() {
-    fetch(`/api//gods`)
+    fetch(`/api/gods`)
       .then((res) => res.json())
       .then((gods) => {
         this.gods = gods;
