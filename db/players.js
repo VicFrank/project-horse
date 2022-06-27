@@ -493,7 +493,7 @@ module.exports = {
 
       for (const reward of cosmetics) {
         const { cosmetic_id, amount, free } = reward;
-        if (free || isUnlocked) {
+        if (!free) {
           for (let i = 0; i < amount; i++) {
             await this.giveCosmeticByID(steamID, cosmetic_id);
           }
