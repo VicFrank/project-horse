@@ -5,7 +5,7 @@
   >
     <div class="d-flex justify-content-between px-3 py-3">
       <span>Log in ({{ numCompleted }}/7)</span>
-      <span>{{ daysUntilMonday }} day(s) left</span>
+      <!-- <span>{{ daysUntilMonday }} day(s) left</span> -->
     </div>
     <div
       v-if="loading"
