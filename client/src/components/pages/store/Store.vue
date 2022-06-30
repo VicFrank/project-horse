@@ -269,7 +269,6 @@ export default {
         .then((res) => {
           this.loading = false;
           document.documentElement.scrollTop = 0;
-          console.log(res);
           if (res.error) {
             this.error = res.error;
             this.showError = true;

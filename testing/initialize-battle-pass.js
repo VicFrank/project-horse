@@ -43,12 +43,9 @@ async function initializeBattlePass() {
     await battlePasses.setActiveBattlePass(battlePass.battle_pass_id);
 
     console.log("Adding battle passes to existing players...");
-    const allPlayers = await players.getAllPlayers(999999);
-    for (const player of allPlayers) {
-      await players.createBattlePass(
-        player.steam_id,
-        battlePass.battle_pass_id
-      );
+    const steamIDs = await players.getAllSteamIds();
+    for (const steamID of steamIDs) {
+      await players.createBattlePass(steamID, battlePass.battle_pass_id);
     }
 
     console.log("Battle Pass initialized");
