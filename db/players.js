@@ -471,8 +471,7 @@ module.exports = {
   async unlockBattlePass(steamID) {
     try {
       const battlePass = await this.getActiveBattlePass(steamID);
-      if (battlePass.unlocked)
-        throw new Error("Your battle pass is already unlocked");
+      if (battlePass.unlocked) return false;
 
       await query(
         `UPDATE player_battle_pass
@@ -482,9 +481,7 @@ module.exports = {
       );
 
       // get all the non-free battle pass rewards we haven't claimed yet
-      const isUnlocked = battlePass.unlocked;
       const bpLevel = battlePass.bp_level;
-
       const rewards = await BattlePasses.getBattlePassRewardsFromRange(
         0,
         bpLevel
@@ -499,7 +496,7 @@ module.exports = {
           }
         }
       }
-      return;
+      return true;
     } catch (error) {
       throw error;
     }
@@ -562,15 +559,13 @@ module.exports = {
       );
       const { cosmetics, coins } = rewards;
 
-      const battlePass = this.getActiveBattlePass(steamID);
+      const battlePass = await this.getActiveBattlePass(steamID);
       const isUnlocked = battlePass.unlocked;
 
       for (const reward of cosmetics) {
-        const { cosmetic_id, amount, free } = reward;
+        const { cosmetic_id, free } = reward;
         if (free || isUnlocked) {
-          for (let i = 0; i < amount; i++) {
-            await this.giveCosmeticByID(steamID, cosmetic_id);
-          }
+          await this.giveCosmeticByID(steamID, cosmetic_id);
         }
       }
 
@@ -987,7 +982,8 @@ module.exports = {
       }
 
       if (cosmeticName === "buy_bp") {
-        this.unlockBattlePass(steamID);
+        const success = await this.unlockBattlePass(steamID);
+        if (!success) throw new Error("Battle Pass is already upgraded");
       }
 
       // Log the transaction
@@ -1000,7 +996,7 @@ module.exports = {
       await this.removeCosmeticByID(steamID, cosmetic.cosmetic_id);
       await this.addBattlePassXp(steamID, xp);
 
-      return xp;
+      return true;
     } catch (error) {
       throw error;
     }

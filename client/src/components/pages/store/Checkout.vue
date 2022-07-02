@@ -17,7 +17,6 @@
       </div>
 
       <template v-if="item.cosmetic_name === 'buy_bp'" && bpUpgraded>
-        <div>upgraded: {{ bpUpgraded }}</div>
         <div>You have already upgraded your battle pass!</div>
       </template>
       <template v-else>

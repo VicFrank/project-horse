@@ -15,6 +15,7 @@ module.exports = {
       await this.upsertGame(matchID, ranked);
       const player = await Players.upsertPlayer(steamID, username);
       const currentMMR = player.mmr;
+      const currentLadderMMR = player.ladder_mmr;
       let mmrChange = 0;
       let xpChange = 0;
       let coinsChange = 0;
@@ -29,7 +30,10 @@ module.exports = {
           (p) => p.hasLost === true && p.steamID !== steamID
         );
         mmrChange = mmr.getMatchRatingChange(currentMMR, winners, losers);
-        ladderRatingChange = mmr.getMatchLadderRatingChange(currentMMR, place);
+        ladderRatingChange = mmr.getMatchLadderRatingChange(
+          currentLadderMMR,
+          place
+        );
       }
 
       if (ranked) {

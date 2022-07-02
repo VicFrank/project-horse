@@ -22,11 +22,11 @@ const dropOdds = {
 const typeOdds = {
   gold: [{ odds: 100, item_name: "gold_placeholder" }],
   xp: [
-    { odds: 57.25, item_name: "get_xp_250" },
+    { odds: 56, item_name: "get_xp_250" },
     { odds: 25, item_name: "get_xp_500" },
     { odds: 11.5, item_name: "get_xp_1000" },
     { odds: 5, item_name: "get_xp_2500" },
-    { odds: 1.25, item_name: "get_xp_10k" },
+    { odds: 2.5, item_name: "get_xp_10k" },
   ],
   border: [
     { odds: 25, item_name: "avatar_red" },
@@ -100,44 +100,22 @@ const typeOdds = {
   // negative odds in this case means you have a random chance
   // of getting one god you don't have yet
   god: [
-    { odds: -1, item_name: "card_pudge" },
-    { odds: -1, item_name: "card_dazzle" },
-    { odds: -1, item_name: "card_shopkeeper" },
-    { odds: -1, item_name: "card_brewmaster" },
-    { odds: -1, item_name: "card_ladyAnshu" },
-    { odds: -1, item_name: "card_cloudGod" },
-    { odds: -1, item_name: "card_legionCommander" },
-    { odds: -1, item_name: "card_aghanim" },
-    { odds: -1, item_name: "card_lifestealer" },
-    { odds: -1, item_name: "card_kanna" },
-    { odds: -1, item_name: "card_ogreMagi" },
-    { odds: -1, item_name: "card_rix" },
-    { odds: -1, item_name: "card_gambler" },
-    { odds: -1, item_name: "card_phantomAssassin" },
-    { odds: -1, item_name: "card_alchemist" },
-    { odds: -1, item_name: "card_runeGod" },
     { odds: -1, item_name: "card_sorlaKhan" },
+    { odds: -1, item_name: "card_alchemist" },
+    { odds: -1, item_name: "card_rix" },
+    { odds: -1, item_name: "card_tinker" },
+    { odds: -1, item_name: "card_ladyAnshu" },
+    { odds: -1, item_name: "card_lifestealer" },
   ],
 
   // Golden gods aren't in yet
   gold_god: [
-    { odds: -1, item_name: "card_pudge" },
-    { odds: -1, item_name: "card_dazzle" },
-    { odds: -1, item_name: "card_shopkeeper" },
-    { odds: -1, item_name: "card_brewmaster" },
-    { odds: -1, item_name: "card_ladyAnshu" },
-    { odds: -1, item_name: "card_cloudGod" },
-    { odds: -1, item_name: "card_legionCommander" },
-    { odds: -1, item_name: "card_aghanim" },
-    { odds: -1, item_name: "card_lifestealer" },
-    { odds: -1, item_name: "card_kanna" },
-    { odds: -1, item_name: "card_ogreMagi" },
-    { odds: -1, item_name: "card_rix" },
-    { odds: -1, item_name: "card_gambler" },
-    { odds: -1, item_name: "card_phantomAssassin" },
-    { odds: -1, item_name: "card_alchemist" },
-    { odds: -1, item_name: "card_runeGod" },
     { odds: -1, item_name: "card_sorlaKhan" },
+    { odds: -1, item_name: "card_alchemist" },
+    { odds: -1, item_name: "card_rix" },
+    { odds: -1, item_name: "card_tinker" },
+    { odds: -1, item_name: "card_ladyAnshu" },
+    { odds: -1, item_name: "card_lifestealer" },
   ],
 };
 

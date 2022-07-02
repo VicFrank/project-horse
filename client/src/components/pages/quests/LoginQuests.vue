@@ -123,11 +123,9 @@ export default {
         { method: "post" }
       )
         .then((res) => res.json())
-        .then((res) => {
-          if (res.success) {
-            this.getLoginQuests();
-            this.$store.dispatch("REFRESH_BATTLE_PASS");
-          }
+        .then(() => {
+          this.getLoginQuests();
+          this.$store.dispatch("REFRESH_BATTLE_PASS");
         })
         .catch((err) => {
           this.error = err;
