@@ -46,10 +46,12 @@ module.exports = {
       // prettier-ignore
       const { rows: gamePlayerRows } = await query(
         `INSERT INTO game_players
-         (game_id, steam_id, rounds, place, end_time, mmr, mmr_change, team, wins, losses, god, xp_change, coins_change)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
+         (game_id, steam_id, rounds, place, end_time, mmr, mmr_change, ladder_mmr_change,
+           team, wins, losses, god, xp_change, coins_change)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
          RETURNING *`,
-        [matchID, steamID, rounds, place, endTime, currentMMR, mmrChange, team, wins, losses, god, xpChange, coinsChange]
+        [matchID, steamID, rounds, place, endTime, currentMMR, mmrChange, ladderRatingChange,
+          team, wins, losses, god, xpChange, coinsChange]
       );
       const gamePlayerId = gamePlayerRows[0].game_player_id;
 
@@ -219,7 +221,8 @@ module.exports = {
       const { rows: gamePlayers } = await query(
         `
           SELECT gp.steam_id, gp.rounds, gp.wins, gp.losses, gp.end_time, gp.place, gp.team,
-            gp.game_player_id, gp.god, gp.mmr_change, gp.mmr, p.username
+            gp.game_player_id, gp.god, gp.mmr_change, gp.mmr, p.ladder_mmr, gp.ladder_mmr_change,
+            p.username
           FROM game_players AS gp
           JOIN players AS p
           USING (steam_id)

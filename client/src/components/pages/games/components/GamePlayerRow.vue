@@ -9,11 +9,11 @@
     </td>
     <td class="col6">{{ player.wins }} - {{ player.losses }}</td>
     <td v-if="showMMR">
-      <div>{{ player.mmr }}</div>
-      <span v-if="player.mmr_change >= 0" class="win">
-        +{{ player.mmr_change }}
+      <div>{{ player.ladder_mmr }}</div>
+      <span v-if="player.ladder_mmr_change >= 0" class="win">
+        +{{ player.ladder_mmr_change }}
       </span>
-      <span v-else class="loss"> {{ player.mmr_change }} </span>
+      <span v-else class="loss"> {{ player.ladder_mmr_change }} </span>
     </td>
     <td class="col2">
       <div class="d-flex">
