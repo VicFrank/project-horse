@@ -26,7 +26,7 @@ const typeOdds = {
     { odds: 25, item_name: "get_xp_500" },
     { odds: 11.5, item_name: "get_xp_1000" },
     { odds: 5, item_name: "get_xp_2500" },
-    { odds: 2.5, item_name: "get_xp_10k" },
+    { odds: 2.5, item_name: "get_xp_5000" },
   ],
   border: [
     { odds: 25, item_name: "avatar_red" },

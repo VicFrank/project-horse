@@ -27,8 +27,8 @@ async function addCosmetics() {
     console.log("Adding cosmetics...");
     await cosmetics.bulkCreateCosmetics([
       {
-        name: "gold_placeholder",
-        type: "",
+        name: "card_tinker",
+        type: "Card Frame",
         coins: -1,
         cost_usd: -1,
         equip_group: "",
@@ -77,7 +77,8 @@ async function setChestRewards() {
   }
 }
 (async function () {
-  await clearCosmetics();
-  await initializeCosmetics();
+  // await clearCosmetics();
+  // await initializeCosmetics();
+  await addCosmetics();
   await setChestRewards();
 })();

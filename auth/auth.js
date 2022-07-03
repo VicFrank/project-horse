@@ -9,7 +9,9 @@ function checkServerKey(req) {
     : keys.toolsKey;
 
   return (
-    true ||
+    serverKey === "Invalid_NotOnDedicatedServer" ||
+    serverKey2 === "Invalid_NotOnDedicatedServer" ||
+    serverKey3 === "Invalid_NotOnDedicatedServer" ||
     serverKey === dedicatedServerKey ||
     serverKey2 === dedicatedServerKey ||
     serverKey3 === dedicatedServerKey

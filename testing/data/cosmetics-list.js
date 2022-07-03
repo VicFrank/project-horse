@@ -471,7 +471,7 @@ module.exports = [
   },
   {
     // Chest Drop
-    name: "get_xp_10k",
+    name: "get_xp_5000",
     type: "Consumable",
     coins: -1,
     cost_usd: -1,
@@ -681,6 +681,14 @@ module.exports = [
   },
   {
     name: "card_crystalMaiden",
+    type: "Card Frame",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "",
+    rarity: "Immortal",
+  },
+  {
+    name: "card_tinker",
     type: "Card Frame",
     coins: -1,
     cost_usd: -1,

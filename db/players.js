@@ -941,8 +941,8 @@ module.exports = {
         case "get_xp_2500":
           xp = 2500;
           break;
-        case "get_xp_10k":
-          xp = 10000;
+        case "get_xp_5000":
+          xp = 5000;
           break;
         case "buy_xp_5000":
           xp = 5000;
