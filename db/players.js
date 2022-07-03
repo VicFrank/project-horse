@@ -314,7 +314,7 @@ module.exports = {
       await this.initializeAchievements(steamID);
 
       const activeBattlePass = await BattlePasses.getActiveBattlePass();
-      await this.createBattlePass(steamID, activeBattlePass.id);
+      await this.createBattlePass(steamID, activeBattlePass.battle_pass_id);
 
       return rows[0];
     } catch (error) {
