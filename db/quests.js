@@ -268,4 +268,44 @@ module.exports = {
       throw error;
     }
   },
+
+  //////////////////////////////////////////////////////////////////////////////
+  // Welcome Quests
+  //////////////////////////////////////////////////////////////////////////////
+
+  async clearWelcomeQuests() {
+    try {
+      await query(`DELETE FROM player_welcome_quests`);
+      await query(`DELETE FROM welcome_quests`);
+      return;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async createWelcomeQuest(day, coins, xp) {
+    try {
+      const { rows } = await query(
+        `INSERT INTO welcome_quests (day, coin_reward, xp_reward)
+        VALUES ($1, $2, $3)
+        RETURNING *
+        `,
+        [day, coins, xp]
+      );
+      return rows[0];
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getWelcomeQuests() {
+    try {
+      const { rows } = await query(
+        `SELECT * FROM welcome_quests ORDER BY day ASC`
+      );
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
 };

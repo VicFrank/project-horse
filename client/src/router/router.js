@@ -17,7 +17,7 @@ const PaymentSuccess = () => import("../components/pages/store/PaymentSuccess");
 const AlipayPayment = () => import("../components/pages/store/AlipayPayment");
 
 const Games = () => import("../components/pages/games/Games");
-const Game = () => import("../components/pages/games/Game");
+import Game from "../components/pages/games/Game";
 
 const Gods = () => import("../components/pages/stats/Gods");
 const Abilities = () => import("../components/pages/stats/Abilities");

@@ -44,6 +44,41 @@ router.get("/:steamID", async (req, res) => {
   }
 });
 
+router.get("/:steamID/plus_benefits", async (req, res) => {
+  try {
+    const steamID = req.params.steamID;
+    const doubleDown = await players.canUseWeeklyDoubleDown(steamID);
+    const canClaimGold = await players.canClaimDailyPlusGold(steamID);
+    res.status(200).json({
+      doubleDown,
+      canClaimGold,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Server Error" });
+  }
+});
+
+router.post("/:steamID/claim_daily_gold", async (req, res) => {
+  try {
+    const steamID = req.params.steamID;
+    const hasPlus = await players.hasPlus(steamID);
+    if (!hasPlus)
+      return res.status(400).send({ message: "You do not have plus" });
+    const claimed = await players.claimDailyPlusGold(steamID);
+    if (!claimed)
+      return res
+        .status(400)
+        .send({ message: "You have already claimed today's daily plus gold" });
+    res.status(200).json(claimed);
+  } catch (error) {
+    if (error.message === "Daily gold already claimed")
+      return res.status(400).send({ message: error.message });
+    console.log(error);
+    res.status(500).send({ message: "Server Error" });
+  }
+});
+
 router.get("/:steamID/stats", async (req, res) => {
   try {
     const steamID = req.params.steamID;
@@ -166,6 +201,33 @@ router.post("/:steamID/achievements/claim", auth.userAuth, async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).send({ error: error.toString() });
+  }
+});
+
+router.get("/:steamID/welcome_quests", async (req, res) => {
+  try {
+    const steamID = req.params.steamID;
+    const quests = await players.getWelcomeQuests(steamID);
+    // if all quests are completed, return an empty array
+    const allCompleted = !quests.find((quest) => !quest.claimed);
+    if (allCompleted) return res.status(200).json([]);
+    else res.status(200).json(quests);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Server Error" });
+  }
+});
+
+// /api/players/:steamID/welcome_quests/claim?questID=:questid
+router.post("/:steamID/welcome_quests/claim", async (req, res) => {
+  try {
+    const steamID = req.params.steamID;
+    const questID = req.query.questID;
+    const quests = await players.claimWelcomeQuests(steamID, questID);
+    res.status(200).json(quests);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Server Error" });
   }
 });
 

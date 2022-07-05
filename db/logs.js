@@ -40,4 +40,18 @@ module.exports = {
       throw error;
     }
   },
+
+  async getLastLogEvent(steamID, event) {
+    try {
+      const sql_query = `
+      SELECT * FROM player_logs
+      WHERE steam_id = $1 AND log_event = $2
+      ORDER BY log_time DESC
+      `;
+      const { rows } = await query(sql_query, [steamID, event]);
+      return rows[0];
+    } catch (error) {
+      throw error;
+    }
+  },
 };

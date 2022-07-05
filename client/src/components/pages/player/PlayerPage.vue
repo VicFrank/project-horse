@@ -4,6 +4,7 @@
       <h1 class="page-title">{{ player.username }}</h1>
       <div v-if="!player.username" style="height: 48px"></div>
 
+      <PlayerStats :stats="player" :loading="statsLoading"></PlayerStats>
       <b-tabs style="max-width: 700px; margin: auto">
         <b-tab title="Games" active>
           <PlayerGamesList
@@ -32,21 +33,25 @@
 import PlayerGamesList from "./PlayerGamesList.vue";
 import GodStats from "../stats/GodStats.vue";
 import AbilityStats from "../stats/AbilityStats.vue";
+import PlayerStats from "../player/components/PlayerStats.vue";
 
 export default {
   components: {
     PlayerGamesList,
     GodStats,
     AbilityStats,
+    PlayerStats,
   },
 
   data: () => ({
     error: "",
     games: [],
     player: {},
+    plusBenefits: {},
     abilityStats: [],
     godStats: [],
     gamesLoading: true,
+    statsLoading: true,
     playerFound: true,
   }),
 
@@ -69,6 +74,7 @@ export default {
       .then((player) => {
         if (player.steam_id) this.playerFound = true;
         this.player = player;
+        this.statsLoading = false;
       });
 
     fetch(`/api/players/${this.steamID}/ability_stats`)

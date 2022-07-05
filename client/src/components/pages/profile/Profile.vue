@@ -2,10 +2,22 @@
   <div>
     <h1 class="page-title">Profile</h1>
 
+    <WelcomeQuests class="mb-5"></WelcomeQuests>
+
     <LoginQuests class="mb-5"></LoginQuests>
 
     <!-- Daily Quests -->
     <DailyQuests class="mb-5"></DailyQuests>
+
+    <div v-if="hasPlus && plusBenefits.canClaimGold" class="text-center mb-5">
+      <button
+        v-on:click="claimDailyGold()"
+        type="button"
+        class="btn btn-primary"
+      >
+        Plus Benefits - Claim Daily 100 Gold
+      </button>
+    </div>
 
     <!-- Recent Games -->
     <div class="d-flex justify-content-between align-items-center">
@@ -25,12 +37,14 @@
 <script>
 import DailyQuests from "../quests/DailyQuests.vue";
 import LoginQuests from "../quests/LoginQuests.vue";
+import WelcomeQuests from "../quests/WelcomeQuests.vue";
 import PlayerGamesList from "../player/PlayerGamesList.vue";
 
 export default {
   components: {
     DailyQuests,
     LoginQuests,
+    WelcomeQuests,
     PlayerGamesList,
   },
 
@@ -38,6 +52,7 @@ export default {
     error: "",
     games: [],
     playerStats: {},
+    plusBenefits: {},
     gamesLoading: true,
     secondsUntilReset: 0,
   }),
@@ -45,6 +60,31 @@ export default {
   computed: {
     steamID() {
       return this.$store.state.auth.userSteamID;
+    },
+    hasPlus() {
+      return this.$store.state.auth.hasPlus;
+    },
+  },
+
+  methods: {
+    getPlusBenefits() {
+      fetch(`/api/players/${this.steamID}/plus_benefits`)
+        .then((res) => res.json())
+        .then((plusBenefits) => {
+          this.plusBenefits = plusBenefits;
+        });
+    },
+    claimDailyGold() {
+      fetch(`/api/players/${this.steamID}/claim_daily_gold`, { method: "post" })
+        .then((res) => res.json())
+        .then(() => {
+          this.plusBenefits.canClaimGold = false;
+          this.getPlusBenefits();
+          this.$store.dispatch("REFRESH_PLAYER");
+        })
+        .catch((err) => {
+          console.error("Error fetching player stats", err);
+        });
     },
   },
 
@@ -64,6 +104,10 @@ export default {
       .catch((err) => {
         console.error("Error fetching player stats", err);
       });
+
+    if (this.hasPlus) {
+      this.getPlusBenefits();
+    }
   },
 };
 </script>

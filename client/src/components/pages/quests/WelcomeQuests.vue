@@ -1,11 +1,11 @@
 <template>
   <div
+    v-if="!loading && quests.length > 0"
     style="background-color: #222e3b; border: solid 1.1px #364552"
     class="pb-2"
   >
-    <div class="d-flex justify-content-between px-3 py-3">
-      <span>Login ({{ numCompleted }}/7)</span>
-      <!-- <span>{{ daysUntilMonday }} day(s) left</span> -->
+    <div class="px-3 py-3">
+      <span>Welcome Quests</span>
     </div>
     <div
       v-if="loading"
@@ -29,13 +29,19 @@
     >
       <div
         v-for="quest in quests"
-        :key="quest.login_quest_id"
+        :key="quest.welcome_quest_id"
         class="mx-3 single-quest"
       >
         <div v-if="quest.claimed" class="overlay"></div>
-        <div class="quest-xp-text text-center p-3">
-          {{ quest.xp_reward }} XP
+        <div v-if="quest.coin_reward > 0" class="quest-xp-text text-center p-3">
+          {{ quest.coin_reward }} Coins
         </div>
+        <img
+          style="height: 48px; width: 100%; object-fit: cover"
+          v-if="quest.day === 7"
+          :src="require('../../../assets/images/cosmetics/card_aghanim.png')"
+          alt="Aghanim"
+        />
         <div class="text-center quest-xp py-1">
           Day {{ quest.day }}
           <i v-if="quest.claimed" class="fas fa-check ml-1"></i>
@@ -43,7 +49,7 @@
         <div class="text-center">
           <button
             v-on:click="claimQuest(quest)"
-            v-if="quest.completed && !quest.claimed"
+            v-if="!quest.claimed && quest.can_claim"
             type="button"
             class="btn btn-primary mt-2"
           >
@@ -62,28 +68,15 @@ export default {
     showError: false,
     quests: [],
     loading: true,
-    numCompleted: 0,
-    daysUntilMonday: 0,
   }),
 
   created() {
-    this.getLoginQuests();
-    this.tryComplete();
-
-    this.daysUntilMonday = this.getDaysUntilMonday();
+    this.getQuests();
   },
 
   methods: {
-    getDaysUntilMonday() {
-      const today = new Date();
-      const day = today.getDay();
-      const diff = (day < 1 ? 7 : 0) + 1 - day;
-
-      return 7 + diff;
-    },
-    getLoginQuests() {
-      // time request
-      fetch(`/api/players/${this.$store.state.auth.userSteamID}/login_quests`)
+    getQuests() {
+      fetch(`/api/players/${this.$store.state.auth.userSteamID}/welcome_quests`)
         .then(
           (res) => res.json(),
           (err) => {
@@ -95,37 +88,25 @@ export default {
         .then((quests) => {
           this.loading = false;
           this.quests = quests;
-          this.numCompleted = quests.filter((quest) => quest.completed).length;
         })
         .catch((err) => {
           this.error = err;
           this.showError = true;
         });
     },
-    tryComplete() {
-      // time request
-      fetch(
-        `/api/players/${this.$store.state.auth.userSteamID}/login_quests/try_complete`,
-        { method: "post" }
-      )
-        .then((res) => res.json())
-        .then((completed) => {
-          if (completed) this.getLoginQuests();
-        });
-    },
     claimQuest(quest) {
-      const { login_quest_id } = quest;
+      const { welcome_quest_id } = quest;
       this.quests = this.quests.map((q) =>
-        q.login_quest_id === login_quest_id ? { ...q, claimed: true } : q
+        q.welcome_quest_id === welcome_quest_id ? { ...q, claimed: true } : q
       );
       fetch(
-        `/api/players/${this.$store.state.auth.userSteamID}/login_quests/claim?questID=${login_quest_id}`,
+        `/api/players/${this.$store.state.auth.userSteamID}/welcome_quests/claim?questID=${welcome_quest_id}`,
         { method: "post" }
       )
         .then((res) => res.json())
         .then(() => {
-          this.getLoginQuests();
-          this.$store.dispatch("REFRESH_BATTLE_PASS");
+          this.getQuests();
+          this.$store.dispatch("REFRESH_PLAYER");
         })
         .catch((err) => {
           this.error = err;

@@ -4,27 +4,7 @@
     <div v-if="loading" class="d-flex justify-content-center mb-3">
       <b-spinner label="Loading..."></b-spinner>
     </div>
-    <table v-if="!loading" class="table mx-auto mb-3" style="max-width: 600px">
-      <tbody>
-        <tr>
-          <td class="tb-head">MMR</td>
-          <td class="tb-head">games</td>
-          <td class="tb-head">Avg Place</td>
-          <td class="tb-head">Placements</td>
-        </tr>
-        <tr>
-          <td>{{ playerStats.mmr }}</td>
-          <td>{{ playerStats.games }}</td>
-          <td>{{ playerStats.results.avg_place }}</td>
-          <td>
-            <PlacemementGraph
-              style="margin: auto; width: fit-content"
-              :placements="playerStats.results.placements"
-            ></PlacemementGraph>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <PlayerStats :stats="playerStats" :loading="loading"></PlayerStats>
     <b-tabs
       v-if="!loading"
       content-class="mt-3"
@@ -43,13 +23,13 @@
 <script>
 import GodStats from "../stats/GodStats.vue";
 import AbilityStats from "../stats/AbilityStats.vue";
-import PlacemementGraph from "../stats/components/PlacementGraph.vue";
+import PlayerStats from "../player/components/PlayerStats.vue";
 
 export default {
   components: {
     GodStats,
     AbilityStats,
-    PlacemementGraph,
+    PlayerStats,
   },
 
   data: () => ({

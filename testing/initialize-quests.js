@@ -3,8 +3,8 @@ const players = require("../db/players");
 
 const achievements = require("./data/quests/achievements");
 const dailyQuests = require("./data/quests/daily_quests");
-// const weeklyQuests = require("./data/quests/weekly_quests");
 const loginQuests = require("./data/quests/login_quests");
+const welcomeQuests = require("./data/quests/welcome_quests");
 
 async function InitializeQuests() {
   try {
@@ -37,7 +37,25 @@ async function InitializeLoginQuests() {
   }
 }
 
+async function InitializeWelcomeQuests() {
+  try {
+    await quests.clearWelcomeQuests();
+    for (const quest of welcomeQuests) {
+      const { day, coins, xp } = quest;
+      await quests.createWelcomeQuest(day, coins, xp);
+    }
+    const steamIDs = await players.getAllSteamIds();
+    for (const steamID of steamIDs) {
+      await players.resetWelcomeQuests(steamID);
+    }
+    console.log("Welcome quests initialized");
+  } catch (error) {
+    throw error;
+  }
+}
+
 (async function () {
   // await InitializeQuests();
   // await InitializeLoginQuests();
+  await InitializeWelcomeQuests();
 })();

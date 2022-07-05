@@ -255,6 +255,21 @@ CREATE TABLE IF NOT EXISTS player_login_quests (
   completed BOOLEAN DEFAULT FALSE
 );
 
+DROP TABLE IF EXISTS welcome_quests CASCADE;
+CREATE TABLE IF NOT EXISTS welcome_quests (
+  welcome_quest_id SERIAL PRIMARY KEY,
+  day INTEGER NOT NULL UNIQUE,
+  coin_reward INTEGER DEFAULT 0,
+  xp_reward INTEGER DEFAULT 0
+);
+
+DROP TABLE IF EXISTS player_welcome_quests CASCADE;
+CREATE TABLE IF NOT EXISTS player_welcome_quests (
+  steam_id TEXT REFERENCES players (steam_id) ON UPDATE CASCADE,
+  welcome_quest_id INTEGER REFERENCES welcome_quests (welcome_quest_id) ON UPDATE CASCADE,
+  claim_date TIMESTAMPTZ
+);
+
 DROP TABLE IF EXISTS drop_type_rewards;
 CREATE TABLE IF NOT EXISTS drop_type_rewards (
   drop_type TEXT NOT NULL,
@@ -315,3 +330,4 @@ CREATE TABLE IF NOT EXISTS player_logs (
   log_data JSON,
   log_time TIMESTAMPTZ DEFAULT NOW()
 );
+CREATE INDEX "IDX_player_logs_event" ON player_logs(log_event);

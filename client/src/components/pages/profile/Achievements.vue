@@ -104,6 +104,7 @@ export default {
           if (res.success) {
             this.getAchievements();
             this.$store.dispatch("REFRESH_BATTLE_PASS");
+            this.$store.dispatch("REFRESH_PLAYER");
           }
         })
         .catch((err) => {

@@ -338,6 +338,7 @@ export default {
           } else {
             this.success = true;
             this.$store.dispatch("REFRESH_BATTLE_PASS");
+            this.$store.dispatch("REFRESH_PLAYER");
             this.getPlayerCosmetics();
           }
         })

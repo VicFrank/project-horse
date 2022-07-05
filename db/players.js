@@ -4,6 +4,7 @@ const Logs = require("./logs");
 const Quests = require("./quests");
 const BattlePasses = require("./battlepass");
 const mmr = require("../mmr/mmr");
+const moment = require("moment");
 
 module.exports = {
   // --------------------------------------------------
@@ -90,6 +91,21 @@ module.exports = {
         rank,
         achievements_to_claim: achievementsToClaim,
       };
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async hasPlus(steamID) {
+    try {
+      const { rows } = await query(
+        `SELECT
+          plus_expiration IS NOT NULL AND plus_expiration > NOW() as has_plus
+         FROM players WHERE steam_id = $1`,
+        [steamID]
+      );
+      const player = rows[0];
+      return player?.has_plus ?? false;
     } catch (error) {
       throw error;
     }
@@ -299,6 +315,62 @@ module.exports = {
   },
 
   // --------------------------------------------------
+  // Player logs based functions
+  // --------------------------------------------------
+  async canUseWeeklyDoubleDown(steamID) {
+    try {
+      const hasPlus = await this.hasPlus(steamID);
+      if (hasPlus) return false;
+      const event = await Logs.getLastLogEvent(steamID, "weekly_double_down");
+      if (!event) return true;
+      // check if it has been a week since we used our double down
+      const lastWeek = moment(event.log_time).add(7, "days");
+      if (moment().isAfter(lastWeek)) return true;
+      return false;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async useWeeklyDoubleDown(steamID) {
+    try {
+      const canUse = await this.canUseWeeklyDoubleDown(steamID);
+      if (!canUse) throw new Error("Cannot use weekly double down");
+      await Logs.addTransactionLog(steamID, "weekly_double_down");
+      return true;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async canClaimDailyPlusGold(steamID) {
+    try {
+      const hasPlus = await this.hasPlus(steamID);
+      if (!hasPlus) return false;
+      const event = await Logs.getLastLogEvent(steamID, "daily_plus_gold");
+      if (!event) return true;
+      // check if the last event was the same day as today
+      const usedToday = moment(event.log_time).isSame(moment(), "day");
+      if (usedToday) return false;
+      return true;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async claimDailyPlusGold(steamID) {
+    try {
+      const canClaim = await this.canClaimDailyPlusGold(steamID);
+      if (!canClaim) throw new Error("Cannot claim daily plus gold");
+      await this.modifyCoins(steamID, 100);
+      await Logs.addTransactionLog(steamID, "daily_plus_gold");
+      return true;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  // --------------------------------------------------
   // Player Write Functions
   // --------------------------------------------------
 
@@ -311,6 +383,7 @@ module.exports = {
 
       await this.createInitialDailyQuests(steamID, 3);
       await this.resetLoginQuests(steamID);
+      await this.resetWelcomeQuests(steamID);
       await this.initializeAchievements(steamID);
 
       const activeBattlePass = await BattlePasses.getActiveBattlePass();
@@ -1658,6 +1731,107 @@ module.exports = {
           break;
       }
       await this.incrementQuestProgress(steamID, questID, progress);
+    }
+  },
+
+  //////////////////////////////////////////////////////////////////////////////
+  // Welcome quests
+  //////////////////////////////////////////////////////////////////////////////
+
+  async resetWelcomeQuests(steamID) {
+    try {
+      await query(`DELETE FROM player_welcome_quests WHERE steam_id = $1`, [
+        steamID,
+      ]);
+      const quests = await Quests.getWelcomeQuests();
+
+      for (const quest of quests) {
+        await query(
+          `INSERT INTO player_welcome_quests (steam_id, welcome_quest_id) VALUES ($1, $2)`,
+          [steamID, quest.welcome_quest_id]
+        );
+      }
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getWelcomeQuests(steamID) {
+    try {
+      const { rows } = await query(
+        `SELECT player_welcome_quests.welcome_quest_id,
+          welcome_quests.day, welcome_quests.coin_reward, claim_date IS NOT NULL as claimed
+        FROM player_welcome_quests JOIN welcome_quests USING (welcome_quest_id)
+        WHERE steam_id = $1
+        ORDER BY day ASC`,
+        [steamID]
+      );
+      const lastCompletedQuest = rows.reverse().find((quest) => quest.claimed);
+      rows.reverse();
+      if (!lastCompletedQuest && rows[0]) rows[0].can_claim = true;
+      else {
+        const lastCompletedQuestDate = lastCompletedQuest.claim_date;
+        // check if the last completed quest is at least a day old
+        const canClaimNext =
+          lastCompletedQuestDate < new Date(Date.now() - 86400000);
+        if (canClaimNext) {
+          const indexOfLastCompletedQuest = rows.indexOf(lastCompletedQuest);
+          const nextQuestIndex = indexOfLastCompletedQuest + 1;
+          if (nextQuestIndex < rows.length) {
+            rows[nextQuestIndex].can_claim = true;
+          }
+        }
+      }
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getWelcomeQuest(steamID, questID) {
+    try {
+      const { rows } = await query(
+        `SELECT player_welcome_quests.welcome_quest_id,
+          welcome_quests.day, welcome_quests.coin_reward, claim_date IS NOT NULL as claimed
+        FROM player_welcome_quests JOIN welcome_quests USING (welcome_quest_id)
+        WHERE steam_id = $1 AND welcome_quest_id = $2`,
+        [steamID, questID]
+      );
+      return rows[0];
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async claimWelcomeQuests(steamID, questID) {
+    try {
+      const quest = await this.getWelcomeQuest(steamID, questID);
+      if (quest.claimed) throw new Error("Quest has already been claimed");
+      const welcomeQuests = await this.getWelcomeQuests(steamID);
+      const canClaimQuest = welcomeQuests.find((quest) => quest.can_claim);
+      if (!canClaimQuest) throw new Error("Cannot complete this quest yet");
+      if (quest.day !== canClaimQuest.day)
+        throw new Error("This isn't even the right quest to finish you dingus");
+
+      await query(
+        `UPDATE player_welcome_quests
+        SET claim_date = NOW()
+        WHERE steam_id = $1 AND welcome_quest_id = $2`,
+        [steamID, questID]
+      );
+      const { coin_reward, xp_reward } = quest;
+
+      await this.modifyCoins(steamID, coin_reward);
+      await this.addBattlePassXp(steamID, xp_reward);
+
+      // For the last quest, get an aghanim god card
+      if (quest.day === 7) {
+        await this.giveCosmeticByName(steamID, "card_aghanim");
+      }
+
+      return true;
+    } catch (error) {
+      throw error;
     }
   },
 
