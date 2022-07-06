@@ -111,7 +111,7 @@
                       v-if="isUsable(cosmetic)"
                       class="mr-2"
                       variant="primary"
-                      @click="consumeItem(cosmetic)"
+                      @click="consumeItem(cosmetic, i)"
                       >{{ $t("armory.use") }}</b-button
                     >
                   </div>
@@ -325,7 +325,7 @@ export default {
           this.showError = true;
         });
     },
-    consumeItem(cosmetic) {
+    consumeItem(cosmetic, i) {
       fetch(`/api/players/${this.steamID}/use_item/${cosmetic.cosmetic_id}`, {
         method: "post",
         headers: { "Content-Type": "application/json" },
@@ -337,6 +337,7 @@ export default {
             this.showError = true;
           } else {
             this.success = true;
+            this.hideModal(i);
             this.$store.dispatch("REFRESH_BATTLE_PASS");
             this.$store.dispatch("REFRESH_PLAYER");
             this.getPlayerCosmetics();
