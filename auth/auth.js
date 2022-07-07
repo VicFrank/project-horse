@@ -4,6 +4,7 @@ function checkServerKey(req) {
   const serverKey = req.body.server_key;
   const serverKey2 = req.get("server_key");
   const serverKey3 = req.params.server_key;
+  const serverKey4 = req.query.server_key;
   const dedicatedServerKey = process.env.IS_PRODUCTION
     ? keys.dedicatedServerKey
     : keys.toolsKey;
@@ -12,9 +13,11 @@ function checkServerKey(req) {
     serverKey === "Invalid_NotOnDedicatedServer" ||
     serverKey2 === "Invalid_NotOnDedicatedServer" ||
     serverKey3 === "Invalid_NotOnDedicatedServer" ||
+    serverKey4 === "Invalid_NotOnDedicatedServer" ||
     serverKey === dedicatedServerKey ||
     serverKey2 === dedicatedServerKey ||
-    serverKey3 === dedicatedServerKey
+    serverKey3 === dedicatedServerKey ||
+    serverKey4 === dedicatedServerKey
   );
 }
 

@@ -83,8 +83,8 @@ module.exports = {
         return achievement.quest_completed && !achievement.claimed;
       }).length;
 
-      player.badge = mmr.getRankBadge(player.mmr);
-      player.pips = mmr.getRankPips(player.mmr);
+      player.badge = mmr.getRankBadge(player.ladder_mmr);
+      player.pips = mmr.getRankPips(player.ladder_mmr);
 
       return {
         ...player,
