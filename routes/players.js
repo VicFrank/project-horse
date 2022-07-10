@@ -404,7 +404,7 @@ router.get("/:steamID/battle_pass", auth.userAuth, async (req, res) => {
   }
 });
 
-router.get("/:steamID/levels", auth.userAuth, async (req, res) => {
+router.get("/:steamID/battle_pass/levels", auth.userAuth, async (req, res) => {
   try {
     const steamID = req.params.steamID;
     const levels = await players.getBattlePassLevels(steamID);

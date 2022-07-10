@@ -111,7 +111,7 @@ export default {
 
   methods: {
     fetchBattlePass() {
-      fetch(`/api/players/${this.steamID}/levels`)
+      fetch(`/api/players/${this.steamID}/battle_pass/levels`)
         .then((res) => res.json())
         .then((rewards) => {
           this.rewards = rewards;
