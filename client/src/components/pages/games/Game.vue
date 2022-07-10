@@ -54,7 +54,8 @@ export default {
         if (!gameData) this.error = "Game not found";
         else {
           this.game = gameData;
-          if (gameData.players[0].mmr_change != undefined) this.showMMR = true;
+          if (gameData.players[0].ladder_mmr_change != undefined)
+            this.showMMR = true;
         }
       })
       .catch(() => {

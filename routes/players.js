@@ -47,10 +47,10 @@ router.get("/:steamID", async (req, res) => {
 router.get("/:steamID/plus_benefits", async (req, res) => {
   try {
     const steamID = req.params.steamID;
-    const doubleDown = await players.canUseWeeklyDoubleDown(steamID);
+    const hasWeeklyDoubleDown = await players.canUseWeeklyDoubleDown(steamID);
     const canClaimGold = await players.canClaimDailyPlusGold(steamID);
     res.status(200).json({
-      doubleDown,
+      hasWeeklyDoubleDown,
       canClaimGold,
     });
   } catch (error) {
@@ -403,6 +403,45 @@ router.get("/:steamID/battle_pass", auth.userAuth, async (req, res) => {
     res.status(500).send({ message: "Server Error" });
   }
 });
+
+router.get("/:steamID/levels", auth.userAuth, async (req, res) => {
+  try {
+    const steamID = req.params.steamID;
+    const levels = await players.getBattlePassLevels(steamID);
+    res.status(200).json(levels);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Server Error" });
+  }
+});
+
+// /api/players/:steamID/battle_pass/claim?level=:level
+router.post("/:steamID/battle_pass/claim", auth.userAuth, async (req, res) => {
+  try {
+    const steamID = req.params.steamID;
+    const level = req.query.level;
+    const claimed = await players.claimBattlePassReward(steamID, level);
+    res.status(200).json(claimed);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Server Error" });
+  }
+});
+
+router.post(
+  "/:steamID/battle_pass/claim_all",
+  auth.userAuth,
+  async (req, res) => {
+    try {
+      const steamID = req.params.steamID;
+      const claimedRewards = await players.claimAllBattlePassRewards(steamID);
+      res.status(200).json(claimedRewards);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({ message: "Server Error" });
+    }
+  }
+);
 
 router.post(
   "/:steamID/open_chest/:chestid",

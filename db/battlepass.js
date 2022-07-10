@@ -84,9 +84,9 @@ module.exports = {
       const { rows } = await query(
         `
         SELECT
-          battle_pass_levels.*,
+          battle_pass_levels.next_level_xp, battle_pass_levels.total_xp, battle_pass_levels.bp_level,
           battle_pass_cosmetic_rewards.amount, battle_pass_cosmetic_rewards.free,
-          cosmetics.*
+          cosmetics.cosmetic_id, cosmetics.cosmetic_name, cosmetics.rarity
         FROM battle_pass_levels
         LEFT JOIN battle_pass_cosmetic_rewards
         USING (battle_pass_id, bp_level)
@@ -151,7 +151,7 @@ module.exports = {
     }
   },
 
-  async getBattlePassRewardsFromRange(minLevel, maxLevel) {
+  async getRewardsFromRange(minLevel, maxLevel) {
     try {
       const { rows } = await query(
         `SELECT coins_reward FROM battle_pass_levels WHERE bp_level >= $1 AND bp_level <= $2`,
@@ -163,7 +163,7 @@ module.exports = {
 
       let { rows: cosmetics } = await query(
         `
-        SELECT cosmetic_id, amount, free
+        SELECT cosmetic_id, amount, free, bp_level
         FROM battle_pass_cosmetic_rewards
         WHERE bp_level >= $1 AND bp_level <= $2`,
         [minLevel, maxLevel]
@@ -180,6 +180,7 @@ module.exports = {
             cosmetics.push({
               cosmetic_id: diamondGamblerAvatar.cosmetic_id,
               free: false,
+              bp_level: i,
               amount: 1,
             });
           } else if (i === 1000) {
@@ -189,18 +190,21 @@ module.exports = {
             cosmetics.push({
               cosmetic_id: gabenAvatar.cosmetic_id,
               free: false,
+              bp_level: i,
               amount: 1,
             });
           } else if (i % 10 === 0) {
             cosmetics.push({
               cosmetic_id: goldChest.cosmetic_id,
               free: false,
+              bp_level: i,
               amount: 1,
             });
           } else if (i % 5 === 0) {
             cosmetics.push({
               cosmetic_id: basicChest.cosmetic_id,
               free: false,
+              bp_level: i,
               amount: 1,
             });
           }

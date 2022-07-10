@@ -213,6 +213,13 @@ CREATE TABLE IF NOT EXISTS player_battle_pass (
   total_xp INTEGER DEFAULT 0
 );
 
+DROP TABLE IF EXISTS player_claimed_battle_pass_rewards CASCADE;
+CREATE TABLE IF NOT EXISTS player_claimed_battle_pass_rewards (
+  steam_id TEXT REFERENCES players (steam_id) ON UPDATE CASCADE,
+  battle_pass_id INTEGER REFERENCES battle_pass (battle_pass_id) ON UPDATE CASCADE,
+  bp_level INTEGER NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS quests (
   quest_id SERIAL PRIMARY KEY,
   quest_name TEXT NOT NULL,

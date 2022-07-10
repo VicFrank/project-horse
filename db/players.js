@@ -541,6 +541,156 @@ module.exports = {
     }
   },
 
+  async getClaimedBattlePassRewards(steamID, bpID) {
+    try {
+      const { rows } = await query(
+        `SELECT * FROM player_claimed_battle_pass_rewards WHERE steam_id = $1 AND battle_pass_id = $2`,
+        [steamID, bpID]
+      );
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async hasClaimedReward(steamID, bpID, level) {
+    try {
+      const { rows } = await query(
+        `SELECT * FROM player_claimed_battle_pass_rewards
+        WHERE steam_id = $1 AND battle_pass_id = $2 AND bp_level = $3`,
+        [steamID, bpID, level]
+      );
+      const hasClaimed = rows.length > 0;
+      return hasClaimed;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  // get all level rewards (up to 50) and if they've been claimed
+  async getBattlePassLevels(steamID) {
+    try {
+      const activeBattlePass = await BattlePasses.getActiveBattlePass();
+      const { bp_level, unlocked, battle_pass_id } =
+        await this.getActiveBattlePass(steamID);
+      const battlePassID = activeBattlePass.battle_pass_id;
+      const levels = await BattlePasses.getBattlePassLevelsAndRewards(
+        battlePassID
+      );
+      const claimedRewards = await this.getClaimedBattlePassRewards(
+        steamID,
+        battle_pass_id
+      );
+      const playerLevels = levels.map((level) => {
+        const claimed = claimedRewards.some(
+          (reward) => reward.bp_level === level.bp_level
+        );
+        const can_claim =
+          level.bp_level <= bp_level && !claimed && (level.free || unlocked);
+        return {
+          ...level,
+          claimed,
+          can_claim,
+        };
+      });
+      return playerLevels;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async addPlayerClaimedRewardRow(steamID, bpID, level) {
+    try {
+      await query(
+        `INSERT INTO player_claimed_battle_pass_rewards (steam_id, bp_level, battle_pass_id)
+        VALUES ($1, $2, $3)`,
+        [steamID, level, bpID]
+      );
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async claimBattlePassReward(steamID, level) {
+    try {
+      const { unlocked, battle_pass_id } = await this.getActiveBattlePass(
+        steamID
+      );
+      const hasClaimed = await this.hasClaimedReward(
+        steamID,
+        battle_pass_id,
+        level
+      );
+      if (hasClaimed) throw new Error("You have already claimed this reward.");
+
+      const { cosmetics } = await BattlePasses.getRewardsFromRange(
+        level,
+        level
+      );
+      if (cosmetics.length === 0)
+        throw new Error("No cosmetics to claim at this level.");
+
+      const { cosmetic_id, free } = cosmetics[0];
+      if (!free) {
+        if (!unlocked)
+          throw new Error(
+            "You must upgrade your Battle Pass to claim this reward."
+          );
+      }
+
+      const activeBattlePass = await BattlePasses.getActiveBattlePass();
+      await this.addPlayerClaimedRewardRow(
+        steamID,
+        activeBattlePass.battle_pass_id,
+        level
+      );
+
+      await this.giveCosmeticByID(steamID, cosmetic_id);
+      return true;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async claimAllBattlePassRewards(steamID) {
+    try {
+      const battlePass = await this.getActiveBattlePass(steamID);
+      const { unlocked, battle_pass_id } = await this.getActiveBattlePass(
+        steamID
+      );
+      const { cosmetics } = await BattlePasses.getRewardsFromRange(
+        0,
+        battlePass.bp_level
+      );
+      const claimedRewards = await this.getClaimedBattlePassRewards(
+        steamID,
+        battle_pass_id
+      );
+
+      const claimedCosmetics = [];
+      for (const cosmetic of cosmetics) {
+        const { cosmetic_id, free, bp_level } = cosmetic;
+        if (!free && !unlocked) continue;
+        const hasClaimed = claimedRewards.some(
+          (reward) => reward.bp_level === bp_level
+        );
+        if (hasClaimed) continue;
+
+        await this.addPlayerClaimedRewardRow(
+          steamID,
+          activeBattlePass.battle_pass_id,
+          level
+        );
+        await this.giveCosmeticByID(steamID, cosmetic_id);
+        claimedCosmetics.push(cosmetic);
+      }
+
+      return claimedCosmetics;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async unlockBattlePass(steamID) {
     try {
       const battlePass = await this.getActiveBattlePass(steamID);
@@ -553,22 +703,6 @@ module.exports = {
         [steamID]
       );
 
-      // get all the non-free battle pass rewards we haven't claimed yet
-      const bpLevel = battlePass.bp_level;
-      const rewards = await BattlePasses.getBattlePassRewardsFromRange(
-        0,
-        bpLevel
-      );
-      const { cosmetics } = rewards;
-
-      for (const reward of cosmetics) {
-        const { cosmetic_id, amount, free } = reward;
-        if (!free) {
-          for (let i = 0; i < amount; i++) {
-            await this.giveCosmeticByID(steamID, cosmetic_id);
-          }
-        }
-      }
       return true;
     } catch (error) {
       throw error;
@@ -625,24 +759,6 @@ module.exports = {
       `,
         [steamID, currentLevel]
       );
-
-      const rewards = await BattlePasses.getBattlePassRewardsFromRange(
-        previousLevel + 1,
-        currentLevel
-      );
-      const { cosmetics, coins } = rewards;
-
-      const battlePass = await this.getActiveBattlePass(steamID);
-      const isUnlocked = battlePass.unlocked;
-
-      for (const reward of cosmetics) {
-        const { cosmetic_id, free } = reward;
-        if (free || isUnlocked) {
-          await this.giveCosmeticByID(steamID, cosmetic_id);
-        }
-      }
-
-      if (coins > 0) await this.modifyCoins(steamID, coins);
 
       return updatedBP;
     } catch (error) {
@@ -1759,7 +1875,7 @@ module.exports = {
   async getWelcomeQuests(steamID) {
     try {
       const { rows } = await query(
-        `SELECT player_welcome_quests.welcome_quest_id,
+        `SELECT player_welcome_quests.welcome_quest_id, claim_date,
           welcome_quests.day, welcome_quests.coin_reward, claim_date IS NOT NULL as claimed
         FROM player_welcome_quests JOIN welcome_quests USING (welcome_quest_id)
         WHERE steam_id = $1

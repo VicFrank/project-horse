@@ -61,11 +61,9 @@ router.get("/:gameid", cache("1 hour"), async (req, res) => {
 
     const game = await games.getGame(gameID);
     if (!game) return res.status(404).send({ message: "Game not found" });
-    if (!auth.isAdmin(req)) {
-      for (const player of game.players) {
-        delete player.mmr_change;
-        delete player.mmr;
-      }
+    for (const player of game.players) {
+      delete player.mmr_change;
+      delete player.mmr;
     }
 
     res.status(200).json(game);

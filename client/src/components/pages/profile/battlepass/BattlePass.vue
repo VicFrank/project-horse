@@ -22,43 +22,60 @@
               <div
                 v-bind:class="{
                   'lvl-wrapper': true,
-                  'lvl-locked': i >= bpLevel || getLevelLocked(i),
+                  'lvl-locked': i > bpLevel || getLevelLocked(i),
                 }"
               >
-                <template v-if="loading">
-                  <img src="./images/bp_placeholder.png" alt="placeholder" />
-                </template>
-                <template v-else>
-                  <img
-                    v-if="getItemImage(i)"
-                    :src="getItemImage(i)"
-                    :alt="getRewardItem(i)"
-                    @click="$bvModal.show(`bp-modal-${i}`)"
-                  />
-                  <b-modal
-                    v-if="getRewardItem(i)"
-                    :id="`bp-modal-${i}`"
-                    centered
-                    hide-header
-                    hide-footer
-                  >
-                    <h2 class="mb-2 text-center">
-                      {{ getTranslatedItemName(i) }}
-                    </h2>
+                <div>
+                  <template v-if="loading">
+                    <img src="./images/bp_placeholder.png" alt="placeholder" />
+                  </template>
+                  <template v-else>
+                    <img
+                      v-if="getItemImage(i)"
+                      :src="getItemImage(i)"
+                      :alt="getRewardItem(i)"
+                      @click="$bvModal.show(`bp-modal-${i}`)"
+                    />
+                    <b-modal
+                      v-if="getRewardItem(i)"
+                      :id="`bp-modal-${i}`"
+                      centered
+                      hide-header
+                      hide-footer
+                    >
+                      <h2 class="mb-2 text-center">
+                        {{ getTranslatedItemName(i) }}
+                      </h2>
 
-                    <div class="text-center">
-                      <div>
-                        <img
-                          v-if="getItemImage(i)"
-                          :src="getItemImage(i)"
-                          :alt="getRewardItem(i)"
-                          class="mb-2"
-                        />
+                      <div class="text-center">
+                        <div>
+                          <img
+                            v-if="getItemImage(i)"
+                            :src="getItemImage(i)"
+                            :alt="getRewardItem(i)"
+                            class="mb-2"
+                          />
+                        </div>
+                        {{ getTranslatedDescription(i) }}
                       </div>
-                      {{ getTranslatedDescription(i) }}
-                    </div>
-                  </b-modal>
-                </template>
+                    </b-modal>
+                  </template>
+                </div>
+                <div class="claim-button">
+                  <b-button
+                    size="sm"
+                    variant="primary"
+                    @click="claimReward(i)"
+                    v-if="getLevelCanClaim(i)"
+                  >
+                    Claim
+                    <b-spinner
+                      small
+                      v-if="levelLoading(i)"
+                      :label="Loading"
+                    ></b-spinner>
+                  </b-button>
+                </div>
               </div>
             </div>
           </div>
@@ -77,13 +94,7 @@ export default {
   }),
 
   created() {
-    fetch(`/api/battle_pass/levels`)
-      .then((res) => res.json())
-      .then((rewards) => {
-        this.rewards = rewards;
-        this.loading = false;
-      })
-      .catch((err) => (this.error = err));
+    this.fetchBattlePass();
   },
 
   computed: {
@@ -93,14 +104,43 @@ export default {
     bpUpgraded() {
       return this.$store.getters.bpUpgraded;
     },
+    steamID() {
+      return this.$store.state.auth.userSteamID;
+    },
   },
 
   methods: {
+    fetchBattlePass() {
+      fetch(`/api/players/${this.steamID}/levels`)
+        .then((res) => res.json())
+        .then((rewards) => {
+          this.rewards = rewards;
+          this.loading = false;
+        })
+        .catch((err) => (this.error = err));
+    },
+    claimReward(level) {
+      const reward = this.getRewards(level);
+      reward.loading = true;
+      fetch(`/api/players/${this.steamID}/battle_pass/claim?level=${level}`, {
+        method: "post",
+      })
+        .then((res) => res.json())
+        .then((claimed) => {
+          reward.claimed = claimed;
+          reward.loading = false;
+          this.fetchBattlePass();
+        })
+        .catch(() => (level.loading = false));
+    },
     isEven(number) {
       return number % 2 === 0;
     },
     getRewards(level) {
       return this.rewards.find((reward) => reward.bp_level === level);
+    },
+    levelLoading(level) {
+      return this.getRewards(level)?.loading;
     },
     getRewardItem(level) {
       const reward = this.getRewards(level)?.cosmetic_name;
@@ -128,6 +168,14 @@ export default {
       if (!this.getRewards(level)) return false;
       if (this.bpUpgraded) return false;
       return !this.getRewards(level).free;
+    },
+    getLevelClaimed(level) {
+      if (!this.getRewards(level)) return false;
+      return this.getRewards(level).claimed;
+    },
+    getLevelCanClaim(level) {
+      if (!this.getRewards(level)) return false;
+      return this.getRewards(level).can_claim;
     },
     hasItemReward(level) {
       return this.getRewards(level)?.cosmetic_id !== null;
@@ -302,6 +350,20 @@ export default {
 
 .lvl-locked:hover {
   filter: grayscale(0%);
+}
+
+.left .claim-button {
+  width: 137px;
+  margin-left: auto;
+  margin-top: 0.25rem;
+  text-align: center;
+}
+
+.right .claim-button {
+  width: 137px;
+  margin-right: auto;
+  margin-top: 0.25rem;
+  text-align: center;
 }
 
 /* Media queries - Responsive timeline on screens less than 600px wide */
