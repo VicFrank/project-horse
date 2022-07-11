@@ -5,6 +5,7 @@ const Quests = require("./quests");
 const BattlePasses = require("./battlepass");
 const mmr = require("../mmr/mmr");
 const moment = require("moment");
+const { addTransactionLog } = require("./logs");
 
 module.exports = {
   // --------------------------------------------------
@@ -718,7 +719,7 @@ module.exports = {
    * @param {*} xp
    */
   async addBattlePassXp(steamID, xp) {
-    if (xp <= 0) return;
+    if (xp <= 0 || xp == undefined) return;
 
     try {
       const { rows } = await query(
@@ -1937,6 +1938,11 @@ module.exports = {
       );
       const { coin_reward, xp_reward } = quest;
 
+      await addTransactionLog(steamID, "claim_welcome_quest", {
+        coin_reward,
+        xp_reward,
+      });
+
       await this.modifyCoins(steamID, coin_reward);
       await this.addBattlePassXp(steamID, xp_reward);
 
@@ -2042,6 +2048,11 @@ module.exports = {
         [steamID, loginQuestID]
       );
       const { coin_reward, xp_reward } = quest;
+
+      await addTransactionLog(steamID, "claim_login_quest", {
+        coin_reward,
+        xp_reward,
+      });
 
       await this.modifyCoins(steamID, coin_reward);
       await this.addBattlePassXp(steamID, xp_reward);
