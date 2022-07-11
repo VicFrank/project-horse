@@ -45,9 +45,9 @@ module.exports = {
   async getLeaderboard() {
     try {
       const { rows } = await query(`
-      select * from players
-      ORDER BY mmr DESC
-      LIMIT 100
+        SELECT * from players
+        ORDER BY (CASE WHEN ladder_mmr < 4500 THEN ladder_mmr ELSE mmr END) DESC
+        LIMIT 100
       `);
       // add index to rows
       for (let i = 0; i < rows.length; i++) {
@@ -55,8 +55,8 @@ module.exports = {
       }
       // add band and pips to each player
       for (const player of rows) {
-        player.badge = mmr.getRankBadge(player.mmr);
-        player.pips = mmr.getRankPips(player.mmr);
+        player.badge = mmr.getRankBadge(player.ladder_mmr);
+        player.pips = mmr.getRankPips(player.ladder_mmr);
       }
       return rows;
     } catch (error) {

@@ -4,20 +4,22 @@
     <table class="table m-auto">
       <thead>
         <tr>
-          <th v-t="'leaderboard.rank'"></th>
+          <th style="width: 80px" v-t="'leaderboard.rank'"></th>
+          <th style="width: 80px">Badge</th>
           <th class="text-left" v-t="'leaderboard.player'"></th>
-          <th v-t="'leaderboard.mmr'"></th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="player in players" :key="player.steam_id">
           <td>{{ player.rank }}</td>
+          <td>
+            <RankBadge :height="60" :badge="player.badge" :pips="player.pips" />
+          </td>
           <td class="text-left">
             <router-link :to="'/players/' + player.steam_id">
               {{ player.username }}
             </router-link>
           </td>
-          <td>{{ player.mmr }}</td>
         </tr>
       </tbody>
     </table>
@@ -25,7 +27,12 @@
 </template>
 
 <script>
+import RankBadge from "../../utility/RankBadge.vue";
 export default {
+  components: {
+    RankBadge,
+  },
+
   data: () => ({
     error: "",
     players: [],
