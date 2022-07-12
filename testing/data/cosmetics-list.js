@@ -695,6 +695,30 @@ module.exports = [
     equip_group: "",
     rarity: "Immortal",
   },
+  {
+    name: "card_bloodseeker",
+    type: "Card Frame",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "",
+    rarity: "Immortal",
+  },
+  {
+    name: "card_centaur",
+    type: "Card Frame",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "",
+    rarity: "Immortal",
+  },
+  {
+    name: "card_icefrog",
+    type: "Card Frame",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "",
+    rarity: "Immortal",
+  },
   /**
    * *************************
    * Finishers

@@ -6,6 +6,7 @@ const gods = require("../db/gods");
 const quests = require("../db/quests");
 const auth = require("../auth/auth");
 const apicache = require("apicache");
+const { adminAuth } = require("../auth/auth");
 
 const cache = apicache.middleware;
 
@@ -37,6 +38,18 @@ router.get("/:steamID", async (req, res) => {
         doesNotExist: true,
       });
     if (!auth.isAuthenticatedUser(req)) delete player.mmr;
+    res.status(200).json(player);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Server Error" });
+  }
+});
+
+router.post("/:steamID", auth.adminAuth, async (req, res) => {
+  try {
+    const steamID = req.params.steamID;
+    const username = req.body.username;
+    const player = await players.upsertPlayer(steamID, username);
     res.status(200).json(player);
   } catch (error) {
     console.log(error);

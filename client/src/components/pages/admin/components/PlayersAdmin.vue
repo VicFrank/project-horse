@@ -69,10 +69,8 @@
         </b-list-group>
       </b-card>
 
-      <!-- <b-card title="Transactions">
-        <b-button v-b-toggle.collapse-2 variant="primary"
-          >Transactions</b-button
-        >
+      <b-card title="Events">
+        <b-button v-b-toggle.collapse-2 variant="primary">Events</b-button>
         <b-collapse id="collapse-2" class="mt-2 mb-2">
           <b-card>
             <b-list-group-item
@@ -83,7 +81,7 @@
                 <div>
                   <div>{{ transaction.log_event }}</div>
                   <div class="faded">
-                    {{ transaction.log_time | dateFromNow }}
+                    {{ transaction.log_time.toLocaleString() }}
                   </div>
                 </div>
                 <div>
@@ -96,7 +94,7 @@
             </b-list-group-item>
           </b-card>
         </b-collapse>
-      </b-card> -->
+      </b-card>
 
       <b-card title="Cosmetics">
         <b-button v-b-toggle.collapse-1 variant="primary">Give Items</b-button>
