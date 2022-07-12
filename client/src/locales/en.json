@@ -160,6 +160,7 @@
     "card_tinker": "Tinker God",
     "card_bloodseeker": "Bloodseeker God",
     "card_centaur": "Centaur God",
+    "card_icefrog": "Icefrog God",
     "finisher_default": "Default Finisher",
     "finisher_fire": "Fire Finisher",
     "finisher_lightning": "Lightning Finisher",
@@ -395,7 +396,10 @@
     "alchemist": "Alchemist",
     "kanna": "Kanna",
     "crystalMaiden": "Crystal Maiden",
-    "tinker": "Tinker"
+    "tinker": "Tinker",
+    "bloodseeker": "Bloodseeker",
+    "centaur": "Centaur",
+    "icefrog": "Icefrog"
   },
   "abilities": {
     "custom_abaddon_aphotic_shield": "Aphotic Shield",
