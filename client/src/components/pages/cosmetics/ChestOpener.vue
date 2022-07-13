@@ -100,7 +100,7 @@ export default {
           this.items = res.items;
           this.coins = res.coins;
           this.opened = true;
-          if (res.coins) this.$store.dispatch("REFRESH_COINS");
+          this.$store.dispatch("REFRESH_PLAYER");
           this.showError = false;
           this.$emit("open");
         })

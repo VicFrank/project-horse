@@ -9,6 +9,8 @@ const state = {
   coins: 0,
   achievementsToClaim: 0,
   dailiesToClaim: 0,
+  unopenedChests: 0,
+  unclaimedBPRewards: 0,
   battlePass: {
     level: null,
     progress: null,
@@ -36,6 +38,8 @@ const getters = {
 
   achievementsToClaim: (state) => state.achievementsToClaim,
   dailiesToClaim: (state) => state.dailiesToClaim,
+  unopenedChests: (state) => state.unopenedChests,
+  unclaimedBPRewards: (state) => state.unclaimedBPRewards,
 };
 
 const mutations = {
@@ -55,12 +59,23 @@ const mutations = {
   },
   SAVE_USER(
     state,
-    { username, isAdmin, achievementsToClaim, coins, hasPlus, plusExpiration }
+    {
+      username,
+      isAdmin,
+      achievementsToClaim,
+      coins,
+      hasPlus,
+      plusExpiration,
+      unopenedChests,
+      unclaimedBPRewards,
+    }
   ) {
     state.username = username;
     state.loggedIn = true;
     state.isAdmin = isAdmin;
     state.achievementsToClaim = achievementsToClaim;
+    state.unopenedChests = unopenedChests;
+    state.unclaimedBPRewards = unclaimedBPRewards;
     state.coins = coins;
     state.hasPlus = hasPlus;
     state.plusExpiration = plusExpiration;
@@ -86,6 +101,8 @@ const actions = {
           achievements_to_claim,
           has_plus,
           plus_expiration,
+          unopenedChests,
+          unclaimedBPRewards,
         } = player;
         commit("SAVE_USER", {
           username,
@@ -94,6 +111,8 @@ const actions = {
           coins,
           hasPlus: has_plus,
           plusExpiration: plus_expiration,
+          unopenedChests,
+          unclaimedBPRewards,
         });
       })
       .catch((err) => {

@@ -151,6 +151,20 @@ module.exports = {
     }
   },
 
+  getNumClaimableRewardsAtLevel(level, unlocked) {
+    // Until level 40, there is only one reward per level for unlocked
+    if (unlocked) {
+      if (level <= 40) return level;
+      const remaining = level - 40;
+      // after 40, there is a reward every 5 levels
+      return 40 + Math.floor(remaining / 5);
+    } else {
+      // there is a reward every 5 levels until level 40, when there are no more rewards
+      level = level < 40 ? level : 40;
+      return Math.floor(level / 5);
+    }
+  },
+
   async getRewardsFromRange(minLevel, maxLevel) {
     try {
       const { rows } = await query(

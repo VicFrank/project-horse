@@ -87,10 +87,17 @@ module.exports = {
       player.badge = mmr.getRankBadge(player.ladder_mmr);
       player.pips = mmr.getRankPips(player.ladder_mmr);
 
+      const unopenedChests = await this.getNumUnopenedChests(steamID);
+      const unclaimedBPRewards = await this.getNumUnclaimedBattlepassRewards(
+        steamID
+      );
+
       return {
         ...player,
         rank,
         achievements_to_claim: achievementsToClaim,
+        unopenedChests,
+        unclaimedBPRewards,
       };
     } catch (error) {
       throw error;
@@ -891,7 +898,7 @@ module.exports = {
   // --------------------------------------------------
   // Player Cosmetics Functions
   // --------------------------------------------------
-  async getPlayerCosmetics(steamID, onlyEquipped = false) {
+  async getCosmetics(steamID, onlyEquipped = false) {
     try {
       const filter = onlyEquipped ? "AND equipped = TRUE" : "";
       const { rows } = await query(
@@ -911,6 +918,48 @@ module.exports = {
     }
   },
 
+  async getNumUnopenedChests(steamID) {
+    try {
+      const { rows } = await query(
+        `
+        SELECT *
+        FROM player_cosmetics
+        JOIN cosmetics
+        USING (cosmetic_id)
+        WHERE steam_id = $1
+        AND cosmetic_type = 'Chest'
+      `,
+        [steamID]
+      );
+      return rows.length;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getNumUnclaimedBattlepassRewards(steamID) {
+    try {
+      const { bp_level, unlocked, battle_pass_id } =
+        await this.getActiveBattlePass(steamID);
+      const { rows } = await query(
+        `
+        SELECT *
+        FROM player_claimed_battle_pass_rewards
+        WHERE steam_id = $1 AND battle_pass_id = $2
+      `,
+        [steamID, battle_pass_id]
+      );
+      const numClaimedRewards = rows.length;
+      const numRewards = BattlePasses.getNumClaimableRewardsAtLevel(
+        bp_level,
+        unlocked
+      );
+      return numRewards - numClaimedRewards;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async equipCosmetic(steamID, cosmeticID, equipped) {
     try {
       if (equipped) {
@@ -918,7 +967,8 @@ module.exports = {
         const equipGroup = await Cosmetics.getEquipGroup(cosmeticID);
 
         await query(
-          `UPDATE player_cosmetics pc
+          `
+          UPDATE player_cosmetics pc
           SET equipped = FALSE
           FROM cosmetics c
           WHERE pc.steam_id = $1
@@ -953,7 +1003,7 @@ module.exports = {
    */
   async hasCosmetic(steamID, cosmeticID) {
     try {
-      const allCosmetics = await this.getPlayerCosmetics(steamID);
+      const allCosmetics = await this.getCosmetics(steamID);
       return allCosmetics.some(
         (cosmetic) => cosmetic.cosmetic_id === cosmeticID
       );

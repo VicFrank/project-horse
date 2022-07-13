@@ -89,7 +89,7 @@
                         class="mr-2"
                         variant="secondary"
                         @click="hideModal(i)"
-                        >{{ $t("armory.cancel") }}</b-button
+                        >{{ $t("armory.close") }}</b-button
                       >
                       <b-button
                         v-if="!cosmetic.equipped"

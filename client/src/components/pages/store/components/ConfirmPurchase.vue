@@ -6,7 +6,7 @@
     hide-header
     hide-footer
   >
-    Are you sure you want to pay for this item?
+    Do you want to buy this item?
     <div class="mt-4 d-flex justify-content-end">
       <b-button class="mr-2" variant="secondary" @click="cancel"
         >Cancel</b-button

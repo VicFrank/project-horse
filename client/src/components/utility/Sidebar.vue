@@ -78,8 +78,17 @@
               to="/profile/battlepass"
               class="sidebar-nav__link sidebar-nav__link_battlepass"
               exact-active-class="active"
-              v-t="'navigation.battle_pass'"
-            ></router-link>
+            >
+              {{ $t("navigation.battle_pass") }}
+              <b-badge
+                v-if="unclaimedBPRewards > 0"
+                variant="primary"
+                class="ml-1"
+              >
+                {{ unclaimedBPRewards }}
+                <span class="sr-only">Unclaimed Battle Pass Rewards</span>
+              </b-badge>
+            </router-link>
           </li>
 
           <li class="sidebar-nav__item">
@@ -87,8 +96,13 @@
               to="/profile/armory"
               class="sidebar-nav__link sidebar-nav__link_armory"
               exact-active-class="active"
-              v-t="'navigation.armory'"
-            ></router-link>
+            >
+              {{ $t("navigation.armory") }}
+              <b-badge v-if="unopenedChests > 0" variant="primary" class="ml-1">
+                {{ unopenedChests }}
+                <span class="sr-only">Unopened Chests</span>
+              </b-badge>
+            </router-link>
           </li>
 
           <li class="sidebar-nav__item">
@@ -258,6 +272,12 @@ export default {
     },
     numDailies() {
       return this.$store.state.auth.dailiesToClaim;
+    },
+    unopenedChests() {
+      return this.$store.state.auth.unopenedChests;
+    },
+    unclaimedBPRewards() {
+      return this.$store.state.auth.unclaimedBPRewards;
     },
     plusExpiration() {
       const expiration = this.$store.state.auth.plusExpiration;

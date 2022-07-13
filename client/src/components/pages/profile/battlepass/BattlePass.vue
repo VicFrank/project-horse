@@ -130,6 +130,7 @@ export default {
           reward.claimed = claimed;
           reward.loading = false;
           this.fetchBattlePass();
+          this.$store.dispatch("REFRESH_PLAYER");
         })
         .catch(() => (level.loading = false));
     },
