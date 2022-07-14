@@ -87,8 +87,8 @@ module.exports = {
       player.badge = mmr.getRankBadge(player.ladder_mmr);
       player.pips = mmr.getRankPips(player.ladder_mmr);
 
-      const unopenedChests = await this.getNumUnopenedChests(steamID);
-      const unclaimedBPRewards = await this.getNumUnclaimedBattlepassRewards(
+      const unopened_chests = await this.getNumUnopenedChests(steamID);
+      const unclaimed_bp_rewards = await this.getNumUnclaimedBattlepassRewards(
         steamID
       );
 
@@ -96,8 +96,8 @@ module.exports = {
         ...player,
         rank,
         achievements_to_claim: achievementsToClaim,
-        unopenedChests,
-        unclaimedBPRewards,
+        unopened_chests,
+        unclaimed_bp_rewards,
       };
     } catch (error) {
       throw error;

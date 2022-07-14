@@ -101,8 +101,8 @@ const actions = {
           achievements_to_claim,
           has_plus,
           plus_expiration,
-          unopenedChests,
-          unclaimedBPRewards,
+          unopenedChests: unopened_chests,
+          unclaimedBPRewards: unclaimed_bp_rewards,
         } = player;
         commit("SAVE_USER", {
           username,
@@ -111,8 +111,8 @@ const actions = {
           coins,
           hasPlus: has_plus,
           plusExpiration: plus_expiration,
-          unopenedChests,
-          unclaimedBPRewards,
+          unopenedChests: unopened_chests,
+          unclaimedBPRewards: unclaimed_bp_rewards,
         });
       })
       .catch((err) => {
