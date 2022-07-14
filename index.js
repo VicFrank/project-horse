@@ -21,6 +21,7 @@ const steamRouter = require("./routes/steam");
 const leaderboardRouter = require("./routes/leaderboard");
 const statsRouter = require("./routes/stats");
 const godsRouter = require("./routes/gods");
+const redemptionsRouter = require("./routes/redemption-codes");
 
 const players = require("./db/players");
 
@@ -134,6 +135,7 @@ app.use("/api/steam", steamRouter);
 app.use("/api/leaderboard", leaderboardRouter);
 app.use("/api/stats", statsRouter);
 app.use("/api/gods", godsRouter);
+app.use("/api/redemption_codes", redemptionsRouter);
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/client/dist/index.html"));

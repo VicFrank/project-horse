@@ -960,6 +960,34 @@ module.exports = {
     }
   },
 
+  async hasRedeemedCode(steamID, code) {
+    try {
+      const { rows } = await query(
+        `SELECT * FROM player_redeemed_codes WHERE steam_id = $1 AND code = $2`,
+        [steamID, code]
+      );
+      return rows.length > 0;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async redeemCode(steamID, code) {
+    try {
+      const hasRedeemedCode = await this.hasRedeemedCode(steamID, code);
+      if (hasRedeemedCode) throw new Error("Code already redeemed");
+      await query(
+        `
+        INSERT INTO player_redeemed_codes (steam_id, code)
+        VALUES ($1, $2)`,
+        [steamID, code]
+      );
+      return true;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async equipCosmetic(steamID, cosmeticID, equipped) {
     try {
       if (equipped) {

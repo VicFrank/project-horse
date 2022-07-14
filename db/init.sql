@@ -295,6 +295,24 @@ CREATE TABLE IF NOT EXISTS chest_drop_types (
   CONSTRAINT chest_drop_types_pkey PRIMARY KEY (chest_cosmetic_id, drop_type, cum_sum_odds)
 );
 
+DROP TABLE IF EXISTS redemption_codes;
+CREATE TABLE IF NOT EXISTS redemption_codes (
+  cosmetic_id INTEGER REFERENCES cosmetics (cosmetic_id) ON UPDATE CASCADE,
+  code TEXT NOT NULL,
+  active BOOLEAN DEFAULT TRUE,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+
+  CONSTRAINT redemption_codes_pkey PRIMARY KEY (cosmetic_id, code)
+);
+
+DROP TABLE IF EXISTS player_redeemed_codes;
+CREATE TABLE IF NOT EXISTS player_redeemed_codes (
+  steam_id TEXT REFERENCES players (steam_id) ON UPDATE CASCADE,
+  code TEXT NOT NULL,
+  date_claimed TIMESTAMPTZ DEFAULT NOW(),
+
+  CONSTRAINT player_redeemed_codes_pkey PRIMARY KEY (steam_id, code)
+);
 
 --------------------------------------------------------------------------------
 -- Polls

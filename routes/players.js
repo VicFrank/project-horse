@@ -72,7 +72,7 @@ router.get("/:steamID/plus_benefits", async (req, res) => {
   }
 });
 
-router.post("/:steamID/claim_daily_gold", async (req, res) => {
+router.post("/:steamID/claim_daily_gold", auth.userAuth, async (req, res) => {
   try {
     const steamID = req.params.steamID;
     const hasPlus = await players.hasPlus(steamID);
@@ -319,6 +319,17 @@ router.post(
   }
 );
 
+router.post("/:steamID/redeem_code/:code", auth.userAuth, async (req, res) => {
+  try {
+    const { steamID, code } = req.params;
+    const success = await players.redeemCode(steamID, code);
+    res.status(200).json(success);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Server Error" });
+  }
+});
+
 router.get("/:steamID/cosmetics", async (req, res) => {
   try {
     const steamID = req.params.steamID;
@@ -406,7 +417,7 @@ router.delete(
   }
 );
 
-router.get("/:steamID/battle_pass", auth.userAuth, async (req, res) => {
+router.get("/:steamID/battle_pass", async (req, res) => {
   try {
     const steamID = req.params.steamID;
     const playerInfo = await players.getActiveBattlePass(steamID);
@@ -417,7 +428,7 @@ router.get("/:steamID/battle_pass", auth.userAuth, async (req, res) => {
   }
 });
 
-router.get("/:steamID/battle_pass/levels", auth.userAuth, async (req, res) => {
+router.get("/:steamID/battle_pass/levels", async (req, res) => {
   try {
     const steamID = req.params.steamID;
     const levels = await players.getBattlePassLevels(steamID);
