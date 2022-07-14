@@ -101,8 +101,8 @@ const actions = {
           achievements_to_claim,
           has_plus,
           plus_expiration,
-          unopenedChests: unopened_chests,
-          unclaimedBPRewards: unclaimed_bp_rewards,
+          unopened_chests,
+          unclaimed_bp_rewards,
         } = player;
         commit("SAVE_USER", {
           username,
