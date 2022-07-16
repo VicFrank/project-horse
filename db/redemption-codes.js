@@ -3,9 +3,18 @@ const { query } = require("./index");
 module.exports = {
   async getAllCodes() {
     try {
+      // get all codes, with their rewards in an array
       const { rows } = await query(
         `
-        SELECT * FROM redemption_codes JOIN cosmetics USING (cosmetic_id)
+        SELECT redemption_codes.*,
+        json_agg(json_build_object(
+          'cosmetic_id', cosmetic_id,
+          'cosmetic_name', cosmetic_name
+        )) AS rewards
+        FROM redemption_codes
+        LEFT JOIN redemption_code_rewards USING (code)
+        LEFT JOIN cosmetics USING (cosmetic_id)
+        GROUP BY code
         ORDER BY created_at DESC`
       );
       return rows;
@@ -17,15 +26,33 @@ module.exports = {
   async getCode(code) {
     try {
       const { rows } = await query(
-        "SELECT * FROM redemption_codes WHERE code = $1",
+        `
+        SELECT * FROM redemption_codes
+        WHERE code = $1`,
         [code]
       );
       if (!rows[0]) return null;
+      const rewards = await this.getRewards(code);
       const players = await this.getNumPlayers(code);
       return {
         ...rows[0],
         players,
+        rewards,
       };
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getRewards(code) {
+    try {
+      const { rows } = await query(
+        `
+        SELECT cosmetic_id FROM redemption_code_rewards
+        WHERE code = $1`,
+        [code]
+      );
+      return rows;
     } catch (error) {
       throw error;
     }
@@ -62,12 +89,29 @@ module.exports = {
     }
   },
 
-  async addRedemptionCode(code, cosmeticID) {
+  async exists(code) {
     try {
-      await query(
-        "INSERT INTO redemption_codes (code, cosmetic_id) VALUES ($1, $2)",
-        [code, cosmeticID]
+      const { rows } = await query(
+        "SELECT * FROM redemption_codes WHERE code = $1",
+        [code]
       );
+      return rows[0] ? true : false;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async addRedemptionCode(code, cosmeticIDs) {
+    try {
+      await query("INSERT INTO redemption_codes (code) VALUES ($1)", [code]);
+      for (const cosmeticID of cosmeticIDs) {
+        await query(
+          "INSERT INTO redemption_code_rewards (code, cosmetic_id) VALUES ($1, $2)",
+          [code, cosmeticID]
+        );
+      }
+      const created = await this.getCode(code);
+      return created;
     } catch (error) {
       throw error;
     }
@@ -84,18 +128,25 @@ module.exports = {
     }
   },
 
-  async changeRedemptionCodeReward(code, cosmeticID) {
+  async updateRedemptionCodeRewards(code, cosmeticIDs) {
     try {
-      await query(
-        "UPDATE redemption_codes SET cosmetic_id = $2 WHERE code = $1",
-        [code, cosmeticID]
-      );
+      await query("DELETE FROM redemption_code_rewards WHERE code = $1", [
+        code,
+      ]);
+      for (const cosmeticID of cosmeticIDs) {
+        await query(
+          "INSERT INTO redemption_code_rewards (code, cosmetic_id) VALUES ($1, $2)",
+          [code, cosmeticID]
+        );
+      }
+      const updated = await this.getCode(code);
+      return updated;
     } catch (error) {
       throw error;
     }
   },
 
-  async changeRedemptionCodeCode(oldCode, newCode) {
+  async updateRedemptionCodeCode(oldCode, newCode) {
     try {
       await query("UPDATE redemption_codes SET code = $2 WHERE code = $1", [
         oldCode,

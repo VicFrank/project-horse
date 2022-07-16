@@ -1,4 +1,7 @@
 {
+  "common": {
+    "close": "Close"
+  },
   "home": {
     "page_title": "Ability Arena"
   },

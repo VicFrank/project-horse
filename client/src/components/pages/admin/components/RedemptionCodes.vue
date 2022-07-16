@@ -5,31 +5,80 @@
       >Create a New Code</b-button
     >
     <b-modal
+      id="create-code-error"
+      title="Error"
+      :ok-label="$t('common.close')"
+      @ok="error = ''"
+    >
+      <p>{{ error }}</p>
+    </b-modal>
+    <b-modal
       id="create-code"
       title="Create Redemption Code"
       @ok="createCode"
-      :ok-disabled="!(newCode.code && newCode.cosmetic)"
+      @cancel="clearNewCode"
+      :ok-disabled="
+        !(newCode.code && newCode.cosmetics && newCode.cosmetics.length > 0)
+      "
     >
       <b-form-input
         type="text"
         v-model="newCode.code"
         placeholder="Enter the code..."
       ></b-form-input>
+      <b-form-input
+        type="text"
+        v-model="cosmeticsFilter"
+        placeholder="Search cosmetics..."
+        class="mt-3"
+      ></b-form-input>
       <b-form-select
         v-model="newCode.cosmetic"
-        :options="cosmetics"
+        :options="filteredCosmetics"
         :select-size="7"
         class="mt-3"
       ></b-form-select>
-      <div v-if="newCode.cosmetic" class="mt-3">
-        Reward: <strong>{{ newCode.cosmetic.cosmetic_name }}</strong>
+      <b-button
+        variant="success"
+        size="sm"
+        class="mt-2"
+        @click="addCosmetic"
+        :disabled="!newCode.cosmetic"
+      >
+        Add Cosmetic
+      </b-button>
+      <div>
+        <div
+          v-for="cosmetic in newCode.cosmetics"
+          :key="cosmetic.cosmetic_id"
+          class="d-flex align-items-center my-1"
+        >
+          <b-button
+            v-b-modal.delete-cosmetic
+            variant="danger"
+            size="sm"
+            class="mr-3"
+            @click="removeCosmetic(cosmetic)"
+            >x</b-button
+          >
+          {{ $t(`cosmetics.${cosmetic.cosmetic_name}`) }}
+          <span class="text-muted mx-1">{{ cosmetic.cosmetic_name }}</span>
+        </div>
       </div>
     </b-modal>
     <!-- List existing codes -->
     <div class="d-flex flex-wrap p-3">
       <div v-for="code in codes" :key="code.code" class="p-2 text-center">
-        <div>{{ code.code }}</div>
-        <div class="text-muted">{{ code.cosmetic_name }}</div>
+        <div class="text-center" style="height: 70px; overflow-y: auto">
+          <div>{{ code.code }}</div>
+          <div
+            v-for="cosmetic in code.rewards"
+            :key="cosmetic.cosmetic_id"
+            class="text-muted"
+          >
+            {{ cosmetic.cosmetic_name }}
+          </div>
+        </div>
         <div style="width: 200px" class="text-center mt-2">
           <b-button
             v-b-modal.view-redemptions
@@ -47,7 +96,7 @@
             >Disable</b-button
           >
           <b-button
-            v-if="code.active"
+            v-if="!code.active"
             @click="toggleEnabled(code)"
             size="sm"
             class="w-100 mt-1"
@@ -80,8 +129,11 @@ export default {
   data: () => ({
     codes: [],
     cosmetics: [],
+    filteredCosmetics: [],
     loading: true,
     newCode: {},
+    cosmeticsFilter: "",
+    error: "",
   }),
 
   created() {
@@ -92,11 +144,38 @@ export default {
           value: cosmetic,
           text: cosmetic.cosmetic_name,
         }));
+        this.filteredCosmetics = this.cosmetics;
       });
     this.getCodes();
   },
 
+  watch: {
+    cosmeticsFilter(val) {
+      if (val) {
+        this.filteredCosmetics = this.cosmetics.filter((cosmetic) =>
+          cosmetic.text.toLowerCase().includes(val.toLowerCase())
+        );
+      } else {
+        this.filteredCosmetics = this.cosmetics;
+      }
+    },
+  },
+
   methods: {
+    addCosmetic() {
+      if (!this.newCode.cosmetics) this.newCode.cosmetics = [];
+      this.newCode.cosmetics.push(this.newCode.cosmetic);
+      this.newCode.cosmetic = null;
+    },
+    removeCosmetic(cosmetic) {
+      this.newCode.cosmetics = this.newCode.cosmetics.filter(
+        (c) => c.cosmetic_id !== cosmetic.cosmetic_id
+      );
+      this.$forceUpdate();
+    },
+    clearNewCode() {
+      this.newCode = {};
+    },
     getCodes() {
       fetch(`/api/redemption_codes`)
         .then((res) => res.json())
@@ -105,18 +184,28 @@ export default {
           this.loading = false;
         });
     },
-    createCode() {
+    createCode(bvModalEvent) {
+      bvModalEvent.preventDefault();
+      const cosmeticIDs = this.newCode.cosmetics.map(
+        (cosmetic) => cosmetic.cosmetic_id
+      );
       fetch(`/api/redemption_codes/${this.newCode.code}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ cosmeticID: this.newCode.cosmetic.cosmetic_id }),
+        body: JSON.stringify({ cosmeticIDs }),
       })
         .then((res) => res.json())
-        .then(() => {
-          this.loading = true;
-          this.getCodes();
+        .then((res) => {
+          if (res.error) {
+            this.error = res.error;
+            this.$bvModal.show("create-code-error");
+          } else {
+            this.getCodes();
+            this.clearNewCode();
+            this.$bvModal.hide("create-code");
+          }
         });
     },
     loadPlayers(code) {
@@ -131,7 +220,7 @@ export default {
         });
     },
     toggleEnabled(code) {
-      fetch(`/api/redemption_codes/${code.code}`, {
+      fetch(`/api/redemption_codes/${code.code}/active`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

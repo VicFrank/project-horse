@@ -3,6 +3,7 @@ const Cosmetics = require("./cosmetics");
 const Logs = require("./logs");
 const Quests = require("./quests");
 const BattlePasses = require("./battlepass");
+const RedemptionCodes = require("./redemption-codes");
 const mmr = require("../mmr/mmr");
 const moment = require("moment");
 const { addTransactionLog } = require("./logs");
@@ -976,12 +977,18 @@ module.exports = {
     try {
       const hasRedeemedCode = await this.hasRedeemedCode(steamID, code);
       if (hasRedeemedCode) throw new Error("Code already redeemed");
+      const redemptionCode = await RedemptionCodes.getCode(code);
+      const rewards = redemptionCode.rewards;
       await query(
         `
         INSERT INTO player_redeemed_codes (steam_id, code)
         VALUES ($1, $2)`,
         [steamID, code]
       );
+      for (const reward of rewards) {
+        const { cosmetic_id } = reward;
+        await this.giveCosmeticByID(steamID, cosmetic_id);
+      }
       return true;
     } catch (error) {
       throw error;
@@ -1042,6 +1049,8 @@ module.exports = {
 
   async giveCosmeticByID(steamID, cosmeticID) {
     try {
+      const cosmetic = await Cosmetics.getCosmetic(cosmeticID);
+      await Logs.addTransactionLog(steamID, "add_cosmetic", cosmetic);
       await query(
         `
         INSERT INTO player_cosmetics (steam_id, cosmetic_id)
@@ -1058,6 +1067,7 @@ module.exports = {
     try {
       const cosmetic = await Cosmetics.getCosmeticByName(name);
       if (!cosmetic) return false;
+      await Logs.addTransactionLog(steamID, "add_cosmetic", cosmetic);
       await query(
         `
         INSERT INTO player_cosmetics (steam_id, cosmetic_id)

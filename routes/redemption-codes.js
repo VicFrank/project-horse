@@ -27,16 +27,20 @@ router.get("/:code/players", auth.adminAuth, async (req, res) => {
 router.post("/:code", auth.adminAuth, async (req, res) => {
   try {
     const code = req.params.code;
-    const cosmeticID = req.body.cosmeticID;
-    await redemptionCodes.addRedemptionCode(code, cosmeticID);
-    res.status(201).send({ success: true });
+    const cosmeticIDs = req.body.cosmeticIDs;
+    const exists = await redemptionCodes.exists(code);
+    if (exists) {
+      return res.status(400).json({ error: "Code already exists" });
+    }
+    const result = await redemptionCodes.addRedemptionCode(code, cosmeticIDs);
+    res.status(201).send(result);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: error.toString() });
   }
 });
 
-router.post("/:code/active", auth.adminAuth, async (req, res) => {
+router.patch("/:code/active", auth.adminAuth, async (req, res) => {
   try {
     const code = req.params.code;
     const active = req.body.active;
@@ -48,23 +52,26 @@ router.post("/:code/active", auth.adminAuth, async (req, res) => {
   }
 });
 
-router.post("/:code/reward", auth.adminAuth, async (req, res) => {
+router.patch("/:code/reward", auth.adminAuth, async (req, res) => {
   try {
     const code = req.params.code;
-    const cosmeticID = req.body.cosmeticID;
-    await redemptionCodes.changeRedemptionCodeReward(code, cosmeticID);
-    res.status(201).send({ success: true });
+    const cosmeticIDs = req.body.cosmeticIDs;
+    const result = await redemptionCodes.updateRedemptionCodeRewards(
+      code,
+      cosmeticIDs
+    );
+    res.status(201).send(result);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: error.toString() });
   }
 });
 
-router.post("/:code/code", auth.adminAuth, async (req, res) => {
+router.patch("/:code/code", auth.adminAuth, async (req, res) => {
   try {
     const code = req.params.code;
     const name = req.body.name;
-    await redemptionCodes.changeRedemptionCodeCode(code, name);
+    await redemptionCodes.updateRedemptionCodeCode(code, name);
     res.status(201).send({ success: true });
   } catch (error) {
     console.log(error);
