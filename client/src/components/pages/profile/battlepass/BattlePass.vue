@@ -159,11 +159,11 @@ export default {
     },
     getLevelTotalXP(level) {
       if (!this.getRewards(level)) return null;
-      return this.getRewards(level).total_xp;
+      return this.getRewards(level).total_xp.toLocaleString();
     },
     getNextLevelXP(level) {
       if (!this.getRewards(level)) return null;
-      return this.getRewards(level).next_level_xp;
+      return this.getRewards(level).next_level_xp.toLocaleString();
     },
     getLevelLocked(level) {
       if (!this.getRewards(level)) return false;

@@ -32,7 +32,15 @@
     </div>
     <div v-if="coins">
       <div class="h2 text-center blue">Coins</div>
-      <div class="text-center">{{ coins }}</div>
+      <div class="text-center">
+        <img
+          src="../../../assets/images/coin1.png"
+          alt="coins"
+          class="coins-image"
+          style="width: 20px; height: 20px"
+        />
+        {{ coins }}
+      </div>
     </div>
     <b-alert v-model="showError" variant="danger" dismissible>
       {{ error }}

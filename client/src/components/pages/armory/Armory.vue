@@ -192,6 +192,9 @@ export default {
     bpTier() {
       return this.$store.state.auth.bpTier;
     },
+    bpUpgraded() {
+      return this.$store.getters.bpUpgraded;
+    },
   },
 
   created() {
@@ -248,6 +251,9 @@ export default {
       );
     },
     isUsable(cosmetic) {
+      if (cosmetic.cosmetic_name === "buy_bp" && this.bpUpgraded) {
+        return false;
+      }
       return cosmetic.cosmetic_type === "Consumable";
     },
     hideModal(i) {

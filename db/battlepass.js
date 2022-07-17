@@ -109,6 +109,11 @@ module.exports = {
    */
   async calculateBattlePassLevel(battlePassId, totalXP) {
     try {
+      if (totalXP > 26500) {
+        const remainingXp = totalXP - 26500;
+        const extraLevels = Math.floor(remainingXp / 1000);
+        return 50 + extraLevels;
+      }
       const battlePassLevels = await this.getBattlePassLevels(battlePassId);
       let lastLevel = 0;
       for (const level of battlePassLevels) {
@@ -139,7 +144,7 @@ module.exports = {
       if (rows.length > 0) return rows[0];
 
       // every level after 50 takes 1000 xp
-      const level50 = 28000;
+      const level50 = 26500;
       const totalXp = level50 + (level - 50) * 1000;
       return {
         total_xp: totalXp,
@@ -235,6 +240,7 @@ module.exports = {
   async deleteBattlePasses() {
     try {
       await tx.default(pool, async (db) => {
+        await db.query(`DELETE FROM player_claimed_battle_pass_rewards`);
         await db.query(`DELETE FROM player_battle_pass`);
         await db.query(`DELETE FROM battle_pass_cosmetic_rewards`);
         await db.query(`DELETE FROM battle_pass_levels`);

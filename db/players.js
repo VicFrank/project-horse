@@ -576,6 +576,22 @@ module.exports = {
     }
   },
 
+  async getXpToTargetLevel(steamID, targetLevel) {
+    try {
+      const { battle_pass_id, bp_level, total_xp } =
+        await this.getActiveBattlePass(steamID);
+      if (bp_level >= targetLevel) return 0;
+      const targetReqs = await BattlePasses.getRequirementsAtLevel(
+        battle_pass_id,
+        targetLevel
+      );
+      const targetXp = targetReqs.total_xp;
+      return targetXp - total_xp;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   // get all level rewards (up to 50) and if they've been claimed
   async getBattlePassLevels(steamID) {
     try {
