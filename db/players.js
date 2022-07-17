@@ -994,6 +994,8 @@ module.exports = {
       const hasRedeemedCode = await this.hasRedeemedCode(steamID, code);
       if (hasRedeemedCode) throw new Error("Code already redeemed");
       const redemptionCode = await RedemptionCodes.getCode(code);
+      if (!redemptionCode) throw new Error("Code not found");
+      if (!redemptionCode.active) throw new Error("Code expired");
       const rewards = redemptionCode.rewards;
       await query(
         `

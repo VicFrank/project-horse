@@ -323,8 +323,14 @@ router.post("/:steamID/redeem_code/:code", auth.userAuth, async (req, res) => {
   try {
     const { steamID, code } = req.params;
     const success = await players.redeemCode(steamID, code);
-    res.status(200).json(success);
+    res.status(200).json({ success });
   } catch (error) {
+    if (error.message === "Code not found")
+      return res.status(404).json({ message: "Code not found" });
+    else if (error.message === "Code already redeemed")
+      return res.status(400).json({ message: "Code already redeemed" });
+    else if (error.message === "Code expired")
+      return res.status(400).json({ message: "Code expired" });
     console.log(error);
     res.status(500).send({ message: "Server Error" });
   }

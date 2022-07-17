@@ -31,6 +31,8 @@ const BattlePass = () =>
   import("../components/pages/profile/battlepass/BattlePass");
 const MyGods = () => import("../components/pages/profile/MyGods");
 
+const RedemptionCode = () => import("../components/pages/codes/RedemptionCode");
+
 const Leaderboard = () => import("../components/pages/leaderboard/Leaderboard");
 const PlayerPage = () => import("../components/pages/player/PlayerPage");
 const PlayerGamesList = () =>
@@ -51,6 +53,11 @@ const routes = [
   { path: "/gods", component: Gods },
   { path: "/abilities", component: Abilities },
   { path: "/leaderboard", component: Leaderboard },
+  {
+    path: "/redeem_code",
+    component: RedemptionCode,
+    meta: { requiresAuth: true },
+  },
   { path: "/players/:steam_id", component: PlayerPage },
   { path: "/players/:steam_id/games", component: PlayerGamesList },
   { path: "/store", component: Store },
