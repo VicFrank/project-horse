@@ -719,6 +719,14 @@ module.exports = [
     equip_group: "",
     rarity: "Immortal",
   },
+  {
+    name: "card_tomeGod",
+    type: "Card Frame",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "",
+    rarity: "Immortal",
+  },
   /**
    * *************************
    * Finishers

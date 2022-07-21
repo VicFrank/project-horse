@@ -96,17 +96,18 @@ module.exports = {
    * When a game is finished, record post game stats, round results
    */
   async addGameResults(results) {
-    const { matchID, duration, rounds, ranked, cheatsEnabled, roundResults } =
-      results;
+    const { matchID, duration, rounds, cheatsEnabled, roundResults } = results;
 
     try {
-      await this.upsertGame(matchID, ranked);
+      const game = await this.getGame(matchID);
+      if (!game) throw new Error("Game not found");
+
       await query(
         `UPDATE games SET
-        (duration, rounds, ranked, cheats_enabled) =
+        (duration, rounds, cheats_enabled) =
         ($1, $2, $3, $4)
          WHERE game_id = $5`,
-        [duration, rounds, ranked, cheatsEnabled, matchID]
+        [duration, rounds, cheatsEnabled, matchID]
       );
 
       for (const round of roundResults) {
@@ -219,6 +220,8 @@ module.exports = {
       );
       const game = games[0];
 
+      if (!game) return null;
+
       // Players
       const { rows: gamePlayers } = await query(
         `
@@ -235,6 +238,7 @@ module.exports = {
       );
 
       for (const player of gamePlayers) {
+        // heroes
         const { rows: gamePlayerHeroes } = await query(
           `
             SELECT h.hero_name, h.tier, game_player_hero_id
@@ -246,6 +250,7 @@ module.exports = {
         delete player.game_player_id;
 
         for (const hero of gamePlayerHeroes) {
+          // abilities
           const { rows: heroAbilities } = await query(
             `
               SELECT ha.ability_level, ha.slot_index, a.*
