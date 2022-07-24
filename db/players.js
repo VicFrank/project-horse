@@ -877,9 +877,13 @@ module.exports = {
       const player = await this.getPlayer(steamID);
 
       for (const god of allGods) {
-        const hasGod = godCards.some(
-          (card) => card.cosmetic_name.substring(5) === god.god_name
+        const hasGoldGod = godCards.some(
+          (card) => card.cosmetic_name.substring(10) === god.god_name
         );
+        const hasGod =
+          godCards.some(
+            (card) => card.cosmetic_name.substring(5) === god.god_name
+          ) || hasGoldGod;
         const isBanned = playerGods.some(
           (playerGod) => playerGod.god_name === god.god_name && playerGod.banned
         );
@@ -887,6 +891,7 @@ module.exports = {
           hasGod || god.free || (player.has_plus && god.plus_exclusive);
         god.banned = isBanned;
         god.plus_exclusive = god.plus_exclusive;
+        god.gold = hasGoldGod;
       }
       return allGods;
     } catch (error) {
@@ -1367,6 +1372,7 @@ module.exports = {
   async getRandomChestReward(steamID, chestCosmeticID) {
     try {
       const dropType = await Cosmetics.getRandomChestDropType(chestCosmeticID);
+      const chest = await Cosmetics.getCosmetic(chestCosmeticID);
       if (!dropType)
         throw new Error(`No drop type found for chest ${chestCosmeticID}`);
       const dropTypeRewards = await Cosmetics.getDropTypeRewards(dropType);
@@ -1387,6 +1393,14 @@ module.exports = {
           // otherwise, give pity coins. For now, let's just give them 100
           const hasItem = await this.doesPlayerHaveItem(steamID, rewardID);
           if (hasItem) {
+            // if the item is a god card, track how of this type we have opened
+            if (rewardCosmetic.cosmetic_name.startsWith("card_")) {
+              Logs.addTransactionLog(steamID, "god_opened", {
+                cosmeticName: rewardCosmetic.cosmetic_name,
+              });
+            }
+            // Return coins equal to 25% the price of the chest
+            if (chest.cost_coins > 0) return { coins: chest.cost_coins / 4 };
             return { coins: 100 };
           } else return { items: { [rewardID]: 1 } };
         }

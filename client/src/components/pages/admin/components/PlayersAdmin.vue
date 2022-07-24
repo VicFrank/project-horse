@@ -80,15 +80,17 @@
               <div class="d-flex justify-content-between align-items-center">
                 <div>
                   <div>{{ transaction.log_event }}</div>
-                  <div class="faded">
-                    {{ transaction.log_time.toLocaleString() }}
+                  <div class="text-muted">
+                    {{ new Date(transaction.log_time).toLocaleString() }}
                   </div>
                 </div>
                 <div>
                   <template v-if="transaction.log_event == 'paypal'"
                     >Item ID: {{ transaction.log_data.itemID }}</template
                   >
-                  <template v-else>{{ transaction.log_data }}</template>
+                  <template v-else>
+                    <pre>{{ transaction.log_data }}</pre>
+                  </template>
                 </div>
               </div>
             </b-list-group-item>
@@ -215,7 +217,7 @@ export default {
         .then((res) => res.json())
         .then((playerData) => {
           this.playerData = playerData;
-          if (!this.playerData.username) {
+          if (this.playerData.username == null) {
             this.error = "No player with this SteamID found";
           }
         })

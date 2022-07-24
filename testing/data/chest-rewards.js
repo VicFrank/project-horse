@@ -110,12 +110,12 @@ const typeOdds = {
 
   // Golden gods aren't in yet
   gold_god: [
-    { odds: -1, item_name: "card_sorlaKhan" },
-    { odds: -1, item_name: "card_alchemist" },
-    { odds: -1, item_name: "card_rix" },
-    { odds: -1, item_name: "card_tinker" },
-    { odds: -1, item_name: "card_ladyAnshu" },
-    { odds: -1, item_name: "card_lifestealer" },
+    { odds: -1, item_name: "gold_card_sorlaKhan" },
+    { odds: -1, item_name: "gold_card_alchemist" },
+    { odds: -1, item_name: "gold_card_rix" },
+    { odds: -1, item_name: "gold_card_tinker" },
+    { odds: -1, item_name: "gold_card_ladyAnshu" },
+    { odds: -1, item_name: "gold_card_lifestealer" },
   ],
 };
 
