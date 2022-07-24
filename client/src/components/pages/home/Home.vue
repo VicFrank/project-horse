@@ -1,13 +1,13 @@
 <template>
   <div class="text-center">
     <h1 class="page-title" v-t="'home.page_title'"></h1>
-    <p>Simple, fast, and free to play.</p>
-    <p>Play with friends or compete against the best players in the world.</p>
+    <p>Ability Arena Ability Arena.</p>
+    <p>
+      Ability Arena Ability Arena Ability Arena Ability Arena Ability Arena.
+    </p>
 
     <p>
-      <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
-        <img src="https://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg" alt="" />
-      </a>
+      <img src="../../../assets/images/logo_1.png" alt="logo" class="logo" />
     </p>
 
     <div class="row">

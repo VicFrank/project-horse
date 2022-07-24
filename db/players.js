@@ -926,6 +926,7 @@ module.exports = {
         USING (cosmetic_id)
         WHERE steam_id = $1
         ${filter}
+        ORDER BY cosmetic_type, cosmetic_name
       `,
         [steamID]
       );
@@ -2163,11 +2164,6 @@ module.exports = {
       await this.modifyCoins(steamID, coin_reward);
       await this.addBattlePassXp(steamID, xp_reward);
 
-      await query(
-        `UPDATE players SET last_login_quest_claimed = NOW() WHERE steam_id = $1`,
-        [steamID]
-      );
-
       return true;
     } catch (error) {
       throw error;
@@ -2188,6 +2184,11 @@ module.exports = {
       await query(
         `UPDATE player_login_quests SET completed = TRUE WHERE steam_id = $1 AND login_quest_id = $2`,
         [steamID, loginQuest.login_quest_id]
+      );
+
+      await query(
+        `UPDATE players SET last_login_quest_claimed = NOW() WHERE steam_id = $1`,
+        [steamID]
       );
 
       return true;

@@ -33,6 +33,10 @@
     <div v-if="coins">
       <div class="h2 text-center blue">Coins</div>
       <div class="text-center">
+        You received a duplicate item. It has been auto-recycled and you have
+        been awarded some gold in return.
+      </div>
+      <div class="text-center">
         <img
           src="../../../assets/images/coin1.png"
           alt="coins"

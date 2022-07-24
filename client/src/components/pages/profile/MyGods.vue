@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="page-title">{{ $t("gods.page_title") }}</h1>
+    <h1 class="page-title">{{ $t("gods.my_gods") }}</h1>
     <div class="gods-container">
       <div
         v-for="god of gods"

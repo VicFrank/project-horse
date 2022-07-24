@@ -290,6 +290,7 @@ export default {
         "Finisher",
         "Consumable",
         "Game Consumable",
+        "Terrain",
       ];
       if (includedTypes.includes(cosmetic_type))
         return require(`../../../assets/images/cosmetics/${cosmetic_name}.png`);
