@@ -277,6 +277,6 @@ async function setChestRewards() {
   }
 }
 (async function () {
-  await addCosmetics();
-  await setChestRewards();
+  // await addCosmetics();
+  // await setChestRewards();
 })();
