@@ -29,11 +29,11 @@
           </td>
           <td>
             {{ getRankString(game.place) }}
-            <template v-if="game.mmr_change != undefined">
-              <span v-if="game.mmr_change >= 0" class="win">
-                +{{ game.mmr_change }}
+            <template v-if="game.ladder_mmr_change != undefined">
+              <span v-if="game.ladder_mmr_change >= 0" class="win">
+                +{{ game.ladder_mmr_change }}
               </span>
-              <span v-else class="loss"> {{ game.mmr_change }} </span>
+              <span v-else class="loss"> {{ game.ladder_mmr_change }} </span>
             </template>
             <div class="text-muted">{{ dateFromNow(game.created_at) }}</div>
           </td>
