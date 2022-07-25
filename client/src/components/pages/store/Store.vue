@@ -285,17 +285,8 @@ export default {
         });
     },
     cosmeticImageSrc(cosmetic) {
-      const { cosmetic_name, cosmetic_type } = cosmetic;
-      const includedTypes = [
-        "Card Frame",
-        "Chest",
-        "Finisher",
-        "Consumable",
-        "Game Consumable",
-      ];
-      if (includedTypes.includes(cosmetic_type))
-        return require(`../../../assets/images/cosmetics/${cosmetic_name}.png`);
-      else return require(`../../../assets/images/cosmetics/placeholder.png`);
+      const { cosmetic_name } = cosmetic;
+      return require(`../../../assets/images/cosmetics/${cosmetic_name}.png`);
     },
   },
 };

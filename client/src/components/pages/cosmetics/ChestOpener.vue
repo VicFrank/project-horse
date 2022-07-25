@@ -32,7 +32,7 @@
     </div>
     <div v-if="coins">
       <div class="h2 text-center blue">Coins</div>
-      <div class="text-center">
+      <div class="text-center" v-if="cosmetic.cosmetic_name != 'chest_gold'">
         You received a duplicate item. It has been auto-recycled and you have
         been awarded some gold in return.
       </div>
@@ -122,17 +122,9 @@ export default {
         });
     },
     cosmeticImageSrc(cosmetic) {
-      const { cosmetic_name, cosmetic_type } = cosmetic;
-      const includedTypes = [
-        "Card Frame",
-        "Chest",
-        "Finisher",
-        "Consumable",
-        "Game Consumable",
-      ];
-      if (includedTypes.includes(cosmetic_type))
-        return require(`../../../assets/images/cosmetics/${cosmetic_name}.png`);
-      else return require(`../../../assets/images/cosmetics/placeholder.png`);
+      const { cosmetic_name } = cosmetic;
+      return require(`../../../assets/images/cosmetics/${cosmetic_name}.png`);
+      // return require(`../../../assets/images/cosmetics/placeholder.png`);
     },
     openedImage(cosmeticName) {
       return require(`../../../assets/images/cosmetics/${cosmeticName}_open.png`);
