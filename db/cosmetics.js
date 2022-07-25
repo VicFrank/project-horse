@@ -130,6 +130,9 @@ module.exports = {
 
   async deleteAllCosmetics() {
     try {
+      await query("DELETE FROM player_redeemed_codes");
+      await query("DELETE FROM redemption_code_rewards");
+      await query("DELETE FROM redemption_codes");
       await query("DELETE FROM drop_type_rewards");
       await query("DELETE FROM chest_drop_types");
       await query("DELETE FROM battle_pass_cosmetic_rewards");
