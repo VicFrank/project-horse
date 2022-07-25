@@ -299,6 +299,7 @@ DROP TABLE IF EXISTS redemption_codes;
 CREATE TABLE IF NOT EXISTS redemption_codes (
   code TEXT PRIMARY KEY,
   active BOOLEAN DEFAULT TRUE,
+  redemption_limit INTEGER DEFAULT NULL,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 

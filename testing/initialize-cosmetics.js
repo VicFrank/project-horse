@@ -22,217 +22,306 @@ async function clearCosmetics() {
   }
 }
 
+async function deleteHats() {
+  try {
+    console.log("Deleting hats...");
+    const allCosmetics = await cosmetics.getAllCosmetics();
+    for (const cosmetic of allCosmetics) {
+      const equipGroups = [
+        "avatar_hat",
+        "avatar_accessory",
+        "avatar_mouth",
+        "avatar_eyewear",
+        "avatar_emote",
+        "avatar_facial_hair",
+        "avatar_mouth",
+      ];
+      if (equipGroups.includes(cosmetic.equip_group)) {
+        console.log(`Deleting cosmetic ${cosmetic.cosmetic_name}`);
+        await cosmetics.deleteCosmetic(cosmetic.cosmetic_id);
+      } else if (cosmetic.cosmetic_type === "Avatar Hat") {
+        console.log(`Deleting cosmetic ${cosmetic.cosmetic_name}`);
+        await cosmetics.deleteCosmetic(cosmetic.cosmetic_id);
+      }
+    }
+  } catch (error) {
+    throw error;
+  }
+}
+
 async function addCosmetics() {
   try {
     console.log("Adding cosmetics...");
     await cosmetics.bulkCreateCosmetics([
       {
-        name: "gold_card_dazzle",
-        type: "Card Frame",
+        // Chest Drop
+        name: "hat_birthday",
+        type: "Avatar hat",
+        equip_group: "avatar_hat",
         coins: -1,
         cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
+        rarity: "Rare",
       },
       {
-        name: "gold_card_runeGod",
-        type: "Card Frame",
+        // Chest Drop
+        name: "hat_bucket",
+        type: "Avatar hat",
+        equip_group: "avatar_hat",
         coins: -1,
         cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
+        rarity: "Rare",
       },
       {
-        name: "gold_card_legionCommander",
-        type: "Card Frame",
+        // Chest Drop
+        name: "hat_cone",
+        type: "Avatar hat",
+        equip_group: "avatar_hat",
         coins: -1,
         cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
+        rarity: "Rare",
       },
       {
-        name: "gold_card_brewmaster",
-        type: "Card Frame",
+        // Chest Drop
+        name: "hat_cowboy",
+        type: "Avatar hat",
+        equip_group: "avatar_hat",
         coins: -1,
         cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
+        rarity: "Rare",
       },
       {
-        name: "gold_card_cloudGod",
-        type: "Card Frame",
+        // Chest Drop
+        name: "hat_detective",
+        type: "Avatar Hat",
+        equip_group: "avatar_hat",
         coins: -1,
         cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
+        rarity: "Rare",
       },
       {
-        name: "gold_card_spiritBreaker",
-        type: "Card Frame",
+        // Chest Drop
+        name: "hat_feelsrainman",
+        type: "Avatar Hat",
+        equip_group: "avatar_hat",
         coins: -1,
         cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
+        rarity: "Rare",
       },
       {
-        name: "gold_card_sorlaKhan",
-        type: "Card Frame",
+        // Chest Drop
+        name: "hat_green",
+        type: "Avatar Hat",
+        equip_group: "avatar_hat",
         coins: -1,
         cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
+        rarity: "Rare",
       },
       {
-        name: "gold_card_pudge",
-        type: "Card Frame",
+        // Chest Drop
+        name: "hat_helicopter",
+        type: "Avatar Hat",
+        equip_group: "avatar_hat",
         coins: -1,
         cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
+        rarity: "Rare",
       },
       {
-        name: "gold_card_rix",
-        type: "Card Frame",
+        // Chest Drop
+        name: "hat_jester",
+        type: "Avatar Hat",
+        equip_group: "avatar_hat",
         coins: -1,
         cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
+        rarity: "Rare",
       },
       {
-        name: "gold_card_shopkeeper",
-        type: "Card Frame",
+        // Chest Drop
+        name: "hat_mushroom",
+        type: "Avatar Hat",
+        equip_group: "avatar_hat",
         coins: -1,
         cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
+        rarity: "Rare",
       },
       {
-        name: "gold_card_rubick",
-        type: "Card Frame",
+        // Chest Drop
+        name: "hat_red",
+        type: "Avatar Hat",
+        equip_group: "avatar_hat",
         coins: -1,
         cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
+        rarity: "Rare",
       },
       {
-        name: "gold_card_lifestealer",
-        type: "Card Frame",
+        // Chest Drop
+        name: "hat_santa",
+        type: "Avatar Hat",
+        equip_group: "avatar_hat",
         coins: -1,
         cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
+        rarity: "Rare",
       },
       {
-        name: "gold_card_ogreMagi",
-        type: "Card Frame",
+        // Chest Drop
+        name: "hat_turkish",
+        type: "Avatar Hat",
+        equip_group: "avatar_hat",
         coins: -1,
         cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
+        rarity: "Rare",
       },
       {
-        name: "gold_card_aghanim",
-        type: "Card Frame",
+        // Chest Drop
+        name: "hat_witch",
+        type: "Avatar Hat",
+        equip_group: "avatar_hat",
         coins: -1,
         cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
+        rarity: "Rare",
       },
       {
-        name: "gold_card_ladyAnshu",
-        type: "Card Frame",
+        // Chest Drop
+        name: "hat_wizard",
+        type: "Avatar Hat",
+        equip_group: "avatar_hat",
         coins: -1,
         cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
+        rarity: "Rare",
       },
       {
-        name: "gold_card_donkeyAghanim",
-        type: "Card Frame",
+        // Chest Drop
+        name: "hat_barb",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
         coins: -1,
         cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
+        rarity: "Rare",
       },
       {
-        name: "gold_card_gambler",
-        type: "Card Frame",
+        // Chest Drop
+        name: "hat_begent",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
         coins: -1,
         cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
+        rarity: "Rare",
       },
       {
-        name: "gold_card_phantomAssassin",
-        type: "Card Frame",
+        // Chest Drop
+        name: "hat_bandito",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
         coins: -1,
         cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
+        rarity: "Rare",
       },
       {
-        name: "gold_card_alchemist",
-        type: "Card Frame",
+        // Chest Drop
+        name: "hat_rockstar",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
         coins: -1,
         cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
+        rarity: "Rare",
       },
       {
-        name: "gold_card_kanna",
-        type: "Card Frame",
+        // Chest Drop
+        name: "hat_thisisfine",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
         coins: -1,
         cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
+        rarity: "Rare",
       },
       {
-        name: "gold_card_crystalMaiden",
-        type: "Card Frame",
+        // Chest Drop
+        name: "hat_buckteeth",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
         coins: -1,
         cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
+        rarity: "Rare",
       },
       {
-        name: "gold_card_tinker",
-        type: "Card Frame",
+        // Chest Drop
+        name: "hat_cigar",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
         coins: -1,
         cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
+        rarity: "Rare",
       },
       {
-        name: "gold_card_bloodseeker",
-        type: "Card Frame",
+        // Chest Drop
+        name: "hat_grin",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
         coins: -1,
         cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
+        rarity: "Rare",
       },
       {
-        name: "gold_card_centaur",
-        type: "Card Frame",
+        // Chest Drop
+        name: "hat_lips",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
         coins: -1,
         cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
+        rarity: "Rare",
       },
       {
-        name: "gold_card_icefrog",
-        type: "Card Frame",
+        // Chest Drop
+        name: "hat_tongue",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
         coins: -1,
         cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
+        rarity: "Rare",
       },
       {
-        name: "gold_card_tomeGod",
-        type: "Card Frame",
+        // Chest Drop
+        name: "hat_angryeyes",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
         coins: -1,
         cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
+        rarity: "Rare",
+      },
+      {
+        // Chest Drop
+        name: "hat_blackglasses",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        // Chest Drop
+        name: "hat_confused",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        // Chest Drop
+        name: "hat_sidestare",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        // Chest Drop
+        name: "hat_tealglasses",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
       },
     ]);
     console.log("Cosmetics initialized");
@@ -277,6 +366,7 @@ async function setChestRewards() {
   }
 }
 (async function () {
-  // await addCosmetics();
-  // await setChestRewards();
+  await deleteHats();
+  await addCosmetics();
+  await setChestRewards();
 })();

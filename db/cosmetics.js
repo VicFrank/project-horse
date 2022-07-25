@@ -140,6 +140,28 @@ module.exports = {
     }
   },
 
+  async deleteCosmetic(cosmeticID) {
+    try {
+      await query(
+        `DELETE FROM drop_type_rewards WHERE reward_cosmetic_id = $1`,
+        [cosmeticID]
+      );
+      await query(`DELETE FROM chest_drop_types WHERE chest_cosmetic_id = $1`, [
+        cosmeticID,
+      ]);
+      await query(
+        `DELETE FROM battle_pass_cosmetic_rewards WHERE cosmetic_id = $1`,
+        [cosmeticID]
+      );
+      await query(`DELETE FROM player_cosmetics WHERE cosmetic_id = $1`, [
+        cosmeticID,
+      ]);
+      await query(`DELETE FROM cosmetics WHERE cosmetic_id = $1`, [cosmeticID]);
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async bulkCreateCosmetics(cosmetics) {
     try {
       await tx.default(pool, async (db) => {

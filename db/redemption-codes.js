@@ -33,10 +33,10 @@ module.exports = {
       );
       if (!rows[0]) return null;
       const rewards = await this.getRewards(code);
-      const players = await this.getNumPlayers(code);
+      const redeemed = await this.getNumRedeemed(code);
       return {
         ...rows[0],
-        players,
+        redeemed,
         rewards,
       };
     } catch (error) {
@@ -74,7 +74,7 @@ module.exports = {
     }
   },
 
-  async getNumPlayers(code) {
+  async getNumRedeemed(code) {
     try {
       const { rows } = await query(
         `
