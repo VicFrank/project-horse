@@ -986,7 +986,7 @@ module.exports = {
   async hasRedeemedCode(steamID, code) {
     try {
       const { rows } = await query(
-        `SELECT * FROM player_redeemed_codes WHERE steam_id = $1 AND code = $2`,
+        `SELECT * FROM player_redeemed_codes WHERE steam_id = $1 AND lower(code) = lower($2)`,
         [steamID, code]
       );
       return rows.length > 0;
