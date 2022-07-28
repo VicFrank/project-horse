@@ -115,9 +115,8 @@ module.exports = {
 
       await query(
         `UPDATE games SET
-        (duration, rounds, cheats_enabled) =
-        ($1, $2, $3, $4)
-         WHERE game_id = $5`,
+        (duration, rounds, cheats_enabled) = ($1, $2, $3)
+        WHERE game_id = $4`,
         [duration, rounds, cheatsEnabled, matchID]
       );
 
