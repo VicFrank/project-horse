@@ -164,6 +164,7 @@
     "card_bloodseeker": "Bloodseeker God",
     "card_centaur": "Centaur God",
     "card_icefrog": "Icefrog God",
+    "card_jmuy": "J'muy",
     "finisher_default": "Default Finisher",
     "finisher_fire": "Fire Finisher",
     "finisher_lightning": "Lightning Finisher",
@@ -405,6 +406,7 @@
     "bloodseeker": "Bloodseeker",
     "centaur": "Centaur",
     "tomeGod": "Tome God",
+    "jmuy": "J'muy",
     "icefrog": "Icefrog"
   },
   "abilities": {
