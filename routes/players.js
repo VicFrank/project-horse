@@ -26,17 +26,7 @@ router.get("/:steamID", async (req, res) => {
   try {
     const steamID = req.params.steamID;
     const player = await players.getPlayer(steamID);
-    // send a default player
-    if (!player)
-      return res.status(404).send({
-        steam_id: steamID,
-        username: "",
-        mmr: 1000,
-        coins: 0,
-        user_type: "USER",
-        patreon_level: 0,
-        doesNotExist: true,
-      });
+    if (!player) await players.upsertPlayer(steamID, "placeholder");
     if (!auth.isAuthenticatedUser(req)) delete player.mmr;
     res.status(200).json(player);
   } catch (error) {
