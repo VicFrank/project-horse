@@ -55,7 +55,8 @@ module.exports = {
         [matchID, steamID, rounds, place, endTime, currentMMR, mmrChange, ladderRatingChange,
           team, wins, losses, god, xpChange, coinsChange]
       );
-      const gamePlayerId = gamePlayerRows[0].game_player_id;
+      const gamePlayer = gamePlayerRows[0];
+      const gamePlayerId = gamePlayer.game_player_id;
 
       await Players.modifyMMR(steamID, mmrChange);
       await Players.modifyLadderRating(steamID, ladderRatingChange);
@@ -86,7 +87,17 @@ module.exports = {
       // async but we don't need to await
       Players.tryCompleteLoginQuest(steamID);
 
-      return { matchID, steamID, mmrChange };
+      const oldPips = mmr.getRankPips(currentLadderMMR);
+      const newPips = mmr.getRankPips(currentLadderMMR + ladderRatingChange);
+      const oldBadge = mmr.getRankBadge(currentLadderMMR);
+      const newBadge = mmr.getRankBadge(currentLadderMMR + ladderRatingChange);
+      const badgeChange = newBadge !== oldBadge ? newBadge : null;
+
+      return {
+        ...gamePlayer,
+        pips_change: newPips - oldPips,
+        badge_change: badgeChange,
+      };
     } catch (error) {
       throw error;
     }

@@ -522,6 +522,11 @@ router.post("/:steamID/use_item/:itemid", auth.userAuth, async (req, res) => {
 router.get("/leaderboard", auth.userAuth, async (req, res) => {
   try {
     const leaderboard = await players.getLeaderboard();
+    if (!auth.isAuthenticatedUser(req)) {
+      for (const player of leaderboard) {
+        delete player.mmr;
+      }
+    }
     res.status(200).json(leaderboard);
   } catch (error) {
     console.log(error);
