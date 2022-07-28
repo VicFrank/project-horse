@@ -25,8 +25,11 @@ router.get("/", async (req, res) => {
 router.get("/:steamID", async (req, res) => {
   try {
     const steamID = req.params.steamID;
-    const player = await players.getPlayer(steamID);
-    if (!player) await players.upsertPlayer(steamID, "placeholder");
+    let player = await players.getPlayer(steamID);
+    if (!player) {
+      await players.upsertPlayer(steamID, "placeholder");
+      player = await players.getPlayer(steamID);
+    }
     if (!auth.isAuthenticatedUser(req)) delete player.mmr;
     res.status(200).json(player);
   } catch (error) {
