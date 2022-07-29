@@ -36,6 +36,7 @@ export default {
       return require(`../../assets/images/badges/rank${rankNumber}_psd.png`);
     },
     getPipsPath() {
+      if (this.pips == 0) return;
       return require(`../../assets/images/badges/pip${this.pips}_psd.png`);
     },
   },
