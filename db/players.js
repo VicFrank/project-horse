@@ -92,6 +92,7 @@ module.exports = {
       const unclaimed_bp_rewards = await this.getNumUnclaimedBattlepassRewards(
         steamID
       );
+      const unclaimed_quests = await this.getNumUnclaimedQuests(steamID);
 
       return {
         ...player,
@@ -99,6 +100,7 @@ module.exports = {
         achievements_to_claim: achievementsToClaim,
         unopened_chests,
         unclaimed_bp_rewards,
+        unclaimed_quests,
       };
     } catch (error) {
       throw error;
@@ -955,6 +957,34 @@ module.exports = {
         [steamID]
       );
       return rows.length;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getNumUnclaimedQuests(steamID) {
+    try {
+      const dailyQuests = await this.getDailyQuests(steamID);
+      const loginQuests = await this.getLoginQuests(steamID);
+      const welcomeQuests = await this.getWelcomeQuests(steamID);
+
+      const unclaimedDailyQuests = dailyQuests.filter(
+        (quest) => !quest.claimed && quest.quest_completed
+      ).length;
+      const unclaimedLoginQuests = loginQuests.filter(
+        (quest) => !quest.claimed && quest.completed
+      ).length;
+      const unclaimedWelcomeQuests = welcomeQuests.filter(
+        (quest) => quest.can_claim
+      ).length;
+      console.log(
+        unclaimedDailyQuests,
+        unclaimedLoginQuests,
+        unclaimedWelcomeQuests
+      );
+      return (
+        unclaimedDailyQuests + unclaimedLoginQuests + unclaimedWelcomeQuests
+      );
     } catch (error) {
       throw error;
     }

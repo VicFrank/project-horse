@@ -8,7 +8,7 @@ const state = {
   plus_expiration: null,
   coins: 0,
   achievementsToClaim: 0,
-  dailiesToClaim: 0,
+  questsToClaim: 0,
   unopenedChests: 0,
   unclaimedBPRewards: 0,
   battlePass: {
@@ -37,7 +37,7 @@ const getters = {
   bpUpgraded: (state) => state.battlePass?.upgraded,
 
   achievementsToClaim: (state) => state.achievementsToClaim,
-  dailiesToClaim: (state) => state.dailiesToClaim,
+  questsToClaim: (state) => state.questsToClaim,
   unopenedChests: (state) => state.unopenedChests,
   unclaimedBPRewards: (state) => state.unclaimedBPRewards,
 };
@@ -63,6 +63,7 @@ const mutations = {
       username,
       isAdmin,
       achievementsToClaim,
+      questsToClaim,
       coins,
       hasPlus,
       plusExpiration,
@@ -74,6 +75,7 @@ const mutations = {
     state.loggedIn = true;
     state.isAdmin = isAdmin;
     state.achievementsToClaim = achievementsToClaim;
+    state.questsToClaim = questsToClaim;
     state.unopenedChests = unopenedChests;
     state.unclaimedBPRewards = unclaimedBPRewards;
     state.coins = coins;
@@ -94,25 +96,16 @@ const actions = {
     fetch(`/api/players/${state.userSteamID}`)
       .then((res) => res.json())
       .then((player) => {
-        const {
-          username,
-          user_type,
-          coins,
-          achievements_to_claim,
-          has_plus,
-          plus_expiration,
-          unopened_chests,
-          unclaimed_bp_rewards,
-        } = player;
         commit("SAVE_USER", {
-          username,
-          isAdmin: user_type === "ADMIN",
-          achievementsToClaim: achievements_to_claim,
-          coins,
-          hasPlus: has_plus,
-          plusExpiration: plus_expiration,
-          unopenedChests: unopened_chests,
-          unclaimedBPRewards: unclaimed_bp_rewards,
+          username: player.username,
+          isAdmin: player.user_type === "ADMIN",
+          achievementsToClaim: player.achievements_to_claim,
+          questsToClaim: player.unclaimed_quests,
+          coins: player.coins,
+          hasPlus: player.has_plus,
+          plusExpiration: player.plus_expiration,
+          unopenedChests: player.unopened_chests,
+          unclaimedBPRewards: player.unclaimed_bp_rewards,
         });
       })
       .catch((err) => {

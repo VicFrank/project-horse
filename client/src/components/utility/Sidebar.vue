@@ -66,9 +66,9 @@
               exact-active-class="active"
             >
               {{ $t("navigation.profile") }}
-              <b-badge v-if="numDailies > 0" variant="primary" class="ml-1">
-                {{ numDailies }}
-                <span class="sr-only">Unclaimed Daily Quests</span>
+              <b-badge v-if="numQuests > 0" variant="primary" class="ml-1">
+                {{ numQuests }}
+                <span class="sr-only">Unclaimed Quests</span>
               </b-badge>
             </router-link>
           </li>
@@ -270,8 +270,8 @@ export default {
     numAchievements() {
       return this.$store.state.auth.achievementsToClaim;
     },
-    numDailies() {
-      return this.$store.state.auth.dailiesToClaim;
+    numQuests() {
+      return this.$store.state.auth.questsToClaim;
     },
     unopenedChests() {
       return this.$store.state.auth.unopenedChests;
