@@ -18,20 +18,48 @@
       @ok="createCode"
       @cancel="clearNewCode"
       :ok-disabled="
-        !(newCode.code && newCode.cosmetics && newCode.cosmetics.length > 0)
+        !(
+          newCode.code &&
+          ((newCode.cosmetics && newCode.cosmetics.length > 0) || newCode.coins)
+        )
       "
     >
-      <b-form-input
-        type="text"
-        v-model="newCode.code"
-        placeholder="Enter the code..."
-      ></b-form-input>
-      <b-form-input
-        type="text"
-        v-model="cosmeticsFilter"
-        placeholder="Search cosmetics..."
-        class="mt-3"
-      ></b-form-input>
+      <b-form-group id="input-group-2" label="Code Name" label-for="input-2">
+        <b-form-input
+          type="text"
+          v-model="newCode.code"
+          placeholder="Enter the code"
+        ></b-form-input>
+      </b-form-group>
+      <b-form-group id="input-group-2" label="Coins" label-for="input-2">
+        <b-form-input
+          type="number"
+          v-model="newCode.coins"
+          placeholder="Coins"
+          class="mt-3"
+        ></b-form-input>
+      </b-form-group>
+      <b-form-group
+        id="input-group-2"
+        label="Limit (optional, default infinite)"
+        label-for="input-2"
+      >
+        <b-form-input
+          type="number"
+          v-model="newCode.redemption_limit"
+          placeholder="Limit"
+          class="mt-3"
+        ></b-form-input>
+      </b-form-group>
+      <hr />
+      <b-form-group id="input-group-2" label="Cosmetics" label-for="input-2">
+        <b-form-input
+          type="text"
+          v-model="cosmeticsFilter"
+          placeholder="Search cosmetics"
+          class="mt-3"
+        ></b-form-input>
+      </b-form-group>
       <b-form-select
         v-model="newCode.cosmetic"
         :options="filteredCosmetics"
@@ -69,8 +97,25 @@
     <!-- List existing codes -->
     <div class="d-flex flex-wrap p-3">
       <div v-for="code in codes" :key="code.code" class="p-2 text-center">
-        <div class="text-center" style="height: 70px; overflow-y: auto">
+        <div class="text-center" style="height: 90px; overflow-y: auto">
           <div>{{ code.code }}</div>
+          <div class="text-muted">
+            ({{ code.num_redeemed.toLocaleString() }} /
+            {{
+              code.redemption_limit != null
+                ? code.redemption_limit.toLocaleString()
+                : "∞"
+            }})
+          </div>
+          <div v-if="code.coins">
+            <img
+              src="../../../../assets/images/coin1.png"
+              alt="coins"
+              class="coins-image"
+              style="width: 20px; height: 20px"
+            />
+            {{ code.coins }}
+          </div>
           <div
             v-for="cosmetic in code.rewards"
             :key="cosmetic.cosmetic_id"
@@ -186,6 +231,7 @@ export default {
     },
     createCode(bvModalEvent) {
       bvModalEvent.preventDefault();
+      if (!this.newCode.cosmetics) this.newCode.cosmetics = [];
       const cosmeticIDs = this.newCode.cosmetics.map(
         (cosmetic) => cosmetic.cosmetic_id
       );
@@ -194,7 +240,11 @@ export default {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ cosmeticIDs }),
+        body: JSON.stringify({
+          cosmeticIDs,
+          coins: this.newCode.coins,
+          redemptionLimit: this.newCode.redemption_limit,
+        }),
       })
         .then((res) => res.json())
         .then((res) => {

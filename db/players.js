@@ -801,7 +801,7 @@ module.exports = {
   async givePostGameRewards(steamID, placement) {
     try {
       const rewards = {
-        1: { xp: 300, coins: 50 },
+        1: { xp: 200, coins: 50 },
         2: { xp: 180, coins: 30 },
         3: { xp: 120, coins: 20 },
         4: { xp: 90, coins: 15 },
@@ -1008,6 +1008,8 @@ module.exports = {
       if (redemptionLimit != null && numRedeemed >= redemptionLimit)
         throw new Error("Code expired");
 
+      addTransactionLog(steamID, "redeem_code", redemptionCode);
+
       const rewards = redemptionCode.rewards;
       await query(
         `
@@ -1019,6 +1021,10 @@ module.exports = {
         const { cosmetic_id } = reward;
         await this.giveCosmeticByID(steamID, cosmetic_id);
       }
+      if (redemptionCode.coins > 0) {
+        await this.modifyCoins(steamID, redemptionCode.coins);
+      }
+
       return true;
     } catch (error) {
       throw error;
@@ -1389,14 +1395,15 @@ module.exports = {
           const rewardID = reward.reward_cosmetic_id;
           const rewardCosmetic = await Cosmetics.getCosmetic(rewardID);
           if (rewardCosmetic.cosmetic_name === "gold_placeholder") {
-            // hard code the gold rewards here
+            // The rewards for the gold chest
             const coins = Math.floor(Math.random() * 100) + 50;
             return { coins };
           } else if (rewardCosmetic.cosmetic_type === "Consumable") {
             // we can win as many consumables as we want
             return { items: { [rewardID]: 1 } };
           }
-          // otherwise, give pity coins. For now, let's just give them 100
+          // Check if the player already has this item, and it's not a consumable
+          // In that case, we'll return pity coins
           const hasItem = await this.doesPlayerHaveItem(steamID, rewardID);
           if (hasItem) {
             // if the item is a god card, track how of this type we have opened
@@ -1406,7 +1413,11 @@ module.exports = {
               });
             }
             // Return coins equal to 25% the price of the chest
-            if (chest.cost_coins > 0) return { coins: chest.cost_coins / 4 };
+            if (chest.cost_coins > 0)
+              return {
+                coins: chest.cost_coins / 4,
+                missed_item: rewardCosmetic,
+              };
             return { coins: 100 };
           } else return { items: { [rewardID]: 1 } };
         }
@@ -1815,7 +1826,7 @@ module.exports = {
         SELECT pq.*, q.*,
           LEAST(quest_progress, required_amount) as capped_quest_progress,
           quest_progress >= required_amount as quest_completed,
-          created < current_timestamp - interval '23 hours' as can_reroll
+          (created < current_timestamp - interval '23 hours' AND quest_progress < required_amount) as can_reroll
         FROM player_quests pq
         JOIN quests q
         USING (quest_id)

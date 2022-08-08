@@ -3,7 +3,6 @@ const { query } = require("./index");
 module.exports = {
   async getAllCodes() {
     try {
-      // get all codes, with their rewards in an array
       const { rows } = await query(
         `
         SELECT redemption_codes.*,
@@ -16,6 +15,29 @@ module.exports = {
         LEFT JOIN cosmetics USING (cosmetic_id)
         GROUP BY code
         ORDER BY created_at DESC`
+      );
+      const codeRedemptions = await this.getAllCodesNumRedeeemed();
+      const codes = rows.map((code) => ({
+        ...code,
+        rewards: code.rewards[0].cosmetic_id ? code.rewards : [],
+        num_redeemed: Number(
+          codeRedemptions.find((c) => c.code === code.code)?.num_redeemed || 0
+        ),
+      }));
+      return codes;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getAllCodesNumRedeeemed() {
+    try {
+      const { rows } = await query(
+        `
+        SELECT code,
+        COUNT(*) AS num_redeemed
+        FROM player_redeemed_codes
+        GROUP BY code`
       );
       return rows;
     } catch (error) {
@@ -101,9 +123,12 @@ module.exports = {
     }
   },
 
-  async addRedemptionCode(code, cosmeticIDs) {
+  async addRedemptionCode(code, redemptionLimit, cosmeticIDs, coins = 0) {
     try {
-      await query("INSERT INTO redemption_codes (code) VALUES ($1)", [code]);
+      await query(
+        "INSERT INTO redemption_codes (code, coins, redemption_limit) VALUES ($1, $2, $3)",
+        [code, coins, redemptionLimit]
+      );
       for (const cosmeticID of cosmeticIDs) {
         await query(
           "INSERT INTO redemption_code_rewards (code, cosmetic_id) VALUES ($1, $2)",

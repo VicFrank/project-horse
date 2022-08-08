@@ -30,8 +30,17 @@
         </div>
       </div>
     </div>
+    <div v-if="missedItem" class="text-center mb-2">
+      <div class="mb-2">{{ $t(`cosmetics.${missedItem.cosmetic_name}`) }}</div>
+      <img
+        class="reward-image mb-1"
+        style="filter: brightness(0.5)"
+        v-bind:src="cosmeticImageSrc(missedItem)"
+        :alt="missedItem.cosmetic_name"
+      />
+      <div class="text-muted">{{ missedItem.rarity }}</div>
+    </div>
     <div v-if="coins">
-      <div class="h2 text-center blue">Coins</div>
       <div class="text-center" v-if="cosmetic.cosmetic_name != 'chest_gold'">
         You received a duplicate item. It has been auto-recycled and you have
         been awarded some gold in return.
@@ -69,6 +78,7 @@ export default {
     error: "",
     showError: false,
     items: [],
+    missedItem: null,
     coins: 0,
     opened: false,
   }),
@@ -110,6 +120,7 @@ export default {
         .then((res) => res.json())
         .then((res) => {
           this.items = res.items;
+          this.missedItem = res.missed_item;
           this.coins = res.coins;
           this.opened = true;
           this.$store.dispatch("REFRESH_PLAYER");

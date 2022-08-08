@@ -27,12 +27,17 @@ router.get("/:code/players", auth.adminAuth, async (req, res) => {
 router.post("/:code", auth.adminAuth, async (req, res) => {
   try {
     const code = req.params.code;
-    const cosmeticIDs = req.body.cosmeticIDs;
+    const { cosmeticIDs, coins, redemptionLimit } = req.body;
     const exists = await redemptionCodes.exists(code);
     if (exists) {
       return res.status(400).json({ error: "Code already exists" });
     }
-    const result = await redemptionCodes.addRedemptionCode(code, cosmeticIDs);
+    const result = await redemptionCodes.addRedemptionCode(
+      code,
+      redemptionLimit,
+      cosmeticIDs,
+      coins
+    );
     res.status(201).send(result);
   } catch (error) {
     console.log(error);
