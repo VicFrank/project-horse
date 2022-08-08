@@ -977,11 +977,6 @@ module.exports = {
       const unclaimedWelcomeQuests = welcomeQuests.filter(
         (quest) => quest.can_claim
       ).length;
-      console.log(
-        unclaimedDailyQuests,
-        unclaimedLoginQuests,
-        unclaimedWelcomeQuests
-      );
       return (
         unclaimedDailyQuests + unclaimedLoginQuests + unclaimedWelcomeQuests
       );
