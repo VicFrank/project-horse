@@ -9,16 +9,6 @@
     <!-- Daily Quests -->
     <DailyQuests class="mb-5"></DailyQuests>
 
-    <div v-if="hasPlus && plusBenefits.canClaimGold" class="text-center mb-5">
-      <button
-        v-on:click="claimDailyGold()"
-        type="button"
-        class="btn btn-primary"
-      >
-        Plus Benefits - Claim Daily 100 Gold
-      </button>
-    </div>
-
     <!-- Recent Games -->
     <div class="d-flex justify-content-between align-items-center">
       <h2 v-if="games.length > 0">Recent Games</h2>
@@ -74,18 +64,18 @@ export default {
           this.plusBenefits = plusBenefits;
         });
     },
-    claimDailyGold() {
-      fetch(`/api/players/${this.steamID}/claim_daily_gold`, { method: "post" })
-        .then((res) => res.json())
-        .then(() => {
-          this.plusBenefits.canClaimGold = false;
-          this.getPlusBenefits();
-          this.$store.dispatch("REFRESH_PLAYER");
-        })
-        .catch((err) => {
-          console.error("Error fetching player stats", err);
-        });
-    },
+    // claimDailyGold() {
+    //   fetch(`/api/players/${this.steamID}/claim_daily_gold`, { method: "post" })
+    //     .then((res) => res.json())
+    //     .then(() => {
+    //       this.plusBenefits.canClaimGold = false;
+    //       this.getPlusBenefits();
+    //       this.$store.dispatch("REFRESH_PLAYER");
+    //     })
+    //     .catch((err) => {
+    //       console.error("Error fetching player stats", err);
+    //     });
+    // },
   },
 
   created() {

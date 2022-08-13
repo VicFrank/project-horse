@@ -126,6 +126,7 @@ export default {
         .then(() => {
           this.getLoginQuests();
           this.$store.dispatch("REFRESH_BATTLE_PASS");
+          this.$store.dispatch("REFRESH_PLAYER");
         })
         .catch((err) => {
           this.error = err;

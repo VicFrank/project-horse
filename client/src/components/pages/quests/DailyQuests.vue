@@ -161,6 +161,7 @@ export default {
             // refresh the daily quests
             this.getDailyQuests();
             this.$store.dispatch("REFRESH_BATTLE_PASS");
+            this.$store.dispatch("REFRESH_PLAYER");
           }
         })
         .catch((err) => {
