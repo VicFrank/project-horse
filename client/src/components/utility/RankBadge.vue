@@ -1,5 +1,5 @@
 <template>
-  <div v-b-tooltip.hover.html :title="`${badge} ${pips}`">
+  <div v-b-tooltip.hover.html :title="`${badge} ${pips > 0 ? pips : ''}`">
     <b-img
       :height="height"
       v-bind:src="getBadgePath(hero)"
