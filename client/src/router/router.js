@@ -61,7 +61,7 @@ const routes = [
   { path: "/players/:steam_id", component: PlayerPage },
   { path: "/players/:steam_id/games", component: PlayerGamesList },
   { path: "/store", component: Store },
-  { path: "/checkout/:item_id", component: Checkout },
+  { path: "/checkout/:item_ids+", component: Checkout },
   { path: "/payment_success/", component: PaymentSuccess },
   {
     path: "/alipay_payment/",

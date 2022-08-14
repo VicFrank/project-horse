@@ -9,7 +9,7 @@
             :to="getCheckoutLink('buy_bp')"
           >
             <img
-              src="./images/Battle_Pass_Icons_tickets.jpg"
+              src="../../../assets/images/cosmetics/buy_bp.png"
               alt="Battle Pass Shop"
             />
           </router-link>
@@ -23,7 +23,7 @@
             :to="getCheckoutLink('plus_year_package')"
           >
             <img
-              src="./images/Battle_Pass_Icons_tickets.jpg"
+              src="../../../assets/images/cosmetics/plus_year_package.png"
               alt="Battle Pass Shop"
             />
           </router-link>

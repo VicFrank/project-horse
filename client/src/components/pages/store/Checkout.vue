@@ -2,7 +2,11 @@
   <div>
     <h1 class="page-title" v-t="'store.checkout_title'"></h1>
     <div class="container text-center">
-      <div class="item-card">
+      <b-alert v-model="showGeneralError" variant="danger" dismissible>{{
+        generalError
+      }}</b-alert>
+
+      <div v-for="item in items" :key="item.cosmetic_id" class="item-card">
         <div class="item-card-img">
           <img
             v-bind:src="cosmeticImageSrc(item)"
@@ -11,31 +15,47 @@
           />
         </div>
         <div class="item-card-body">
-          <div class="mb-2">{{ $t(`cosmetics.${item.cosmetic_name}`) }}</div>
-          <div class="text-muted">${{ item.cost_usd }}</div>
+          <div class="mb-2 text-muted">
+            {{ $t(`cosmetics.${item.cosmetic_name}`) }}
+          </div>
+          <strong>${{ item.cost_usd }}</strong>
+        </div>
+      </div>
+      <!-- subtotal  -->
+      <div class="item-card text-align-right">
+        <div class="item-card-body">
+          <div v-if="totalXp != 0" class="mb-2">
+            <span class="mr-2">{{ $t("store.totalXp") }}</span>
+            <strong>{{ totalXp }}</strong>
+          </div>
+          <div>
+            <span class="mr-2">{{ $t("store.subtotal") }}</span>
+            <strong>${{ totalCost }}</strong>
+          </div>
         </div>
       </div>
 
-      <template v-if="item.cosmetic_name === 'buy_bp'" && bpUpgraded>
+      <template v-if="containsPurchasedBattlePass">
         <div>You have already upgraded your battle pass!</div>
       </template>
       <template v-else>
-        <template v-if="loggedIn">
+        <template v-if="loggedIn && validPurchase">
           <div v-if="loading" class="d-flex justify-content-center mb-3">
             <b-spinner label="Loading..."></b-spinner>
           </div>
           <b-card v-else class="mt-3" style="max-width: 300px; margin: auto">
             <StripePurchase
               class="my-3"
-              :item="item"
+              :items="items"
               v-on:purchaseSuccess="onPurchaseSuccess"
               v-on:error="onError"
             />
-            <StripeAlipay :item="item" class="mb-3" />
+            <!-- <StripeAlipay :items="items" class="mb-3" /> -->
             <PaypalPurchase
-              :item="item"
+              :items="items"
               :paypalType="paypalType"
               v-on:purchaseSuccess="onPurchaseSuccess"
+              v-on:purchaseError="onError"
             />
             <b-alert v-model="showError" variant="danger" dismissible>{{
               error
@@ -43,7 +63,9 @@
           </b-card>
         </template>
         <template v-else>
-          <LoginButton></LoginButton>
+          <template v-if="validPurchase">
+            <LoginButton></LoginButton>
+          </template>
         </template>
       </template>
     </div>
@@ -59,23 +81,26 @@
 <script>
 import LoginButton from "../../utility/LoginButton.vue";
 import StripePurchase from "./components/StripePurchase.vue";
-import StripeAlipay from "./components/StripeAlipay.vue";
+// import StripeAlipay from "./components/StripeAlipay.vue";
 import PaypalPurchase from "./components/PaypalPurchase.vue";
 
 export default {
   components: {
     LoginButton,
     StripePurchase,
-    StripeAlipay,
+    // StripeAlipay,
     PaypalPurchase,
   },
 
   data() {
     return {
-      item: {},
+      items: [],
       error: "",
       showError: false,
+      showGeneralError: false,
+      generalError: "",
       loading: true,
+      validPurchase: true,
     };
   },
 
@@ -87,7 +112,34 @@ export default {
       return this.$store.getters.bpUpgraded;
     },
     paypalType() {
-      return this.item.cost_usd < 12 ? "cheap" : "expensive";
+      const totalCost = this.items.reduce((acc, item) => {
+        return acc + item.cost_usd;
+      }, 0);
+      return totalCost < 12 ? "cheap" : "expensive";
+    },
+    totalCost() {
+      return this.items
+        .reduce((acc, item) => {
+          return acc + item.cost_usd;
+        }, 0)
+        .toLocaleString();
+    },
+    totalXp() {
+      return this.items
+        .reduce((acc, item) => {
+          if (item.cosmetic_name.startsWith("buy_xp_")) {
+            const xp = Number(item.cosmetic_name.slice(7));
+            return acc + xp;
+          }
+          return acc;
+        }, 0)
+        .toLocaleString();
+    },
+    containsPurchasedBattlePass() {
+      return (
+        this.$store.getters.bpUpgraded &&
+        this.items.some((item) => item.cosmetic_name === "buy_bp")
+      );
     },
   },
 
@@ -106,21 +158,35 @@ export default {
   },
 
   created() {
-    fetch(`/api/cosmetics/${this.$route.params.item_id}`)
+    const cosmeticIDs = this.$route.params.item_ids.split("/");
+    fetch(`/api/cosmetics/get_cosmetics`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ cosmeticIDs }),
+    })
       .then((res) => res.json())
-      .then((item) => {
-        if (item) {
-          this.item = item;
-          this.loading = false;
-        } else {
-          this.error = "Invalid Item";
-          this.showError = true;
-          this.$router.push("/store");
+      .then((data) => {
+        this.loading = false;
+
+        if (data.some((item) => item.cost_usd <= 0)) {
+          this.generalError =
+            "Trying to purchase an invalid item (not purchaseable)";
+          this.showGeneralError = true;
+          this.validPurchase = false;
         }
+        if (data.some((item) => !item.cosmetic_id)) {
+          this.generalError = "Invalid item(s)!";
+          this.showGeneralError = true;
+          this.validPurchase = false;
+        }
+        this.items = data;
       })
-      .catch((err) => {
+      .catch(() => {
+        this.error = "Error loading cosmetic data";
         this.showError = true;
-        this.error = err;
+        this.loading = false;
       });
   },
 };

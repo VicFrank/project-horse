@@ -25,6 +25,40 @@ module.exports = {
     }
   },
 
+  async getCosmetics(cosmeticIDs) {
+    try {
+      const promises = [];
+      for (const cosmeticID of cosmeticIDs) {
+        // check if cosmeticID is a number greater than 0
+        if (isNaN(cosmeticID) || cosmeticID < 1) {
+          throw new Error(`Invalid cosmeticID: ${cosmeticID}`);
+        }
+        promises.push(this.getCosmetic(cosmeticID));
+      }
+      const cosmetics = await Promise.all(promises);
+      return cosmetics;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getPurchaseableXpItems() {
+    const xpItems = ["buy_xp_5000", "buy_xp_1000", "buy_xp_300"];
+    try {
+      const promises = [];
+      for (const cosmeticName of xpItems) {
+        promises.push(this.getCosmeticByName(cosmeticName));
+      }
+      const cosmetics = await Promise.all(promises);
+      return cosmetics.map((cosmetic) => ({
+        ...cosmetic,
+        xp: Number(cosmetic.cosmetic_name.slice(7)),
+      }));
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async getCosmeticByName(cosmeticName) {
     try {
       const { rows } = await query(

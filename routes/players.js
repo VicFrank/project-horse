@@ -443,12 +443,15 @@ router.get("/:steamID/battle_pass/levels", async (req, res) => {
   }
 });
 
-router.get("/:steamID/battle_pass/xp_to_level", async (req, res) => {
+router.get("/:steamID/battle_pass/items_to_hit_level", async (req, res) => {
   try {
     const steamID = req.params.steamID;
     const targetLevel = req.query.level;
-    const xp = await players.getXpToTargetLevel(steamID, targetLevel);
-    res.status(200).json({ xp });
+    const cosmeticIDs = await players.getXpItemsToTargetLevel(
+      steamID,
+      targetLevel
+    );
+    res.status(200).json(cosmeticIDs);
   } catch (error) {
     console.log(error);
     res.status(500).send({ message: "Server Error" });

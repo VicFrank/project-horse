@@ -18,7 +18,7 @@ router.post("/paypal/:steamID", auth.userAuth, async (req, res) => {
   try {
     const steamID = req.params.steamID;
     const orderID = req.body.orderID;
-    const itemID = req.body.itemID;
+    const cosmeticIDs = req.body.cosmeticIDs;
     const paypalType = req.body.paypalType;
 
     let request = new checkoutNodeJssdk.orders.OrdersGetRequest(orderID);
@@ -36,7 +36,7 @@ router.post("/paypal/:steamID", auth.userAuth, async (req, res) => {
     let order;
     try {
       order = await paypalClient().execute(request);
-      const intentEvent = { itemID, order };
+      const intentEvent = { cosmeticIDs, order };
       await logs.addTransactionLog(steamID, "paypal_intent", intentEvent);
     } catch (error) {
       console.log(error);
@@ -51,11 +51,17 @@ router.post("/paypal/:steamID", auth.userAuth, async (req, res) => {
     // make sure this is a valid payment
     // this returns a float, so round
     const paidAmount = order.result.purchase_units[0].amount.value;
-    const itemData = await cosmetics.getCosmetic(itemID);
-    const { cost_usd } = itemData;
+    const cosmeticsData = await cosmetics.getCosmetics(cosmeticIDs);
+    const totalCost =
+      Math.round(
+        cosmeticsData.reduce((acc, curr) => {
+          return acc + curr.cost_usd;
+        }, 0) * 100
+      ) / 100;
 
-    if (!itemData) return res.status(400).send({ message: "Invalid ItemID" });
-    if (paidAmount != cost_usd)
+    if (cosmeticsData.some((cosmetic) => !cosmetic))
+      return res.status(400).send({ message: "Invalid Cosmetic Id" });
+    if (paidAmount != totalCost)
       return res.status(400).send({ message: "Invalid Payment Amount" });
 
     // Call PayPal to capture the order
@@ -64,15 +70,14 @@ router.post("/paypal/:steamID", auth.userAuth, async (req, res) => {
 
     try {
       const capture = await paypalClient().execute(request);
-      const purchaseEvent = { itemID, capture };
+      const purchaseEvent = { cosmeticIDs, capture };
       await logs.addTransactionLog(steamID, "paypal", purchaseEvent);
     } catch (err) {
       console.log(err);
       return res.send(500);
     }
 
-    const transaction = { items: { [itemID]: 1 } };
-    await players.doItemTransaction(steamID, transaction);
+    await addCosmeticsFromIDs(steamID, cosmeticIDs);
 
     res.status(200).send({ message: `Payment Success` });
   } catch (error) {
@@ -80,6 +85,20 @@ router.post("/paypal/:steamID", auth.userAuth, async (req, res) => {
     res.status(500).json({ error: error.toString() });
   }
 });
+
+async function addCosmeticsFromIDs(steamID, cosmeticIDs) {
+  const transactionItems = {};
+  for (const cosmeticID of cosmeticIDs) {
+    if (!transactionItems[cosmeticID]) transactionItems[cosmeticID] = 1;
+    else transactionItems[cosmeticID]++;
+  }
+  const transaction = { items: transactionItems };
+  try {
+    await players.doItemTransaction(steamID, transaction);
+  } catch (error) {
+    throw error;
+  }
+}
 
 async function handlePaypalWebhooks(body) {
   const { event_type, resource } = body;
@@ -153,20 +172,27 @@ router.post("/webhooks/paypal", async (req, res) => {
 });
 
 router.post("/stripe/intents", async (req, res) => {
-  const { cosmeticID, amount, steamID } = req.body;
+  const { cosmeticIDs, amount, steamID } = req.body;
 
-  const itemData = await cosmetics.getCosmetic(cosmeticID);
-  if (!itemData) return res.status(400).send({ message: "Invalid Item ID" });
+  const cosmeticsData = await cosmetics.getCosmetics(cosmeticIDs);
+  const totalCost = cosmeticsData.reduce((acc, curr) => {
+    return acc + curr.cost_usd;
+  }, 0);
 
-  const { cost_usd } = itemData;
-  if (amount / 100 !== cost_usd)
+  if (cosmeticsData.some((cosmetic) => !cosmetic))
+    return res.status(400).send({ message: "Invalid Cosmetic Id" });
+  if (amount / 100 != totalCost)
     return res.status(400).send({ message: "Invalid Payment Amount" });
 
   const paymentIntent = await stripeClient.client.paymentIntents.create({
     amount,
     currency: "usd",
     payment_method_types: ["card"],
-    metadata: { steamID, itemID: cosmeticID, isPaymentIntent: true },
+    metadata: {
+      steamID,
+      cosmeticIDs: JSON.stringify(cosmeticIDs),
+      isPaymentIntent: true,
+    },
   });
 
   res.send(paymentIntent);
@@ -175,15 +201,15 @@ router.post("/stripe/intents", async (req, res) => {
 // This is only for payment intents,
 // because apparently in production the charge succeeded webhook was not working
 async function stripePaymentIntentSucceeded(intent) {
-  const { steamID, itemID } = intent.metadata;
-  console.log("stripe payment intent succeeded", steamID, itemID);
+  const { steamID, cosmeticIDs } = intent.metadata;
+  console.log("stripe payment intent succeeded", steamID, cosmeticIDs);
 
   // Handle payments purchasing a specific item
-  if (itemID) {
+  if (cosmeticIDs) {
     try {
+      const parsedCosmeticIDs = JSON.parse(cosmeticIDs);
       await logs.addTransactionLog(steamID, "stripe", { intent });
-      const transaction = { items: { [itemID]: 1 } };
-      await players.doItemTransaction(steamID, transaction);
+      await addCosmeticsFromIDs(steamID, parsedCosmeticIDs);
     } catch (error) {
       console.log(error);
     }
@@ -191,7 +217,7 @@ async function stripePaymentIntentSucceeded(intent) {
 }
 
 async function stripeChargeSucceeded(intent) {
-  const itemID = intent.metadata.itemID;
+  const cosmeticIDs = intent.metadata.cosmeticIDs;
   const isPaymentIntent = intent.metadata.isPaymentIntent;
 
   // Ignore payment intents, those are handled in another webhook
@@ -199,62 +225,29 @@ async function stripeChargeSucceeded(intent) {
     return;
   }
 
+  console.log("stripe charge succeeded", cosmeticIDs);
+
   // Handle payments purchasing a specific item
-  if (itemID) {
+  if (cosmeticIDs) {
     const steamID = intent.metadata.steamID;
-    console.log("stripe charge succeeded", steamID, itemID);
+    console.log("stripe charge succeeded", steamID, cosmeticIDs);
 
     try {
       await logs.addTransactionLog(steamID, "stripe", { intent });
-      const transaction = { items: { [itemID]: 1 } };
-      await players.doItemTransaction(steamID, transaction);
+      const parsedCosmeticIDs = JSON.parse(cosmeticIDs);
+      await addCosmeticsFromIDs(steamID, parsedCosmeticIDs);
     } catch (error) {
       console.log(error);
     }
   } else {
     // assume this is a subscription payment
-    const { amount, customer } = intent;
-
-    // Add 31 days to this tier
-    // stripe subscriptions are monthly, and some months have fewer than 31 days
-    // because of this, on those months, the user gets a few extra days
-    const player = players.getStripeSubscriptionByCustomerID(customer);
-
-    if (!player) {
-      const message = `Customer with ID ${customer} not found to give a subscription to`;
-      console.log(message);
-      // send a log to myself (VicFrank)
-      logs.addTransactionLog("76561198030851434", "error", { message });
-      return;
-    }
-
-    const steamID = player.steam_id;
-
-    // TODO: Update this
-    switch (amount) {
-      case 200:
-        // Silver battle pass
-        players.addBattlePassTier(steamID, 1, 31);
-        break;
-      case 500:
-        // Gold battle pass
-        players.addBattlePassTier(steamID, 2, 31);
-        break;
-      case 1500:
-        // Plat battle pass
-        players.addBattlePassTier(steamID, 3, 31);
-        break;
-      default:
-        console.log("We got a payment we didn't know how to handle!", intent);
-        break;
-    }
   }
 }
 
 async function handleStripeSourceChargeable(intent) {
   const { amount, id, currency } = intent;
-  const { itemID } = intent.metadata;
-  const isValid = await isValidStripeTransaction(itemID, amount);
+  const { cosmeticIDs } = intent.metadata;
+  const isValid = await isValidStripeTransaction(cosmeticIDs, amount);
   if (isValid) {
     stripeClient.client.charges.create({
       amount: amount,
@@ -271,11 +264,13 @@ async function handleStripeSubscription(session) {
   players.addStripeSubscription(steamID, customerID, "active");
 }
 
-async function isValidStripeTransaction(itemID, amount) {
-  const itemData = await cosmetics.getCosmetic(itemID);
-  const { cost_usd } = itemData;
+async function isValidStripeTransaction(cosmeticIDs, amount) {
+  const itemData = await cosmetics.getCosmetics(cosmeticIDs);
+  const totalCost = cosmeticsData.reduce((acc, curr) => {
+    return acc + curr.cost_usd;
+  }, 0);
 
-  if (!itemData || amount / 100 != cost_usd) return false;
+  if (!itemData || amount / 100 != totalCost) return false;
 
   return true;
 }
@@ -376,7 +371,6 @@ router.post("/stripe/webhook", async (req, res) => {
       secret
     );
   } catch (err) {
-    // console.log(err);
     res.status(400).send("Webhook Error");
     return;
   }

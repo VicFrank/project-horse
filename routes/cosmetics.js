@@ -28,4 +28,15 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+router.post("/get_cosmetics", async (req, res) => {
+  const ids = req.body.cosmeticIDs;
+  try {
+    const result = await cosmetics.getCosmetics(ids);
+    res.status(201).send(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.toString() });
+  }
+});
+
 module.exports = router;

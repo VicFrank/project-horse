@@ -21,7 +21,7 @@
 let card = undefined;
 export default {
   props: {
-    item: {},
+    items: [],
   },
 
   data: () => ({
@@ -38,7 +38,7 @@ export default {
   }),
 
   async created() {
-    const isDev = window.webpackHotUpdate;
+    const isDev = process.env.NODE_ENV == "development";
     const key = isDev ? this.keys.dev : this.keys.prod;
     const stripe = window.Stripe(key);
     this.stripe = stripe;
@@ -51,14 +51,19 @@ export default {
   methods: {
     async createIntent() {
       const url = "/api/payments/stripe/intents";
+      // stripe amounts are in cents
+      let amount = this.items.reduce((acc, item) => {
+        return acc + item.cost_usd * 100;
+      }, 0);
+      amount = Math.round(amount);
       const params = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          amount: this.item.cost_usd * 100, // stripe amounts are in cents
-          cosmeticID: this.item.cosmetic_id,
+          amount,
+          cosmeticIDs: this.items.map((item) => item.cosmetic_id),
           steamID: this.$store.state.auth.userSteamID,
         }),
       };

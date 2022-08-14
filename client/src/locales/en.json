@@ -382,6 +382,8 @@
     "select_product": "Select a product",
     "payment": "Payment",
     "item": "Item",
+    "subtotal": "Subtotal",
+    "totalXp": "XP",
     "price": "Price",
     "checkout": "Proceed to checkout",
     "login": "Login to complete your purchase",

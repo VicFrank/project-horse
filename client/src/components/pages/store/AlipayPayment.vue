@@ -72,7 +72,7 @@ export default {
             setTimeout(this.pollForSourceStatus, 1000);
           } else if (source.status === "consumed") {
             // Payment success
-            this.$store.dispatch("refreshPlayer");
+            this.$store.dispatch("REFRESH_PLAYER");
           } else {
             // We've timed out or failed
             this.status = "failed";

@@ -19,7 +19,7 @@
 <script>
 export default {
   props: {
-    item: {},
+    items: [],
     paypalType: String,
   },
 
@@ -50,7 +50,7 @@ export default {
   },
 
   mounted() {
-    const isDev = window.webpackHotUpdate;
+    const isDev = process.env.NODE_ENV == "development";
     this.credentials = isDev ? this.keys.dev : this.keys.prod;
     const script = document.createElement("script");
     const clientID =
@@ -66,8 +66,13 @@ export default {
     setLoaded() {
       // "this" doesn't work in window.paypal because javascript sucks
       const steamID = this.$store.state.auth.userSteamID;
-      const itemID = this.item.cosmetic_id;
-      const cost_usd = this.item.cost_usd;
+      const costUSD =
+        Math.round(
+          this.items.reduce((acc, item) => {
+            return acc + item.cost_usd;
+          }, 0) * 100
+        ) / 100;
+
       const paypalType = this.paypalType;
       const _this = this;
       window.paypal
@@ -85,14 +90,14 @@ export default {
                 {
                   amount: {
                     currency_code: "USD",
-                    value: cost_usd,
+                    value: costUSD,
                   },
                 },
               ],
               application_context: { shipping_preference: "NO_SHIPPING" },
             });
           },
-          onApprove: function (data) {
+          onApprove: (data) => {
             _this.processingPayment = true;
             return fetch(`/api/payments/paypal/${steamID}`, {
               method: "post",
@@ -101,7 +106,7 @@ export default {
               },
               body: JSON.stringify({
                 orderID: data.orderID,
-                itemID,
+                cosmeticIDs: this.items.map((item) => item.cosmetic_id),
                 paypalType,
               }),
             })
@@ -109,22 +114,22 @@ export default {
               .then((res) => {
                 _this.processingPayment = false;
                 if (res.message === "Payment Success") {
-                  _this.$store.dispatch("refreshPlayer");
+                  _this.$store.dispatch("REFRESH_PLAYER");
                   _this.$emit("purchaseSuccess");
                 } else {
-                  _this.error = res.message;
-                  _this.showError = true;
+                  console.error(res.message);
+                  _this.$emit("purchaseError", res.message);
                 }
               })
               .catch((err) => {
                 _this.processingPayment = false;
-                _this.error = err;
-                _this.showError = true;
+                console.error(err);
+                _this.$emit("purchaseError", err);
               });
           },
           onError: (err) => {
-            _this.showError = true;
-            _this.error = err;
+            console.error(err);
+            _this.$emit("purchaseError", err);
           },
         })
         .render(this.$refs.paypal);

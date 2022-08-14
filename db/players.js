@@ -594,6 +594,34 @@ module.exports = {
     }
   },
 
+  async getXpItemsToTargetLevel(steamID, targetLevel) {
+    try {
+      const items = [];
+      let neededXp = await this.getXpToTargetLevel(steamID, targetLevel);
+      if (neededXp < 0) return items;
+      // items are ordered by xp, largest to smallest
+      const purchaseableXpItems = await Cosmetics.getPurchaseableXpItems();
+      purchaseableXpItems.sort((a, b) => b.xp - a.xp);
+
+      // find the most cost efficient way to get to the needed xp
+      while (neededXp > 0) {
+        let xpItem = purchaseableXpItems.find((item) => item.xp <= neededXp);
+        // if we didn't find any, add the smallest
+        if (!xpItem) {
+          xpItem = purchaseableXpItems[purchaseableXpItems.length - 1];
+        }
+        // prevent infinite loop if we can't get to the needed xp
+        if (!xpItem || !xpItem.xp) break;
+        neededXp -= xpItem.xp;
+        items.push(xpItem.cosmetic_id);
+      }
+
+      return items;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   // get all level rewards (up to 50) and if they've been claimed
   async getBattlePassLevels(steamID) {
     try {
