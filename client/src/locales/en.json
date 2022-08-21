@@ -53,8 +53,9 @@
     "ru": "русский"
   },
   "profile": {
-    "daily_quests": "Daily Quests",
-    "weekly_quests": "Weekly Quests",
+    "daily_quests": "Quests",
+    "weekly_quests": "Login Rewards",
+    "welcome_quests": "Welcome Rewards",
     "match_history": "Match History",
     "my_subscriptions": "My Subscriptions",
     "my_stats": "My Stats",

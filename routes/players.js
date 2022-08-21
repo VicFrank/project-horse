@@ -7,6 +7,7 @@ const quests = require("../db/quests");
 const auth = require("../auth/auth");
 const apicache = require("apicache");
 const { adminAuth } = require("../auth/auth");
+const cosmetics = require("../db/cosmetics");
 
 const cache = apicache.middleware;
 
@@ -82,6 +83,23 @@ router.post("/:steamID/claim_daily_gold", auth.userAuth, async (req, res) => {
       return res.status(400).send({ message: error.message });
     console.log(error);
     res.status(500).send({ message: "Server Error" });
+  }
+});
+
+router.post("/:steamID/use_doubledown", auth.userAuth, async (req, res) => {
+  try {
+    const steamID = req.params.steamID;
+    const hasWeeklyDoubleDown = await players.canUseWeeklyDoubleDown(steamID);
+    if (hasWeeklyDoubleDown) {
+      await players.useWeeklyDoubleDown(steamID);
+      return res.status(200).send({ message: "Weekly Double Down used" });
+    } else {
+      await players.consumeDoubledown(steamID);
+      return res.status(200).send({ message: "Double Down used" });
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({ message: error.message });
   }
 });
 

@@ -23,14 +23,6 @@
         >
           <div class="single-quest">
             <p>{{ quest.quest_name }}</p>
-            <button
-              v-on:click="claimQuest(quest)"
-              v-if="quest.quest_completed && !quest.claimed"
-              type="button"
-              class="btn btn-primary mb-3"
-            >
-              Claim
-            </button>
             <ProgressBar
               :progress="quest.capped_quest_progress"
               :required="quest.required_amount"
@@ -51,6 +43,14 @@
               >
             </div>
             <div v-else class="quest-rewards">Completed</div>
+            <button
+              v-on:click="claimQuest(quest)"
+              v-if="quest.quest_completed && !quest.claimed"
+              type="button"
+              class="btn btn-primary ml-auto mr-3 my-2"
+            >
+              Claim
+            </button>
             <a
               v-if="quest.can_reroll"
               v-on:click="rerollQuest(quest)"
@@ -58,7 +58,7 @@
             >
               <img src="./reroll.svg" alt="Reroll" />
             </a>
-            <template v-else>
+            <template v-else-if="!quest.quest_completed">
               <span class="ml-auto mr-2 next-quest-text">{{
                 getTimeUntilReroll(quest.created)
               }}</span>

@@ -733,8 +733,8 @@ module.exports = {
 
         await this.addPlayerClaimedRewardRow(
           steamID,
-          activeBattlePass.battle_pass_id,
-          level
+          battlePass.battle_pass_id,
+          bp_level
         );
         await this.giveCosmeticByID(steamID, cosmetic_id);
         claimedCosmetics.push(cosmetic);
@@ -1281,11 +1281,27 @@ module.exports = {
     }
   },
 
+  async consumeDoubledown(steamID) {
+    try {
+      const cosmetic = await Cosmetics.getCosmeticByName("doubledown");
+      const hasCosmetic = await this.hasCosmetic(steamID, cosmetic.cosmetic_id);
+      if (!hasCosmetic) throw new Error("You don't own this item");
+
+      await Logs.addTransactionLog(steamID, "consume_item", {
+        steamID: steamID,
+        cosmeticName: "doubledown",
+      });
+      await this.removeCosmeticByID(steamID, cosmetic.cosmetic_id);
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async consumeItem(steamID, cosmeticID) {
     try {
       const cosmetic = await Cosmetics.getCosmetic(cosmeticID);
 
-      if (!cosmetic) throw new Error("Tried to consume non-existent item");
+      if (!cosmetic) throw new Error(`Invalid cosmetic ID ${cosmeticID}`);
       if (cosmetic.cosmetic_type !== "Consumable")
         throw new Error("Tried to consume non-consumable item");
 

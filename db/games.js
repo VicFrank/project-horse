@@ -9,7 +9,7 @@ module.exports = {
   async createGamePlayer(postGamePlayerData) {
     const { matchID, steamID, username, place, god } = postGamePlayerData;
     const { rounds, endTime, heroes, team, wins, losses } = postGamePlayerData;
-    const { players } = postGamePlayerData;
+    const { players, doubledown } = postGamePlayerData;
     let { ranked } = postGamePlayerData;
 
     if (players.length !== 8) ranked = false;
@@ -36,6 +36,7 @@ module.exports = {
           currentLadderMMR,
           place
         );
+        if (doubledown) mmrChange *= 2;
       }
 
       if (ranked) {

@@ -5,7 +5,7 @@
     class="pb-2"
   >
     <div class="px-3 py-3">
-      <span>Welcome Quests</span>
+      <span v-t="'profile.daily_quests'"></span>
     </div>
     <div
       v-if="loading"
