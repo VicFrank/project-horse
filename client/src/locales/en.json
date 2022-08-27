@@ -320,9 +320,9 @@
     "terrain_god_rune": "Immortal Custom Arena: Rune God Themed",
     "terrain_champion": "Ultra Rare Custom Arena: Galaxy Brain. Reserved for tournament and leaderboard winners",
     "terrain_leaderboard": "Legendary Custom Arena: Galaxy. Reserved for excellent placements in tournaments and the leaderboard",
-    "chest_basic": "Basic Chest",
-    "chest_gold": "Gold Chest",
-    "chest_god": "God Chest",
+    "chest_basic": "A chest full of myriad rewards",
+    "chest_gold": "An ornate chest made out of gold",
+    "chest_god": "A beautifully crafted chest, fit for Gaben himself",
     "gold_placeholder": "Gold"
   },
   "armory": {
