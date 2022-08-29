@@ -1878,6 +1878,8 @@ module.exports = {
   // For now, all players have 2 daily quests
   async getNumDailyQuests(steamID) {
     try {
+      const hasPlus = await this.hasPlus(steamID);
+      if (hasPlus) return 3;
       return 2;
     } catch (error) {
       throw error;
