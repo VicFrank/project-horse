@@ -815,6 +815,15 @@ module.exports = {
         [steamID, currentLevel]
       );
 
+      // Auto claim rewards for every level past 40
+      if (currentLevel > 40) {
+        try {
+          await this.claimBattlePassReward(steamID, currentLevel);
+        } catch (error) {
+          // If we can't claim the reward, we don't care
+        }
+      }
+
       return updatedBP;
     } catch (error) {
       throw error;
@@ -1452,6 +1461,7 @@ module.exports = {
 
   async getRandomChestReward(steamID, chestCosmeticID) {
     try {
+      const consumableTypes = ["Consumable", "Game Consumable", "Chest"];
       const dropType = await Cosmetics.getRandomChestDropType(chestCosmeticID);
       const chest = await Cosmetics.getCosmetic(chestCosmeticID);
       if (!dropType)
@@ -1467,7 +1477,7 @@ module.exports = {
             // The rewards for the gold chest
             const coins = Math.floor(Math.random() * 100) + 50;
             return { coins };
-          } else if (rewardCosmetic.cosmetic_type === "Consumable") {
+          } else if (consumableTypes.includes(rewardCosmetic.cosmetic_type)) {
             // we can win as many consumables as we want
             return { items: { [rewardID]: 1 } };
           }
