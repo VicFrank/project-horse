@@ -422,7 +422,7 @@ module.exports = {
     try {
       const existingPlayer = await this.getPlayer(steamID);
       if (!existingPlayer) return this.createPlayer(steamID, username);
-      await this.updateUsername(steamID, username);
+      if (username != "") await this.updateUsername(steamID, username);
       return existingPlayer;
     } catch (error) {
       throw error;
