@@ -1,7 +1,8 @@
 const { query } = require("../db/index");
 
-// INSERT INTO gods (god_name, free) VALUES ('jmuy', true);
-// INSERT INTO cosmetics (cosmetic_name, cosmetic_type, equip_group, cost_coins, cost_usd, rarity) VALUES ('jmuy', 'Card Frame', '', -1, -1, 'Immortal');
+// INSERT INTO gods (god_name, free) VALUES ('selemene', true);
+// INSERT INTO cosmetics (cosmetic_name, cosmetic_type, equip_group, cost_coins, cost_usd, rarity) VALUES ('card_selemene', 'Card Frame', '', -1, -1, 'Immortal');
+// INSERT INTO cosmetics (cosmetic_name, cosmetic_type, equip_group, cost_coins, cost_usd, rarity) VALUES ('gold_card_selemene', 'Card Frame', '', -1, -1, 'Immortal');
 async function InitializeGods() {
   const getAllGods = async () => {
     try {

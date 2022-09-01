@@ -14,17 +14,6 @@ const {
 const stripeClient = require("../common/stripe-client");
 const keys = require("../config/keys");
 
-router.get("/test", async (req, res) => {
-  res.send("test");
-});
-
-router.post("/test", async (req, res) => {
-  console.log(req);
-  console.log(req.body);
-  console.log(req.query);
-  res.send("test");
-});
-
 router.post("/paypal/:steamID", auth.userAuth, async (req, res) => {
   try {
     const steamID = req.params.steamID;
