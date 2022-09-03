@@ -884,6 +884,7 @@ module.exports = {
         throw error;
       }
     };
+
     const getPlayerGods = async () => {
       try {
         const { rows } = await query(
@@ -895,6 +896,7 @@ module.exports = {
         throw error;
       }
     };
+
     const getGodCards = async () => {
       try {
         const { rows } = await query(
@@ -914,6 +916,10 @@ module.exports = {
       const playerGods = await getPlayerGods();
       const godCards = await getGodCards();
       const player = await this.getPlayer(steamID);
+      const loggedGods = await Logs.getLogsOfTypeForPlayer(
+        steamID,
+        "god_opened"
+      );
 
       for (const god of allGods) {
         const hasGoldGod = godCards.some(
@@ -926,11 +932,16 @@ module.exports = {
         const isBanned = playerGods.some(
           (playerGod) => playerGod.god_name === god.god_name && playerGod.banned
         );
+        const numOpened = loggedGods.filter(
+          (log) => log.log_data.cosmeticName === `card_${god.god_name}`
+        ).length;
+
         god.owned =
           hasGod || god.free || (player.has_plus && god.plus_exclusive);
         god.banned = isBanned;
         god.plus_exclusive = god.plus_exclusive;
         god.gold = hasGoldGod;
+        god.num_opened = numOpened;
       }
       return allGods;
     } catch (error) {

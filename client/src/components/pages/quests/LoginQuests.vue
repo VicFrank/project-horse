@@ -68,7 +68,7 @@ export default {
 
   created() {
     this.getLoginQuests();
-    this.tryComplete();
+    // this.tryComplete();
 
     this.daysUntilMonday = this.getDaysUntilMonday();
   },
@@ -82,7 +82,6 @@ export default {
       return 7 + diff;
     },
     getLoginQuests() {
-      // time request
       fetch(`/api/players/${this.$store.state.auth.userSteamID}/login_quests`)
         .then(
           (res) => res.json(),
@@ -103,7 +102,6 @@ export default {
         });
     },
     tryComplete() {
-      // time request
       fetch(
         `/api/players/${this.$store.state.auth.userSteamID}/login_quests/try_complete`,
         { method: "post" }

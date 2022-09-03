@@ -7,7 +7,6 @@ const quests = require("../db/quests");
 const auth = require("../auth/auth");
 const apicache = require("apicache");
 const { adminAuth } = require("../auth/auth");
-const cosmetics = require("../db/cosmetics");
 
 const cache = apicache.middleware;
 

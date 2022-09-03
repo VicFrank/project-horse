@@ -41,6 +41,20 @@ module.exports = {
     }
   },
 
+  async getLogsOfTypeForPlayer(steamID, type) {
+    try {
+      const sql_query = `
+      SELECT * FROM player_logs
+      WHERE steam_id = $1 AND log_event = $2
+      ORDER BY log_time DESC
+      `;
+      const { rows } = await query(sql_query, [steamID, type]);
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async getLastLogEvent(steamID, event) {
     try {
       const sql_query = `
