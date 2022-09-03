@@ -34,7 +34,7 @@ module.exports = {
   },
 
   // This is just for doing bulk operations over all steam ids
-  async getAllSteamIds() {
+  async getAllSteamIDs() {
     try {
       const { rows } = await query(`SELECT steam_id from players`);
       return rows.map((row) => row.steam_id);
@@ -396,6 +396,7 @@ module.exports = {
       await this.resetLoginQuests(steamID);
       await this.resetWelcomeQuests(steamID);
       await this.initializeAchievements(steamID);
+      await this.addDefaultCosmetics(steamID);
 
       const activeBattlePass = await BattlePasses.getActiveBattlePass();
       await this.createBattlePass(steamID, activeBattlePass.battle_pass_id);
@@ -486,6 +487,20 @@ module.exports = {
         `INSERT INTO player_logs (steam_id, log_event) VALUES ($1, $2)`,
         [steamID, event]
       );
+      return;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async addDefaultCosmetics(steamID) {
+    try {
+      const defaultCosmetics = await Cosmetics.getDefaultCosmetics();
+      for (const cosmetic of defaultCosmetics) {
+        if (!this.hasCosmetic(steamID, cosmetic.cosmetic_id)) {
+          await this.giveCosmeticByName(steamID, cosmetic.cosmetic_id);
+        }
+      }
       return;
     } catch (error) {
       throw error;

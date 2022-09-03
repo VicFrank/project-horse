@@ -1,6 +1,7 @@
 const cosmetics = require("../db/cosmetics");
 const comseticsList = require("./data/cosmetics-list");
 const { dropOdds, typeOdds } = require("./data/chest-rewards");
+const players = require("../db/players");
 
 async function initializeCosmetics() {
   try {
@@ -8,6 +9,7 @@ async function initializeCosmetics() {
     await cosmetics.bulkCreateCosmetics(comseticsList);
     console.log("Cosmetics initialized");
   } catch (error) {
+    console.error(error);
     throw error;
   }
 }
@@ -18,6 +20,7 @@ async function clearCosmetics() {
     await cosmetics.deleteAllCosmetics();
     console.log("Cosmetics Deleted");
   } catch (error) {
+    console.error(error);
     throw error;
   }
 }
@@ -45,6 +48,7 @@ async function deleteHats() {
       }
     }
   } catch (error) {
+    console.error(error);
     throw error;
   }
 }
@@ -62,270 +66,10 @@ async function addCosmetics() {
         cost_usd: -1,
         rarity: "Rare",
       },
-      {
-        // Chest Drop
-        name: "hat_bucket",
-        type: "Avatar hat",
-        equip_group: "avatar_hat",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Rare",
-      },
-      {
-        // Chest Drop
-        name: "hat_cone",
-        type: "Avatar hat",
-        equip_group: "avatar_hat",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Rare",
-      },
-      {
-        // Chest Drop
-        name: "hat_cowboy",
-        type: "Avatar hat",
-        equip_group: "avatar_hat",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Rare",
-      },
-      {
-        // Chest Drop
-        name: "hat_detective",
-        type: "Avatar Hat",
-        equip_group: "avatar_hat",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Rare",
-      },
-      {
-        // Chest Drop
-        name: "hat_feelsrainman",
-        type: "Avatar Hat",
-        equip_group: "avatar_hat",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Rare",
-      },
-      {
-        // Chest Drop
-        name: "hat_green",
-        type: "Avatar Hat",
-        equip_group: "avatar_hat",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Rare",
-      },
-      {
-        // Chest Drop
-        name: "hat_helicopter",
-        type: "Avatar Hat",
-        equip_group: "avatar_hat",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Rare",
-      },
-      {
-        // Chest Drop
-        name: "hat_jester",
-        type: "Avatar Hat",
-        equip_group: "avatar_hat",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Rare",
-      },
-      {
-        // Chest Drop
-        name: "hat_mushroom",
-        type: "Avatar Hat",
-        equip_group: "avatar_hat",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Rare",
-      },
-      {
-        // Chest Drop
-        name: "hat_red",
-        type: "Avatar Hat",
-        equip_group: "avatar_hat",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Rare",
-      },
-      {
-        // Chest Drop
-        name: "hat_santa",
-        type: "Avatar Hat",
-        equip_group: "avatar_hat",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Rare",
-      },
-      {
-        // Chest Drop
-        name: "hat_turkish",
-        type: "Avatar Hat",
-        equip_group: "avatar_hat",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Rare",
-      },
-      {
-        // Chest Drop
-        name: "hat_witch",
-        type: "Avatar Hat",
-        equip_group: "avatar_hat",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Rare",
-      },
-      {
-        // Chest Drop
-        name: "hat_wizard",
-        type: "Avatar Hat",
-        equip_group: "avatar_hat",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Rare",
-      },
-      {
-        // Chest Drop
-        name: "hat_barb",
-        type: "Avatar Accessory",
-        equip_group: "avatar_accessory",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Rare",
-      },
-      {
-        // Chest Drop
-        name: "hat_begent",
-        type: "Avatar Accessory",
-        equip_group: "avatar_accessory",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Rare",
-      },
-      {
-        // Chest Drop
-        name: "hat_bandito",
-        type: "Avatar Accessory",
-        equip_group: "avatar_accessory",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Rare",
-      },
-      {
-        // Chest Drop
-        name: "hat_rockstar",
-        type: "Avatar Accessory",
-        equip_group: "avatar_accessory",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Rare",
-      },
-      {
-        // Chest Drop
-        name: "hat_thisisfine",
-        type: "Avatar Accessory",
-        equip_group: "avatar_accessory",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Rare",
-      },
-      {
-        // Chest Drop
-        name: "hat_buckteeth",
-        type: "Avatar Accessory",
-        equip_group: "avatar_accessory",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Rare",
-      },
-      {
-        // Chest Drop
-        name: "hat_cigar",
-        type: "Avatar Accessory",
-        equip_group: "avatar_accessory",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Rare",
-      },
-      {
-        // Chest Drop
-        name: "hat_grin",
-        type: "Avatar Accessory",
-        equip_group: "avatar_accessory",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Rare",
-      },
-      {
-        // Chest Drop
-        name: "hat_lips",
-        type: "Avatar Accessory",
-        equip_group: "avatar_accessory",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Rare",
-      },
-      {
-        // Chest Drop
-        name: "hat_tongue",
-        type: "Avatar Accessory",
-        equip_group: "avatar_accessory",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Rare",
-      },
-      {
-        // Chest Drop
-        name: "hat_angryeyes",
-        type: "Avatar Accessory",
-        equip_group: "avatar_accessory",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Rare",
-      },
-      {
-        // Chest Drop
-        name: "hat_blackglasses",
-        type: "Avatar Accessory",
-        equip_group: "avatar_accessory",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Rare",
-      },
-      {
-        // Chest Drop
-        name: "hat_confused",
-        type: "Avatar Accessory",
-        equip_group: "avatar_accessory",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Rare",
-      },
-      {
-        // Chest Drop
-        name: "hat_sidestare",
-        type: "Avatar Accessory",
-        equip_group: "avatar_accessory",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Rare",
-      },
-      {
-        // Chest Drop
-        name: "hat_tealglasses",
-        type: "Avatar Accessory",
-        equip_group: "avatar_accessory",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Rare",
-      },
     ]);
     console.log("Cosmetics initialized");
   } catch (error) {
+    console.error(error);
     throw error;
   }
 }
@@ -362,11 +106,36 @@ async function setChestRewards() {
     }
     console.log("Chest rewards set");
   } catch (error) {
+    console.error(error);
     throw error;
   }
 }
+
+async function addDefaultCosmeticsToAllPlayers() {
+  try {
+    console.log("Adding default cosmetics to all players...");
+    const defaultCosmetics = await cosmetics.getDefaultCosmetics();
+    const allSteamIDs = await players.getAllSteamIDs();
+    for (const steamID of allSteamIDs) {
+      for (const cosmetic of defaultCosmetics) {
+        const hasCosmetic = await players.hasCosmetic(
+          steamID,
+          cosmetic.cosmetic_id
+        );
+        if (!hasCosmetic) {
+          await players.giveCosmeticByName(steamID, cosmetic.cosmetic_name);
+        }
+      }
+    }
+    console.log("Default cosmetics added to all players");
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
 (async function () {
-  await deleteHats();
-  await addCosmetics();
-  await setChestRewards();
+  // await addCosmetics();
+  // await setChestRewards();
+  await addDefaultCosmeticsToAllPlayers();
 })();

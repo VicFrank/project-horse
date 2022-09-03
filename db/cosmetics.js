@@ -146,6 +146,23 @@ module.exports = {
     }
   },
 
+  // A list of cosmetics that every player should have by default
+  async getDefaultCosmetics() {
+    try {
+      const cosmeticNames = ["finisher_default", "terrain_default"];
+      const cosmetics = [];
+      for (const cosmetic of cosmeticNames) {
+        const item = await this.getCosmeticByName(cosmetic);
+        if (item) {
+          cosmetics.push(item);
+        }
+      }
+      return cosmetics;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async createCosmetic(name, type, equipGroup, coins, cost, rarity) {
     try {
       const { rows } = await query(
