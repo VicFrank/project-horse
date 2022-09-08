@@ -93,6 +93,7 @@ module.exports = {
         steamID
       );
       const unclaimed_quests = await this.getNumUnclaimedQuests(steamID);
+      const num_games = Number(await this.getNumTotalNumGames(steamID));
 
       return {
         ...player,
@@ -101,6 +102,7 @@ module.exports = {
         unopened_chests,
         unclaimed_bp_rewards,
         unclaimed_quests,
+        games: num_games,
       };
     } catch (error) {
       throw error;
