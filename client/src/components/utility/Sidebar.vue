@@ -55,7 +55,7 @@
             class="coins-img"
             alt="Coins"
           />
-          {{ coins }}
+          {{ coins.toLocaleString() }}
         </div>
 
         <ul class="sidebar-nav">

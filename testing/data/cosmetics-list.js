@@ -523,6 +523,51 @@ module.exports = [
     equip_group: "",
     rarity: "Rare",
   },
+  {
+    // Real Money Purchase
+    name: "gold_3500",
+    type: "Consumable",
+    coins: -1,
+    cost_usd: 1.99,
+    equip_group: "",
+    rarity: "Rare",
+  },
+  {
+    // Real Money Purchase
+    name: "gold_10000",
+    type: "Consumable",
+    coins: -1,
+    cost_usd: 4.99,
+    equip_group: "",
+    rarity: "Mythical",
+  },
+  {
+    // Real Money Purchase
+    name: "gold_33000",
+    type: "Consumable",
+    coins: -1,
+    cost_usd: 14.99,
+    equip_group: "",
+    rarity: "Legendary",
+  },
+  {
+    // Real Money Purchase
+    name: "gold_70000",
+    type: "Consumable",
+    coins: -1,
+    cost_usd: 29.99,
+    equip_group: "",
+    rarity: "Legendary",
+  },
+  {
+    // Real Money Purchase
+    name: "gold_200000",
+    type: "Consumable",
+    coins: -1,
+    cost_usd: 79.99,
+    equip_group: "",
+    rarity: "Legendary",
+  },
   /**
    * *************************
    * Card Frames (From God Chest)

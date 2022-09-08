@@ -1346,6 +1346,7 @@ module.exports = {
       const cosmeticName = cosmetic.cosmetic_name;
 
       let xp = 0;
+      let gold = 0;
       switch (cosmeticName) {
         case "get_xp_250":
           xp = 250;
@@ -1370,6 +1371,21 @@ module.exports = {
           break;
         case "buy_xp_300":
           xp = 300;
+          break;
+        case "gold_3500":
+          gold = 3500;
+          break;
+        case "gold_10000":
+          gold = 10000;
+          break;
+        case "gold_33000":
+          gold = 33000;
+          break;
+        case "gold_70000":
+          gold = 70000;
+          break;
+        case "gold_200000":
+          gold = 200000;
           break;
       }
 
@@ -1413,6 +1429,7 @@ module.exports = {
       // remove the item
       await this.removeCosmeticByID(steamID, cosmetic.cosmetic_id);
       await this.addBattlePassXp(steamID, xp);
+      await this.modifyCoins(steamID, gold);
 
       return true;
     } catch (error) {

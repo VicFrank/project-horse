@@ -2,7 +2,7 @@
   <div>
     <h1 class="page-title" v-t="'store.page_title'"></h1>
     <div class="container">
-      <div class="row">
+      <div class="row" v-if="!$route.query.type">
         <div class="sale">
           <router-link
             v-if="cosmetics.length > 0"
@@ -185,6 +185,8 @@ export default {
   },
 
   created() {
+    // get query params
+    const itemType = this.$route.query.type;
     if (this.loggedIn && this.steamID) {
       fetch(`/api/players/${this.steamID}/cosmetics`)
         .then((res) => res.json())
@@ -202,29 +204,33 @@ export default {
       .then((cosmetics) => {
         this.cosmetics = cosmetics;
         this.shopCosmetics = cosmetics
+          .filter((cosmetic) => {
+            if (!itemType) return true;
+            switch (itemType) {
+              case "gold":
+                return cosmetic.cosmetic_name.includes("gold_");
+              case "chest":
+                return cosmetic.cosmetic_name.includes("chest_");
+              case "xp":
+                return cosmetic.cosmetic_name.includes("_xp_");
+              case "plus":
+                return cosmetic.cosmetic_name.includes("plus_");
+              default:
+                return true;
+            }
+          })
           .filter(
             (cosmetic) => cosmetic.cost_coins > 0 || cosmetic.cost_usd > 0
           )
           .sort((c1, c2) => {
-            if (this.isConsumableOrChest(c1) && !this.isConsumableOrChest(c2)) {
-              return -1;
-            } else if (
-              this.isConsumableOrChest(c2) &&
-              !this.isConsumableOrChest(c1)
-            ) {
-              return 1;
-            } else if (
-              this.isConsumableOrChest(c1) &&
-              this.isConsumableOrChest(c2)
-            ) {
-              const c1Chest = c1.cosmetic_type == "Chest" ? 1 : -1;
-              const c2Chest = c2.cosmetic_type == "Chest" ? 1 : -1;
-              if (c1Chest != c2Chest) {
-                return c2Chest - c1Chest;
-              }
-              return c1.cosmetic_name.localeCompare(c2.cosmetic_name);
+            const c1Start = c1.cosmetic_name.slice(0, 5);
+            const c2Start = c2.cosmetic_name.slice(0, 5);
+            if (c1Start !== c2Start) {
+              if (c1Start === "chest") return -1;
+              if (c2Start === "chest") return 1;
+              return c1Start.localeCompare(c2Start);
             }
-            return c1.cosmetic_type.localeCompare(c2.cosmetic_type);
+            return c1.cost_usd - c2.cost_usd;
           });
       })
       .catch((err) => {
@@ -236,12 +242,6 @@ export default {
   methods: {
     hideModal(cosmeticID) {
       this.$refs[`bp-modal-${cosmeticID}`][0].hide();
-    },
-    isConsumableOrChest(cosmetic) {
-      return (
-        cosmetic.cosmetic_type === "Chest" ||
-        cosmetic.cosmetic_type === "Consumable"
-      );
     },
     getCheckoutLink(cosmeticName) {
       const cosmetic = this.cosmetics.find(
