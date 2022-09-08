@@ -44,7 +44,7 @@ async function InitializeWelcomeQuests() {
       const { day, coins, xp } = quest;
       await quests.createWelcomeQuest(day, coins, xp);
     }
-    const steamIDs = await players.getAllSteamIds();
+    const steamIDs = await players.getAllSteamIDs();
     for (const steamID of steamIDs) {
       await players.resetWelcomeQuests(steamID);
     }
