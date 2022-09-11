@@ -1252,6 +1252,41 @@ module.exports = {
     }
   },
 
+  async setCosmeticTypeViewed(steamID, cosmeticType) {
+    try {
+      await query(
+        `
+        UPDATE player_cosmetics SET viewed = TRUE
+        FROM cosmetics
+        WHERE
+          player_cosmetics.cosmetic_id = cosmetics.cosmetic_id AND
+          player_cosmetics.steam_id = $1 AND
+          cosmetics.cosmetic_type = $2
+        `,
+        [steamID, cosmeticType]
+      );
+      return;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getUnviewedCosmeticTypes(steamID) {
+    try {
+      const { rows } = await query(
+        `
+        SELECT DISTINCT cosmetics.cosmetic_type
+        FROM cosmetics JOIN player_cosmetics USING (cosmetic_id)
+        WHERE player_cosmetics.steam_id = $1 AND player_cosmetics.viewed = FALSE
+        `,
+        [steamID]
+      );
+      return rows.map((row) => row.cosmetic_type);
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async doItemTransaction(steamID, transactionData) {
     try {
       if (!transactionData) throw new Error("No transaction supplied");

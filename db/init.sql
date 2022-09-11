@@ -174,6 +174,7 @@ CREATE TABLE IF NOT EXISTS player_cosmetics (
   cosmetic_id INTEGER REFERENCES cosmetics (cosmetic_id) ON UPDATE CASCADE,
   steam_id TEXT REFERENCES players (steam_id) ON UPDATE CASCADE,
   created TIMESTAMPTZ DEFAULT NOW(),
+  viewed BOOLEAN DEFAULT FALSE,
   equipped BOOLEAN DEFAULT FALSE
 );
 

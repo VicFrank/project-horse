@@ -365,6 +365,30 @@ router.get("/:steamID/cosmetics", async (req, res) => {
   }
 });
 
+router.get("/:steamID/cosmetics/unviewed_types", async (req, res) => {
+  try {
+    const steamID = req.params.steamID;
+    const types = await players.getUnviewedCosmeticTypes(steamID);
+    res.status(200).json(types);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Server Error" });
+  }
+});
+
+router.post("/:steamID/cosmetics/view_type", async (req, res) => {
+  try {
+    const steamID = req.params.steamID;
+    const type = req.query.type;
+    const parsedType = type.replace(/_/g, " ");
+    await players.setCosmeticTypeViewed(steamID, parsedType);
+    res.status(200).json({ message: "Cosmetic Type Viewed" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Server Error" });
+  }
+});
+
 router.get("/:steamID/gods", async (req, res) => {
   try {
     const steamID = req.params.steamID;
