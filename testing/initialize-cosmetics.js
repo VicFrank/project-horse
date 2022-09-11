@@ -171,6 +171,6 @@ async function addDefaultCosmeticsToAllPlayers() {
 }
 
 (async function () {
-  await addCosmetics();
-  // await setChestRewards();
+  // await addCosmetics();
+  await setChestRewards();
 })();

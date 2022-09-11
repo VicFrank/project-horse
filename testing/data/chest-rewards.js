@@ -9,10 +9,7 @@ const dropOdds = {
     { odds: 5, type: "god_chest" },
   ],
   chest_gold: [{ odds: 100, type: "gold" }],
-  chest_god: [
-    { odds: 99, type: "god" },
-    { odds: 1, type: "gold_god" },
-  ],
+  chest_god: [{ odds: 100, type: "god" }],
 };
 
 const typeOdds = {
@@ -98,7 +95,7 @@ const typeOdds = {
     { odds: -1, item_name: "card_lifestealer" },
   ],
 
-  // Golden gods aren't in yet
+  // Golden gods no longer drop from chests
   gold_god: [
     { odds: -1, item_name: "gold_card_sorlaKhan" },
     { odds: -1, item_name: "gold_card_alchemist" },
