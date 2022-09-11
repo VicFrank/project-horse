@@ -36,7 +36,7 @@ const typeOdds = {
     { odds: -1, item_name: "hat_detective" },
     { odds: -1, item_name: "hat_feelsrainman" },
     { odds: -1, item_name: "hat_green" },
-    { odds: -1, item_name: "hat_helicopter" },
+    { odds: -1, item_name: "hat_clown_wig" },
     { odds: -1, item_name: "hat_jester" },
     { odds: -1, item_name: "hat_mushroom" },
     { odds: -1, item_name: "hat_red" },

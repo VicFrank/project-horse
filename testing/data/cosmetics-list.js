@@ -114,6 +114,15 @@ module.exports = [
   },
   {
     // Chest Drop
+    name: "hat_clown_wig",
+    type: "Avatar Hat",
+    equip_group: "avatar_hat",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
+    // Chest Drop
     name: "hat_bucket",
     type: "Avatar Hat",
     equip_group: "avatar_hat",
