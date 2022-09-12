@@ -890,6 +890,20 @@ module.exports = {
   // Player God Functions
   // --------------------------------------------------
 
+  async getGodCards(steamID) {
+    try {
+      const { rows } = await query(
+        `SELECT player_cosmetics.*, cosmetics.cosmetic_name
+        FROM player_cosmetics JOIN cosmetics USING (cosmetic_id)
+        WHERE steam_id = $1 AND cosmetic_type = 'Card Frame'`,
+        [steamID]
+      );
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async getGods(steamID) {
     const getAllGods = async () => {
       try {
@@ -914,24 +928,10 @@ module.exports = {
       }
     };
 
-    const getGodCards = async () => {
-      try {
-        const { rows } = await query(
-          `SELECT player_cosmetics.*, cosmetics.cosmetic_name
-          FROM player_cosmetics JOIN cosmetics USING (cosmetic_id)
-          WHERE steam_id = $1 AND cosmetic_type = 'Card Frame'`,
-          [steamID]
-        );
-        return rows;
-      } catch (error) {
-        throw error;
-      }
-    };
-
     try {
       const allGods = await getAllGods();
       const playerGods = await getPlayerGods();
-      const godCards = await getGodCards();
+      const godCards = await this.getGodCards(steamID);
       const player = await this.getPlayer(steamID);
       const loggedGods = await Logs.getLogsOfTypeForPlayer(
         steamID,
@@ -942,6 +942,7 @@ module.exports = {
         const hasGoldGod = godCards.some(
           (card) => card.cosmetic_name.substring(10) === god.god_name
         );
+        console.log(god.god_name, hasGoldGod);
         const hasGod =
           godCards.some(
             (card) => card.cosmetic_name.substring(5) === god.god_name
@@ -1548,41 +1549,93 @@ module.exports = {
         throw new Error(`No drop type found for chest ${chestCosmeticID}`);
       const dropTypeRewards = await Cosmetics.getDropTypeRewards(dropType);
 
-      const roll = Math.random() * 100;
-      for (const reward of dropTypeRewards) {
-        if (roll <= reward.cum_sum_odds) {
-          const rewardID = reward.reward_cosmetic_id;
-          const rewardCosmetic = await Cosmetics.getCosmetic(rewardID);
-          if (rewardCosmetic.cosmetic_name === "gold_placeholder") {
-            // The rewards for the gold chest
-            const coins = Math.floor(Math.random() * 100) + 50;
-            return { coins };
-          } else if (consumableTypes.includes(rewardCosmetic.cosmetic_type)) {
-            // we can win as many consumables as we want
-            return { items: { [rewardID]: 1 } };
-          }
-          // Check if the player already has this item, and it's not a consumable
-          // In that case, we'll return pity coins
-          const hasItem = await this.doesPlayerHaveItem(steamID, rewardID);
-          if (hasItem) {
-            // if the item is a god card, track how of this type we have opened
-            if (rewardCosmetic.cosmetic_name.startsWith("card_")) {
-              Logs.addTransactionLog(steamID, "god_opened", {
-                cosmeticName: rewardCosmetic.cosmetic_name,
-              });
-            }
-            // Return coins equal to 25% the price of the chest
-            if (chest.cost_coins > 0)
-              return {
-                coins: chest.cost_coins / 4,
-                missed_item: rewardCosmetic,
-              };
-            return { coins: 100 };
-          } else return { items: { [rewardID]: 1 } };
-        }
-      }
+      const handleGodOpening = async () => {
+        try {
+          // if the player already has a golden god, remove it from the drop table
+          const godCards = await this.getGodCards();
+          const goldenGods = godCards
+            .filter((card) => card.cosmetic_name.startsWith("gold"))
+            .map((card) => card.cosmetic_name.substring(10));
+          const drops = dropTypeRewards.filter(
+            (drop) => !goldenGods.includes(drop.cosmetic_name.substring(5))
+          );
 
-      throw new Error(`Failed to find a reward for chest ${chestCosmeticID}`);
+          // If we already have every god at gold
+          if (drops.length === 0) return { coins: chest.cost_coins / 4 };
+
+          // choose a random drop
+          const drop = drops[Math.floor(Math.random() * drops.length)];
+
+          // log that we've opened this god
+          await Logs.addTransactionLog(steamID, "god_opened", {
+            cosmeticName: drop.cosmetic_name,
+          });
+
+          // if this is the 10th god of this type opened, give the player a golden god
+          const loggedGods = await Logs.getLogsOfTypeForPlayer(
+            steamID,
+            "god_opened"
+          );
+          const numOpened = loggedGods.filter(
+            (log) => log.log_data.cosmeticName === drop.cosmetic_name
+          ).length;
+
+          if (numOpened >= 10) {
+            const goldenGod = await Cosmetics.getCosmeticByName(
+              `gold_${drop.cosmetic_name}`
+            );
+            if (!this.hasCosmetic(steamID, goldenGod.cosmetic_id)) {
+              return { items: { [goldenGod.cosmetic_id]: 1 } };
+            } else {
+              return { coins: chest.cost_coins / 4 };
+            }
+          } else if (numOpened === 1) {
+            return { items: { [drop.cosmetic_id]: 1 } };
+          } else {
+            return {
+              missed_item: drop,
+              coins: chest.cost_coins / 4,
+            };
+          }
+        } catch (error) {
+          throw error;
+        }
+      };
+
+      const handleNormalOpening = async () => {
+        const roll = Math.random() * 100;
+        for (const reward of dropTypeRewards) {
+          if (roll <= reward.cum_sum_odds) {
+            const rewardID = reward.reward_cosmetic_id;
+            const rewardCosmetic = await Cosmetics.getCosmetic(rewardID);
+            if (rewardCosmetic.cosmetic_name === "gold_placeholder") {
+              // The rewards for the gold chest
+              const coins = Math.floor(Math.random() * 100) + 50;
+              return { coins };
+            } else if (consumableTypes.includes(rewardCosmetic.cosmetic_type)) {
+              // we can win as many consumables as we want
+              return { items: { [rewardID]: 1 } };
+            }
+            // Check if the player already has this item, and it's not a consumable
+            // In that case, we'll return pity coins
+            const hasItem = await this.doesPlayerHaveItem(steamID, rewardID);
+            if (hasItem) {
+              // Return coins equal to 25% the price of the chest
+              if (chest.cost_coins > 0)
+                return {
+                  coins: chest.cost_coins / 4,
+                  missed_item: rewardCosmetic,
+                };
+              return { coins: 100 };
+            } else return { items: { [rewardID]: 1 } };
+          }
+        }
+        throw new Error(`Failed to find a reward for chest ${chestCosmeticID}`);
+      };
+
+      const isGodChest = chest.cosmetic_name === "chest_god";
+      if (isGodChest) return await handleGodOpening();
+      else return await handleNormalOpening();
     } catch (error) {
       throw error;
     }

@@ -124,8 +124,10 @@
         </b-collapse>
         <h4 class="card-title">Inventory</h4>
         <div
-          v-for="cosmetic in cosmetics"
-          :key="cosmetic.cosmetic_id + cosmetic.created + cosmetic.equipped"
+          v-for="(cosmetic, index) in cosmetics"
+          :key="
+            cosmetic.cosmetic_id + cosmetic.created + cosmetic.equipped + index
+          "
           class="d-flex align-items-center my-1"
         >
           <b-button

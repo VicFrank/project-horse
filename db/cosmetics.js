@@ -5,7 +5,7 @@ module.exports = {
   async getAllCosmetics() {
     try {
       const { rows } = await query(
-        `SELECT * FROM cosmetics ORDER BY cosmetic_type, cosmetic_name`
+        "SELECT * FROM cosmetics ORDER BY cosmetic_type, cosmetic_name"
       );
       return rows;
     } catch (error) {
@@ -16,7 +16,7 @@ module.exports = {
   async getCosmetic(cosmeticID) {
     try {
       const { rows } = await query(
-        `SELECT * FROM cosmetics WHERE cosmetic_id = $1`,
+        "SELECT * FROM cosmetics WHERE cosmetic_id = $1",
         [cosmeticID]
       );
       return rows[0];
@@ -127,8 +127,7 @@ module.exports = {
         SELECT * FROM cosmetics
         WHERE rarity = $1
           AND cost > 0
-          AND cosmetic_type != 'Chest'
-      `,
+          AND cosmetic_type != 'Chest'`,
         [rarity]
       );
       return rows;
@@ -169,8 +168,7 @@ module.exports = {
         `
         INSERT INTO cosmetics (cosmetic_name, cosmetic_type, equip_group, cost_coins, cost_usd, rarity)
         VALUES ($1, $2, $3, $4, $5, $6)
-        RETURNING *
-      `,
+        RETURNING *`,
         [name, type, equipGroup, coins, cost, rarity]
       );
       return rows;
@@ -231,8 +229,7 @@ module.exports = {
           await db.query(
             `
             INSERT INTO cosmetics (cosmetic_name, cosmetic_type, equip_group, cost_coins, cost_usd, rarity)
-            VALUES ($1, $2, $3, $4, $5, $6)
-          `,
+            VALUES ($1, $2, $3, $4, $5, $6)`,
             [
               cosmetic.name,
               cosmetic.type,
@@ -256,8 +253,7 @@ module.exports = {
         `
       INSERT INTO drop_type_rewards (drop_type, reward_cosmetic_id, cum_sum_odds)
       VALUES ($1, $2, $3)
-      RETURNING *
-    `,
+      RETURNING *`,
         [dropType, rewardCosmeticID, cumSumOdds]
       );
     } catch (error) {
@@ -271,8 +267,7 @@ module.exports = {
         `
       INSERT INTO chest_drop_types (chest_cosmetic_id, drop_type, cum_sum_odds)
       VALUES ($1, $2, $3)
-      RETURNING *
-    `,
+      RETURNING *`,
         [chestCosmeticID, dropType, cumSumOdds]
       );
     } catch (error) {
@@ -298,8 +293,7 @@ module.exports = {
         `
       SELECT * FROM chest_drop_types
       WHERE chest_cosmetic_id = $1
-      ORDER BY cum_sum_odds ASC
-    `,
+      ORDER BY cum_sum_odds ASC`,
         [chestCosmeticID]
       );
       return rows;
@@ -312,10 +306,10 @@ module.exports = {
     try {
       const { rows } = await query(
         `
-      SELECT * FROM drop_type_rewards
-      WHERE drop_type = $1
-      ORDER BY cum_sum_odds ASC
-    `,
+        SELECT * FROM drop_type_rewards
+        JOIN cosmetics ON cosmetic_id = reward_cosmetic_id
+        WHERE drop_type = $1
+        ORDER BY cum_sum_odds ASC`,
         [dropType]
       );
       return rows;
