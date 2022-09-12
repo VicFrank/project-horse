@@ -30,26 +30,26 @@
           </div>
           <div class="d-flex flex-row quest-xp">
             <div v-if="!quest.claimed" class="quest-rewards">
-              <span v-if="quest.poggers_reward > 0" class="pog-text mr-3">
+              <span v-if="quest.coin_reward > 0" class="pog-text mr-1">
                 <img
-                  class="pogcoin"
+                  class="coin"
                   src="../../../assets/images/coin1.png"
                   alt="Pog Coin"
                 />
-                {{ quest.poggers_reward }} POGGERS
+                {{ quest.coin_reward }} {{ $t("common.coins") }}
               </span>
               <span v-if="quest.xp_reward > 0" class="quest-xp-text"
-                >{{ quest.xp_reward }} XP</span
+                >{{ quest.xp_reward }} {{ $t("common.xp") }}</span
               >
             </div>
-            <div v-else class="quest-rewards">Completed</div>
+            <div v-else class="quest-rewards">{{ $t("common.completed") }}</div>
             <button
               v-on:click="claimQuest(quest)"
               v-if="quest.quest_completed && !quest.claimed"
               type="button"
               class="btn btn-primary ml-auto mr-3 my-2"
             >
-              Claim
+              {{ $t("common.claim") }}
             </button>
             <a
               v-if="quest.can_reroll"
@@ -174,6 +174,10 @@ export default {
 </script>
 
 <style scoped>
+.coin {
+  width: 20px;
+  height: 20px;
+}
 .reroll-button {
   cursor: pointer;
   line-height: 43px;

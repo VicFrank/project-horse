@@ -73,5 +73,5 @@ async function InitializeWelcomeQuests() {
   // await InitializeQuests();
   // await InitializeLoginQuests();
   // await InitializeWelcomeQuests();
-  await InitializeDailyQuests();
+  // await InitializeDailyQuests();
 })();

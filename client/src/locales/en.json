@@ -1,6 +1,10 @@
 {
   "common": {
-    "close": "Close"
+    "close": "Close",
+    "coins": "Coins",
+    "xp": "XP",
+    "completed": "Completed",
+    "claim": "Claim"
   },
   "home": {
     "page_title": "Ability Arena"
