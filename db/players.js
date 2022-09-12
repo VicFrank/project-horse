@@ -2040,7 +2040,7 @@ module.exports = {
           LEAST(quest_progress, required_amount) as capped_quest_progress,
           quest_progress >= required_amount as quest_completed,
           (created < current_timestamp - interval '23 hours'
-            AND (claimed = TRUE OR quest_progress < required_amount)) as can_reroll
+            AND (claimed OR quest_progress < required_amount)) as can_reroll
         FROM player_quests pq
         JOIN quests q
         USING (quest_id)
