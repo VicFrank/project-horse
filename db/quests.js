@@ -32,6 +32,21 @@ module.exports = {
     }
   },
 
+  async deleteAllDailyQuests() {
+    try {
+      await query(
+        `DELETE FROM player_quests WHERE quest_id IN
+          (SELECT quest_id FROM quests WHERE is_achievement = FALSE AND is_weekly = FALSE)`
+      );
+      await query(
+        "DELETE FROM quests WHERE is_achievement = FALSE AND is_weekly = FALSE"
+      );
+      return;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async getAllWeeklyQuests() {
     try {
       const { rows } = await query(

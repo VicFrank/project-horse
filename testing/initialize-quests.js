@@ -14,7 +14,22 @@ async function InitializeQuests() {
     }));
     await quests.bulkCreateQuests(parsedAchievements);
     await quests.bulkCreateQuests(dailyQuests);
-    // await quests.bulkCreateQuests(weeklyQuests);
+    console.log("Quests initialized");
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function InitializeDailyQuests() {
+  try {
+    // delete all existing daily quests
+    await quests.deleteAllDailyQuests();
+    // create the new ones
+    await quests.bulkCreateQuests(dailyQuests);
+    // assign quests to all players
+    for (const steamID of await players.getAllSteamIDs()) {
+      await players.createInitialDailyQuests(steamID, 3);
+    }
     console.log("Quests initialized");
   } catch (error) {
     throw error;
@@ -57,5 +72,6 @@ async function InitializeWelcomeQuests() {
 (async function () {
   // await InitializeQuests();
   // await InitializeLoginQuests();
-  await InitializeWelcomeQuests();
+  // await InitializeWelcomeQuests();
+  await InitializeDailyQuests();
 })();
