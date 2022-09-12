@@ -942,7 +942,6 @@ module.exports = {
         const hasGoldGod = godCards.some(
           (card) => card.cosmetic_name.substring(10) === god.god_name
         );
-        console.log(god.god_name, hasGoldGod);
         const hasGod =
           godCards.some(
             (card) => card.cosmetic_name.substring(5) === god.god_name
