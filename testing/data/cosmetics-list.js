@@ -666,7 +666,7 @@ module.exports = [
   {
     name: "card_shopkeeper",
     type: "Card Frame",
-    coins: -1,
+    coins: 200000,
     cost_usd: -1,
     equip_group: "",
     rarity: "Immortal",
@@ -762,7 +762,7 @@ module.exports = [
   {
     name: "card_tinker",
     type: "Card Frame",
-    coins: -1,
+    coins: 200000,
     cost_usd: -1,
     equip_group: "",
     rarity: "Immortal",

@@ -177,6 +177,35 @@ module.exports = {
     }
   },
 
+  async updateCosmetic(
+    cosmeticID,
+    name,
+    type,
+    equipGroup,
+    coins,
+    cost,
+    rarity
+  ) {
+    try {
+      const { rows } = await query(
+        `
+        UPDATE cosmetics
+        SET cosmetic_name = $1,
+            cosmetic_type = $2,
+            equip_group = $3,
+            cost_coins = $4,
+            cost_usd = $5,
+            rarity = $6
+        WHERE cosmetic_id = $7
+        RETURNING *`,
+        [name, type, equipGroup, coins, cost, rarity, cosmeticID]
+      );
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async deleteAllCosmetics() {
     try {
       await query("DELETE FROM player_redeemed_codes");

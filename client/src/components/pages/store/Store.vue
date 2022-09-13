@@ -215,6 +215,8 @@ export default {
                 return cosmetic.cosmetic_name.includes("_xp_");
               case "plus":
                 return cosmetic.cosmetic_name.includes("plus_");
+              case "gods":
+                return cosmetic.cosmetic_name.includes("card_");
               default:
                 return true;
             }

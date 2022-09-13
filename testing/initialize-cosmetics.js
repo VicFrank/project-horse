@@ -74,6 +74,64 @@ async function addCosmetics() {
   }
 }
 
+async function updateCosmetics() {
+  try {
+    console.log("Updating cosmetics...");
+    const cosmeticsToUpdate = [
+      {
+        name: "gold_card_tinker",
+        type: "Card Frame",
+        coins: -1,
+        cost_usd: -1,
+        equip_group: "",
+        rarity: "Immortal",
+      },
+      {
+        name: "gold_card_shopkeeper",
+        type: "Card Frame",
+        coins: -1,
+        cost_usd: -1,
+        equip_group: "",
+        rarity: "Immortal",
+      },
+      {
+        name: "card_tinker",
+        type: "Card Frame",
+        coins: 200000,
+        cost_usd: -1,
+        equip_group: "",
+        rarity: "Immortal",
+      },
+      {
+        name: "card_shopkeeper",
+        type: "Card Frame",
+        coins: 200000,
+        cost_usd: -1,
+        equip_group: "",
+        rarity: "Immortal",
+      },
+    ];
+    for (const c of cosmeticsToUpdate) {
+      const cosmetic = await cosmetics.getCosmeticByName(c.name);
+      if (!cosmetic) throw new Error(`Cosmetic ${c.name} does not exist`);
+      await cosmetics.updateCosmetic(
+        cosmetic.cosmetic_id,
+        c.name,
+        c.type,
+        c.equip_group,
+        c.coins,
+        c.cost_usd,
+        c.rarity
+      );
+      console.log(`Updated cosmetic ${c.name}`);
+    }
+    console.log("Cosmetics updated");
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
 async function setChestRewards() {
   try {
     console.log("Setting chest rewards...");
@@ -135,6 +193,6 @@ async function addDefaultCosmeticsToAllPlayers() {
 }
 
 (async function () {
-  // await addCosmetics();
-  // await setChestRewards();
+  await updateCosmetics();
+  await setChestRewards();
 })();

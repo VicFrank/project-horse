@@ -87,22 +87,14 @@ const typeOdds = {
   // negative odds in this case means you have a random chance
   // of getting one god you don't have yet
   god: [
-    { odds: -1, item_name: "card_sorlaKhan" },
     { odds: -1, item_name: "card_alchemist" },
-    { odds: -1, item_name: "card_rix" },
-    { odds: -1, item_name: "card_tinker" },
+    { odds: -1, item_name: "card_donkeyAghanim" },
+    { odds: -1, item_name: "card_jmuy" },
     { odds: -1, item_name: "card_ladyAnshu" },
     { odds: -1, item_name: "card_lifestealer" },
-  ],
-
-  // Golden gods no longer drop from chests
-  gold_god: [
-    { odds: -1, item_name: "gold_card_sorlaKhan" },
-    { odds: -1, item_name: "gold_card_alchemist" },
-    { odds: -1, item_name: "gold_card_rix" },
-    { odds: -1, item_name: "gold_card_tinker" },
-    { odds: -1, item_name: "gold_card_ladyAnshu" },
-    { odds: -1, item_name: "gold_card_lifestealer" },
+    { odds: -1, item_name: "card_phantomAssassin" },
+    { odds: -1, item_name: "card_rix" },
+    { odds: -1, item_name: "card_sorlaKhan" },
   ],
 };
 
