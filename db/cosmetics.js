@@ -162,6 +162,23 @@ module.exports = {
     }
   },
 
+  // A list of cosmetic types that a player should never have more than one of
+  // they can have more than one item in a type, but only of that specific item
+  getUniqueCosmeticTypes() {
+    return [
+      "Avatar Frame",
+      "Avatar Hat",
+      "Avatar Accessory",
+      "Card Frame",
+      "Finisher",
+      "Terrain",
+    ];
+  },
+
+  isUniqueCosmetic(cosmeticType) {
+    return this.getUniqueCosmeticTypes().includes(cosmeticType);
+  },
+
   async createCosmetic(name, type, equipGroup, coins, cost, rarity) {
     try {
       const { rows } = await query(

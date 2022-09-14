@@ -45,6 +45,17 @@ router.post("/:code", auth.adminAuth, async (req, res) => {
   }
 });
 
+router.delete("/:code", auth.adminAuth, async (req, res) => {
+  try {
+    const code = req.params.code;
+    await redemptionCodes.deleteRedemptionCode(code);
+    res.status(201).send("deleted");
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.toString() });
+  }
+});
+
 router.patch("/:code/active", auth.adminAuth, async (req, res) => {
   try {
     const code = req.params.code;

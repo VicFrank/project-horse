@@ -33,8 +33,19 @@
         class="mx-3 single-quest"
       >
         <div v-if="quest.claimed" class="overlay"></div>
-        <div class="quest-xp-text text-center p-3">
-          {{ quest.xp_reward }} XP
+        <div style="height: 115px">
+          <div class="quest-xp-text text-center p-3" v-if="quest.xp_reward > 0">
+            {{ quest.xp_reward }} {{ $t("common.xp") }}
+          </div>
+          <div class="pog-text text-center p-3" v-if="quest.coin_reward > 0">
+            {{ quest.coin_reward }} {{ $t("common.coins") }}
+          </div>
+          <img
+            style="height: 100%; width: 100%; object-fit: cover"
+            v-if="quest.cosmetic_name"
+            v-bind:src="cosmeticImageSrc(quest)"
+            :alt="quest.cosmetic_name"
+          />
         </div>
         <div class="text-center quest-xp py-1">
           Day {{ quest.day }}
@@ -130,6 +141,10 @@ export default {
           this.error = err;
           this.showError = true;
         });
+    },
+    cosmeticImageSrc(cosmetic) {
+      const { cosmetic_name } = cosmetic;
+      return require(`../../../assets/images/cosmetics/${cosmetic_name}.png`);
     },
   },
 };

@@ -226,7 +226,7 @@ module.exports = {
   async getLeaderboardPosition(mmr) {
     try {
       const { rows } = await query(
-        `SELECT count(*) FROM players WHERE mmr > $1`,
+        `SELECT count(*) FROM players WHERE mmr > $1 AND ladder_mmr >= 4500`,
         [mmr]
       );
       if (rows.length === 0) return 0;
@@ -1107,13 +1107,15 @@ module.exports = {
         VALUES ($1, $2)`,
         [steamID, code]
       );
+
+      const items = {};
       for (const reward of rewards) {
-        const { cosmetic_id } = reward;
-        await this.giveCosmeticByID(steamID, cosmetic_id);
+        items[reward.cosmetic_id] = items[reward.cosmetic_id] + 1 || 1;
       }
-      if (redemptionCode.coins > 0) {
-        await this.modifyCoins(steamID, redemptionCode.coins);
-      }
+      await this.doItemTransaction(steamID, {
+        items,
+        coins: redemptionCode.coins,
+      });
 
       return true;
     } catch (error) {
@@ -1166,7 +1168,7 @@ module.exports = {
     try {
       const allCosmetics = await this.getCosmetics(steamID);
       return allCosmetics.some(
-        (cosmetic) => cosmetic.cosmetic_id === cosmeticID
+        (cosmetic) => cosmetic.cosmetic_id == cosmeticID
       );
     } catch (error) {
       throw error;
@@ -1322,6 +1324,11 @@ module.exports = {
 
         for (const [cosmeticID, amount] of entries) {
           if (amount > 0) {
+            const cosmetic = await Cosmetics.getCosmetic(cosmeticID);
+            if (Cosmetics.isUniqueCosmetic(cosmetic.cosmetic_type)) {
+              const hasCosmetic = await this.hasCosmetic(steamID, cosmeticID);
+              if (hasCosmetic) continue;
+            }
             for (let i = 0; i < amount; i++) {
               await this.giveCosmeticByID(steamID, cosmeticID);
             }
@@ -2229,8 +2236,10 @@ module.exports = {
     try {
       const { rows } = await query(
         `SELECT player_welcome_quests.welcome_quest_id, claim_date,
-          welcome_quests.day, welcome_quests.coin_reward, claim_date IS NOT NULL as claimed
+          welcome_quests.day, welcome_quests.coin_reward, claim_date IS NOT NULL as claimed,
+          cosmetics.cosmetic_id, cosmetics.cosmetic_name
         FROM player_welcome_quests JOIN welcome_quests USING (welcome_quest_id)
+        LEFT JOIN cosmetics USING (cosmetic_id)
         WHERE steam_id = $1
         ORDER BY day ASC`,
         [steamID]
@@ -2261,8 +2270,10 @@ module.exports = {
     try {
       const { rows } = await query(
         `SELECT player_welcome_quests.welcome_quest_id,
-          welcome_quests.day, welcome_quests.coin_reward, claim_date IS NOT NULL as claimed
+          welcome_quests.day, welcome_quests.coin_reward, claim_date IS NOT NULL as claimed,
+          cosmetics.cosmetic_id, cosmetics.cosmetic_name
         FROM player_welcome_quests JOIN welcome_quests USING (welcome_quest_id)
+        LEFT JOIN cosmetics USING (cosmetic_id)
         WHERE steam_id = $1 AND welcome_quest_id = $2`,
         [steamID, questID]
       );
@@ -2288,20 +2299,18 @@ module.exports = {
         WHERE steam_id = $1 AND welcome_quest_id = $2`,
         [steamID, questID]
       );
-      const { coin_reward, xp_reward } = quest;
+      const { coin_reward, xp_reward, cosmetic_id } = quest;
 
       await addTransactionLog(steamID, "claim_welcome_quest", {
         coin_reward,
         xp_reward,
+        cosmetic_id,
       });
 
       await this.modifyCoins(steamID, coin_reward);
       await this.addBattlePassXp(steamID, xp_reward);
-
-      // For the last quest, get an aghanim god card
-      if (quest.day === 7) {
-        await this.giveCosmeticByName(steamID, "card_aghanim");
-      }
+      console.log(cosmetic_id);
+      if (cosmetic_id) await this.giveCosmeticByID(steamID, cosmetic_id);
 
       return true;
     } catch (error) {
@@ -2349,6 +2358,8 @@ module.exports = {
         SELECT * FROM player_login_quests
         JOIN login_quests
         USING (login_quest_id)
+        LEFT JOIN cosmetics
+        USING (cosmetic_id)
         WHERE steam_id = $1
         ORDER BY day`,
         [steamID]
@@ -2399,15 +2410,17 @@ module.exports = {
         `UPDATE player_login_quests SET claimed = TRUE WHERE steam_id = $1 AND login_quest_id = $2`,
         [steamID, loginQuestID]
       );
-      const { coin_reward, xp_reward } = quest;
+      const { coin_reward, xp_reward, cosmetic_id } = quest;
 
       await addTransactionLog(steamID, "claim_login_quest", {
         coin_reward,
         xp_reward,
+        cosmetic_id,
       });
 
       await this.modifyCoins(steamID, coin_reward);
       await this.addBattlePassXp(steamID, xp_reward);
+      if (cosmetic_id) await this.giveCosmeticByID(steamID, cosmetic_id);
 
       return true;
     } catch (error) {

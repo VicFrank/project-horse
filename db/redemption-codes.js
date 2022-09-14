@@ -181,4 +181,16 @@ module.exports = {
       throw error;
     }
   },
+
+  async deleteRedemptionCode(code) {
+    try {
+      await query("DELETE FROM player_redeemed_codes WHERE code = $1", [code]);
+      await query("DELETE FROM redemption_code_rewards WHERE code = $1", [
+        code,
+      ]);
+      await query("DELETE FROM redemption_codes WHERE code = $1", [code]);
+    } catch (error) {
+      throw error;
+    }
+  },
 };

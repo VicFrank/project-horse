@@ -1,5 +1,6 @@
 const quests = require("../db/quests");
 const players = require("../db/players");
+const cosmetics = require("../db/cosmetics");
 
 const achievements = require("./data/quests/achievements");
 const dailyQuests = require("./data/quests/daily_quests");
@@ -38,11 +39,15 @@ async function InitializeDailyQuests() {
 
 async function InitializeLoginQuests() {
   try {
+    await quests.clearLoginQuests();
     for (const quest of loginQuests) {
-      const { day, coins, xp } = quest;
-      await quests.createLoginQuest(day, coins, xp);
+      const { day, coins, xp, cosmetic_name } = quest;
+      const cosmetic = cosmetic_name
+        ? await cosmetics.getCosmeticByName(cosmetic_name)
+        : null;
+      await quests.createLoginQuest(day, coins, xp, cosmetic?.cosmetic_id);
     }
-    const steamIDs = await players.getAllSteamIds();
+    const steamIDs = await players.getAllSteamIDs();
     for (const steamID of steamIDs) {
       await players.resetLoginQuests(steamID);
     }
@@ -56,8 +61,11 @@ async function InitializeWelcomeQuests() {
   try {
     await quests.clearWelcomeQuests();
     for (const quest of welcomeQuests) {
-      const { day, coins, xp } = quest;
-      await quests.createWelcomeQuest(day, coins, xp);
+      const { day, coins, xp, cosmetic_name } = quest;
+      const cosmetic = cosmetic_name
+        ? await cosmetics.getCosmeticByName(cosmetic_name)
+        : null;
+      await quests.createWelcomeQuest(day, coins, xp, cosmetic?.cosmetic_id);
     }
     const steamIDs = await players.getAllSteamIDs();
     for (const steamID of steamIDs) {
@@ -71,7 +79,7 @@ async function InitializeWelcomeQuests() {
 
 (async function () {
   // await InitializeQuests();
-  // await InitializeLoginQuests();
-  // await InitializeWelcomeQuests();
+  await InitializeLoginQuests();
+  await InitializeWelcomeQuests();
   // await InitializeDailyQuests();
 })();

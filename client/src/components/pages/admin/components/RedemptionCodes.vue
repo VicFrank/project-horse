@@ -147,6 +147,14 @@
             class="w-100 mt-1"
             >Enable</b-button
           >
+          <b-button
+            @click="tryDeleteCode(code)"
+            size="sm"
+            class="w-100 mt-1"
+            variant="danger"
+          >
+            Delete</b-button
+          >
         </div>
         <b-modal :id="`players-${code.code}`" title="Redemptions">
           <div v-if="code.loading">Loading...</div>
@@ -282,6 +290,33 @@ export default {
           this.loading = true;
           this.getCodes();
         });
+    },
+    tryDeleteCode(code) {
+      this.$bvModal
+        .msgBoxConfirm(`Are you sure you want to delete code ${code.code}?`, {
+          title: "Confirm Delete",
+          size: "sm",
+          buttonSize: "sm",
+          okVariant: "danger",
+          okTitle: "DELETE",
+          cancelTitle: "Cancel",
+          footerClass: "p-2",
+          hideHeaderClose: false,
+          centered: true,
+        })
+        .then((value) => {
+          if (value) {
+            this.deleteCode(code);
+          }
+        });
+    },
+    deleteCode(code) {
+      fetch(`/api/redemption_codes/${code.code}`, {
+        method: "DELETE",
+      }).then(() => {
+        this.loading = true;
+        this.getCodes();
+      });
     },
   },
 };

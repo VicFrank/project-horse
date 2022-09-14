@@ -37,10 +37,10 @@
           {{ quest.coin_reward }} Coins
         </div>
         <img
-          style="height: 48px; width: 100%; object-fit: cover"
-          v-if="quest.day === 7"
-          :src="require('../../../assets/images/cosmetics/card_aghanim.png')"
-          alt="Aghanim"
+          style="height: 115px; width: 100%; object-fit: cover"
+          v-if="quest.cosmetic_name"
+          v-bind:src="cosmeticImageSrc(quest)"
+          :alt="quest.cosmetic_name"
         />
         <div class="text-center quest-xp py-1">
           Day {{ quest.day }}
@@ -113,6 +113,10 @@ export default {
           this.error = err;
           this.showError = true;
         });
+    },
+    cosmeticImageSrc(cosmetic) {
+      const { cosmetic_name } = cosmetic;
+      return require(`../../../assets/images/cosmetics/${cosmetic_name}.png`);
     },
   },
 };

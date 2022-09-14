@@ -258,14 +258,24 @@ module.exports = {
   // These are quests that you complete simply by claiming them each day
   //////////////////////////////////////////////////////////////////////////////
 
-  async createLoginQuest(day, coins, xp) {
+  async clearLoginQuests() {
+    try {
+      await query(`DELETE FROM player_login_quests`);
+      await query(`DELETE FROM login_quests`);
+      return;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async createLoginQuest(day, coins, xp, cosmeticID) {
     try {
       const { rows } = await query(
-        `INSERT INTO login_quests (day, coin_reward, xp_reward)
-        VALUES ($1, $2, $3)
+        `INSERT INTO login_quests (day, coin_reward, xp_reward, cosmetic_id)
+        VALUES ($1, $2, $3, $4)
         RETURNING *
         `,
-        [day, coins, xp]
+        [day, coins, xp, cosmeticID]
       );
       return rows[0];
     } catch (error) {
@@ -298,14 +308,14 @@ module.exports = {
     }
   },
 
-  async createWelcomeQuest(day, coins, xp) {
+  async createWelcomeQuest(day, coins, xp, cosmeticID) {
     try {
       const { rows } = await query(
-        `INSERT INTO welcome_quests (day, coin_reward, xp_reward)
-        VALUES ($1, $2, $3)
+        `INSERT INTO welcome_quests (day, coin_reward, xp_reward, cosmetic_id)
+        VALUES ($1, $2, $3, $4)
         RETURNING *
         `,
-        [day, coins, xp]
+        [day, coins, xp, cosmeticID]
       );
       return rows[0];
     } catch (error) {
@@ -316,7 +326,10 @@ module.exports = {
   async getWelcomeQuests() {
     try {
       const { rows } = await query(
-        `SELECT * FROM welcome_quests ORDER BY day ASC`
+        `SELECT * FROM welcome_quests
+        LEFT JOIN cosmetics
+        USING (cosmetic_id)
+        ORDER BY day ASC`
       );
       return rows;
     } catch (error) {

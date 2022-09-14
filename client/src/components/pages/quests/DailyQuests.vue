@@ -34,7 +34,7 @@
                 <img
                   class="coin"
                   src="../../../assets/images/coin1.png"
-                  alt="Pog Coin"
+                  alt="Gold"
                 />
                 {{ quest.coin_reward }} {{ $t("common.coins") }}
               </span>

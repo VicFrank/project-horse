@@ -251,7 +251,8 @@ CREATE TABLE IF NOT EXISTS login_quests (
   login_quest_id SERIAL PRIMARY KEY,
   day INTEGER NOT NULL UNIQUE,
   coin_reward INTEGER DEFAULT 0,
-  xp_reward INTEGER DEFAULT 0
+  xp_reward INTEGER DEFAULT 0,
+  cosmetic_id INTEGER REFERENCES cosmetics (cosmetic_id)
 );
 
 -- Every day, if you play a game, or login to the site, you complete
@@ -268,7 +269,8 @@ CREATE TABLE IF NOT EXISTS welcome_quests (
   welcome_quest_id SERIAL PRIMARY KEY,
   day INTEGER NOT NULL UNIQUE,
   coin_reward INTEGER DEFAULT 0,
-  xp_reward INTEGER DEFAULT 0
+  xp_reward INTEGER DEFAULT 0,
+  cosmetic_id INTEGER REFERENCES cosmetics (cosmetic_id)
 );
 
 DROP TABLE IF EXISTS player_welcome_quests CASCADE;
