@@ -31,6 +31,7 @@ export default {
   created() {
     const isDev = process.env.NODE_ENV == "development";
     const key = isDev ? this.keys.dev : this.keys.prod;
+    console.log(key);
     const stripe = window.Stripe(key);
     this.stripe = stripe;
     const rootUrl = isDev
@@ -40,17 +41,21 @@ export default {
       return acc + item.cost_usd * 100;
     }, 0);
     amount = Math.round(amount);
+    const itemIDs = this.$route.params.item_ids;
+
     stripe
       .createSource({
         type: "alipay",
         amount,
         currency: "usd",
         metadata: {
-          cosmeticIDs: this.items.map((item) => item.cosmetic_id),
+          cosmeticIDs: JSON.stringify(
+            this.items.map((item) => item.cosmetic_id)
+          ),
           steamID: this.$store.state.auth.userSteamID,
         },
         redirect: {
-          return_url: `${rootUrl}/alipay_payment?item_id=${this.$route.params.item_ids}`,
+          return_url: `${rootUrl}/alipay_payment?item_id=${itemIDs}`,
         },
       })
       .then((result) => {

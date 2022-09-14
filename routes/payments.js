@@ -174,14 +174,8 @@ router.post("/webhooks/paypal", async (req, res) => {
 router.post("/stripe/intents", async (req, res) => {
   const { cosmeticIDs, amount, steamID } = req.body;
 
-  const cosmeticsData = await cosmetics.getCosmetics(cosmeticIDs);
-  const totalCost = cosmeticsData.reduce((acc, curr) => {
-    return acc + curr.cost_usd;
-  }, 0);
-
-  if (cosmeticsData.some((cosmetic) => !cosmetic))
-    return res.status(400).send({ message: "Invalid Cosmetic Id" });
-  if (amount / 100 != totalCost)
+  const isValidAmount = await isValidStripeTransaction(cosmeticIDs, amount);
+  if (!isValidAmount)
     return res.status(400).send({ message: "Invalid Payment Amount" });
 
   const paymentIntent = await stripeClient.client.paymentIntents.create({
@@ -225,8 +219,6 @@ async function stripeChargeSucceeded(intent) {
     return;
   }
 
-  console.log("stripe charge succeeded", cosmeticIDs);
-
   // Handle payments purchasing a specific item
   if (cosmeticIDs) {
     const steamID = intent.metadata.steamID;
@@ -247,7 +239,8 @@ async function stripeChargeSucceeded(intent) {
 async function handleStripeSourceChargeable(intent) {
   const { amount, id, currency } = intent;
   const { cosmeticIDs } = intent.metadata;
-  const isValid = await isValidStripeTransaction(cosmeticIDs, amount);
+  const parsedCosmeticIDs = JSON.parse(cosmeticIDs);
+  const isValid = await isValidStripeTransaction(parsedCosmeticIDs, amount);
   if (isValid) {
     stripeClient.client.charges.create({
       amount: amount,
@@ -265,12 +258,12 @@ async function handleStripeSubscription(session) {
 }
 
 async function isValidStripeTransaction(cosmeticIDs, amount) {
-  const itemData = await cosmetics.getCosmetics(cosmeticIDs);
+  const cosmeticsData = await cosmetics.getCosmetics(cosmeticIDs);
   const totalCost = cosmeticsData.reduce((acc, curr) => {
     return acc + curr.cost_usd;
   }, 0);
 
-  if (!itemData || amount / 100 != totalCost) return false;
+  if (!cosmeticsData || amount / 100 != totalCost) return false;
 
   return true;
 }

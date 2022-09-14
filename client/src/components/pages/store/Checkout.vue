@@ -50,7 +50,7 @@
               v-on:purchaseSuccess="onPurchaseSuccess"
               v-on:error="onError"
             />
-            <!-- <StripeAlipay :items="items" class="mb-3" /> -->
+            <StripeAlipay :items="items" class="mb-3" />
             <PaypalPurchase
               :items="items"
               :paypalType="paypalType"
@@ -81,14 +81,14 @@
 <script>
 import LoginButton from "../../utility/LoginButton.vue";
 import StripePurchase from "./components/StripePurchase.vue";
-// import StripeAlipay from "./components/StripeAlipay.vue";
+import StripeAlipay from "./components/StripeAlipay.vue";
 import PaypalPurchase from "./components/PaypalPurchase.vue";
 
 export default {
   components: {
     LoginButton,
     StripePurchase,
-    // StripeAlipay,
+    StripeAlipay,
     PaypalPurchase,
   },
 

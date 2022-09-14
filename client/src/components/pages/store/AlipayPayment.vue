@@ -43,12 +43,16 @@ export default {
     MAX_POLL_COUNT: 10,
     pollCount: 0,
     status: "",
+    keys: {
+      dev: "pk_test_kG4TReBTkO6yDfO9mMwtShME00mx65Yyw2",
+      prod: "pk_live_FlJcVm7zuiGei0k6IDXksnmy003GNNZuiw",
+    },
   }),
 
   created() {
-    const stripe = window.Stripe("pk_test_kG4TReBTkO6yDfO9mMwtShME00mx65Yyw2");
-    // const stripe = window.Stripe("pk_live_FlJcVm7zuiGei0k6IDXksnmy003GNNZuiw");
-    this.stripe = stripe;
+    const isDev = process.env.NODE_ENV == "development";
+    const key = isDev ? this.keys.dev : this.keys.prod;
+    this.stripe = window.Stripe(key);
 
     this.pollForSourceStatus();
   },
