@@ -48,12 +48,12 @@
               <div class="cosmetic" @click="$bvModal.show(`modal-${i}`)">
                 <div class="cosmetic__picture">
                   <img
-                    v-bind:src="cosmeticImageSrc(cosmetic)"
+                    v-bind:src="`/images/cosmetics/${cosmetic.cosmetic_name}.png`"
                     :alt="cosmetic.cosmetic_name"
                   />
                   <img
                     v-if="cosmetic.equipped"
-                    src="../../../assets/images/cosmetics/equipped.png"
+                    src="/images/cosmetics/equipped.png"
                     class="equipped-overlay"
                     alt
                   />
@@ -78,7 +78,7 @@
                 <template v-if="cosmetic.cosmetic_type !== 'Chest'">
                   <div class="text-center mb-2">
                     <img
-                      v-bind:src="cosmeticImageSrc(cosmetic)"
+                      v-bind:src="`/images/cosmetics/${cosmetic.cosmetic_name}.png`"
                       :alt="cosmetic.cosmetic_id"
                     />
                   </div>
@@ -281,11 +281,6 @@ export default {
     },
     equippable(cosmetic) {
       return cosmetic.equip_group != "";
-    },
-    cosmeticImageSrc(cosmetic) {
-      const { cosmetic_name } = cosmetic;
-      return require(`../../../assets/images/cosmetics/${cosmetic_name}.png`);
-      // return require(`../../../assets/images/cosmetics/placeholder.png`);
     },
     toggleFilter(name) {
       this.filters = this.filters.map((filter) => ({

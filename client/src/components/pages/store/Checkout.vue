@@ -153,7 +153,7 @@ export default {
     },
     cosmeticImageSrc(cosmetic) {
       const { cosmetic_name } = cosmetic;
-      return require(`../../../assets/images/cosmetics/${cosmetic_name}.png`);
+      return `/images/cosmetics/${cosmetic_name}.png`;
     },
   },
 

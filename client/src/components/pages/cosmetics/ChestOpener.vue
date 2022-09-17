@@ -3,14 +3,14 @@
     <img
       v-if="!opened"
       class="chest-image clickable"
-      v-bind:src="cosmeticImageSrc(cosmetic)"
+      :src="`/images/cosmetics/${cosmetic.cosmetic_name}.png`"
       :alt="cosmetic.cosmetic_name"
       @click="open"
     />
     <img
       v-else
       class="chest-image"
-      v-bind:src="openedImage(cosmetic.cosmetic_name)"
+      :src="`/images/cosmetics/${cosmetic.cosmetic_name}_open.png`"
       :alt="cosmetic.cosmetic_name"
     />
     <div v-if="items.length > 0" class="mt-2">
@@ -23,7 +23,7 @@
           <div class="mb-2">{{ $t(`cosmetics.${item.cosmetic_name}`) }}</div>
           <img
             class="reward-image mb-1"
-            v-bind:src="cosmeticImageSrc(item)"
+            :src="`/images/cosmetics/${item.cosmetic_name}.png`"
             :alt="item.cosmetic_name"
           />
           <div class="text-muted">{{ item.rarity }}</div>
@@ -35,7 +35,7 @@
       <img
         class="reward-image mb-1"
         style="filter: brightness(0.5)"
-        v-bind:src="cosmeticImageSrc(missedItem)"
+        :src="`/images/cosmetics/${missedItem.cosmetic_name}.png`"
         :alt="missedItem.cosmetic_name"
       />
       <div class="text-muted">{{ missedItem.rarity }}</div>
@@ -47,7 +47,7 @@
       </div>
       <div class="text-center">
         <img
-          src="../../../assets/images/coin1.png"
+          src="/images/coin1.png"
           alt="coins"
           class="coins-image"
           style="width: 20px; height: 20px"
@@ -106,7 +106,7 @@ export default {
         return;
       }
 
-      const audio = new Audio(require("../../../assets/sounds/inv_ticket.wav"));
+      const audio = new Audio(require("./sounds/inv_ticket.wav"));
       audio.volume = 0.08;
       audio.play();
 
@@ -131,14 +131,6 @@ export default {
           this.error = err;
           this.showError = true;
         });
-    },
-    cosmeticImageSrc(cosmetic) {
-      const { cosmetic_name } = cosmetic;
-      return require(`../../../assets/images/cosmetics/${cosmetic_name}.png`);
-      // return require(`../../../assets/images/cosmetics/placeholder.png`);
-    },
-    openedImage(cosmeticName) {
-      return require(`../../../assets/images/cosmetics/${cosmeticName}_open.png`);
     },
   },
 };

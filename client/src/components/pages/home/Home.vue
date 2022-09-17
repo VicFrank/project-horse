@@ -7,7 +7,7 @@
     </p>
 
     <p>
-      <img src="../../../assets/images/logo_1.png" alt="logo" class="logo" />
+      <img src="/images/logo_1.png" alt="logo" class="logo" />
     </p>
 
     <div class="row">

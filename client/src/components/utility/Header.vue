@@ -7,7 +7,7 @@
           <img
             style="height: 40px"
             class="ml-2"
-            src="../../assets/images/logo_small.png"
+            src="/images/logo_small.png"
             alt="Ability Arena"
           />
         </router-link>

@@ -184,8 +184,7 @@ export default {
     getItemImage(level) {
       const cosmeticName = this.getRewardItem(level);
       if (!cosmeticName) return require("./images/bp_placeholder.png");
-      // return require(`./images/${cosmetic_name}.png`);
-      return require(`../../../../assets/images/cosmetics/${cosmeticName}.png`);
+      return `/images/cosmetics/${cosmeticName}.png`;
     },
   },
 };

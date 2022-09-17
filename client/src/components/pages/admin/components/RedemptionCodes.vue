@@ -109,7 +109,7 @@
           </div>
           <div v-if="code.coins">
             <img
-              src="../../../../assets/images/coin1.png"
+              src="/images/coin1.png"
               alt="coins"
               class="coins-image"
               style="width: 20px; height: 20px"

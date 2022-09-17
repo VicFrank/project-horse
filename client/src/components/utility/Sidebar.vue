@@ -18,7 +18,7 @@
               <div class="bp-icon">
                 <img
                   v-if="bpUpgraded"
-                  src="../../assets/images/battlepass_logo.png"
+                  src="/images/battlepass_logo.png"
                   alt="Battle Pass"
                   style="width: auto; height: 40px"
                 />
@@ -33,7 +33,7 @@
         <div class="d-flex justify-content-center align-items-center mt-1">
           <img
             v-if="hasPlus"
-            src="../../assets/images/bp_tier1.png"
+            src="/images/bp_tier1.png"
             class="custom-badge-img"
             alt="Plus Badge"
             v-b-tooltip.hover
@@ -50,11 +50,7 @@
         </div>
 
         <div class="d-flex justify-content-center align-items-center mt-1">
-          <img
-            src="../../assets/images/coin1.png"
-            class="coins-img"
-            alt="Coins"
-          />
+          <img src="/images/coin1.png" class="coins-img" alt="Coins" />
           {{ coins.toLocaleString() }}
         </div>
 
@@ -168,7 +164,7 @@
         <div class="login-button">
           <LoginButton></LoginButton>
         </div>
-        <img src="../../assets/images/login_sample.jpg" />
+        <img src="/images/login_sample.jpg" />
       </template>
       <hr class="d-lg-none" />
       <ul class="sidebar-nav">
@@ -498,69 +494,69 @@ export default {
   width: 20px;
   height: 20px;
   background-repeat: no-repeat;
-  background-image: url("../../assets/images/icons/profile.png");
+  background-image: url("icons/profile.png");
 }
 
 .sidebar-nav__link_battlepass:before {
   width: 20px;
   height: 20px;
   background-repeat: no-repeat;
-  background-image: url("../../assets/images/icons/book.svg");
+  background-image: url("icons/book.svg");
 }
 
 .sidebar-nav__link_armory:before {
   width: 20px;
   height: 20px;
   background-repeat: no-repeat;
-  background-image: url("../../assets/images/icons/columns.svg");
+  background-image: url("icons/columns.svg");
 }
 
 .sidebar-nav__link_gods:before {
   width: 20px;
   height: 20px;
   background-repeat: no-repeat;
-  background-image: url("../../assets/images/icons/newspaper-solid.svg");
+  background-image: url("icons/newspaper-solid.svg");
 }
 
 .sidebar-nav__link_achievements:before {
   width: 20px;
   height: 20px;
   background-repeat: no-repeat;
-  background-image: url("../../assets/images/icons/gift.svg");
+  background-image: url("icons/gift.svg");
 }
 
 .sidebar-nav__link_dailyquest:before {
   width: 20px;
   height: 20px;
   background-repeat: no-repeat;
-  background-image: url("../../assets/images/icons/calendar-alt.svg");
+  background-image: url("icons/calendar-alt.svg");
 }
 
 .sidebar-nav__link_stats:before {
   width: 20px;
   height: 20px;
   background-repeat: no-repeat;
-  background-image: url("../../assets/images/icons/chart-bar.svg");
+  background-image: url("icons/chart-bar.svg");
 }
 
 .sidebar-nav__link_friends:before {
   width: 20px;
   height: 20px;
   background-repeat: no-repeat;
-  background-image: url("../../assets/images/icons/users.svg");
+  background-image: url("icons/users.svg");
 }
 
 .sidebar-nav__link_settings:before {
   width: 20px;
   height: 20px;
   background-repeat: no-repeat;
-  background-image: url("../../assets/images/icons/cog.svg");
+  background-image: url("icons/cog.svg");
 }
 
 .sidebar-nav__link_history:before {
   width: 20px;
   height: 20px;
   background-repeat: no-repeat;
-  background-image: url("../../assets/images/icons/history.svg");
+  background-image: url("icons/history.svg");
 }
 </style>

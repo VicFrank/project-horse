@@ -31,11 +31,7 @@
           <div class="d-flex flex-row quest-xp">
             <div v-if="!quest.claimed" class="quest-rewards">
               <span v-if="quest.coin_reward > 0" class="pog-text mr-1">
-                <img
-                  class="coin"
-                  src="../../../assets/images/coin1.png"
-                  alt="Gold"
-                />
+                <img class="coin" src="/images/coin1.png" alt="Gold" />
                 {{ quest.coin_reward }} {{ $t("common.coins") }}
               </span>
               <span v-if="quest.xp_reward > 0" class="quest-xp-text"

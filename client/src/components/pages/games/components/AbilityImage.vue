@@ -31,15 +31,20 @@ export default {
     },
   },
 
+  data() {
+    return {
+      publicPath: process.env.BASE_URL,
+    };
+  },
+
   methods: {
     getAbilityPath(icon) {
       if (icon && icon.startsWith("custom_")) {
         icon = icon.slice(7);
       }
       if (this.small)
-        return require(`../../../../assets/images/ability_icons/small/${icon}.png`);
-      else
-        return require(`../../../../assets/images/ability_icons/${icon}.png`);
+        return `${this.publicPath}images/ability_icons/small/${icon}.png`;
+      else return `${this.publicPath}images/ability_icons/${icon}.png`;
     },
   },
 

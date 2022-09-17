@@ -8,10 +8,7 @@
             v-if="cosmetics.length > 0"
             :to="getCheckoutLink('buy_bp')"
           >
-            <img
-              src="../../../assets/images/cosmetics/buy_bp.png"
-              alt="Battle Pass Shop"
-            />
+            <img src="/images/cosmetics/buy_bp.png" alt="Battle Pass Shop" />
           </router-link>
           <div class="overlay">
             <h3>Battle Pass</h3>
@@ -23,7 +20,7 @@
             :to="getCheckoutLink('plus_year_package')"
           >
             <img
-              src="../../../assets/images/cosmetics/plus_year_package.png"
+              src="/images/cosmetics/plus_year_package.png"
               alt="Battle Pass Shop"
             />
           </router-link>
@@ -54,7 +51,7 @@
             >
               <div>
                 <img
-                  v-bind:src="cosmeticImageSrc(cosmetic)"
+                  :src="`/images/cosmetics/${cosmetic.cosmetic_name}.png`"
                   :alt="cosmetic.cosmetic_name"
                   class="preview-image"
                 />
@@ -288,7 +285,7 @@ export default {
     },
     cosmeticImageSrc(cosmetic) {
       const { cosmetic_name } = cosmetic;
-      return require(`../../../assets/images/cosmetics/${cosmetic_name}.png`);
+      return `/images/cosmetics/${cosmetic_name}.png`;
     },
   },
 };

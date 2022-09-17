@@ -19,11 +19,7 @@ export default {
         hero = hero.slice(14);
       }
 
-      if (this.small) {
-        // return require(`../../../../assets/images/heroes/small/${hero}.png`);
-      } else {
-        return require(`../../../../assets/images/heroes/${hero}.png`);
-      }
+      return `/images/heroes/${hero}.png`;
     },
   },
 };

@@ -38,10 +38,10 @@ export default {
     },
     getBadgePath() {
       const rankNumber = this.getRankNumber();
-      return require(`../../assets/images/badges/rank${rankNumber}_psd.png`);
+      return `/images/badges/rank${rankNumber}_psd.png`;
     },
     getPipsPath() {
-      return require(`../../assets/images/badges/pip${this.pips}_psd.png`);
+      return `/images/badges/pip${this.pips}_psd.png`;
     },
   },
 };

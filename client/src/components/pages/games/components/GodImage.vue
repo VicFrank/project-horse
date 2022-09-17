@@ -11,7 +11,7 @@ export default {
 
   methods: {
     getGodPath(god) {
-      return require(`../../../../assets/images/gods/${god}.png`);
+      return `/images/gods/${god}.png`;
     },
   },
 };
