@@ -1,5 +1,5 @@
-const BundleAnalyzerPlugin =
-  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+// const BundleAnalyzerPlugin =
+//   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 module.exports = {
   devServer: {
     proxy: {
@@ -11,9 +11,9 @@ module.exports = {
     },
   },
 
-  configureWebpack: {
-    plugins: [new BundleAnalyzerPlugin()],
-  },
+  // configureWebpack: {
+  //   plugins: [new BundleAnalyzerPlugin()],
+  // },
 
   pluginOptions: {
     i18n: {
