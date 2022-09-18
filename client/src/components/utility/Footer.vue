@@ -1,41 +1,40 @@
 <template>
   <footer class="d-flex justify-content-end align-items-center">
     <div class="d-none d-md-flex">
-      <a
+      <!-- <a
         href="https://www.youtube.com/user/DotaCinema"
         target="_blank"
         class="fa fa-youtube mr-3"
-      ></a>
+      ></a> -->
       <a
         href="https://www.twitch.tv/sunsfantv"
         target="_blank"
+        alt="Twitch"
         class="fa fa-twitch mr-3"
       ></a>
       <a
-        href="http://discord.gg/sunsfan"
+        href="https://www.twitch.tv/https://www.twitch.tv/420jenkins"
         target="_blank"
+        alt="Twitch, but Jenkins"
+        class="fa fa-twitch mr-3"
+      ></a>
+      <a
+        href="https://discord.gg/NRDjuTPNvS"
+        target="_blank"
+        alt="Discord"
         class="fab fa-discord mr-3"
       ></a>
       <a
-        href="https://www.reddit.com/r/DotaCinema/"
+        href="https://www.reddit.com/r/abilityarena/"
         target="_blank"
+        alt="Reddit"
         class="fa fa-reddit mr-3"
       ></a>
-      <a
-        href="https://twitter.com/DotaCinema"
-        target="_blank"
-        class="fa fa-twitter mr-3"
-      ></a>
-      <a
-        href="https://www.facebook.com/DotaCinema/"
-        target="_blank"
-        class="fa fa-facebook mr-3"
-      ></a>
     </div>
-    <!-- {{ $t("credits.copyright") }}
+    {{ $t("credits.copyright") }}
     <router-link to="/credits" class="float-right ml-3 mr-5">{{
       $t("credits.our_team")
-    }}</router-link> -->
+    }}</router-link>
   </footer>
 </template>
 
