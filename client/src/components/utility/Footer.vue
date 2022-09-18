@@ -13,7 +13,7 @@
         class="fa fa-twitch mr-3"
       ></a>
       <a
-        href="https://www.twitch.tv/https://www.twitch.tv/420jenkins"
+        href="https://www.twitch.tv/420jenkins"
         target="_blank"
         alt="Twitch, but Jenkins"
         class="fa fa-twitch mr-3"
