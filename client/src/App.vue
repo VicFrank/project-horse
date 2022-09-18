@@ -2,10 +2,7 @@
   <div id="app">
     <Header />
     <div class="main-layout" :key="loggedIn">
-      <div
-        @click="onMainContentClicked"
-        v-bind:class="{ 'sidebar-open': sidebarOpen, 'neutral-div': true }"
-      >
+      <div class="sidebar-open neutral-div">
         <div class="main-content">
           <div class="main-layout__content">
             <div class="content">

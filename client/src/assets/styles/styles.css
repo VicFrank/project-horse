@@ -43,7 +43,7 @@ th {
 }
 
 @media all and (max-width: 1599px) {
-  .sidebar-open:after {
+  /* .sidebar-open:after {
     content: "";
     position: fixed;
     width: 100%;
@@ -52,13 +52,13 @@ th {
     left: 0;
     top: 0;
     z-index: 0;
-  }
+  } */
 }
 
 @media all and (min-width: 1600) {
-  .sidebar-open {
+  /* .sidebar-open {
     margin-left: 220px;
-  }
+  } */
 }
 
 .nav-item {

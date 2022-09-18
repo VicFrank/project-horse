@@ -98,7 +98,7 @@
             {{ $t("navigation.admin") }}
           </b-dropdown-item>
         </b-nav-item-dropdown>
-        <li class="nav-item mr-2">
+        <li class="nav-item mr-2 d-none d-lg-block">
           <router-link
             class="nav-link"
             to="/games"
@@ -116,7 +116,7 @@
             {{ $t("navigation.store") }}
           </router-link>
         </li>
-        <b-nav-item-dropdown text="STATS" class="mx-2">
+        <b-nav-item-dropdown text="STATS" class="mx-2 d-none d-sm-block">
           <b-dropdown-item to="/leaderboard" exact-active-class="active-link">
             {{ $t("navigation.leaderboard") }}
           </b-dropdown-item>
@@ -127,7 +127,7 @@
             {{ $t("navigation.abilities") }}
           </b-dropdown-item>
         </b-nav-item-dropdown>
-        <li class="nav-item mx-2">
+        <li class="nav-item mx-2 d-none d-lg-block">
           <router-link
             class="nav-link"
             to="/changelog"
@@ -137,7 +137,7 @@
           </router-link>
         </li>
       </ul>
-      <div class="d-flex align-items-center ml-auto">
+      <div class="d-flex align-items-center ml-auto mt-2">
         <div class="d-flex align-items-center" v-if="!loggedIn">
           <div class="mr-2">
             <LoginButton></LoginButton>
@@ -155,7 +155,7 @@
             </a>
           </div>
         </div>
-        <div class="d-flex navbar-nav mt-2" v-if="loggedIn">
+        <div class="d-flex mt-2" style="list-style: none" v-if="loggedIn">
           <img
             :src="profilePicture"
             class="profile-picture"
