@@ -83,11 +83,11 @@
           </b-dropdown-item>
           <b-dropdown-item to="/profile/games" exact-active-class="active-link">
             <img src="/images/icons/history.svg" class="link-icon" />
-            {{ $t("navigation.my_stats") }}
+            {{ $t("navigation.match_history") }}
           </b-dropdown-item>
           <b-dropdown-item to="/profile/stats" exact-active-class="active-link">
             <img src="/images/icons/chart-bar.svg" class="link-icon" />
-            {{ $t("navigation.match_history") }}
+            {{ $t("navigation.my_stats") }}
           </b-dropdown-item>
           <b-dropdown-item
             v-if="isAdmin"
