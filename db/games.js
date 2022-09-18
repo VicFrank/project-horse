@@ -36,7 +36,10 @@ module.exports = {
           currentLadderMMR,
           place
         );
-        if (doubledown) mmrChange *= 2;
+        if (doubledown) {
+          mmrChange *= 2;
+          ladderRatingChange *= 2;
+        }
       }
 
       if (ranked) {
