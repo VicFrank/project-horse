@@ -32,10 +32,10 @@
         class="fa fa-facebook mr-3"
       ></a>
     </div>
-    {{ $t("credits.copyright") }}
+    <!-- {{ $t("credits.copyright") }}
     <router-link to="/credits" class="float-right ml-3 mr-5">{{
       $t("credits.our_team")
-    }}</router-link>
+    }}</router-link> -->
   </footer>
 </template>
 

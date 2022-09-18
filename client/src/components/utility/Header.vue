@@ -137,7 +137,7 @@
           </router-link>
         </li>
       </ul>
-      <div class="d-flex align-items-center ml-auto mt-2">
+      <div class="d-flex align-items-center ml-auto">
         <div class="d-flex align-items-center" v-if="!loggedIn">
           <div class="mr-2">
             <LoginButton></LoginButton>
@@ -155,17 +155,15 @@
             </a>
           </div>
         </div>
-        <div class="d-flex mt-2" style="list-style: none" v-if="loggedIn">
-          <img
-            :src="profilePicture"
-            class="profile-picture"
-            alt="Profile Picture"
-          />
-          <b-nav-item-dropdown
-            :text="username"
-            class="username-dropdown"
-            v-if="loggedIn"
-          >
+        <div class="d-flex" style="list-style: none" v-if="loggedIn">
+          <b-nav-item-dropdown class="username-dropdown" v-if="loggedIn">
+            <template #button-content
+              ><img
+                :src="profilePicture"
+                class="profile-picture"
+                alt="Profile Picture"
+              />{{ username }}</template
+            >
             <a
               href="/api/auth/logout"
               class="btn sign-out-button"
