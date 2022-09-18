@@ -2,9 +2,9 @@
   <div>
     <h1 class="page-title">Profile</h1>
 
-    <WelcomeQuests class="mb-5"></WelcomeQuests>
+    <WelcomeQuests v-if="isAdmin" class="mb-5"></WelcomeQuests>
 
-    <LoginQuests class="mb-5"></LoginQuests>
+    <LoginQuests v-if="isAdmin" class="mb-5"></LoginQuests>
 
     <!-- Daily Quests -->
     <DailyQuests class="mb-5"></DailyQuests>
@@ -12,7 +12,7 @@
     <!-- Recent Games -->
     <div class="d-flex justify-content-between align-items-center">
       <h2 v-if="games.length > 0">Recent Games</h2>
-      <router-link to="/profile/games" class="blue"
+      <router-link to="/profile/games" class="color-primary"
         ><i class="fas fa-plus mr-1"></i>View All</router-link
       >
     </div>
@@ -53,6 +53,9 @@ export default {
     },
     hasPlus() {
       return this.$store.state.auth.hasPlus;
+    },
+    isAdmin() {
+      return this.$store.getters.isAdmin;
     },
   },
 

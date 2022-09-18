@@ -55,7 +55,7 @@ export default {
 }
 
 .bar-inner {
-  background-color: #0b86c4;
+  background-color: var(--primary-color);
   width: 100%;
   align-self: flex-end;
 }

@@ -40,6 +40,8 @@ passport.serializeUser(async (user, next) => {
   const playerExists = await players.doesPlayerExist(steamID);
   if (!playerExists) {
     await players.createPlayer(steamID, username);
+  } else {
+    await players.updateUsername(steamID, username);
   }
 
   const { user_type } = await players.getPlayer(steamID);

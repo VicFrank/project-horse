@@ -1,70 +1,178 @@
 <template>
-  <header id="main-nav">
+  <header
+    id="main-nav"
+    style="background-image: url('/images/site/top_nav_bg.png')"
+  >
     <nav class="navbar navbar-expand-lg">
       <div class="d-flex align-items-center">
-        <SidebarToggle class="navbar-nav mr-1"></SidebarToggle>
         <router-link to="/" class="navbar-brand">
           <img
             style="height: 40px"
             class="ml-2"
-            src="/images/logo_small.png"
+            src="/images/site/ability_arena_logo_nav.png"
             alt="Ability Arena"
           />
         </router-link>
       </div>
-      <ul class="navbar-nav mx-auto flex-row d-none d-lg-flex text-uppercase">
+      <ul class="navbar-nav flex-row d-flex text-uppercase mt-2">
+        <b-nav-item-dropdown
+          text="MY PROFILE"
+          class="mx-2 my-profile-dropdown"
+          v-if="loggedIn"
+        >
+          <b-dropdown-item to="/profile" exact-active-class="active-link">
+            <img src="/images/icons/profile.png" class="link-icon" />
+            {{ $t("navigation.profile") }}
+            <b-badge
+              v-if="numQuests > 0"
+              style="background-color: #523c88"
+              class="ml-1"
+            >
+              {{ numQuests }}
+              <span class="sr-only">Unclaimed Quests</span>
+            </b-badge>
+          </b-dropdown-item>
+          <b-dropdown-item
+            to="/profile/battlepass"
+            exact-active-class="active-link"
+          >
+            <img src="/images/icons/book.svg" class="link-icon" />
+            {{ $t("navigation.battle_pass") }}
+            <b-badge
+              v-if="unclaimedBPRewards > 0"
+              style="background-color: #523c88"
+              class="ml-1"
+            >
+              {{ unclaimedBPRewards }}
+              <span class="sr-only">Unclaimed Battle Pass Rewards</span>
+            </b-badge>
+          </b-dropdown-item>
+          <b-dropdown-item
+            to="/profile/armory"
+            exact-active-class="active-link"
+          >
+            <img src="/images/icons/columns.svg" class="link-icon" />
+            {{ $t("navigation.armory") }}
+            <b-badge
+              v-if="unopenedChests > 0"
+              style="background-color: #523c88"
+              class="ml-1"
+            >
+              {{ unopenedChests }}
+              <span class="sr-only">Unopened Chests</span>
+            </b-badge>
+          </b-dropdown-item>
+          <b-dropdown-item to="/profile/gods" exact-active-class="active-link">
+            <img src="/images/icons/newspaper-solid.svg" class="link-icon" />
+            {{ $t("navigation.gods") }}
+          </b-dropdown-item>
+          <b-dropdown-item
+            to="/profile/achievements"
+            exact-active-class="active-link"
+          >
+            <img src="/images/icons/gift.svg" class="link-icon" />
+            {{ $t("navigation.achievements") }}
+            <b-badge
+              v-if="numAchievements > 0"
+              style="background-color: #523c88"
+              class="ml-1"
+            >
+              {{ numAchievements }}
+              <span class="sr-only">Unclaimed Achievements</span>
+            </b-badge>
+          </b-dropdown-item>
+          <b-dropdown-item to="/profile/games" exact-active-class="active-link">
+            <img src="/images/icons/history.svg" class="link-icon" />
+            {{ $t("navigation.my_stats") }}
+          </b-dropdown-item>
+          <b-dropdown-item to="/profile/stats" exact-active-class="active-link">
+            <img src="/images/icons/chart-bar.svg" class="link-icon" />
+            {{ $t("navigation.match_history") }}
+          </b-dropdown-item>
+          <b-dropdown-item
+            v-if="isAdmin"
+            to="/admin"
+            exact-active-class="active-link"
+          >
+            <img src="/images/icons/cog.svg" class="link-icon" />
+            {{ $t("navigation.admin") }}
+          </b-dropdown-item>
+        </b-nav-item-dropdown>
         <li class="nav-item mr-2">
-          <router-link class="nav-link" to="/games">
-            {{ $t("navigation.games") }}
+          <router-link
+            class="nav-link"
+            to="/games"
+            exact-active-class="active-link"
+          >
+            {{ $t("navigation.matches") }}
           </router-link>
         </li>
         <li class="nav-item mr-2">
-          <router-link class="nav-link" to="/store">
+          <router-link
+            class="nav-link"
+            to="/store"
+            exact-active-class="active-link"
+          >
             {{ $t("navigation.store") }}
           </router-link>
         </li>
         <b-nav-item-dropdown text="STATS" class="mx-2">
-          <b-dropdown-item to="/leaderboard">
+          <b-dropdown-item to="/leaderboard" exact-active-class="active-link">
             {{ $t("navigation.leaderboard") }}
           </b-dropdown-item>
-          <b-dropdown-item to="/gods">
+          <b-dropdown-item to="/gods" exact-active-class="active-link">
             {{ $t("navigation.gods") }}
           </b-dropdown-item>
-          <b-dropdown-item to="/abilities">
+          <b-dropdown-item to="/abilities" exact-active-class="active-link">
             {{ $t("navigation.abilities") }}
           </b-dropdown-item>
         </b-nav-item-dropdown>
         <li class="nav-item mx-2">
-          <router-link class="nav-link" to="/changelog">
+          <router-link
+            class="nav-link"
+            to="/changelog"
+            exact-active-class="active-link"
+          >
             {{ $t("navigation.change_log") }}
           </router-link>
         </li>
-        <!-- <li class="nav-item ml-2">
-          <router-link class="nav-link" to="/credits">
-            {{ $t("navigation.credits") }}
-          </router-link>
-        </li> -->
       </ul>
-      <div class="d-flex align-items-center">
-        <div class="d-flex align-items-center">
-          <!-- <div>
-            <b-button
-              class="d-none d-md-flex mr-3"
-              href="#"
-              target="_blank"
-              variant="secondary"
-              v-t="'navigation.report_a_bug'"
-            ></b-button>
-          </div> -->
-          <div>
-            <b-button
-              class="d-none d-md-flex"
-              href="#"
-              target="_blank"
-              variant="primary"
-              v-t="'navigation.play_now'"
-            ></b-button>
+      <div class="d-flex align-items-center ml-auto">
+        <div class="d-flex align-items-center" v-if="!loggedIn">
+          <div class="mr-2">
+            <LoginButton></LoginButton>
           </div>
+          <div>
+            <a
+              role="button"
+              tabindex="0"
+              href="#"
+              target="_blank"
+              class="d-none d-md-flex mr-3 play-button btn"
+              style="background-image: url('/images/site/play_button_pink.png')"
+            >
+              {{ $t("navigation.play_now") }}
+            </a>
+          </div>
+        </div>
+        <div class="d-flex navbar-nav mt-2" v-if="loggedIn">
+          <img
+            :src="profilePicture"
+            class="profile-picture"
+            alt="Profile Picture"
+          />
+          <b-nav-item-dropdown
+            :text="username"
+            class="username-dropdown"
+            v-if="loggedIn"
+          >
+            <a
+              href="/api/auth/logout"
+              class="btn sign-out-button"
+              variant="outline-primary"
+              v-t="'navigation.sign_out'"
+            ></a>
+          </b-nav-item-dropdown>
         </div>
       </div>
     </nav>
@@ -72,11 +180,11 @@
 </template>
 
 <script>
-import SidebarToggle from "./SidebarToggle.vue";
+import LoginButton from "./LoginButton";
 
 export default {
   components: {
-    SidebarToggle,
+    LoginButton,
   },
 
   data: () => ({ langs: ["en", "ru", "cn"], selected: null }),
@@ -87,6 +195,33 @@ export default {
       this.$root._i18n._vm.locale = lang.toLowerCase();
     }
   },
+
+  computed: {
+    username() {
+      return this.$store.state.auth.username;
+    },
+    profilePicture() {
+      return this.$store.state.auth.profilePictureLink;
+    },
+    loggedIn() {
+      return this.$store.getters.loggedIn;
+    },
+    isAdmin() {
+      return this.$store.getters.isAdmin;
+    },
+    numAchievements() {
+      return this.$store.state.auth.achievementsToClaim;
+    },
+    numQuests() {
+      return this.$store.state.auth.questsToClaim;
+    },
+    unopenedChests() {
+      return this.$store.state.auth.unopenedChests;
+    },
+    unclaimedBPRewards() {
+      return this.$store.state.auth.unclaimedBPRewards;
+    },
+  },
 };
 </script>
 
@@ -95,5 +230,33 @@ export default {
   padding: 0.25rem !important;
   font-size: 0.65rem !important;
   border-radius: 0.2rem !important;
+}
+
+.play-button {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  text-align: center;
+}
+
+.play-button:hover {
+  color: #fff;
+  filter: brightness(1.2);
+}
+
+.link-icon {
+  height: 16px;
+  width: 16px;
+  margin-right: 5px;
+}
+
+.profile-picture {
+  height: 32px;
+  width: 32px;
+  margin-right: 5px;
+}
+
+.sign-out-button {
+  border-color: var(--primary-color);
 }
 </style>

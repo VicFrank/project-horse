@@ -1,9 +1,5 @@
 <template>
-  <div
-    v-if="!loading && quests.length > 0"
-    style="background-color: #222e3b; border: solid 1.1px #364552"
-    class="pb-2"
-  >
+  <div v-if="!loading && quests.length > 0" class="pb-2 quests-background">
     <div class="px-3 py-3">
       <span v-t="'profile.daily_quests'"></span>
     </div>
@@ -124,7 +120,6 @@ export default {
 
 <style scoped>
 .single-quest {
-  /* border: solid 1px #202e3a; */
   border: solid 1.1px #364552;
   background-color: #222e3b;
   border-bottom: 0;

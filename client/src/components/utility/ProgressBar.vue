@@ -47,7 +47,11 @@ export default {
 }
 
 .current-progress {
-  background-image: linear-gradient(to right, #0b86c4, #42728a);
+  background-image: linear-gradient(
+    to right,
+    var(--primary-color),
+    var(--primary-color-dark)
+  );
   height: 20px;
   transition: width 0.5s;
 }

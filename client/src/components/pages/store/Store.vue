@@ -336,7 +336,7 @@ export default {
   line-height: 1;
   letter-spacing: 0.45px;
   text-align: center;
-  color: #0b86c4;
+  color: var(--primary-color);
 }
 
 .featured img,

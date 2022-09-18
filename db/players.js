@@ -2309,7 +2309,6 @@ module.exports = {
 
       await this.modifyCoins(steamID, coin_reward);
       await this.addBattlePassXp(steamID, xp_reward);
-      console.log(cosmetic_id);
       if (cosmetic_id) await this.giveCosmeticByID(steamID, cosmetic_id);
 
       return true;

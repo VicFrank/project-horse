@@ -2,7 +2,6 @@
   <div id="app">
     <Header />
     <div class="main-layout" :key="loggedIn">
-      <Sidebar />
       <div
         @click="onMainContentClicked"
         v-bind:class="{ 'sidebar-open': sidebarOpen, 'neutral-div': true }"
@@ -22,13 +21,11 @@
 
 <script>
 import Header from "./components/utility/Header.vue";
-import Sidebar from "./components/utility/Sidebar.vue";
 import Footer from "./components/utility/Footer.vue";
 export default {
   name: "App",
   components: {
     Header,
-    Sidebar,
     Footer,
   },
   computed: {

@@ -9,11 +9,12 @@ export default {
       .then((res) => res.json())
       .then((res) => {
         if (res.success) {
-          const { photos, id, isAdmin } = res.user;
+          const { photos, id, isAdmin, displayName } = res.user;
 
           this.$store.commit({
             type: "SET_USER",
             steamID: id,
+            username: displayName,
             picture: photos[2].value,
             isAdmin,
           });

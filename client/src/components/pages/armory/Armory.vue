@@ -127,7 +127,6 @@
               </b-modal>
             </div>
           </div>
-          <!-- <div v-else-if="!loading" class="h3 blue row mt-3">No cosmetics found</div> -->
         </div>
       </div>
     </div>

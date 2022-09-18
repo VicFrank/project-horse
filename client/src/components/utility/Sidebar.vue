@@ -62,7 +62,11 @@
               exact-active-class="active"
             >
               {{ $t("navigation.profile") }}
-              <b-badge v-if="numQuests > 0" variant="primary" class="ml-1">
+              <b-badge
+                v-if="numQuests > 0"
+                style="background-color: #523c88"
+                class="ml-1"
+              >
                 {{ numQuests }}
                 <span class="sr-only">Unclaimed Quests</span>
               </b-badge>
@@ -78,7 +82,7 @@
               {{ $t("navigation.battle_pass") }}
               <b-badge
                 v-if="unclaimedBPRewards > 0"
-                variant="primary"
+                style="background-color: #523c88"
                 class="ml-1"
               >
                 {{ unclaimedBPRewards }}
@@ -94,7 +98,11 @@
               exact-active-class="active"
             >
               {{ $t("navigation.armory") }}
-              <b-badge v-if="unopenedChests > 0" variant="primary" class="ml-1">
+              <b-badge
+                v-if="unopenedChests > 0"
+                style="background-color: #523c88"
+                class="ml-1"
+              >
                 {{ unopenedChests }}
                 <span class="sr-only">Unopened Chests</span>
               </b-badge>
@@ -119,7 +127,7 @@
               {{ $t("navigation.achievements") }}
               <b-badge
                 v-if="numAchievements > 0"
-                variant="primary"
+                style="background-color: #523c88"
                 class="ml-1"
               >
                 {{ numAchievements }}
@@ -181,7 +189,7 @@
             to="/games"
             class="sidebar-nav__link"
             exact-active-class="active"
-            v-t="'navigation.games'"
+            v-t="'navigation.matches'"
           ></router-link>
         </li>
         <li class="sidebar-nav__item d-lg-none">
@@ -357,7 +365,7 @@ export default {
   font-family: "Radiance-Semibold";
   letter-spacing: 1px;
   text-align: center;
-  color: #0b86c4;
+  color: var(--primary-color);
 }
 
 .sidebar-nav {
@@ -390,7 +398,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  border-left: 3px solid #0b86c4;
+  border-left: 3px solid var(--primary-color);
   background: linear-gradient(
     90deg,
     rgba(83, 169, 255, 0.1) 0%,
@@ -412,7 +420,7 @@ export default {
 }
 
 .sidebar-nav__link.active {
-  color: #0b86c4;
+  color: var(--primary-color);
   font-weight: 500;
   font-size: 18px;
   letter-spacing: 1px;
@@ -447,7 +455,7 @@ export default {
   bottom: -12px;
   right: 20px;
 
-  background-color: #0b86c4;
+  background-color: var(--primary-color);
   border-radius: 50%;
 
   float: right;

@@ -245,9 +245,9 @@ export default {
   margin-left: -3px;
   background-image: linear-gradient(
     to bottom,
-    #135272,
-    #0b86c4 48%,
-    #135272 99%
+    var(--primary-color-light),
+    var(--primary-color) 48%,
+    var(--primary-color-dark) 99%
   );
   z-index: 5;
 }
@@ -278,9 +278,9 @@ export default {
   height: 300px;
   background-image: linear-gradient(
     to bottom,
-    #135272,
-    #0b86c4 48%,
-    #135272 99%
+    var(--primary-color-light),
+    var(--primary-color) 48%,
+    var(--primary-color-dark) 99%
   );
   z-index: -1;
 }
@@ -310,9 +310,9 @@ export default {
   height: 300px;
   background-image: linear-gradient(
     to bottom,
-    #135272,
-    #0b86c4 48%,
-    #135272 99%
+    var(--primary-color-light),
+    var(--primary-color) 48%,
+    var(--primary-color-dark) 99%
   );
   z-index: -1;
 }
@@ -394,9 +394,9 @@ export default {
     height: 300px;
     background-image: linear-gradient(
       to bottom,
-      #135272,
-      #0b86c4 48%,
-      #135272 99%
+      var(--primary-color-light),
+      var(--primary-color) 48%,
+      var(--primary-color-dark) 99%
     );
     z-index: -1;
   }

@@ -55,10 +55,10 @@ footer {
 }
 
 a {
-  color: #0b86c4;
+  color: var(--primary-color);
 }
 
 .fa {
-  color: #0b86c4;
+  color: var(--primary-color);
 }
 </style>

@@ -1,6 +1,5 @@
 <template>
   <div class="content">
-    <h3 class="mb-5 text-center" v-t="'profile.daily_quests'"></h3>
     <div class="quest container p-0">
       <b-alert v-model="showError" show variant="danger" dismissible>
         {{ error }}
