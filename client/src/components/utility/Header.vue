@@ -98,6 +98,16 @@
             {{ $t("navigation.admin") }}
           </b-dropdown-item>
         </b-nav-item-dropdown>
+        <li class="nav-item mr-2">
+          <router-link
+            class="nav-link"
+            to="/store"
+            exact-active-class="active-link"
+          >
+            <img src="/images/coin1.png" class="coins-img" alt="Coins" />
+            {{ $t("navigation.store") }}
+          </router-link>
+        </li>
         <li class="nav-item mr-2 d-none d-lg-block">
           <router-link
             class="nav-link"
@@ -105,15 +115,6 @@
             exact-active-class="active-link"
           >
             {{ $t("navigation.matches") }}
-          </router-link>
-        </li>
-        <li class="nav-item mr-2">
-          <router-link
-            class="nav-link"
-            to="/store"
-            exact-active-class="active-link"
-          >
-            {{ $t("navigation.store") }}
           </router-link>
         </li>
         <b-nav-item-dropdown text="STATS" class="mx-2 d-none d-sm-block">
@@ -256,5 +257,11 @@ export default {
 
 .sign-out-button {
   border-color: var(--primary-color);
+}
+
+.coins-img {
+  width: 16px;
+  height: 16px;
+  margin-bottom: 2px;
 }
 </style>
