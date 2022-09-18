@@ -29,7 +29,7 @@
       <div class="col-sm my-auto">
         <img class="img-fluid" src="./images/image1.png" alt="General" />
       </div>
-      <div class="col-sm my-auto">
+      <div class="col-sm my-auto py-3">
         <h2 v-t="'home.row2-1'"></h2>
         <ul>
           <li v-t="'home.row2-2'"></li>
@@ -42,7 +42,7 @@
     </div>
 
     <div class="row">
-      <div class="col-sm my-auto">
+      <div class="col-sm my-auto py-3">
         <h2 v-t="'home.row8-1'"></h2>
         <ul>
           <li v-t="'home.row8-2'"></li>
@@ -65,7 +65,7 @@
           alt="Upgrade your spells"
         />
       </div>
-      <div class="col-sm my-auto">
+      <div class="col-sm my-auto py-3">
         <h2 v-t="'home.row3-1'"></h2>
         <ul>
           <li v-t="'home.row3-2'"></li>
@@ -76,7 +76,7 @@
     </div>
 
     <div class="row">
-      <div class="col-sm my-auto">
+      <div class="col-sm my-auto py-3">
         <h2 v-t="'home.row4-1'"></h2>
         <ul>
           <li v-t="'home.row4-2'"></li>
@@ -95,7 +95,7 @@
       <div class="col-sm my-auto">
         <img class="img-fluid" src="./images/image5.png" alt="Select a Hero" />
       </div>
-      <div class="col-sm my-auto">
+      <div class="col-sm my-auto py-3">
         <h2 v-t="'home.row5-1'"></h2>
         <ul>
           <li v-t="'home.row5-2'"></li>
@@ -108,7 +108,7 @@
     </div>
 
     <div class="row">
-      <div class="col-sm my-auto">
+      <div class="col-sm my-auto py-3">
         <h2 v-t="'home.row6-1'"></h2>
         <ul>
           <li v-t="'home.row6-2'"></li>
@@ -125,9 +125,9 @@
 
     <div class="row">
       <div class="col-sm my-auto">
-        <img class="img-fluid" src="./images/image6.png" alt="Leaderboard" />
+        <img class="img-fluid" src="./images/image7.png" alt="Leaderboard" />
       </div>
-      <div class="col-sm my-auto">
+      <div class="col-sm my-auto py-3">
         <h2 v-t="'home.row7-1'"></h2>
         <ul>
           <li v-t="'home.row7-2'"></li>
@@ -136,22 +136,6 @@
           <li v-t="'home.row7-5'"></li>
           <li v-t="'home.row7-6'"></li>
         </ul>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-sm my-auto">
-        <h2 v-t="'home.row7-1'"></h2>
-        <ul>
-          <li v-t="'home.row7-2'"></li>
-          <li v-t="'home.row7-3'"></li>
-          <li v-t="'home.row7-4'"></li>
-          <li v-t="'home.row7-5'"></li>
-          <li v-t="'home.row7-6'"></li>
-        </ul>
-      </div>
-      <div class="col-sm my-auto">
-        <img class="img-fluid" src="./images/image7.png" alt="Plus" />
       </div>
     </div>
   </div>
