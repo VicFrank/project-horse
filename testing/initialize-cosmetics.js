@@ -58,13 +58,12 @@ async function addCosmetics() {
     console.log("Adding cosmetics...");
     await cosmetics.bulkCreateCosmetics([
       {
-        // Chest Drop
-        name: "hat_clown_wig",
-        type: "Avatar Hat",
-        equip_group: "avatar_hat",
+        name: "name_rainbow",
+        type: "Name Color",
         coins: -1,
         cost_usd: -1,
-        rarity: "Rare",
+        equip_group: "name_color",
+        rarity: "Immortal",
       },
     ]);
     console.log("Cosmetics initialized");
@@ -193,6 +192,5 @@ async function addDefaultCosmeticsToAllPlayers() {
 }
 
 (async function () {
-  await updateCosmetics();
-  await setChestRewards();
+  await addCosmetics();
 })();

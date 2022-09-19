@@ -1251,6 +1251,19 @@ module.exports = [
   },
   /**
    * *************************
+   * Name Colors
+   * *************************
+   */
+  {
+    name: "name_rainbow",
+    type: "Name Color",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "name_color",
+    rarity: "Immortal",
+  },
+  /**
+   * *************************
    * Placeholders
    * *************************
    */

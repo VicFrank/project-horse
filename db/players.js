@@ -1438,9 +1438,11 @@ module.exports = {
         case "plus_year_package":
           // add two god chests
           const godChest = await Cosmetics.getCosmeticByName("chest_god");
+          const nameRainbow = await Cosmetics.getCosmeticByName("name_rainbow");
           this.doItemTransaction(steamID, {
             items: {
               [godChest.cosmetic_id]: 2,
+              [nameRainbow.cosmetic_id]: 1,
             },
           });
           this.addPlusDays(steamID, 365);
