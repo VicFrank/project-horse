@@ -1,6 +1,6 @@
 <template>
   <div
-    style="background-color: #222e3b; border: solid 1.1px #364552"
+    style="background-color: #2d223b; border: solid 1.1px #403652"
     class="pb-2"
   >
     <div class="d-flex justify-content-between px-3 py-3">
@@ -153,24 +153,24 @@ export default {
 <style scoped>
 .single-quest {
   /* border: solid 1px #202e3a; */
-  border: solid 1.1px #364552;
-  background-color: #222e3b;
+  border: solid 1.1px #403652;
+  background-color: #2d223b;
   border-bottom: 0;
   min-width: 125px;
   position: relative;
 }
 
 .quest-xp {
-  background-color: #1a232b;
-  border: solid 1.1px #364552;
+  background-color: #1f1a2b;
+  border: solid 1.1px #403652;
   border-top: 0;
-  border-bottom: 3px solid #125478;
+  border-bottom: 3px solid #3c1278;
 }
 
 .overlay {
   position: absolute;
   top: 0;
-  background-color: #364552;
+  background-color: #403652;
   opacity: 0.5;
   width: 100%;
   height: 100%;

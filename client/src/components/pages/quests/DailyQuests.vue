@@ -193,8 +193,8 @@ export default {
 }
 
 .single-quest {
-  border: solid 1.1px #364552;
-  background-color: #222e3b;
+  border: solid 1.1px #403652;
+  background-color: #2d223b;
   padding: 2em 1em;
   border-bottom: 0;
 }
@@ -209,10 +209,10 @@ export default {
 
 .quest-xp {
   height: 50px;
-  background-color: #1a232b;
-  border: solid 1.1px #364552;
+  background-color: #1f1a2b;
+  border: solid 1.1px #403652;
   border-top: 0;
-  border-bottom: 3px solid #125478;
+  border-bottom: 3px solid #3c1278;
 }
 
 .next-quest-text {

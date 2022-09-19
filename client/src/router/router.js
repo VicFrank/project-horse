@@ -46,12 +46,24 @@ const routes = [
   { path: "/", component: Home },
   { path: "/credits", component: Credits },
   { path: "/changelog", component: Changelog },
-  { path: "/admin", component: Admin },
+  {
+    path: "/admin",
+    component: Admin,
+    meta: { requiresAuth: true, requiresAdmin: true },
+  },
   { path: "/redirect", component: LoginRedirect },
   { path: "/games", component: Games },
   { path: "/games/:game_id", component: Game },
-  { path: "/gods", component: Gods },
-  { path: "/abilities", component: Abilities },
+  {
+    path: "/gods",
+    component: Gods,
+    meta: { requiresAuth: true, requiresAdmin: true },
+  },
+  {
+    path: "/abilities",
+    component: Abilities,
+    meta: { requiresAuth: true, requiresAdmin: true },
+  },
   { path: "/leaderboard", component: Leaderboard },
   {
     path: "/redeem_code",

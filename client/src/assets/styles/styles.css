@@ -293,7 +293,7 @@ a:hover {
 }
 
 tr {
-  border: solid 1.1px #364552;
+  border: solid 1.1px #403652;
   background-color: var(--primary-color-light);
 }
 
@@ -453,8 +453,8 @@ td a:hover {
   position: relative;
   /* border: solid 1.1px #202e3a;
     background-color: #172126; */
-  border: solid 1.1px #364552;
-  background-color: #1a232b;
+  border: solid 1.1px #403652;
+  background-color: #1f1a2b;
   padding-bottom: 4em !important;
 }
 
@@ -779,7 +779,7 @@ td a:hover {
 }
 
 .pog-text {
-  background-image: linear-gradient(to bottom, #53b5e7 11%, #b3b9bf 83%);
+  background-image: linear-gradient(to bottom, #6a53e7 11%, #b3b9bf 83%);
   font-size: 20px;
   font-weight: 600;
   letter-spacing: 0.5px;
@@ -789,7 +789,7 @@ td a:hover {
 }
 
 .quests-background {
-  background-color: #222e3b;
+  background-color: #2d223b;
   border: 1px solid #1a1a1a;
 }
 

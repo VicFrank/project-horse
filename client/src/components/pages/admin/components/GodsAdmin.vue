@@ -143,7 +143,7 @@ button {
   position: absolute;
   top: 0;
   left: 17px;
-  background-color: #364552;
+  background-color: #403652;
   opacity: 0.5;
   width: 100px;
   height: 100px;

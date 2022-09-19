@@ -117,7 +117,11 @@
             {{ $t("navigation.matches") }}
           </router-link>
         </li>
-        <b-nav-item-dropdown text="STATS" class="mx-2 d-none d-sm-block">
+        <b-nav-item-dropdown
+          text="STATS"
+          class="mx-2 d-none d-sm-block"
+          v-if="isAdmin"
+        >
           <b-dropdown-item to="/leaderboard" exact-active-class="active-link">
             {{ $t("navigation.leaderboard") }}
           </b-dropdown-item>
@@ -128,6 +132,15 @@
             {{ $t("navigation.abilities") }}
           </b-dropdown-item>
         </b-nav-item-dropdown>
+        <li class="nav-item mx-2 d-none d-lg-block" v-if="!isAdmin">
+          <router-link
+            class="nav-link"
+            to="/leaderboard"
+            exact-active-class="active-link"
+          >
+            {{ $t("navigation.leaderboard") }}
+          </router-link>
+        </li>
         <li class="nav-item mx-2 d-none d-lg-block">
           <router-link
             class="nav-link"

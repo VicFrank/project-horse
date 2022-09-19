@@ -125,10 +125,10 @@ export default {
   position: relative;
   margin: 0.75em auto;
   padding: 2em 4em;
-  border: solid 1.1px #364552;
+  border: solid 1.1px #403652;
   /* border: solid 1px #202e3a;
     background-color: #172126; */
-  background-color: #222e3b;
+  background-color: #2d223b;
 }
 
 .achievement h3 {

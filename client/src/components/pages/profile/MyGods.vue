@@ -100,7 +100,7 @@ export default {
 .overlay {
   position: absolute;
   top: 0;
-  background-color: #364552;
+  background-color: #403652;
   opacity: 0.5;
   width: 100%;
   height: 100px;
