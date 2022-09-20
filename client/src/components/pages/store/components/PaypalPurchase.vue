@@ -41,9 +41,9 @@ export default {
         },
         prod: {
           cheap:
-            "AZJSuJyzSWP6mBtWjYUohMjjdj7NaMFacv7MAIhCG5Bjm12tmkoeYkJwwPxPh1ZPqXROCJAxpFM7M3wY",
+            "ARyCiFJGaPqBv5V0OJNPloAOgwUDp-YOu2cLtrp8fdTLlpBCaIfbXhnFHfVuMylXG9iyPaKCw2SR2D4V",
           expensive:
-            "ARyCiFJGaPqBv5V0OJNPloAOgwUDp-YOu2cLtrp8fdTLlpBCaIfbXhnFHfVuMylXG9iyPaKCw2SR2D4",
+            "ARyCiFJGaPqBv5V0OJNPloAOgwUDp-YOu2cLtrp8fdTLlpBCaIfbXhnFHfVuMylXG9iyPaKCw2SR2D4V",
         },
       },
     };
