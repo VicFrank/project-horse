@@ -130,7 +130,7 @@ module.exports = {
           );
           levels.push({
             cosmetic_id: diamondGamblerAvatar.cosmetic_id,
-            cosmetic_name: diamondGamblerAvatar.cosmetic_id,
+            cosmetic_name: diamondGamblerAvatar.cosmetic_name,
             rarity: diamondGamblerAvatar.rarity,
             free: false,
             bp_level: i,
@@ -140,7 +140,7 @@ module.exports = {
           const gabenAvatar = await Cosmetics.getCosmeticByName("avatar_gaben");
           levels.push({
             cosmetic_id: gabenAvatar.cosmetic_id,
-            cosmetic_name: gabenAvatar.cosmetic_id,
+            cosmetic_name: gabenAvatar.cosmetic_name,
             rarity: gabenAvatar.rarity,
             free: false,
             bp_level: i,
@@ -149,7 +149,7 @@ module.exports = {
         } else if (i % 10 === 0) {
           levels.push({
             cosmetic_id: goldChest.cosmetic_id,
-            cosmetic_name: goldChest.cosmetic_id,
+            cosmetic_name: goldChest.cosmetic_name,
             rarity: goldChest.rarity,
             free: false,
             bp_level: i,
