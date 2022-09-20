@@ -273,6 +273,7 @@
     "chest_basic": "War Chest",
     "chest_gold": "Gold Chest",
     "chest_god": "God Chest",
+    "name_rainbow": "Rainbow Name",
     "gold_placeholder": "Gold"
   },
   "cosmetic_descriptions": {
@@ -386,9 +387,19 @@
     "terrain_god_rune": "Immortal Custom Arena: Rune God Themed",
     "terrain_champion": "Ultra Rare Custom Arena: Galaxy Brain. Reserved for tournament and leaderboard winners",
     "terrain_leaderboard": "Legendary Custom Arena: Galaxy. Reserved for excellent placements in tournaments and the leaderboard",
-    "chest_basic": "A chest full of myriad rewards",
-    "chest_gold": "An ornate chest made out of gold",
-    "chest_god": "A beautifully crafted chest, fit for Gaben himself",
+    "chest_basic": [
+      "25%: Battle Pass XP",
+      "19%: Avatar Border",
+      "18%: Avatar Hat",
+      "15%: Temporary PLUS Membership",
+      "10%: Finisher",
+      "8%: Custom Arena",
+      "5%: God Chest",
+      "Duplicate drops will result in a small refund."
+    ],
+    "chest_gold": "An ornate chest made out of gold. Grants a random amount of Gold. Only available from the Battle Pass.",
+    "chest_god": "This chest will drop a random non-starter God. Duplicate drops will result in a small refund.",
+    "name_rainbow": "Awarded to those who have purchased a year of Plus. Makes your name rainbow colored.",
     "gold_placeholder": "Gold"
   },
   "armory": {

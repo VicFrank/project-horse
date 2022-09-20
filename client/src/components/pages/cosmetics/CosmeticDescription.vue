@@ -1,7 +1,9 @@
 <template>
   <div v-if="typeof getDescription() === 'object'">
-    <ul>
-      <li v-for="line in getDescription()" :key="line">{{ line }}</li>
+    <ul class="text-left">
+      <li v-for="line in getDescription()" :key="line">
+        {{ line }}
+      </li>
     </ul>
   </div>
   <div v-else-if="typeof getDescription() === 'string'">

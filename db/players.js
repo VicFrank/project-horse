@@ -646,13 +646,22 @@ module.exports = {
       const { bp_level, unlocked, battle_pass_id } =
         await this.getActiveBattlePass(steamID);
       const battlePassID = activeBattlePass.battle_pass_id;
-      const levels = await BattlePasses.getBattlePassLevelsAndRewards(
-        battlePassID
-      );
       const claimedRewards = await this.getClaimedBattlePassRewards(
         steamID,
         battle_pass_id
       );
+      const levels = await BattlePasses.getBattlePassLevelsAndRewards(
+        battlePassID
+      );
+      // If you're above level 50, append the rewards in that range to the list of levels
+
+      if (bp_level > 50) {
+        const levelsAbove50 = await BattlePasses.getLevelsAndRewardsPast50(
+          bp_level
+        );
+        levels.push(...levelsAbove50);
+      }
+
       const playerLevels = levels.map((level) => {
         const claimed = claimedRewards.some(
           (reward) => reward.bp_level === level.bp_level
@@ -697,7 +706,8 @@ module.exports = {
 
       const { cosmetics } = await BattlePasses.getRewardsFromRange(
         level,
-        level
+        level,
+        battle_pass_id
       );
       if (cosmetics.length === 0)
         throw new Error("No cosmetics to claim at this level.");
@@ -732,7 +742,8 @@ module.exports = {
       );
       const { cosmetics } = await BattlePasses.getRewardsFromRange(
         0,
-        battlePass.bp_level
+        battlePass.bp_level,
+        battle_pass_id
       );
       const claimedRewards = await this.getClaimedBattlePassRewards(
         steamID,

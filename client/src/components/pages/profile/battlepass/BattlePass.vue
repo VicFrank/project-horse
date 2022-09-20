@@ -56,7 +56,7 @@
                             class="mb-2"
                           />
                         </div>
-                        {{ getTranslatedDescription(i) }}
+                        <CosmeticDescription :cosmetic="getRewards(i)" />
                       </div>
                     </b-modal>
                   </template>
@@ -86,7 +86,12 @@
 </template>
 
 <script>
+import CosmeticDescription from "../../cosmetics/CosmeticDescription.vue";
 export default {
+  components: {
+    CosmeticDescription,
+  },
+
   data: () => ({
     error: "",
     rewards: [],

@@ -79,6 +79,22 @@ module.exports = {
     }
   },
 
+  /**
+   * @param {number} battlePassID
+   *
+   * @returns {Promise<
+   * {
+   *    next_level_xp: number,
+   *    total_xp: number,
+   *    bp_level: number,
+   *    amount: number,
+   *    free: boolean,
+   *    cosmetic_id: number,
+   *    cosmetic_name: string,
+   *    rarity: string
+   * }[]
+   * }
+   **/
   async getBattlePassLevelsAndRewards(battlePassID) {
     try {
       const { rows } = await query(
@@ -98,6 +114,60 @@ module.exports = {
       );
       return rows;
     } catch (error) {
+      throw error;
+    }
+  },
+
+  async getLevelsAndRewardsPast50(level) {
+    try {
+      const goldChest = await Cosmetics.getCosmeticByName("chest_gold");
+      const basicChest = await Cosmetics.getCosmeticByName("chest_basic");
+      const levels = [];
+      for (let i = 51; i <= level; i++) {
+        if (i === 100) {
+          const diamondGamblerAvatar = await Cosmetics.getCosmeticByName(
+            "avatar_gambler_diamond"
+          );
+          levels.push({
+            cosmetic_id: diamondGamblerAvatar.cosmetic_id,
+            cosmetic_name: diamondGamblerAvatar.cosmetic_id,
+            rarity: diamondGamblerAvatar.rarity,
+            free: false,
+            bp_level: i,
+            amount: 1,
+          });
+        } else if (i === 1000) {
+          const gabenAvatar = await Cosmetics.getCosmeticByName("avatar_gaben");
+          levels.push({
+            cosmetic_id: gabenAvatar.cosmetic_id,
+            cosmetic_name: gabenAvatar.cosmetic_id,
+            rarity: gabenAvatar.rarity,
+            free: false,
+            bp_level: i,
+            amount: 1,
+          });
+        } else if (i % 10 === 0) {
+          levels.push({
+            cosmetic_id: goldChest.cosmetic_id,
+            cosmetic_name: goldChest.cosmetic_id,
+            rarity: goldChest.rarity,
+            free: false,
+            bp_level: i,
+            amount: 1,
+          });
+        } else if (i % 5 === 0) {
+          levels.push({
+            cosmetic_id: basicChest.cosmetic_id,
+            cosmetic_name: basicChest.cosmetic_name,
+            rarity: basicChest.rarity,
+            free: false,
+            bp_level: i,
+            amount: 1,
+          });
+        }
+      }
+      return levels;
+    } catch {
       throw error;
     }
   },
@@ -170,11 +240,16 @@ module.exports = {
     }
   },
 
-  async getRewardsFromRange(minLevel, maxLevel) {
+  async getRewardsFromRange(minLevel, maxLevel, battlePassID) {
     try {
+      if (!battlePassID) {
+        const activeBattlePass = await this.getActiveBattlePass();
+        battlePassID = activeBattlePass.battle_pass_id;
+      }
       const { rows } = await query(
-        `SELECT coins_reward FROM battle_pass_levels WHERE bp_level >= $1 AND bp_level <= $2`,
-        [minLevel, maxLevel]
+        `SELECT coins_reward FROM battle_pass_levels
+         WHERE bp_level >= $1 AND bp_level <= $2 AND battle_pass_id = $3`,
+        [minLevel, maxLevel, battlePassID]
       );
       let coins = rows.reduce((acc, cur) => {
         return acc + cur.coins_reward;
@@ -184,8 +259,8 @@ module.exports = {
         `
         SELECT cosmetic_id, amount, free, bp_level
         FROM battle_pass_cosmetic_rewards
-        WHERE bp_level >= $1 AND bp_level <= $2`,
-        [minLevel, maxLevel]
+        WHERE bp_level >= $1 AND bp_level <= $2 AND battle_pass_id = $3`,
+        [minLevel, maxLevel, battlePassID]
       );
 
       if (maxLevel > 50) {
