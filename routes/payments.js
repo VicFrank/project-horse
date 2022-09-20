@@ -308,7 +308,7 @@ router.get(
 router.post("/stripe/create_checkout_session", async (req, res) => {
   const { priceID, steamID } = req.body;
   const baseUrl = process.env.IS_PRODUCTION
-    ? "https://www.pathofguardians.com"
+    ? "https://www.abilityarena.com"
     : "http://localhost:8080";
 
   // handle existing customers
@@ -364,6 +364,7 @@ router.post("/stripe/webhook", async (req, res) => {
       secret
     );
   } catch (err) {
+    console.log(error);
     res.status(400).send("Webhook Error");
     return;
   }
