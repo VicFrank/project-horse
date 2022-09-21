@@ -1,6 +1,6 @@
 const keys = require("../config/keys");
 
-function checkServerKey(req) {
+const isTestClient = (req) => {
   const serverKey = req.body.server_key;
   const serverKey2 = req.get("server_key");
   const serverKey3 = req.params.server_key;
@@ -8,23 +8,45 @@ function checkServerKey(req) {
   const testDedicatedServerKey = process.env.IS_PRODUCTION
     ? keys.dedicatedServerKey
     : keys.toolsKey;
+
+  return (
+    serverKey === testDedicatedServerKey ||
+    serverKey2 === testDedicatedServerKey ||
+    serverKey3 === testDedicatedServerKey ||
+    serverKey4 === testDedicatedServerKey
+  );
+};
+
+const isProdClient = (req) => {
+  const serverKey = req.body.server_key;
+  const serverKey2 = req.get("server_key");
+  const serverKey3 = req.params.server_key;
+  const serverKey4 = req.query.server_key;
   const prodDedicatedServerKey = process.env.IS_PRODUCTION
-    ? keys.prodDedicatedServerKey
+    ? keys.dedicatedServerKey
     : keys.toolsKey;
+
+  return (
+    serverKey === prodDedicatedServerKey ||
+    serverKey2 === prodDedicatedServerKey ||
+    serverKey3 === prodDedicatedServerKey ||
+    serverKey4 === prodDedicatedServerKey
+  );
+};
+
+function checkServerKey(req) {
+  const serverKey = req.body.server_key;
+  const serverKey2 = req.get("server_key");
+  const serverKey3 = req.params.server_key;
+  const serverKey4 = req.query.server_key;
 
   return (
     serverKey === "Invalid_NotOnDedicatedServer" ||
     serverKey2 === "Invalid_NotOnDedicatedServer" ||
     serverKey3 === "Invalid_NotOnDedicatedServer" ||
     serverKey4 === "Invalid_NotOnDedicatedServer" ||
-    serverKey === prodDedicatedServerKey ||
-    serverKey2 === prodDedicatedServerKey ||
-    serverKey3 === prodDedicatedServerKey ||
-    serverKey4 === prodDedicatedServerKey ||
-    serverKey === testDedicatedServerKey ||
-    serverKey2 === testDedicatedServerKey ||
-    serverKey3 === testDedicatedServerKey ||
-    serverKey4 === testDedicatedServerKey
+    isTestClient(req) ||
+    isProdClient(req)
   );
 }
 
@@ -47,6 +69,8 @@ module.exports = {
   isAdmin: function (req) {
     return req.user?.isAdmin;
   },
+  isProdClient,
+  isTestClient,
   adminAuth: function (req, res, next) {
     if (checkServerKey(req)) {
       return next();
