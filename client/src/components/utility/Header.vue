@@ -168,6 +168,37 @@
           </div>
         </div>
         <div class="d-flex" style="list-style: none" v-if="loggedIn">
+          <div class="d-none d-lg-block mr-2">
+            <div class="d-flex align-items-center">
+              <div class="d-flex flex-column">
+                <img
+                  src="/images/battlepass_logo.png"
+                  alt="Battle Pass"
+                  :class="{ 'profile-image': true, disabled: !bpUpgraded }"
+                />
+                <span class="custom-badge">{{ bpLevel }}</span>
+              </div>
+              <img
+                src="/images/cosmetics/plus.png"
+                alt="Plus Badge"
+                v-b-tooltip.hover
+                :title="
+                  hasPlus ? `Plus Expires ${plusExpiration}` : 'Upgrade to Plus'
+                "
+                :class="{
+                  'profile-image': true,
+                  'mx-1': true,
+                  disabled: !hasPlus,
+                }"
+              />
+              <div
+                class="d-flex justify-content-center align-items-center mt-1"
+              >
+                <img src="/images/coin1.png" class="coins-img" alt="Gold" />
+                {{ coins.toLocaleString() }}
+              </div>
+            </div>
+          </div>
           <b-nav-item-dropdown class="username-dropdown" v-if="loggedIn">
             <template #button-content>
               <img
@@ -176,37 +207,48 @@
                 alt="Profile Picture"
               />{{ username }}
             </template>
-            <div
-              class="d-flex justify-content-center align-items-center mx-auto"
-              style="width: 75%"
-            >
-              <div class="d-flex align-items-center">
+            <div class="d-lg-none">
+              <div
+                class="d-flex justify-content-center align-items-center mx-auto"
+                style="width: 75%"
+              >
+                <div class="d-flex align-items-center">
+                  <img
+                    src="/images/battlepass_logo.png"
+                    alt="Battle Pass"
+                    :class="{ 'profile-image': true, disabled: !bpUpgraded }"
+                  />
+                  <span class="custom-badge">{{ bpLevel }}</span>
+                </div>
                 <img
-                  v-if="bpUpgraded"
-                  src="/images/battlepass_logo.png"
-                  alt="Battle Pass"
-                  class="profile-image"
+                  src="/images/cosmetics/plus.png"
+                  alt="Plus Badge"
+                  v-b-tooltip.hover
+                  :title="
+                    hasPlus
+                      ? `Plus Expires ${plusExpiration}`
+                      : 'Upgrade to Plus'
+                  "
+                  :class="{
+                    'profile-image': true,
+                    'ml-3': true,
+                    disabled: !hasPlus,
+                  }"
                 />
-                <span class="custom-badge">{{ bpLevel }}</span>
               </div>
-              <img
-                src="/images/cosmetics/plus.png"
-                class="profile-image ml-3"
-                alt="Plus Badge"
-                v-b-tooltip.hover
-                :title="`Plus Expires ${plusExpiration}`"
-              />
-            </div>
-            <div class="row">
-              <ProgressBar
-                class="bp-progress my-1"
-                :progress="progress"
-                :required="required"
-              />
-            </div>
-            <div class="d-flex justify-content-center align-items-center mt-1">
-              <img src="/images/coin1.png" class="coins-img" alt="Gold" />
-              {{ coins.toLocaleString() }}
+              <div class="row">
+                <ProgressBar
+                  class="bp-progress my-1"
+                  :progress="progress"
+                  :required="required"
+                />
+              </div>
+              <div
+                class="d-flex justify-content-center align-items-center mt-1"
+              >
+                <img src="/images/coin1.png" class="coins-img" alt="Gold" />
+                {{ coins.toLocaleString() }}
+              </div>
             </div>
             <a
               href="/api/auth/logout"
@@ -350,5 +392,9 @@ export default {
 .profile-image {
   height: 32px;
   width: auto;
+}
+
+.disabled {
+  filter: grayscale(100%);
 }
 </style>
