@@ -1338,9 +1338,13 @@ module.exports = {
             const cosmetic = await Cosmetics.getCosmetic(cosmeticID);
             if (Cosmetics.isUniqueCosmetic(cosmetic.cosmetic_type)) {
               const hasCosmetic = await this.hasCosmetic(steamID, cosmeticID);
+              console.log(
+                `Already has cosmetic ${cosmetic.cosmetic_name} ${hasCosmetic}`
+              );
               if (hasCosmetic) continue;
             }
             for (let i = 0; i < amount; i++) {
+              console.log("give cosmetic", cosmeticID);
               await this.giveCosmeticByID(steamID, cosmeticID);
             }
           } else if (amount < 0) {
@@ -1598,13 +1602,11 @@ module.exports = {
           const numOpened = loggedGods.filter(
             (log) => log.log_data.cosmeticName === drop.cosmetic_name
           ).length;
-          console.log(numOpened);
 
           if (numOpened >= 10) {
             const goldenGod = await Cosmetics.getCosmeticByName(
               `gold_${drop.cosmetic_name}`
             );
-            console.log(goldenGod);
             if (!this.hasCosmetic(steamID, goldenGod.cosmetic_id)) {
               return { items: { [goldenGod.cosmetic_id]: 1 } };
             } else {
@@ -1674,6 +1676,7 @@ module.exports = {
 
       // consume this chest as part of the transaction
       rewardsTransaction.items = { ...rewardsTransaction.items, [chestID]: -1 };
+      console.log(rewardsTransaction);
 
       // add the rewards to the player
       await this.doItemTransaction(steamID, rewardsTransaction);
