@@ -16,10 +16,21 @@
       </div>
       <ul class="navbar-nav flex-row d-flex text-uppercase mt-2">
         <b-nav-item-dropdown
-          text="MY PROFILE"
+          :text="$t('navigation.my_profile')"
           class="mx-2 my-profile-dropdown"
           v-if="loggedIn"
         >
+          <template #button-content>
+            {{ $t("navigation.my_profile") }}
+            <b-badge
+              v-if="totalAlerts > 0"
+              style="background-color: #523c88"
+              class="ml-1"
+            >
+              {{ totalAlerts }}
+              <span class="sr-only">Unclaimed Quests</span>
+            </b-badge>
+          </template>
           <b-dropdown-item to="/profile" exact-active-class="active-link">
             <img src="/images/icons/profile.png" class="link-icon" />
             {{ $t("navigation.profile") }}
@@ -219,6 +230,11 @@ export default {
     },
     unclaimedBPRewards() {
       return this.$store.state.auth.unclaimedBPRewards;
+    },
+    totalAlerts() {
+      const { questsToClaim, unopenedChests, unclaimedBPRewards } =
+        this.$store.state.auth;
+      return questsToClaim + unopenedChests + unclaimedBPRewards;
     },
   },
 };

@@ -74,6 +74,7 @@
   },
   "navigation": {
     "profile": "Profile",
+    "my_profile": "My Profile",
     "battle_pass": "Battle Pass",
     "my_subscriptions": "My Subscriptions",
     "armory": "Armory",
