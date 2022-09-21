@@ -1339,6 +1339,7 @@ module.exports = {
               const hasCosmetic = await this.hasCosmetic(steamID, cosmeticID);
               if (hasCosmetic) continue;
             }
+            console.log("Giving cosmetic", cosmeticID, amount);
             for (let i = 0; i < amount; i++) {
               await this.giveCosmeticByID(steamID, cosmeticID);
             }

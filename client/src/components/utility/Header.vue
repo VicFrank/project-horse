@@ -176,7 +176,7 @@
                   alt="Battle Pass"
                   :class="{ 'profile-image': true, disabled: !bpUpgraded }"
                 />
-                <span class="custom-badge">{{ bpLevel }}</span>
+                <span class="custom-badge text-center">{{ bpLevel }}</span>
               </div>
               <img
                 src="/images/cosmetics/plus.png"
@@ -218,7 +218,7 @@
                     alt="Battle Pass"
                     :class="{ 'profile-image': true, disabled: !bpUpgraded }"
                   />
-                  <span class="custom-badge">{{ bpLevel }}</span>
+                  <span class="custom-badge text-center">{{ bpLevel }}</span>
                 </div>
                 <img
                   src="/images/cosmetics/plus.png"

@@ -167,6 +167,67 @@ async function addDefaultCosmeticsToAllPlayers() {
   }
 }
 
+async function addCosmeticsToPlayers() {
+  const steamIDs = [
+    "76561197964547457", // Synderen
+    "76561197980022982", // SingSing
+    "76561198047076771", // funky-deserver
+    "76561198065444496", // Beep beep
+    "76561198053098358", // Gothmog
+    "76561198026562132", // Purge
+    "76561198030654385", // Grass
+    "76561197979938082", // NoTail
+  ];
+  const cosmeticsToGive = [
+    {
+      cosmeticName: "chest_god",
+      amount: 4,
+    },
+    {
+      cosmeticName: "chest_basic",
+      amount: 6,
+    },
+    {
+      cosmeticName: "gold_10000",
+      amount: 2,
+    },
+    {
+      cosmeticName: "plus_year_package",
+      amount: 1,
+    },
+    {
+      cosmeticName: "buy_bp",
+      amount: 1,
+    },
+    {
+      cosmeticName: "finisher_fire",
+      amount: 1,
+    },
+    {
+      cosmeticName: "terrain_lava",
+      amount: 1,
+    },
+  ];
+  try {
+    console.log("Adding cosmetics to players...");
+    const transaction = { items: {} };
+    for (const cosmetic of cosmeticsToGive) {
+      const dbComsetic = await cosmetics.getCosmeticByName(
+        cosmetic.cosmeticName
+      );
+      transaction.items[dbComsetic.cosmetic_id] = cosmetic.amount;
+    }
+    for (const steamID of steamIDs) {
+      console.log(`Adding cosmetics to ${steamID}`);
+      await players.doItemTransaction(steamID, transaction);
+    }
+    console.log("cosmetics added to players");
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
 (async function () {
-  // await addCosmetics();
+  await addCosmeticsToPlayers();
 })();
