@@ -69,6 +69,7 @@
           <b-dropdown-item
             to="/profile/achievements"
             exact-active-class="active-link"
+            v-if="isAdmin"
           >
             <img src="/images/icons/gift.svg" class="link-icon" />
             {{ $t("navigation.achievements") }}
