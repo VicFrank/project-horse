@@ -94,7 +94,7 @@
     "report_a_bug": "Report a bug",
     "play_now": "Play Now",
     "language": "Language",
-    "tournament": "Tournament",
+    "tournaments": "Tournaments",
     "en": "English",
     "cn": "汉语",
     "ru": "русский"
@@ -127,6 +127,12 @@
     "bp_sellout": "Purchase a {link} to increase your Daily XP",
     "bp_sellout_link": "BP Accelerator",
     "reset_in": "Resets in"
+  },
+  "tournaments": {
+    "page_title": "Tournaments",
+    "tournament": "Tournament",
+    "date": "Date",
+    "results": "Results"
   },
   "cosmetic_types": {
     "Avatar Frame": "Avatar Frame",

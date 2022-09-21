@@ -108,48 +108,34 @@
             {{ $t("navigation.store") }}
           </router-link>
         </li>
-        <li class="nav-item mr-2 d-none d-lg-block">
-          <router-link
-            class="nav-link"
-            to="/games"
-            exact-active-class="active-link"
-          >
+        <b-nav-item-dropdown text="GAME" class="mx-2 d-none d-sm-block">
+          <b-dropdown-item exact-active-class="active-link" to="/games">
             {{ $t("navigation.matches") }}
-          </router-link>
-        </li>
-        <b-nav-item-dropdown
-          text="STATS"
-          class="mx-2 d-none d-sm-block"
-          v-if="isAdmin"
-        >
+          </b-dropdown-item>
           <b-dropdown-item to="/leaderboard" exact-active-class="active-link">
             {{ $t("navigation.leaderboard") }}
           </b-dropdown-item>
-          <b-dropdown-item to="/gods" exact-active-class="active-link">
+          <b-dropdown-item exact-active-class="active-link" to="/tournaments">
+            {{ $t("navigation.tournaments") }}
+          </b-dropdown-item>
+          <b-dropdown-item exact-active-class="active-link" to="/changelog">
+            {{ $t("navigation.change_log") }}
+          </b-dropdown-item>
+          <b-dropdown-item
+            v-if="isAdmin"
+            to="/gods"
+            exact-active-class="active-link"
+          >
             {{ $t("navigation.gods") }}
           </b-dropdown-item>
-          <b-dropdown-item to="/abilities" exact-active-class="active-link">
+          <b-dropdown-item
+            v-if="isAdmin"
+            to="/abilities"
+            exact-active-class="active-link"
+          >
             {{ $t("navigation.abilities") }}
           </b-dropdown-item>
         </b-nav-item-dropdown>
-        <li class="nav-item mx-2 d-none d-lg-block" v-if="!isAdmin">
-          <router-link
-            class="nav-link"
-            to="/leaderboard"
-            exact-active-class="active-link"
-          >
-            {{ $t("navigation.leaderboard") }}
-          </router-link>
-        </li>
-        <li class="nav-item mx-2 d-none d-lg-block">
-          <router-link
-            class="nav-link"
-            to="/changelog"
-            exact-active-class="active-link"
-          >
-            {{ $t("navigation.change_log") }}
-          </router-link>
-        </li>
       </ul>
       <div class="d-flex align-items-center ml-auto">
         <div class="d-flex align-items-center" v-if="!loggedIn">

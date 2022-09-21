@@ -655,12 +655,11 @@ module.exports = {
       );
       // If you're above level 50, append the rewards in that range to the list of levels
 
-      if (bp_level > 50) {
-        const levelsAbove50 = await BattlePasses.getLevelsAndRewardsPast50(
-          bp_level
-        );
-        levels.push(...levelsAbove50);
-      }
+      const targetLevel = Math.max(bp_level, 1000);
+      const levelsAbove50 = await BattlePasses.getLevelsAndRewardsPast50(
+        targetLevel
+      );
+      levels.push(...levelsAbove50);
 
       const playerLevels = levels.map((level) => {
         const claimed = claimedRewards.some(

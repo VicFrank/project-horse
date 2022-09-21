@@ -9,6 +9,7 @@ const LoginRedirect = () => import("../components/pages/misc/LoginRedirect");
 const Home = () => import("../components/pages/home/Home");
 const Credits = () => import("../components/pages/credits/Credits");
 const Changelog = () => import("../components/pages/changelog/Changelog");
+const Tournaments = () => import("../components/pages/tournaments/Tournaments");
 const Admin = () => import("../components/pages/admin/Admin");
 
 const Store = () => import("../components/pages/store/Store");
@@ -46,6 +47,7 @@ const routes = [
   { path: "/", component: Home },
   { path: "/credits", component: Credits },
   { path: "/changelog", component: Changelog },
+  { path: "/tournaments", component: Tournaments },
   {
     path: "/admin",
     component: Admin,
