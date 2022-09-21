@@ -3,7 +3,7 @@
 :root {
   --primary-color: #6248a5;
   --primary-color-dark: #24183c;
-  --primary-color-light: #2b1e49;
+  --primary-color-light: var(--primary-color-light);
   --secondary-color: #ae803b;
 }
 
@@ -801,4 +801,9 @@ td a:hover {
 .nav-link.active {
   background-color: black !important;
   color: white !important;
+}
+
+.btn-primary {
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color-dark) !important;
 }

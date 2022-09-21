@@ -20,7 +20,14 @@
             <tr>
               <td class="text-left">Season 1 Tournament</td>
               <td class="text-left">September 28, 2022</td>
-              <td class="text-left"></td>
+              <td class="text-left">
+                <b-button
+                  href="https://www.communitygaming.io/tournament/ability-arena-1"
+                  target="_blank"
+                  variant="primary"
+                  v-t="'tournaments.sign_up'"
+                ></b-button>
+              </td>
             </tr>
           </tbody>
         </table>
