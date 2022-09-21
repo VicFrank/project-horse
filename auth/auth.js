@@ -23,7 +23,7 @@ const isProdClient = (req) => {
   const serverKey3 = req.params.server_key;
   const serverKey4 = req.query.server_key;
   const prodDedicatedServerKey = process.env.IS_PRODUCTION
-    ? keys.dedicatedServerKey
+    ? keys.prodDedicatedServerKey
     : keys.toolsKey;
 
   return (
