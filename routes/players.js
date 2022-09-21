@@ -357,7 +357,7 @@ router.get("/:steamID/cosmetics", async (req, res) => {
     const steamID = req.params.steamID;
     const filter = req.query.filter;
     const onlyEquipped = filter === "equipped";
-    const player = await players.getPlayer(steamID);
+    let player = await players.getPlayer(steamID);
     // If an admin gets a player that doesn't exist, create it
     if (!player && auth.isAuthenticatedUser(req)) {
       await players.upsertPlayer(steamID, "placeholder");
@@ -398,7 +398,7 @@ router.post("/:steamID/cosmetics/view_type", async (req, res) => {
 router.get("/:steamID/gods", async (req, res) => {
   try {
     const steamID = req.params.steamID;
-    const player = await players.getPlayer(steamID);
+    let player = await players.getPlayer(steamID);
     // If an admin gets a player that doesn't exist, create it
     if (!player && auth.isAuthenticatedUser(req)) {
       await players.upsertPlayer(steamID, "placeholder");
@@ -478,7 +478,7 @@ router.delete(
 router.get("/:steamID/battle_pass", async (req, res) => {
   try {
     const steamID = req.params.steamID;
-    const player = await players.getPlayer(steamID);
+    let player = await players.getPlayer(steamID);
     // If an admin gets a player that doesn't exist, create it
     if (!player && auth.isAuthenticatedUser(req)) {
       await players.upsertPlayer(steamID, "placeholder");
@@ -495,7 +495,7 @@ router.get("/:steamID/battle_pass", async (req, res) => {
 router.get("/:steamID/battle_pass/levels", async (req, res) => {
   try {
     const steamID = req.params.steamID;
-    const player = await players.getPlayer(steamID);
+    let player = await players.getPlayer(steamID);
     // If an admin gets a player that doesn't exist, create it
     if (!player && auth.isAuthenticatedUser(req)) {
       await players.upsertPlayer(steamID, "placeholder");
