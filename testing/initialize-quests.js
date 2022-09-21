@@ -79,7 +79,7 @@ async function InitializeWelcomeQuests() {
 
 (async function () {
   // await InitializeQuests();
-  // await InitializeLoginQuests();
-  // await InitializeWelcomeQuests();
+  await InitializeLoginQuests();
+  await InitializeWelcomeQuests();
   // await InitializeDailyQuests();
 })();
