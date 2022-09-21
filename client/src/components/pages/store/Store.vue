@@ -329,7 +329,7 @@ export default {
   /* margin-top: 50px; */
   text-align: center;
   margin-bottom: 120px;
-  box-shadow: 0 0 15px 0 #457296;
+  box-shadow: 0 0 15px 0 #724596;
   width: 200px;
 }
 
@@ -387,7 +387,7 @@ export default {
 .sale {
   text-align: center;
   margin: 0 auto 40px;
-  box-shadow: 0 0 15px 0 #457296;
+  box-shadow: 0 0 15px 0 #784596;
 
   width: 300px;
 }

@@ -658,7 +658,7 @@ td a:hover {
 .cosmetic:hover .cosmetic__price {
   transition: 0.25s ease-in-out;
 
-  box-shadow: 0 0 35px 0 #457296;
+  box-shadow: 0 0 35px 0 #684596;
 }
 
 .cosmetic:hover .cosmetic__descr:after {
@@ -675,7 +675,7 @@ td a:hover {
   color: var(--primary-color);
   font-family: "Radiance-Semibold";
   border-radius: 15px;
-  background-color: #212e3a;
+  background-color: #36213a;
 }
 
 .cosmetic__picture {

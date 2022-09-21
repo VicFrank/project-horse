@@ -1598,23 +1598,22 @@ module.exports = {
           const numOpened = loggedGods.filter(
             (log) => log.log_data.cosmeticName === drop.cosmetic_name
           ).length;
+          console.log(numOpened);
 
           if (numOpened >= 10) {
             const goldenGod = await Cosmetics.getCosmeticByName(
               `gold_${drop.cosmetic_name}`
             );
+            console.log(goldenGod);
             if (!this.hasCosmetic(steamID, goldenGod.cosmetic_id)) {
               return { items: { [goldenGod.cosmetic_id]: 1 } };
             } else {
-              return { coins: chest.cost_coins / 4 };
+              return { missed_item: drop, coins: chest.cost_coins / 4 };
             }
           } else if (numOpened === 1) {
             return { items: { [drop.cosmetic_id]: 1 } };
           } else {
-            return {
-              missed_item: drop,
-              coins: chest.cost_coins / 4,
-            };
+            return { missed_item: drop, coins: chest.cost_coins / 4 };
           }
         } catch (error) {
           throw error;

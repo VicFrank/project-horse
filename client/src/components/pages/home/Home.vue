@@ -5,7 +5,7 @@
       <div class="trailer">
         <b-embed
           type="iframe"
-          src="https://www.youtube.com/embed/xhj96SqA2wE"
+          src="https://www.youtube.com/embed/oDb75RQT5Z8"
           allowfullscreen
         ></b-embed>
       </div>
