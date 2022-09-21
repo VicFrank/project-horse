@@ -30,7 +30,7 @@
       >
         <div v-if="quest.claimed" class="overlay"></div>
         <div v-if="quest.coin_reward > 0" class="quest-xp-text text-center p-3">
-          {{ quest.coin_reward }} Coins
+          {{ quest.coin_reward }} {{ $t("common.coins") }}
         </div>
         <img
           style="height: 115px; width: 100%; object-fit: cover"

@@ -48,7 +48,7 @@
       <div class="text-center">
         <img
           src="/images/coin1.png"
-          alt="coins"
+          alt="Gold"
           class="coins-image"
           style="width: 20px; height: 20px"
         />

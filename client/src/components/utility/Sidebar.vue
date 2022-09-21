@@ -50,7 +50,7 @@
         </div>
 
         <div class="d-flex justify-content-center align-items-center mt-1">
-          <img src="/images/coin1.png" class="coins-img" alt="Coins" />
+          <img src="/images/coin1.png" class="coins-img" alt="Gold" />
           {{ coins.toLocaleString() }}
         </div>
 

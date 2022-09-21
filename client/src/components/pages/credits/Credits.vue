@@ -5,7 +5,7 @@
       <ul class="text-center" style="list-style-type: none">
         <li>
           <span class="name">SUNSfan</span> - Project Lead (<a
-            href="mailto:sunsfan@sunsfan.gg"
+            href="mailto:contact@abilityarena.com"
             target="_blank"
             >{{ $t("credits.contact") }}</a
           >)

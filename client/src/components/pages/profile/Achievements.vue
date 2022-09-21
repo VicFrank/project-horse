@@ -25,7 +25,7 @@
               </div>
               <div class="rewards">
                 <p v-if="quest.coin_reward > 0" class="pog-text">
-                  {{ quest.coin_reward }} COINS
+                  {{ quest.coin_reward }} GOLD
                 </p>
                 <p class="quest-xp-text">{{ quest.xp_reward }} XP</p>
               </div>

@@ -66,7 +66,8 @@
                 <div class="cosmetic__price">
                   <span class="cosmetic-price">
                     <template v-if="cosmetic.cost_coins > 0">
-                      {{ cosmetic.cost_coins.toLocaleString() }} Coins
+                      {{ cosmetic.cost_coins.toLocaleString() }}
+                      {{ $t("common.coins") }}
                     </template>
                     <template v-else>${{ cosmetic.cost_usd }}</template>
                   </span>
@@ -88,7 +89,7 @@
               </div>
               <p class="text-center">
                 <template v-if="cosmetic.cost_coins > 0">
-                  {{ cosmetic.cost_coins }} Coins
+                  {{ cosmetic.cost_coins }} {{ $t("common.coins") }}
                 </template>
                 <template v-else>${{ cosmetic.cost_usd }}</template>
               </p>

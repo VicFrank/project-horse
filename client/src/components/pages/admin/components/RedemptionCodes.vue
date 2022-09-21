@@ -31,11 +31,11 @@
           placeholder="Enter the code"
         ></b-form-input>
       </b-form-group>
-      <b-form-group id="input-group-2" label="Coins" label-for="input-2">
+      <b-form-group id="input-group-2" label="Gold" label-for="input-2">
         <b-form-input
           type="number"
           v-model="newCode.coins"
-          placeholder="Coins"
+          placeholder="Gold"
           class="mt-3"
         ></b-form-input>
       </b-form-group>

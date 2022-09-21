@@ -31,7 +31,7 @@
         <b-list-group flush>
           <b-list-group-item>
             <b-button v-b-modal.modal-1 variant="success" size="sm">+</b-button>
-            Coins <span class="text-muted">{{ playerData.coins }}</span>
+            Gold <span class="text-muted">{{ playerData.coins }}</span>
             <b-modal id="modal-1" title="Give Coins" @ok="giveCoins">
               <b-form-input type="number" v-model="coins"></b-form-input>
             </b-modal>

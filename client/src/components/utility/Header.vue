@@ -104,7 +104,7 @@
             to="/store"
             exact-active-class="active-link"
           >
-            <img src="/images/coin1.png" class="coins-img" alt="Coins" />
+            <img src="/images/coin1.png" class="coins-img" alt="Gold" />
             {{ $t("navigation.store") }}
           </router-link>
         </li>
