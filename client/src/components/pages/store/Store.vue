@@ -8,7 +8,11 @@
             v-if="cosmetics.length > 0"
             :to="getCheckoutLink('buy_bp')"
           >
-            <img src="/images/cosmetics/buy_bp.png" alt="Battle Pass Shop" />
+            <img
+              src="/images/cosmetics/buy_bp.png"
+              alt="Buy Battle Pass"
+              class="preview-image"
+            />
           </router-link>
           <div class="overlay">
             <h3>Battle Pass</h3>
@@ -21,7 +25,8 @@
           >
             <img
               src="/images/cosmetics/plus_year_package.png"
-              alt="Battle Pass Shop"
+              alt="Buy Plus Year Package"
+              class="preview-image"
             />
           </router-link>
           <div class="overlay">
@@ -168,6 +173,10 @@ export default {
     currentCosmetic: {},
     cosmetics: [],
     shopCosmetics: [],
+    sortPriorities: {
+      "Card Frame": 1,
+      Chest: 2,
+    },
   }),
 
   computed: {
@@ -223,6 +232,12 @@ export default {
             (cosmetic) => cosmetic.cost_coins > 0 || cosmetic.cost_usd > 0
           )
           .sort((c1, c2) => {
+            // order as battlepass, plus, gods, chests
+            const c1Type = this.sortPriorities[c1.cosmetic_type] || 3;
+            const c2Type = this.sortPriorities[c2.cosmetic_type] || 3;
+            if (c1Type !== c2Type) {
+              return c1Type - c2Type;
+            }
             const c1Start = c1.cosmetic_name.slice(0, 5);
             const c2Start = c2.cosmetic_name.slice(0, 5);
             if (c1Start !== c2Start) {
@@ -298,10 +313,8 @@ export default {
 }
 
 .preview-image {
-  width: 200px;
-  height: 200px;
-  display: block;
-  margin: auto;
+  width: auto;
+  height: 300px;
 }
 
 .featured {
