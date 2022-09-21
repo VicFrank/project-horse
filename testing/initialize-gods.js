@@ -29,5 +29,5 @@ async function InitializeGods() {
 }
 
 (async function () {
-  await InitializeGods();
+  // await InitializeGods();
 })();
