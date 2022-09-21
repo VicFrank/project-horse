@@ -35,19 +35,7 @@ const isProdClient = (req) => {
 };
 
 function checkServerKey(req) {
-  const serverKey = req.body.server_key;
-  const serverKey2 = req.get("server_key");
-  const serverKey3 = req.params.server_key;
-  const serverKey4 = req.query.server_key;
-
-  return (
-    serverKey === "Invalid_NotOnDedicatedServer" ||
-    serverKey2 === "Invalid_NotOnDedicatedServer" ||
-    serverKey3 === "Invalid_NotOnDedicatedServer" ||
-    serverKey4 === "Invalid_NotOnDedicatedServer" ||
-    isTestClient(req) ||
-    isProdClient(req)
-  );
+  return isTestClient(req) || isProdClient(req);
 }
 
 function checkUserAuth(req) {
