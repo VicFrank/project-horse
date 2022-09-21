@@ -11,11 +11,11 @@
             <img
               src="/images/cosmetics/buy_bp.png"
               alt="Buy Battle Pass"
-              class="preview-image"
+              class="promoted"
             />
           </router-link>
           <div class="overlay">
-            <h3>Battle Pass</h3>
+            <h3 v-t="'cosmetics.buy_bp'"></h3>
           </div>
         </div>
         <div class="sale">
@@ -26,11 +26,11 @@
             <img
               src="/images/cosmetics/plus_year_package.png"
               alt="Buy Plus Year Package"
-              class="preview-image"
+              class="promoted"
             />
           </router-link>
           <div class="overlay">
-            <h3>Upgrade to Plus</h3>
+            <h3 v-t="'cosmetics.plus_year_package'"></h3>
           </div>
         </div>
       </div>
@@ -312,9 +312,16 @@ export default {
   cursor: pointer;
 }
 
-.preview-image {
+.promoted {
   width: auto;
   height: 300px;
+}
+
+.preview-image {
+  width: 200px;
+  height: 200px;
+  display: block;
+  margin: auto;
 }
 
 .featured {
