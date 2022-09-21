@@ -1178,6 +1178,12 @@ module.exports = {
   async hasCosmetic(steamID, cosmeticID) {
     try {
       const allCosmetics = await this.getCosmetics(steamID);
+      console.log(allCosmetics.filter((c) => c.cosmetic_id == cosmeticID));
+      console.log(
+        `${steamID} has cosmetic ${cosmeticID} : ${allCosmetics.some(
+          (cosmetic) => cosmetic.cosmetic_id === cosmeticID
+        )}`
+      );
       return allCosmetics.some(
         (cosmetic) => cosmetic.cosmetic_id == cosmeticID
       );
