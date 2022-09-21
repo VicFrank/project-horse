@@ -160,7 +160,7 @@
             <a
               role="button"
               tabindex="0"
-              href="#"
+              href="https://steamcommunity.com/sharedfiles/filedetails/?id=2865676075"
               target="_blank"
               class="d-none d-md-flex mr-3 play-button btn"
               style="background-image: url('/images/site/play_button_pink.png')"

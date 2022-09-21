@@ -17,8 +17,9 @@
 
     <div class="row">
       <b-button
+        style="background-color: #6248a5; border-color: #2b1e49"
         class="mx-auto"
-        href="#"
+        href="https://steamcommunity.com/sharedfiles/filedetails/?id=2865676075"
         target="_blank"
         variant="primary"
         v-t="'navigation.play_now'"
