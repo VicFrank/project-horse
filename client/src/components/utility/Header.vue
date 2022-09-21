@@ -169,16 +169,48 @@
         </div>
         <div class="d-flex" style="list-style: none" v-if="loggedIn">
           <b-nav-item-dropdown class="username-dropdown" v-if="loggedIn">
-            <template #button-content
-              ><img
+            <template #button-content>
+              <img
                 :src="profilePicture"
                 class="profile-picture"
                 alt="Profile Picture"
-              />{{ username }}</template
+              />{{ username }}
+            </template>
+            <div
+              class="d-flex justify-content-center align-items-center mx-auto"
+              style="width: 75%"
             >
+              <div class="d-flex align-items-center">
+                <img
+                  v-if="bpUpgraded"
+                  src="/images/battlepass_logo.png"
+                  alt="Battle Pass"
+                  class="profile-image"
+                />
+                <span class="custom-badge">{{ bpLevel }}</span>
+              </div>
+              <img
+                src="/images/cosmetics/plus.png"
+                class="profile-image ml-3"
+                alt="Plus Badge"
+                v-b-tooltip.hover
+                :title="`Plus Expires ${plusExpiration}`"
+              />
+            </div>
+            <div class="row">
+              <ProgressBar
+                class="bp-progress my-1"
+                :progress="progress"
+                :required="required"
+              />
+            </div>
+            <div class="d-flex justify-content-center align-items-center mt-1">
+              <img src="/images/coin1.png" class="coins-img" alt="Gold" />
+              {{ coins.toLocaleString() }}
+            </div>
             <a
               href="/api/auth/logout"
-              class="btn sign-out-button"
+              class="btn sign-out-button mt-3"
               variant="outline-primary"
               v-t="'navigation.sign_out'"
             ></a>
@@ -191,10 +223,16 @@
 
 <script>
 import LoginButton from "./LoginButton";
+import ProgressBar from "./ProgressBar";
+
+import dayjs from "dayjs";
+const relativeTime = require("dayjs/plugin/relativeTime");
+dayjs.extend(relativeTime);
 
 export default {
   components: {
     LoginButton,
+    ProgressBar,
   },
 
   data: () => ({ langs: ["en", "ru", "cn"], selected: null }),
@@ -235,6 +273,29 @@ export default {
       const { questsToClaim, unopenedChests, unclaimedBPRewards } =
         this.$store.state.auth;
       return questsToClaim + unopenedChests + unclaimedBPRewards;
+    },
+    // economy info stuff
+    coins() {
+      return this.$store.getters.coins;
+    },
+    bpLevel() {
+      return this.$store.getters.bpLevel;
+    },
+    bpUpgraded() {
+      return this.$store.getters.bpUpgraded;
+    },
+    hasPlus() {
+      return this.$store.getters.hasPlus;
+    },
+    required() {
+      return this.$store.getters.bpLevelRequired;
+    },
+    progress() {
+      return this.$store.getters.bpLevelProgress;
+    },
+    plusExpiration() {
+      const expiration = this.$store.state.auth.plusExpiration;
+      return dayjs(expiration).fromNow();
     },
   },
 };
@@ -279,5 +340,15 @@ export default {
   width: 16px;
   height: 16px;
   margin-bottom: 2px;
+}
+
+.bp-progress {
+  margin: auto;
+  width: 75%;
+}
+
+.profile-image {
+  height: 32px;
+  width: auto;
 }
 </style>
