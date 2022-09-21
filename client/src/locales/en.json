@@ -128,6 +128,18 @@
     "bp_sellout_link": "BP Accelerator",
     "reset_in": "Resets in"
   },
+  "cosmetic_types": {
+    "Avatar Frame": "Avatar Frame",
+    "Avatar Hat": "Avatar Hat",
+    "Avatar Accessory": "Avatar Accessory",
+    "Consumable": "Consumable",
+    "Game Consumable": "Consumable",
+    "Finisher": "Finisher",
+    "Terrain": "Terrain",
+    "Chest": "Chest",
+    "Name Color": "Name Color",
+    "Card Frame": "God"
+  },
   "cosmetics": {
     "Chest": "Chest",
     "Avatar": "Avatar",
@@ -342,7 +354,7 @@
     "gold_200000": "Activate to gain more Gold!",
     "card_pudge": "Permanently Unlocks Pudge",
     "card_dazzle": "Permanently Unlocks Dazzle",
-    "card_shopkeeper": "Permanently Unlocks Shopkeeper",
+    "card_shopkeeper": "Permanently Unlocks Shopkeeper as a God. All Gods are subject to future balance changes.",
     "card_brewmaster": "Permanently Unlocks Brewmaster",
     "card_nimbus": "Permanently Unlocks Nimbus",
     "card_legion": "Permanently Unlocks Legion Commander",
@@ -359,7 +371,7 @@
     "card_bloodseeker": "Permanently Unlocks Bloodseeker",
     "card_centaur": "Permanently Unlocks Centaur",
     "card_icefrog": "Permanently Unlocks Icefrog",
-    "card_tinker": "Permanently Unlocks Tinker",
+    "card_tinker": "Permanently Unlocks Tinker.  All Gods are subject to future balance changes.",
     "card_tome": "Permanently Unlocks Tome God",
     "card_jmuy": "Permanently Unlocks J'Muy the Wise",
     "card_selemene": "Permanently Unlocks Selemene",

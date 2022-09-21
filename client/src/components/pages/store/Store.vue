@@ -66,7 +66,7 @@
                   {{ $t(`cosmetics.${cosmetic.cosmetic_name}`) }}
                 </div>
                 <div class="text-muted">
-                  {{ cosmetic.cosmetic_type }}
+                  {{ $t(`cosmetic_types.${cosmetic.cosmetic_type}`) }}
                 </div>
                 <div class="cosmetic__price">
                   <span class="cosmetic-price">
@@ -90,7 +90,7 @@
                 {{ $t(`cosmetics.${cosmetic.cosmetic_name}`) }}
               </p>
               <div class="text-center text-muted mb-3">
-                {{ cosmetic.cosmetic_type }}
+                {{ $t(`cosmetic_types.${cosmetic.cosmetic_type}`) }}
               </div>
               <p class="text-center">
                 <template v-if="cosmetic.cost_coins > 0">
@@ -105,7 +105,7 @@
                   :alt="cosmetic.cosmetic_name"
                 />
               </div>
-              <CosmeticDescription :cosmetic="cosmetic" />
+              <CosmeticDescription :cosmetic="cosmetic" class="mt-4" />
               <div v-if="loggedIn" class="mt-4 d-flex justify-content-end">
                 <b-button
                   class="mr-2"
