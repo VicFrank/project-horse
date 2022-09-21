@@ -27,11 +27,11 @@ router.get("/:steamID", async (req, res) => {
     const steamID = req.params.steamID;
     let player = await players.getPlayer(steamID);
     // If an admin gets a player that doesn't exist, create it
-    if (!player) {
+    if (!player && auth.isAuthenticatedUser(req)) {
       await players.upsertPlayer(steamID, "placeholder");
       player = await players.getPlayer(steamID);
     }
-    // if (!auth.isAuthenticatedUser(req)) delete player.mmr;
+    if (!auth.isAuthenticatedUser(req)) delete player.mmr;
     res.status(200).json(player);
   } catch (error) {
     console.log(error);

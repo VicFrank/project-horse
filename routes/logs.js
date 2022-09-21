@@ -13,6 +13,16 @@ router.get("/paypal", auth.adminAuth, async (req, res) => {
   }
 });
 
+router.get("/stripe", auth.adminAuth, async (req, res) => {
+  try {
+    const logs = await playerLogs.getLogsOfType("stripe");
+    res.status(201).send(logs);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.toString() });
+  }
+});
+
 router.get("/players/:steamID", auth.adminAuth, async (req, res) => {
   try {
     const steamID = req.params.steamID;
