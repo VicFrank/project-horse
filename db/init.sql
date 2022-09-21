@@ -63,6 +63,7 @@ CREATE TABLE IF NOT EXISTS games (
   ranked BOOLEAN,
   duration DOUBLE PRECISION,
   cheats_enabled BOOLEAN,
+  environment TEXT,
 
   created_at TIMESTAMPTZ DEFAULT Now(),
   end_time TIMESTAMPTZ

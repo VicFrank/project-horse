@@ -9,13 +9,14 @@ module.exports = {
   async createGamePlayer(postGamePlayerData) {
     const { matchID, steamID, username, place, god } = postGamePlayerData;
     const { rounds, endTime, heroes, team, wins, losses } = postGamePlayerData;
-    const { players, doubledown } = postGamePlayerData;
+    const { players, doubledown, isProd } = postGamePlayerData;
     let { ranked } = postGamePlayerData;
+    if (!isProd) ranked = false;
 
     if (players.length !== 8) ranked = false;
 
     try {
-      await this.upsertGame(matchID, ranked);
+      await this.upsertGame(matchID, ranked, isProd);
       const player = await Players.upsertPlayer(steamID, username);
       const currentMMR = player.mmr;
       const currentLadderMMR = player.ladder_mmr;
@@ -149,15 +150,16 @@ module.exports = {
     }
   },
 
-  async upsertGame(matchID, ranked) {
+  async upsertGame(matchID, ranked, isProd) {
+    const environment = isProd ? "prod" : "dev";
     try {
       const { rows } = await query(
-        `INSERT INTO games(game_id, ranked)
-         VALUES ($1, $2)
+        `INSERT INTO games(game_id, ranked, environment)
+         VALUES ($1, $2, $3)
          ON CONFLICT(game_id)
          DO NOTHING
          RETURNING *`,
-        [matchID, ranked]
+        [matchID, ranked, environment]
       );
       return rows[0];
     } catch (error) {

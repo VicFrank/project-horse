@@ -29,6 +29,7 @@ router.post("/players", auth.adminAuth, async (req, res) => {
   try {
     const parsedData = JSON.parse(data);
     const gameID = parsedData.matchID;
+    parsedData.isProd = auth.isProdClient(req);
     const created = await games.createGamePlayer(parsedData);
     apicache.clear(`game-${gameID}`);
     res.status(201).send({ message: `Recorded game`, ...created });
