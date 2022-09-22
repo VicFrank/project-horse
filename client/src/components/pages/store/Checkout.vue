@@ -15,9 +15,10 @@
           />
         </div>
         <div class="item-card-body">
-          <div class="mb-2 text-muted">
+          <div class="mb-2">
             {{ $t(`cosmetics.${item.cosmetic_name}`) }}
           </div>
+          <CosmeticDescription :cosmetic="item" class="mb-2 text-muted" />
           <strong>${{ item.cost_usd }}</strong>
         </div>
       </div>
@@ -64,7 +65,7 @@
         </template>
         <template v-else>
           <template v-if="validPurchase">
-            <LoginButton></LoginButton>
+            <LoginButton class="mx-auto" style="max-width: 300px"></LoginButton>
           </template>
         </template>
       </template>
@@ -80,6 +81,7 @@
 
 <script>
 import LoginButton from "../../utility/LoginButton.vue";
+import CosmeticDescription from "../cosmetics/CosmeticDescription.vue";
 import StripePurchase from "./components/StripePurchase.vue";
 import StripeAlipay from "./components/StripeAlipay.vue";
 import PaypalPurchase from "./components/PaypalPurchase.vue";
@@ -87,6 +89,7 @@ import PaypalPurchase from "./components/PaypalPurchase.vue";
 export default {
   components: {
     LoginButton,
+    CosmeticDescription,
     StripePurchase,
     StripeAlipay,
     PaypalPurchase,
@@ -198,7 +201,7 @@ export default {
 }
 
 .item-card {
-  width: 300px;
+  width: 500px;
   display: flex;
   align-items: center;
 
