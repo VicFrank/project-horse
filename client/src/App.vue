@@ -61,7 +61,7 @@ export default {
       .then((res) => res.json())
       .then((res) => {
         if (res.success) {
-          const { photos, id, isAdmin, displayName } = res.user;
+          const { photos, id, isAdmin, displayName, userType } = res.user;
 
           this.$store.commit({
             type: "SET_USER",
@@ -69,6 +69,7 @@ export default {
             username: displayName,
             picture: photos[2].value,
             isAdmin,
+            userType,
           });
 
           this.$store.dispatch("REFRESH_PLAYER");

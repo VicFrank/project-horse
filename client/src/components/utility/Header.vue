@@ -137,14 +137,14 @@
             {{ $t("navigation.change_log") }}
           </b-dropdown-item>
           <b-dropdown-item
-            v-if="isAdmin"
+            v-if="canSeeStats"
             to="/gods"
             exact-active-class="active-link"
           >
             {{ $t("navigation.gods") }}
           </b-dropdown-item>
           <b-dropdown-item
-            v-if="isAdmin"
+            v-if="canSeeStats"
             to="/abilities"
             exact-active-class="active-link"
           >
@@ -301,6 +301,12 @@ export default {
     },
     isAdmin() {
       return this.$store.getters.isAdmin;
+    },
+    canSeeStats() {
+      return (
+        this.$store.getters.isAdmin ||
+        this.$store.getters.userType === "STATS_GUY"
+      );
     },
     numAchievements() {
       return this.$store.state.auth.achievementsToClaim;

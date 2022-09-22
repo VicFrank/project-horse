@@ -50,6 +50,7 @@ passport.serializeUser(async (user, next) => {
   user = {
     ...user,
     isAdmin: user_type === "ADMIN",
+    userType: user_type,
   };
 
   next(null, user);

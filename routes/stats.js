@@ -3,10 +3,11 @@ const router = express.Router();
 const gods = require("../db/gods");
 const abilities = require("../db/abilities");
 const apicache = require("apicache");
+const { statsManAuth } = require("../auth/auth");
 
 const cache = apicache.middleware;
 
-router.get("/gods", cache("1 hour"), async (req, res) => {
+router.get("/gods", statsManAuth, cache("1 hour"), async (req, res) => {
   try {
     const hours = parseInt(req.query.hours) || 720;
     const stats = await gods.getGodsStats(hours);
@@ -17,7 +18,7 @@ router.get("/gods", cache("1 hour"), async (req, res) => {
   }
 });
 
-router.get("/abilities", cache("1 hour"), async (req, res) => {
+router.get("/abilities", statsManAuth, cache("1 hour"), async (req, res) => {
   try {
     const hours = parseInt(req.query.hours) || 720;
     const stats = await abilities.getAbilityStats(hours);

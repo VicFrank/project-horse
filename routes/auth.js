@@ -129,7 +129,6 @@ router.get(
 
 // Returns if we are on test, prod, or other
 router.get("/get_client", (req, res) => {
-  const isTestClient = auth.isTestClient(req);
   if (auth.isProdClient(req)) return res.json({ client: "prod" });
   if (auth.isTestClient(req)) return res.json({ client: "test" });
   return res.json({ client: "other" });

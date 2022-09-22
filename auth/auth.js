@@ -71,6 +71,20 @@ module.exports = {
       return;
     }
   },
+  statsManAuth: function (req, res, next) {
+    if (checkServerKey(req)) {
+      return next();
+    } else if (req.user?.isAdmin) {
+      return next();
+    } else if (req.user?.userType == "STATS_GUY") {
+      return next();
+    } else {
+      res
+        .status(403)
+        .send({ message: `You are not authorized to access this data` });
+      return;
+    }
+  },
   userAuth: function (req, res, next) {
     if (checkUserAuth(req)) {
       return next();

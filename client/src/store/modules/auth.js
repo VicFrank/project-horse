@@ -26,6 +26,7 @@ const getters = {
   profilePictureLink: (state) => state.profilePictureLink,
   loggedIn: (state) => state.userSteamID !== "",
   isAdmin: (state) => state.isAdmin,
+  userType: (state) => state.userType,
   hasPlus: (state) => state.hasPlus,
   coins: (state) => state.coins,
   plus_expiration: (state) => state.plus_expiration,
@@ -43,12 +44,13 @@ const getters = {
 };
 
 const mutations = {
-  SET_USER(state, { steamID, username, picture, isAdmin }) {
+  SET_USER(state, { steamID, username, picture, isAdmin, userType }) {
     state.userSteamID = steamID;
     state.username = username;
     state.profilePictureLink = picture;
     state.loggedIn = true;
     state.isAdmin = isAdmin;
+    state.userType = userType;
   },
   LOG_OUT(state) {
     state.username = "";
@@ -62,6 +64,7 @@ const mutations = {
     {
       username,
       isAdmin,
+      userType,
       achievementsToClaim,
       questsToClaim,
       coins,
@@ -74,6 +77,7 @@ const mutations = {
     state.username = username;
     state.loggedIn = true;
     state.isAdmin = isAdmin;
+    state.userType = userType;
     state.achievementsToClaim = achievementsToClaim;
     state.questsToClaim = questsToClaim;
     state.unopenedChests = unopenedChests;
@@ -98,6 +102,7 @@ const actions = {
       .then((player) => {
         commit("SAVE_USER", {
           username: player.username,
+          userType: player.user_type,
           isAdmin: player.user_type === "ADMIN",
           achievementsToClaim: player.achievements_to_claim,
           questsToClaim: player.unclaimed_quests,
