@@ -114,13 +114,6 @@
                   >{{ $t("armory.cancel") }}</b-button
                 >
                 <b-button
-                  v-if="coins < cosmetic.cost_coins"
-                  class="mr-2"
-                  variant="primary"
-                  to="/coins"
-                  >{{ $t("store.get_more_coins") }}</b-button
-                >
-                <b-button
                   v-if="cosmetic.cost_usd > 0"
                   class="mr-2"
                   variant="primary"
