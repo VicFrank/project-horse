@@ -1,7 +1,10 @@
 <template>
   <header
     id="main-nav"
-    style="background-image: url('/images/site/top_nav_bg.png')"
+    style="
+      background-image: url('/images/site/top_nav_bg.png');
+      background-repeat: no-repeat;
+    "
   >
     <nav class="navbar navbar-expand-lg">
       <div class="d-flex align-items-center">
@@ -218,7 +221,6 @@
                     alt="Battle Pass"
                     :class="{ 'profile-image': true, disabled: !bpUpgraded }"
                   />
-                  <span class="custom-badge text-center">{{ bpLevel }}</span>
                 </div>
                 <img
                   src="/images/cosmetics/plus.png"
@@ -236,6 +238,7 @@
                   }"
                 />
               </div>
+              <div class="custom-badge text-center mt-1">{{ bpLevel }}</div>
               <div class="row">
                 <ProgressBar
                   class="bp-progress my-1"
