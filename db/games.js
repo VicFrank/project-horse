@@ -253,39 +253,51 @@ module.exports = {
         [gameID]
       );
 
-      for (const player of gamePlayers) {
-        // heroes
-        const { rows: gamePlayerHeroes } = await query(
-          `
-            SELECT h.hero_name, h.tier, game_player_hero_id
-            FROM game_player_heroes AS h
-            WHERE game_player_id = $1
-          `,
-          [player.game_player_id]
-        );
-        delete player.game_player_id;
+      const { rows: heroAbilities } = await query(
+        `
+        SELECT ha.ability_level, ha.slot_index, a.*, gph.game_player_hero_id
+        FROM game_players
+        JOIN game_player_heroes as gph USING (game_player_id)
+        JOIN hero_abilities AS ha USING (game_player_hero_id)
+        JOIN abilities AS a USING (ability_name)
+        WHERE game_id = $1;
+        `,
+        [gameID]
+      );
 
-        for (const hero of gamePlayerHeroes) {
-          // abilities
-          const { rows: heroAbilities } = await query(
+      const setGamePlayerHeroes = async (player) => {
+        try {
+          const { rows: gamePlayerHeroes } = await query(
             `
-              SELECT ha.ability_level, ha.slot_index, a.*
-              FROM hero_abilities AS ha
-              JOIN abilities AS a
-              USING (ability_name)
-              WHERE game_player_hero_id = $1
+              SELECT h.hero_name, h.tier, game_player_hero_id
+              FROM game_player_heroes AS h
+              WHERE game_player_id = $1
             `,
-            [hero.game_player_hero_id]
+            [player.game_player_id]
           );
-          delete hero.game_player_hero_id;
+          for (const hero of gamePlayerHeroes) {
+            const abilities = heroAbilities.filter(
+              (ability) =>
+                ability.game_player_hero_id === hero.game_player_hero_id
+            );
+            delete hero.game_player_hero_id;
+            hero.abilities = abilities;
+          }
 
-          hero.abilities = heroAbilities;
+          player.heroes = gamePlayerHeroes;
+          player.badge = mmr.getRankBadge(player.mmr);
+          player.pips = mmr.getRankPips(player.mmr);
+        } catch (error) {
+          throw error;
         }
+      };
 
-        player.heroes = gamePlayerHeroes;
-        player.badge = mmr.getRankBadge(player.mmr);
-        player.pips = mmr.getRankPips(player.mmr);
+      const promises = [];
+      for (const player of gamePlayers) {
+        promises.push(setGamePlayerHeroes(player));
       }
+
+      await Promise.all(promises);
 
       // // Rounds
       // const { rows: combatResults } = await query(
