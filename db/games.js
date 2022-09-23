@@ -125,26 +125,26 @@ module.exports = {
         [duration, rounds, cheatsEnabled, matchID]
       );
 
-      for (const round of roundResults) {
-        for (const combat of round.combatResults) {
-          const { rows: combatResultRows } = await query(
-            `INSERT INTO combat_results(game_id, round_number, duration)
-             VALUES ($1, $2, $3)
-             RETURNING *`,
-            [matchID, round.round, round.duration]
-          );
-          const combatResultId = combatResultRows[0].combat_results_id;
+      // for (const round of roundResults) {
+      //   for (const combat of round.combatResults) {
+      //     const { rows: combatResultRows } = await query(
+      //       `INSERT INTO combat_results(game_id, round_number, duration)
+      //        VALUES ($1, $2, $3)
+      //        RETURNING *`,
+      //       [matchID, round.round, round.duration]
+      //     );
+      //     const combatResultId = combatResultRows[0].combat_results_id;
 
-          for (const player of combat.participants) {
-            if (player.steamID === 0) player.steamID = player.playerID;
-            await query(
-              `INSERT INTO combat_players(combat_results_id, steam_id, damage_taken, ghost)
-               VALUES ($1, $2, $3, $4)`,
-              [combatResultId, player.steamID, player.damageTaken, player.ghost]
-            );
-          }
-        }
-      }
+      //     for (const player of combat.participants) {
+      //       if (player.steamID === 0) player.steamID = player.playerID;
+      //       await query(
+      //         `INSERT INTO combat_players(combat_results_id, steam_id, damage_taken, ghost)
+      //          VALUES ($1, $2, $3, $4)`,
+      //         [combatResultId, player.steamID, player.damageTaken, player.ghost]
+      //       );
+      //     }
+      //   }
+      // }
     } catch (error) {
       throw error;
     }
