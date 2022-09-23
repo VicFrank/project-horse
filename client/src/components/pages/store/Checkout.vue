@@ -205,7 +205,8 @@ export default {
   display: flex;
   align-items: center;
 
-  background-color: #f5f5f5;
+  background-color: var(--primary-color-light);
+  color: white;
   border-radius: 5px;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
   margin: auto;
@@ -222,6 +223,10 @@ export default {
 .item-card-body {
   width: 100%;
   text-align: right;
-  color: #333;
+  color: white;
+}
+
+.text-muted {
+  color: #a493d2 !important;
 }
 </style>
