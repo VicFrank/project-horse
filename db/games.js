@@ -98,10 +98,6 @@ module.exports = {
       const newBadge = mmr.getRankBadge(currentLadderMMR + ladderRatingChange);
       const badgeChange = newBadge !== oldBadge ? newBadge : null;
 
-      console.log(
-        `Pips Change ${newPips - oldPips}, Badge Change ${badgeChange}`
-      );
-
       return {
         ...gamePlayer,
         pips_change: newPips - oldPips,
