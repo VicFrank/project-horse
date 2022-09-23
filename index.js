@@ -81,9 +81,9 @@ const sess = {
   secret: keys.sessionKey,
   name: "id",
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie: {
-    maxAge: 2592000000,
+    maxAge: 2592000000, // 30 days
   },
 };
 
