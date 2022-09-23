@@ -31,7 +31,7 @@
             <div v-if="!quest.claimed" class="quest-rewards">
               <span v-if="quest.coin_reward > 0" class="pog-text mr-1">
                 <img class="coin" src="/images/coin1.png" alt="Gold" />
-                {{ quest.coin_reward }} {{ $t("common.coins") }}
+                {{ quest.coin_reward }}
               </span>
               <span v-if="quest.xp_reward > 0" class="quest-xp-text"
                 >{{ quest.xp_reward }} {{ $t("common.xp") }}</span
@@ -60,6 +60,11 @@
               <a class="mr-3 reroll-button-inactive">
                 <img src="./reroll.svg" alt="Reroll" />
               </a>
+            </template>
+            <template v-else-if="quest.claimed">
+              <span class="ml-auto mr-2 next-quest-text">{{
+                getTimeUntilNextQuest(quest.created)
+              }}</span>
             </template>
           </div>
         </div>
@@ -94,6 +99,10 @@ export default {
     getTimeUntilReroll(created) {
       const time = dayjs(created).add(24, "hours").fromNow();
       return `Can refresh ${time}`;
+    },
+    getTimeUntilNextQuest(created) {
+      const time = dayjs(created).add(24, "hours").fromNow();
+      return `New Quest ${time}`;
     },
     getDailyQuests() {
       // time request
