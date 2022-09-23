@@ -287,49 +287,49 @@ module.exports = {
         player.pips = mmr.getRankPips(player.mmr);
       }
 
-      // Rounds
-      const { rows: combatResults } = await query(
-        `
-          SELECT combat_results_id, duration, round_number FROM combat_results
-          WHERE game_id = $1
-        `,
-        [gameID]
-      );
+      // // Rounds
+      // const { rows: combatResults } = await query(
+      //   `
+      //     SELECT combat_results_id, duration, round_number FROM combat_results
+      //     WHERE game_id = $1
+      //   `,
+      //   [gameID]
+      // );
 
-      for (const combat of combatResults) {
-        const { rows: combatPlayers } = await query(
-          `
-            SELECT steam_id, damage_taken, ghost FROM combat_players
-            WHERE combat_results_id = $1
-          `,
-          [combat.combat_results_id]
-        );
-        delete combat.combat_results_id;
+      // for (const combat of combatResults) {
+      //   const { rows: combatPlayers } = await query(
+      //     `
+      //       SELECT steam_id, damage_taken, ghost FROM combat_players
+      //       WHERE combat_results_id = $1
+      //     `,
+      //     [combat.combat_results_id]
+      //   );
+      //   delete combat.combat_results_id;
 
-        combat.participants = combatPlayers;
-      }
+      //   combat.participants = combatPlayers;
+      // }
 
-      // get all unique round numbers from combats
-      const roundNumbers = combatResults.map((combat) => combat.round_number);
-      const uniqueRoundNumbers = [...new Set(roundNumbers)].sort();
+      // // get all unique round numbers from combats
+      // const roundNumbers = combatResults.map((combat) => combat.round_number);
+      // const uniqueRoundNumbers = [...new Set(roundNumbers)].sort();
 
-      const rounds = [];
+      // const rounds = [];
 
-      for (const roundNumber of uniqueRoundNumbers) {
-        const round = {
-          round: roundNumber,
-          combatResults: combatResults
-            .filter((result) => result.round_number === roundNumber)
-            .map(({ round_number, ...result }) => result),
-        };
+      // for (const roundNumber of uniqueRoundNumbers) {
+      //   const round = {
+      //     round: roundNumber,
+      //     combatResults: combatResults
+      //       .filter((result) => result.round_number === roundNumber)
+      //       .map(({ round_number, ...result }) => result),
+      //   };
 
-        rounds.push(round);
-      }
+      //   rounds.push(round);
+      // }
 
       return {
         ...game,
         players: gamePlayers,
-        rounds: rounds,
+        // rounds: rounds,
       };
     } catch (error) {
       throw error;
