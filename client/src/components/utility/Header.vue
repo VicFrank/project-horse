@@ -136,6 +136,9 @@
           <b-dropdown-item exact-active-class="active-link" to="/changelog">
             {{ $t("navigation.change_log") }}
           </b-dropdown-item>
+          <b-dropdown-item exact-active-class="active-link" to="/faq">
+            {{ $t("navigation.faq") }}
+          </b-dropdown-item>
           <b-dropdown-item
             v-if="canSeeStats"
             to="/gods"

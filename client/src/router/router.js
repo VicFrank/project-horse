@@ -8,6 +8,7 @@ const LoginRedirect = () => import("../components/pages/misc/LoginRedirect");
 
 const Home = () => import("../components/pages/home/Home");
 const Credits = () => import("../components/pages/credits/Credits");
+const FAQ = () => import("../components/pages/faq/Faq");
 const Changelog = () => import("../components/pages/changelog/Changelog");
 const Tournaments = () => import("../components/pages/tournaments/Tournaments");
 const Admin = () => import("../components/pages/admin/Admin");
@@ -46,6 +47,7 @@ const routes = [
   { path: "*", redirect: "/404" },
   { path: "/", component: Home },
   { path: "/credits", component: Credits },
+  { path: "/faq", component: FAQ },
   { path: "/changelog", component: Changelog },
   { path: "/tournaments", component: Tournaments },
   {
