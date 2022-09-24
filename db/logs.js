@@ -38,7 +38,7 @@ module.exports = {
       WHERE log_event = 'paypal'
       ORDER BY log_time DESC
       `;
-      const { rows } = await query(sql_query, [type]);
+      const { rows } = await query(sql_query);
       return rows;
     } catch (error) {
       throw error;
@@ -68,7 +68,7 @@ module.exports = {
       WHERE log_event = 'stripe'
       ORDER BY log_time DESC;
       `;
-      const { rows } = await query(sql_query, [type]);
+      const { rows } = await query(sql_query);
       return rows;
     } catch (error) {
       throw error;
