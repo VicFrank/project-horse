@@ -52,7 +52,7 @@ module.exports = {
       FROM player_logs
       WHERE log_event = 'paypal';
       `;
-      const { rows } = await query(sql_query, [type]);
+      const { rows } = await query(sql_query);
       return rows[0].net_amount;
     } catch (error) {
       throw error;
