@@ -3,20 +3,19 @@ const router = express.Router();
 const auth = require("../auth/auth");
 const playerLogs = require("../db/logs");
 
-router.get("/paypal", auth.adminAuth, async (req, res) => {
+router.get("/payments", auth.adminAuth, async (req, res) => {
   try {
-    const logs = await playerLogs.getLogsOfType("paypal");
-    res.status(201).send(logs);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: error.toString() });
-  }
-});
-
-router.get("/stripe", auth.adminAuth, async (req, res) => {
-  try {
-    const logs = await playerLogs.getLogsOfType("stripe");
-    res.status(201).send(logs);
+    const totalPaypalAmount = await playerLogs.getTotalPaypalPayments();
+    const paypalPayments = await playerLogs.getPaypalPayments();
+    const stripePayments = await playerLogs.getStripePayments();
+    const totalStripePayments = await playerLogs.getTotalStripePayments();
+    const result = {
+      paypalTotal: totalPaypalAmount,
+      stripeTotal: totalStripePayments,
+      paypalPayments: paypalPayments,
+      stripePayments: stripePayments,
+    };
+    res.status(201).send(result);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: error.toString() });

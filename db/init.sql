@@ -273,6 +273,7 @@ CREATE TABLE IF NOT EXISTS welcome_quests (
   xp_reward INTEGER DEFAULT 0,
   cosmetic_id INTEGER REFERENCES cosmetics (cosmetic_id)
 );
+CREATE INDEX "IDX_welcome_quests_day" ON welcome_quests(day);
 
 DROP TABLE IF EXISTS player_welcome_quests CASCADE;
 CREATE TABLE IF NOT EXISTS player_welcome_quests (
