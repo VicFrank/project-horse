@@ -868,14 +868,14 @@ module.exports = {
   async givePostGameRewards(steamID, placement) {
     try {
       const rewards = {
-        1: { xp: 200, coins: 50 },
-        2: { xp: 180, coins: 30 },
-        3: { xp: 120, coins: 20 },
-        4: { xp: 90, coins: 15 },
-        5: { xp: 60, coins: 10 },
-        6: { xp: 40, coins: 7 },
-        7: { xp: 20, coins: 4 },
-        8: { xp: 10, coins: 2 },
+        1: { xp: 100, coins: 50 },
+        2: { xp: 90, coins: 30 },
+        3: { xp: 60, coins: 20 },
+        4: { xp: 45, coins: 15 },
+        5: { xp: 30, coins: 10 },
+        6: { xp: 20, coins: 7 },
+        7: { xp: 10, coins: 4 },
+        8: { xp: 5, coins: 2 },
       };
 
       const reward = rewards[placement];
