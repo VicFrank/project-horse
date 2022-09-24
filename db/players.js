@@ -89,12 +89,16 @@ module.exports = {
       player.badge = mmr.getRankBadge(player.ladder_mmr);
       player.pips = mmr.getRankPips(player.ladder_mmr);
 
-      const unopened_chests = await this.getNumUnopenedChests(steamID);
-      const unclaimed_bp_rewards = await this.getNumUnclaimedBattlepassRewards(
-        steamID
-      );
-      const unclaimed_quests = await this.getNumUnclaimedQuests(steamID);
-      const num_games = Number(await this.getNumTotalNumGames(steamID));
+      // const unopened_chests = await this.getNumUnopenedChests(steamID);
+      // const unclaimed_bp_rewards = await this.getNumUnclaimedBattlepassRewards(
+      //   steamID
+      // );
+      // const unclaimed_quests = await this.getNumUnclaimedQuests(steamID);
+      // const num_games = Number(await this.getNumTotalNumGames(steamID));
+      unopened_chests = 0;
+      unclaimed_bp_rewards = 0;
+      unclaimed_quests = 0;
+      num_games = 0;
 
       return {
         ...player,
@@ -643,6 +647,7 @@ module.exports = {
   // get all level rewards (up to 50) and if they've been claimed
   async getBattlePassLevels(steamID) {
     try {
+      return [];
       const activeBattlePass = await BattlePasses.getActiveBattlePass();
       const { bp_level, unlocked, battle_pass_id } =
         await this.getActiveBattlePass(steamID);
