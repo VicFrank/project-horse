@@ -2,6 +2,7 @@ const battlePasses = require("../db/battlepass");
 const cosmetics = require("../db/cosmetics");
 const players = require("../db/players");
 const battlePassLevels = require("./data/battle-pass-rewards");
+const { query } = require("../db/index");
 
 async function initializeBattlePass() {
   try {
@@ -64,7 +65,69 @@ async function deleteBattlePasses() {
   }
 }
 
+async function fixUninitializedPlayers() {
+  try {
+    console.log("fixing uninitialized players");
+    const { rows: unitializedPlayers } = await query(`
+      SELECT * FROM players 
+      LEFT JOIN player_battle_pass USING (steam_id)
+      WHERE battle_pass_id IS NULL LIMIT 100;`);
+
+    console.log(
+      `Found ${unitializedPlayers.length} uninitialized battle passes`
+    );
+    const battlePass = await battlePasses.getActiveBattlePass();
+    for (const player of unitializedPlayers) {
+      const { steam_id } = player;
+      await players.createBattlePass(steam_id, battlePass.battle_pass_id);
+    }
+
+    const { rows: unitializedDailyQuests } = await query(`
+    SELECT * FROM players
+    LEFT JOIN player_quests USING (steam_id)
+    WHERE quest_id IS NULL LIMIT 100;`);
+
+    console.log(
+      `Fixed ${unitializedDailyQuests.length} uninitialized daily quests`
+    );
+    for (const player of unitializedDailyQuests) {
+      const { steam_id } = player;
+      await players.createInitialDailyQuests(steam_id);
+    }
+
+    const { rows: unitializedWeeklyQuests } = await query(`
+      SELECT * FROM players
+      LEFT JOIN player_welcome_quests USING (steam_id)
+      WHERE welcome_quest_id IS NULL LIMIT 100;`);
+
+    console.log(
+      `Fixed ${unitializedWeeklyQuests.length} uninitialized weekly quests`
+    );
+    for (const player of unitializedWeeklyQuests) {
+      const { steam_id } = player;
+      await players.resetWelcomeQuests(steam_id);
+    }
+
+    const { rows: unitializedLoginQuests } = await query(`
+      SELECT * FROM players
+      LEFT JOIN player_login_quests USING (steam_id)
+      WHERE login_quest_id IS NULL LIMIT 100;`);
+
+    console.log(
+      `Fixed ${unitializedLoginQuests.length} uninitialized login quests`
+    );
+    for (const player of unitializedLoginQuests) {
+      const { steam_id } = player;
+      await players.resetLoginQuests(steam_id);
+    }
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
 (async () => {
   // await deleteBattlePasses();
   // await initializeBattlePass();
+  await fixUninitializedPlayers();
 })();

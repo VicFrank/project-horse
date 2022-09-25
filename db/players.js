@@ -17,7 +17,7 @@ module.exports = {
     try {
       const { rows } = await query(
         `
-      SELECT p.*, count(*) as games
+        SELECT p.*, count(*) as games
         FROM players as p
         JOIN game_players as gp
         USING (steam_id)

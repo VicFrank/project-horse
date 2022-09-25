@@ -253,6 +253,9 @@ export default {
       if (cosmetic.cosmetic_name === "buy_bp" && this.bpUpgraded) {
         return false;
       }
+      if (cosmetic.cosmetic_name.includes("doubledown")) {
+        return false;
+      }
       return cosmetic.cosmetic_type === "Consumable";
     },
     hideModal(i) {
