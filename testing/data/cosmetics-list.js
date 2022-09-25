@@ -399,7 +399,7 @@ module.exports = [
   {
     // Battle Pass Reward
     name: "doubledown",
-    type: "Game Consumable",
+    type: "Consumable",
     coins: -1,
     cost_usd: -1,
     equip_group: "",
@@ -408,7 +408,7 @@ module.exports = [
   {
     // Plus Reward
     name: "plus_doubledown",
-    type: "Game Consumable",
+    type: "Consumable",
     coins: -1,
     cost_usd: -1,
     equip_group: "",
@@ -531,6 +531,46 @@ module.exports = [
     cost_usd: 1.99,
     equip_group: "",
     rarity: "Rare",
+  },
+  {
+    name: "drop_gold_50",
+    type: "Consumable",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "",
+    rarity: "Common",
+  },
+  {
+    name: "drop_gold_100",
+    type: "Consumable",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "",
+    rarity: "Uncommon",
+  },
+  {
+    name: "drop_gold_200",
+    type: "Consumable",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "",
+    rarity: "Rare",
+  },
+  {
+    name: "drop_gold_400",
+    type: "Consumable",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "",
+    rarity: "Mythical",
+  },
+  {
+    name: "drop_gold_1000",
+    type: "Consumable",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "",
+    rarity: "Legendary",
   },
   {
     // Real Money Purchase

@@ -13,7 +13,13 @@ const dropOdds = {
 };
 
 const typeOdds = {
-  gold: [{ odds: 100, item_name: "gold_placeholder" }],
+  gold: [
+    { odds: 50, item_name: "drop_gold_50" },
+    { odds: 30, item_name: "drop_gold_100" },
+    { odds: 12.5, item_name: "drop_gold_200" },
+    { odds: 5, item_name: "drop_gold_400" },
+    { odds: 2.5, item_name: "drop_gold_1000" },
+  ],
   xp: [
     { odds: 56, item_name: "get_xp_250" },
     { odds: 25, item_name: "get_xp_500" },

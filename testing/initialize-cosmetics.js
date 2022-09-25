@@ -58,12 +58,44 @@ async function addCosmetics() {
     console.log("Adding cosmetics...");
     await cosmetics.bulkCreateCosmetics([
       {
-        name: "name_rainbow",
-        type: "Name Color",
+        name: "drop_gold_50",
+        type: "Consumable",
         coins: -1,
         cost_usd: -1,
-        equip_group: "name_color",
-        rarity: "Immortal",
+        equip_group: "",
+        rarity: "Common",
+      },
+      {
+        name: "drop_gold_100",
+        type: "Consumable",
+        coins: -1,
+        cost_usd: -1,
+        equip_group: "",
+        rarity: "Uncommon",
+      },
+      {
+        name: "drop_gold_200",
+        type: "Consumable",
+        coins: -1,
+        cost_usd: -1,
+        equip_group: "",
+        rarity: "Rare",
+      },
+      {
+        name: "drop_gold_400",
+        type: "Consumable",
+        coins: -1,
+        cost_usd: -1,
+        equip_group: "",
+        rarity: "Mythical",
+      },
+      {
+        name: "drop_gold_1000",
+        type: "Consumable",
+        coins: -1,
+        cost_usd: -1,
+        equip_group: "",
+        rarity: "Legendary",
       },
     ]);
     console.log("Cosmetics initialized");
@@ -229,5 +261,6 @@ async function addCosmeticsToPlayers() {
 }
 
 (async function () {
-  await addCosmeticsToPlayers();
+  await addCosmetics();
+  await setChestRewards();
 })();

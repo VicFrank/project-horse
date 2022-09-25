@@ -393,7 +393,6 @@ router.get("/:steamID/gods", async (req, res) => {
   try {
     const steamID = req.params.steamID;
     const gods = await players.getGods(steamID);
-    if (gods.length == 0) console.log("No gods found for player");
     res.status(200).json(gods);
   } catch (error) {
     console.log(error);

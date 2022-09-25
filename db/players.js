@@ -1348,6 +1348,15 @@ module.exports = {
             }
             for (let i = 0; i < amount; i++) {
               await this.giveCosmeticByID(steamID, cosmeticID);
+              if (Cosmetics.shouldAutoConsume(cosmetic)) {
+                try {
+                  await this.consumeItem(steamID, cosmeticID);
+                } catch (error) {
+                  console.error(
+                    `Failed to consume item ${cosmeticID} for player ${steamID}`
+                  );
+                }
+              }
             }
           } else if (amount < 0) {
             for (let i = 0; i < amount * -1; i++) {
@@ -1432,6 +1441,21 @@ module.exports = {
           break;
         case "buy_xp_300":
           xp = 300;
+          break;
+        case "drop_gold_50":
+          gold = 50;
+          break;
+        case "drop_gold_100":
+          gold = 100;
+          break;
+        case "drop_gold_200":
+          gold = 200;
+          break;
+        case "drop_gold_400":
+          gold = 400;
+          break;
+        case "drop_gold_1000":
+          gold = 1000;
           break;
         case "gold_3500":
           gold = 3500;

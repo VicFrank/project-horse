@@ -179,6 +179,13 @@ module.exports = {
     return this.getUniqueCosmeticTypes().includes(cosmeticType);
   },
 
+  shouldAutoConsume(cosmetic) {
+    if (cosmetic.cosmetic_type !== "Consumable") return false;
+    if (cosmetic.cosmetic_name.includes("gold")) return true;
+    if (cosmetic.cosmetic_name.includes("_xp_")) return true;
+    if (cosmetic.cosmetic_name === "buy_bp") return true;
+  },
+
   async createCosmetic(name, type, equipGroup, coins, cost, rarity) {
     try {
       const { rows } = await query(
