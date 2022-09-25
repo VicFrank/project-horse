@@ -88,12 +88,17 @@ module.exports = {
       player.badge = mmr.getRankBadge(player.ladder_mmr);
       player.pips = mmr.getRankPips(player.ladder_mmr);
 
-      const unopened_chests = await this.getNumUnopenedChests(steamID);
-      const unclaimed_bp_rewards = await this.getNumUnclaimedBattlepassRewards(
-        steamID
-      );
-      const unclaimed_quests = await this.getNumUnclaimedQuests(steamID);
-      const num_games = Number(await this.getNumTotalNumGames(steamID));
+      // const unopened_chests = await this.getNumUnopenedChests(steamID);
+      // const unclaimed_bp_rewards = await this.getNumUnclaimedBattlepassRewards(
+      //   steamID
+      // );
+      // const unclaimed_quests = await this.getNumUnclaimedQuests(steamID);
+      // const num_games = Number(await this.getNumTotalNumGames(steamID));
+
+      const unopened_chests = 0;
+      const unclaimed_bp_rewards = 0;
+      const unclaimed_quests = 0;
+      const num_games = 0;
 
       return {
         ...player,
