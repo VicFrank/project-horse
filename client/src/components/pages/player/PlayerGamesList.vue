@@ -40,9 +40,8 @@
           <td>
             {{ game.rounds || "?" }} Rounds
             <div>
-              <span class="win">{{ game.wins }} </span>-<span class="loss">{{
-                game.losses
-              }}</span>
+              <span class="win">{{ game.wins }}</span
+              >-<span class="loss">{{ game.losses }}</span>
             </div>
           </td>
           <td>{{ game.ranked ? "Ranked" : "Unranked" }}</td>

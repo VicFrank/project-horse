@@ -4,6 +4,12 @@
     <div v-if="loading" class="d-flex justify-content-center mb-3">
       <b-spinner label="Loading..."></b-spinner>
     </div>
+    <RankBadge
+      class="text-center mb-2"
+      :badge="playerStats.badge"
+      :pips="playerStats.pips"
+      :rank="playerStats.rank"
+    ></RankBadge>
     <PlayerStats :stats="playerStats" :loading="loading"></PlayerStats>
     <b-tabs
       v-if="!loading"
@@ -24,12 +30,14 @@
 import GodStats from "../stats/GodStats.vue";
 import AbilityStats from "../stats/AbilityStats.vue";
 import PlayerStats from "../player/components/PlayerStats.vue";
+import RankBadge from "../../utility/RankBadge.vue";
 
 export default {
   components: {
     GodStats,
     AbilityStats,
     PlayerStats,
+    RankBadge,
   },
 
   data: () => ({
