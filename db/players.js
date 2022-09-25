@@ -80,25 +80,20 @@ module.exports = {
 
       const rank = await this.getLeaderboardPosition(player.mmr);
 
-      // const achievements = await Quests.getAchievementsForPlayer(steamID);
-      // const achievementsToClaim = achievements.filter((achievement) => {
-      //   return achievement.quest_completed && !achievement.claimed;
-      // }).length;
-      const achievementsToClaim = 0;
+      const achievements = await Quests.getAchievementsForPlayer(steamID);
+      const achievementsToClaim = achievements.filter((achievement) => {
+        return achievement.quest_completed && !achievement.claimed;
+      }).length;
 
       player.badge = mmr.getRankBadge(player.ladder_mmr);
       player.pips = mmr.getRankPips(player.ladder_mmr);
 
-      // const unopened_chests = await this.getNumUnopenedChests(steamID);
-      // const unclaimed_bp_rewards = await this.getNumUnclaimedBattlepassRewards(
-      //   steamID
-      // );
-      // const unclaimed_quests = await this.getNumUnclaimedQuests(steamID);
-      // const num_games = Number(await this.getNumTotalNumGames(steamID));
-      unopened_chests = 0;
-      unclaimed_bp_rewards = 0;
-      unclaimed_quests = 0;
-      num_games = 0;
+      const unopened_chests = await this.getNumUnopenedChests(steamID);
+      const unclaimed_bp_rewards = await this.getNumUnclaimedBattlepassRewards(
+        steamID
+      );
+      const unclaimed_quests = await this.getNumUnclaimedQuests(steamID);
+      const num_games = Number(await this.getNumTotalNumGames(steamID));
 
       return {
         ...player,
@@ -649,7 +644,6 @@ module.exports = {
   // get all level rewards (up to 50) and if they've been claimed
   async getBattlePassLevels(steamID) {
     try {
-      return [];
       const activeBattlePass = await BattlePasses.getActiveBattlePass();
       const { bp_level, unlocked, battle_pass_id } =
         await this.getActiveBattlePass(steamID);
@@ -663,11 +657,11 @@ module.exports = {
       );
       // If you're above level 50, append the rewards in that range to the list of levels
 
-      const targetLevel = Math.max(bp_level, 1000);
-      const levelsAbove50 = await BattlePasses.getLevelsAndRewardsPast50(
-        targetLevel
-      );
-      levels.push(...levelsAbove50);
+      // const targetLevel = Math.max(bp_level, 1000);
+      // const levelsAbove50 = await BattlePasses.getLevelsAndRewardsPast50(
+      //   targetLevel
+      // );
+      // levels.push(...levelsAbove50);
 
       const playerLevels = levels.map((level) => {
         const claimed = claimedRewards.some(
