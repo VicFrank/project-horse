@@ -12,7 +12,13 @@
     </div>
 
     <div class="row text-center mx-auto" style="max-width: 600px">
-      <p v-t="'home.row1-1'"></p>
+      <i18n path="home.row1-1" tag="p">
+        <template v-slot:link>
+          <a href="https://www.abilityarena.com/faq" target="_blank">{{
+            $t("home.row1-1link")
+          }}</a>
+        </template>
+      </i18n>
     </div>
 
     <div class="row">

@@ -8,7 +8,8 @@
   },
   "home": {
     "page_title": "Ability Arena",
-    "row1-1": "Ability Arena is an autobattler that mixes the fun of games such as Auto Chess, Atomic War, and Underlords with the depth and variety of Ability Draft.",
+    "row1-1": "Ability Arena is an autobattler that mixes the fun of games such as Auto Chess, Atomic War, and Underlords with the depth and variety of Ability Draft. Vist our {link} for more information.",
+    "row1-1link": "FAQ",
     "row2-1": "General",
     "row2-2": "Mix and match Spells to create cool combos",
     "row2-3": "No economy - Your gold will reset every round",
