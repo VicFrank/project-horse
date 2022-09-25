@@ -145,6 +145,8 @@ module.exports = {
       player.rank = rank;
       player.games = numGames;
       player.results = results;
+      player.pips = mmr.getRankPips(player.ladder_mmr);
+      player.badge = mmr.getRankBadge(player.ladder_mmr);
 
       return player;
     } catch (error) {

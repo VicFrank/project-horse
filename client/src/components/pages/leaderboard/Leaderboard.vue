@@ -13,7 +13,12 @@
         <tr v-for="player in players" :key="player.steam_id">
           <td>{{ player.rank }}</td>
           <td>
-            <RankBadge :height="60" :badge="player.badge" :pips="player.pips" />
+            <RankBadge
+              :height="60"
+              :badge="player.badge"
+              :pips="player.pips"
+              :rank="player.rank"
+            />
           </td>
           <td class="text-left">
             <router-link :to="'/players/' + player.steam_id">

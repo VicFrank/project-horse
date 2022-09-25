@@ -1,7 +1,16 @@
 <template>
   <div>
     <div v-if="playerFound">
-      <h1 class="page-title">{{ player.username }}</h1>
+      <h1 class="page-title mb-1">
+        {{ player.username }}
+      </h1>
+      <RankBadge
+        class="text-center mb-2"
+        :badge="player.badge"
+        :pips="player.pips"
+        :rank="player.rank"
+      ></RankBadge>
+
       <div v-if="!player.username" style="height: 48px"></div>
 
       <PlayerStats :stats="player" :loading="statsLoading"></PlayerStats>
@@ -34,6 +43,7 @@ import PlayerGamesList from "./PlayerGamesList.vue";
 import GodStats from "../stats/GodStats.vue";
 import AbilityStats from "../stats/AbilityStats.vue";
 import PlayerStats from "../player/components/PlayerStats.vue";
+import RankBadge from "../../utility/RankBadge.vue";
 
 export default {
   components: {
@@ -41,6 +51,7 @@ export default {
     GodStats,
     AbilityStats,
     PlayerStats,
+    RankBadge,
   },
 
   data: () => ({

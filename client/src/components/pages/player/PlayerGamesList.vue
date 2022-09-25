@@ -29,17 +29,21 @@
           </td>
           <td>
             {{ getRankString(game.place) }}
-            <template v-if="game.ladder_mmr_change != undefined">
+            <!-- <template v-if="game.ladder_mmr_change != undefined">
               <span v-if="game.ladder_mmr_change >= 0" class="win">
                 +{{ game.ladder_mmr_change }}
               </span>
               <span v-else class="loss"> {{ game.ladder_mmr_change }} </span>
-            </template>
+            </template> -->
             <div class="text-muted">{{ dateFromNow(game.created_at) }}</div>
           </td>
           <td>
             {{ game.rounds || "?" }} Rounds
-            <div class="text-muted">{{ hhmmss(game.duration) }}</div>
+            <div>
+              <span class="win">{{ game.wins }} </span>-<span class="loss">{{
+                game.losses
+              }}</span>
+            </div>
           </td>
           <td>{{ game.ranked ? "Ranked" : "Unranked" }}</td>
         </tr>
