@@ -102,6 +102,11 @@ module.exports = {
         ...gamePlayer,
         pips_change: newPips - oldPips,
         badge_change: badgeChange,
+        post_match_pips: newPips,
+        post_match_badge: newBadge,
+        post_match_ladder_mmr: currentLadderMMR + ladderRatingChange,
+        coins_change: coinsChange,
+        xp_change: xpChange,
       };
     } catch (error) {
       throw error;
