@@ -6,13 +6,16 @@
         v-for="god of gods"
         :key="god.god_name"
         class="text-center m-3"
-        v-bind:class="{
-          'gold-card': god.gold,
-        }"
         style="position: relative"
       >
         <div v-if="!god.owned" class="overlay"></div>
-        <GodImage :god="god.god_name" :height="100"></GodImage>
+        <GodImage
+          :god="god.god_name"
+          :height="100"
+          v-bind:class="{
+            'gold-card': god.gold,
+          }"
+        ></GodImage>
         <div
           v-bind:class="{
             'my-1': true,
@@ -22,6 +25,8 @@
         >
           {{ $t(`gods.${god.god_name}`) }}
         </div>
+        <div v-if="god.plus_exclusive" class="text-muted">Plus</div>
+        <div v-if="god.free" class="text-muted">Free</div>
         <!-- <div v-if="god.error" class="text-danger">Error</div>
         <b-button
           variant="secondary"
