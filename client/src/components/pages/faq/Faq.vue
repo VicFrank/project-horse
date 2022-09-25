@@ -278,11 +278,11 @@ export default {};
 
 <style scoped>
 h2 {
-  color: var(--primary-color-light);
+  color: #8761e6;
 }
 
 .question {
-  color: var(--primary-color-light);
+  color: #8761e6;
   font-size: 1.3rem;
   margin-bottom: 0.5rem;
   font-weight: 500;
