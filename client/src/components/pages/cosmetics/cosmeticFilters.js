@@ -16,7 +16,7 @@ const filterCosmetics = (
         if (cosmetic_type === "Chest") return true;
       }
       if (currentFilter === "Arenas") {
-        if (cosmetic_type === "Terrain FX") return true;
+        if (cosmetic_type === "Terrain") return true;
       }
       if (currentFilter === "Gods") {
         if (cosmetic_type === "Card Frame") return true;
