@@ -80,10 +80,11 @@ module.exports = {
 
       const rank = await this.getLeaderboardPosition(player.mmr);
 
-      const achievements = await Quests.getAchievementsForPlayer(steamID);
-      const achievementsToClaim = achievements.filter((achievement) => {
-        return achievement.quest_completed && !achievement.claimed;
-      }).length;
+      // const achievements = await Quests.getAchievementsForPlayer(steamID);
+      // const achievementsToClaim = achievements.filter((achievement) => {
+      //   return achievement.quest_completed && !achievement.claimed;
+      // }).length;
+      const achievementsToClaim = 0;
 
       player.badge = mmr.getRankBadge(player.ladder_mmr);
       player.pips = mmr.getRankPips(player.ladder_mmr);
