@@ -402,14 +402,10 @@ async function addCosmeticsToPlayers2() {
       cosmeticName: "get_xp_1000",
       amount: 1,
     },
-    {
-      cosmeticName: "drop_gold_1000",
-      amount: 5,
-    },
   ];
   try {
     console.log("Adding cosmetics to players...");
-    const transaction = { items: {} };
+    const transaction = { items: {}, coins: 5000 };
     for (const cosmetic of cosmeticsToGive) {
       const dbComsetic = await cosmetics.getCosmeticByName(
         cosmetic.cosmeticName
@@ -434,6 +430,6 @@ async function addCosmeticsToPlayers2() {
 (async function () {
   // await addCosmetics();
   // await setChestRewards();
-  await addCosmeticsToPlayers();
+  // await addCosmeticsToPlayers();
   await addCosmeticsToPlayers2();
 })();
