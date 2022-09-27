@@ -466,8 +466,8 @@ router.delete(
 router.get("/:steamID/battle_pass", async (req, res) => {
   try {
     const steamID = req.params.steamID;
-    const playerInfo = await players.getActiveBattlePass(steamID);
-    res.status(200).json(playerInfo);
+    const battlePass = await players.getActiveBattlePass(steamID);
+    res.status(200).json(battlePass);
   } catch (error) {
     console.log(error);
     res.status(500).send({ message: "Server Error" });
