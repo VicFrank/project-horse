@@ -650,7 +650,6 @@ module.exports = {
   // get all level rewards (up to 50) and if they've been claimed
   async getBattlePassLevels(steamID) {
     try {
-      return [];
       const activeBattlePass = await BattlePasses.getActiveBattlePass();
       const { bp_level, unlocked, battle_pass_id } =
         await this.getActiveBattlePass(steamID);
@@ -2280,7 +2279,6 @@ module.exports = {
 
   async getWelcomeQuests(steamID) {
     try {
-      return [];
       const { rows } = await query(
         `SELECT player_welcome_quests.welcome_quest_id, claim_date,
           welcome_quests.day, welcome_quests.coin_reward, claim_date IS NOT NULL as claimed,
@@ -2399,7 +2397,6 @@ module.exports = {
 
   async getLoginQuests(steamID) {
     try {
-      return [];
       const { rows } = await query(
         `
         SELECT * FROM player_login_quests
