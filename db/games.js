@@ -98,15 +98,32 @@ module.exports = {
       const newBadge = mmr.getRankBadge(currentLadderMMR + ladderRatingChange);
       const badgeChange = newBadge !== oldBadge ? newBadge : null;
 
+      let post_match_leaderboard_rank;
+      if (newBadge == "Immortal" && ranked) {
+        post_match_leaderboard_rank = await Players.getLeaderboardPosition(
+          currentMMR + mmrChange
+        );
+      }
+
+      const mmrChangeType =
+        newPips > oldPips || (badgeChange && ladderRatingChange > 0)
+          ? "up"
+          : "neutral";
+
       return {
         ...gamePlayer,
         pips_change: newPips - oldPips,
         badge_change: badgeChange,
-        post_match_pips: newPips,
+        post_match_pips: newBadge == "Immortal" ? undefined : newPips,
         post_match_badge: newBadge,
-        post_match_ladder_mmr: currentLadderMMR + ladderRatingChange,
+        post_match_ladder_mmr:
+          newBadge == "Immortal"
+            ? currentLadderMMR + ladderRatingChange
+            : undefined,
         coins_change: coinsChange,
         xp_change: xpChange,
+        mmr_change_type: mmrChangeType,
+        post_match_leaderboard_rank,
       };
     } catch (error) {
       throw error;
