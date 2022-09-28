@@ -1293,6 +1293,7 @@ module.exports = {
   },
 
   async getUnviewedCosmeticTypes(steamID) {
+    return [];
     try {
       const { rows } = await query(
         `
