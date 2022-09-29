@@ -650,7 +650,6 @@ module.exports = {
   // get all level rewards (up to 50) and if they've been claimed
   async getBattlePassLevels(steamID) {
     try {
-      return [];
       const activeBattlePass = await BattlePasses.getActiveBattlePass();
       const { bp_level, unlocked, battle_pass_id } =
         await this.getActiveBattlePass(steamID);
