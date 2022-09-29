@@ -121,6 +121,8 @@ CREATE TABLE IF NOT EXISTS player_gods (
   god_name TEXT REFERENCES gods (god_name) ON UPDATE CASCADE,
   steam_id TEXT REFERENCES players (steam_id) ON UPDATE CASCADE,
   banned BOOLEAN DEFAULT FALSE,
+  progress INTEGER DEFAULT 0,
+  amount_required INTEGER DEFAULT 100,
 
   CONSTRAINT player_gods_pkey PRIMARY KEY (god_name, steam_id)
 );
