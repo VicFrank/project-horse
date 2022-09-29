@@ -1293,7 +1293,6 @@ module.exports = {
   },
 
   async getUnviewedCosmeticTypes(steamID) {
-    return [];
     try {
       const { rows } = await query(
         `
@@ -2281,7 +2280,6 @@ module.exports = {
 
   async getWelcomeQuests(steamID) {
     try {
-      return [];
       const { rows } = await query(
         `SELECT player_welcome_quests.welcome_quest_id, claim_date,
           welcome_quests.day, welcome_quests.coin_reward, claim_date IS NOT NULL as claimed,
@@ -2399,7 +2397,6 @@ module.exports = {
   },
 
   async getLoginQuests(steamID) {
-    return [];
     try {
       const { rows } = await query(
         `
