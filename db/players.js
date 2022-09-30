@@ -1024,7 +1024,7 @@ module.exports = {
 
     try {
       const allGods = await getAllGods();
-      const playerGods = await getPlayerGods();
+      // const playerGods = await getPlayerGods();
       const godCards = await this.getGodCards(steamID);
       const player = await this.getPlayer(steamID);
       const loggedGods = await Logs.getLogsOfTypeForPlayer(
@@ -1079,8 +1079,8 @@ module.exports = {
         god.plus_exclusive = god.plus_exclusive;
         god.gold = hasGoldGod;
         god.num_opened = numOpened;
-        god.progress = progress;
-        god.amount_required = amount_required;
+        // god.progress = progress;
+        // god.amount_required = amount_required;
       }
       return allGods;
     } catch (error) {
