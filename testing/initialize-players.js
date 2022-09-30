@@ -27,10 +27,10 @@ async function initializePlayerGods() {
           (log) => log.log_data.cosmeticName === cosmeticName
         ).length;
         if (numOpened > 1) {
+          const numTops = await Players.getNumTopsWithGod(steam_id, godName);
           console.log(
             `Initializing ${steam_id} with ${numOpened} ${godName} and ${numTops} tops`
           );
-          const numTops = await Players.getNumTopsWithGod(steam_id, godName);
           await Players.addPlayerGod(
             steam_id,
             godName,
