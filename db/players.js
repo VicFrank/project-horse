@@ -891,7 +891,7 @@ module.exports = {
     try {
       let hasPlus;
       try {
-        const hasPlus = await this.hasPlus(steamID);
+        await this.hasPlus(steamID);
       } catch (error) {
         hasPlus = false;
       }
