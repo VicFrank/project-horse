@@ -116,7 +116,7 @@ router.get("/:steamID/stats", async (req, res) => {
   }
 });
 
-router.get("/:steamID/ability_stats", async (req, res) => {
+router.get("/:steamID/ability_stats", cache("1 hour"), async (req, res) => {
   try {
     const steamID = req.params.steamID;
     const stats = await abilities.getPlayerAbilityStats(steamID, 9999);
@@ -128,7 +128,7 @@ router.get("/:steamID/ability_stats", async (req, res) => {
   }
 });
 
-router.get("/:steamID/god_stats", async (req, res) => {
+router.get("/:steamID/god_stats", cache("1 hour"), async (req, res) => {
   try {
     const steamID = req.params.steamID;
     const stats = await gods.getPlayerGodsStats(steamID, 9999);
