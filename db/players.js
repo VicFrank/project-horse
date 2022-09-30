@@ -1072,7 +1072,7 @@ module.exports = {
         // const amount_required = playerGod.amount_required;
 
         god.owned =
-          hasGod || god.free || (player.has_plus && god.plus_exclusive);
+          hasGod || god.free || (player?.has_plus && god.plus_exclusive);
         god.banned = false;
         god.plus_exclusive = god.plus_exclusive;
         god.gold = hasGoldGod;
