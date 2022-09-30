@@ -889,20 +889,27 @@ module.exports = {
    */
   async givePostGameRewards(steamID, placement) {
     try {
+      let hasPlus;
+      try {
+        const hasPlus = await this.hasPlus(steamID);
+      } catch (error) {
+        hasPlus = false;
+      }
       const rewards = {
-        1: { xp: 100, coins: 50 },
-        2: { xp: 90, coins: 30 },
-        3: { xp: 60, coins: 20 },
-        4: { xp: 45, coins: 15 },
-        5: { xp: 30, coins: 10 },
-        6: { xp: 20, coins: 7 },
-        7: { xp: 10, coins: 4 },
-        8: { xp: 5, coins: 2 },
+        1: { xp: 100, coins: 100 },
+        2: { xp: 90, coins: 60 },
+        3: { xp: 60, coins: 40 },
+        4: { xp: 45, coins: 30 },
+        5: { xp: 30, coins: 20 },
+        6: { xp: 20, coins: 14 },
+        7: { xp: 10, coins: 8 },
+        8: { xp: 5, coins: 4 },
       };
 
       const reward = rewards[placement];
       if (!reward) return { xp: 0, coins: 0 };
-      const { coins, xp } = reward;
+      let { coins, xp } = reward;
+      if (hasPlus) coins *= 2;
 
       await Logs.addTransactionLog(steamID, "game_xp", {
         placement,
@@ -952,6 +959,23 @@ module.exports = {
       `,
         [steamID, godName, progress]
       );
+
+      const playerGod = rows[0];
+      if (playerGod.progress > playerGod.amount_required) {
+        const goldenGod = await Cosmetics.getCosmeticByName(
+          `gold_card_${godName}`
+        );
+        const hasCosmetic = await this.hasCosmetic(
+          steamID,
+          goldenGod.cosmetic_id
+        );
+        if (!hasCosmetic) {
+          this.doItemTransaction(steamID, {
+            items: { [goldenGod.cosmetic_id]: 1 },
+          });
+        }
+      }
+
       return rows[0];
     } catch (error) {
       throw error;
