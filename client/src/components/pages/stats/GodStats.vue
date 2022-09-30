@@ -73,6 +73,8 @@ export default {
   }),
 
   created() {
+    this.$emit("created");
+
     this.fields = [
       {
         key: "god",

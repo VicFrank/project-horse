@@ -10,17 +10,35 @@
       :pips="playerStats.pips"
       :rank="playerStats.rank"
     ></RankBadge>
-    <PlayerStats :stats="playerStats" :loading="loading"></PlayerStats>
+    <PlayerStats
+      :stats="playerStats"
+      :loading="loading"
+      :isUser="true"
+    ></PlayerStats>
     <b-tabs
       v-if="!loading"
       content-class="mt-3"
       style="max-width: 700px; margin: auto"
+      lazy
     >
       <b-tab title="Gods" active>
-        <GodStats :gods="godStats"></GodStats>
+        <template v-if="godsLoading">
+          <div class="d-flex justify-content-center my-3">
+            <b-spinner label="Loading..."></b-spinner>
+          </div>
+        </template>
+        <GodStats :gods="godStats" @created="loadGodStats"></GodStats>
       </b-tab>
       <b-tab title="Abilities">
-        <AbilityStats :abilities="abilityStats"></AbilityStats>
+        <template v-if="abilitiesLoading">
+          <div class="d-flex justify-content-center my-3">
+            <b-spinner label="Loading..."></b-spinner>
+          </div>
+        </template>
+        <AbilityStats
+          :abilities="abilityStats"
+          @created="loadAbilityStats"
+        ></AbilityStats>
       </b-tab>
     </b-tabs>
   </div>
@@ -54,26 +72,34 @@ export default {
     },
   },
 
+  methods: {
+    loadGodStats() {
+      if (this.godStats.length > 0) return;
+      fetch(`/api/players/${this.steamID}/god_stats`)
+        .then((res) => res.json())
+        .then((godStats) => {
+          this.godsLoading = false;
+          this.godStats = godStats;
+        });
+    },
+
+    loadAbilityStats() {
+      if (this.abilityStats.length > 0) return;
+      fetch(`/api/players/${this.steamID}/ability_stats`)
+        .then((res) => res.json())
+        .then((abilityStats) => {
+          this.abilitiesLoading = false;
+          this.abilityStats = abilityStats;
+        });
+    },
+  },
+
   created() {
     fetch(`/api/players/${this.steamID}/stats`)
       .then((res) => res.json())
       .then((playerStats) => {
         this.loading = false;
         this.playerStats = playerStats;
-      });
-
-    fetch(`/api/players/${this.steamID}/ability_stats`)
-      .then((res) => res.json())
-      .then((abilityStats) => {
-        this.loading = false;
-        this.abilityStats = abilityStats;
-      });
-
-    fetch(`/api/players/${this.steamID}/god_stats`)
-      .then((res) => res.json())
-      .then((godStats) => {
-        this.loading = false;
-        this.godStats = godStats;
       });
   },
 };

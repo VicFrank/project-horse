@@ -2,11 +2,16 @@
   <div>
     <h1 v-if="error">{{ error }}</h1>
     <div v-else>
-      <div class="text-center">
+      <div v-if="!loading" class="text-center">
         <h3>
           {{ dateFromNow(game.created_at) }}
         </h3>
         <h4 class="text-muted">{{ hhmmss(game.duration) }}</h4>
+      </div>
+      <div v-if="loading" class="text-center" style="height: 70px">
+        <h3>
+          <b-spinner label="Loading"></b-spinner>
+        </h3>
       </div>
       <table class="table game-table">
         <thead>
@@ -20,6 +25,20 @@
           </tr>
         </thead>
         <tbody>
+          <template v-if="loading">
+            <tr
+              v-for="i in 8"
+              :key="i"
+              class="animate-pulse"
+              style="height: 113px"
+            >
+              <td />
+              <td />
+              <td />
+              <td />
+              <td />
+            </tr>
+          </template>
           <GamePlayerRow
             v-for="player of game.players"
             :key="player.steam_id + player.place"
@@ -45,12 +64,14 @@ export default {
     error: "",
     game: {},
     showMMR: false,
+    loading: true,
   }),
 
   mounted() {
     fetch(`/api/games/${this.$route.params.game_id}`)
       .then((res) => res.json())
       .then((gameData) => {
+        this.loading = false;
         if (!gameData) this.error = "Game not found";
         else {
           this.game = gameData;
@@ -59,6 +80,7 @@ export default {
         }
       })
       .catch(() => {
+        this.loading = false;
         this.error = "Error fetching game data";
       });
   },

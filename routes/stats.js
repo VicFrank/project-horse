@@ -9,7 +9,7 @@ const cache = apicache.middleware;
 
 router.get("/gods", statsManAuth, cache("1 hour"), async (req, res) => {
   try {
-    const hours = parseInt(req.query.hours) || 720;
+    const hours = parseInt(req.query.hours) || 24;
     const stats = await gods.getGodsStats(hours);
     res.status(200).json(stats);
   } catch (error) {
@@ -20,7 +20,7 @@ router.get("/gods", statsManAuth, cache("1 hour"), async (req, res) => {
 
 router.get("/abilities", statsManAuth, cache("1 hour"), async (req, res) => {
   try {
-    const hours = parseInt(req.query.hours) || 720;
+    const hours = parseInt(req.query.hours) || 24;
     const stats = await abilities.getAbilityStats(hours);
     res.status(200).json(stats);
   } catch (error) {

@@ -9,6 +9,7 @@
       v-if="pips > 0"
       class="pip"
       :height="height"
+      alt="pips"
       v-bind:src="getPipsPath()"
     />
     <span class="rank" v-if="badge === 'Immortal'">{{

@@ -3,14 +3,14 @@
     <tbody>
       <tr>
         <td v-if="stats.mmr" class="tb-head">MMR</td>
-        <td v-if="stats.ladder_mmr" class="tb-head">Ladder MMR</td>
+        <td v-if="stats.ladder_mmr && isUser" class="tb-head">Ladder MMR</td>
         <td class="tb-head">games</td>
         <td class="tb-head">Avg Place</td>
         <td class="tb-head">Placements</td>
       </tr>
       <tr>
         <td v-if="stats.mmr">{{ stats.mmr }}</td>
-        <td v-if="stats.ladder_mmr">{{ stats.ladder_mmr }}</td>
+        <td v-if="stats.ladder_mmr && isUser">{{ stats.ladder_mmr }}</td>
         <td>{{ stats.games }}</td>
         <td v-if="stats.results">{{ stats.results.avg_place }}</td>
         <td v-if="!stats.results"></td>
@@ -38,6 +38,11 @@ export default {
     stats: {
       type: Object,
       required: true,
+    },
+    isUser: {
+      type: Boolean,
+      required: false,
+      default: false,
     },
   },
 };
