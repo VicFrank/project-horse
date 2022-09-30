@@ -1041,7 +1041,7 @@ module.exports = {
         const numOpened = loggedGods.filter(
           (log) => log.log_data.cosmeticName === `card_${god.god_name}`
         ).length;
-        let playerGod = playerGods.find((pg) => pg.god_name === god.god_name);
+        // let playerGod = playerGods.find((pg) => pg.god_name === god.god_name);
         // if (!playerGod) {
         //   try {
         //     const numTops = await this.getNumTopsWithGod(steamID, god.god_name);
@@ -1064,7 +1064,7 @@ module.exports = {
         //     };
         //   }
         // }
-        const isBanned = playerGod.banned;
+        // const isBanned = playerGod.banned;
         // const progress = Math.min(
         //   playerGod.progress,
         //   playerGod.amount_required
@@ -1073,7 +1073,7 @@ module.exports = {
 
         god.owned =
           hasGod || god.free || (player.has_plus && god.plus_exclusive);
-        god.banned = isBanned;
+        god.banned = false;
         god.plus_exclusive = god.plus_exclusive;
         god.gold = hasGoldGod;
         god.num_opened = numOpened;
