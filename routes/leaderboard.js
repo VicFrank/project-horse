@@ -5,7 +5,7 @@ const apicache = require("apicache");
 
 const cache = apicache.middleware;
 
-router.get("/", cache("1 minutes"), async (req, res) => {
+router.get("/", cache("5 minutes"), async (req, res) => {
   try {
     const leaderboard = await players.getLeaderboard();
     res.status(200).json(leaderboard);
