@@ -920,7 +920,7 @@ module.exports = {
       await this.addBattlePassXp(steamID, xp);
       await this.modifyCoins(steamID, coins);
 
-      return reward;
+      return { xp, coins };
     } catch (error) {
       throw error;
     }
