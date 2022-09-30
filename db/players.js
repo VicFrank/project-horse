@@ -911,8 +911,6 @@ module.exports = {
       let { coins, xp } = reward;
       if (hasPlus) coins *= 2;
 
-      if (hasPlus) console.log(placement, coins);
-
       await Logs.addTransactionLog(steamID, "game_xp", {
         placement,
         coins,
