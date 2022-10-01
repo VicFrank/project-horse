@@ -4,30 +4,58 @@ const { query } = require("../db/index");
 // INSERT INTO cosmetics (cosmetic_name, cosmetic_type, equip_group, cost_coins, cost_usd, rarity) VALUES ('card_selemene', 'Card Frame', '', -1, -1, 'Immortal');
 // INSERT INTO cosmetics (cosmetic_name, cosmetic_type, equip_group, cost_coins, cost_usd, rarity) VALUES ('gold_card_selemene', 'Card Frame', '', -1, -1, 'Immortal');
 async function InitializeGods() {
-  const getAllGods = async () => {
-    try {
-      const { rows } = await query(`SELECT DISTINCT(god) FROM game_players`);
-      return rows;
-    } catch (error) {
-      throw error;
-    }
-  };
+  const gods = [
+    "default",
+    "dazzle",
+    "runeGod",
+    "legionCommander",
+    "brewmaster",
+    "cloudGod",
+    "spiritBreaker",
+    "sorlaKhan",
+    "pudge",
+    "rix",
+    "shopkeeper",
+    "rubick",
+    "lifestealer",
+    "ogreMagi",
+    "aghanim",
+    "ladyAnshu",
+    "donkeyAghanim",
+    "gambler",
+    "phantomAssassin",
+    "alchemist",
+    "kanna",
+    "crystalMaiden",
+    "tinker",
+    "bloodseeker",
+    "centaur",
+    "icefrog",
+    "jmuy",
+    "tomeGod",
+    "selemene",
+    "counterStrike",
+  ];
 
   try {
-    const gods = await getAllGods();
     for (const god of gods) {
-      const { god: godName } = god;
+      await query(`INSERT INTO gods (god_name, free) VALUES ($1, true);`[god]);
       await query(
-        `INSERT INTO gods (god_name, free, god_enabled) VALUES ($1, $2, $3)`,
-        [godName, false, true]
+        `INSERT INTO cosmetics (cosmetic_name, cosmetic_type, equip_group, cost_coins, cost_usd, rarity)
+         VALUES ('card_${god}', 'Card Frame', '', -1, -1, 'Immortal');`
+      );
+      await query(
+        `INSERT INTO cosmetics (cosmetic_name, cosmetic_type, equip_group, cost_coins, cost_usd, rarity)
+        VALUES ('gold_card_${god}', 'Card Frame', '', -1, -1, 'Immortal')`
       );
     }
-    console.log(`Initialize gods`);
+    console.log(`Initialized gods`);
   } catch (error) {
+    console.error(error);
     throw error;
   }
 }
 
 (async function () {
-  // await InitializeGods();
+  await InitializeGods();
 })();

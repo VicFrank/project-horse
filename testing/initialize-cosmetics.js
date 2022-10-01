@@ -277,7 +277,7 @@ async function addCosmeticsToPlayers() {
 }
 
 (async function () {
-  await addCosmetics();
+  await initializeCosmetics();
   await setChestRewards();
   // await addCosmeticsToPlayers();
 })();
