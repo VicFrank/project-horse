@@ -35,7 +35,6 @@ const app = express();
 // Steam OpenID Passport stuff
 passport.serializeUser(async (user, next) => {
   // create the user if they don't yet exist
-  console.log("serialzer user", user);
   const steamID = user.id;
   const username = user.displayName;
 
@@ -63,7 +62,6 @@ passport.deserializeUser((obj, next) => {
 });
 
 const baseUrl = process.env.API_URL;
-console.log(`${baseUrl}/api/auth/steam/return`);
 passport.use(
   new SteamStrategy(
     {
@@ -91,6 +89,7 @@ const sess = {
 if (process.env.IS_PRODUCTION) {
   app.set("trust proxy", 1);
   sess.cookie.secure = true;
+  console.log("Running in production mode");
 }
 
 app.use(session(sess));
