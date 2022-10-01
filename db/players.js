@@ -2552,6 +2552,7 @@ module.exports = {
     try {
       const quest = await this.getLoginQuest(steamID, loginQuestID);
       if (!quest.completed) return false;
+      if (quest.claimed) return false;
       await query(
         `UPDATE player_login_quests SET claimed = TRUE WHERE steam_id = $1 AND login_quest_id = $2`,
         [steamID, loginQuestID]

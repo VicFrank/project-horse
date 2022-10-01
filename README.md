@@ -34,6 +34,28 @@ There are a lot of other requests that can happen during the game, such was when
 
 Here's a couple seconds of logs from the server, to give you an idea of what endpoints are getting hit, and how long they take.
 
+
+Player get requests
+
+"players/:steamID" -> player and leaderboard rank
+"players/:steamID/plus_benefits" -> 
+"players/:steamID/stats"
+"players/:steamID/ability_stats", cache("1 hour")
+"players/:steamID/god_stats", cache("1 hour")
+"players/:steamID/games"
+"players/:steamID/daily_quests",
+"players/:steamID/weekly_quests",
+"players/:steamID/achievements"
+"players/:steamID/welcome_quests"
+"players/:steamID/login_quests"
+"players/:steamID/cosmetics"
+"players/:steamID/cosmetics/unviewed_types"
+"players/:steamID/gods"
+"players/:steamID/battle_pass"
+"players/:steamID/battle_pass/levels"
+"players/:steamID/battle_pass/items_to_hit_level"
+"players/leaderboard",
+
 155.133.252.62 - GET /api/players/76561198056428264/plus_benefitsHTTP/1.1 200 49 - 17.696 ms
 155.133.252.62 - POST /api/players/76561198336297852/cosmetics/view_type?type=Consumable HTTP/1.1 200 34 - 21.211 ms
 103.10.124.41 - GET /api/leaderboardHTTP/1.1 200 33217 - 44.156 ms
