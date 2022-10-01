@@ -50,6 +50,4 @@ async function InitializeGods() {
   }
 }
 
-(async function () {
-  await InitializeGods();
-})();
+(async function () {})();

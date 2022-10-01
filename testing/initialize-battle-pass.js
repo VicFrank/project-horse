@@ -127,6 +127,5 @@ async function fixUninitializedPlayers() {
 }
 
 (async () => {
-  // await fixUninitializedPlayers();
-  await initializeBattlePass();
+  await fixUninitializedPlayers();
 })();
