@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
@@ -60,9 +61,7 @@ passport.deserializeUser((obj, next) => {
   next(null, obj);
 });
 
-const baseUrl = process.env.IS_PRODUCTION
-  ? "https://www.abilityarena.com"
-  : "http://localhost:4000";
+const baseUrl = process.env.API_URL;
 passport.use(
   new SteamStrategy(
     {

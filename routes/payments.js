@@ -307,9 +307,7 @@ router.get(
 
 router.post("/stripe/create_checkout_session", async (req, res) => {
   const { priceID, steamID } = req.body;
-  const baseUrl = process.env.IS_PRODUCTION
-    ? "https://www.abilityarena.com"
-    : "http://localhost:8080";
+  const baseUrl = process.env.BASE_URL;
 
   // handle existing customers
   let customer;
