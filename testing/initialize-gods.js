@@ -39,7 +39,9 @@ async function InitializeGods() {
 
   try {
     for (const god of gods) {
-      await query(`INSERT INTO gods (god_name, free) VALUES ($1, true);`[god]);
+      await query(`INSERT INTO gods (god_name, free) VALUES ($1, true);`, [
+        god,
+      ]);
       await query(
         `INSERT INTO cosmetics (cosmetic_name, cosmetic_type, equip_group, cost_coins, cost_usd, rarity)
          VALUES ('card_${god}', 'Card Frame', '', -1, -1, 'Immortal');`
