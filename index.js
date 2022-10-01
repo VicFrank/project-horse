@@ -86,8 +86,6 @@ const sess = {
   },
 };
 
-console.log(sess);
-
 if (process.env.IS_PRODUCTION) {
   app.set("trust proxy", 1);
   sess.cookie.secure = true;
