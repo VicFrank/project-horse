@@ -46,7 +46,7 @@ module.exports = {
   async getLeaderboard() {
     try {
       const { rows } = await query(`
-        SELECT * from players
+        SELECT mmr, steam_id, username from players
         ORDER BY LEAST (ladder_mmr, 4500) DESC, mmr DESC
         LIMIT 100
       `);
@@ -58,6 +58,7 @@ module.exports = {
       for (const player of rows) {
         player.badge = mmr.getRankBadge(player.ladder_mmr);
         player.pips = mmr.getRankPips(player.ladder_mmr);
+        delete player.mmr;
       }
       return rows;
     } catch (error) {
