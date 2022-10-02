@@ -140,9 +140,6 @@ module.exports = {
     const { matchID, duration, rounds, cheatsEnabled, roundResults } = results;
 
     try {
-      const game = await this.getGame(matchID);
-      if (!game) throw new Error("Game not found");
-
       await query(
         `UPDATE games SET
         (duration, rounds, cheats_enabled) = ($1, $2, $3)
