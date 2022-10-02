@@ -307,30 +307,8 @@ module.exports = {
     }
   },
 
-  // Return a list of games a player has played today
-  async getGamesToday(steamID) {
-    try {
-      const { rows } = await query(
-        `
-        SELECT *
-        FROM games
-        JOIN game_players gp
-        USING (game_id)
-        JOIN players
-        USING (steam_id)
-        WHERE steam_id = $1
-          AND created_at >= NOW()::date
-        ORDER BY created_at DESC`,
-        [steamID]
-      );
-      return rows;
-    } catch (error) {
-      throw error;
-    }
-  },
-
   // Get the amount of xp a player has earned today
-  async getDailyXP(steamID) {
+  async getXpEarnedToday(steamID) {
     try {
       const { rows } = await query(
         `
@@ -2551,23 +2529,33 @@ module.exports = {
   async claimLoginQuest(steamID, loginQuestID) {
     try {
       const quest = await this.getLoginQuest(steamID, loginQuestID);
+
       if (!quest.completed) return false;
       if (quest.claimed) return false;
-      await query(
-        `UPDATE player_login_quests SET claimed = TRUE WHERE steam_id = $1 AND login_quest_id = $2`,
+
+      // This query returns the values before we update them
+      // So we can check again if the quest has been claimed
+      const { rows } = await db.query(
+        `UPDATE player_login_quests SET claimed = TRUE
+        WHERE steam_id = $1 AND login_quest_id = $2
+        RETURNING (
+          SELECT * FROM player_login_quests
+          WHERE steam_id = $1 AND login_quest_id = $2);`,
         [steamID, loginQuestID]
       );
-      const { coin_reward, xp_reward, cosmetic_id } = quest;
+
+      const { coin_reward, xp_reward, cosmetic_id, claimed } = rows[0];
+      if (claimed) return false;
+
+      await this.modifyCoins(steamID, coin_reward);
+      await this.addBattlePassXp(steamID, xp_reward);
+      if (cosmetic_id) await this.giveCosmeticByID(steamID, cosmetic_id);
 
       await addTransactionLog(steamID, "claim_login_quest", {
         coin_reward,
         xp_reward,
         cosmetic_id,
       });
-
-      await this.modifyCoins(steamID, coin_reward);
-      await this.addBattlePassXp(steamID, xp_reward);
-      if (cosmetic_id) await this.giveCosmeticByID(steamID, cosmetic_id);
 
       return true;
     } catch (error) {
