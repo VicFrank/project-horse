@@ -11,7 +11,6 @@ module.exports = {
     const { rounds, endTime, heroes, team, wins, losses } = postGamePlayerData;
     const { players, doubledown, isProd } = postGamePlayerData;
     let { ranked } = postGamePlayerData;
-    if (!isProd) ranked = false;
 
     if (players.length !== 8) ranked = false;
 
