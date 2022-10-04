@@ -94,8 +94,10 @@ module.exports = {
       const unclaimed_bp_rewards = await this.getNumUnclaimedBattlepassRewards(
         steamID
       );
-      const unclaimed_quests = await this.getNumUnclaimedQuests(steamID);
+      // const unclaimed_quests = await this.getNumUnclaimedQuests(steamID);
       // const num_games = Number(await this.getNumTotalNumGames(steamID));
+
+      const unclaimed_quests = 0;
       const num_games = 0;
 
       return {
