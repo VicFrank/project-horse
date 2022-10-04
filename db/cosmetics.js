@@ -1,4 +1,4 @@
-const tx = require(`pg-tx`);
+const tx = require("pg-tx");
 const { query, pool } = require("./index");
 
 module.exports = {

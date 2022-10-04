@@ -97,6 +97,22 @@ async function addCosmetics() {
         equip_group: "",
         rarity: "Legendary",
       },
+      {
+        name: "drop_gold_4000",
+        type: "Consumable",
+        coins: -1,
+        cost_usd: -1,
+        equip_group: "",
+        rarity: "Mythical",
+      },
+      {
+        name: "drop_gold_10000",
+        type: "Consumable",
+        coins: -1,
+        cost_usd: -1,
+        equip_group: "",
+        rarity: "Legendary",
+      },
     ]);
     console.log("Cosmetics initialized");
   } catch (error) {
