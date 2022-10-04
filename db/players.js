@@ -2475,7 +2475,6 @@ module.exports = {
       throw error;
     }
   },
-
   async getLoginQuests(steamID) {
     try {
       const { rows } = await query(
@@ -2534,9 +2533,7 @@ module.exports = {
       if (!quest.completed) return false;
       if (quest.claimed) return false;
 
-      // This query returns the values before we update them
-      // So we can check again if the quest has been claimed
-      const { rows } = await query(
+      await query(
         `UPDATE player_login_quests SET claimed = TRUE
         WHERE steam_id = $1 AND login_quest_id = $2`,
         [steamID, loginQuestID]
