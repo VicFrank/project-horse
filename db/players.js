@@ -95,10 +95,8 @@ module.exports = {
         steamID
       );
       // const unclaimed_quests = await this.getNumUnclaimedQuests(steamID);
-      // const num_games = Number(await this.getNumTotalNumGames(steamID));
 
       const unclaimed_quests = 0;
-      const num_games = 0;
 
       return {
         ...player,
@@ -2527,6 +2525,7 @@ module.exports = {
   async claimLoginQuest(steamID, loginQuestID) {
     try {
       const quest = await this.getLoginQuest(steamID, loginQuestID);
+      const { coin_reward, xp_reward, cosmetic_id, claimed } = quest;
 
       if (!quest.completed) return false;
       if (quest.claimed) return false;
@@ -2536,10 +2535,6 @@ module.exports = {
         WHERE steam_id = $1 AND login_quest_id = $2`,
         [steamID, loginQuestID]
       );
-
-      const { coin_reward, xp_reward, cosmetic_id, claimed } = quest;
-      const quest2 = await this.getLoginQuest(steamID, loginQuestID);
-      if (quest2.claimed) return false;
 
       await this.modifyCoins(steamID, coin_reward);
       await this.addBattlePassXp(steamID, xp_reward);
