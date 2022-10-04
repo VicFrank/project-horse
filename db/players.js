@@ -105,7 +105,7 @@ module.exports = {
         unopened_chests,
         unclaimed_bp_rewards,
         unclaimed_quests,
-        games: num_games,
+        games: 0,
       };
     } catch (error) {
       throw error;
