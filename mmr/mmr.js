@@ -3,7 +3,7 @@ const getEloProbability = (winnerRating, loserRating) => {
   return probability;
 };
 
-const getEloRatingChange = (winnerRank, loserRank, K = 25) => {
+const getEloRatingChange = (winnerRank, loserRank, K = 20) => {
   const Pa = getEloProbability(winnerRank, loserRank);
   const ratingChange = Math.floor(K * (1 - Pa), 1);
 
