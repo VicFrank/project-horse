@@ -144,6 +144,11 @@ router.get("/:steamID/games", async (req, res) => {
   try {
     const steamID = req.params.steamID;
     const limit = req.query.limit;
+    // check if limit is a number
+    if (limit && isNaN(limit)) {
+      console.log("stop");
+      return res.status(400).send({ message: "Fuck off" });
+    }
     const recentMatches = await players.getGames(steamID, limit);
     for (const match of recentMatches) {
       delete match.mmr_change;
