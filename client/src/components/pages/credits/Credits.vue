@@ -12,7 +12,7 @@
         </li>
         <li><span class="name">Jenkins</span> - Game Design & Programmer</li>
         <li><span class="name">Joel Larsson</span> - Game Design</li>
-        <li><span class="name">Dr. Gester</span> - Lead Programmer</li>
+        <li><span class="name">DoctorGester</span> - Lead Programmer</li>
         <li><span class="name">bukka</span> - Lead UI Design</li>
         <li><span class="name">efe</span> - Programmer</li>
         <li><span class="name">VicFrank</span> - Programmer</li>
