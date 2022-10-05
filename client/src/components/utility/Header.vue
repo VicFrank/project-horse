@@ -154,6 +154,11 @@
             {{ $t("navigation.abilities") }}
           </b-dropdown-item>
         </b-nav-item-dropdown>
+        <li class="nav-item">
+          <a href="https://news.abilityarena.com/" class="nav-link">
+            {{ $t("navigation.news") }}
+          </a>
+        </li>
       </ul>
       <div class="d-flex align-items-center ml-auto">
         <div class="d-flex align-items-center" v-if="!loggedIn">
