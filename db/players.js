@@ -1716,6 +1716,8 @@ module.exports = {
             if (!hasCosmetic) {
               return { items: { [goldenGod.cosmetic_id]: 1 } };
             } else {
+              const godName = drop.cosmetic_name.substring(5);
+              this.addPlayerGodProgress(steamID, godName, 10);
               return { missed_item: drop, coins: chest.cost_coins / 4 };
             }
           } else if (numOpened === 1) {
