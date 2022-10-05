@@ -49,7 +49,7 @@ module.exports = {
         await Players.addGameQuestProgress(postGamePlayerData);
         // If we placed top four, add god progress
         if (place <= 4) {
-          // await Players.addPlayerGodProgress(steamID, god, 1);
+          await Players.addPlayerGodProgress(steamID, god, 1);
         }
       }
 
