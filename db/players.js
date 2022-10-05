@@ -995,7 +995,7 @@ module.exports = {
 
     try {
       const allGods = await getAllGods();
-      // const playerGods = await getPlayerGods();
+      const playerGods = await getPlayerGods();
       const godCards = await this.getGodCards(steamID);
       const player = await this.getPlayer(steamID);
       const loggedGods = await Logs.getLogsOfTypeForPlayer(
@@ -1014,39 +1014,39 @@ module.exports = {
         const numOpened = loggedGods.filter(
           (log) => log.log_data.cosmeticName === `card_${god.god_name}`
         ).length;
-        // let playerGod = playerGods.find((pg) => pg.god_name === god.god_name);
-        // if (!playerGod) {
-        //   try {
-        //     const numTops = await this.getNumTopsWithGod(steamID, god.god_name);
-        //     const progress =
-        //       numOpened > 1 ? numTops + (numOpened - 1) * 10 : numTops;
-        //     playerGod = await this.addPlayerGod(
-        //       steamID,
-        //       god.god_name,
-        //       progress
-        //     );
-        //   } catch (error) {
-        //     console.log(
-        //       `Error adding player god ${god.god_name} for ${steamID}`
-        //     );
-        //     console.log(error);
-        //     playerGod = {
-        //       banned: false,
-        //       progress: 0,
-        //       amount_required: 100,
-        //     };
-        //   }
-        // }
-        // const isBanned = playerGod.banned;
-        // const progress = Math.min(
-        //   playerGod.progress,
-        //   playerGod.amount_required
-        // );
-        // const amount_required = playerGod.amount_required;
+        let playerGod = playerGods.find((pg) => pg.god_name === god.god_name);
+        if (!playerGod) {
+          try {
+            const numTops = await this.getNumTopsWithGod(steamID, god.god_name);
+            const progress =
+              numOpened > 1 ? numTops + (numOpened - 1) * 10 : numTops;
+            playerGod = await this.addPlayerGod(
+              steamID,
+              god.god_name,
+              progress
+            );
+          } catch (error) {
+            console.log(
+              `Error adding player god ${god.god_name} for ${steamID}`
+            );
+            console.log(error);
+            playerGod = {
+              banned: false,
+              progress: 0,
+              amount_required: 100,
+            };
+          }
+        }
+        const isBanned = playerGod.banned;
+        const progress = Math.min(
+          playerGod.progress,
+          playerGod.amount_required
+        );
+        const amount_required = playerGod.amount_required;
 
         god.owned =
           hasGod || god.free || (player?.has_plus && god.plus_exclusive);
-        god.banned = false;
+        god.banned = isBanned;
         god.plus_exclusive = god.plus_exclusive;
         god.gold = hasGoldGod;
         god.num_opened = numOpened;
