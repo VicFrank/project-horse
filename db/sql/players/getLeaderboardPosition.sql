@@ -1,0 +1,1 @@
+SELECT count(*) FROM players WHERE mmr > $1 AND ladder_mmr >= 4500

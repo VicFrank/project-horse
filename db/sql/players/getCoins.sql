@@ -1,0 +1,1 @@
+SELECT coins FROM players WHERE steam_id = $1

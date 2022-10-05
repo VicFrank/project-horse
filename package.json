@@ -30,6 +30,7 @@
     "patreon-oauth": "^1.0.0",
     "paypal-rest-sdk": "^1.8.1",
     "pg": "^8.7.3",
+    "pg-promise": "^10.12.0",
     "pg-tx": "^1.0.1",
     "redis": "^4.0.4",
     "stripe": "^8.211.0",

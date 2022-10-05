@@ -1,0 +1,1 @@
+UPDATE players SET mmr = mmr + $1 WHERE steam_id = $2

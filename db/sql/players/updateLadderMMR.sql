@@ -1,0 +1,1 @@
+UPDATE players SET ladder_mmr = ladder_mmr + $1 WHERE steam_id = $2

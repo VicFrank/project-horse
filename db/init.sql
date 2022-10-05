@@ -91,6 +91,7 @@ CREATE TABLE IF NOT EXISTS game_players (
   coins_change INTEGER DEFAULT 0,
   xp_change INTEGER DEFAULT 0
 );
+CREATE UNIQUE INDEX ON game_players (game_id, steam_id);
 
 CREATE TABLE IF NOT EXISTS game_player_heroes (
   game_player_hero_id SERIAL PRIMARY KEY,
@@ -134,7 +135,6 @@ CREATE TABLE IF NOT EXISTS abilities (
 );
 
 CREATE TABLE IF NOT EXISTS hero_abilities (
-  hero_ability_id SERIAL PRIMARY KEY,
   game_player_hero_id INTEGER REFERENCES game_player_heroes (game_player_hero_id) ON UPDATE CASCADE,
   ability_name TEXT REFERENCES abilities (ability_name) ON UPDATE CASCADE,
 
@@ -143,6 +143,8 @@ CREATE TABLE IF NOT EXISTS hero_abilities (
 );
 DROP INDEX IF EXISTS idx_hero_abilities_ability_name;
 CREATE INDEX idx_hero_abilities_ability_name ON hero_abilities (ability_name);
+-- TODO: apply this locally and in beta server
+CREATE UNIQUE INDEX ON hero_abilities (game_player_hero_id, ability_name);
 
 CREATE TABLE IF NOT EXISTS combat_results (
   combat_results_id SERIAL PRIMARY KEY,
@@ -180,6 +182,7 @@ CREATE TABLE IF NOT EXISTS player_cosmetics (
   viewed BOOLEAN DEFAULT FALSE,
   equipped BOOLEAN DEFAULT FALSE
 );
+CREATE INDEX "IDX_player_cosmetics_cosmetic_id_steam_id" ON player_cosmetics(cosmetic_id, steam_id);
 
 DROP TABLE IF EXISTS battle_pass CASCADE;
 CREATE TABLE IF NOT EXISTS battle_pass (
@@ -216,6 +219,7 @@ CREATE TABLE IF NOT EXISTS player_battle_pass (
   bp_level INTEGER DEFAULT 1,
   total_xp INTEGER DEFAULT 0
 );
+CREATE UNIQUE INDEX ON player_battle_pass (steam_id, battle_pass_id);
 
 DROP TABLE IF EXISTS player_claimed_battle_pass_rewards CASCADE;
 CREATE TABLE IF NOT EXISTS player_claimed_battle_pass_rewards (
@@ -223,6 +227,8 @@ CREATE TABLE IF NOT EXISTS player_claimed_battle_pass_rewards (
   battle_pass_id INTEGER REFERENCES battle_pass (battle_pass_id) ON UPDATE CASCADE,
   bp_level INTEGER NOT NULL
 );
+CREATE INDEX "IDX_player_claimed_battle_pass_rewards_steam_id_battle_pass_id"
+ON player_claimed_battle_pass_rewards(steam_id, battle_pass_id);
 
 CREATE TABLE IF NOT EXISTS quests (
   quest_id SERIAL PRIMARY KEY,
@@ -266,6 +272,7 @@ CREATE TABLE IF NOT EXISTS player_login_quests (
   claimed BOOLEAN DEFAULT FALSE,
   completed BOOLEAN DEFAULT FALSE
 );
+CREATE UNIQUE INDEX ON player_login_quests (steam_id, login_quest_id);
 
 DROP TABLE IF EXISTS welcome_quests CASCADE;
 CREATE TABLE IF NOT EXISTS welcome_quests (
@@ -283,6 +290,7 @@ CREATE TABLE IF NOT EXISTS player_welcome_quests (
   welcome_quest_id INTEGER REFERENCES welcome_quests (welcome_quest_id) ON UPDATE CASCADE,
   claim_date TIMESTAMPTZ
 );
+CREATE UNIQUE INDEX ON player_welcome_quests (steam_id, welcome_quest_id);
 
 DROP TABLE IF EXISTS drop_type_rewards;
 CREATE TABLE IF NOT EXISTS drop_type_rewards (

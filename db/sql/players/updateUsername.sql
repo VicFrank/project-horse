@@ -1,0 +1,1 @@
+INSERT INTO player_logs (steam_id, log_event) VALUES ($1, $2)
