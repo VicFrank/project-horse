@@ -381,7 +381,6 @@ router.post("/:steamID/cosmetics/view_type", async (req, res) => {
     const steamID = req.params.steamID;
     const type = req.query.type;
     const parsedType = type.replace(/_/g, " ");
-    console.log(parsedType);
     await players.setCosmeticTypeViewed(steamID, parsedType);
     res.status(200).json({ message: "Cosmetic Type Viewed" });
   } catch (error) {
