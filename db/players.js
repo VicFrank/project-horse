@@ -922,6 +922,7 @@ module.exports = {
   async addPlayerGodProgress(steamID, godName, progress) {
     try {
       // Upsert the player god
+      console.log(steamID, godName, progress);
       const { rows } = await query(
         `
         INSERT INTO player_gods (steam_id, god_name, progress)
