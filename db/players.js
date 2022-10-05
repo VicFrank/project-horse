@@ -1046,12 +1046,12 @@ module.exports = {
 
         god.owned =
           hasGod || god.free || (player?.has_plus && god.plus_exclusive);
-        god.banned = false;
+        god.banned = isBanned;
         god.plus_exclusive = god.plus_exclusive;
         god.gold = hasGoldGod;
         god.num_opened = numOpened;
-        god.progress = numOpened;
-        god.amount_required = 10;
+        god.progress = progress;
+        god.amount_required = amount_required;
       }
       return allGods;
     } catch (error) {

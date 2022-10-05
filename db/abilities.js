@@ -206,7 +206,8 @@ module.exports = {
         JOIN game_players USING (game_id)
         JOIN game_player_heroes USING (game_player_id)
         JOIN hero_abilities USING (game_player_hero_id)
-        WHERE place = 1 and ability_level = 9
+        WHERE place = 1 and ability_level = 9 AND
+          games.created_at > NOW() - 24 * INTERVAL '1 HOUR'
         GROUP BY ability_name
         ORDER BY count(*) desc;
       `
