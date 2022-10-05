@@ -94,9 +94,7 @@ module.exports = {
       const unclaimed_bp_rewards = await this.getNumUnclaimedBattlepassRewards(
         steamID
       );
-      // const unclaimed_quests = await this.getNumUnclaimedQuests(steamID);
-
-      const unclaimed_quests = 0;
+      const unclaimed_quests = await this.getNumUnclaimedQuests(steamID);
 
       return {
         ...player,
@@ -1052,8 +1050,8 @@ module.exports = {
         god.plus_exclusive = god.plus_exclusive;
         god.gold = hasGoldGod;
         god.num_opened = numOpened;
-        // god.progress = progress;
-        // god.amount_required = amount_required;
+        god.progress = numOpened;
+        god.amount_required = 10;
       }
       return allGods;
     } catch (error) {
