@@ -909,6 +909,8 @@ module.exports = {
         `
         INSERT INTO player_gods (steam_id, god_name, progress)
         VALUES ($1, $2, $3)
+        ON CONFLICT (steam_id, god_name) DO UPDATE
+        SET progress = $3
         RETURNING *
       `,
         [steamID, godName, progress]
