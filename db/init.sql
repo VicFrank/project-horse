@@ -92,6 +92,7 @@ CREATE TABLE IF NOT EXISTS game_players (
   xp_change INTEGER DEFAULT 0
 );
 CREATE UNIQUE INDEX ON game_players (game_id, steam_id);
+CREATE INDEX idx_game_players_game_id_fkey ON game_players (game_id);
 
 CREATE TABLE IF NOT EXISTS game_player_heroes (
   game_player_hero_id SERIAL PRIMARY KEY,
@@ -108,6 +109,7 @@ CREATE TABLE IF NOT EXISTS game_player_heroes (
 );
 DROP INDEX IF EXISTS idx_game_player_heroes_hero_name;
 CREATE INDEX idx_game_player_heroes_hero_name ON game_player_heroes (hero_name);
+CREATE INDEX idx_game_player_heroes_game_player_id ON game_player_heroes (game_player_id);
 
 DROP TABLE IF EXISTS gods;
 CREATE TABLE IF NOT EXISTS gods (
@@ -127,6 +129,7 @@ CREATE TABLE IF NOT EXISTS player_gods (
 
   CONSTRAINT player_gods_pkey PRIMARY KEY (god_name, steam_id)
 );
+CREATE INDEX idx_player_gods_steam_id_fkey ON player_gods (steam_id);
 
 CREATE TABLE IF NOT EXISTS abilities (
   ability_name TEXT PRIMARY KEY,
@@ -143,7 +146,6 @@ CREATE TABLE IF NOT EXISTS hero_abilities (
 );
 DROP INDEX IF EXISTS idx_hero_abilities_ability_name;
 CREATE INDEX idx_hero_abilities_ability_name ON hero_abilities (ability_name);
--- TODO: apply this locally and in beta server
 CREATE UNIQUE INDEX ON hero_abilities (game_player_hero_id, ability_name);
 
 CREATE TABLE IF NOT EXISTS combat_results (
@@ -153,6 +155,7 @@ CREATE TABLE IF NOT EXISTS combat_results (
   duration DOUBLE PRECISION NOT NULL,
   round_number INTEGER NOT NULL
 );
+CREATE INDEX idx_combat_results_game_id ON combat_results (game_id);
 
 CREATE TABLE IF NOT EXISTS combat_players (
   combat_results_id INTEGER REFERENCES combat_results (combat_results_id) ON UPDATE CASCADE,
@@ -376,3 +379,4 @@ CREATE TABLE IF NOT EXISTS player_logs (
   log_time TIMESTAMPTZ DEFAULT NOW()
 );
 CREATE INDEX "IDX_player_logs_event" ON player_logs(log_event);
+CREATE INDEX "IDX_player_steam_id" ON player_logs(steam_id);

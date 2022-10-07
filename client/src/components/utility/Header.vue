@@ -124,9 +124,9 @@
           </router-link>
         </li>
         <b-nav-item-dropdown text="GAME" class="mx-2 d-none d-sm-block">
-          <b-dropdown-item exact-active-class="active-link" to="/games">
+          <!-- <b-dropdown-item exact-active-class="active-link" to="/games">
             {{ $t("navigation.matches") }}
-          </b-dropdown-item>
+          </b-dropdown-item> -->
           <b-dropdown-item to="/leaderboard" exact-active-class="active-link">
             {{ $t("navigation.leaderboard") }}
           </b-dropdown-item>

@@ -217,13 +217,17 @@ module.exports = {
       // get games and number of players
       const { rows } = await query(
         `
-          SELECT games.*, count(game_players.game_player_id) as players
-          FROM games
-          JOIN game_players USING (game_id)
-          GROUP BY games.game_id
-          ${whereClause}
-          ORDER BY created_at DESC
-          LIMIT $1 OFFSET $2`,
+          WITH g AS (
+            SELECT * FROM games
+            ${whereClause}
+            ORDER BY created_at DESC
+            LIMIT $1 OFFSET $2
+          )
+          SELECT g.created_at, g.duration, g.game_id, g.ranked, g.rounds,
+            count(game_players.game_player_id) as players
+            FROM g
+            JOIN game_players USING (game_id)
+            GROUP BY g.created_at, g.duration, g.game_id, g.ranked, g.rounds;`,
         args
       );
       return rows;
