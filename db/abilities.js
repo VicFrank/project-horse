@@ -8,16 +8,18 @@ const getAbilityFreqs = async (hours, steamID) => {
     if (steamID) args.push(steamID);
     const { rows } = await query(
       `
-        SELECT ability_name, COUNT(*) AS freq
+      WITH g AS (
+        SELECT * FROM games
+        WHERE games.created_at > NOW() - $1 * INTERVAL '1 HOUR' AND RANKED = TRUE
+        ${steamID ? `AND game_players.steam_id = $2` : ""}
+      )
+      SELECT ability_name, COUNT(*) AS freq
         FROM hero_abilities
         JOIN game_player_heroes USING (game_player_hero_id)
         JOIN game_players USING (game_player_id)
-        JOIN games USING (game_id)
-        WHERE games.created_at > NOW() - $1 * INTERVAL '1 HOUR'
-          AND ranked = true
-          ${steamID ? `AND game_players.steam_id = $2` : ""}
+        JOIN g USING (game_id)
         GROUP BY ability_name
-        ORDER BY freq DESC
+        ORDER BY freq DESC;
       `,
       args
     );
@@ -33,15 +35,16 @@ const getWinnerAbilityFreqs = async (hours, steamID) => {
     if (steamID) args.push(steamID);
     const { rows } = await query(
       `
+      WITH g AS (
+        SELECT * FROM games
+        WHERE games.created_at > NOW() - $1 * INTERVAL '1 HOUR' AND RANKED = TRUE
+        ${steamID ? `AND game_players.steam_id = $2` : ""}
+      )
         SELECT ability_name, COUNT(*) AS freq
         FROM hero_abilities
         JOIN game_player_heroes USING (game_player_hero_id)
         JOIN game_players USING (game_player_id)
-        JOIN games USING (game_id)
-        WHERE games.created_at > NOW() - $1 * INTERVAL '1 HOUR'
-          AND game_players.place = 1
-          AND ranked = true
-          ${steamID ? `AND game_players.steam_id = $2` : ""}
+        JOIN g USING (game_id)
         GROUP BY ability_name
         ORDER BY freq DESC
       `,
@@ -59,15 +62,16 @@ const getTopFourAbilityFreqs = async (hours, steamID) => {
     if (steamID) args.push(steamID);
     const { rows } = await query(
       `
+      WITH g AS (
+        SELECT * FROM games
+        WHERE games.created_at > NOW() - $1 * INTERVAL '1 HOUR' AND RANKED = TRUE
+        ${steamID ? `AND game_players.steam_id = $2` : ""}
+      )
         SELECT ability_name, COUNT(*) AS freq
         FROM hero_abilities
         JOIN game_player_heroes USING (game_player_hero_id)
         JOIN game_players USING (game_player_id)
-        JOIN games USING (game_id)
-        WHERE games.created_at > NOW() - $1 * INTERVAL '1 HOUR'
-          AND game_players.place <= 4
-          AND ranked = true
-          ${steamID ? `AND game_players.steam_id = $2` : ""}
+        JOIN g USING (game_id)
         GROUP BY ability_name
         ORDER BY freq DESC
       `,
@@ -84,6 +88,10 @@ const getWinnerLevelRates = async (hours) => {
   try {
     const { rows } = await query(
       `
+      WITH g AS (
+        SELECT * FROM games
+        WHERE games.created_at > NOW() - $1 * INTERVAL '1 HOUR' AND RANKED = TRUE
+      )
       SELECT ability_name,
       count(case when ability_level = 1 then 1 end) as level_1,
       count(case when ability_level = 2 then 1 end) as level_2,
@@ -97,10 +105,9 @@ const getWinnerLevelRates = async (hours) => {
       JOIN game_player_heroes USING (game_player_hero_id)
       JOIN game_players USING (game_player_id)
       JOIN games USING (game_id)
-      WHERE games.created_at > NOW() - $1 * INTERVAL '1 HOUR'
-        AND game_players.place = 1
+      WHERE game_players.place = 1
       GROUP BY ability_name
-      ORDER BY ability_name
+      ORDER BY ability_name;
       `,
       [hours]
     );
@@ -197,17 +204,43 @@ module.exports = {
       throw error;
     }
   },
+  async getSuperWinStats() {
+    try {
+      const { rows } = await query(
+        `
+        WITH g AS (
+          SELECT * FROM games
+          WHERE games.created_at > NOW() - 24 * INTERVAL '1 HOUR' AND RANKED = TRUE
+        )
+        SELECT ability_name, count(*)
+        FROM g
+        JOIN game_players USING (game_id)
+        JOIN game_player_heroes USING (game_player_id)
+        JOIN hero_abilities USING (game_player_hero_id)
+        WHERE place = 1 and ability_level = >= 6 AND
+        GROUP BY ability_name
+        ORDER BY count(*) desc;
+      `
+      );
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
   async getGabenWinStats() {
     try {
       const { rows } = await query(
         `
+        WITH g AS (
+          SELECT * FROM games
+          WHERE games.created_at > NOW() - 24 * INTERVAL '1 HOUR' AND RANKED = TRUE
+        )
         SELECT ability_name, count(*)
-        FROM games
+        FROM g
         JOIN game_players USING (game_id)
         JOIN game_player_heroes USING (game_player_id)
         JOIN hero_abilities USING (game_player_hero_id)
-        WHERE place = 1 and ability_level = 9 AND
-          games.created_at > NOW() - 24 * INTERVAL '1 HOUR'
+        WHERE place = 1 and ability_level = >= 9 AND
         GROUP BY ability_name
         ORDER BY count(*) desc;
       `

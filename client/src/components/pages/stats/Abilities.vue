@@ -1,7 +1,10 @@
 <template>
   <div class="text-center">
     <h1 class="page-title" v-t="'stats.abilities'"></h1>
-    <AbilityStats :abilities="abilities"></AbilityStats>
+    <AbilityStats
+      :abilities="abilities"
+      @created="loadAbilityStats"
+    ></AbilityStats>
   </div>
 </template>
 
@@ -22,6 +25,27 @@ export default {
       .then((abilities) => {
         this.abilities = abilities;
       });
+  },
+
+  methods: {
+    loadGodStats() {
+      if (this.godStats.length > 0) return;
+      fetch(`/api/players/${this.steamID}/god_stats`)
+        .then((res) => res.json())
+        .then((godStats) => {
+          this.godsLoading = false;
+          this.godStats = godStats;
+        });
+    },
+
+    loadAbilityStats() {
+      if (this.abilityStats.length > 0) return;
+      fetch(`/api/stats/abilities`)
+        .then((res) => res.json())
+        .then((abilities) => {
+          this.abilities = abilities;
+        });
+    },
   },
 };
 </script>
