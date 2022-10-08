@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="page-title">Battle Pass</h1>
+    <h1 class="page-title">{{ $t("battle_pass.page_title") }}</h1>
     <div class="timeline">
       <ul class="battlepass-timeline">
         <li v-for="i in 50" :key="i">
@@ -68,7 +68,7 @@
                     @click="claimReward(i)"
                     v-if="getLevelCanClaim(i)"
                   >
-                    Claim
+                    {{ $t("common.claim") }}
                     <b-spinner
                       small
                       v-if="levelLoading(i)"

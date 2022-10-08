@@ -5,7 +5,7 @@
       <thead>
         <tr>
           <th style="width: 80px" v-t="'leaderboard.rank'"></th>
-          <th style="width: 80px">Badge</th>
+          <th style="width: 80px" v-t="'leaderboard.badge'"></th>
           <th class="text-left" v-t="'leaderboard.player'"></th>
         </tr>
       </thead>

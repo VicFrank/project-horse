@@ -1,8 +1,8 @@
 <template>
   <div>
-    <b-button variant="primary" @click="goToAlipay" :disabled="!complete"
-      >Pay with Alipay</b-button
-    >
+    <b-button variant="primary" @click="goToAlipay" :disabled="!complete">{{
+      $t("store.pay_with_alipay")
+    }}</b-button>
     <b-alert v-model="showError" variant="danger" dismissible>{{
       error
     }}</b-alert>

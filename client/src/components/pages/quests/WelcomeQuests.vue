@@ -49,7 +49,7 @@
             type="button"
             class="btn btn-primary mt-2"
           >
-            Claim
+            {{ $t("common.claim") }}
           </button>
         </div>
       </div>

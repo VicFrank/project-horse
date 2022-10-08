@@ -16,12 +16,12 @@
       <table class="table game-table">
         <thead>
           <tr>
-            <th>Rank</th>
-            <th>Rounds</th>
-            <th>W/L</th>
-            <th v-if="showMMR">MMR</th>
-            <th class="text-left">Player</th>
-            <th class="text-left">Heroes</th>
+            <th>{{ $t("leaderboard.rank") }}</th>
+            <th>{{ $t("leaderboard.rounds") }}</th>
+            <th>{{ $t("leaderboard.wl") }}</th>
+            <th v-if="showMMR">{{ $t("leaderboard.mmr") }}</th>
+            <th class="text-left">{{ $t("leaderboard.player") }}</th>
+            <th class="text-left">{{ $t("leaderboard.heroes") }}</th>
           </tr>
         </thead>
         <tbody>

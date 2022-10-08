@@ -25,8 +25,10 @@
         >
           {{ $t(`gods.${god.god_name}`) }}
         </div>
-        <div v-if="god.plus_exclusive" class="text-muted">Plus</div>
-        <div v-if="god.free" class="text-muted">Free</div>
+        <div v-if="god.plus_exclusive" class="text-muted">
+          {{ $t("common.plus") }}
+        </div>
+        <div v-if="god.free" class="text-muted">{{ $t("common.free") }}</div>
         <!-- <div v-if="god.error" class="text-danger">Error</div>
         <b-button
           variant="secondary"

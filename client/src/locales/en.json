@@ -4,6 +4,8 @@
     "coins": "Gold",
     "xp": "XP",
     "completed": "Completed",
+    "plus": "Plus",
+    "free": "Free",
     "claim": "Claim"
   },
   "home": {
@@ -68,9 +70,17 @@
     "lost": "Lost",
     "recent_matches": "Recent Matches",
     "player": "Player",
-    "lhdn": "LH/DN",
     "gold": "Gold",
     "dmg": "DMG",
+    "badge": "Badge",
+    "mmr": "MMR",
+    "ladder_mmr": "Ladder MMR",
+    "avg_place": "Avg Place",
+    "placements": "Placements",
+    "match_id": "Match Id",
+    "god": "God",
+    "rounds": "Rounds",
+    "ranked": "Ranked",
     "daily_limit": "You've reached your daily limit"
   },
   "navigation": {
@@ -116,20 +126,15 @@
     "stats": "Stats",
     "records": "Records",
     "longest_game": "Longest Game",
-    "most_kills": "Most Kills",
-    "most_lh": "Most LH",
-    "most_damage": "Most Damage",
-    "biggest_upset": "Biggest Upset",
     "view_all": "View All",
     "mmr": "mmr",
     "wins": "Wins",
     "losses": "Losses",
     "abandoned": "Abandoned",
     "time_played": "Time Played",
+    "recent_games": "Recent Games",
     "not_found": "Player not found",
-    "current_booster": "Current Booster: ",
     "bp_sellout": "Purchase a {link} to increase your Daily XP",
-    "bp_sellout_link": "BP Accelerator",
     "reset_in": "Resets in"
   },
   "tournaments": {
@@ -585,7 +590,16 @@
   "leaderboard": {
     "page_title": "Leaderboard",
     "rank": "Rank",
+    "ranked": "Ranked",
+    "rounds": "Rounds",
+    "wl": "W/L",
     "player": "Player",
+    "heroes": "Heroes",
+    "match_id": "Match Id",
+    "date": "Date",
+    "players": "Players",
+    "duration": "Duration",
+    "badge": "Badge",
     "mmr": "MMR"
   },
   "store": {
@@ -618,7 +632,9 @@
     "contact_us": "contact us",
     "processing": "Processing payment...",
     "loading": "Loading...",
-    "pay_with_stripe": "Pay with Stripe"
+    "pay_with_stripe": "Pay with Stripe",
+    "pay_with_alipay": "Pay with Alipay",
+    "pay_with_wechat": "Pay with WeChat Pay"
   },
   "not_found": "Page not found",
   "credits": {

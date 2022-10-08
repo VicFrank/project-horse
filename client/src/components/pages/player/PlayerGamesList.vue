@@ -2,11 +2,11 @@
   <table class="table">
     <thead>
       <tr>
-        <th class="text-left">Match Id</th>
-        <th class="text-left">God</th>
-        <th>Result</th>
-        <th>Rounds</th>
-        <th>Ranked</th>
+        <th class="text-left">{{ $t("tables.match_id") }}</th>
+        <th class="text-left">{{ $t("tables.god") }}</th>
+        <th>{{ $t("tables.result") }}</th>
+        <th>{{ $t("tables.rounds") }}</th>
+        <th>{{ $t("tables.ranked") }}</th>
       </tr>
     </thead>
 
@@ -38,7 +38,7 @@
             <div class="text-muted">{{ dateFromNow(game.created_at) }}</div>
           </td>
           <td>
-            {{ game.rounds || "?" }} Rounds
+            {{ game.rounds || "?" }} {{ $t("tables.rounds") }}
             <div>
               <span class="win">{{ game.wins }}</span
               >-<span class="loss">{{ game.losses }}</span>

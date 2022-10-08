@@ -2,12 +2,12 @@
   <table class="table" style="width: 600px">
     <thead>
       <tr>
-        <th>Match Id</th>
-        <th>Date</th>
-        <th>Players</th>
-        <th>Duration</th>
-        <th>Rounds</th>
-        <th>Ranked</th>
+        <th>{{ $t("leaderboard.match_id") }}</th>
+        <th>{{ $t("leaderboard.date") }}</th>
+        <th>{{ $t("leaderboard.players") }}</th>
+        <th>{{ $t("leaderboard.duration") }}</th>
+        <th>{{ $t("leaderboard.rounds") }}</th>
+        <th>{{ $t("leaderboard.ranked") }}</th>
       </tr>
     </thead>
 

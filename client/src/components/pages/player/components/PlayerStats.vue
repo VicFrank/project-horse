@@ -2,11 +2,13 @@
   <table class="table mx-auto mb-3" style="max-width: 600px">
     <tbody>
       <tr>
-        <td v-if="stats.mmr" class="tb-head">MMR</td>
-        <td v-if="stats.ladder_mmr && isUser" class="tb-head">Ladder MMR</td>
-        <td class="tb-head">games</td>
-        <td class="tb-head">Avg Place</td>
-        <td class="tb-head">Placements</td>
+        <td v-if="stats.mmr" class="tb-head">{{ $t("tables.mmr") }}</td>
+        <td v-if="stats.ladder_mmr && isUser" class="tb-head">
+          {{ $t("tables.ladder_mmr") }}
+        </td>
+        <td class="tb-head">{{ $t("tables.badge") }}</td>
+        <td class="tb-head">{{ $t("tables.avg_place") }}</td>
+        <td class="tb-head">{{ $t("tables.placements") }}</td>
       </tr>
       <tr>
         <td v-if="stats.mmr">{{ stats.mmr }}</td>
