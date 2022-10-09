@@ -242,7 +242,7 @@ module.exports = {
         `SELECT COUNT(*) FROM games WHERE created_at >  NOW() - $1 * INTERVAL '1 HOUR'`,
         [hours]
       );
-      const numGames = gamesQuery.rows[0].count;
+      const numGames = Number(gamesQuery.rows[0].count);
       return numGames;
     } catch (error) {
       throw error;
