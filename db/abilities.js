@@ -202,14 +202,15 @@ module.exports = {
         WHERE games.created_at > NOW() - $1 * INTERVAL '1 HOUR' AND RANKED = TRUE
       )
       SELECT ability_name,
+      count(*) AS ability_freq,
       count(case when ability_level = 1 then 1 end) as level_1,
       count(case when ability_level = 2 then 1 end) as level_2,
       count(case when ability_level = 3 then 1 end) as level_3,
       count(case when ability_level = 4 then 1 end) as level_4,
       count(case when ability_level = 5 then 1 end) as level_5,
-      count(case when ability_level = 5 then 1 end) as level_6,
-      count(case when ability_level = 5 then 1 end) as level_7,
-      count(case when ability_level = 5 then 1 end) as level_8
+      count(case when ability_level = 6 then 1 end) as level_6,
+      count(case when ability_level = 7 then 1 end) as level_7,
+      count(case when ability_level = 8 then 1 end) as level_8
       FROM hero_abilities
       JOIN game_player_heroes USING (game_player_hero_id)
       JOIN game_players USING (game_player_id)
@@ -225,7 +226,7 @@ module.exports = {
       const withPlacementArray = withIcons.map((item) => {
         const placementArray = [];
         for (let i = 1; i <= 8; i++) {
-          placementArray.push(item[`level_${i}`]);
+          placementArray.push(item[`level_${i}`] / item.ability_freq);
         }
         return {
           ability_name: item.ability_name,
