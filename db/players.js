@@ -7,6 +7,7 @@ const RedemptionCodes = require("./redemption-codes");
 const mmr = require("../mmr/mmr");
 const moment = require("moment");
 const { addTransactionLog } = require("./logs");
+const { shouldAutoConsume } = require("./cosmetics");
 
 module.exports = {
   // --------------------------------------------------
@@ -1384,7 +1385,7 @@ module.exports = {
     }
   },
 
-  async doItemTransaction(steamID, transactionData) {
+  async doItemTransaction(steamID, transactionData, consumePlus = false) {
     try {
       if (!transactionData) throw new Error("No transaction supplied");
 
@@ -1433,6 +1434,20 @@ module.exports = {
                   console.error(
                     `Failed to consume item ${cosmeticID} for player ${steamID}`
                   );
+                }
+              } else if (consumePlus) {
+                const cosmeticName = cosmetic.cosmetic_name;
+                const isPlus =
+                  cosmeticName === "plus_year_package" ||
+                  cosmeticName === "plus_month";
+                if (isPlus) {
+                  try {
+                    await this.consumeItem(steamID, cosmeticID);
+                  } catch (error) {
+                    console.error(
+                      `Failed to consume item ${cosmeticID} for player ${steamID}`
+                    );
+                  }
                 }
               }
             }

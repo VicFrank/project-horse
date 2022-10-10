@@ -94,7 +94,7 @@ async function addCosmeticsFromIDs(steamID, cosmeticIDs) {
   }
   const transaction = { items: transactionItems };
   try {
-    await players.doItemTransaction(steamID, transaction);
+    await players.doItemTransaction(steamID, transaction, true);
   } catch (error) {
     throw error;
   }
