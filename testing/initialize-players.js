@@ -49,29 +49,13 @@ async function initializePlayerGods() {
 
 async function giveDropRewards() {
   try {
-    console.log("Giving drop rewards...");
-    const { rows: players } = await query(`
-      select steam_id from player_logs
-      where log_event = 'consume_item'
-      AND log_data->>'cosmeticName' = 'drop_gold_10000';`);
-    console.log(`Found ${players.length} players with drop rewards`);
-
-    for (const player of players) {
-      const { steam_id } = player;
-      await Players.modifyCoins(steam_id, 10000);
-      await Logs.addTransactionLog(steam_id, "fix_bad_drops", {
-        steamID: steam_id,
-        coins: 10000,
-      });
-    }
-
     const { rows: players2 } = await query(`
       select steam_id from player_logs
       where log_event = 'consume_item'
       AND log_data->>'cosmeticName' = 'drop_gold_4000';`);
     console.log(`Found ${players2.length} players with drop rewards`);
 
-    for (const player of players) {
+    for (const player of players2) {
       const { steam_id } = player;
       await Players.modifyCoins(steam_id, 4000);
       await Logs.addTransactionLog(steam_id, "fix_bad_drops", {
