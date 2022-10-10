@@ -2181,7 +2181,7 @@ module.exports = {
    * @param {String} steamID
    */
   async getDailyQuests(steamID) {
-    try {
+    const getQuests = async () => {
       const { rows } = await query(
         `
         SELECT pq.*, q.*,
@@ -2199,10 +2199,28 @@ module.exports = {
       `,
         [steamID]
       );
+      return rows;
+    };
 
+    try {
+      let quests = await getQuests();
       const numQuests = await this.getNumDailyQuests(steamID);
 
-      return rows.slice(0, numQuests);
+      // if the quest can be rerolled, and is already claimed, reroll it
+      for (let quest of quests) {
+        if (quest.can_reroll && quest.claimed) {
+          try {
+            await this.rerollQuest(steamID, quest.quest_id);
+            quests = await getQuests();
+          } catch (error) {
+            console.error(
+              `Error automatically rerolling quest ${quest.quest_id} for ${steamID}`
+            );
+          }
+        }
+      }
+
+      return quests.slice(0, numQuests);
     } catch (error) {
       throw error;
     }
