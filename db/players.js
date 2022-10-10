@@ -1565,21 +1565,6 @@ module.exports = {
         case "gold_200000":
           gold = 200000;
           break;
-        case "drop_gold_50":
-          gold = 50;
-          break;
-        case "drop_gold_100":
-          gold = 100;
-          break;
-        case "drop_gold_200":
-          gold = 200;
-          break;
-        case "drop_gold_400":
-          gold = 400;
-          break;
-        case "drop_gold_1000":
-          gold = 1000;
-          break;
         case "drop_gold_4000":
           gold = 4000;
           break;
