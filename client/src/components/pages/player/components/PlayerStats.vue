@@ -6,7 +6,7 @@
         <td v-if="stats.ladder_mmr && isUser" class="tb-head">
           {{ $t("tables.ladder_mmr") }}
         </td>
-        <td class="tb-head">{{ $t("tables.badge") }}</td>
+        <td class="tb-head">{{ $t("tables.games") }}</td>
         <td class="tb-head">{{ $t("tables.avg_place") }}</td>
         <td class="tb-head">{{ $t("tables.placements") }}</td>
       </tr>
