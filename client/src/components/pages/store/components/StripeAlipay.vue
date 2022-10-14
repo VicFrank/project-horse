@@ -31,12 +31,11 @@ export default {
   created() {
     const isDev = process.env.NODE_ENV == "development";
     const key = isDev ? this.keys.dev : this.keys.prod;
-    console.log(key);
     const stripe = window.Stripe(key);
     this.stripe = stripe;
     const rootUrl = isDev
       ? "http://localhost:8080"
-      : "https://www.abilityarena.com";
+      : "https://abilityarena.com";
     let amount = this.items.reduce((acc, item) => {
       return acc + item.cost_usd * 100;
     }, 0);

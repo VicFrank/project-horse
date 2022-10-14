@@ -14,7 +14,7 @@
     <div class="row text-center mx-auto" style="max-width: 600px">
       <i18n path="home.row1-1" tag="p">
         <template v-slot:link>
-          <a href="https://www.abilityarena.com/faq" target="_blank">{{
+          <a href="https://abilityarena.com/faq" target="_blank">{{
             $t("home.row1-1link")
           }}</a>
         </template>

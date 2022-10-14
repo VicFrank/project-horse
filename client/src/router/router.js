@@ -17,6 +17,7 @@ const Store = () => import("../components/pages/store/Store");
 const Checkout = () => import("../components/pages/store/Checkout");
 const PaymentSuccess = () => import("../components/pages/store/PaymentSuccess");
 const AlipayPayment = () => import("../components/pages/store/AlipayPayment");
+const WeChatPay = () => import("../components/pages/store/WeChatPay");
 
 const Games = () => import("../components/pages/games/Games");
 import Game from "../components/pages/games/Game";
@@ -82,6 +83,16 @@ const routes = [
   {
     path: "/alipay_payment/",
     component: AlipayPayment,
+    props: (route) => ({
+      source: route.query.source,
+      livemode: route.query.livemode,
+      clientSecret: route.query.client_secret,
+      itemID: route.query.item_id,
+    }),
+  },
+  {
+    path: "/wechat_payment/",
+    component: WeChatPay,
     props: (route) => ({
       source: route.query.source,
       livemode: route.query.livemode,

@@ -6,7 +6,7 @@
       <pre>
 For a breakdown of the patch, check out our new developer blog: https://news.abilityarena.com/
 
-For full changelog visit: https://www.abilityarena.com/changelog
+For full changelog visit: https://abilityarena.com/changelog
 
 **Featuring**
 

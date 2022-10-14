@@ -1,8 +1,8 @@
 <template>
   <div>
-    <b-button variant="primary" @click="goToAlipay" :disabled="!complete"
+    <b-button variant="primary" @click="goToWechat" :disabled="!complete"
       >{{ $t("store.pay_with_wechat") }}
-    >
+    </b-button>
     <b-alert v-model="showError" variant="danger" dismissible>{{
       error
     }}</b-alert>
@@ -19,8 +19,8 @@ export default {
     error: "",
     showError: false,
     clientSecret: "",
-    alipayRedirect: "",
-    alipayStatus: "",
+    qrCodeUrl: "",
+    paymentStatus: "",
     complete: false,
     keys: {
       dev: "pk_test_kG4TReBTkO6yDfO9mMwtShME00mx65Yyw2",
@@ -31,12 +31,11 @@ export default {
   created() {
     const isDev = process.env.NODE_ENV == "development";
     const key = isDev ? this.keys.dev : this.keys.prod;
-    console.log(key);
     const stripe = window.Stripe(key);
     this.stripe = stripe;
     const rootUrl = isDev
       ? "http://localhost:8080"
-      : "https://www.abilityarena.com";
+      : "https://abilityarena.com";
     let amount = this.items.reduce((acc, item) => {
       return acc + item.cost_usd * 100;
     }, 0);
@@ -45,7 +44,7 @@ export default {
 
     stripe
       .createSource({
-        type: "alipay",
+        type: "wechat",
         amount,
         currency: "usd",
         metadata: {
@@ -55,26 +54,27 @@ export default {
           steamID: this.$store.state.auth.userSteamID,
         },
         redirect: {
-          return_url: `${rootUrl}/alipay_payment?item_id=${itemIDs}`,
+          return_url: `${rootUrl}/wechat_payment?item_id=${itemIDs}`,
         },
       })
       .then((result) => {
+        console.log(result);
         if (result.error) {
           this.error = result.error.message;
           this.showError = true;
         } else {
           const source = result.source;
           this.clientSecret = source.client_secret;
-          this.alipayRedirect = source.redirect.url;
-          this.alipayStatus = source.status;
+          this.qrCodeUrl = source.wechat.qr_code_url;
+          this.paymentStatus = source.status;
           this.complete = true;
         }
       });
   },
 
   methods: {
-    goToAlipay() {
-      window.location.href = this.alipayRedirect;
+    goToWechat() {
+      window.location.href = this.qrCodeUrl;
     },
   },
 };

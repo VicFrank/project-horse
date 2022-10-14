@@ -131,9 +131,7 @@
     <div class="question">Who worked on this game?</div>
     <div class="answer">
       Here’s a list of
-      <a href="https://www.abilityarena.com/credits" target="_blank"
-        >Our Team</a
-      >
+      <a href="https://abilityarena.com/credits" target="_blank">Our Team</a>
     </div>
     <h2>Mechanics</h2>
     <div class="question">
