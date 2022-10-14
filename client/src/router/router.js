@@ -15,6 +15,7 @@ const Admin = () => import("../components/pages/admin/Admin");
 
 const Store = () => import("../components/pages/store/Store");
 const Checkout = () => import("../components/pages/store/Checkout");
+const Checkout2 = () => import("../components/pages/store/Checkout2");
 const PaymentSuccess = () => import("../components/pages/store/PaymentSuccess");
 const AlipayPayment = () => import("../components/pages/store/AlipayPayment");
 const WeChatPay = () => import("../components/pages/store/WeChatPay");
@@ -79,6 +80,7 @@ const routes = [
   { path: "/players/:steam_id/games", component: PlayerGamesList },
   { path: "/store", component: Store },
   { path: "/checkout/:item_ids+", component: Checkout },
+  { path: "/checkout2/:item_ids+", component: Checkout2 },
   { path: "/payment_success/", component: PaymentSuccess },
   {
     path: "/alipay_payment/",
