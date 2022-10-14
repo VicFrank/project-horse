@@ -52,7 +52,7 @@
               v-on:error="onError"
             />
             <StripeAlipay :items="items" class="mb-3" />
-            <StripeWeChatPay :items="items" class="mb-3" />
+            <!-- <StripeWeChatPay :items="items" class="mb-3" /> -->
             <PaypalPurchase
               :items="items"
               :paypalType="paypalType"
@@ -85,7 +85,7 @@ import LoginButton from "../../utility/LoginButton.vue";
 import CosmeticDescription from "../cosmetics/CosmeticDescription.vue";
 import StripePurchase from "./components/StripePurchase.vue";
 import StripeAlipay from "./components/StripeAlipay.vue";
-import StripeWeChatPay from "./components/StripeWeChatPay.vue";
+// import StripeWeChatPay from "./components/StripeWeChatPay.vue";
 import PaypalPurchase from "./components/PaypalPurchase.vue";
 
 export default {
@@ -95,7 +95,7 @@ export default {
     PaypalPurchase,
     StripePurchase,
     StripeAlipay,
-    StripeWeChatPay,
+    // StripeWeChatPay,
   },
 
   data() {
