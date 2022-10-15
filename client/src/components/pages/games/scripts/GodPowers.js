@@ -16,7 +16,7 @@ const gods = {
   donkeyAghanim: ["sorceryVolumeTwo"],
   gambler: ["allIn"],
   phantomAssassin: ["veiledPact"],
-  alchemist: ["greevilsGreed", "unstableConcotion"],
+  alchemist: ["greevilsGreed", "unstableConcoction"],
   kanna: ["preyOnTheWeak"],
   crystalMaiden: [],
   tinker: ["rearm"],

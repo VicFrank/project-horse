@@ -6,21 +6,19 @@
         v-for="god of gods"
         :key="god.god_name"
         class="text-center m-3"
-        style="position: relative"
+        style="position: relative; max-width: 100px"
       >
-        <div v-if="!god.owned" class="overlay"></div>
         <GodImage
+          :class="{ overlay: !god.owned }"
           :god="god.god_name"
           :height="100"
-          v-bind:class="{
-            'gold-card': god.gold,
-          }"
         ></GodImage>
         <div
           v-bind:class="{
             'my-1': true,
             'text-muted': !god.owned,
             'text-danger': god.banned,
+            'text-gold': god.gold,
           }"
         >
           {{ $t(`gods.${god.god_name}`) }}
@@ -105,15 +103,9 @@ export default {
 }
 
 .overlay {
-  position: absolute;
-  top: 0;
   background-color: #403652;
   opacity: 0.5;
   width: 100%;
   height: 100px;
-}
-
-.gold-card {
-  box-shadow: 0 0 0 1px gold, 0 0 0 2px gold, 0 0 0 3px gold;
 }
 </style>
