@@ -266,7 +266,7 @@ module.exports = {
       if (maxLevel > 50) {
         const goldChest = await Cosmetics.getCosmeticByName("chest_gold");
         const basicChest = await Cosmetics.getCosmeticByName("chest_basic");
-        for (let i = 51; i <= maxLevel; i++) {
+        for (let i = minLevel; i <= maxLevel; i++) {
           if (i === 100) {
             const diamondGamblerAvatar = await Cosmetics.getCosmeticByName(
               "avatar_gambler_diamond"
