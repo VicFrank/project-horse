@@ -5,6 +5,7 @@
         {{ player.username }}
       </h1>
       <RankBadge
+        v-if="player"
         class="text-center mb-2"
         :badge="player.badge"
         :pips="player.pips"

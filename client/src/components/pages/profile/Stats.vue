@@ -5,6 +5,7 @@
       <b-spinner label="Loading..."></b-spinner>
     </div>
     <RankBadge
+      v-if="!loading"
       class="text-center mb-2"
       :badge="playerStats.badge"
       :pips="playerStats.pips"
