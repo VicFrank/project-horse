@@ -7,7 +7,8 @@ const passport = require("passport");
 const session = require("express-session");
 const SteamStrategy = require("passport-steam").Strategy;
 const pgSession = require("connect-pg-simple")(session);
-
+const http = require("http");
+const WebSocket = require("ws");
 const keys = require("./config/keys");
 
 const gamesRouter = require("./routes/games");
@@ -24,8 +25,9 @@ const statsRouter = require("./routes/stats");
 const godsRouter = require("./routes/gods");
 const redemptionsRouter = require("./routes/redemption-codes");
 
-const players = require("./db/players");
+const websocketHandler = require("./websocket/connection");
 
+const players = require("./db/players");
 const { pool } = require("./db/index");
 
 const port = 4000;
@@ -91,7 +93,8 @@ if (process.env.IS_PRODUCTION) {
   sess.cookie.secure = true;
 }
 
-app.use(session(sess));
+const sessionParser = session(sess);
+app.use(sessionParser);
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -139,11 +142,63 @@ app.use("/api/stats", statsRouter);
 app.use("/api/gods", godsRouter);
 app.use("/api/redemption_codes", redemptionsRouter);
 
+// Websocket stuff
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ clientTracking: true, noServer: true });
+
+server.on("upgrade", (req, socket, head) => {
+  sessionParser(req, {}, () => {
+    if (!req.session.passport) {
+      console.log("Session or Passport not found");
+      socket.destroy();
+      return;
+    }
+
+    const user = req.session.passport.user;
+    if (!user) {
+      console.log("Not logged in");
+      socket.destroy();
+      return;
+    }
+
+    wss.handleUpgrade(req, socket, head, function (ws) {
+      wss.emit("connection", ws, user);
+    });
+  });
+});
+
+wss.on("connection", function (ws, user) {
+  websocketHandler(ws, user);
+});
+
+wss.on("error", function error(error) {
+  console.log(`websocket error ${error}`);
+});
+
+// Periodically send heartbeats
+const interval = setInterval(function ping() {
+  wss.clients.forEach(function each(ws) {
+    if (ws.isAlive === false) {
+      console.log("hearbeat failed, killing");
+      return ws.terminate();
+    }
+
+    ws.isAlive = false;
+
+    ws.send(JSON.stringify({ event: "ping" }));
+  });
+}, 30000);
+
+wss.on("close", function close() {
+  console.log("close websocket server");
+  clearInterval(interval);
+});
+
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/client/dist/index.html"));
 });
 
-const server = app.listen(port, () => {
+const runningServer = server.listen(port, () => {
   console.log(`App running on port ${port}.`);
 });
 
@@ -151,7 +206,7 @@ process.on("SIGINT", () => {
   console.info("SIGINT signal received.");
 
   // Stops the server from accepting new connections and finishes existing connections.
-  server.close((err) => {
+  runningServer.close(function (err) {
     // if error, log and exit with error (1 code)
     if (err) {
       console.error(err);

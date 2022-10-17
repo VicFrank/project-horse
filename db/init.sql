@@ -187,6 +187,10 @@ CREATE TABLE IF NOT EXISTS player_cosmetics (
 );
 CREATE INDEX "IDX_player_cosmetics_cosmetic_id_steam_id" ON player_cosmetics(cosmetic_id, steam_id);
 
+--------------------------------------------------------------------------------
+-- Battle Pass
+--------------------------------------------------------------------------------
+
 DROP TABLE IF EXISTS battle_pass CASCADE;
 CREATE TABLE IF NOT EXISTS battle_pass (
   battle_pass_id SERIAL PRIMARY KEY,
@@ -233,6 +237,10 @@ CREATE TABLE IF NOT EXISTS player_claimed_battle_pass_rewards (
 CREATE INDEX "IDX_player_claimed_battle_pass_rewards_steam_id_battle_pass_id"
 ON player_claimed_battle_pass_rewards(steam_id, battle_pass_id);
 
+--------------------------------------------------------------------------------
+-- Quests / Achievements
+--------------------------------------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS quests (
   quest_id SERIAL PRIMARY KEY,
   quest_name TEXT NOT NULL,
@@ -258,6 +266,10 @@ CREATE TABLE IF NOT EXISTS player_quests (
   CONSTRAINT player_quests_pkey PRIMARY KEY (steam_id, quest_id)
 );
 
+--------------------------------------------------------------------------------
+-- Login Quests
+--------------------------------------------------------------------------------
+
 -- Quests that you claim every day you login
 CREATE TABLE IF NOT EXISTS login_quests (
   login_quest_id SERIAL PRIMARY KEY,
@@ -277,6 +289,10 @@ CREATE TABLE IF NOT EXISTS player_login_quests (
 );
 CREATE UNIQUE INDEX ON player_login_quests (steam_id, login_quest_id);
 
+--------------------------------------------------------------------------------
+-- Welcome Quests
+--------------------------------------------------------------------------------
+
 DROP TABLE IF EXISTS welcome_quests CASCADE;
 CREATE TABLE IF NOT EXISTS welcome_quests (
   welcome_quest_id SERIAL PRIMARY KEY,
@@ -295,6 +311,10 @@ CREATE TABLE IF NOT EXISTS player_welcome_quests (
 );
 CREATE UNIQUE INDEX ON player_welcome_quests (steam_id, welcome_quest_id);
 
+--------------------------------------------------------------------------------
+-- Chest Drops
+--------------------------------------------------------------------------------
+
 DROP TABLE IF EXISTS drop_type_rewards;
 CREATE TABLE IF NOT EXISTS drop_type_rewards (
   drop_type TEXT NOT NULL,
@@ -312,6 +332,10 @@ CREATE TABLE IF NOT EXISTS chest_drop_types (
 
   CONSTRAINT chest_drop_types_pkey PRIMARY KEY (chest_cosmetic_id, drop_type, cum_sum_odds)
 );
+
+--------------------------------------------------------------------------------
+-- Reward Codes
+--------------------------------------------------------------------------------
 
 DROP TABLE IF EXISTS redemption_codes;
 CREATE TABLE IF NOT EXISTS redemption_codes (
@@ -336,6 +360,32 @@ CREATE TABLE IF NOT EXISTS player_redeemed_codes (
 
   CONSTRAINT player_redeemed_codes_pkey PRIMARY KEY (steam_id, code)
 );
+
+--------------------------------------------------------------------------------
+-- Matchmaking
+--------------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS lobbies CASCADE;
+CREATE TABLE IF NOT EXISTS lobbies (
+  lobby_id SERIAL PRIMARY KEY,
+  region TEXT,
+  min_rank INTEGER,
+  max_rank INTEGER,
+  lobby_password TEXT,
+  lock_time TIMESTAMPTZ
+);
+
+DROP TABLE IF EXISTS lobby_players;
+CREATE TABLE IF NOT EXISTS lobby_players (
+  lobby_id INTEGER REFERENCES lobbies (lobby_id),
+  steam_id TEXT REFERENCES players (steam_id) UNIQUE,
+  is_host BOOLEAN DEFAULT FALSE,
+  ready BOOLEAN DEFAULT FALSE,
+  avatar TEXT,
+
+  CONSTRAINT lobby_players_pkey PRIMARY KEY (lobby_id, steam_id)
+);
+CREATE UNIQUE INDEX ON lobby_players (lobby_id, steam_id);
 
 --------------------------------------------------------------------------------
 -- Polls

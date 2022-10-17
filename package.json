@@ -34,7 +34,8 @@
     "pg-tx": "^1.0.1",
     "redis": "^4.0.4",
     "stripe": "^8.211.0",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "ws": "^8.9.0"
   },
   "devDependencies": {
     "concurrently": "^6.5.1",
