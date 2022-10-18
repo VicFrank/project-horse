@@ -335,7 +335,7 @@ module.exports = connection = (ws, user) => {
 };
 
 (async function () {
-  runTests();
+  // runTests();
 })();
 
 async function runTests() {
