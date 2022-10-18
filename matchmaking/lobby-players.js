@@ -1,5 +1,6 @@
 const { query } = require("../db/index");
 const { LOBBY_LOCK_TIME } = require("../common/constants");
+const Players = require("../db/players");
 
 module.exports = {
   async getLobby(steamID) {
@@ -39,13 +40,14 @@ module.exports = {
   },
 
   async joinLobby(steamID, lobbyID, avatar) {
+    const rank = await Players.getLeaderboardPositionForPlayer(steamID);
     await query(
       `
       INSERT INTO lobby_players
-      (steam_id, lobby_id, avatar)
-      VALUES ($1, $2, $3)
+      (steam_id, lobby_id, avatar, leaderboard_rank)
+      VALUES ($1, $2, $3, $4)
     `,
-      [steamID, lobbyID, avatar]
+      [steamID, lobbyID, avatar, rank]
     );
   },
 
@@ -64,6 +66,24 @@ module.exports = {
     const player = await this.getPlayer(steamID);
     if (!player) return false;
     if (!player.lobby_id) return false;
+    return true;
+  },
+
+  async getPlayerMMR(steamID) {
+    const { rows } = await query(
+      `SELECT mmr, ladder_mmr
+      FROM players
+      WHERE steam_id = $1
+    `,
+      [steamID]
+    );
+    return rows[0].mmr;
+  },
+
+  async isInMMRRange(steamID, minRank, maxRank) {
+    const mmr = await this.getPlayerMMR(steamID);
+    if (!mmr) return false;
+    if (mmr < minRank || mmr > maxRank) return false;
     return true;
   },
 };

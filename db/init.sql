@@ -381,6 +381,7 @@ CREATE TABLE IF NOT EXISTS lobby_players (
   steam_id TEXT REFERENCES players (steam_id) UNIQUE,
   is_host BOOLEAN DEFAULT FALSE,
   ready BOOLEAN DEFAULT FALSE,
+  leaderboard_rank INTEGER,
   avatar TEXT,
 
   CONSTRAINT lobby_players_pkey PRIMARY KEY (lobby_id, steam_id)

@@ -1,9 +1,23 @@
 <template>
   <td>
     <template v-if="player">
-      <img v-if="player.avatar" :src="player.avatar" :alt="player.username" class="mr-2" />
-      <i v-if="player.is_host" class="fas fa-crown mr-1"></i>
-      {{ player.username }}
+      <div class="d-flex justify-content-center align-items-center">
+        <img
+          v-if="player.avatar"
+          :src="player.avatar"
+          :alt="player.username"
+          class="mr-2"
+        />
+        <i v-if="player.is_host" class="fas fa-crown mr-1"></i>
+        {{ player.username }}
+        <RankBadge
+          class="ml-2"
+          :height="32"
+          :badge="player.badge"
+          :pips="player.pips"
+          :rank="player.rank"
+        />
+      </div>
     </template>
     <template v-else>
       <span class="text-muted">Empty Slot</span>
@@ -12,10 +26,14 @@
 </template>
 
 <script>
+import RankBadge from "../../../utility/RankBadge.vue";
 export default {
+  components: {
+    RankBadge,
+  },
   props: {
-    player: Object
-  }
+    player: Object,
+  },
 };
 </script>
 

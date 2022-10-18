@@ -3,7 +3,6 @@ const lobbyPlayers = require("../matchmaking/lobby-players");
 const connectionManager = require("./connectionManager");
 
 const { LOBBY_LOCK_TIME } = require("../common/constants");
-const { getLobby } = require("../matchmaking/lobby-players");
 
 /*
   Handle the different websocket events
@@ -78,17 +77,16 @@ function sendError(steamID, errorMessage) {
   connectionManager.sendMessageToPlayer(steamID, data);
 }
 
-async function makeLobby(steamID, avatar, region) {
-  // TODO: MMR ranges
-  const minRank = 0;
-  const maxRank = 0;
-
+async function makeLobby(steamID, avatar, region, minRank, maxRank) {
   // check to see if the player can make this lobby
+  const isInMMRRange = await lobbyPlayers.isInMMRRange(
+    steamID,
+    minRank,
+    maxRank
+  );
+  if (!isInMMRRange) return sendError(steamID, "failed_lobby_requirements");
   const inLobby = await lobbyPlayers.inLobby(steamID);
-  if (inLobby) {
-    sendError(steamID, "already_in_lobby");
-    return;
-  }
+  if (inLobby) return sendError(steamID, "already_in_lobby");
 
   return await lobbies.makeLobby(steamID, avatar, region, minRank, maxRank);
 }
@@ -105,7 +103,6 @@ async function updateLobbyPlayers(lobbyID) {
 
 async function joinLobby(steamID, lobbyID, avatar) {
   const lobby = await lobbies.getLobby(lobbyID);
-  const player = await lobbyPlayers.getPlayer(steamID);
 
   const inLobby = await lobbyPlayers.inLobby(steamID);
   if (inLobby) {
@@ -124,8 +121,11 @@ async function joinLobby(steamID, lobbyID, avatar) {
     return;
   }
 
-  // TODO: Check if player meets mmr requirements
-  const meetsRequirements = true;
+  const meetsRequirements = await lobbyPlayers.isInMMRRange(
+    steamID,
+    lobby.min_rank,
+    lobby.max_rank
+  );
   if (!meetsRequirements) {
     sendError(steamID, "failed_lobby_requirements");
     return;
@@ -307,8 +307,8 @@ module.exports = connection = (ws, user) => {
         // Try to find a lobby that matches the user's preferences
         break;
       case "make_lobby":
-        const region = data.region;
-        makeLobby(steamID, avatar, region);
+        const { region, mmrMin, mmrMax } = data;
+        makeLobby(steamID, avatar, region, mmrMin, mmrMax);
         break;
     }
   });
@@ -327,21 +327,21 @@ module.exports = connection = (ws, user) => {
 };
 
 (async function () {
-  // runTests();
+  runTests();
 })();
 
 async function runTests() {
-  console.log("running tests");
+  // console.log("running tests");
 
   const steamIDs = [
     "76561197960956468",
-    "76561197964547457",
-    "76561198014254115",
-    "76561197960287930",
-    "76561198052211234",
-    "76561198015161808",
-    "76561198007141460",
-    "76561198030851434",
+    "76561198062147437",
+    "76561198397146825",
+    "76561198389696579",
+    "76561198055012951",
+    "76561197996590553",
+    "76561198862719145",
+    "76561198025862322",
   ];
 
   const player1 = steamIDs[0];
@@ -353,16 +353,16 @@ async function runTests() {
   const player7 = steamIDs[6];
   const player8 = steamIDs[7];
 
-  // await leaveLobby(player1);
+  await leaveLobby(player1);
   // await leaveLobby(player2);
   // await leaveLobby(player3);
   // await leaveLobby(player4);
   // await leaveLobby(player5);
   // await leaveLobby(player6);
 
-  // const lobbyID = await makeLobby(player1, null, "US West");
+  // const lobbyID = await makeLobby(player1, null, "US West", 1100, 1300);
 
-  // await joinLobby(player1, 6, null);
+  await joinLobby(player1, 10, null);
   // await joinLobby(player3, lobbyID, null);
   // await joinLobby(player4, lobbyID, null);
   // await joinLobby(player5, lobbyID, null);

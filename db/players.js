@@ -7,7 +7,6 @@ const RedemptionCodes = require("./redemption-codes");
 const mmr = require("../mmr/mmr");
 const moment = require("moment");
 const { addTransactionLog } = require("./logs");
-const { shouldAutoConsume } = require("./cosmetics");
 
 module.exports = {
   // --------------------------------------------------
@@ -242,6 +241,13 @@ module.exports = {
     return result.rows.length > 0;
   },
 
+  async getMMR(steamID) {
+    const result = await query(`SELECT mmr FROM players WHERE steam_id = $1`, [
+      steamID,
+    ]);
+    return result.rows[0]?.mmr ?? 0;
+  },
+
   async getLeaderboardPosition(mmr) {
     try {
       const { rows } = await query(
@@ -250,6 +256,15 @@ module.exports = {
       );
       if (rows.length === 0) return 0;
       return parseInt(rows[0].count) + 1;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getLeaderboardPositionForPlayer(steamID) {
+    try {
+      const mmr = await this.getMMR(steamID);
+      return await this.getLeaderboardPosition(mmr);
     } catch (error) {
       throw error;
     }

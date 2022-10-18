@@ -1,6 +1,8 @@
 const { query } = require("../db/index");
+const mmr = require("../mmr/mmr");
 const { LOBBY_LOCK_TIME, LOBBY_SIZE } = require("../common/constants");
-const lobbyPlayers = require("./lobby-players");
+const LobbyPlayers = require("./lobby-players");
+const Players = require("../db//players");
 
 module.exports = {
   async getAllLobbies() {
@@ -10,9 +12,30 @@ module.exports = {
       FROM lobbies
       JOIN lobby_players
       USING (lobby_id)
-      WHERE (lock_time > NOW() - INTERVAL '${LOBBY_LOCK_TIME} SECONDS') IS NOT TRUE
-      GROUP BY lobby_id`);
+      GROUP BY lobby_id
+      ORDER BY max_rank desc`);
     return rows;
+  },
+
+  async getAllLobbiesForPlayer(steamID) {
+    try {
+      const mmr = await LobbyPlayers.getPlayerMMR(steamID);
+      const { rows } = await query(
+        `
+        SELECT lobby_id, region, min_rank, max_rank,
+          count(*) as lobbySize
+        FROM lobbies
+        JOIN lobby_players
+        USING (lobby_id)
+        WHERE min_rank <= $1 AND max_rank >= $1
+        GROUP BY lobby_id
+        ORDER BY max_rank desc`,
+        [mmr]
+      );
+      return rows;
+    } catch (error) {
+      throw error;
+    }
   },
 
   async getLobby(lobbyID) {
@@ -62,7 +85,7 @@ module.exports = {
   async getLobbyPlayers(lobbyID) {
     const { rows } = await query(
       `
-      SELECT players.steam_id, is_host, username, avatar
+      SELECT players.steam_id, is_host, username, avatar, ladder_mmr, leaderboard_rank as rank
       FROM lobby_players
       JOIN players
       USING (steam_id)
@@ -70,6 +93,10 @@ module.exports = {
     `,
       [lobbyID]
     );
+    for (const player of rows) {
+      player.badge = mmr.getRankBadge(player.ladder_mmr);
+      player.pips = mmr.getRankPips(player.ladder_mmr);
+    }
 
     return rows;
   },
@@ -104,20 +131,18 @@ module.exports = {
   async makeLobby(steamID, avatar, region, minRank, maxRank) {
     try {
       // Create the lobby
-      const res = await query(
-        `
-        INSERT INTO
+      const { rows } = await query(
+        `INSERT INTO
         lobbies(region, min_rank, max_rank)
         VALUES($1, $2, $3)
         RETURNING lobby_id`,
         [region, minRank, maxRank]
       );
-      const lobbyID = res.rows[0].lobby_id;
+      const lobbyID = rows[0].lobby_id;
 
       // Insert the player as host
       await query(
-        `
-        INSERT INTO
+        `INSERT INTO
         lobby_players(lobby_id, steam_id, is_host, avatar)
         VALUES ($1, $2, $3, $4)`,
         [lobbyID, steamID, true, avatar]
@@ -126,7 +151,6 @@ module.exports = {
       return lobbyID;
     } catch (e) {
       throw e;
-    } finally {
     }
   },
 
@@ -147,6 +171,6 @@ module.exports = {
     }
 
     const newHostSteamID = players[0].steam_id;
-    await lobbyPlayers.setIsHost(newHostSteamID, true);
+    await LobbyPlayers.setIsHost(newHostSteamID, true);
   },
 };

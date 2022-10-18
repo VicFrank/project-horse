@@ -7,6 +7,7 @@ const state = {
   hasPlus: false,
   plus_expiration: null,
   coins: 0,
+  mmr: null,
   achievementsToClaim: 0,
   questsToClaim: 0,
   unopenedChests: 0,
@@ -27,6 +28,7 @@ const getters = {
   loggedIn: (state) => state.userSteamID !== "",
   isAdmin: (state) => state.isAdmin,
   userType: (state) => state.userType,
+  mmr: (state) => state.mmr,
   hasPlus: (state) => state.hasPlus,
   coins: (state) => state.coins,
   plus_expiration: (state) => state.plus_expiration,
@@ -65,6 +67,7 @@ const mutations = {
       username,
       isAdmin,
       userType,
+      mmr,
       achievementsToClaim,
       questsToClaim,
       coins,
@@ -78,6 +81,7 @@ const mutations = {
     state.loggedIn = true;
     state.isAdmin = isAdmin;
     state.userType = userType;
+    state.mmr = mmr;
     state.achievementsToClaim = achievementsToClaim;
     state.questsToClaim = questsToClaim;
     state.unopenedChests = unopenedChests;
@@ -104,6 +108,7 @@ const actions = {
           username: player.username,
           userType: player.user_type,
           isAdmin: player.user_type === "ADMIN",
+          mmr: player.mmr,
           achievementsToClaim: player.achievements_to_claim,
           questsToClaim: player.unclaimed_quests,
           coins: player.coins,
