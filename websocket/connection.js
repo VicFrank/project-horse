@@ -88,7 +88,15 @@ async function makeLobby(steamID, avatar, region, minRank, maxRank) {
   const inLobby = await lobbyPlayers.inLobby(steamID);
   if (inLobby) return sendError(steamID, "already_in_lobby");
 
-  return await lobbies.makeLobby(steamID, avatar, region, minRank, maxRank);
+  const lobbyID = await lobbies.makeLobby(
+    steamID,
+    avatar,
+    region,
+    minRank,
+    maxRank
+  );
+
+  updateLobbyPlayers(lobbyID);
 }
 
 async function updateLobbyPlayers(lobbyID) {

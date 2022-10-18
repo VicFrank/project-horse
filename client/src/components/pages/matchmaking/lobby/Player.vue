@@ -11,6 +11,7 @@
         <i v-if="player.is_host" class="fas fa-crown mr-1"></i>
         {{ player.username }}
         <RankBadge
+          v-if="player.badge"
           class="ml-2"
           :height="32"
           :badge="player.badge"
