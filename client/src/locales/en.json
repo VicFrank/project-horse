@@ -765,7 +765,7 @@
     "assault_respawnTimePenalty": "ESPAWN TIME PENALTY: 2",
     "assault_respawnHealthPct": "RESPAWN HEALTH: 50",
     "darkMoonBlessing": "Dark Moon Blessing",
-    "darkMoonBlessing_Description": "Ally heroes gain 4% spell amplification per 1 mana used. Buff resets every round.",
+    "darkMoonBlessing_Description": "Ally heroes gain 0.04% spell amplification per 1 mana used. Buff resets every round.",
     "darkMoonBlessing_spellAmpPct": "SPELL AMP: 4%",
     "letsMakeADeal": "Let's Make a Deal",
     "letsMakeADeal_Description": "You can only upgrade your shop to level 3, but all spells cost 2 gold (and sell for 1). The amount of spells that appear in your shop is also reduced to 2/3/4.",
