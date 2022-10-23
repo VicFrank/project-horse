@@ -2,7 +2,7 @@
   <div class="text-center">
     <h1 class="blue">Matchmaking</h1>
     <HostLobby class="mb-3" />
-    <LobbyList class="lobbies-list" />
+    <LobbyList key="Lobbies" class="lobbies-list" />
   </div>
 </template>
 
@@ -12,8 +12,8 @@ import HostLobby from "./buttons/HostLobby";
 export default {
   components: {
     LobbyList,
-    HostLobby
-  }
+    HostLobby,
+  },
 };
 </script>
 

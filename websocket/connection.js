@@ -1,5 +1,6 @@
 const lobbies = require("../matchmaking/lobbies");
 const lobbyPlayers = require("../matchmaking/lobby-players");
+const Players = require("../db/players");
 const connectionManager = require("./connectionManager");
 
 const { LOBBY_LOCK_TIME } = require("../common/constants");
@@ -295,6 +296,7 @@ module.exports = connection = (ws, user) => {
         break;
       case "pong":
         ws.isAlive = true;
+        Players.updatePingTime(steamID);
         break;
       case "chat":
         // Send a message to the chat lobby
@@ -326,9 +328,19 @@ module.exports = connection = (ws, user) => {
   });
 
   ws.on("close", function () {
-    // TODO: Remove player from the lobby if they've been disconnected
-    // long enough
     console.log(`Websocket Closed: ${username} ${steamID}`);
+    // In 5 minutes, if they're still not connected, kick them from the lobby
+    setTimeout(async () => {
+      try {
+        const timeSincePing = await Players.getTimeSincePing(steamID);
+        if (timeSincePing > 4 * 60) {
+          console.log(`Kicking ${username} from lobby for being afk`);
+          await leaveLobby(steamID);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }, 5 * 60 * 1000);
 
     connectionManager.removeConnection(steamID);
   });

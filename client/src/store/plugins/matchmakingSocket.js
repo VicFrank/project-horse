@@ -35,8 +35,8 @@ function connect(store) {
     try {
       const { event, data } = JSON.parse(e.data);
 
-      console.log(e.data);
-      console.log(event, data);
+      // console.log(e.data);
+      // console.log(event, data);
 
       switch (event) {
         case "ping":
@@ -75,8 +75,8 @@ function connect(store) {
     }
   };
 
-  connection.onclose = (e) => {
-    console.log(`websocket closed ${e}`);
+  connection.onclose = () => {
+    // console.log(`websocket closed ${e}`);
     clearTimeout(connection.pingTimeout);
     store.dispatch("setDisconnected", true);
   };
@@ -87,6 +87,11 @@ function isClosed() {
 }
 
 export default function createWebSocketPlugin() {
+  // only connect to the websocket if we're on the matchmaking page
+  if (window.location.pathname !== "/matchmaking") {
+    return () => {};
+  }
+
   return (store) => {
     if (!store.getters.loggedIn) return;
 
@@ -107,7 +112,7 @@ export default function createWebSocketPlugin() {
       const inLobby = state.matchmaking.inLobby;
       const data = mutation.payload;
 
-      console.log(mutation);
+      // console.log(mutation);
 
       // Refresh the websocket connection
       if (mutation.type === "REFRESH_CONNECTION") {

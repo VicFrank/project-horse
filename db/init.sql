@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS players (
   patreon_level INTEGER DEFAULT 0,
   plus_expiration TIMESTAMPTZ,
   last_login_quest_claimed TIMESTAMPTZ,
+  last_ping TIMESTAMPTZ,
   created_at TIMESTAMPTZ DEFAULT Now()
 );
 CREATE INDEX ix_players_mmr ON players (mmr);
