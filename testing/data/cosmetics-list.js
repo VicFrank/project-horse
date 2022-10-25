@@ -1,9 +1,72 @@
 module.exports = [
   /**
    * *************************
-   * Avatar Items
+   * Emote Packs
    * *************************
    */
+  {
+    name: "emote_pack_rune_god_1",
+    type: "Consumable",
+    equip_group: "",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Mythical",
+  },
+  {
+    name: "emote_pack_rune_god_2",
+    type: "Consumable",
+    equip_group: "",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Mythical",
+  },
+  {
+    name: "emote_pack_rune_god_3",
+    type: "Consumable",
+    equip_group: "",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Mythical",
+  },
+  /**
+   * *************************
+   * Emotes
+   * *************************
+   */
+  {
+    name: "emote_random",
+    type: "Consumable",
+    equip_group: "",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Common",
+  },
+  /**
+   * *************************
+   * SFX
+   * *************************
+   */
+  {
+    name: "sfx_gaben_posh",
+    type: "SFX",
+    equip_group: "sfx_gaben",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Common",
+  },
+  /**
+   * *************************
+   * Avatars
+   * *************************
+   */
+  {
+    name: "avatar_random",
+    type: "Consumable",
+    equip_group: "",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Ancient",
+  },
   {
     // Battle Pass Reward
     name: "avatar_gaben",
@@ -16,6 +79,15 @@ module.exports = [
   {
     // Battle Pass Reward
     name: "avatar_gambler_diamond",
+    type: "Avatar Frame",
+    equip_group: "avatar_frame",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Arcana",
+  },
+  {
+    // Battle Pass Reward
+    name: "avatar_rune_god",
     type: "Avatar Frame",
     equip_group: "avatar_frame",
     coins: -1,
@@ -904,6 +976,14 @@ module.exports = [
     rarity: "Immortal",
   },
   {
+    name: "card_chaosGod",
+    type: "Card Frame",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "",
+    rarity: "Immortal",
+  },
+  {
     name: "gold_card_dazzle",
     type: "Card Frame",
     coins: -1,
@@ -1128,7 +1208,7 @@ module.exports = [
     rarity: "Immortal",
   },
   {
-    name: "gold_card_card_boomer",
+    name: "gold_card_boomer",
     type: "Card Frame",
     coins: -1,
     cost_usd: -1,
@@ -1136,7 +1216,7 @@ module.exports = [
     rarity: "Immortal",
   },
   {
-    name: "gold_card_card_toyPudge",
+    name: "gold_card_toyPudge",
     type: "Card Frame",
     coins: -1,
     cost_usd: -1,
@@ -1144,7 +1224,15 @@ module.exports = [
     rarity: "Immortal",
   },
   {
-    name: "gold_card_card_glados",
+    name: "gold_card_glados",
+    type: "Card Frame",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "",
+    rarity: "Immortal",
+  },
+  {
+    name: "gold_card_chaosGod",
     type: "Card Frame",
     coins: -1,
     cost_usd: -1,
