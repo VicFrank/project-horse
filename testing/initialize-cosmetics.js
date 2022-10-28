@@ -113,6 +113,114 @@ async function addCosmetics() {
         cost_usd: -1,
         rarity: "Arcana",
       },
+      {
+        // Chest Drop
+        name: "hat_birthday_rainbow",
+        type: "Avatar Hat",
+        equip_group: "avatar_hat",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        // Chest Drop
+        name: "hat_birthday_blower",
+        type: "Avatar Hat",
+        equip_group: "avatar_hat",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        // Chest Drop
+        name: "hat_diamond_trophy",
+        type: "Avatar Hat",
+        equip_group: "avatar_hat",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        // Chest Drop
+        name: "hat_diamond_trophy2",
+        type: "Avatar Hat",
+        equip_group: "avatar_hat",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        // Chest Drop
+        name: "hat_gold_trophy",
+        type: "Avatar Hat",
+        equip_group: "avatar_hat",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        // Chest Drop
+        name: "hat_gold_trophy2",
+        type: "Avatar Hat",
+        equip_group: "avatar_hat",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        // Chest Drop
+        name: "hat_rainbow",
+        type: "Avatar Hat",
+        equip_group: "avatar_hat",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        // Chest Drop
+        name: "hat_rainbow_beard",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        // Chest Drop
+        name: "hat_rainbow_horn",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        // Chest Drop
+        name: "hat_rainbow_trophy",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        // Chest Drop
+        name: "hat_rainbow_vomit",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        // Chest Drop
+        name: "hat_rainbow_vomit_teeth",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
     ]);
     console.log("Cosmetics initialized");
   } catch (error) {
