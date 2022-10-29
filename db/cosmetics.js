@@ -1,5 +1,7 @@
 const tx = require("pg-tx");
 const { query, pool } = require("./index");
+const RandomDrops = require("../testing/data/random-drops");
+const EmotePacks = require("../testing/data/emote-packs");
 
 module.exports = {
   async getAllCosmetics() {
@@ -337,9 +339,6 @@ module.exports = {
     }
   },
 
-  // --------------------------------------------------
-  // Chests
-  // --------------------------------------------------
   async getChestDropTypes(chestCosmeticID) {
     try {
       const { rows } = await query(
@@ -381,5 +380,13 @@ module.exports = {
     } catch (error) {
       throw error;
     }
+  },
+
+  getEmotePackItems(cosmeticName) {
+    return EmotePacks[cosmeticName];
+  },
+
+  getRandomDrops(cosmeticName) {
+    return RandomDrops[cosmeticName];
   },
 };

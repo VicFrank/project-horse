@@ -221,6 +221,30 @@ async function addCosmetics() {
         cost_usd: -1,
         rarity: "Rare",
       },
+      {
+        name: "avatar_rainbow",
+        type: "Avatar Frame",
+        equip_group: "avatar_frame",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        name: "avatar_rainbow_day",
+        type: "Avatar Frame",
+        equip_group: "avatar_frame",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        name: "avatar_rainbow_night",
+        type: "Avatar Frame",
+        equip_group: "avatar_frame",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
     ]);
     console.log("Cosmetics initialized");
   } catch (error) {

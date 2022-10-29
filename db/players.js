@@ -7,7 +7,6 @@ const RedemptionCodes = require("./redemption-codes");
 const mmr = require("../mmr/mmr");
 const moment = require("moment");
 const { addTransactionLog } = require("./logs");
-const { shouldAutoConsume } = require("./cosmetics");
 
 module.exports = {
   // --------------------------------------------------
@@ -1495,8 +1494,44 @@ module.exports = {
     }
   },
 
+  async openEmotePack(steamID, cosmeticName) {
+    try {
+      const itemNames = Cosmetics.getEmotePackItems(cosmeticName);
+      const items = {};
+      for (const itemName of itemNames) {
+        const cosmetic = await Cosmetics.getCosmeticByName(itemName);
+        items[cosmetic.cosmetic_id] = 1;
+      }
+      await this.doItemTransaction(steamID, { items });
+      return itemNames;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async openRandomDrop(steamID, cosmeticName) {
+    try {
+      const itemNames = Cosmetics.getRandomDrops(cosmeticName);
+      const ownedItems = await this.getCosmetics(steamID);
+      const itemsToChooseFrom = itemNames.filter(
+        (itemName) => !ownedItems.includes(itemName)
+      );
+      if (itemsToChooseFrom.length == 0) return;
+      const randomItem =
+        itemsToChooseFrom[Math.floor(Math.random() * itemsToChooseFrom.length)];
+      const cosmetic = await Cosmetics.getCosmeticByName(randomItem);
+      await this.doItemTransaction(steamID, {
+        items: { [cosmetic.cosmetic_id]: 1 },
+      });
+      return randomItem;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async consumeItem(steamID, cosmeticID) {
     try {
+      let results;
       const cosmetic = await Cosmetics.getCosmetic(cosmeticID);
 
       if (!cosmetic) throw new Error(`Invalid cosmetic ID ${cosmeticID}`);
@@ -1601,6 +1636,20 @@ module.exports = {
           break;
       }
 
+      // Handle emote packs
+      if (cosmeticName.startsWith("emote_pack_")) {
+        results = await this.openEmotePack(steamID, cosmeticName);
+      }
+
+      // Handle random items
+      if (cosmeticName === "avatar_random" || cosmeticName === "emote_random") {
+        results = await this.openRandomDrop(steamID, cosmeticName);
+        if (!results) {
+          throw new Error("You already own all items of this type");
+        }
+      }
+
+      // Handle upgrading the battle pass
       if (cosmeticName === "buy_bp") {
         const success = await this.unlockBattlePass(steamID);
         if (!success) throw new Error("Battle Pass is already upgraded");
@@ -1617,7 +1666,7 @@ module.exports = {
       await this.addBattlePassXp(steamID, xp);
       await this.modifyCoins(steamID, gold);
 
-      return true;
+      return results;
     } catch (error) {
       throw error;
     }
