@@ -15,7 +15,7 @@ module.exports = [
   },
   {
     level: 3,
-    cosmetics: ["avatar_bronze"],
+    cosmetics: ["emote_random"],
     nextLevelXp: 100,
     free: false,
     coins: 0,
@@ -64,7 +64,7 @@ module.exports = [
   },
   {
     level: 10,
-    cosmetics: ["chest_gold"],
+    cosmetics: ["emote_pack_rune_god_1"],
     nextLevelXp: 200,
     free: true,
     coins: 0,
@@ -92,7 +92,7 @@ module.exports = [
   },
   {
     level: 14,
-    cosmetics: ["chest_gold"],
+    cosmetics: ["emote_pack_rune_god_2"],
     nextLevelXp: 300,
     free: false,
     coins: 0,
@@ -113,7 +113,7 @@ module.exports = [
   },
   {
     level: 17,
-    cosmetics: ["avatar_silver"],
+    cosmetics: ["avatar_random"],
     nextLevelXp: 400,
     free: false,
     coins: 0,
@@ -127,14 +127,14 @@ module.exports = [
   },
   {
     level: 19,
-    cosmetics: ["finisher_god_gambler"],
+    cosmetics: ["finisher_god_rune"],
     nextLevelXp: 400,
     free: false,
     coins: 0,
   },
   {
     level: 20,
-    cosmetics: ["chest_gold"],
+    cosmetics: ["card_chaosGod"],
     nextLevelXp: 400,
     free: true,
     coins: 0,
@@ -155,7 +155,7 @@ module.exports = [
   },
   {
     level: 23,
-    cosmetics: ["chest_gold"],
+    cosmetics: ["sfx_gaben_posh"],
     nextLevelXp: 500,
     free: false,
     coins: 0,
@@ -183,7 +183,7 @@ module.exports = [
   },
   {
     level: 27,
-    cosmetics: ["avatar_gold"],
+    cosmetics: ["emote_random"],
     nextLevelXp: 600,
     free: false,
     coins: 0,
@@ -204,7 +204,7 @@ module.exports = [
   },
   {
     level: 30,
-    cosmetics: ["terrain_god_gambler"],
+    cosmetics: ["terrain_god_rune"],
     nextLevelXp: 600,
     free: true,
     coins: 0,
@@ -232,7 +232,7 @@ module.exports = [
   },
   {
     level: 34,
-    cosmetics: ["chest_gold"],
+    cosmetics: ["emote_pack_rune_god_3"],
     nextLevelXp: 700,
     free: false,
     coins: 0,
@@ -246,7 +246,7 @@ module.exports = [
   },
   {
     level: 36,
-    cosmetics: ["chest_god"],
+    cosmetics: ["emote_random"],
     nextLevelXp: 800,
     free: false,
     coins: 0,
@@ -267,14 +267,14 @@ module.exports = [
   },
   {
     level: 39,
-    cosmetics: ["avatar_gambler"],
+    cosmetics: ["avatar_rune_god"],
     nextLevelXp: 800,
     free: false,
     coins: 0,
   },
   {
     level: 40,
-    cosmetics: ["card_gambler"],
+    cosmetics: ["card_runeGod"],
     nextLevelXp: 800,
     free: true,
     coins: 0,

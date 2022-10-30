@@ -554,8 +554,8 @@ router.post("/:steamID/use_item/:itemid", auth.userAuth, async (req, res) => {
     const steamID = req.params.steamID;
     const itemid = req.params.itemid;
 
-    await players.consumeItem(steamID, itemid);
-    res.status(200).send({ message: "used item" });
+    const result = await players.consumeItem(steamID, itemid);
+    res.status(200).send(result);
   } catch (error) {
     console.log(error);
     res.status(500).send({ error: error.message });

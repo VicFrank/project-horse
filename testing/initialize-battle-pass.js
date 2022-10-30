@@ -55,13 +55,83 @@ async function initializeBattlePass() {
   }
 }
 
-// Deletes all battlepass data
 async function deleteBattlePasses() {
+  // Deletes all battlepass data
   try {
     await battlePasses.deleteBattlePasses();
     console.log("Battle Pass cleared");
   } catch (error) {
     throw error;
+  }
+}
+
+async function claimRewardsForAllPlayers() {
+  const getUpgradedBattlePasses = async () => {
+    const { rows } = await query(
+      `SELECT steam_id, count(*), player_battle_pass.bp_level
+      FROM player_battle_pass
+      LEFT JOIN player_claimed_battle_pass_rewards USING (steam_id)
+      WHERE player_battle_pass.bp_level <= 40 AND unlocked = TRUE
+      GROUP BY steam_id, player_battle_pass.bp_level
+      HAVING COUNT(*) < player_battle_pass.bp_level`
+    );
+    return rows;
+  };
+
+  const getUnupgradedBattlePasses = async () => {
+    const { rows } = await query(
+      `SELECT steam_id, count(*), player_battle_pass.bp_level, CEIL(player_battle_pass.bp_level / 5)
+        FROM player_battle_pass
+        LEFT JOIN player_claimed_battle_pass_rewards USING (steam_id)
+        WHERE player_battle_pass.bp_level <= 40 AND player_battle_pass.bp_level > 1 AND unlocked = FALSE
+        GROUP BY steam_id, player_battle_pass.bp_level
+        HAVING COUNT(*) < CEIL(player_battle_pass.bp_level / 5)`
+    );
+    return rows;
+  };
+
+  const getBattlePassesAbove40 = async () => {
+    const { rows } = await query(
+      `SELECT steam_id
+        FROM player_battle_pass
+        WHERE player_battle_pass.bp_level >= 40`
+    );
+    return rows;
+  };
+
+  try {
+    const upgradedPlayers = await getUpgradedBattlePasses();
+    console.log(
+      `Found ${upgradedPlayers.length} upgraded players with unclaimed rewards`
+    );
+    let count = 1;
+    for (const player of upgradedPlayers) {
+      const { steam_id } = player;
+      await players.claimAllBattlePassRewards(steam_id);
+      console.log(`${count++} Claimed rewards for ${steam_id}`);
+    }
+    count = 1;
+    const unupgradedPlayers = await getUnupgradedBattlePasses();
+    console.log(
+      `Found ${unupgradedPlayers.length} unupgraded players with unclaimed rewards`
+    );
+    for (const player of unupgradedPlayers) {
+      const { steam_id } = player;
+      await players.claimAllBattlePassRewards(steam_id);
+      console.log(`${count++} Claimed rewards for ${steam_id}`);
+    }
+    const above40Players = await getBattlePassesAbove40();
+    console.log(
+      `Found ${above40Players.length} players with battle pass level above 40`
+    );
+    count = 1;
+    for (const player of above40Players) {
+      const { steam_id } = player;
+      await players.claimAllBattlePassRewards(steam_id);
+      console.log(`${count++} Claimed rewards for ${steam_id}`);
+    }
+  } catch (error) {
+    console.log(error);
   }
 }
 
@@ -128,4 +198,8 @@ async function fixUninitializedPlayers() {
 
 (async () => {
   await fixUninitializedPlayers();
+  await claimRewardsForAllPlayers();
+
+  await deleteBattlePasses();
+  await initializeBattlePass();
 })();

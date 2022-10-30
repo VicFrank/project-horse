@@ -311,7 +311,22 @@ module.exports = {
     }
   },
 
-  // ONLY FOR TESTING
+  async getAllPlayersWithUnclaimedRewards() {
+    try {
+      const { rows } = await query(
+        `
+        SELECT count(*), bp_level
+        FROM player_claimed_battle_pass_rewards
+        JOIN player_battle_pass USING (steam_id)
+        GROUP BY steam_id
+        `
+      );
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async deleteBattlePasses() {
     try {
       await tx.default(pool, async (db) => {

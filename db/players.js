@@ -46,7 +46,7 @@ module.exports = {
   async getLeaderboard() {
     try {
       const { rows } = await query(`
-        SELECT mmr, steam_id, username from players
+        SELECT mmr, steam_id, username, ladder_mmr from players
         ORDER BY LEAST (ladder_mmr, 4500) DESC, mmr DESC
         LIMIT 100
       `);
@@ -59,6 +59,7 @@ module.exports = {
         player.badge = mmr.getRankBadge(player.ladder_mmr);
         player.pips = mmr.getRankPips(player.ladder_mmr);
         delete player.mmr;
+        delete player.ladder_mmr;
       }
       return rows;
     } catch (error) {
@@ -1529,8 +1530,44 @@ module.exports = {
     }
   },
 
+  async openEmotePack(steamID, cosmeticName) {
+    try {
+      const itemNames = Cosmetics.getEmotePackItems(cosmeticName);
+      const items = {};
+      for (const itemName of itemNames) {
+        const cosmetic = await Cosmetics.getCosmeticByName(itemName);
+        items[cosmetic.cosmetic_id] = 1;
+      }
+      await this.doItemTransaction(steamID, { items });
+      return itemNames;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async openRandomDrop(steamID, cosmeticName) {
+    try {
+      const itemNames = Cosmetics.getRandomDrops(cosmeticName);
+      const ownedItems = await this.getCosmetics(steamID);
+      const itemsToChooseFrom = itemNames.filter(
+        (itemName) => !ownedItems.includes(itemName)
+      );
+      if (itemsToChooseFrom.length == 0) return;
+      const randomItem =
+        itemsToChooseFrom[Math.floor(Math.random() * itemsToChooseFrom.length)];
+      const cosmetic = await Cosmetics.getCosmeticByName(randomItem);
+      await this.doItemTransaction(steamID, {
+        items: { [cosmetic.cosmetic_id]: 1 },
+      });
+      return randomItem;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async consumeItem(steamID, cosmeticID) {
     try {
+      let results = [];
       const cosmetic = await Cosmetics.getCosmetic(cosmeticID);
 
       if (!cosmetic) throw new Error(`Invalid cosmetic ID ${cosmeticID}`);
@@ -1635,6 +1672,21 @@ module.exports = {
           break;
       }
 
+      // Handle emote packs
+      if (cosmeticName.startsWith("emote_pack_")) {
+        results = await this.openEmotePack(steamID, cosmeticName);
+      }
+
+      // Handle random items
+      if (cosmeticName === "avatar_random" || cosmeticName === "emote_random") {
+        const itemDrop = await this.openRandomDrop(steamID, cosmeticName);
+        if (!itemDrop) {
+          throw new Error("You already own all items of this type");
+        }
+        results.push(itemDrop);
+      }
+
+      // Handle upgrading the battle pass
       if (cosmeticName === "buy_bp") {
         const success = await this.unlockBattlePass(steamID);
         if (!success) throw new Error("Battle Pass is already upgraded");
@@ -1651,7 +1703,7 @@ module.exports = {
       await this.addBattlePassXp(steamID, xp);
       await this.modifyCoins(steamID, gold);
 
-      return true;
+      return results;
     } catch (error) {
       throw error;
     }
@@ -1762,22 +1814,7 @@ module.exports = {
             (log) => log.log_data.cosmeticName === drop.cosmetic_name
           ).length;
 
-          if (numOpened >= 10) {
-            const goldenGod = await Cosmetics.getCosmeticByName(
-              `gold_${drop.cosmetic_name}`
-            );
-            const hasCosmetic = await this.hasCosmetic(
-              steamID,
-              goldenGod.cosmetic_id
-            );
-            if (!hasCosmetic) {
-              return { items: { [goldenGod.cosmetic_id]: 1 } };
-            } else {
-              const godName = drop.cosmetic_name.substring(5);
-              this.addPlayerGodProgress(steamID, godName, 5);
-              return { missed_item: drop, coins: chest.cost_coins / 4 };
-            }
-          } else if (numOpened === 1) {
+          if (numOpened === 1) {
             return { items: { [drop.cosmetic_id]: 1 } };
           } else {
             const godName = drop.cosmetic_name.substring(5);
