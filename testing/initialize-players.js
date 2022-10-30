@@ -107,7 +107,7 @@ async function giveEndOfSeasonRewards() {
       amount: 1,
     },
     {
-      cosmeticName: "hat_diamond_trophy2",
+      cosmeticName: "hat_rainbow_trophy",
       amount: 1,
     },
   ];
