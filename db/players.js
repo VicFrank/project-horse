@@ -46,7 +46,7 @@ module.exports = {
   async getLeaderboard() {
     try {
       const { rows } = await query(`
-        SELECT mmr, steam_id, username from players
+        SELECT mmr, steam_id, username, ladder_mmr from players
         ORDER BY LEAST (ladder_mmr, 4500) DESC, mmr DESC
         LIMIT 100
       `);
@@ -59,6 +59,7 @@ module.exports = {
         player.badge = mmr.getRankBadge(player.ladder_mmr);
         player.pips = mmr.getRankPips(player.ladder_mmr);
         delete player.mmr;
+        delete player.ladder_mmr;
       }
       return rows;
     } catch (error) {
@@ -1531,7 +1532,7 @@ module.exports = {
 
   async consumeItem(steamID, cosmeticID) {
     try {
-      let results;
+      let results = [];
       const cosmetic = await Cosmetics.getCosmetic(cosmeticID);
 
       if (!cosmetic) throw new Error(`Invalid cosmetic ID ${cosmeticID}`);
@@ -1643,10 +1644,11 @@ module.exports = {
 
       // Handle random items
       if (cosmeticName === "avatar_random" || cosmeticName === "emote_random") {
-        results = await this.openRandomDrop(steamID, cosmeticName);
-        if (!results) {
+        const itemDrop = await this.openRandomDrop(steamID, cosmeticName);
+        if (!itemDrop) {
           throw new Error("You already own all items of this type");
         }
+        results.push(itemDrop);
       }
 
       // Handle upgrading the battle pass
@@ -1777,22 +1779,7 @@ module.exports = {
             (log) => log.log_data.cosmeticName === drop.cosmetic_name
           ).length;
 
-          if (numOpened >= 10) {
-            const goldenGod = await Cosmetics.getCosmeticByName(
-              `gold_${drop.cosmetic_name}`
-            );
-            const hasCosmetic = await this.hasCosmetic(
-              steamID,
-              goldenGod.cosmetic_id
-            );
-            if (!hasCosmetic) {
-              return { items: { [goldenGod.cosmetic_id]: 1 } };
-            } else {
-              const godName = drop.cosmetic_name.substring(5);
-              this.addPlayerGodProgress(steamID, godName, 5);
-              return { missed_item: drop, coins: chest.cost_coins / 4 };
-            }
-          } else if (numOpened === 1) {
+          if (numOpened === 1) {
             return { items: { [drop.cosmetic_id]: 1 } };
           } else {
             const godName = drop.cosmetic_name.substring(5);

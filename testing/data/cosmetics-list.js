@@ -1535,7 +1535,7 @@ module.exports = [
     rarity: "Immortal",
   },
   {
-    // For getting top 25 in monthly leaderboard
+    // For getting top 10 in monthly leaderboard
     name: "terrain_leaderboard",
     type: "Terrain",
     coins: -1,
