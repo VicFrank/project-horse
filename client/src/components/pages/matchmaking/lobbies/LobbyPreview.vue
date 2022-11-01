@@ -5,11 +5,11 @@
   >
     <td>
       <div v-if="lobby">
-        <span>{{ lobby.lobbysize }}/8</span>
         <span class="ml-2">{{ lobby.region }}</span>
-        <div class="text-muted">
+        <div class="text-muted">({{ lobby.lobbysize }}/8)</div>
+        <!-- <div class="text-muted">
           <span>MMR ({{ lobby.min_rank }} - {{ lobby.max_rank }})</span>
-        </div>
+        </div> -->
       </div>
       <div v-else class="text-muted">Empty Lobby</div>
     </td>
