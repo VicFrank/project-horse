@@ -355,15 +355,6 @@ module.exports = [
   },
   {
     // Chest Drop
-    name: "hat_birthday_blower",
-    type: "Avatar Hat",
-    equip_group: "avatar_hat",
-    coins: -1,
-    cost_usd: -1,
-    rarity: "Rare",
-  },
-  {
-    // Chest Drop
     name: "hat_diamond_trophy",
     type: "Avatar Hat",
     equip_group: "avatar_hat",
@@ -555,6 +546,15 @@ module.exports = [
     // Chest Drop
     name: "hat_rainbow_vomit",
     type: "Avatar Accessory",
+    equip_group: "avatar_accessory",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
+    // Chest Drop
+    name: "hat_birthday_blower",
+    type: "Avatar Hat",
     equip_group: "avatar_accessory",
     coins: -1,
     cost_usd: -1,
