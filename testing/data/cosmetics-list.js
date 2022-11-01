@@ -1512,7 +1512,7 @@ module.exports = [
   {
     name: "terrain_god_pa",
     type: "Terrain",
-    coins: -1,
+    coins: 20000,
     cost_usd: -1,
     equip_group: "terrain",
     rarity: "Immortal",

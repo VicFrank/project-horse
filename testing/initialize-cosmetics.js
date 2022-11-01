@@ -258,11 +258,11 @@ async function updateCosmetics() {
     console.log("Updating cosmetics...");
     const cosmeticsToUpdate = [
       {
-        name: "gold_card_tinker",
-        type: "Card Frame",
-        coins: -1,
+        name: "terrain_god_pa",
+        type: "Terrain",
+        coins: 20000,
         cost_usd: -1,
-        equip_group: "",
+        equip_group: "terrain",
         rarity: "Immortal",
       },
     ];
@@ -427,5 +427,6 @@ async function addCosmeticsToPlayers() {
 (async function () {
   await addCosmetics();
   await setChestRewards();
+  await updateCosmetics();
   // await addCosmeticsToPlayers();
 })();

@@ -24,13 +24,13 @@ const getLadderRatingPoints = (place) => {
     case 4:
       return 15;
     case 5:
-      return -15;
+      return -10;
     case 6:
-      return -50;
+      return -30;
     case 7:
-      return -75;
+      return -55;
     case 8:
-      return -100;
+      return -80;
     default:
       return 0;
   }
