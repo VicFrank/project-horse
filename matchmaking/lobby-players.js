@@ -80,7 +80,20 @@ module.exports = {
     return rows[0].mmr;
   },
 
+  async getLadderMMR(steamID) {
+    const { rows } = await query(
+      `SELECT mmr, ladder_mmr
+      FROM players
+      WHERE steam_id = $1
+    `,
+      [steamID]
+    );
+    return rows[0].ladder_mmr;
+  },
+
   async isInMMRRange(steamID, minRank, maxRank) {
+    const ladderMMR = await this.getLadderMMR(steamID);
+    if (ladderMMR < 4500) return false;
     const mmr = await this.getPlayerMMR(steamID);
     if (!mmr) return false;
     if (mmr < minRank || mmr > maxRank) return false;

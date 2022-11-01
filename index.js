@@ -172,14 +172,14 @@ wss.on("connection", function (ws, user) {
 });
 
 wss.on("error", function error(error) {
-  console.log(`websocket error ${error}`);
+  // console.log(`websocket error ${error}`);
 });
 
 // Periodically send heartbeats
 const interval = setInterval(function ping() {
   wss.clients.forEach(function each(ws) {
     if (ws.isAlive === false) {
-      console.log("hearbeat failed, killing");
+      // console.log("hearbeat failed, killing");
       return ws.terminate();
     }
 

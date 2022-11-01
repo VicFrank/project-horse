@@ -16,7 +16,7 @@ const subscriber = client.duplicate();
 
   await subscriber.subscribe("ws_broadcast", (message) => {
     const { steamID, payload } = JSON.parse(message);
-    console.log(`Sending payload ${JSON.stringify(payload)} to ${steamID}`);
+    // console.log(`Sending payload ${JSON.stringify(payload)} to ${steamID}`);
 
     // Send the message to the player, if they exist on this cluster
     if (connections[steamID]) {

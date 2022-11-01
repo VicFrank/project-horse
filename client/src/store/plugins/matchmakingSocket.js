@@ -13,7 +13,7 @@ function heartbeat(connection) {
   // Delay should be equal to the interval at which your server
   // sends out pings plus a conservative assumption of the latency.
   connection.pingTimeout = setTimeout(() => {
-    console.log("heartbeat failed, killing");
+    // console.log("heartbeat failed, killing");
     connection.terminate();
   }, 30000 + 1000);
 }
@@ -21,8 +21,8 @@ function heartbeat(connection) {
 function connect(store) {
   connection = new WebSocket(`${scheme}://${hostname}${port}`);
 
-  connection.onopen = (e) => {
-    console.log("Successfully connected", e);
+  connection.onopen = () => {
+    // console.log("Successfully connected", e);
     store.dispatch("connectionOpened");
 
     const msg = JSON.stringify({ event: "connected" });

@@ -69,7 +69,7 @@ async function sendLobbyList(steamID) {
 }
 
 function sendError(steamID, errorMessage) {
-  console.log(`${steamID}: ${errorMessage}`);
+  // console.log(`${steamID}: ${errorMessage}`);
 
   const data = {
     event: "error",
@@ -97,7 +97,8 @@ async function makeLobby(steamID, avatar, region, minRank, maxRank) {
     maxRank
   );
 
-  updateLobbyPlayers(lobbyID);
+  await updateLobbyPlayers(lobbyID);
+  return lobbyID;
 }
 
 async function updateLobbyPlayers(lobbyID) {
@@ -210,9 +211,8 @@ async function deleteLobby(lobbyID) {
   };
 
   // inform all remaining players that they've left the lobby
-  // await to make sure we get the lobby players before it's destroyed
   await connectionManager.sendMessageToLobby(lobbyID, data);
-  lobbies.deleteLobby(lobbyID);
+  await lobbies.deleteLobby(lobbyID);
 }
 
 function generatePassword() {
@@ -242,9 +242,9 @@ async function onLobbyFull(lobbyID) {
 
   connectionManager.sendMessageToLobby(lobbyID, data);
 
-  // TODO: After 5 minutes, unlock the lobby
+  // After 5 minutes, delete the lobby
   setTimeout(() => {
-    unlockLobby(lobbyID);
+    deleteLobby(lobbyID);
   }, LOBBY_LOCK_TIME * 1000);
 }
 
@@ -287,7 +287,7 @@ module.exports = connection = (ws, user) => {
     }
 
     if (event !== "pong") {
-      console.log(`Received event ${event} from user ${username}`);
+      // console.log(`Received event ${event} from user ${username}`);
     }
 
     switch (event) {
@@ -328,7 +328,7 @@ module.exports = connection = (ws, user) => {
   });
 
   ws.on("close", function () {
-    console.log(`Websocket Closed: ${username} ${steamID}`);
+    // console.log(`Websocket Closed: ${username} ${steamID}`);
     // In 5 minutes, if they're still not connected, kick them from the lobby
     setTimeout(async () => {
       try {
@@ -347,7 +347,7 @@ module.exports = connection = (ws, user) => {
 };
 
 (async function () {
-  // runTests();
+  runTests();
 })();
 
 async function runTests() {
@@ -374,18 +374,24 @@ async function runTests() {
   const player8 = steamIDs[7];
 
   await leaveLobby(player1);
-  // await leaveLobby(player2);
-  // await leaveLobby(player3);
-  // await leaveLobby(player4);
-  // await leaveLobby(player5);
-  // await leaveLobby(player6);
+  await leaveLobby(player2);
+  await leaveLobby(player3);
+  await leaveLobby(player4);
+  await leaveLobby(player5);
+  await leaveLobby(player6);
+  await leaveLobby(player7);
 
-  // const lobbyID = await makeLobby(player1, null, "US West", 1100, 1300);
+  const lobbyID = await makeLobby(player1, null, "US West", 0, 9999);
 
-  await joinLobby(player1, 10, null);
-  // await joinLobby(player3, lobbyID, null);
-  // await joinLobby(player4, lobbyID, null);
-  // await joinLobby(player5, lobbyID, null);
+  console.log("Lobby ID", lobbyID);
+
+  await joinLobby(player1, lobbyID, null);
+  await joinLobby(player2, lobbyID, null);
+  await joinLobby(player3, lobbyID, null);
+  await joinLobby(player4, lobbyID, null);
+  await joinLobby(player5, lobbyID, null);
+  await joinLobby(player6, lobbyID, null);
+  await joinLobby(player7, lobbyID, null);
 
   // sendChatToLobby(player1, "hey");
 

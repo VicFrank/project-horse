@@ -24,7 +24,7 @@
             required
           ></b-form-select>
         </b-form-group>
-        <b-form-group
+        <!-- <b-form-group
           :state="mmrMinState"
           :invalid-feedback="`Must be lower than ${mmr}`"
           label="Min MMR"
@@ -52,8 +52,8 @@
             v-model="mmrMax"
             type="number"
             required
-          ></b-form-input>
-        </b-form-group>
+          ></b-form-input> 
+        </b-form-group>-->
       </form>
     </b-modal>
   </div>
@@ -92,11 +92,11 @@ export default {
     checkFormValidity() {
       const valid = this.$refs.form.checkValidity();
       this.regionState = this.region != null;
-      this.mmrMinState = this.mmrMin != null && this.mmrMin <= this.mmr;
-      this.mmrMaxState =
-        this.mmrMax != null &&
-        this.mmrMax >= this.mmr &&
-        this.mmrMax <= this.mmr + 200;
+      // this.mmrMinState = this.mmrMin != null && this.mmrMin <= this.mmr;
+      // this.mmrMaxState =
+      //   this.mmrMax != null &&
+      //   this.mmrMax >= this.mmr &&
+      //   this.mmrMax <= this.mmr + 200;
       return valid;
     },
     resetModal() {
@@ -122,8 +122,8 @@ export default {
       });
       this.$store.dispatch("hostLobby", {
         region: this.region,
-        mmrMin: this.mmrMin,
-        mmrMax: this.mmrMax,
+        mmrMin: 0,
+        mmrMax: 9999,
       });
     },
   },

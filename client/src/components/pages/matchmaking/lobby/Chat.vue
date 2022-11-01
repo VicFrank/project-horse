@@ -9,11 +9,11 @@
     </div>
     <div class="mx-auto" style="max-width: 701px">
       <b-form inline @submit="sendChatMessage">
-        <b-input
+        <b-form-input
           v-model="nextMessage"
-          autoComplete="off"
+          autocomplete="off"
           class="chat-text-box"
-        ></b-input>
+        ></b-form-input>
         <b-button type="submit" variant="primary" style="height: 40px"
           >Chat</b-button
         >

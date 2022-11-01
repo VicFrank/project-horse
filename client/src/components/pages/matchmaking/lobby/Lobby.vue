@@ -7,15 +7,19 @@
       </template>
     </h1>
     <p v-if="locked" class="text-muted text-center">
-      Lobby is locked for another {{ hhmmss(lockTimeRemaining) }} seconds
+      This lobby will be locked for 5 minutes while players join the Dota lobby.
+      Then, the lobby will be destroyed
     </p>
-    <h2 v-if="lobbyPassword">
+    <p v-if="lobbyPassword && isHost" class="text-muted text-center">
+      As the host, it is your job to create the lobby with this password
+    </p>
+    <p v-if="lobbyPassword && !isHost" class="text-muted text-center">
+      Wait for the host to create the lobby, then join it with this password
+    </p>
+    <h2 v-if="lobbyPassword" class="text-center">
       <span class="text-muted text-center">Password:</span>
       {{ lobbyPassword }}
     </h2>
-    <p v-if="lobbyPassword && isHost" class="text-muted text-center">
-      As the host, it is your job to create the lobby
-    </p>
     <PlayersList class="mx-auto" />
     <Chat class="text-center" />
     <div class="text-center">
@@ -42,6 +46,7 @@ export default {
   },
   methods: {
     leaveLobby() {
+      if (this.locked) return;
       this.$store.dispatch("attemptLeave");
     },
     hhmmss,
@@ -58,9 +63,6 @@ export default {
     },
     isHost() {
       return this.$store.getters.isHost;
-    },
-    lockTimeRemaining() {
-      return this.$store.getters.lockTimeRemaining;
     },
   },
 };

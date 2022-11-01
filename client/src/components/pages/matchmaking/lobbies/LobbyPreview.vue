@@ -28,19 +28,14 @@ export default {
     mmr() {
       return this.$store.getters.mmr;
     },
+    ladderMMR() {
+      return this.$store.getters.ladderMMR;
+    },
     joinable() {
-      return (
-        this.lobby &&
-        this.lobby.lobbysize < 8 &&
-        this.mmr >= this.lobby.min_rank &&
-        this.mmr <= this.lobby.max_rank
-      );
+      return this.lobby && this.lobby.lobbysize < 8 && this.ladderMMR >= 4500;
     },
     outOfRange() {
-      return (
-        this.lobby &&
-        (this.mmr < this.lobby.min_rank || this.mmr > this.lobby.max_rank)
-      );
+      return this.lobby && this.ladderMMR < 4500;
     },
   },
   methods: {

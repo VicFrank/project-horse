@@ -47,6 +47,7 @@ const getters = {
   isHost: (state) => state.isHost,
 
   lobbyPlayers: (state) => state.lobbyPlayers,
+  timeSinceLock: (state) => state.timeSinceLock,
   lockTimeRemaining: (state) =>
     Math.floor(Math.max(0, 60 * 5 - state.timeSinceLock)),
 };
