@@ -60,6 +60,16 @@ module.exports = {
   isProdClient,
   isTestClient,
   adminAuth: function (req, res, next) {
+    if (req.user?.isAdmin) {
+      return next();
+    } else {
+      res
+        .status(403)
+        .send({ message: `You are not authorized to add/change data` });
+      return;
+    }
+  },
+  keyAuth: function (req, res, next) {
     if (checkServerKey(req)) {
       return next();
     } else if (req.user?.isAdmin) {

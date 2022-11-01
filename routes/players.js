@@ -6,7 +6,6 @@ const gods = require("../db/gods");
 const quests = require("../db/quests");
 const auth = require("../auth/auth");
 const apicache = require("apicache");
-const { adminAuth } = require("../auth/auth");
 
 const cache = apicache.middleware;
 
@@ -304,21 +303,19 @@ router.post("/:steamID/login_quests/claim", auth.userAuth, async (req, res) => {
 });
 
 router.post("/:steamID/transaction", auth.adminAuth, async (req, res) => {
-  // not allowed
-  return res.status(403).send({ message: "Not allowed" });
-  // try {
-  //   const steamID = req.params.steamID;
-  //   const { itemTransaction } = JSON.parse(JSON.stringify(req.body));
-  //   const playerExists = await players.doesPlayerExist(steamID);
-  //   if (!playerExists)
-  //     return res.status(404).send({ message: "Player not found" });
-  //   await players.doItemTransaction(steamID, itemTransaction);
-  //   res.status(200).send({ message: "Transaction Complete" });
-  // } catch (error) {
-  //   res
-  //     .status(500)
-  //     .json({ message: "Transaction Failed", error: error.toString() });
-  // }
+  try {
+    const steamID = req.params.steamID;
+    const { itemTransaction } = JSON.parse(JSON.stringify(req.body));
+    const playerExists = await players.doesPlayerExist(steamID);
+    if (!playerExists)
+      return res.status(404).send({ message: "Player not found" });
+    await players.doItemTransaction(steamID, itemTransaction);
+    res.status(200).send({ message: "Transaction Complete" });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Transaction Failed", error: error.toString() });
+  }
 });
 
 router.post(

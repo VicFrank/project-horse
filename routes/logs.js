@@ -33,7 +33,7 @@ router.get("/players/:steamID", auth.adminAuth, async (req, res) => {
   }
 });
 
-router.post("/:gameID", auth.adminAuth, async (req, res) => {
+router.post("/:gameID", auth.keyAuth, async (req, res) => {
   try {
     const gameID = req.params.gameID;
     const logs = await playerLogs.addTransactionLog(

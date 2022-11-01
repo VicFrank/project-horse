@@ -24,7 +24,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/players", auth.adminAuth, async (req, res) => {
+router.post("/players", auth.keyAuth, async (req, res) => {
   const { data } = req.body;
   try {
     const parsedData = JSON.parse(data);
@@ -40,7 +40,7 @@ router.post("/players", auth.adminAuth, async (req, res) => {
   }
 });
 
-router.post("/", auth.adminAuth, async (req, res) => {
+router.post("/", auth.keyAuth, async (req, res) => {
   const { data } = req.body;
   try {
     const parsedData = JSON.parse(data);
