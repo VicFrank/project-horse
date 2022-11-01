@@ -268,11 +268,11 @@ module.exports = {
         const basicChest = await Cosmetics.getCosmeticByName("chest_basic");
         for (let i = minLevel; i <= maxLevel; i++) {
           if (i === 100) {
-            const diamondGamblerAvatar = await Cosmetics.getCosmeticByName(
-              "avatar_gambler_diamond"
+            const diamondAvatar = await Cosmetics.getCosmeticByName(
+              "avatar_rune_god_diamond"
             );
             cosmetics.push({
-              cosmetic_id: diamondGamblerAvatar.cosmetic_id,
+              cosmetic_id: diamondAvatar.cosmetic_id,
               free: false,
               bp_level: i,
               amount: 1,

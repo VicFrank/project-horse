@@ -95,6 +95,15 @@ module.exports = [
     rarity: "Arcana",
   },
   {
+    // Battle Pass Reward
+    name: "avatar_rune_god_diamond",
+    type: "Avatar Frame",
+    equip_group: "avatar_frame",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Arcana",
+  },
+  {
     // Chest drop
     name: "avatar_red",
     type: "Avatar Frame",
@@ -169,14 +178,6 @@ module.exports = [
   {
     // Battle Pass Reward
     name: "avatar_bronze",
-    type: "Avatar Frame",
-    equip_group: "avatar_frame",
-    coins: -1,
-    cost_usd: -1,
-    rarity: "Rare",
-  },
-  {
-    name: "avatar_rainbow",
     type: "Avatar Frame",
     equip_group: "avatar_frame",
     coins: -1,
@@ -372,25 +373,7 @@ module.exports = [
   },
   {
     // Chest Drop
-    name: "hat_diamond_trophy2",
-    type: "Avatar Hat",
-    equip_group: "avatar_hat",
-    coins: -1,
-    cost_usd: -1,
-    rarity: "Rare",
-  },
-  {
-    // Chest Drop
     name: "hat_gold_trophy",
-    type: "Avatar Hat",
-    equip_group: "avatar_hat",
-    coins: -1,
-    cost_usd: -1,
-    rarity: "Rare",
-  },
-  {
-    // Chest Drop
-    name: "hat_gold_trophy2",
     type: "Avatar Hat",
     equip_group: "avatar_hat",
     coins: -1,

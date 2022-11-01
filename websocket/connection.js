@@ -347,11 +347,11 @@ module.exports = connection = (ws, user) => {
 };
 
 (async function () {
-  runTests();
+  // runTests();
 })();
 
 async function runTests() {
-  // console.log("running tests");
+  console.log("running tests");
 
   const steamIDs = [
     "76561197960956468",
@@ -382,8 +382,6 @@ async function runTests() {
   await leaveLobby(player7);
 
   const lobbyID = await makeLobby(player1, null, "US West", 0, 9999);
-
-  console.log("Lobby ID", lobbyID);
 
   await joinLobby(player1, lobbyID, null);
   await joinLobby(player2, lobbyID, null);
