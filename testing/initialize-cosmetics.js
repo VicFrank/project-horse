@@ -133,8 +133,8 @@ async function addCosmetics() {
       {
         // Chest Drop
         name: "hat_diamond_trophy",
-        type: "Avatar Hat",
-        equip_group: "avatar_hat",
+        type: "Avatar Accessory",
+        equip_group: "avatar_acessory",
         coins: -1,
         cost_usd: -1,
         rarity: "Rare",
@@ -142,8 +142,8 @@ async function addCosmetics() {
       {
         // Chest Drop
         name: "hat_gold_trophy",
-        type: "Avatar Hat",
-        equip_group: "avatar_hat",
+        type: "Avatar Accessory",
+        equip_group: "avatar_acessory",
         coins: -1,
         cost_usd: -1,
         rarity: "Rare",
@@ -169,7 +169,7 @@ async function addCosmetics() {
       {
         // Chest Drop
         name: "hat_birthday_blower",
-        type: "Avatar Hat",
+        type: "Avatar Accessory",
         equip_group: "avatar_accessory",
         coins: -1,
         cost_usd: -1,
@@ -237,6 +237,33 @@ async function updateCosmetics() {
         cost_usd: -1,
         equip_group: "terrain",
         rarity: "Immortal",
+      },
+      {
+        // Chest Drop
+        name: "hat_diamond_trophy",
+        type: "Avatar Accessory",
+        equip_group: "avatar_acessory",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        // Chest Drop
+        name: "hat_gold_trophy",
+        type: "Avatar Accessory",
+        equip_group: "avatar_acessory",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        // Chest Drop
+        name: "hat_birthday_blower",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
       },
     ];
     for (const c of cosmeticsToUpdate) {
@@ -398,7 +425,7 @@ async function addCosmeticsToPlayers() {
 }
 
 (async function () {
-  await addCosmetics();
+  // await addCosmetics();
   await setChestRewards();
   await updateCosmetics();
   // await addCosmeticsToPlayers();
