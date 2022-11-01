@@ -1,6 +1,8 @@
 <template>
   <div>
-    <b-button v-b-modal.modal-host-lobby>Host a Lobby</b-button>
+    <b-button v-b-modal.modal-host-lobby variant="primary"
+      >Host a Lobby</b-button
+    >
 
     <b-modal
       id="modal-host-lobby"
