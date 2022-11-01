@@ -175,6 +175,15 @@ router.beforeEach((to, from, next) => {
   } else {
     next();
   }
+  if (to.matched.some((record) => record.meta.requiresImmortal)) {
+    if (store.getters.ladderMMR >= 4500) {
+      next();
+    } else {
+      next("");
+    }
+  } else {
+    next();
+  }
 });
 
 router.beforeEach((to, from, next) => {

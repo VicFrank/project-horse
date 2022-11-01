@@ -140,6 +140,13 @@
             {{ $t("navigation.faq") }}
           </b-dropdown-item>
           <b-dropdown-item
+            v-if="ladderMMR >= 4500"
+            exact-active-class="active-link"
+            to="/matchmaking"
+          >
+            {{ $t("navigation.matchmaking") }}
+          </b-dropdown-item>
+          <b-dropdown-item
             v-if="canSeeStats"
             to="/gods"
             exact-active-class="active-link"
@@ -315,6 +322,9 @@ export default {
         this.$store.getters.isAdmin ||
         this.$store.getters.userType === "STATS_GUY"
       );
+    },
+    ladderMMR() {
+      return this.$store.getters.ladderMMR;
     },
     numAchievements() {
       return this.$store.state.auth.achievementsToClaim;
