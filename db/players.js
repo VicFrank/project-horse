@@ -242,6 +242,13 @@ module.exports = {
     return result.rows.length > 0;
   },
 
+  async getMMR(steamID) {
+    const result = await query(`SELECT mmr FROM players WHERE steam_id = $1`, [
+      steamID,
+    ]);
+    return result.rows[0]?.mmr ?? 0;
+  },
+
   async getLeaderboardPosition(mmr) {
     try {
       const { rows } = await query(
@@ -250,6 +257,15 @@ module.exports = {
       );
       if (rows.length === 0) return 0;
       return parseInt(rows[0].count) + 1;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getLeaderboardPositionForPlayer(steamID) {
+    try {
+      const mmr = await this.getMMR(steamID);
+      return await this.getLeaderboardPosition(mmr);
     } catch (error) {
       throw error;
     }
@@ -322,6 +338,25 @@ module.exports = {
     } catch (error) {
       throw error;
     }
+  },
+
+  async updatePingTime(steamID) {
+    return await query(
+      `UPDATE players SET last_ping = NOW() WHERE steam_id = $1`,
+      [steamID]
+    );
+  },
+
+  // Get the time in seconds since a player last pinged the server
+  async getTimeSincePing(steamID) {
+    const { rows } = await query(
+      `SELECT last_ping FROM players WHERE steam_id = $1`,
+      [steamID]
+    );
+    if (rows.length === 0) return 0;
+    const lastPing = rows[0].last_ping;
+    const timeSincePing = Math.floor((Date.now() - lastPing) / 1000);
+    return timeSincePing;
   },
 
   // --------------------------------------------------

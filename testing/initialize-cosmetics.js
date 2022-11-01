@@ -213,15 +213,6 @@ async function addCosmetics() {
         rarity: "Rare",
       },
       {
-        // Chest Drop
-        name: "hat_rainbow_vomit_teeth",
-        type: "Avatar Accessory",
-        equip_group: "avatar_accessory",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Rare",
-      },
-      {
         name: "avatar_rainbow",
         type: "Avatar Frame",
         equip_group: "avatar_frame",

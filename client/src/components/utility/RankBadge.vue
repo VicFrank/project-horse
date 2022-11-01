@@ -12,7 +12,7 @@
       alt="pips"
       v-bind:src="getPipsPath()"
     />
-    <span class="rank" v-if="badge === 'Immortal'">{{
+    <span class="rank" v-if="badge === 'Immortal' && rank">{{
       rank.toLocaleString()
     }}</span>
   </div>

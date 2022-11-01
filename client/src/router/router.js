@@ -42,6 +42,8 @@ const PlayerPage = () => import("../components/pages/player/PlayerPage");
 const PlayerGamesList = () =>
   import("../components/pages/player/PlayerGamesList");
 
+const Matchmaking = () => import("../components/pages/matchmaking/Matchmaking");
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -76,8 +78,14 @@ const routes = [
     component: RedemptionCode,
     meta: { requiresAuth: true },
   },
+  {
+    path: "/matchmaking",
+    component: Matchmaking,
+    meta: { requiresAuth: true },
+  },
   { path: "/players/:steam_id", component: PlayerPage },
   { path: "/players/:steam_id/games", component: PlayerGamesList },
+
   { path: "/store", component: Store },
   { path: "/checkout/:item_ids+", component: Checkout },
   { path: "/checkout2/:item_ids+", component: Checkout2 },
@@ -160,6 +168,15 @@ router.beforeEach((to, from, next) => {
   }
   if (to.matched.some((record) => record.meta.requiresAdmin)) {
     if (store.getters.isAdmin) {
+      next();
+    } else {
+      next("");
+    }
+  } else {
+    next();
+  }
+  if (to.matched.some((record) => record.meta.requiresImmortal)) {
+    if (store.getters.ladderMMR >= 4500) {
       next();
     } else {
       next("");
