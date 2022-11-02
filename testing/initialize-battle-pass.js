@@ -141,7 +141,7 @@ async function fixUninitializedPlayers() {
     const { rows: unitializedPlayers } = await query(`
       SELECT * FROM players 
       LEFT JOIN player_battle_pass USING (steam_id)
-      WHERE battle_pass_id IS NULL LIMIT 100;`);
+      WHERE battle_pass_id IS NULL`);
 
     console.log(
       `Found ${unitializedPlayers.length} uninitialized battle passes`
