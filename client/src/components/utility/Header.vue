@@ -159,11 +159,11 @@
             {{ $t("navigation.news") }}
           </a>
         </li>
-        <li class="nav-item d-none d-sm-block">
+        <!-- <li class="nav-item d-none d-sm-block">
           <a href="/matchmaking" class="nav-link">
             {{ $t("navigation.matchmaking") }}
           </a>
-        </li>
+        </li> -->
       </ul>
       <div class="d-flex align-items-center ml-auto">
         <div class="d-flex align-items-center" v-if="!loggedIn">
