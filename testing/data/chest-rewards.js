@@ -102,6 +102,7 @@ const typeOdds = {
     { odds: -1, item_name: "card_rix" },
     { odds: -1, item_name: "card_sorlaKhan" },
     { odds: -1, item_name: "card_gambler" },
+    { odds: -1, item_name: "card_rubick" },
   ],
 };
 
