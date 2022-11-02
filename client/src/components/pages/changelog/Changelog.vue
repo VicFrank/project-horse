@@ -111,7 +111,6 @@
         <li>Added Burning Barrage</li>
         <li>Added Dragons Blood</li>
         <li>Added Death Ward</li>
-        <li>Added Duel</li>
         <li>Added Enchant Totem</li>
         <li>Added Epicenter</li>
         <li>Added Fiends Grip</li>
