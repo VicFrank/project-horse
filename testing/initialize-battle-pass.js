@@ -198,8 +198,8 @@ async function fixUninitializedPlayers() {
 
 (async () => {
   await fixUninitializedPlayers();
-  await claimRewardsForAllPlayers();
+  // await claimRewardsForAllPlayers();
 
-  await deleteBattlePasses();
-  await initializeBattlePass();
+  // await deleteBattlePasses();
+  // await initializeBattlePass();
 })();
