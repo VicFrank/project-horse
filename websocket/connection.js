@@ -261,6 +261,20 @@ async function unlockLobby(lobbyID) {
   });
 }
 
+async function kickAfkPlayers() {
+  try {
+    const allLobbyPlayers = await lobbyPlayers.getAllLobbyPlayers();
+    const afkPlayers = allLobbyPlayers.filter((player) => {
+      return player.time_since_last_ping > 5 * 60;
+    });
+    for (const player of afkPlayers) {
+      leaveLobby(player.steamID);
+    }
+  } catch (error) {
+    throw error;
+  }
+}
+
 module.exports = connection = (ws, user) => {
   ws.isAlive = true;
 

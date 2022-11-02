@@ -39,6 +39,25 @@ module.exports = {
     return rows[0];
   },
 
+  async getAllLobbyPlayers() {
+    try {
+      const { rows } = await query(`
+        SELECT steam_id, username, mmr, ladder_mmr, lobby_id, ready, avatar, is_host, last_ping
+        FROM players JOIN lobby_players USING (steam_id)`);
+      const players = rows.map((player) => {
+        const time_since_last_ping =
+          Math.floor(Date.now() - player.last_ping) / 1000;
+        return {
+          ...player,
+          time_since_last_ping,
+        };
+      });
+      return players;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async joinLobby(steamID, lobbyID, avatar) {
     const rank = await Players.getLeaderboardPositionForPlayer(steamID);
     await query(

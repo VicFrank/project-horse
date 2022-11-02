@@ -134,7 +134,7 @@ async function addCosmetics() {
         // Chest Drop
         name: "hat_diamond_trophy",
         type: "Avatar Accessory",
-        equip_group: "avatar_acessory",
+        equip_group: "avatar_accessory",
         coins: -1,
         cost_usd: -1,
         rarity: "Rare",
@@ -143,7 +143,7 @@ async function addCosmetics() {
         // Chest Drop
         name: "hat_gold_trophy",
         type: "Avatar Accessory",
-        equip_group: "avatar_acessory",
+        equip_group: "avatar_accessory",
         coins: -1,
         cost_usd: -1,
         rarity: "Rare",
@@ -242,7 +242,7 @@ async function updateCosmetics() {
         // Chest Drop
         name: "hat_diamond_trophy",
         type: "Avatar Accessory",
-        equip_group: "avatar_acessory",
+        equip_group: "avatar_accessory",
         coins: -1,
         cost_usd: -1,
         rarity: "Rare",
@@ -251,7 +251,7 @@ async function updateCosmetics() {
         // Chest Drop
         name: "hat_gold_trophy",
         type: "Avatar Accessory",
-        equip_group: "avatar_acessory",
+        equip_group: "avatar_accessory",
         coins: -1,
         cost_usd: -1,
         rarity: "Rare",

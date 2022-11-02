@@ -228,3 +228,9 @@ cron.schedule("0 0 0 * * 1", async () => {
   console.log("Resetting login quests...");
   await players.resetAllLoginQuests();
 });
+
+// Cron job to run every 10 minutes and kick lobby players that are afk
+// cron.schedule("0 0 0 * * 1", async () => {
+//   console.log("Resetting login quests...");
+//   await lobbyPlayers.kickAfk();
+// });

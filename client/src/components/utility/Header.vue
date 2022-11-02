@@ -113,9 +113,9 @@
             {{ $t("navigation.admin") }}
           </b-dropdown-item>
         </b-nav-item-dropdown>
-        <li class="nav-item mr-2">
+        <li class="nav-item mr-2 d-none d-sm-block">
           <router-link
-            class="nav-link"
+            class="nav-link d-flex"
             to="/store"
             exact-active-class="active-link"
           >
@@ -140,13 +140,6 @@
             {{ $t("navigation.faq") }}
           </b-dropdown-item>
           <b-dropdown-item
-            v-if="ladderMMR >= 4500"
-            exact-active-class="active-link"
-            to="/matchmaking"
-          >
-            {{ $t("navigation.matchmaking") }}
-          </b-dropdown-item>
-          <b-dropdown-item
             v-if="canSeeStats"
             to="/gods"
             exact-active-class="active-link"
@@ -161,9 +154,14 @@
             {{ $t("navigation.abilities") }}
           </b-dropdown-item>
         </b-nav-item-dropdown>
-        <li class="nav-item">
+        <li class="mr-2 nav-item d-none d-sm-block">
           <a href="https://news.abilityarena.com/" class="nav-link">
             {{ $t("navigation.news") }}
+          </a>
+        </li>
+        <li class="nav-item d-none d-sm-block">
+          <a href="/matchmaking" class="nav-link">
+            {{ $t("navigation.matchmaking") }}
           </a>
         </li>
       </ul>
