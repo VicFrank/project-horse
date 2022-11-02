@@ -147,9 +147,12 @@ async function fixUninitializedPlayers() {
       `Found ${unitializedPlayers.length} uninitialized battle passes`
     );
     const battlePass = await battlePasses.getActiveBattlePass();
+    let count = 1;
     for (const player of unitializedPlayers) {
       const { steam_id } = player;
       await players.createBattlePass(steam_id, battlePass.battle_pass_id);
+      console.log(count);
+      count += 1;
     }
 
     const { rows: unitializedDailyQuests } = await query(`
