@@ -1805,16 +1805,12 @@ module.exports = {
             cosmeticName: drop.cosmetic_name,
           });
 
-          // if this is the 10th god of this type opened, give the player a golden god
-          const loggedGods = await Logs.getLogsOfTypeForPlayer(
+          const alreadyHasGod = await this.hasCosmetic(
             steamID,
-            "god_opened"
+            drop.cosmetic_id
           );
-          const numOpened = loggedGods.filter(
-            (log) => log.log_data.cosmeticName === drop.cosmetic_name
-          ).length;
 
-          if (numOpened === 1) {
+          if (!alreadyHasGod) {
             return { items: { [drop.cosmetic_id]: 1 } };
           } else {
             const godName = drop.cosmetic_name.substring(5);
