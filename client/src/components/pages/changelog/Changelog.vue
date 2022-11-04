@@ -2,6 +2,51 @@
   <div style="max-width: 650px">
     <h1 class="page-title" v-t="'changelog.page_title'"></h1>
     <div class="pl-3 change-log">
+      <h3>Update: 11/4/2022</h3>
+      <h4>General</h4>
+
+      <ul>
+        <li>
+          Fixed the long standing issue where units would randomly not attack at
+          all
+        </li>
+        <li>Fixed Rainbow Finisher to actually work</li>
+        <li>Updated God cards in armory to show how they are unlocked</li>
+        <li>Fixed Battlepass dates to show properly</li>
+        <li>Updated Russian Localization</li>
+      </ul>
+
+      <h4>Gods</h4>
+      <ul>
+        <li>
+          Chaos God deals 2% current HP per second in damage in addition to it's
+          current effects
+        </li>
+        <li>
+          Jmuy fixed so you don't have every spell on a 1s cooldown at the start
+          of the round
+        </li>
+        <li>
+          Selemene fixed to give the proper spell amp (was at only 10% power)
+        </li>
+      </ul>
+
+      <h4>Spells</h4>
+      <ul>
+        <li>Benched Tidebringer</li>
+        <li>Added Frostbite</li>
+        <li>Quill Spray casts even if there is no enemy in range</li>
+        <li>Fixed Jingu Mastery Buff only lasting for 3 attacks</li>
+        <li>Moon Glaives fixed bouncing 1 less time than it should</li>
+        <li>Searing Arrows Gaben no longer does literally nothing</li>
+        <li>Sticky Napalm Super fixed to actually work</li>
+        <li>
+          Sunder AI targets closest unit in range with highest HP, rather than
+          highest HP on board
+        </li>
+        <li>Tricks of the Trade Super no longer jumps in allies</li>
+      </ul>
+
       <h3>Season 2</h3>
       <h4>Featured</h4>
 
