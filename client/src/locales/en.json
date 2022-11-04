@@ -822,7 +822,7 @@
     "rearm_Description": "Every round, re-rolls have reduced cost until you buy something or you re-roll a certain amount of times.",
     "rearm_rerollsAmount": "REROLLS AMOUNT: 10/8/6/4/2",
     "rearm_shopRerollCost": "REROLL COST: 0",
-    "fillBottle": "Selected unit will gain a random rune every round. Can gain multiple runes as the shop level increases.",
+    "fillBottle": "Fill Bottle",
     "fillBottle_Description": "Selected unit will gain a random rune every round. Can gain multiple runes as the shop level increases.",
     "questionMark": "?",
     "questionMark_Description": "Both allies and enemies take magical damage per second.",
