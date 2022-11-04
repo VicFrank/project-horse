@@ -1548,7 +1548,9 @@ module.exports = {
   async openRandomDrop(steamID, cosmeticName) {
     try {
       const itemNames = Cosmetics.getRandomDrops(cosmeticName);
-      const ownedItems = await this.getCosmetics(steamID);
+      const ownedItems = (await this.getCosmetics(steamID)).map(
+        (c) => c.cosmetic_name
+      );
       const itemsToChooseFrom = itemNames.filter(
         (itemName) => !ownedItems.includes(itemName)
       );
