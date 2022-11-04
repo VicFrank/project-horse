@@ -1,6 +1,6 @@
 const gods = {
   dazzle: ["shallowGrave", "cheatingDeath"],
-  runeGod: [],
+  runeGod: ["fillBottle"],
   legionCommander: ["stonehallPike"],
   brewmaster: [],
   spiritBreaker: [],
@@ -8,7 +8,7 @@ const gods = {
   pudge: ["beefyBoy"],
   rix: ["oathed", "assault"],
   shopkeeper: ["letsMakeADeal"],
-  rubick: [],
+  rubick: ["spellSteal"],
   lifestealer: ["feast"],
   ogreMagi: ["multicast"],
   aghanim: ["sorceryForDummies"],
@@ -30,7 +30,7 @@ const gods = {
   counterStrike: [],
   glados: [],
   bonelessAghanim: ["sorceryVolumeThree"],
-  chaosGod: [],
+  chaosGod: ["questionMark"],
   towerGod: [],
   icefrog: [],
 };
