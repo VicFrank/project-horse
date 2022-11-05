@@ -589,7 +589,7 @@ module.exports = [
     name: "plus_year_package",
     type: "Consumable",
     coins: -1,
-    cost_usd: 55,
+    cost_usd: 50,
     equip_group: "",
     rarity: "Legendary",
   },
