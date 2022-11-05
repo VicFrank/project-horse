@@ -25,13 +25,13 @@
                   href="https://www.communitygaming.io/tournament/ability-arena-1"
                   target="_blank"
                   variant="primary"
-                  v-t="'tournaments.sign_up'"
+                  v-t="'tournaments.results'"
                 ></b-button>
               </td>
             </tr>
             <tr>
               <td class="text-left">Season 2 Tournament</td>
-              <td class="text-left">Nov 5, 2022</td>
+              <td class="text-left">Nov 19-20, 2022</td>
               <td class="text-left">
                 <b-button
                   href="https://www.communitygaming.io/tournament/ability-arena-2"
