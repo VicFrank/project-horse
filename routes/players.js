@@ -404,6 +404,17 @@ router.get("/:steamID/gods", async (req, res) => {
   }
 });
 
+router.get("/:steamID/gods_with_rewards", async (req, res) => {
+  try {
+    const steamID = req.params.steamID;
+    const gods = await players.getGodsWithRewards(steamID);
+    res.status(200).json(gods);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Server Error" });
+  }
+});
+
 router.post("/:steamID/gods/:name/ban", auth.userAuth, async (req, res) => {
   try {
     const { steamID, name } = req.params;

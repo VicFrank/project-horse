@@ -1097,6 +1097,75 @@ module.exports = {
     }
   },
 
+  async getGodFreqs(steamID) {
+    try {
+      const { rows } = await query(
+        `
+        SELECT god, COUNT(*) AS freq
+        FROM game_players
+        JOIN games USING (game_id)
+        WHERE ranked = TRUE AND steam_id = $1
+        GROUP BY god
+        ORDER BY freq DESC
+        `,
+        [steamID]
+      );
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getGodsWithRewards(steamID) {
+    const getRandomReward = (type) => {
+      const roll = Math.random();
+      if (roll < 0.6) {
+        return type;
+      } else if (roll < 0.625) {
+        return "chest_basic";
+      } else if (roll < 0.63) {
+        return "chest_god";
+      } else return false;
+    };
+
+    const addRewardToRandomGod = (gods, type) => {
+      for (const god of gods) {
+        if (god.reward) continue;
+        const reward = getRandomReward(type);
+        if (reward) {
+          god.reward = reward;
+          return;
+        }
+      }
+    };
+
+    try {
+      const playerGods = await this.getGods(steamID);
+      const godFreqs = await this.getGodFreqs(steamID);
+      const numRewardsOfType = Math.floor(playerGods.length * 0.15);
+      const rewardTypes = ["gold", "doubledown", "xp"];
+
+      for (const god of playerGods) {
+        const godFreq = godFreqs.find((gf) => gf.god === god.god_name);
+        god.freq = godFreq ? godFreq.freq : 0;
+      }
+      playerGods.sort((a, b) => b.freq - a.freq);
+      for (const god of playerGods) {
+        delete god.freq;
+      }
+
+      for (const type of rewardTypes) {
+        for (let i = 0; i < numRewardsOfType; i++) {
+          addRewardToRandomGod(playerGods, type);
+        }
+      }
+
+      return playerGods;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async setGodBanned(steamID, godName, banned) {
     try {
       // Upsert the god into the player_gods table
