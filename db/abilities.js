@@ -288,4 +288,26 @@ module.exports = {
       throw error;
     }
   },
+  async getMostGabens() {
+    try {
+      const { rows } = await query(
+        `
+        SELECT game_id, steam_id, count(distinct ability_name)
+        FROM hero_abilities
+        JOIN game_player_heroes USING (game_player_hero_id)
+        JOIN game_players USING (game_player_id)
+        JOIN games USING (game_id)
+        WHERE ability_level = 9 AND ranked = TRUE
+        AND games.created_at > NOW() - INTERVAL '24 HOURS'
+        GROUP BY game_id, steam_id
+        ORDER BY count(ability_name) DESC
+        LIMIT 100;
+      `
+      );
+
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
