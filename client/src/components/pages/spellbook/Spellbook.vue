@@ -21,6 +21,7 @@ export default {
     return {
       searchText: "",
       tagFilter: "",
+      loading: true,
       allTags: [],
       abilities: [],
       filteredAbilities: []
@@ -38,6 +39,7 @@ export default {
           .then((enabledAbilities) => {
             this.abilities = this.abilities.filter(({ id }) => enabledAbilities.includes(id));
             this.allTags = Array.from(new Set(this.abilities.reduce((prev, curr) => prev.concat(curr.tags), [])));
+            this.loading = false;
             this.updateShownAbilities();
           }))
     },
@@ -79,20 +81,22 @@ export default {
         </div>
       </div>
     </div>
-    <div style="display:flex; flex-direction:row; flex-wrap: wrap; justify-content: center;">
-      <div v-for="tag in allTags" :key="tag" class="px-2 py-1 mx-2 my-1"
-        :class="{ 'filter-selected': tagFilter == tag }"
-        style="text-transform: capitalize; background: #1b182f; user-select: none;" @click="setTagFilter(tag)">
+    <div v-if="loading" class="d-flex justify-content-center mb-3">
+      <b-spinner label="Loading..."></b-spinner>
+    </div>
+    <div class="tag-container">
+      <div v-for="tag in allTags" :key="tag" class="tag-button px-2 py-1 mx-2 my-1"
+        :class="{ 'filter-selected': tagFilter == tag }" @click="setTagFilter(tag)">
         {{ tag.split(/(?=[A-Z])/).join(' ') }}
       </div>
     </div>
-    <div style="display: flex; flex-wrap: wrap; justify-content: center">
+    <div class="card-container">
       <div v-for="ability in filteredAbilities" :key="ability.id" class="spell-card">
         <h4 class="pt-2 pl-2" style="background: #1b182f">
           {{ ability.name }}
         </h4>
         <div style="display: flex; flex-direction: row" class="">
-          <div id="types" class="m-2 text-slate-400">
+          <div id="types" class="m-2">
             <div v-for="catStr in ability.categories" :key="catStr">
               {{ catStr }}
             </div>
@@ -164,7 +168,7 @@ export default {
   flex-direction: column;
   max-width: 20rem;
   margin: 0.5rem;
-  box-shadow: 0 0 10px 0 #724596;
+  background: var(--primary-color-dark)
 }
 
 #super {
@@ -176,10 +180,29 @@ export default {
 }
 
 #differences {
-  background: var(--primary-color-dark);
+  background: var(--primary-color);
 }
 
 .filter-selected {
-  box-shadow: 0 0 10px 0 #681ea5;
+  box-shadow: 0 0 10px 0 var(--secondary-color)
+}
+
+.tag-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tag-button {
+  text-transform: capitalize;
+  background: #1b182f;
+  user-select: none;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 </style>
