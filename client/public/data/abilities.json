@@ -2569,7 +2569,6 @@
     "differences": "",
     "values": [
       "CAST RANGE: 700",
-      "CAST RANGE: 700",
       "CREEP DURATION: 10",
       "DAMAGE PER SECOND: 100",
       "HERO DURATION: 1.5 / 2 / 3"
@@ -4086,7 +4085,6 @@
       "CAST RANGE: 350",
       "BONUS ATTACK SPEED: 40",
       "BONUS DAMAGE: 10 / 30 / 50",
-      "CAST RANGE: 350",
       "DURATION: 3 / 3.25 / 3.5",
       "SLASH JUMP RADIUS: 375",
       "SLASHES RATE MULTIPLIER: 1.5"
@@ -4282,7 +4280,6 @@
     "values": [
       "CAST RANGE: 1500",
       "BONUS ATTACK SPEED: 80 / 110 / 170",
-      "CAST RANGE: 1500",
       "DURATION: 2",
       "LIFESTEAL: 10% / 15% / 25%"
     ],

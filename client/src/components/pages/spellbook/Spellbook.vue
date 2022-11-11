@@ -102,7 +102,7 @@ export default {
             </div>
           </div>
           <img style="margin-left: auto; margin-right: 8px"
-            :src="`https://abilityarena.com/images/ability_icons/${ability.icon}.png`" />
+            :src="`../images/ability_icons/${ability.icon}.png`" />
         </div>
         <div id="desc" class="p-2">
           {{ ability.description }}
