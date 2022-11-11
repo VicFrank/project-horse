@@ -164,6 +164,11 @@
             {{ $t("navigation.matchmaking") }}
           </a>
         </li>
+        <li class="nav-item d-none d-sm-block">
+          <a href="/learn/spellbook" class="nav-link">
+            {{ $t("navigation.spellbook") }}
+          </a>
+        </li>
       </ul>
       <div class="d-flex align-items-center ml-auto">
         <div class="d-flex align-items-center" v-if="!loggedIn">
