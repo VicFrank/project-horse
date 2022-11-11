@@ -21,7 +21,7 @@ export default {
     return {
       searchText: "",
       abilities: [],
-      filteredAbilities: [],
+      filteredAbilities: []
     };
   },
   methods: {
@@ -31,16 +31,31 @@ export default {
         .then((abilities) => {
           this.abilities = abilities;
         }).then(fetch('https://double-edge-studios-llc.github.io/enabled_abilities.txt')
-        .then(r => r.text())
-        .then(t => t.split('\n').filter(line => !line.startsWith('#') || !line.startsWith('#')))
-        .then((enabledAbilities) => {
-          this.abilities = this.abilities.filter(({ id }) => enabledAbilities.contains(id))
-        }))
+          .then(r => r.text())
+          .then(t => t.split('\n').filter(line => !line.startsWith('#') || !line.startsWith('#')))
+          .then((enabledAbilities) => {
+            this.abilities = this.abilities.filter(({ id }) => enabledAbilities.includes(id));
+            this.updateShownAbilities();
+          }))
     },
+    updateShownAbilities() {
+      console.log('Updating', this.filteredAbilities.length)
+      this.filteredAbilities = this.searchText === ""
+        ? this.abilities
+        : this.abilities.filter((a) => {
+          return a.name.toLowerCase().includes(this.searchText.toLowerCase()) || a.tags.filter(tag => tag.toLowerCase().includes(this.searchText)).length > 0
+        })
+      console.log('done filtering', this.filteredAbilities.length)
+    }
   },
   created() {
     this.fetchAbilities();
   },
+  watch: {
+    searchText: function () {
+      this.updateShownAbilities()
+    },
+  }
 };
 </script>
 
@@ -56,7 +71,7 @@ export default {
       </div>
     </div>
     <div style="display: flex; flex-wrap: wrap; justify-content: center">
-      <div v-for="ability in abilities" :key="ability.id" class="spell-card">
+      <div v-for="ability in filteredAbilities" :key="ability.id" class="spell-card">
         <h4 class="pt-2 pl-2" style="background: #1b182f">
           {{ ability.name }}
         </h4>
