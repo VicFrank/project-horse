@@ -20,6 +20,8 @@ export default {
   data() {
     return {
       searchText: "",
+      tagFilter: "",
+      allTags: [],
       abilities: [],
       filteredAbilities: []
     };
@@ -35,17 +37,21 @@ export default {
           .then(t => t.split('\n').filter(line => !line.startsWith('#') || !line.startsWith('#')))
           .then((enabledAbilities) => {
             this.abilities = this.abilities.filter(({ id }) => enabledAbilities.includes(id));
+            this.allTags = Array.from(new Set(this.abilities.reduce((prev, curr) => prev.concat(curr.tags), [])));
             this.updateShownAbilities();
           }))
     },
     updateShownAbilities() {
-      console.log('Updating', this.filteredAbilities.length)
-      this.filteredAbilities = this.searchText === ""
-        ? this.abilities
-        : this.abilities.filter((a) => {
-          return a.name.toLowerCase().includes(this.searchText.toLowerCase()) || a.tags.filter(tag => tag.toLowerCase().includes(this.searchText)).length > 0
-        })
-      console.log('done filtering', this.filteredAbilities.length)
+      let filtered = this.abilities;
+      if (this.tagFilter !== "") {
+        filtered = filtered.filter(a => a.tags.filter(tag => tag.toLowerCase().includes(this.tagFilter.toLowerCase())).length > 0)
+      }
+      if (this.searchText !== "")
+        filtered = filtered.filter(a => a.name.toLowerCase().includes(this.searchText.toLowerCase()))
+      this.filteredAbilities = filtered;
+    },
+    setTagFilter(tag) {
+      this.tagFilter = this.tagFilter === tag ? "" : tag;
     }
   },
   created() {
@@ -53,6 +59,9 @@ export default {
   },
   watch: {
     searchText: function () {
+      this.updateShownAbilities()
+    },
+    tagFilter: function () {
       this.updateShownAbilities()
     },
   }
@@ -68,6 +77,13 @@ export default {
             <input type="text" name="search" placeholder="Search..." v-model="searchText" />
           </div>
         </div>
+      </div>
+    </div>
+    <div style="display:flex; flex-direction:row; flex-wrap: wrap; justify-content: center;">
+      <div v-for="tag in allTags" :key="tag" class="px-2 py-1 mx-2 my-1"
+        :class="{ 'filter-selected': tagFilter == tag }"
+        style="text-transform: capitalize; background: #1b182f; user-select: none;" @click="setTagFilter(tag)">
+        {{ tag.split(/(?=[A-Z])/).join(' ') }}
       </div>
     </div>
     <div style="display: flex; flex-wrap: wrap; justify-content: center">
@@ -161,5 +177,9 @@ export default {
 
 #differences {
   background: var(--primary-color-dark);
+}
+
+.filter-selected {
+  box-shadow: 0 0 10px 0 #681ea5;
 }
 </style>
