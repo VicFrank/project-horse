@@ -24,6 +24,7 @@
     <Chat class="text-center" />
     <div class="text-center">
       <b-button
+        v-if="!locked"
         :disabled="locked"
         variant="secondary"
         class="my-3 ml-auto"
