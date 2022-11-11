@@ -30,7 +30,12 @@ export default {
         .then((res) => res.json())
         .then((abilities) => {
           this.abilities = abilities;
-        });
+        }).then(fetch('https://double-edge-studios-llc.github.io/enabled_abilities.txt')
+        .then(r => r.text())
+        .then(t => t.split('\n').filter(line => !line.startsWith('#') || !line.startsWith('#')))
+        .then((enabledAbilities) => {
+          this.abilities = this.abilities.filter(({ id }) => enabledAbilities.contains(id))
+        }))
     },
   },
   created() {
@@ -45,12 +50,7 @@ export default {
       <div class="col-xl-12">
         <div class="search-bar spell-search">
           <div class="search-input">
-            <input
-              type="text"
-              name="search"
-              placeholder="Search..."
-              v-model="searchText"
-            />
+            <input type="text" name="search" placeholder="Search..." v-model="searchText" />
           </div>
         </div>
       </div>
@@ -66,10 +66,8 @@ export default {
               {{ catStr }}
             </div>
           </div>
-          <img
-            style="margin-left: auto; margin-right: 8px"
-            :src="`https://abilityarena.com/images/ability_icons/${ability.icon}.png`"
-          />
+          <img style="margin-left: auto; margin-right: 8px"
+            :src="`https://abilityarena.com/images/ability_icons/${ability.icon}.png`" />
         </div>
         <div id="desc" class="p-2">
           {{ ability.description }}
@@ -80,16 +78,13 @@ export default {
             <span>{{ val.split(":")[1] }}</span>
           </div>
           <div style="display: flex; flex-wrap: wrap; align-items: center">
-            <div
-              v-if="ability.cooldowns.length > 0"
-              class="py-2"
-            >
+            <div v-if="ability.cooldowns.length > 0" class="py-2">
               <img src="./clock.svg" width="16px" height="16px" />
               <span>
                 {{
-                  ability.cooldowns
-                    .slice(0, Math.min(ability.cooldowns.length, 3))
-                    .join(" / ")
+                    ability.cooldowns
+                      .slice(0, Math.min(ability.cooldowns.length, 3))
+                      .join(" / ")
                 }}
               </span>
             </div>
@@ -98,9 +93,9 @@ export default {
                 <div style="height: 16px; width: 16px; background: blue"></div>
                 <span class="pl-2">
                   {{
-                    ability.manaCost
-                      .slice(0, Math.min(ability.manaCost.length, 3))
-                      .join(" / ")
+                      ability.manaCost
+                        .slice(0, Math.min(ability.manaCost.length, 3))
+                        .join(" / ")
                   }}
                 </span>
               </div>
@@ -117,12 +112,8 @@ export default {
           <span class="">Gaben: </span>
           <span>{{ ability.gabenUpgrade.split("Gaben: ")[1] }}</span>
         </div>
-        <div
-          v-if="ability.differences"
-          id="differences"
-          class="p-2 mb-0"
-        >
-          <span >Differences from Dota: </span>
+        <div v-if="ability.differences" id="differences" class="p-2 mb-0">
+          <span>Differences from Dota: </span>
           {{ ability.differences }}
         </div>
       </div>
@@ -136,6 +127,7 @@ export default {
 .spell-search {
   display: block;
 }
+
 .spell-card {
   display: flex;
   flex-direction: column;
@@ -143,13 +135,16 @@ export default {
   margin: 0.5rem;
   box-shadow: 0 0 10px 0 #724596;
 }
+
 #super {
   background: rgb(32 26 79);
 }
+
 #gaben {
   background: rgb(45 34 63);
 }
+
 #differences {
-    background: var(--primary-color-dark);
+  background: var(--primary-color-dark);
 }
 </style>
