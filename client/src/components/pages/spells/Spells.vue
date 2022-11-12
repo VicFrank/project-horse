@@ -38,7 +38,7 @@ export default {
           .then(t => t.split('\n').filter(line => !line.startsWith('#') || !line.startsWith('#')))
           .then((enabledAbilities) => {
             this.abilities = this.abilities.filter(({ id }) => enabledAbilities.includes(id));
-            this.allTags = Array.from(new Set(this.abilities.reduce((prev, curr) => prev.concat(curr.tags), [])));
+            this.allTags = Array.from(new Set(this.abilities.reduce((prev, curr) => prev.concat(curr.tags), []))).sort();
             this.loading = false;
             this.updateShownAbilities();
           }))
@@ -182,6 +182,7 @@ export default {
   text-transform: capitalize;
   background: #1b182f;
   user-select: none;
+  cursor: pointer;
 }
 
 .card-container {
