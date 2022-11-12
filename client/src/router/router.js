@@ -44,7 +44,7 @@ const PlayerGamesList = () =>
 
 const Matchmaking = () => import("../components/pages/matchmaking/Matchmaking");
 
-const Spellbook = () => import("../components/pages/spellbook/Spellbook");
+const Spells = () => import("../components/pages/spells/Spells");
 
 Vue.use(VueRouter);
 
@@ -145,8 +145,8 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: "/learn/spellbook",
-    component: Spellbook,
+    path: "/learn/spells",
+    component: Spells,
   },
 ];
 
