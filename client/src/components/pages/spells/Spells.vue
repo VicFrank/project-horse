@@ -191,7 +191,7 @@ export default {
 }
 
 .ability-tooltip {
-  width: 210px;
+  width: 265px;
   background-color: #1b1331;
   margin: 4px;
   border: 2px solid #554f9d;
