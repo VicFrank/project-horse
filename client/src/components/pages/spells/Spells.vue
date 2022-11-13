@@ -29,15 +29,16 @@ export default {
   },
   methods: {
     fetchAbilities() {
+      let baseAbilities = [];
       fetch("../../data/abilities.json")
         .then((res) => res.json())
         .then((abilities) => {
-          this.abilities = abilities;
+          baseAbilities = abilities;
         }).then(fetch('https://double-edge-studios-llc.github.io/enabled_abilities.txt')
           .then(r => r.text())
           .then(t => t.split('\n').filter(line => !line.startsWith('#') || !line.startsWith('#')))
           .then((enabledAbilities) => {
-            this.abilities = this.abilities.filter(({ id }) => enabledAbilities.includes(id));
+            this.abilities = baseAbilities.filter(({ id }) => enabledAbilities.includes(id));
             this.allTags = Array.from(new Set(this.abilities.reduce((prev, curr) => prev.concat(curr.tags), []))).sort();
             this.loading = false;
             this.updateShownAbilities();
