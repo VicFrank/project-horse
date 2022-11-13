@@ -24,48 +24,62 @@ export default {
       loading: true,
       allTags: [],
       abilities: [],
-      filteredAbilities: []
+      filteredAbilities: [],
     };
   },
   methods: {
-    fetchAbilities() {
-      fetch("../../data/abilities.json")
-        .then((res) => res.json())
-        .then((abilities) => this.abilities = abilities)
-        .then(fetch('https://double-edge-studios-llc.github.io/enabled_abilities.txt')
-          .then(r => r.text())
-          .then(t => t.split('\n').filter(line => !line.startsWith('#') || !line.startsWith('#')))
-          .then((enabledAbilities) => {
-            this.abilities = this.abilities.filter(({ id }) => enabledAbilities.includes(id));
-            this.allTags = Array.from(new Set(this.abilities.reduce((prev, curr) => prev.concat(curr.tags), []))).sort();
-            this.loading = false;
-            this.updateShownAbilities();
-          }))
+    async fetchAbilities() {
+      const data = await fetch("../../data/abilities.json");
+      this.abilities = await data.json();
+      const res = await fetch(
+        "https://double-edge-studios-llc.github.io/enabled_abilities.txt"
+      );
+      const text = await res.text();
+      const enabledAbilities = text
+        .split("\n")
+        .filter((line) => !line.startsWith("#") || !line.startsWith("#"));
+      this.abilities = this.abilities.filter(({ id }) =>
+        enabledAbilities.includes(id)
+      );
+      this.allTags = Array.from(
+        new Set(
+          this.abilities.reduce((prev, curr) => prev.concat(curr.tags), [])
+        )
+      ).sort();
+      this.loading = false;
+      this.updateShownAbilities();
     },
     updateShownAbilities() {
       let filtered = this.abilities;
       if (this.tagFilter !== "") {
-        filtered = filtered.filter(a => a.tags.filter(tag => tag.toLowerCase().includes(this.tagFilter.toLowerCase())).length > 0)
+        filtered = filtered.filter(
+          (a) =>
+            a.tags.filter((tag) =>
+              tag.toLowerCase().includes(this.tagFilter.toLowerCase())
+            ).length > 0
+        );
       }
       if (this.searchText !== "")
-        filtered = filtered.filter(a => a.name.toLowerCase().includes(this.searchText.toLowerCase()))
+        filtered = filtered.filter((a) =>
+          a.name.toLowerCase().includes(this.searchText.toLowerCase())
+        );
       this.filteredAbilities = filtered;
     },
     setTagFilter(tag) {
       this.tagFilter = this.tagFilter === tag ? "" : tag;
-    }
+    },
   },
   created() {
     this.fetchAbilities();
   },
   watch: {
     searchText: function () {
-      this.updateShownAbilities()
+      this.updateShownAbilities();
     },
     tagFilter: function () {
-      this.updateShownAbilities()
+      this.updateShownAbilities();
     },
-  }
+  },
 };
 </script>
 
@@ -75,7 +89,12 @@ export default {
       <div class="col-xl-12">
         <div class="search-bar spell-search">
           <div class="search-input">
-            <input type="text" name="search" placeholder="Search..." v-model="searchText" />
+            <input
+              type="text"
+              name="search"
+              placeholder="Search..."
+              v-model="searchText"
+            />
           </div>
         </div>
       </div>
@@ -84,15 +103,27 @@ export default {
       <b-spinner label="Loading..."></b-spinner>
     </div>
     <div class="tag-container">
-      <div v-for="tag in allTags" :key="tag" class="tag-button px-2 py-1 mx-2 my-1"
-        :class="{ 'filter-selected': tagFilter == tag }" @click="setTagFilter(tag)">
-        {{ tag.split(/(?=[A-Z])/).join(' ') }}
+      <div
+        v-for="tag in allTags"
+        :key="tag"
+        class="tag-button px-2 py-1 mx-2 my-1"
+        :class="{ 'filter-selected': tagFilter == tag }"
+        @click="setTagFilter(tag)"
+      >
+        {{ tag.split(/(?=[A-Z])/).join(" ") }}
       </div>
     </div>
     <div class="card-container">
-      <div v-for="ability in filteredAbilities" :key="ability.id" class="ability-tooltip">
+      <div
+        v-for="ability in filteredAbilities"
+        :key="ability.id"
+        class="ability-tooltip"
+      >
         <div class="ability-header">
-          <img class="ability-icon" :src="`../images/ability_icons/${ability.icon}.png`" />
+          <img
+            class="ability-icon"
+            :src="`../images/ability_icons/${ability.icon}.png`"
+          />
           <div class="ability-name">
             {{ ability.name }}
           </div>
@@ -110,17 +141,29 @@ export default {
         </div>
         <div class="values p-2">
           <div v-for="val in ability.values" :key="val">
-            <span class="uppercase ability-value-desc"> {{ val.split(":")[0] }}: </span>
+            <span class="uppercase ability-value-desc">
+              {{ val.split(":")[0] }}:
+            </span>
             <span class="ability-value">{{ val.split(":")[1] }}</span>
           </div>
-          <div style="display: flex; flex-wrap: wrap; align-items: center; margin-top: 8px">
-            <div v-if="ability.cooldowns.length > 0" class="icon-and-values pr-4">
+          <div
+            style="
+              display: flex;
+              flex-wrap: wrap;
+              align-items: center;
+              margin-top: 8px;
+            "
+          >
+            <div
+              v-if="ability.cooldowns.length > 0"
+              class="icon-and-values pr-4"
+            >
               <div class="cooldown-icon"></div>
               <span class="ml-2">
                 {{
-                    ability.cooldowns
-                      .slice(0, Math.min(ability.cooldowns.length, 3))
-                      .join(" / ")
+                  ability.cooldowns
+                    .slice(0, Math.min(ability.cooldowns.length, 3))
+                    .join(" / ")
                 }}
               </span>
             </div>
@@ -129,9 +172,9 @@ export default {
                 <div class="mana-cost-icon"></div>
                 <span class="ml-2">
                   {{
-                      ability.manaCost
-                        .slice(0, Math.min(ability.manaCost.length, 3))
-                        .join(" / ")
+                    ability.manaCost
+                      .slice(0, Math.min(ability.manaCost.length, 3))
+                      .join(" / ")
                   }}
                 </span>
               </div>
@@ -150,7 +193,7 @@ export default {
             <span>{{ ability.gabenUpgrade.split("Gaben: ")[1] }}</span>
           </div>
           <div v-if="ability.differences" class="differences">
-            <span style="color: #8e8676;">Differences from Dota: </span>
+            <span style="color: #8e8676">Differences from Dota: </span>
             {{ ability.differences }}
           </div>
         </div>
@@ -159,15 +202,13 @@ export default {
   </div>
 </template>
 
-
-
 <style>
 .spell-search {
   display: block;
 }
 
 .filter-selected {
-  box-shadow: 0 0 10px 0 var(--secondary-color)
+  box-shadow: 0 0 10px 0 var(--secondary-color);
 }
 
 .tag-container {
@@ -220,7 +261,8 @@ export default {
   margin-left: 8px;
   font-size: 20px;
   color: #e1e1e1;
-  font-family: 'Reaver', 'Goudy Trajan Medium', 'FZKai-Z03', 'TH Sarabun New', 'YDYGO 540';
+  font-family: "Reaver", "Goudy Trajan Medium", "FZKai-Z03", "TH Sarabun New",
+    "YDYGO 540";
   font-weight: 600;
   text-transform: uppercase;
   text-shadow: 0px 1px 2px black;
@@ -262,7 +304,7 @@ export default {
   width: 16px;
   height: 16px;
   border-radius: 3px;
-  background: linear-gradient(#00A4DB, #007196);
+  background: linear-gradient(#00a4db, #007196);
 }
 
 .icon-and-values {
@@ -278,7 +320,10 @@ export default {
 
 .super {
   color: #9a88bd;
-  background: linear-gradient(rgba(104, 104, 193, 0.1), rgba(31, 31, 151, 0.16));
+  background: linear-gradient(
+    rgba(104, 104, 193, 0.1),
+    rgba(31, 31, 151, 0.16)
+  );
   box-shadow: inset 0px 0px 15px -5px rgba(98, 116, 255, 0.5);
   padding: 8px;
   margin-top: 12px;
