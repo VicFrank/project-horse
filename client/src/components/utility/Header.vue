@@ -154,6 +154,11 @@
             {{ $t("navigation.abilities") }}
           </b-dropdown-item>
         </b-nav-item-dropdown>
+        <b-nav-item-dropdown :text="$t('navigation.learn')" class="mx-2 d-none d-sm-block">
+          <b-dropdown-item to="/learn/spells" exact-active-class="active-link">
+            {{ $t("navigation.spells") }}
+          </b-dropdown-item>
+        </b-nav-item-dropdown>
         <li class="mr-2 nav-item d-none d-sm-block">
           <a href="https://news.abilityarena.com/" class="nav-link">
             {{ $t("navigation.news") }}
