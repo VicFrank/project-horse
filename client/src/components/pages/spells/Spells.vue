@@ -84,7 +84,7 @@ export default {
 </script>
 
 <template>
-  <div class="container">
+  <div class="container root-card-container">
     <div class="row my-4">
       <div class="col-xl-12">
         <div class="search-bar spell-search">
@@ -93,6 +93,7 @@ export default {
               type="text"
               name="search"
               placeholder="Search..."
+              autocomplete="off"
               v-model="searchText"
             />
           </div>
@@ -203,95 +204,85 @@ export default {
 </template>
 
 <style>
+@media (min-width: 1200px) {
+  .root-card-container.container {
+    max-width: 1580px;
+  }
+}
+
 .spell-search {
   display: block;
 }
-
 .filter-selected {
   box-shadow: 0 0 10px 0 var(--secondary-color);
 }
-
 .tag-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
 }
-
 .tag-button {
   text-transform: capitalize;
   background: #1b182f;
   user-select: none;
-  cursor: pointer;
 }
-
 .card-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
-
 .ability-tooltip {
-  width: 265px;
+  width: 285px;
   background-color: #1b1331;
-  margin: 4px;
-  border: 2px solid #554f9d;
-
+  margin: 8px;
+  border: 1px solid #2d2954;
   font-size: 14px;
+  line-height: 1.35;
+
   display: flex;
   flex-direction: column;
 }
-
 .ability-icon {
   height: 50px;
   width: 50px;
   margin: 4px;
   box-shadow: 0px 0px 8px #000;
 }
-
 .ability-header {
   background-color: #231b40;
   width: 100%;
-
   display: flex;
   align-items: center;
 }
-
 .ability-name {
   margin-left: 8px;
   font-size: 20px;
   color: #e1e1e1;
-  font-family: "Reaver", "Goudy Trajan Medium", "FZKai-Z03", "TH Sarabun New",
-    "YDYGO 540";
-  font-weight: 600;
+  font-family: Reaver, serif;
+  font-weight: bold;
   text-transform: uppercase;
-  text-shadow: 0px 1px 2px black;
+  letter-spacing: 1px;
 }
-
 .categories {
   color: #6548a0;
   margin-left: 8px;
 }
-
 .separator {
-  height: 2px;
+  height: 1px;
   background-color: #383167;
-  margin: 12px;
+  margin: 8px;
 }
-
 .ability-description {
-  color: #9a88bd;
-  margin-left: 8px;
+  color: #847f90;
+  margin: 0px 8px;
 }
-
 .ability-value-desc {
   color: #6548a0;
 }
-
 .ability-value {
   color: #e1e1e1;
 }
-
 .cooldown-icon {
   background-image: url("https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/icons/cooldown.png");
   width: 16px;
@@ -299,44 +290,39 @@ export default {
   border-radius: 3px;
   background-size: cover;
 }
-
 .mana-cost-icon {
   width: 16px;
   height: 16px;
   border-radius: 3px;
   background: linear-gradient(#00a4db, #007196);
 }
-
 .icon-and-values {
   display: flex;
   flex-direction: row;
   align-items: center;
   padding-top: 4px;
 }
-
 .sink {
   margin-top: auto;
 }
-
-.super {
+.super,
+.gaben {
   color: #9a88bd;
+  padding: 12px;
+  margin-top: 12px;
+  font-size: 15px;
+}
+.super {
   background: linear-gradient(
     rgba(104, 104, 193, 0.1),
     rgba(31, 31, 151, 0.16)
   );
   box-shadow: inset 0px 0px 15px -5px rgba(98, 116, 255, 0.5);
-  padding: 8px;
-  margin-top: 12px;
 }
-
 .gaben {
-  color: #9a88bd;
   box-shadow: inset 0px 0px 15px -5px rgba(156, 104, 74, 0.5);
   background: linear-gradient(rgba(59, 41, 34, 0.8), rgba(0, 0, 0, 0));
-  padding: 8px;
-  margin-top: 12px;
 }
-
 .differences {
   background: linear-gradient(rgb(43, 36, 61), rgba(38, 30, 58, 1));
   color: #67696a;
