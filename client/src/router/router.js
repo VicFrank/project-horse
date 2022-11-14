@@ -45,6 +45,7 @@ const PlayerGamesList = () =>
 const Matchmaking = () => import("../components/pages/matchmaking/Matchmaking");
 
 const Spells = () => import("../components/pages/learn/Spells");
+const LearnGods= () => import("../components/pages/learn/LearnGods");
 
 Vue.use(VueRouter);
 
@@ -147,6 +148,10 @@ const routes = [
   {
     path: "/learn/spells",
     component: Spells,
+  },
+  {
+    path: "/learn/gods",
+    component: LearnGods,
   },
 ];
 
