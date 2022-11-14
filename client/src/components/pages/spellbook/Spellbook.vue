@@ -71,7 +71,7 @@ export default {
 </script>
 
 <template>
-  <div class="container">
+  <div class="container root-card-container">
     <div class="row my-4">
       <div class="col-xl-12">
         <div class="search-bar spell-search">
@@ -163,6 +163,18 @@ export default {
 
 
 <style>
+
+.root-card-container{
+
+}
+
+@media (min-width: 1200px){
+  .root-card-container.container{
+    max-width: 1580px;
+  }
+}
+
+
 .spell-search {
   display: block;
 }
@@ -191,14 +203,17 @@ export default {
 }
 
 .ability-tooltip {
-  width: 210px;
-  background-color: #1b1331;
-  margin: 4px;
-  border: 2px solid #554f9d;
+	width: 285px;
+	background-color: #1b1331;
+	margin: 8px;
+	border: 1px solid #2d2954;
 
-  font-size: 14px;
-  display: flex;
-  flex-direction: column;
+	font-size: 14px;
+  line-height: 1.35;
+  
+	display: flex;
+	flex-direction: column;
+
 }
 
 .ability-icon {
@@ -232,14 +247,14 @@ export default {
 }
 
 .separator {
-  height: 2px;
-  background-color: #383167;
-  margin: 12px;
+	height: 1px;
+	background-color: #383167;
+	margin: 8px;
 }
 
 .ability-description {
-  color: #9a88bd;
-  margin-left: 8px;
+	color: #847f90;
+	margin: 0px 8px;
 }
 
 .ability-value-desc {
@@ -276,20 +291,21 @@ export default {
   margin-top: auto;
 }
 
-.super {
+.super, .gaben{
   color: #9a88bd;
+	padding: 12px;
+	margin-top: 12px;
+	font-size: 15px;
+}
+
+.super {
   background: linear-gradient(rgba(104, 104, 193, 0.1), rgba(31, 31, 151, 0.16));
   box-shadow: inset 0px 0px 15px -5px rgba(98, 116, 255, 0.5);
-  padding: 8px;
-  margin-top: 12px;
 }
 
 .gaben {
-  color: #9a88bd;
   box-shadow: inset 0px 0px 15px -5px rgba(156, 104, 74, 0.5);
   background: linear-gradient(rgba(59, 41, 34, 0.8), rgba(0, 0, 0, 0));
-  padding: 8px;
-  margin-top: 12px;
 }
 
 .differences {
