@@ -78,12 +78,30 @@ async function updateCosmetics() {
     console.log("Updating cosmetics...");
     const cosmeticsToUpdate = [
       {
-        // Chest Drop
-        name: "hat_rainbow_horn",
-        type: "Avatar Hat",
-        equip_group: "avatar_hat",
+        // Real Money Purchase
+        name: "buy_xp_5000",
+        type: "Consumable",
         coins: -1,
-        cost_usd: -1,
+        cost_usd: 11.99,
+        equip_group: "",
+        rarity: "Legendary",
+      },
+      {
+        // Real Money Purchase
+        name: "buy_xp_1000",
+        type: "Consumable",
+        coins: -1,
+        cost_usd: 2.99,
+        equip_group: "",
+        rarity: "Mythical",
+      },
+      {
+        // Real Money Purchase
+        name: "buy_xp_300",
+        type: "Consumable",
+        coins: -1,
+        cost_usd: 0.99,
+        equip_group: "",
         rarity: "Rare",
       },
     ];
@@ -246,8 +264,8 @@ async function addCosmeticsToPlayers() {
 }
 
 (async function () {
-  await addCosmetics();
-  await setChestRewards();
+  // await addCosmetics();
+  // await setChestRewards();
   await updateCosmetics();
   // await addCosmeticsToPlayers();
 })();
