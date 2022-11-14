@@ -444,7 +444,7 @@
       "HP FOR MAX BONUS: 10%",
       "MAX ATTACK SPEED: 100 / 165 / 295",
       "MAX MAGIC RESIST: 10% / 15% / 25%",
-      "MAX STR REGEN: 25% / 40% / 70%"
+      "MAX STR REGEN: 15% / 30% / 60%"
     ],
     "cooldowns": [],
     "manaCost": [],
@@ -638,7 +638,7 @@
     "description": "When activated, all damage dealt to you will heal instead of harm. Most negative buffs will also be removed. If the ability is not on cooldown, it will automatically activate if your health falls below 400.\n\nDISPEL TYPE: Strong Dispel",
     "differences": "",
     "values": [
-      "DURATION: 1 / 2 / 3",
+      "DURATION: 1 / 1.5 / 2",
       "HEALTH THRESHOLD: 400"
     ],
     "cooldowns": [
@@ -736,14 +736,14 @@
     "differences": "Has a lower cooldown",
     "values": [
       "ARROWS FIRED: 6",
-      "DAMAGE PER ARROW: 50% / 55% / 65%",
+      "DAMAGE PER ARROW: 40% / 45% / 55%",
       "RANGE: 750 / 800 / 900"
     ],
     "cooldowns": [
-      20,
-      16,
-      12,
-      8
+      22,
+      18,
+      14,
+      10
     ],
     "manaCost": [
       45,
@@ -751,7 +751,7 @@
       75,
       90
     ],
-    "superUpgrade": "Super: +25% damage, +3 arrows fired.",
+    "superUpgrade": "Super: +35% damage, +3 arrows fired.",
     "gabenUpgrade": "Gaben: Grants Gleipnir"
   },
   {
@@ -946,9 +946,9 @@
       170
     ],
     "manaCost": [
-      200,
       300,
-      400
+      450,
+      600
     ],
     "superUpgrade": "Super: Summons Golem on death.",
     "gabenUpgrade": "Gaben: Calls 2 Golems with reduced stats."
@@ -1002,7 +1002,7 @@
     "description": "Enter into a chemically induced rage, reducing base attack cooldown and increasing movement speed and health regeneration.\n\nDISPEL TYPE: Basic Dispel",
     "differences": "Grants faster BAT for melee heroes.",
     "values": [
-      "BASE ATTACK TIME (MELEE): 1.2 / 1.1 / 1",
+      "BASE ATTACK TIME (MELEE): 1.3 / 1.2 / 1.1",
       "BASE ATTACK TIME (RANGED): 1.5 / 1.4 / 1.3",
       "BONUS HEALTH REGEN: 40 / 60 / 80",
       "BONUS MOVE SPEED: 40 / 50 / 60",
@@ -1747,7 +1747,7 @@
       "PIERCES SPELL IMMUNITY: Allies Yes, Enemies No",
       "DISPELLABLE: Strong Dispels Only"
     ],
-    "description": "Dragon Knight takes the form of one of three powerful elder dragons, increasing his speed, and Dragon Tail's range, while granting him new powers.\nLEVEL 1 Green Dragon - Corrosive Breath: attacks deal 20 / 20 / 20 / 30 poison damage per second for 5 seconds. Works on structures.\nLEVEL 2 Red Dragon - Splash Attack: attacks damage all enemy units in a 350 radius for 75% / 75% / 75% / 100% damage, with Corrosive Breath added to the targets.\nLEVEL 3 Blue Dragon - Frost Breath: slows movement speed by 40% / 40% / 40% / 60% and attack speed by 40 / 40 / 40 / 60 of enemy units in Splash Attack range for 3 seconds, with Corrosive Breath added to the targets.",
+    "description": "Dragon Knight takes the form of one of three powerful elder dragons, increasing his speed, and Dragon Tail's range, while granting him new powers.\nLEVEL 1 Green Dragon - Corrosive Breath: attacks deal 20 / 20 / 20 / 30 poison damage per second for 5 seconds. Works on structures.\nLEVEL 2 Red Dragon - Splash Attack: attacks damage all enemy units in a 350 radius for 60% / 60% / 60% / 100% damage, with Corrosive Breath added to the targets.\nLEVEL 3 Blue Dragon - Frost Breath: slows movement speed by 40% / 40% / 40% / 60% and attack speed by 40 / 40 / 40 / 60 of enemy units in Splash Attack range for 3 seconds, with Corrosive Breath added to the targets.",
     "differences": "",
     "values": [
       "BONUS ATTACK RANGE: 0",
@@ -1797,7 +1797,7 @@
       75,
       90
     ],
-    "superUpgrade": "Super: +10% cleave, +10% damage, +10s duration.",
+    "superUpgrade": "Super: +10% cleave, +10% damage, +10s duration +200 cleave radius.",
     "gabenUpgrade": "Gaben: Empower is a global aura."
   },
   {
@@ -1847,7 +1847,7 @@
     "differences": "",
     "values": [
       "ATTACK SLOW: 30",
-      "DAMAGE: 60 / 80 / 100",
+      "DAMAGE: 80 / 100 / 120",
       "MOVEMENT SLOW: 30%",
       "PULSES: 4 / 6 / 8",
       "RADIUS INCREASE PER PULSE: 25",
@@ -2530,7 +2530,7 @@
     "description": "Applies a magical frost shield around the target, reducing damage from attacks against it. While the shield is active, ice magic will affect nearby enemy units every 1 seconds, dealing minor damage and slowing them.",
     "differences": "",
     "values": [
-      "BUFF DURATION: 4 / 5 / 7",
+      "BUFF DURATION: 3 / 4 / 6",
       "DAMAGE REDUCTION: 30% / 40% / 60%",
       "DAMAGE: 20 / 30 / 50",
       "SLOW DURATION: 0.5",
@@ -2548,7 +2548,7 @@
       120,
       130
     ],
-    "superUpgrade": "Super: +1s duration, +10% damage reduction, provides +50 HP Regen.",
+    "superUpgrade": "Super: +10% damage reduction, provides +50 HP Regen.",
     "gabenUpgrade": "Gaben: Frost Shield casts Shivas and gives Shivas Aura while active."
   },
   {
@@ -2889,13 +2889,12 @@
       "PIERCES SPELL IMMUNITY: Yes",
       "DISPELLABLE: Yes"
     ],
-    "description": "Creates a divine barrier around an ally which grants them increased Status Resistance, Strength and Health Regeneration. Always apply effects on self.\n\nDISPEL TYPE: Strong Dispel",
+    "description": "Creates a divine barrier around an ally which grants them increased Strength and Health Regeneration. Always apply effects on self.\n\nDISPEL TYPE: Strong Dispel",
     "differences": "When casted on an ally, also applies the effects on self. Grants 50% status resistance.",
     "values": [
       "BONUS STRENGTH: 8 / 16 / 32",
       "DURATION: 10",
-      "HP REGEN: 8 / 12 / 20",
-      "STATUS RESISTANCE: 50%"
+      "HP REGEN: 8 / 12 / 20"
     ],
     "cooldowns": [
       26,
@@ -2909,7 +2908,7 @@
       100,
       110
     ],
-    "superUpgrade": "Super: Plus 20 health regen bonus, -2s cooldown.",
+    "superUpgrade": "Super: Provides 50% status resistance. Plus 20 health regen bonus, -2s cooldown, .",
     "gabenUpgrade": "Gaben: Plus 50 strength bonus, undispellable."
   },
   {
@@ -3088,7 +3087,7 @@
       "DISPELLABLE: Yes"
     ],
     "description": "The hero lands an infernal attack, igniting the enemy. Stuns for 0.6 seconds and applies a 4 second burn that deals a base damage plus a percentage of the target's Max HP as damage per second.",
-    "differences": "",
+    "differences": "Applies a Break by default.",
     "values": [
       "BASE BURN DAMAGE: 20 / 30 / 50",
       "BURN DURATION: 4",
@@ -3104,7 +3103,7 @@
     "manaCost": [
       40
     ],
-    "superUpgrade": "Super: Infernal Blade debuff applies a break. +1.2s ministun duration, +2.1% max HP burn, and bonus damage.",
+    "superUpgrade": "Super: +1.2s ministun duration, +2.1% max HP burn, and bonus damage.",
     "gabenUpgrade": "Gaben: Infernal Blade's effects are applied to all enemies within 500 radius of the primary target."
   },
   {
@@ -3288,13 +3287,13 @@
     "description": "Thickens Tidehunter's hide to passively block a portion of any incoming physical attack damage. The hide also removes negative status effects if the damage taken crosses a threshold.\n\nDoes not stack with items that provide Damage Block.\n\nDISPEL TYPE: Strong Dispel",
     "differences": "",
     "values": [
-      "DAMAGE BLOCK: 16 / 34 / 70",
+      "DAMAGE BLOCK: 12 / 24 / 48",
       "DAMAGE THRESHOLD: 600 / 550 / 450",
       "THRESHOLD TIMER: 7 / 7 / 7"
     ],
     "cooldowns": [],
     "manaCost": [],
-    "superUpgrade": "Super: Increases damage block by 30 and reduces the damage treshold by 100.",
+    "superUpgrade": "Super: Increases damage block by 40 and reduces the damage treshold by 100.",
     "gabenUpgrade": "Gaben: Grants Blademail."
   },
   {
@@ -3348,8 +3347,8 @@
       "PIERCES SPELL IMMUNITY: No",
       "DISPELLABLE: Yes"
     ],
-    "description": "Treant plants a life-sapping seed in an enemy unit, draining its health, while simultaneously slowing it. The seed heals friendly units around it.",
-    "differences": "",
+    "description": "The caster plants a life-sapping seed in an enemy unit, draining its health, while simultaneously slowing it. The seed heals friendly units around it.",
+    "differences": "Multiple Leech Seed debuffs can be placed on the same unit simultaneously.",
     "values": [
       "DAMAGE/HEAL PER SECOND: 16 / 32 / 64",
       "DURATION: 5",
@@ -3895,10 +3894,10 @@
       "WAVE COUNT: 3"
     ],
     "cooldowns": [
-      26,
       24,
-      22,
-      20
+      20,
+      16,
+      12
     ],
     "manaCost": [
       50,
@@ -3906,7 +3905,7 @@
       90,
       110
     ],
-    "superUpgrade": "Super: +2 waves. -10s reduced cooldown.",
+    "superUpgrade": "Super: +2 waves. +2 arrows per wave.",
     "gabenUpgrade": "Gaben: Gains Eye of Skadi."
   },
   {
@@ -4685,7 +4684,7 @@
     "values": [
       "BONUS ARMOR: 0.5 / 0.6 / 0.8",
       "BONUS HP REGEN: 0.4 / 0.5 / 0.7",
-      "MAX STACKS: 10 / 20 / 40",
+      "MAX STACKS: 7 / 14 / 28",
       "STACK DURATION: 10 / 12 / 16"
     ],
     "cooldowns": [],
@@ -4886,11 +4885,11 @@
     "values": [
       "DAMAGE: 30 / 60 / 120",
       "MOVE SLOW: -14% / -20% / -32%",
-      "RADIUS: 250"
+      "RADIUS: 300"
     ],
     "cooldowns": [],
     "manaCost": [],
-    "superUpgrade": "Super: +100 damage, +225 radius, +14% move slow, and 25% heal reduction on affected enemies.",
+    "superUpgrade": "Super: +100 damage, +175 radius, +14% move slow, and 25% heal reduction on affected enemies.",
     "gabenUpgrade": "Gaben: Grants Eternal Shroud."
   },
   {
@@ -4945,7 +4944,7 @@
       "PIERCES SPELL IMMUNITY: Yes"
     ],
     "description": "Imbues Clinkz's arrows with fire for extra damage.",
-    "differences": "Have no mana cost.",
+    "differences": "Has no mana cost.",
     "values": [
       "BONUS DAMAGE: 20 / 40 / 80"
     ],
@@ -4959,7 +4958,7 @@
       0
     ],
     "superUpgrade": "Super: Grants Monkey King Bar.",
-    "gabenUpgrade": "Gaben: Whenever Searing Arrows is used, 2 different random targets within its cast range are also targeted by Searing Arrows."
+    "gabenUpgrade": "Gaben: Grants Burning Army, whose skeletons fire arrows that proc your instant attacks."
   },
   {
     "name": "Shadow Dance",
@@ -5794,7 +5793,7 @@
       140
     ],
     "superUpgrade": "Super: Summons 2 extra wolves",
-    "gabenUpgrade": "Gaben: Wolves are converted into Big Bad Wolves (2x stats of regular wolf) that apply Howl on attack (4s debuff)"
+    "gabenUpgrade": "Gaben: Also summons a Big Bad Wolf in addition to the regular wolves (5x stats of regular wolf) that apply Howl on attack (4s debuff)"
   },
   {
     "name": "Sunder",
