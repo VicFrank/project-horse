@@ -88,6 +88,21 @@ module.exports = {
     }
   },
 
+  async getPaypalByEmail(email) {
+    try {
+      const { rows } = await query(
+        `
+        SELECT steam_id FROM player_logs
+        WHERE log_event = 'paypal'
+          AND log_data->'capture'->'result'->'payment_source'->'paypal'->>'email_address' = $1`,
+        [email]
+      );
+      return rows[0];
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async getLogsForPlayer(steamID) {
     try {
       const { rows } = await query(
