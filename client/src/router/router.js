@@ -44,7 +44,7 @@ const PlayerGamesList = () =>
 
 const Matchmaking = () => import("../components/pages/matchmaking/Matchmaking");
 
-const Spells = () => import("../components/pages/spells/Spells");
+const Spells = () => import("../components/pages/learn/Spells");
 
 Vue.use(VueRouter);
 
