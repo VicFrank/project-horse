@@ -1,10 +1,5 @@
 <script>
-import GodImage from "../games/components/GodImage.vue";
-
 export default {
-  components: {
-    GodImage,
-  },
 
   data: () => ({
     loading: true,
@@ -12,7 +7,7 @@ export default {
   }),
 
   created() {
-    fetch(`https://abilityarena.com/api/gods`)
+    fetch(`../../data/gods.json`)
       .then((res) => res.json())
       .then((gods) => {
         this.gods = gods;
@@ -27,45 +22,164 @@ export default {
 
 <template>
   <div class="container">
-    <h1 class="page-title">{{ $t("gods.my_gods") }}</h1>
+    <h1 class="page-title">{{ $t("gods.page_title") }}</h1>
     <div class="gods-container">
-      <div
-        v-for="god of gods"
-        :key="god.god_name"
-        class="text-center m-3"
-        style="position: relative; max-width: 100px"
-      >
-        <GodImage
-          :class="{ overlay: !god.owned }"
-          :god="god.god_name"
-          :height="100"
-        ></GodImage>
-        <div
-          v-bind:class="{
-            'my-1': true,
-            'text-muted': !god.owned,
-            'text-danger': god.banned,
-            'text-gold': god.gold,
-          }"
-        >
-          {{ $t(`gods.${god.god_name}`) }}
+      <div v-for="god of gods" :key="god.god_name">
+        <div class="GodCardContainer" :class="{ plus: god.plus_exclusive }">
+          <img class="avatar" :src="`/images/gods/${god.god_name}.png`">
+          <img class="card-frame" src="./god_card_frame_blank.png">
+          <div class="card-banner">
+            <div class="card-banner_title">{{ $t(`gods.${god.god_name}`) }}</div>
+            <img class="card-banner_plus-icon" :class="{hidden: !god.plus_exclusive}" src="./user_bar_plus_icon.png">
+          </div>
         </div>
-        <div v-if="god.plus_exclusive" class="text-muted">
-          {{ $t("common.plus") }}
-        </div>
-        <div v-if="god.free" class="text-muted">{{ $t("common.free") }}</div>
-        <!-- <div v-if="god.error" class="text-danger">Error</div>
-        <b-button
-          variant="secondary"
-          size="sm"
-          :disabled="!god.owned"
-          @click="toggleBanned(god)"
-        >
-          <template v-if="god.banned">{{ $t("gods.unban") }}</template>
-          <template v-if="!god.banned">{{ $t("gods.ban") }}</template>
-          <b-spinner small v-if="god.loading" :label="Loading"></b-spinner>
-        </b-button> -->
       </div>
     </div>
   </div>
 </template>
+
+<style>
+.gods-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+/*
+.GodCardContainer {
+    width: 275px;
+    height: 300px;
+    padding: 5px 10px 2px 7px;
+    opacity: 0;
+    margin-top: 45px;
+    margin-bottom: 45px;
+    transform: rotateY(-90deg);
+    brightness: 100;
+    overflow: noclip;
+    */
+.GodCardContainer {
+  width: 275px;
+  height: 300px;
+  padding: 5px 10px 2px 7px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.plus {
+  filter: drop-shadow(0px 3px 3px rgba(0, 204, 255, 0.5));
+  border-radius: 30px;
+}
+
+.card-frame {
+  position: absolute;
+  width: 258px;
+  height: 292px;
+}
+
+/*
+    BannerContainer {
+        align: left top;
+        margin-top: 24px;
+        width: $cardWidth;
+    }
+    */
+.card-banner {
+  position: absolute;
+  margin-top: 24px;
+  width: 100%;
+  text-align: center;
+}
+
+/*
+    &_BannerContent {
+        align: center center;
+        flow-children: right;
+
+        Image {
+            height: $plusIconSize;
+            width: $plusIconSize;
+            margin-top: -10px;
+            border-radius: 50%;
+            visibility: collapse;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 0px 10px 0px;
+        }
+
+        Label {
+            text-align: center;
+            font-size: 14px;
+            font-family: titleFont;
+            color: gradient(linear, 0% 0%, 0% 100%, from(#fad2f8), to(#d677ce));
+            text-shadow: black 0px 1px 2px 2;
+        }
+    }
+*/
+
+.card-banner_title {
+  text-align: center;
+  font-size: 14px;
+  color: #fad2f8;
+  text-shadow: 0px 1px 2px black;
+}
+
+.card-banner_plus-icon {
+  height: 42px;
+  width: 42px;
+  margin-top: -30px;
+  margin-left: 130px;
+  border-radius: 50%;
+}
+
+/*
+&_Avatar {
+  width: 175px;
+  height: 175px;
+  align: middle top;
+  margin-top: 15px;
+}
+*/
+.avatar {
+  margin-top: 15px;
+  width: 175px;
+  height: 175px;
+}
+
+/*
+&_Abilities {
+  width: fit-children;
+  height: fit-children;
+  align: middle bottom;
+  margin: 0 4px 47px 0;
+  flow-children: right;
+  overflow: noclip;
+}
+*/
+.abilities-container {
+  margin: 0 4px 47px 0;
+}
+
+/*
+&_Universe {
+  height: 30px;
+  width: 30px;
+  align: right bottom;
+  opacity: 0.5;
+  margin: 0 32px 32px 0;
+  saturation: 0;
+  wash-color: #554f9d;
+}
+*/
+.universe-logo {
+  height: 30px;
+  width: 30px;
+  opacity: 0.5;
+  ;
+  margin: 0 32px 32px 0;
+  filter: saturate(0);
+}
+.hidden {
+  display: none;
+}
+</style>
