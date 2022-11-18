@@ -1746,7 +1746,7 @@
     "differences": "Duel does not grant damage to enemies upon losing Duel.",
     "values": [
       "CAST RANGE: 650",
-      "DURATION: 6 / 8 / 10",
+      "DURATION: 4 / 6 / 8",
       "REWARD DAMAGE: 10 / 20 / 30"
     ],
     "cooldowns": [
@@ -1887,8 +1887,8 @@
       45,
       50
     ],
-    "superUpgrade": "Super: +100% bonus damage.",
-    "gabenUpgrade": "Gaben: Becomes a passive ability. -1.5s cooldown."
+    "superUpgrade": "Super: Becomes a passive ability. -1.5s cooldown.",
+    "gabenUpgrade": "Gaben: Grants Daedalus."
   },
   {
     "name": "Epicenter",
@@ -4156,7 +4156,7 @@
       "MAX DPS DURATION: 4",
       "MAX DPS: 15 / 30 / 60",
       "MIN DPS: 15 / 20 / 30",
-      "RADIUS: 400"
+      "RADIUS: 300"
     ],
     "cooldowns": [
       14
