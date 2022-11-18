@@ -24,13 +24,22 @@ export default {
   <div class="container">
     <h1 class="page-title">{{ $t("gods.page_title") }}</h1>
     <div class="gods-container">
-      <div v-for="god of gods" :key="god.god_name">
-        <div class="GodCardContainer" :class="{ plus: god.plus_exclusive }">
-          <img class="avatar" :src="`/images/gods/${god.god_name}.png`">
+      <div v-for="god of gods" :key="god.id">
+        <div class="GodCardContainer" :class="{ plus: god.unlock === 'plus' }">
+          <img class="avatar" :src="`/images/gods/${god.id}.png`">
           <img class="card-frame" src="./god_card_frame_blank.png">
           <div class="card-banner">
-            <div class="card-banner_title">{{ $t(`gods.${god.god_name}`) }}</div>
-            <img class="card-banner_plus-icon" :class="{hidden: !god.plus_exclusive}" src="./user_bar_plus_icon.png">
+            <div class="card-banner_title">{{ god.name }}</div>
+            <img class="card-banner_plus-icon" :class="{ hidden: god.unlock !== 'plus' }"
+              src="./user_bar_plus_icon.png">
+          </div>
+          <div class="abilities-container">
+            <div v-for="power of god.powers" :key="power.id" class="ability-container">
+              <div class="ability-background">
+                <b-img v-bind:src="`/images/gods/powers/power_${power.id}.png`" class="ability-icon"></b-img>
+              </div>
+              <img v-if="power.type !== 'passive'" src="./active_ability_frame.png" class="ability-frame">
+            </div>
           </div>
         </div>
       </div>
@@ -157,7 +166,81 @@ export default {
 }
 */
 .abilities-container {
-  margin: 0 4px 47px 0;
+  margin-top: -10px;
+  display: flex;
+  z-index: 1;
+}
+
+.ability-container {
+  position: relative;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+/*
+    &_AbilityBackground {
+        width: 60px;
+        height: 65px;
+        background-image: url("file://{images}/custom_game/gods/god_card_ability_box.png");
+        background-size: 120% 110%;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+*/
+
+.ability-background {
+  background-image: url("./god_card_ability_box.png");
+  background-size: 120% 110%;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 60px;
+  height: 65px;
+}
+
+/*
+    &_AbilityFrame {
+        width: 55px;
+        height: 55px;
+        align: middle middle;
+        margin-bottom: 5px;
+        opacity: 1;
+        transition: transform 0.1s ease-in-out 0s, brightness 0.1s ease-in-out 0s;
+    }
+*/
+.ability-frame {
+  width: 55px;
+  height: 55px;
+  position: absolute;
+  top: 2px;
+  left: 7px;
+}
+
+/*
+    &_Ability {
+        width: 55px;
+        height: 55px;
+        align: middle middle;
+        margin-bottom: 5px;
+        transition: transform 0.1s ease-in-out 0s, brightness 0.1s ease-in-out 0s, saturation 0.1s ease-in-out 0s;
+    }
+
+    &_Health {
+        align: middle bottom;
+        width: 50px;
+        margin: 0 0 11px 15px;
+        text-align: center;
+        font-size: 24px;
+        font-family: monospaceNumbersFont;
+        color: gradient(linear, 0% 0%, 0% 100%, from(#eece83), to(#d9b86b));
+        text-shadow: black 0px 1px 2px 2;
+    }
+*/
+
+.ability-icon {
+  height: 55px;
+  width: 55px;
+  margin-top: 2px;
+  margin-left: 2px;
 }
 
 /*
@@ -175,10 +258,10 @@ export default {
   height: 30px;
   width: 30px;
   opacity: 0.5;
-  ;
   margin: 0 32px 32px 0;
   filter: saturate(0);
 }
+
 .hidden {
   display: none;
 }
