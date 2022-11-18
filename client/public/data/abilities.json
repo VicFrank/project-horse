@@ -26,7 +26,6 @@
     "manaCost": [
       130,
       140,
-      150,
       160
     ],
     "superUpgrade": "Super: Increases damage per second by a multiplier of 1.5 and armor reduction by a multiplier of 1.5.",
@@ -57,13 +56,11 @@
     "cooldowns": [
       16,
       14,
-      12,
       10
     ],
     "manaCost": [
       75,
       85,
-      95,
       105
     ],
     "superUpgrade": "Super: +2 Acorn Shot bounces, +50% base damage.",
@@ -94,13 +91,11 @@
     "cooldowns": [
       7,
       6,
-      5,
       4
     ],
     "manaCost": [
       40,
       50,
-      60,
       70
     ],
     "superUpgrade": "Super: Increases damage reduction by 20%, damage by 100 and decreases cooldown by 1 second. ",
@@ -131,7 +126,6 @@
     "manaCost": [
       80,
       90,
-      100,
       110
     ],
     "superUpgrade": "Super: Also applies Ancient Seal on a random enemy in 700 radius around the main target.",
@@ -161,13 +155,11 @@
     "cooldowns": [
       12,
       10,
-      8,
       6
     ],
     "manaCost": [
       100,
       110,
-      120,
       130
     ],
     "superUpgrade": "Super: When cast on an ally, will automatically cast on self.",
@@ -247,7 +239,6 @@
     "cooldowns": [
       5,
       4,
-      3,
       2
     ],
     "manaCost": [
@@ -283,7 +274,6 @@
     "cooldowns": [
       38,
       32,
-      26,
       20
     ],
     "manaCost": [
@@ -324,13 +314,11 @@
     "cooldowns": [
       23,
       21,
-      19,
       17
     ],
     "manaCost": [
       80,
       90,
-      100,
       110
     ],
     "superUpgrade": "Super: +40 bonus damage per hero, +5 bonus damage per creep.",
@@ -537,13 +525,11 @@
     "cooldowns": [
       42,
       34,
-      26,
       18
     ],
     "manaCost": [
       120,
       110,
-      100,
       90
     ],
     "superUpgrade": "Super: +100 damage per second, +75 radius, magic immunity now lasts through the entire spin.",
@@ -569,11 +555,9 @@
     "cooldowns": [
       12,
       10,
-      8,
       6
     ],
     "manaCost": [
-      60,
       60,
       60,
       60
@@ -605,13 +589,11 @@
     "cooldowns": [
       20,
       18,
-      16,
       14
     ],
     "manaCost": [
       50,
       55,
-      60,
       65
     ],
     "superUpgrade": "Super: +25 attack speed, casting Bloodlust on an ally also buffs themselves.",
@@ -641,7 +623,6 @@
     "cooldowns": [
       14,
       12,
-      10,
       8
     ],
     "manaCost": [
@@ -707,7 +688,6 @@
     "cooldowns": [
       20,
       16,
-      12,
       8
     ],
     "manaCost": [
@@ -736,13 +716,11 @@
     "cooldowns": [
       14,
       12,
-      10,
       8
     ],
     "manaCost": [
       100,
       120,
-      140,
       160
     ],
     "superUpgrade": "Super: Heal/Damage increased by +150, cooldown reduced by 3 seconds, and applies a maximum level Enfeeble on the target.",
@@ -770,13 +748,11 @@
     "cooldowns": [
       22,
       18,
-      14,
       10
     ],
     "manaCost": [
       45,
       60,
-      75,
       90
     ],
     "superUpgrade": "Super: +35% damage, +3 arrows fired.",
@@ -806,13 +782,11 @@
     "cooldowns": [
       15,
       14,
-      13,
       12
     ],
     "manaCost": [
       110,
       120,
-      130,
       140
     ],
     "superUpgrade": "Super: Applies max level Caustic Finale to units hit by Burrow Strike.",
@@ -847,7 +821,6 @@
     "manaCost": [
       50,
       60,
-      70,
       80
     ],
     "superUpgrade": "Super: Summons both Necro 3 units, Hawks gain Dive Bomb. When casted, all your summons gains 250 health.",
@@ -912,7 +885,6 @@
     "cooldowns": [
       18,
       16,
-      14,
       12
     ],
     "manaCost": [
@@ -1037,7 +1009,6 @@
     "cooldowns": [
       17,
       15,
-      13,
       11
     ],
     "manaCost": [
@@ -1138,13 +1109,11 @@
     "cooldowns": [
       24,
       21,
-      18,
       15
     ],
     "manaCost": [
       50,
       60,
-      70,
       80
     ],
     "superUpgrade": "Super: Now roots and disarms targets instead of stunning them.",
@@ -1344,7 +1313,6 @@
     "cooldowns": [
       9,
       8,
-      7,
       6
     ],
     "manaCost": [
@@ -1378,13 +1346,11 @@
     "cooldowns": [
       8,
       7,
-      6,
       5
     ],
     "manaCost": [
       100,
       130,
-      160,
       190
     ],
     "superUpgrade": "Super: Increases heal by 35 and reduces cooldown by 2.5s.",
@@ -1445,13 +1411,11 @@
     "cooldowns": [
       10,
       8,
-      6,
       4
     ],
     "manaCost": [
       85,
       90,
-      95,
       100
     ],
     "superUpgrade": "Super: Increases strength steal by +6.",
@@ -1568,7 +1532,6 @@
     "cooldowns": [
       16,
       14,
-      12,
       10
     ],
     "manaCost": [
@@ -1600,11 +1563,9 @@
     "cooldowns": [
       29,
       26,
-      23,
       20
     ],
     "manaCost": [
-      120,
       120,
       120,
       120
@@ -1634,13 +1595,11 @@
     "cooldowns": [
       20,
       17,
-      14,
       11
     ],
     "manaCost": [
       100,
       110,
-      120,
       130
     ],
     "superUpgrade": "Super: Adds a partial outer ring to Dissimilate and increases damage by 175. ",
@@ -1669,7 +1628,6 @@
       4
     ],
     "manaCost": [
-      0,
       0,
       0,
       0
@@ -1722,7 +1680,6 @@
     "manaCost": [
       100,
       115,
-      130,
       145
     ],
     "superUpgrade": "Super: Increases damage by 150 and reduces cooldown by 2.5s.",
@@ -1784,7 +1741,6 @@
     "cooldowns": [
       10,
       8,
-      6,
       4
     ],
     "manaCost": [
@@ -1855,7 +1811,6 @@
     "manaCost": [
       45,
       60,
-      75,
       90
     ],
     "superUpgrade": "Super: +10% cleave, +10% damage, +10s duration, +200 cleave radius.",
@@ -1884,7 +1839,6 @@
     "manaCost": [
       35,
       40,
-      45,
       50
     ],
     "superUpgrade": "Super: Becomes a passive ability. -1.5s cooldown.",
@@ -2037,13 +1991,11 @@
     "cooldowns": [
       16,
       14,
-      12,
       10
     ],
     "manaCost": [
       120,
       130,
-      140,
       150
     ],
     "superUpgrade": "Super: -4s cooldown, +10% damage reduction. Applies an instant attack on every unit hit.",
@@ -2278,7 +2230,6 @@
     "cooldowns": [
       21,
       19,
-      17,
       15
     ],
     "manaCost": [
@@ -2312,13 +2263,11 @@
     "cooldowns": [
       21,
       19,
-      17,
       15
     ],
     "manaCost": [
       125,
       140,
-      155,
       170
     ],
     "superUpgrade": "Super: Increases range by 320 and damage by 80.",
@@ -2349,7 +2298,6 @@
     "manaCost": [
       40,
       50,
-      60,
       70
     ],
     "superUpgrade": "Super: Grants Side Gunner: attacks enemy units within 700 units every 1.2 seconds, prioritizing furthest unit away within its range.",
@@ -2382,7 +2330,6 @@
     "manaCost": [
       80,
       90,
-      100,
       110
     ],
     "superUpgrade": "Super: +50 Damage Per Second and +280 Magic Damage Absorbed.",
@@ -2448,13 +2395,11 @@
     "cooldowns": [
       20,
       18,
-      16,
       14
     ],
     "manaCost": [
       35,
       50,
-      65,
       80
     ],
     "superUpgrade": "Super: Permanently gains +2 Strength per enemy that dies in 450 range.",
@@ -2517,7 +2462,6 @@
     "cooldowns": [
       15,
       12,
-      9,
       6
     ],
     "manaCost": [
@@ -2586,7 +2530,6 @@
     "cooldowns": [
       0,
       0,
-      0,
       0
     ],
     "manaCost": [
@@ -2622,13 +2565,11 @@
     "cooldowns": [
       30,
       25,
-      20,
       15
     ],
     "manaCost": [
       100,
       110,
-      120,
       130
     ],
     "superUpgrade": "Super: +10% damage reduction and provides +50 HP Regen.",
@@ -2660,13 +2601,11 @@
     "cooldowns": [
       9,
       8,
-      7,
       6
     ],
     "manaCost": [
       125,
       135,
-      145,
       155
     ],
     "superUpgrade": "Super: Duration increased by 1.25 seconds, affected targets take 25% extra damage for the duration of the debuff.",
@@ -2823,7 +2762,6 @@
     "cooldowns": [
       16,
       14,
-      12,
       10
     ],
     "manaCost": [
@@ -2856,7 +2794,6 @@
     "cooldowns": [
       16,
       14,
-      12,
       10
     ],
     "manaCost": [
@@ -2916,7 +2853,6 @@
     "cooldowns": [
       16,
       15,
-      14,
       13
     ],
     "manaCost": [
@@ -2984,13 +2920,11 @@
     "cooldowns": [
       26,
       22,
-      18,
       14
     ],
     "manaCost": [
       80,
       90,
-      100,
       110
     ],
     "superUpgrade": "Super: Provides 50% status resistance. Plus 20 health regen bonus, -2s cooldown.",
@@ -3020,7 +2954,6 @@
     "manaCost": [
       70,
       110,
-      150,
       190
     ],
     "superUpgrade": "Super: -3 second cooldown, and applies a Break.",
@@ -3054,7 +2987,6 @@
     "cooldowns": [
       36,
       34,
-      32,
       30
     ],
     "manaCost": [
@@ -3116,7 +3048,6 @@
     "cooldowns": [
       23,
       20,
-      17,
       14
     ],
     "manaCost": [
@@ -3144,7 +3075,6 @@
       "DISTANCE DAMAGE: 4% / 8% / 16%"
     ],
     "cooldowns": [
-      0,
       0,
       0,
       0
@@ -3182,7 +3112,6 @@
     "cooldowns": [
       16,
       12,
-      8,
       4
     ],
     "manaCost": [
@@ -3222,13 +3151,11 @@
     "cooldowns": [
       30,
       25,
-      20,
       15
     ],
     "manaCost": [
       120,
       130,
-      140,
       150
     ],
     "superUpgrade": "Super: Increases radius by 150, movement speed bonus by 16%, damage by 40% and reduces cooldown by 5s. Heal the target for 40% of the damage dealt. Upon expiration, the target will receive a strong dispell.",
@@ -3282,13 +3209,11 @@
     "cooldowns": [
       17,
       15,
-      13,
       11
     ],
     "manaCost": [
       75,
       100,
-      125,
       150
     ],
     "superUpgrade": "Super: Heals 50% of damage dealt to heroes and 10% of the damage dealt to creeps. Disarm duration increased by 1s. Cooldown reduced by 3 seconds. Debuff also reduces movement speed by 40%. Cast point is removed.",
@@ -3316,13 +3241,11 @@
     "cooldowns": [
       40,
       35,
-      30,
       25
     ],
     "manaCost": [
       50,
       60,
-      70,
       80
     ],
     "superUpgrade": "Super: Increases the damage 50 bonus by and the lifesteal by 50%",
@@ -3406,13 +3329,11 @@
     "cooldowns": [
       13,
       11,
-      9,
       7
     ],
     "manaCost": [
       110,
       130,
-      150,
       170
     ],
     "superUpgrade": "Super: +100 damage, +2 duration.",
@@ -3446,7 +3367,6 @@
     "manaCost": [
       80,
       90,
-      100,
       110
     ],
     "superUpgrade": "Super: Increases movement slow by 15% and damage/heal per second by 100.",
@@ -3542,13 +3462,11 @@
     "cooldowns": [
       6,
       6,
-      6,
       6
     ],
     "manaCost": [
       120,
       125,
-      130,
       135
     ],
     "superUpgrade": "Super: Cast range increased by 1000. Grants Nimbus. Lightning Bolt now stuns for 1 seconds.",
@@ -3579,13 +3497,11 @@
     "cooldowns": [
       24,
       20,
-      16,
       12
     ],
     "manaCost": [
       50,
       65,
-      80,
       95
     ],
     "superUpgrade": "Super: Uses own attack damage.",
@@ -3614,13 +3530,11 @@
     "cooldowns": [
       9,
       8,
-      7,
       6
     ],
     "manaCost": [
       90,
       100,
-      110,
       120
     ],
     "superUpgrade": "Super: Grants an instant attack at the beam's position towards a nearby enemy in 500 range. Increases Lucent Beam's damage by 100 and cast range by 325. Also reduces mana cost by 50 and cooldown by 3.5.",
@@ -3700,13 +3614,11 @@
     "cooldowns": [
       12,
       11,
-      10,
       9
     ],
     "manaCost": [
       100,
       110,
-      120,
       130
     ],
     "superUpgrade": "Super: Increases damage by 200, breaks for duration of stun and pierces spell immunity.",
@@ -3738,7 +3650,6 @@
     "manaCost": [
       50,
       70,
-      90,
       110
     ],
     "superUpgrade": "Super: Increases the attack speed bonus by 40, also pushes enemies out of the area when cast, and provides allies in it with +40% Magic Resistance. Slows enemies inside by 30%.",
@@ -3813,7 +3724,6 @@
     "cooldowns": [
       18,
       16,
-      14,
       12
     ],
     "manaCost": [
@@ -3843,13 +3753,11 @@
     "cooldowns": [
       40,
       35,
-      30,
       25
     ],
     "manaCost": [
       70,
       85,
-      100,
       115
     ],
     "superUpgrade": "Super: Grants Diffusal Blade. Reduces cooldown by 10, and increases outgoing damage by 13%.",
@@ -3906,7 +3814,6 @@
     "cooldowns": [
       1.9,
       1.5,
-      1.1,
       0.7
     ],
     "manaCost": [],
@@ -3999,13 +3906,11 @@
     "cooldowns": [
       24,
       20,
-      16,
       12
     ],
     "manaCost": [
       50,
       70,
-      90,
       110
     ],
     "superUpgrade": "Super: +2 waves. +2 arrows per wave.",
@@ -4096,7 +4001,6 @@
     "manaCost": [
       130,
       140,
-      150,
       160
     ],
     "superUpgrade": "Super: 2.5x Treant HP/Damage.",
@@ -4156,7 +4060,7 @@
       "MAX DPS DURATION: 4",
       "MAX DPS: 15 / 30 / 60",
       "MIN DPS: 15 / 20 / 30",
-      "RADIUS: 300"
+      "RADIUS: 400"
     ],
     "cooldowns": [
       14
@@ -4228,13 +4132,11 @@
     "cooldowns": [
       25,
       22,
-      19,
       16
     ],
     "manaCost": [
       40,
       60,
-      80,
       100
     ],
     "superUpgrade": "Super: The closest ally will also gain Overcharge.",
@@ -4289,13 +4191,11 @@
     "cooldowns": [
       12,
       11,
-      10,
       9
     ],
     "manaCost": [
       30,
       40,
-      50,
       60
     ],
     "superUpgrade": "Super: +3 Overpower attacks.",
@@ -4326,13 +4226,11 @@
     "cooldowns": [
       20,
       18,
-      16,
       14
     ],
     "manaCost": [
       80,
       100,
-      120,
       140
     ],
     "superUpgrade": "Super: +4 cask bounces.",
@@ -4390,13 +4288,11 @@
     "cooldowns": [
       11,
       9,
-      7,
       5
     ],
     "manaCost": [
       35,
       45,
-      55,
       65
     ],
     "superUpgrade": "Super: +3s duration.",
@@ -4418,11 +4314,9 @@
     "cooldowns": [
       8,
       7.5,
-      7,
       6.5
     ],
     "manaCost": [
-      0,
       0,
       0,
       0
@@ -4457,7 +4351,6 @@
     "manaCost": [
       20,
       22,
-      24,
       26
     ],
     "superUpgrade": "Super: Increased health and base damage by 2.5x, cooldown reduced by 1.5 seconds. Creates 2 wards per cast. ",
@@ -4490,11 +4383,9 @@
     "cooldowns": [
       13,
       12,
-      11,
       10
     ],
     "manaCost": [
-      125,
       125,
       125,
       125
@@ -4531,7 +4422,6 @@
     "manaCost": [
       0,
       0,
-      0,
       0
     ],
     "superUpgrade": "Super: +10% magic resistance reduction per stack. Passively grants +150 attack range.",
@@ -4562,7 +4452,6 @@
     "cooldowns": [
       16,
       15,
-      14,
       13
     ],
     "manaCost": [
@@ -4658,13 +4547,11 @@
     "cooldowns": [
       18,
       16,
-      14,
       12
     ],
     "manaCost": [
       80,
       95,
-      110,
       125
     ],
     "superUpgrade": "Super: +160 Heal/Damage, -2s cooldown.",
@@ -4722,13 +4609,11 @@
     "cooldowns": [
       21,
       20,
-      19,
       18
     ],
     "manaCost": [
       75,
       100,
-      125,
       150
     ],
     "superUpgrade": "Super: Increases movement speed by 20% and duration by 3s.",
@@ -4818,7 +4703,6 @@
     "cooldowns": [
       18,
       14,
-      10,
       6
     ],
     "manaCost": [
@@ -4886,13 +4770,11 @@
     "cooldowns": [
       17,
       17,
-      17,
       17
     ],
     "manaCost": [
       85,
       90,
-      95,
       100
     ],
     "superUpgrade": "Super: +100 damage per instance.",
@@ -4927,7 +4809,6 @@
     "manaCost": [
       115,
       120,
-      125,
       130
     ],
     "superUpgrade": "Super: +100 damage.",
@@ -4961,7 +4842,6 @@
     "cooldowns": [
       16,
       12,
-      8,
       4
     ],
     "manaCost": [
@@ -5020,11 +4900,9 @@
     "cooldowns": [
       19,
       18,
-      17,
       16
     ],
     "manaCost": [
-      100,
       100,
       100,
       100
@@ -5051,7 +4929,6 @@
       "BONUS DAMAGE: 20 / 40 / 80"
     ],
     "cooldowns": [
-      0,
       0,
       0,
       0
@@ -5120,13 +4997,11 @@
     "cooldowns": [
       26,
       22,
-      18,
       14
     ],
     "manaCost": [
       70,
       80,
-      90,
       100
     ],
     "superUpgrade": "Super: Increases duration by 2s and decreases cooldown by 2s.",
@@ -5228,13 +5103,11 @@
     "cooldowns": [
       13,
       12,
-      11,
       10
     ],
     "manaCost": [
       80,
       90,
-      100,
       110
     ],
     "superUpgrade": "Super: +50 width and +150 range. Shockwave erupts after 1.5 seconds, dealing 50% of Shockwave's damage, reducing movement speed by 50% and base armor by 50% for 5 seconds.",
@@ -5265,13 +5138,11 @@
     "cooldowns": [
       36,
       28,
-      20,
       12
     ],
     "manaCost": [
       45,
       40,
-      35,
       30
     ],
     "superUpgrade": "Super: +25% lifesteal. Buffed heroes also gain Spell Immunity for 1.5 seconds.",
@@ -5300,7 +5171,6 @@
     "cooldowns": [
       15,
       12,
-      9,
       6
     ],
     "manaCost": [
@@ -5332,11 +5202,9 @@
     "cooldowns": [
       21,
       19,
-      17,
       15
     ],
     "manaCost": [
-      75,
       75,
       75,
       75
@@ -5365,7 +5233,6 @@
     "cooldowns": [
       24,
       18,
-      12,
       6
     ],
     "manaCost": [
@@ -5432,13 +5299,11 @@
     "cooldowns": [
       15,
       14,
-      13,
       12
     ],
     "manaCost": [
       110,
       120,
-      130,
       140
     ],
     "superUpgrade": "Super: Impales up to 2 units and leaves a fire trail behind for 10 seconds. Deals 35 damage per second and slows by 20%. Debuff lingers for 2 seconds. Increases damage by 100 and stun duration by 1s.",
@@ -5498,11 +5363,9 @@
     "cooldowns": [
       25,
       20,
-      15,
       10
     ],
     "manaCost": [
-      40,
       40,
       40,
       40
@@ -5594,13 +5457,11 @@
     "cooldowns": [
       9,
       9,
-      9,
       9
     ],
     "manaCost": [
       80,
       100,
-      120,
       140
     ],
     "superUpgrade": "Super: Casts level 2 Lightning Storm on every unit hit by Split Earth.",
@@ -5660,7 +5521,6 @@
     "cooldowns": [
       17,
       15,
-      13,
       11
     ],
     "manaCost": [
@@ -5717,7 +5577,6 @@
     "cooldowns": [
       40,
       35,
-      30,
       25
     ],
     "manaCost": [
@@ -5753,7 +5612,6 @@
       "TURN RATE SLOW: -10% / -30% / -70%"
     ],
     "cooldowns": [
-      3,
       3,
       3,
       3
@@ -5857,7 +5715,6 @@
     "manaCost": [
       75,
       75,
-      75,
       75
     ],
     "superUpgrade": "Super: +25 Spirit Bear Movement speed, +8 Spirit Bear Armor, 0s Entangle Cooldown, +1000 Spirit Bear Health, -0.1 Spirit Bear Attack Time.",
@@ -5885,13 +5742,11 @@
     "cooldowns": [
       30,
       30,
-      30,
       30
     ],
     "manaCost": [
       125,
       130,
-      135,
       140
     ],
     "superUpgrade": "Super: Summons 2 extra wolves",
@@ -5924,7 +5779,6 @@
     "manaCost": [
       100,
       110,
-      120,
       130
     ],
     "superUpgrade": "Super: +1.5% max health damage, +1.5% max health heal, grants Holy Locket",
@@ -5987,7 +5841,6 @@
     "cooldowns": [
       24,
       21,
-      18,
       15
     ],
     "manaCost": [
@@ -6042,7 +5895,6 @@
     "manaCost": [
       40,
       40,
-      40,
       40
     ],
     "superUpgrade": "Super: Enemies crossing the tether also get stunned for 1.75 seconds and receive 150 magic damage. +12% movement speed.",
@@ -6071,7 +5923,6 @@
     "cooldowns": [
       13,
       10,
-      7,
       4
     ],
     "manaCost": [],
@@ -6125,7 +5976,6 @@
     "cooldowns": [
       24,
       18,
-      12,
       6
     ],
     "manaCost": [
@@ -6161,7 +6011,6 @@
     "cooldowns": [
       16,
       14,
-      12,
       10
     ],
     "manaCost": [
@@ -6193,13 +6042,11 @@
     "cooldowns": [
       17,
       15,
-      13,
       11
     ],
     "manaCost": [
       90,
       100,
-      110,
       120
     ],
     "superUpgrade": "Super: Grants Blink to the caster as well as applying a 30% movement slow and 30% miss chance to the tossed unit for 2 seconds. The debuff is applied after the tossed unit lands.",
@@ -6231,13 +6078,11 @@
     "cooldowns": [
       30,
       27,
-      24,
       21
     ],
     "manaCost": [
       90,
       85,
-      80,
       75
     ],
     "superUpgrade": "Super: +25% attack damage multiplier, +70 damage radius.",
@@ -6260,7 +6105,6 @@
     "cooldowns": [
       21,
       18,
-      15,
       12
     ],
     "manaCost": [
@@ -6361,13 +6205,11 @@
     "cooldowns": [
       60,
       50,
-      40,
       30
     ],
     "manaCost": [
       60,
       90,
-      120,
       150
     ],
     "superUpgrade": "Super: +100 AoE, -15 cooldown. ",
@@ -6398,7 +6240,6 @@
     "manaCost": [
       70,
       80,
-      90,
       100
     ],
     "superUpgrade": "Super: Skeletons gains 24 attack damage, and 100% health.",
@@ -6448,13 +6289,11 @@
     "cooldowns": [
       21,
       20,
-      19,
       18
     ],
     "manaCost": [
       95,
       105,
-      115,
       125
     ],
     "superUpgrade": "Super: Cooldown reduced by 6 seconds, gains +400 cast range, decreases affected units' attack speed by 10%, impact damage deals 2x more damage.",
@@ -6489,7 +6328,6 @@
     "manaCost": [
       12,
       16,
-      20,
       24
     ],
     "superUpgrade": "Super: Becomes a no target area of effect ability, applying to all enemies within range. Increases Stack Limit to 7.",
@@ -6553,13 +6391,11 @@
     "cooldowns": [
       32,
       28,
-      24,
       20
     ],
     "manaCost": [
       30,
       35,
-      40,
       45
     ],
     "superUpgrade": "Super: +10 bonus armor, +3s duration, +20% movement speed.",
@@ -6615,13 +6451,11 @@
     "cooldowns": [
       16,
       14,
-      12,
       10
     ],
     "manaCost": [
       25,
       30,
-      35,
       40
     ],
     "superUpgrade": "Super: Increases armor reduction by 2 and steals 20% of enemy hero base damage and base armor for the duration of the debuff.",
@@ -6650,7 +6484,6 @@
     "cooldowns": [
       20,
       17,
-      14,
       11
     ],
     "manaCost": [
@@ -6714,7 +6547,6 @@
     "cooldowns": [
       15,
       14,
-      13,
       12
     ],
     "manaCost": [
