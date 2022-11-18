@@ -58,12 +58,12 @@ async function addCosmetics() {
     console.log("Adding cosmetics...");
     await cosmetics.bulkCreateCosmetics([
       {
-        name: "avatar_rainbow_night",
-        type: "Avatar Frame",
-        equip_group: "avatar_frame",
+        name: "finisher_santa_greevil",
+        type: "Finisher",
         coins: -1,
         cost_usd: -1,
-        rarity: "Rare",
+        equip_group: "finisher",
+        rarity: "Immortal",
       },
     ]);
     console.log("Cosmetics initialized");
@@ -264,7 +264,7 @@ async function addCosmeticsToPlayers() {
 }
 
 (async function () {
-  // await addCosmetics();
+  await addCosmetics();
   // await setChestRewards();
   await updateCosmetics();
   // await addCosmeticsToPlayers();
