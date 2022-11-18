@@ -1,41 +1,44 @@
 const keys = require("../config/keys");
 
-const isTestClient = (req) => {
+const reqMatchesKey = (req, key) => {
   const serverKey = req.body.server_key;
   const serverKey2 = req.get("server_key");
   const serverKey3 = req.params.server_key;
   const serverKey4 = req.query.server_key;
-  const testDedicatedServerKey = process.env.IS_PRODUCTION
+  return (
+    serverKey === key ||
+    serverKey2 === key ||
+    serverKey3 === key ||
+    serverKey4 === key
+  );
+};
+
+const isTestClient = (req) => {
+  const key = process.env.IS_PRODUCTION
     ? keys.dedicatedServerKey
     : keys.toolsKey;
 
-  return (
-    serverKey === testDedicatedServerKey ||
-    serverKey2 === testDedicatedServerKey ||
-    serverKey3 === testDedicatedServerKey ||
-    serverKey4 === testDedicatedServerKey
-  );
+  return reqMatchesKey(req, key);
 };
 
 const isProdClient = (req) => {
-  const serverKey = req.body.server_key;
-  const serverKey2 = req.get("server_key");
-  const serverKey3 = req.params.server_key;
-  const serverKey4 = req.query.server_key;
-  const prodDedicatedServerKey = process.env.IS_PRODUCTION
+  const key = process.env.IS_PRODUCTION
     ? keys.prodDedicatedServerKey
     : keys.toolsKey;
 
-  return (
-    serverKey === prodDedicatedServerKey ||
-    serverKey2 === prodDedicatedServerKey ||
-    serverKey3 === prodDedicatedServerKey ||
-    serverKey4 === prodDedicatedServerKey
-  );
+  return reqMatchesKey(req, key);
+};
+
+const isTournamentClient = (req) => {
+  const key = process.env.IS_PRODUCTION
+    ? keys.tournDedicatedServerKey
+    : keys.toolsKey;
+
+  return reqMatchesKey(req, key);
 };
 
 function checkServerKey(req) {
-  return isTestClient(req) || isProdClient(req);
+  return isTestClient(req) || isProdClient(req) || isTournamentClient(req);
 }
 
 function checkUserAuth(req) {
@@ -59,6 +62,7 @@ module.exports = {
   },
   isProdClient,
   isTestClient,
+  isTournamentClient,
   adminAuth: function (req, res, next) {
     if (req.user?.isAdmin) {
       return next();
