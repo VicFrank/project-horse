@@ -1,0 +1,33 @@
+{
+  "redemptionNumber": "123456789",
+  "customerName": "John Doe",
+  "order": "123456789",
+  "products": [
+    {
+      "qualifyingProduct": "LOCk-N-Load AP Progressive Press",
+      "freeProduct": "500 XTP bullets .45",
+      "retailer": "Scheels",
+      "serialNo": "123456789",
+      "salsifyUPC": "123456789",
+      "customerUPC": "123456789",
+      "imageURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Cat_November_2010-1a.jpg/800px-Cat_November_2010-1a.jpg"
+    },
+    {
+      "qualifyingProduct": "LOCk-N-Load AP Progressive Press",
+      "freeProduct": "500 XTP bullets .45",
+      "retailer": "Scheels",
+      "serialNo": "123456789",
+      "salsifyUPC": "123456789",
+      "customerUPC": "987654321",
+      "imageURL": "https://upload.wikimedia.org/wikipedia/commons/4/48/RedCat_8727.jpg"
+    }
+  ],
+  "receipts": [
+    {
+      "imageURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Cat_November_2010-1a.jpg/800px-Cat_November_2010-1a.jpg"
+    },
+    {
+      "imageURL": "https://upload.wikimedia.org/wikipedia/commons/4/48/RedCat_8727.jpg"
+    }
+  ]
+}
