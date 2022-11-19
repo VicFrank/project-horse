@@ -28,7 +28,7 @@ export default {
         <div class="PreSelectedGod">
           <img class="GodComplexity" :src="`/images/gods/god_complexity_${god.complexity}.png`">
           <div class="GodCardContainer" :class="{ Plus: god.unlock === 'plus' }">
-            <img class="GodCard_Avatar" :src="`/images/gods/${god.id}.png`">
+            <img class="GodCard_Avatar" :src="`/images/gods/images/${god.id}_avatar.png`">
             <img class="GodCard_Background" src="./god_card_frame_blank.png">
             <div class="GodCard_BannerContainer">
               <div class="GodCard_BannerContent">
