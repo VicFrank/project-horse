@@ -7,6 +7,7 @@ export default {
     godsToShow: [],
     searchText: "",
     complexityFilter: "",
+    unlockFilter: "",
   }),
 
   created() {
@@ -28,13 +29,18 @@ export default {
     setComplexityFilter(compStr) {
       this.complexityFilter = compStr;
     },
+    setUnlockFilter(unlockStr) {
+      this.unlockFilter = unlockStr;
+    },
 
     updateShownGods() {
       let filtered = this.gods;
       if (this.complexityFilter !== "")
-        filtered = filtered.filter((g) => g.complexity === this.complexityFilter);
+        filtered = filtered.filter(g => g.complexity === this.complexityFilter);
       if (this.searchText !== "")
-        filtered = filtered.filter((g) => g.name.toLowerCase().includes(this.searchText.toLowerCase()));
+        filtered = filtered.filter(g => g.name.toLowerCase().includes(this.searchText.toLowerCase()));
+      if (this.unlockFilter !== "")
+        filtered = filtered.filter(g => g.unlock === this.unlockFilter)
       this.godsToShow = filtered;
     },
   },
@@ -43,6 +49,9 @@ export default {
       this.updateShownGods();
     },
     complexityFilter: function () {
+      this.updateShownGods();
+    },
+    unlockFilter: function () {
       this.updateShownGods();
     },
   },
@@ -63,6 +72,16 @@ export default {
           <div v-for="c in ['easy', 'intermediate', 'advanced']" :key="c" class="filter-button"
             :class="{ selected: c === complexityFilter }" @click="setComplexityFilter(c === complexityFilter ? '' : c)">
             <img class="GodComplexity" :src="`/images/gods/god_complexity_${c}.png`">
+          </div>
+        </div>
+      </div>
+      <div>
+        Unlock Method
+        <div class="filter-button-container">
+          <div v-for="unlock in Array.from(new Set(gods.map(g => g.unlock)))" :key="unlock" class="filter-button"
+            :class="{ selected: unlock === unlockFilter }"
+            @click="setUnlockFilter(unlock === unlockFilter ? '' : unlock)">
+            <span>{{ unlock }}</span>
           </div>
         </div>
       </div>
@@ -182,19 +201,31 @@ export default {
 .filter-button-container {
   margin-left: 8px;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
 }
 
 .filter-button {
   user-select: none;
   filter: saturate(0);
-  width: 40px;
-  height: 35px;
+  margin: 4px;
+  color: #6548a0;
 }
 
 .filter-button.selected {
   filter: saturate(1);
   filter: drop-shadow(0px 0px 6px rgba(0, 204, 255, .5));
+}
+
+.filter-button img {
+  width: 35px;
+  height: 35px;
+}
+
+.filter-button span {
+  text-transform: capitalize;
+  background-color: var(--primary-color-dark);
+  padding: 4px;
 }
 
 .gods-container {
