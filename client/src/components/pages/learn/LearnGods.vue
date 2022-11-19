@@ -26,9 +26,9 @@ export default {
     <div class="gods-container">
       <div v-for="god of gods" :key="god.id">
         <div class="PreSelectedGod">
-          <div class="GodCardContainer" :class="{Plus: god.unlock === 'plus'}">
-            <!-- TOOD scrape this data :O -->
-            <img class="GodComplexity" src="./god_complexity_easy.png">
+          <!-- TOOD scrape this data :O -->
+          <img class="GodComplexity" src="./god_complexity_easy.png">
+          <div class="GodCardContainer" :class="{ Plus: god.unlock === 'plus' }">
             <img class="GodCard_Avatar" :src="`/images/gods/${god.id}.png`">
             <img class="GodCard_Background" src="./god_card_frame_blank.png">
             <div class="GodCard_BannerContainer">
@@ -91,6 +91,8 @@ export default {
 }
 
 .PreSelectedGod {
+  display: flex;
+  flex-direction: column;
   align: center center;
   flow-children: down;
 }
@@ -108,7 +110,7 @@ export default {
 }
 
 .GodCardContainer.Plus {
-  filter: drop-shadow(0 3px 3px rgba(0, 204, 255, .5));
+  filter: drop-shadow(0 3px 6px rgba(0, 204, 255, .5));
 }
 
 .PreSelectedGod .GodCard_Avatar {
@@ -150,14 +152,13 @@ export default {
 .GodCard_Background {
   width: 258px;
   height: 292px;
-  top: 55px;
   position: absolute;
 }
 
 .GodCard_BannerContainer {
   position: absolute;
   align: left top;
-  top: 79px;
+  top: 24px;
   width: 258px;
 }
 
