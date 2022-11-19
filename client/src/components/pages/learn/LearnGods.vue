@@ -4,9 +4,9 @@ export default {
   data: () => ({
     loading: true,
     gods: [],
+    godsToShow: [],
     searchText: "",
     complexityFilter: "",
-    unlockFilter: "",
   }),
 
   created() {
@@ -22,11 +22,29 @@ export default {
       const [allKnownGods, godFilter] = await Promise.all([godReq, filterReq])
       this.loading = false;
       this.gods = allKnownGods.filter(g => godFilter.includes(g.id))
+      this.updateShownGods();
     },
 
     setComplexityFilter(compStr) {
       this.complexityFilter = compStr;
-    }
+    },
+
+    updateShownGods() {
+      let filtered = this.gods;
+      if (this.complexityFilter !== "")
+        filtered = filtered.filter((g) => g.complexity === this.complexityFilter);
+      if (this.searchText !== "")
+        filtered = filtered.filter((g) => g.name.toLowerCase().includes(this.searchText.toLowerCase()));
+      this.godsToShow = filtered;
+    },
+  },
+  watch: {
+    searchText: function () {
+      this.updateShownGods();
+    },
+    complexityFilter: function () {
+      this.updateShownGods();
+    },
   },
 };
 </script>
@@ -43,7 +61,7 @@ export default {
         Complexity
         <div class="filter-button-container">
           <div v-for="c in ['easy', 'intermediate', 'advanced']" :key="c" class="filter-button"
-            :class="{ selected: c === complexityFilter }" @click="setComplexityFilter(c === complexityFilter                                                                                                                      ? '' : c)">
+            :class="{ selected: c === complexityFilter }" @click="setComplexityFilter(c === complexityFilter ? '' : c)">
             <img class="GodComplexity" :src="`/images/gods/god_complexity_${c}.png`">
           </div>
         </div>
@@ -53,7 +71,7 @@ export default {
       <b-spinner label="Loading..."></b-spinner>
     </div>
     <div class="gods-container">
-      <div v-for="god of gods" :key="god.id">
+      <div v-for="god of godsToShow" :key="god.id">
         <div class="PreSelectedGod">
           <img class="GodComplexity" :src="`/images/gods/god_complexity_${god.complexity}.png`">
           <div class="GodCardContainer" :class="{ Plus: god.unlock === 'plus' }">
