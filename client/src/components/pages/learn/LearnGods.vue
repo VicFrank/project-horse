@@ -99,8 +99,6 @@ export default {
 .PreSelectedGod {
   display: flex;
   flex-direction: column;
-  align: center center;
-  flow-children: down;
 }
 
 .PreSelectedGod .GodCardContainer {
@@ -109,10 +107,6 @@ export default {
   flex-direction: column;
   position: relative;
   width: 258px;
-
-  align: center center;
-  saturation: 0;
-  brightness: 0.1;
 }
 
 .GodCardContainer.Plus {
@@ -123,27 +117,10 @@ export default {
   background-color: black;
 }
 
-.PreSelectedGod .ButtonsContainer {
-  flow-children: right;
-}
-
-.PreSelectedGod .ButtonsContainer .Lock {
-  margin-top: -30px;
-  height: 40px;
-  width: 30px;
-  align: center top;
-}
-
-.PreSelectedGod .ButtonsContainer .FancyButton {
-  margin-right: 10px;
-}
-
 .GodComplexity {
   height: 55px;
   width: 55px;
   margin: auto;
-  align: center top;
-  saturation: 0.3;
 }
 
 .GodCard_Avatar {
@@ -151,7 +128,6 @@ export default {
   height: 175px;
   margin-left: auto;
   margin-right: auto;
-  align: middle top;
   margin-top: 15px;
 }
 
@@ -163,17 +139,12 @@ export default {
 
 .GodCard_BannerContainer {
   position: absolute;
-  align: left top;
   top: 24px;
   width: 258px;
 }
 
-
-
 .GodCard_BannerContent {
   text-align: center;
-  align: center center;
-  flow-children: right;
 }
 
 .GodCard_BannerContent img {
@@ -185,37 +156,34 @@ export default {
   position: absolute;
 }
 
+/** TODO: font, gradient text */
 .GodCard_BannerContent span {
   text-align: center;
   font-size: 16px;
-  font-family: titleFont;
-  color: gradient(linear, 0% 0%, 0% 100%, from(#fad2f8), to(#d677ce));
-  text-shadow: black 0px 1px 2px 2;
+  color: #fad2f8;
+  text-shadow: 0px 1px 2px black;
 }
 
+/** TODO wash-color */
 .GodCard_Info {
   height: 18px;
   width: 18px;
-  align: left bottom;
   margin: 0 0 32px 36px;
   background-image: url("./info_icon.png");
   background-repeat: no-repeat;
   background-size: cover;
-  wash-color: #cfcbff;
   opacity: 0.5;
   position: absolute;
   bottom: 0;
   left: 0;
 }
 
+/** TODO find some blend mode that let's us do wash-color stuff */
 .GodCard_Universe {
   height: 30px;
   width: 30px;
-  align: right bottom;
   opacity: 0.5;
   margin: 0 32px 32px 0;
-  saturation: 0;
-  wash-color: #554f9d;
 
   filter: saturate(0);
 
@@ -225,12 +193,7 @@ export default {
 }
 
 .GodCard_Abilities {
-  width: fit-children;
-  height: fit-children;
-  align: middle bottom;
   margin: -10px 4px 47px 0;
-  flow-children: right;
-  overflow: noclip;
 
   display: flex;
   justify-content: center;
@@ -238,7 +201,6 @@ export default {
 }
 
 .GodCard_PowerButton {
-  overflow: noclip;
   margin: 0 2px;
 }
 
@@ -260,7 +222,6 @@ export default {
   width: 55px;
   height: 55px;
   margin-bottom: 5px;
-  align: middle middle;
 }
 
 .SmallPowers .GodCard_Ability,
@@ -282,10 +243,8 @@ export default {
 .GodCard_AbilityFrame {
   width: 55px;
   height: 55px;
-  align: middle middle;
   margin-bottom: 5px;
   opacity: 1;
-  transition: transform 0.1s ease-in-out 0s, brightness 0.1s ease-in-out 0s;
 
   position: absolute;
 }
@@ -293,7 +252,7 @@ export default {
 .PassiveAbility .GodCard_Ability {
   width: 50px;
   height: 50px;
-  box-shadow: rgba(0, 0, 0, 0.9254901961) 0px 0px 4px 1px;
+  box-shadow: black 0px 0px 4px 1px;
 }
 
 .PowerTooltipContainer {
@@ -336,7 +295,7 @@ export default {
 
 .GenericTooltip .Title {
   font-family: titleFont;
-  text-shadow: black 0px 1px 2px 2;
+  text-shadow: 0px 1px 2px black;
   text-overflow: shrink;
   color: white;
   font-size: 22px;
@@ -385,16 +344,15 @@ export default {
   max-width: 400px;
 }
 
+/* TODO: monospace font (steal from mod), gradient text (meh) */
 .GodCard_Health {
-  align: middle bottom;
   width: 100%;
   margin-bottom: 17px;
   margin-left: 9px;
   text-align: center;
   font-size: 24px;
-  font-family: monospaceNumbersFont;
   color: #d9b86b;
-  text-shadow: black 0px 1px 2px 2;
+  text-shadow: 0px 1px 2px black;
   position: absolute;
   bottom: 0;
   left: 0;
