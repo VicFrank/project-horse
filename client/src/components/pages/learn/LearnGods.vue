@@ -90,14 +90,21 @@ export default {
 </template>
 
 <style>
+@media (min-width: 1200px){
+  .container{
+    max-width: 1580px;
+  }
+}
 .gods-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .PreSelectedGod {
   display: flex;
   flex-direction: column;
+  padding: 10px;
 }
 
 .PreSelectedGod .GodCardContainer {
@@ -117,9 +124,10 @@ export default {
 }
 
 .GodComplexity {
-  height: 55px;
-  width: 55px;
+  height: 35px;
+  width: 35px;
   margin: auto;
+  margin-bottom: -5px;
 }
 
 .GodCard_Avatar {
