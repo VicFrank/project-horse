@@ -34,11 +34,32 @@ export default {
               src="./user_bar_plus_icon.png">
           </div>
           <div class="abilities-container">
-            <div v-for="power of god.powers" :key="power.id" class="ability-container">
+            <div v-for="power of god.powers" :key="power.id" class="ability-container" :id="power.id">
               <div class="ability-background">
                 <b-img v-bind:src="`/images/gods/powers/power_${power.id}.png`" class="ability-icon"></b-img>
               </div>
               <img v-if="power.type !== 'passive'" src="./active_ability_frame.png" class="ability-frame">
+              <b-tooltip :target="power.id" custom-class="PowerTooltipContainer" placement="bottom">
+                <div class="PowerTooltip GenericTooltip">
+                  <div class="GenericTooltip__Header">
+                    {{ power.name }}
+                  </div>
+                  <div class="GenericTooltip__Body">
+                    <div class="Type">
+                      {{ power.type_string }}
+                    </div>
+                    <div class="Description">
+                      {{ power.desc }}
+                    </div>
+                    <div class="Values">
+                      <div v-for="value in power.values" :key="value" class="ValueContainer">
+                        <span class="ValueLabel">{{value.split(":")[0]}}:</span>
+                        <span class="Value">{{value.split(":")[1]}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </b-tooltip>
             </div>
           </div>
         </div>
@@ -264,5 +285,89 @@ export default {
 
 .hidden {
   display: none;
+}
+
+.PowerTooltipContainer {
+  opacity: 1;
+}
+
+.PowerTooltipContainer .Type {
+  color: #6548a0;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.PowerTooltipContainer .Values {
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+.PowerTooltipContainer .Notes {
+  font-size: 14px;
+  font-style: italic;
+  color: #665a7f;
+}
+
+.GenericTooltip {
+  background-color: #1b1331;
+  text-align: left;
+  max-width: 400px;
+}
+
+.GenericTooltip__Header {
+  font-size: 22px;
+  padding: 10px;
+  width: 100%;
+  background-color: #231b40;
+}
+
+.GenericTooltip__Body {
+  padding: 10px;
+}
+
+.GenericTooltip .Title {
+  font-family: titleFont;
+  text-shadow: black 0px 1px 2px 2;
+  text-overflow: shrink;
+  color: white;
+  font-size: 22px;
+  white-space: nowrap;
+}
+
+.GenericTooltip .Type {
+  color: #6548a0;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.GenericTooltip .Description {
+  font-size: 16px;
+  font-weight: thin;
+  color: #9a88bd;
+  margin-bottom: 5px;
+}
+
+.GenericTooltip .Values {
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+.Values {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.Values .ValueLabel {
+  color: #6548a0;
+  text-transform: capitalize;
+}
+
+.Values .Value {
+  color: #645b77;
+  font-weight: thin;
+}
+.tooltip.b-tooltip {
+  opacity: 1;
 }
 </style>
