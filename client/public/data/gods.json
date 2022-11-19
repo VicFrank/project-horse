@@ -3,8 +3,10 @@
     "id": "aghanim",
     "name": "Aghanim",
     "universe": "dota",
+    "complexity": "easy",
     "unlock": "quest",
     "unlock_text": "This is a free God that is permanently unlocked by completing the 7-day newcomer quest",
+    "health": 200,
     "powers": [
       {
         "id": "sorceryForDummies",
@@ -22,8 +24,10 @@
     "id": "alchemist",
     "name": "Alchemist",
     "universe": "dota",
+    "complexity": "advanced",
     "unlock": "chest",
     "unlock_text": "This God is permanently unlocked by dropping from God chests",
+    "health": 200,
     "powers": [
       {
         "id": "greevilsGreed",
@@ -52,8 +56,10 @@
     "id": "bloodseeker",
     "name": "Bloodseeker",
     "universe": "dota",
+    "complexity": "intermediate",
     "unlock": "chest",
     "unlock_text": "This God is permanently unlocked by dropping from God chests",
+    "health": 200,
     "powers": [
       {
         "id": "bloodrage",
@@ -72,8 +78,10 @@
     "id": "bonelessAghanim",
     "name": "Boneless Aghanim",
     "universe": "dota",
+    "complexity": "easy",
     "unlock": "none",
     "unlock_text": "Why are you even seeing this God?",
+    "health": 200,
     "powers": [
       {
         "id": "sorceryVolumeThree",
@@ -91,8 +99,10 @@
     "id": "boomer",
     "name": "The Boomer",
     "universe": "l4d",
+    "complexity": "easy",
     "unlock": "free",
     "unlock_text": "This God is free and permanently unlocked",
+    "health": 200,
     "powers": [
       {
         "id": "bileExplosion",
@@ -113,8 +123,10 @@
     "id": "brewmaster",
     "name": "Brewmaster",
     "universe": "dota",
+    "complexity": "intermediate",
     "unlock": "none",
     "unlock_text": "Why are you even seeing this God?",
+    "health": 200,
     "powers": [
       {
         "id": "drunkenBrawler",
@@ -140,8 +152,10 @@
     "id": "centaur",
     "name": "Centaur",
     "universe": "dota",
+    "complexity": "easy",
     "unlock": "free",
     "unlock_text": "This God is free and permanently unlocked",
+    "health": 200,
     "powers": [
       {
         "id": "retaliate",
@@ -160,8 +174,10 @@
     "id": "chaosGod",
     "name": "Chaos God",
     "universe": "none",
+    "complexity": "intermediate",
     "unlock": "temporary",
     "unlock_text": "This God is temporary",
+    "health": 200,
     "powers": [
       {
         "id": "questionMark",
@@ -180,8 +196,10 @@
     "id": "dazzle",
     "name": "Dazzle",
     "universe": "dota",
+    "complexity": "easy",
     "unlock": "free",
     "unlock_text": "This God is free and permanently unlocked",
+    "health": 200,
     "powers": [
       {
         "id": "shallowGrave",
@@ -212,8 +230,10 @@
     "id": "donkeyAghanim",
     "name": "Donkey Aghanim",
     "universe": "dota",
+    "complexity": "intermediate",
     "unlock": "chest",
     "unlock_text": "This God is permanently unlocked by dropping from God chests",
+    "health": 200,
     "powers": [
       {
         "id": "sorceryVolumeTwo",
@@ -232,8 +252,10 @@
     "id": "gambler",
     "name": "The Gambler",
     "universe": "dota",
+    "complexity": "intermediate",
     "unlock": "plus",
     "unlock_text": "This God is temporarily unlocked by subscribing to PLUS. They are permanently unlocked if they drop from a God chest",
+    "health": 200,
     "powers": [
       {
         "id": "allIn",
@@ -252,8 +274,10 @@
     "id": "icefrog",
     "name": "Icefrog",
     "universe": "dota",
+    "complexity": "advanced",
     "unlock": "none",
     "unlock_text": "Why are you even seeing this God?",
+    "health": 200,
     "powers": [
       {
         "id": "balanceInAllThings",
@@ -271,8 +295,10 @@
     "id": "jmuy",
     "name": "J'Muy the Wise",
     "universe": "artifact",
+    "complexity": "advanced",
     "unlock": "chest",
     "unlock_text": "This God is permanently unlocked by dropping from God chests",
+    "health": 200,
     "powers": [
       {
         "id": "wisdomOfTheElders",
@@ -290,8 +316,10 @@
     "id": "kanna",
     "name": "Kanna",
     "universe": "artifact",
+    "complexity": "intermediate",
     "unlock": "free",
     "unlock_text": "This God is free and permanently unlocked",
+    "health": 200,
     "powers": [
       {
         "id": "preyOnTheWeak",
@@ -309,8 +337,10 @@
     "id": "ladyAnshu",
     "name": "Lady Anshu",
     "universe": "artifact",
+    "complexity": "intermediate",
     "unlock": "chest",
     "unlock_text": "This God is permanently unlocked by dropping from God chests",
+    "health": 200,
     "powers": [
       {
         "id": "hymnOfStCrella",
@@ -328,8 +358,10 @@
     "id": "legionCommander",
     "name": "Legion Commander",
     "universe": "dota",
+    "complexity": "easy",
     "unlock": "free",
     "unlock_text": "This God is free and permanently unlocked",
+    "health": 200,
     "powers": [
       {
         "id": "stonehallPike",
@@ -348,8 +380,10 @@
     "id": "lifestealer",
     "name": "Lifestealer",
     "universe": "dota",
+    "complexity": "easy",
     "unlock": "chest",
     "unlock_text": "This God is permanently unlocked by dropping from God chests",
+    "health": 200,
     "powers": [
       {
         "id": "feast",
@@ -367,8 +401,10 @@
     "id": "naturesProphet",
     "name": "Nature's Prophet",
     "universe": "dota",
+    "complexity": "intermediate",
     "unlock": "none",
     "unlock_text": "Why are you even seeing this God?",
+    "health": 200,
     "powers": [
       {
         "id": "teleportation",
@@ -386,8 +422,10 @@
     "id": "ogreMagi",
     "name": "Ogre Magi",
     "universe": "dota",
+    "complexity": "intermediate",
     "unlock": "free",
     "unlock_text": "This God is free and permanently unlocked",
+    "health": 200,
     "powers": [
       {
         "id": "multicast",
@@ -406,8 +444,10 @@
     "id": "phantomAssassin",
     "name": "Phantom Assassin",
     "universe": "dota",
+    "complexity": "intermediate",
     "unlock": "chest",
     "unlock_text": "This God is permanently unlocked by dropping from God chests",
+    "health": 200,
     "powers": [
       {
         "id": "veiledPact",
@@ -427,8 +467,10 @@
     "id": "pudge",
     "name": "Pudge",
     "universe": "dota",
+    "complexity": "easy",
     "unlock": "free",
     "unlock_text": "This God is free and permanently unlocked",
+    "health": 260,
     "powers": [
       {
         "id": "beefyBoy",
@@ -446,8 +488,10 @@
     "id": "rix",
     "name": "Rix, Oathbound",
     "universe": "artifact",
+    "complexity": "intermediate",
     "unlock": "chest",
     "unlock_text": "This God is permanently unlocked by dropping from God chests",
+    "health": 200,
     "powers": [
       {
         "id": "oathed",
@@ -477,8 +521,10 @@
     "id": "rubick",
     "name": "Rubick",
     "universe": "dota",
+    "complexity": "intermediate",
     "unlock": "plus",
     "unlock_text": "This God is temporarily unlocked by subscribing to PLUS. They are permanently unlocked if they drop from a God chest",
+    "health": 200,
     "powers": [
       {
         "id": "spellSteal",
@@ -496,8 +542,10 @@
     "id": "runeGod",
     "name": "Rune God",
     "universe": "dota",
+    "complexity": "easy",
     "unlock": "battlepass",
     "unlock_text": "God is permanently unlocked by reaching a battlepass level",
+    "health": 200,
     "powers": [
       {
         "id": "fillBottle",
@@ -518,8 +566,10 @@
     "id": "selemene",
     "name": "Selemene",
     "universe": "dota",
+    "complexity": "intermediate",
     "unlock": "free",
     "unlock_text": "This God is free and permanently unlocked",
+    "health": 200,
     "powers": [
       {
         "id": "darkMoonBlessing",
@@ -537,8 +587,10 @@
     "id": "shopkeeper",
     "name": "Shopkeeper",
     "universe": "dota",
+    "complexity": "advanced",
     "unlock": "pay",
     "unlock_text": "This God is permanently unlocked with a specific amount of coins",
+    "health": 200,
     "powers": [
       {
         "id": "letsMakeADeal",
@@ -558,8 +610,10 @@
     "id": "sorlaKhan",
     "name": "Sorla Khan",
     "universe": "artifact",
+    "complexity": "intermediate",
     "unlock": "chest",
     "unlock_text": "This God is permanently unlocked by dropping from God chests",
+    "health": 200,
     "powers": [
       {
         "id": "warmonger",
@@ -579,8 +633,10 @@
     "id": "tinker",
     "name": "Tinker",
     "universe": "dota",
+    "complexity": "intermediate",
     "unlock": "pay",
     "unlock_text": "This God is permanently unlocked with a specific amount of coins",
+    "health": 200,
     "powers": [
       {
         "id": "rearm",
@@ -599,8 +655,10 @@
     "id": "tomeGod",
     "name": "Tome God",
     "universe": "dota",
+    "complexity": "easy",
     "unlock": "none",
     "unlock_text": "Why are you even seeing this God?",
+    "health": 200,
     "powers": [
       {
         "id": "tomeOfKnowledge",
@@ -628,8 +686,10 @@
     "id": "towerGod",
     "name": "Tower God",
     "universe": "dota",
+    "complexity": "easy",
     "unlock": "free",
     "unlock_text": "This God is free and permanently unlocked",
+    "health": 200,
     "powers": [
       {
         "id": "building",
@@ -657,8 +717,10 @@
     "id": "toyPudge",
     "name": "Toy Pudge",
     "universe": "dota",
+    "complexity": "intermediate",
     "unlock": "chest",
     "unlock_text": "This God is permanently unlocked by dropping from God chests",
+    "health": 200,
     "powers": [
       {
         "id": "patchworkPlague",

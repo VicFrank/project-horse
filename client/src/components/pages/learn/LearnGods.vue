@@ -26,8 +26,7 @@ export default {
     <div class="gods-container">
       <div v-for="god of gods" :key="god.id">
         <div class="PreSelectedGod">
-          <!-- TOOD scrape this data :O -->
-          <img class="GodComplexity" src="./god_complexity_easy.png">
+          <img class="GodComplexity" :src="`/images/gods/god_complexity_${god.complexity}.png`">
           <div class="GodCardContainer" :class="{ Plus: god.unlock === 'plus' }">
             <img class="GodCard_Avatar" :src="`/images/gods/${god.id}.png`">
             <img class="GodCard_Background" src="./god_card_frame_blank.png">
@@ -75,8 +74,7 @@ export default {
                 </b-tooltip>
               </div>
             </div>
-            <!-- TODO scrape health -->
-            <div class="GodCard_Health">200{{ god.health }}</div>
+            <div class="GodCard_Health">{{ god.health }}</div>
           </div>
         </div>
       </div>

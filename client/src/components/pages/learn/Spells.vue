@@ -123,7 +123,7 @@ export default {
         <div class="ability-header">
           <img
             class="ability-icon"
-            :src="`../images/ability_icons/${ability.icon}.png`"
+            :src="`/images/ability_icons/${ability.icon}.png`"
           />
           <div class="ability-name">
             {{ ability.name }}
