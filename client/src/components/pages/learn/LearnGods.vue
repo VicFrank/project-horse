@@ -4,18 +4,23 @@ export default {
   data: () => ({
     loading: true,
     gods: [],
+    allGods: [],
+    godFilter: [],
   }),
 
   created() {
-    fetch(`../../data/gods.json`)
-      .then((res) => res.json())
-      .then((gods) => {
-        this.gods = gods;
-        this.loading = false;
-      });
+    this.loadAndFilterGods();
   },
 
   methods: {
+    async loadAndFilterGods() {
+      const godReq = fetch(`/data/gods.json`).then((res) => res.json()).then(gods => this.allGods = gods);
+      //const filterReq = fetch('/api/gods').then(r => r.json()).then(gods => this.enabledGods = gods.filter(g => g.god_enabled).map(g => g.god_name));
+      const filterReq = fetch('/data/godsFilter.json').then(r => r.json()).then(gods => this.godFilter = gods.filter(g => g.god_enabled).map(g => g.god_name));
+      await Promise.all([godReq, filterReq])
+      this.loading = false;
+      this.gods = this.allGods.filter(g => this.godFilter.includes(g.id))
+    }
   },
 };
 </script>
@@ -23,6 +28,9 @@ export default {
 <template>
   <div class="container">
     <h1 class="page-title">{{ $t("gods.page_title") }}</h1>
+    <div v-if="loading" class="d-flex justify-content-center mb-3">
+      <b-spinner label="Loading..."></b-spinner>
+    </div>
     <div class="gods-container">
       <div v-for="god of gods" :key="god.id">
         <div class="PreSelectedGod">
