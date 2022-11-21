@@ -71,7 +71,7 @@ export default {
         <div class="filter-button-container">
           <div v-for="c in ['easy', 'intermediate', 'advanced']" :key="c" class="filter-button"
             :class="{ selected: c === complexityFilter }" @click="setComplexityFilter(c === complexityFilter ? '' : c)">
-            <img class="GodComplexity" :src="`/images/gods/god_complexity_${c}.png`">
+            <img class="GodComplexity" :src="`/images/gods/god_complexity_${c}.png`" style="cursor: pointer">
           </div>
         </div>
       </div>
@@ -210,6 +210,7 @@ export default {
   filter: saturate(0);
   margin: 4px;
   color: #6548a0;
+  cursor: pointer;
 }
 
 .filter-button.selected {
