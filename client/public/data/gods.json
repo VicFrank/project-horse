@@ -1,0 +1,738 @@
+[
+  {
+    "id": "aghanim",
+    "name": "Aghanim",
+    "universe": "dota",
+    "complexity": "easy",
+    "unlock": "quest",
+    "unlock_text": "This is a free God that is permanently unlocked by completing the 7-day newcomer quest",
+    "health": 200,
+    "powers": [
+      {
+        "id": "sorceryForDummies",
+        "name": "Sorcery for Dummies: Volume 1",
+        "values": [
+          "CHANCE: 25 / 30 / 35 / 40 / 45"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Has a chance to upgrade a random spell on your team every round (includes any unequipped spells). Cannot upgrade the same spell consecutive times. Chance scales with shop level."
+      }
+    ]
+  },
+  {
+    "id": "alchemist",
+    "name": "Alchemist",
+    "universe": "dota",
+    "complexity": "advanced",
+    "unlock": "chest",
+    "unlock_text": "This God is permanently unlocked by dropping from God chests",
+    "health": 200,
+    "powers": [
+      {
+        "id": "greevilsGreed",
+        "name": "Greevil's Greed",
+        "values": [
+          "GOLD GAIN: 1",
+          "GOLD REQUIRED: 11 / 10 / 9 / 8 / 7"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Your gold never resets. For every 11/10/9/8/7 gold saved at the end of combat, you gain 1 additional gold. Amount of gold required depends on the level of your shop."
+      },
+      {
+        "id": "unstableConcoction",
+        "name": "Unstable Concoction",
+        "values": [
+          "HEALTH LOSS: 15%"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Every round loss will gain a charge to this ability. Any win resets the charges to 0. If the charges reach 3, you will take 15% current HP in damage and the charges will reset to 0. Charges can not be less than 0."
+      }
+    ]
+  },
+  {
+    "id": "bloodseeker",
+    "name": "Bloodseeker",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "chest",
+    "unlock_text": "This God is permanently unlocked by dropping from God chests",
+    "health": 200,
+    "powers": [
+      {
+        "id": "bloodrage",
+        "name": "Blood Frenzy",
+        "values": [
+          "ATTACK SPEED PER STACK: 30",
+          "LIFESTEAL PER STACK: 25%"
+        ],
+        "type_string": "Active (Unit Target)",
+        "type": "unitTarget",
+        "desc": "Each ally hero death will enfrenzy selected unit with attack speed and lifesteal."
+      }
+    ]
+  },
+  {
+    "id": "bonelessAghanim",
+    "name": "Boneless Aghanim",
+    "universe": "dota",
+    "complexity": "easy",
+    "unlock": "none",
+    "unlock_text": "Why are you even seeing this God?",
+    "health": 200,
+    "powers": [
+      {
+        "id": "sorceryVolumeThree",
+        "name": "Sorcery For Dummies: Volume 3",
+        "values": [
+          "SHOP SPELL SLOTS: 4 / 6 / 7 / 9 / 11"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Ultimates never enter your pool of spells. You gain an extra shop slot at shop level 3."
+      }
+    ]
+  },
+  {
+    "id": "boomer",
+    "name": "The Boomer",
+    "universe": "l4d",
+    "complexity": "easy",
+    "unlock": "free",
+    "unlock_text": "This God is free and permanently unlocked",
+    "health": 200,
+    "powers": [
+      {
+        "id": "bileExplosion",
+        "name": "Bile Explosion",
+        "values": [
+          "DAMAGE AMPLIFICATION: 20%",
+          "DAMAGE PERCENT: 20%",
+          "PUDDLE DURATION: 5",
+          "RADIUS: 350"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Ally heroes will explode on death dealing damage in area. Damage dealt is a percentage of the damage taken that round. After exploding, a puddle of bile will remain on the ground that will cause enemies to take extra damage. Debuff is stackable."
+      }
+    ]
+  },
+  {
+    "id": "brewmaster",
+    "name": "Brewmaster",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "none",
+    "unlock_text": "Why are you even seeing this God?",
+    "health": 200,
+    "powers": [
+      {
+        "id": "drunkenBrawler",
+        "name": "Drunken Brawler",
+        "values": [
+          "ATTACK SPEED: 10 / 20 / 30 / 40 / 50",
+          "EVASION: 3% / 6% / 9% / 12% / 15%",
+          "ARMOR: 1 / 3 / 5 / 7 / 9",
+          "MAGIC RESISTANCE: 4% / 8% / 12% / 16% / 20%",
+          "CRIT CHANCE: 20%",
+          "CRIT DAMAGE: 120% / 130% / 140% / 150% / 160%",
+          "SLOW DURATION: 2",
+          "SLOW: 10 / 20 / 30 / 40 / 50",
+          "STATUS RESITANCE: 4% / 8% / 12% / 16% / 20%"
+        ],
+        "type_string": "Active (No Target)",
+        "type": "noTarget",
+        "desc": "Switch stances to provide unique buffs to your units.\n\nEarth Stance - Grants armor and magic resistance.\n\nStorm Stance - Grants evasion and bonus attack speed.\n\nFire Stance - Grants a chance to deal critical damage with attacks.\n\nVoid Stance - Grants status resistance and attack speed and movespeed slow on attacks. "
+      }
+    ]
+  },
+  {
+    "id": "centaur",
+    "name": "Centaur",
+    "universe": "dota",
+    "complexity": "easy",
+    "unlock": "free",
+    "unlock_text": "This God is free and permanently unlocked",
+    "health": 200,
+    "powers": [
+      {
+        "id": "retaliate",
+        "name": "Great Fortitude",
+        "values": [
+          "HEALTH PER ROUND: 50",
+          "RETURN: 20%"
+        ],
+        "type_string": "Active (Unit Target)",
+        "type": "unitTarget",
+        "desc": "Selected hero will gain HP per round. They will also return a percent of damage dealt by physical attack. When a new hero is selected, the entire HP buff moves to them."
+      }
+    ]
+  },
+  {
+    "id": "chaosGod",
+    "name": "Chaos God",
+    "universe": "none",
+    "complexity": "intermediate",
+    "unlock": "temporary",
+    "unlock_text": "This God is temporary",
+    "health": 200,
+    "powers": [
+      {
+        "id": "questionMark",
+        "name": "?",
+        "values": [
+          "CURRENT HP DAMAGE: 2%",
+          "DAMAGE PER SECOND: 50"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Magical damage per second is dealt to both allies and enemies (not lethal). This is a temporary God that will be removed from your armory after Season 2"
+      }
+    ]
+  },
+  {
+    "id": "dazzle",
+    "name": "Dazzle",
+    "universe": "dota",
+    "complexity": "easy",
+    "unlock": "free",
+    "unlock_text": "This God is free and permanently unlocked",
+    "health": 200,
+    "powers": [
+      {
+        "id": "shallowGrave",
+        "name": "Shallow Grave",
+        "values": [
+          "DURATION: 1 / 2 / 3 / 4 / 4",
+          "HEAL AFTER SHALLOW GRAVE: 0 / 0 / 0 / 0 / 250",
+          "SHALLOW GRAVE LEVEL: 1 / 2 / 3 / 4 / 4",
+          "THRESHOLD: 20%"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Cast Shallow Grave on the first ally to fall within 20% HP threshold. Duration is based on shop level."
+      },
+      {
+        "id": "cheatingDeath",
+        "name": "Cheating Death",
+        "values": [
+          ""
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Your god will survive a death blow (goes down to 1 hp)."
+      }
+    ]
+  },
+  {
+    "id": "donkeyAghanim",
+    "name": "Donkey Aghanim",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "chest",
+    "unlock_text": "This God is permanently unlocked by dropping from God chests",
+    "health": 200,
+    "powers": [
+      {
+        "id": "sorceryVolumeTwo",
+        "name": "Sorcery For Dummies: Volume 2",
+        "values": [
+          "MAX ULTIMATES PER HERO: 0 / 0 / 2 / 3 / 4",
+          "SHOP UPGRADE EXTRA COST: 20%"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Heroes can use multiple ultimates, but shop upgrades are more expensive"
+      }
+    ]
+  },
+  {
+    "id": "gambler",
+    "name": "The Gambler",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "plus",
+    "unlock_text": "This God is temporarily unlocked by subscribing to PLUS. They are permanently unlocked if they drop from a God chest",
+    "health": 200,
+    "powers": [
+      {
+        "id": "allIn",
+        "name": "Roll the Dice",
+        "values": [
+          "MAX GOLD BET: 4 / 6 / 8 / 10 / 12",
+          "MIN GOLD BET: 2 / 3 / 4 / 5 / 6"
+        ],
+        "type_string": "Active (No Target)",
+        "type": "noTarget",
+        "desc": "Before your next fight, make a bet. If you win the next round, gain gold in the next shopping phase. If you lose, you get less gold for the following round. The amount of gold is a range of values based on a your shop level."
+      }
+    ]
+  },
+  {
+    "id": "icefrog",
+    "name": "Icefrog",
+    "universe": "dota",
+    "complexity": "advanced",
+    "unlock": "none",
+    "unlock_text": "Why are you even seeing this God?",
+    "health": 200,
+    "powers": [
+      {
+        "id": "balanceInAllThings",
+        "name": "Balance In All Things",
+        "values": [
+          "EXTRA SLOTS: 2"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Get access to all banned spells. Shop contains additional slots."
+      }
+    ]
+  },
+  {
+    "id": "jmuy",
+    "name": "J'Muy the Wise",
+    "universe": "artifact",
+    "complexity": "advanced",
+    "unlock": "chest",
+    "unlock_text": "This God is permanently unlocked by dropping from God chests",
+    "health": 200,
+    "powers": [
+      {
+        "id": "wisdomOfTheElders",
+        "name": "Wisdom of the Elders",
+        "values": [
+          "COOLDOWN REDUCTION: 10% / 20% / 30% / 40% / 50%"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Ability cooldowns now pause between rounds, but all abilities have cooldown reduction. Cooldown reduction scales with shop level."
+      }
+    ]
+  },
+  {
+    "id": "kanna",
+    "name": "Kanna",
+    "universe": "artifact",
+    "complexity": "intermediate",
+    "unlock": "free",
+    "unlock_text": "This God is free and permanently unlocked",
+    "health": 200,
+    "powers": [
+      {
+        "id": "preyOnTheWeak",
+        "name": "Prey on the Weak",
+        "values": [
+          "ATTACK SPEED PER SUMMON: 9"
+        ],
+        "type_string": "Active (Unit Target)",
+        "type": "unitTarget",
+        "desc": "Selected hero gains 9 attack speed for each ally summon. Summons gain half of this value. You will not lose attack speed if any summons die."
+      }
+    ]
+  },
+  {
+    "id": "ladyAnshu",
+    "name": "Lady Anshu",
+    "universe": "artifact",
+    "complexity": "intermediate",
+    "unlock": "chest",
+    "unlock_text": "This God is permanently unlocked by dropping from God chests",
+    "health": 200,
+    "powers": [
+      {
+        "id": "hymnOfStCrella",
+        "name": "Hymn of St. Crella",
+        "values": [
+          "RESPAWN HEALTH: 15%"
+        ],
+        "type_string": "Active (Unit Target)",
+        "type": "unitTarget",
+        "desc": "When selected hero dies, they will revive all dead allied heroes with reduced HP."
+      }
+    ]
+  },
+  {
+    "id": "legionCommander",
+    "name": "Legion Commander",
+    "universe": "dota",
+    "complexity": "easy",
+    "unlock": "free",
+    "unlock_text": "This God is free and permanently unlocked",
+    "health": 200,
+    "powers": [
+      {
+        "id": "stonehallPike",
+        "name": "Stonehall Pike",
+        "values": [
+          "DAMAGE: 3 / 6 / 9 / 12 / 15 / 20",
+          "POINTS REQUIRED FOR LEVEL: 0 / 10 / 30 / 50 / 70 / 100"
+        ],
+        "type_string": "Active (Unit Target)",
+        "type": "unitTarget",
+        "desc": "Legion Commander God gains damage every round based on the total spell points your team has. Selected ally hero will gain this damage buff."
+      }
+    ]
+  },
+  {
+    "id": "lifestealer",
+    "name": "Lifestealer",
+    "universe": "dota",
+    "complexity": "easy",
+    "unlock": "chest",
+    "unlock_text": "This God is permanently unlocked by dropping from God chests",
+    "health": 200,
+    "powers": [
+      {
+        "id": "feast",
+        "name": "Feast",
+        "values": [
+          "HEAL: 6"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Upon winning a round, Lifestealer heals himself (can overheal with no limit)."
+      }
+    ]
+  },
+  {
+    "id": "naturesProphet",
+    "name": "Nature's Prophet",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "none",
+    "unlock_text": "Why are you even seeing this God?",
+    "health": 200,
+    "powers": [
+      {
+        "id": "teleportation",
+        "name": "Nature's Prophet",
+        "values": [
+          ""
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "You can position your heroes anywhere on the board."
+      }
+    ]
+  },
+  {
+    "id": "ogreMagi",
+    "name": "Ogre Magi",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "free",
+    "unlock_text": "This God is free and permanently unlocked",
+    "health": 200,
+    "powers": [
+      {
+        "id": "multicast",
+        "name": "Multicast",
+        "values": [
+          "CHANCE: 25 / 35 / 45 / 55 / 65",
+          "POINTS REQUIRED FOR LEVEL: 0 / 25 / 50 / 75 / 100"
+        ],
+        "type_string": "Active (Unit Target)",
+        "type": "unitTarget",
+        "desc": "Selected unit has a chance to multicast a spell. The chance is tied to the amount of total spell points your team has."
+      }
+    ]
+  },
+  {
+    "id": "phantomAssassin",
+    "name": "Phantom Assassin",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "chest",
+    "unlock_text": "This God is permanently unlocked by dropping from God chests",
+    "health": 200,
+    "powers": [
+      {
+        "id": "veiledPact",
+        "name": "Veiled Pact",
+        "values": [
+          "CRIT CHANCE: 15%",
+          "CRIT DAMAGE: 2%",
+          "DISTANCE TO INCREASE CRIT DMG: 15"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Your units have a chance to deal a critical strike to enemies. They gain crit damage per number of units they travel. This buff lasts the entire round."
+      }
+    ]
+  },
+  {
+    "id": "pudge",
+    "name": "Pudge",
+    "universe": "dota",
+    "complexity": "easy",
+    "unlock": "free",
+    "unlock_text": "This God is free and permanently unlocked",
+    "health": 260,
+    "powers": [
+      {
+        "id": "beefyBoy",
+        "name": "Beefy Boy",
+        "values": [
+          ""
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Your God has more starting health."
+      }
+    ]
+  },
+  {
+    "id": "rix",
+    "name": "Rix, Oathbound",
+    "universe": "artifact",
+    "complexity": "intermediate",
+    "unlock": "chest",
+    "unlock_text": "This God is permanently unlocked by dropping from God chests",
+    "health": 200,
+    "powers": [
+      {
+        "id": "oathed",
+        "name": "Oathed",
+        "values": [
+          "DAMAGE BONUS: 10 / 20 / 30 / 40 / 50"
+        ],
+        "type_string": "Active (Unit Target)",
+        "type": "unitTarget",
+        "desc": "Selected hero is silenced and has bonus damage. If selected unit is revived successfully, the damage buff is doubled."
+      },
+      {
+        "id": "assault",
+        "name": "Assault",
+        "values": [
+          "INITIAL RESPAWN TIME: 3",
+          "RESPAWN HEALTH: 50%",
+          "RESPAWN TIME PENALTY: 2"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "When an Oathed hero is killed, they will be revived after a delay with reduced HP as long as another ally hero is still alive. When revived, they will respawn in the back of the arena. Each revival will add an additional delay to the respawn time. Timer resets each round."
+      }
+    ]
+  },
+  {
+    "id": "rubick",
+    "name": "Rubick",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "plus",
+    "unlock_text": "This God is temporarily unlocked by subscribing to PLUS. They are permanently unlocked if they drop from a God chest",
+    "health": 200,
+    "powers": [
+      {
+        "id": "spellSteal",
+        "name": "Spell Steal",
+        "values": [
+          "POINTS REQUIRED FOR LEVEL: 0 / 11 / 22 / 33 / 44 / 55 / 66 / 77 / 88"
+        ],
+        "type_string": "Active (Unit Target)",
+        "type": "unitTarget",
+        "desc": "Selected unit gains Spell Steal, which upgrades based on how many total spell points you have. Spell Steal does not count towards your four spell hero limit."
+      }
+    ]
+  },
+  {
+    "id": "runeGod",
+    "name": "Rune God",
+    "universe": "dota",
+    "complexity": "easy",
+    "unlock": "battlepass",
+    "unlock_text": "God is permanently unlocked by reaching a battlepass level",
+    "health": 200,
+    "powers": [
+      {
+        "id": "fillBottle",
+        "name": "Fill Bottle",
+        "values": [
+          "BOUNTY RUNE GOLD: 3",
+          "INVISIBILITY BACKSTAB: 50",
+          "REGEN MANA TRESHOLD: 90%",
+          "WATER HEALTH TRESHOLD: 90%"
+        ],
+        "type_string": "Active (Unit Target)",
+        "type": "unitTarget",
+        "desc": "Selected unit gains a random rune at the beginning of battle. Each shop upgrade will give more runes.\n\nTier 4 runes: Water (procs when receiving damage), Haste. \nTier 3 runes: Invisibility (attacking out of invis deals extra damage), Regeneration (procs when spending mana).\nTier 2 runes: Bounty (gives the player extra gold for the following round), Illusion.\nTier 1 runes: Arcane, Double Damage.\n\nShop Level 1: Your bottle is empty.\nShop Level 2: Get a Tier 4 Rune.\nShop Level 3: Get a Tier 3 & 4 Rune.\nShop Level 4: Get a Tier 2 ,3 & 4 Rune.\nShop Level 5: Get a Tier 1, 2, 3 & 4 Rune."
+      }
+    ]
+  },
+  {
+    "id": "selemene",
+    "name": "Selemene",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "free",
+    "unlock_text": "This God is free and permanently unlocked",
+    "health": 200,
+    "powers": [
+      {
+        "id": "darkMoonBlessing",
+        "name": "Dark Moon Blessing",
+        "values": [
+          "SPELL AMP: 0.02%"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Every time an ally hero spends mana, all your heroes gains 0.02% spell amplification. Buff resets every round."
+      }
+    ]
+  },
+  {
+    "id": "shopkeeper",
+    "name": "Shopkeeper",
+    "universe": "dota",
+    "complexity": "advanced",
+    "unlock": "pay",
+    "unlock_text": "This God is permanently unlocked with a specific amount of coins",
+    "health": 200,
+    "powers": [
+      {
+        "id": "letsMakeADeal",
+        "name": "Let's Make a Deal",
+        "values": [
+          "SELL ABILITY BOUNTY: 1",
+          "SHOP ABILITY COST: 2",
+          "SHOP SLOTS: 2 / 3 / 4"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "You can only upgrade your shop to level 3, but all spells cost 2 gold (and sell for 1). The amount of spells that appear in your shop is also reduced to 2/3/4."
+      }
+    ]
+  },
+  {
+    "id": "sorlaKhan",
+    "name": "Sorla Khan",
+    "universe": "artifact",
+    "complexity": "intermediate",
+    "unlock": "chest",
+    "unlock_text": "This God is permanently unlocked by dropping from God chests",
+    "health": 200,
+    "powers": [
+      {
+        "id": "warmonger",
+        "name": "Warmonger",
+        "values": [
+          "DAMAGE BONUS: 8%",
+          "DAMAGE REQUIRED PER STACK: 50",
+          "EXTRA GOD DAMAGE: 2%"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Sorla Khan deals 2% more damage to other Gods for each surviving ally hero. For every 50 damage she has dealt, her team gains a stacking 8% attack damage buff."
+      }
+    ]
+  },
+  {
+    "id": "tinker",
+    "name": "Tinker",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "pay",
+    "unlock_text": "This God is permanently unlocked with a specific amount of coins",
+    "health": 200,
+    "powers": [
+      {
+        "id": "rearm",
+        "name": "Rearm",
+        "values": [
+          "RE-ROLL COST: 0",
+          "RE-ROLLS AMOUNT: 10 / 8 / 6 / 4 / 2"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Every round, re-rolls have reduced cost until you buy something or you re-roll a certain amount of times."
+      }
+    ]
+  },
+  {
+    "id": "tomeGod",
+    "name": "Tome God",
+    "universe": "dota",
+    "complexity": "easy",
+    "unlock": "none",
+    "unlock_text": "Why are you even seeing this God?",
+    "health": 200,
+    "powers": [
+      {
+        "id": "tomeOfKnowledge",
+        "name": "Tome of Knowledge",
+        "values": [
+          "USES PER GAME: 1"
+        ],
+        "type_string": "Active (No Target)",
+        "type": "noTarget",
+        "desc": "Levels your shop to the next level for free."
+      },
+      {
+        "id": "tomeOfExperience",
+        "name": "Tome of Experience",
+        "values": [
+          ""
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Every time you level your shop, your heroes gain an extra level."
+      }
+    ]
+  },
+  {
+    "id": "towerGod",
+    "name": "Tower God",
+    "universe": "dota",
+    "complexity": "easy",
+    "unlock": "free",
+    "unlock_text": "This God is free and permanently unlocked",
+    "health": 200,
+    "powers": [
+      {
+        "id": "building",
+        "name": "Building",
+        "values": [
+          "MINIMUM RANGE: 750"
+        ],
+        "type_string": "Active (Unit Target)",
+        "type": "unitTarget",
+        "desc": "Once the battle begins, the selected unit cannot move and is rooted, while its attack range is set to a minimum. This root is disabled if you are the last allied hero alive or you are facing a fellow Tower God. Activating this ability will enable your Glyph of Fortification Passive.\n\nVoiced by our dear friend PyrionFlax"
+      },
+      {
+        "id": "fortification",
+        "name": "Glyph of Fortification",
+        "values": [
+          "INVULNERABILITY DURATION: 1.5"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "When a hero dies, all remaining heroes become immune to any kind of damage temporarily. This ability is only active if you are using the Building ability, and your Building unit is alive.\n\nVoiced by our dear friend PyrionFlax"
+      }
+    ]
+  },
+  {
+    "id": "toyPudge",
+    "name": "Toy Pudge",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "chest",
+    "unlock_text": "This God is permanently unlocked by dropping from God chests",
+    "health": 200,
+    "powers": [
+      {
+        "id": "patchworkPlague",
+        "name": "Patchwork Plague",
+        "values": [
+          "DISTANCE TO INCREASE SPELL DMG: 12",
+          "SPELL DAMAGE: 0.1%"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Enemy heroes they take increased spell damage per number of units they travel. This buff lasts the entire round."
+      }
+    ]
+  }
+]
