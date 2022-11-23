@@ -1439,6 +1439,35 @@ module.exports = [
   },
   /**
    * *************************
+   * Win Streaks
+   * *************************
+   */
+  {
+    name: "streak_fire",
+    type: "Win Streak",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "streak",
+    rarity: "Immortal",
+  },
+  {
+    name: "streak_santa_greevil",
+    type: "Win Streak",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "streak",
+    rarity: "Immortal",
+  },
+  {
+    name: "streak_space",
+    type: "Win Streak",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "streak",
+    rarity: "Immortal",
+  },
+  /**
+   * *************************
    * Terrains
    * *************************
    */
