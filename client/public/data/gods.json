@@ -57,8 +57,8 @@
     "name": "Bloodseeker",
     "universe": "dota",
     "complexity": "intermediate",
-    "unlock": "chest",
-    "unlock_text": "This God is permanently unlocked by dropping from God chests",
+    "unlock": "free",
+    "unlock_text": "This God is free and permanently unlocked",
     "health": 200,
     "powers": [
       {
