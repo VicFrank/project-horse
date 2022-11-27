@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const players = require("../db/players");
 const abilities = require("../db/abilities");
+const cosmetics = require("../db/cosmetics");
 const gods = require("../db/gods");
 const quests = require("../db/quests");
 const auth = require("../auth/auth");
@@ -550,8 +551,32 @@ router.post(
     try {
       const steamID = req.params.steamID;
       const chestid = req.params.chestid;
-      const reward = await players.openChest(steamID, chestid);
-      res.status(200).json(reward);
+      const cosmetic = await cosmetics.getCosmetic(chestid);
+      if (!cosmetic)
+        return res.status(404).send({ message: "No chest found with this ID" });
+      if (cosmetic.cosmetic_name.includes("unique")) {
+        const reward = await players.openUniqueChest(steamID, chestid);
+        return res.status(200).json(reward);
+      } else {
+        const reward = await players.openChest(steamID, chestid);
+        return res.status(200).json(reward);
+      }
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({ error: error.message });
+    }
+  }
+);
+
+router.get(
+  "/:steamID/chest_drops/:chestid",
+  auth.userAuth,
+  async (req, res) => {
+    try {
+      const steamID = req.params.steamID;
+      const chestID = req.params.chestid;
+      const rewards = await players.getUniqueChestDrops(steamID, chestID);
+      res.status(200).json(rewards);
     } catch (error) {
       console.log(error);
       res.status(500).send({ error: error.message });

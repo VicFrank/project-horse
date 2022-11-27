@@ -1,6 +1,12 @@
 const cosmetics = require("../db/cosmetics");
 const comseticsList = require("./data/cosmetics-list");
 const { dropOdds, typeOdds } = require("./data/chest-rewards");
+const {
+  rareOdds,
+  veryRareOdds,
+  ultraRareOdds,
+} = require("./data/escalating-odds");
+const { chest_god_unique_1 } = require("./data/unique-chest-drops");
 const players = require("../db/players");
 
 async function initializeCosmetics() {
@@ -14,11 +20,26 @@ async function initializeCosmetics() {
   }
 }
 
-async function clearCosmetics() {
+async function initializeEscalatingOdds() {
   try {
-    console.log("Deleting all cosmetics...");
-    await cosmetics.deleteAllCosmetics();
-    console.log("Cosmetics Deleted");
+    console.log("Initializing escalating odds...");
+    await cosmetics.createEscalatingOddsTable("rare", rareOdds);
+    await cosmetics.createEscalatingOddsTable("very_rare", veryRareOdds);
+    await cosmetics.createEscalatingOddsTable("ultra_rare", ultraRareOdds);
+    console.log("Escalating odds initialized");
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+async function initializeUniqueChestDrops(cosmeticName, drops) {
+  try {
+    console.log("Initializing unique chest drops...");
+    const chest = await cosmetics.getCosmeticByName(cosmeticName);
+    const chestID = chest.cosmetic_id;
+    await cosmetics.createUniqueChestDrops(chestID, drops);
+    console.log("Unique chest drops initialized");
   } catch (error) {
     console.error(error);
     throw error;
@@ -58,27 +79,11 @@ async function addCosmetics() {
     console.log("Adding cosmetics...");
     await cosmetics.bulkCreateCosmetics([
       {
-        name: "streak_fire",
-        type: "Win Streak",
-        coins: -1,
+        name: "chest_god_unique_1",
+        type: "Chest",
+        coins: 10000,
         cost_usd: -1,
-        equip_group: "streak",
-        rarity: "Immortal",
-      },
-      {
-        name: "streak_santa_greevil",
-        type: "Win Streak",
-        coins: -1,
-        cost_usd: -1,
-        equip_group: "streak",
-        rarity: "Immortal",
-      },
-      {
-        name: "streak_space",
-        type: "Win Streak",
-        coins: -1,
-        cost_usd: -1,
-        equip_group: "streak",
+        equip_group: "",
         rarity: "Immortal",
       },
     ]);
@@ -282,6 +287,8 @@ async function addCosmeticsToPlayers() {
 (async function () {
   await addCosmetics();
   // await setChestRewards();
-  await updateCosmetics();
+  // await updateCosmetics();
   // await addCosmeticsToPlayers();
+  await initializeEscalatingOdds();
+  await initializeUniqueChestDrops("chest_god_unique_1", chest_god_unique_1);
 })();

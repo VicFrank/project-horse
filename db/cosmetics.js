@@ -389,4 +389,112 @@ module.exports = {
   getRandomDrops(cosmeticName) {
     return RandomDrops[cosmeticName];
   },
+
+  // ********** Unique Chests **********
+  async createEscalatingOddsTable(rarity, odds) {
+    try {
+      await query(
+        `INSERT INTO escalating_odds_tables (rarity) VALUES ($1) RETURNING *`,
+        [rarity]
+      );
+      for (const [index, value] of odds.entries()) {
+        await query(
+          `INSERT INTO escalating_odds (rarity, odds, opening_number) VALUES ($1, $2, $3)`,
+          [rarity, value, index]
+        );
+      }
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async createUniqueChestDrops(chestCosmeticID, drops) {
+    try {
+      const { rows } = await query(
+        `INSERT INTO unique_chests (cosmetic_id) VALUES ($1) RETURNING *`,
+        [chestCosmeticID]
+      );
+      const chestID = rows[0].unique_chest_id;
+
+      for (const drop of drops) {
+        const cosmetic = await this.getCosmeticByName(drop.cosmetic);
+        const cosmeticID = cosmetic.cosmetic_id;
+        await query(
+          `INSERT INTO unique_chest_drops (unique_chest_id, cosmetic_id, rarity) VALUES ($1, $2, $3)`,
+          [chestID, cosmeticID, drop.rarity]
+        );
+      }
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getEscalatingOdds(rarity) {
+    try {
+      const { rows } = await query(
+        `SELECT * FROM escalating_odds WHERE rarity = $1 ORDER BY opening_number ASC`,
+        [rarity]
+      );
+      for (const row of rows) {
+        if (row.odds) row.odds = Number(row.odds);
+      }
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getUniqueChestID(chestCosmeticID) {
+    try {
+      const { rows } = await query(
+        `SELECT * FROM unique_chests WHERE cosmetic_id = $1`,
+        [chestCosmeticID]
+      );
+      return rows[0].unique_chest_id;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async isValidUniqueChestID(chestID) {
+    try {
+      const { rows } = await query(
+        `SELECT * FROM unique_chests WHERE unique_chest_id = $1`,
+        [chestID]
+      );
+      return rows.length > 0;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getUniqueChestDrops(uniqueChestID) {
+    try {
+      const { rows } = await query(
+        `
+        SELECT cosmetics.cosmetic_id, cosmetics.cosmetic_name, unique_chest_drops.rarity
+        FROM unique_chest_drops
+        JOIN cosmetics USING (cosmetic_id)
+        WHERE unique_chest_id = $1`,
+        [uniqueChestID]
+      );
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getUniqueChestDropsWithOdds(uniqueChestID) {
+    try {
+      const chestDrops = await this.getUniqueChestDrops(uniqueChestID);
+      for (const drop of chestDrops) {
+        if (drop.rarity) {
+          drop.escalatingOdds = await this.getEscalatingOdds(drop.rarity);
+        }
+      }
+      return chestDrops;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
