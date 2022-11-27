@@ -599,7 +599,7 @@
     ],
     "chest_gold": "An ornate chest made out of gold. Grants a random amount of Gold. Only available from the Battle Pass.",
     "chest_god": "This chest will drop a random non-starter God. Duplicate drops will result in a small refund.",
-    "chest_god_unique_1": "This chest will drop a random God. Dropping a god removes it from the chest. Has a chance to drop a Rare God.",
+    "chest_god_unique_1": "This chest will drop a random God that you do not own with escalating odds to drop a Rare. You will not get duplicates until you own every common God.",
     "name_rainbow": "Awarded to those who have purchased a year of Plus. Makes your name rainbow colored.",
     "gold_placeholder": "Gold",
     "avatar_rainbow_day": "Rainbow - Day Avatar Frame",
