@@ -335,6 +335,66 @@ CREATE TABLE IF NOT EXISTS chest_drop_types (
 );
 
 --------------------------------------------------------------------------------
+-- Unique Chests
+--------------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS escalating_odds_tables;
+CREATE TABLE IF NOT EXISTS escalating_odds_tables (
+  rarity TEXT PRIMARY KEY
+);
+
+DROP TABLE IF EXISTS escalating_odds;
+CREATE TABLE IF NOT EXISTS escalating_odds (
+  rarity TEXT REFERENCES escalating_odds_tables (rarity),
+  odds DECIMAL(14, 4) NOT NULL,
+  opening_number INTEGER NOT NULL,
+
+  CONSTRAINT escalating_odds_pkey PRIMARY KEY (rarity, opening_number)
+);
+
+DROP TABLE IF EXISTS unique_chests;
+CREATE TABLE IF NOT EXISTS unique_chests (
+  unique_chest_id SERIAL PRIMARY KEY,
+  cosmetic_id INTEGER REFERENCES cosmetics (cosmetic_id)
+);
+CREATE UNIQUE INDEX ON unique_chests (cosmetic_id);
+
+DROP TABLE IF EXISTS unique_chest_drops;
+CREATE TABLE IF NOT EXISTS unique_chest_drops (
+  unique_chest_id INTEGER REFERENCES unique_chests (unique_chest_id),
+  cosmetic_id INTEGER REFERENCES cosmetics (cosmetic_id),
+  rarity TEXT REFERENCES escalating_odds_tables (rarity),
+
+  CONSTRAINT unique_chest_drops_pkey PRIMARY KEY (unique_chest_id, cosmetic_id)
+);
+
+DROP TABLE IF EXISTS player_unique_chests;
+CREATE TABLE IF NOT EXISTS player_unique_chests (
+  player_unique_chest_id SERIAL PRIMARY KEY,
+  steam_id TEXT REFERENCES players (steam_id) ON UPDATE CASCADE,
+  unique_chest_id INTEGER REFERENCES unique_chests (unique_chest_id),
+  active BOOLEAN NOT NULL
+);
+CREATE INDEX "IDX_player_unique_chests_steam_id" ON player_unique_chests(steam_id);
+
+DROP TABLE IF EXISTS player_unique_chests_drops;
+CREATE TABLE IF NOT EXISTS player_unique_chests_drops (
+  player_unique_chest_id INTEGER REFERENCES player_unique_chests (player_unique_chest_id),
+  cosmetic_id INTEGER REFERENCES cosmetics (cosmetic_id),
+
+  CONSTRAINT player_unique_chests_drops_pkey PRIMARY KEY (player_unique_chest_id, cosmetic_id)
+);
+
+DROP TABLE IF EXISTS player_missed_drop_counts;
+CREATE TABLE IF NOT EXISTS player_missed_drop_counts (
+  player_unique_chest_id INTEGER REFERENCES player_unique_chests (player_unique_chest_id),
+  cosmetic_id INTEGER REFERENCES cosmetics (cosmetic_id),
+  missed_drop_count INTEGER DEFAULT 0,
+
+  CONSTRAINT player_missed_drop_counts_pkey PRIMARY KEY (player_unique_chest_id, cosmetic_id)
+);
+
+--------------------------------------------------------------------------------
 -- Reward Codes
 --------------------------------------------------------------------------------
 
