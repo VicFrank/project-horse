@@ -76,7 +76,7 @@ module.exports = {
   async getCosmeticName(cosmeticID) {
     try {
       const { rows } = await query(
-        `SELECT cosmetic_name FROM cosmetics WHERE cosmetic_name = $1`,
+        `SELECT cosmetic_name FROM cosmetics WHERE cosmetic_id = $1`,
         [cosmeticID]
       );
       return rows[0]?.cosmetic_name;

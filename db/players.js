@@ -1209,6 +1209,22 @@ module.exports = {
     }
   },
 
+  async getOwnedCosmeticCount(steamID, cosmeticID) {
+    try {
+      const { rows } = await query(
+        `
+        SELECT count(*)
+        FROM player_cosmetics
+        WHERE steam_id = $1 AND cosmetic_id = $2
+      `,
+        [steamID, cosmeticID]
+      );
+      return rows[0].count;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async getNumUnopenedChests(steamID) {
     try {
       const { rows } = await query(
@@ -1997,8 +2013,8 @@ module.exports = {
     }
   },
 
-  // return the items the player has already gotten from this chest
-  async getChestAlreadyDropped(playerChestID) {
+  // return the cosmetic ids the player has already gotten from this chest
+  async getChestAlreadyDroppedIDs(playerChestID) {
     try {
       const { rows } = await query(
         `
@@ -2006,7 +2022,7 @@ module.exports = {
         WHERE player_unique_chest_id = $1`,
         [playerChestID]
       );
-      return rows;
+      return rows.map((row) => row.cosmetic_id);
     } catch (error) {
       throw error;
     }
@@ -2144,14 +2160,13 @@ module.exports = {
         activeChest = await this.createUniqueChest(steamID, uniqueChestID);
       }
 
-      const alreadyDropped = await this.getChestAlreadyDropped(
+      const alreadyDropped = await this.getChestAlreadyDroppedIDs(
         activeChest.player_unique_chest_id
       );
 
       // Remove the items the player has already gotten from this chest
       let drops = chestDrops.filter(
-        (drop) =>
-          !alreadyDropped.some((d) => d.cosmetic_id === drop.cosmetic_id)
+        (drop) => !alreadyDropped.some((id) => id === drop.cosmetic_id)
       );
 
       // If we've run out of drops, make a new chest
@@ -2195,6 +2210,7 @@ module.exports = {
       const commonDrops = drops.filter((drop) => !drop.rarity);
       const commonDrop =
         commonDrops[Math.floor(Math.random() * commonDrops.length)];
+      await this.removeUniqueChestItem(playerChestID, commonDrop.cosmetic_id);
 
       const rewardsTransaction = {};
       rewardsTransaction.items = {
@@ -2276,17 +2292,16 @@ module.exports = {
       const chestDrops = await Cosmetics.getUniqueChestDropsWithOdds(
         uniqueChestID
       );
+      const chestName = await Cosmetics.getCosmeticName(chestCosmeticID);
       const activeChest = await this.getActiveUniqueChest(
         steamID,
         uniqueChestID
       );
-      const alreadyDropped = await this.getChestAlreadyDropped(
+      const alreadyDropped = await this.getChestAlreadyDroppedIDs(
         activeChest.player_unique_chest_id
       );
       for (const drop of chestDrops) {
-        if (alreadyDropped.includes(drop.cosmetic_id)) {
-          drop.dropped = true;
-        }
+        drop.opened = alreadyDropped.includes(drop.cosmetic_id);
         if (drop.escalatingOdds) {
           const missedDropCount = await this.getMissedDropCount(
             activeChest.player_unique_chest_id,
@@ -2299,7 +2314,17 @@ module.exports = {
         }
         delete drop.escalatingOdds;
       }
-      return chestDrops;
+
+      const ownedCount = await this.getOwnedCosmeticCount(
+        steamID,
+        chestCosmeticID
+      );
+
+      return {
+        cosmetic_name: chestName,
+        owned_count: Number(ownedCount),
+        items: chestDrops,
+      };
     } catch (error) {
       throw error;
     }
