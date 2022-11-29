@@ -33,6 +33,19 @@ async function initializeEscalatingOdds() {
   }
 }
 
+async function updateEscalatingOddsTable() {
+  try {
+    console.log("Updating escalating odds...");
+    await cosmetics.updateEscalatingOddsTable("rare", rareOdds);
+    await cosmetics.updateEscalatingOddsTable("very_rare", veryRareOdds);
+    await cosmetics.updateEscalatingOddsTable("ultra_rare", ultraRareOdds);
+    console.log("Escalating odds updated");
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
 async function initializeUniqueChestDrops(cosmeticName, drops) {
   try {
     console.log("Initializing unique chest drops...");
@@ -99,31 +112,12 @@ async function updateCosmetics() {
     console.log("Updating cosmetics...");
     const cosmeticsToUpdate = [
       {
-        // Real Money Purchase
-        name: "buy_xp_5000",
-        type: "Consumable",
-        coins: -1,
-        cost_usd: 11.99,
-        equip_group: "",
-        rarity: "Legendary",
-      },
-      {
-        // Real Money Purchase
-        name: "buy_xp_1000",
-        type: "Consumable",
-        coins: -1,
-        cost_usd: 2.99,
-        equip_group: "",
-        rarity: "Mythical",
-      },
-      {
-        // Real Money Purchase
-        name: "buy_xp_300",
-        type: "Consumable",
-        coins: -1,
-        cost_usd: 0.99,
-        equip_group: "",
-        rarity: "Rare",
+        name: "finisher_fire",
+        type: "Finisher",
+        coins: 10000,
+        cost_usd: -1,
+        equip_group: "finisher",
+        rarity: "Common",
       },
     ];
     for (const c of cosmeticsToUpdate) {
@@ -285,10 +279,11 @@ async function addCosmeticsToPlayers() {
 }
 
 (async function () {
-  await addCosmetics();
-  // await setChestRewards();
-  // await updateCosmetics();
   // await addCosmeticsToPlayers();
-  await initializeEscalatingOdds();
-  await initializeUniqueChestDrops("chest_god_unique_1", chest_god_unique_1);
+  // await setChestRewards();
+  // await addCosmetics();
+  // await updateCosmetics();
+  // await initializeEscalatingOdds();
+  // await initializeUniqueChestDrops("chest_god_unique_1", chest_god_unique_1);
+  updateEscalatingOddsTable();
 })();

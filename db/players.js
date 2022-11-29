@@ -2036,7 +2036,7 @@ module.exports = {
         WHERE steam_id = $1 AND unique_chest_id = $2`,
         [steamID, uniqueChestID]
       );
-      return rows[0].count;
+      return Number(rows[0].count);
     } catch (error) {
       throw error;
     }
@@ -2044,6 +2044,7 @@ module.exports = {
 
   async createUniqueChest(steamID, uniqueChestID) {
     try {
+      console.log("create unique chest");
       const isValidID = await Cosmetics.isValidUniqueChestID(uniqueChestID);
       if (!isValidID)
         throw new Error(`Invalid unique chest ID ${uniqueChestID}`);
@@ -2068,7 +2069,8 @@ module.exports = {
       const numChests = await this.getUniqueChestNumber(steamID, uniqueChestID);
       if (numChests === 1) {
         // if this is their first chest of this type, we want to remove the gods they already own
-        const godCards = await this.getGodCards();
+        const godCards = await this.getGodCards(steamID);
+        const chestDrops = await Cosmetics.getUniqueChestDrops(uniqueChestID);
         for (const drop of chestDrops) {
           const hasGod = godCards.some(
             (card) => card.cosmetic_name === drop.cosmetic_name
@@ -2088,31 +2090,31 @@ module.exports = {
     }
   },
 
-  async getMissedDropCount(playerChestID, cosmeticID) {
+  async getMissedDropCount(uniqueChestID, cosmeticID) {
     try {
       const { rows } = await query(
         `
         SELECT missed_drop_count FROM player_missed_drop_counts
-        WHERE player_unique_chest_id = $1 AND cosmetic_id = $2`,
-        [playerChestID, cosmeticID]
+        WHERE unique_chest_id = $1 AND cosmetic_id = $2`,
+        [uniqueChestID, cosmeticID]
       );
       if (rows.length === 0) return 0;
-      return rows[0].missed_drop_count;
+      return Number(rows[0].missed_drop_count);
     } catch (error) {
       throw error;
     }
   },
 
-  async incrementMissedDropCount(playerChestID, cosmeticID) {
+  async incrementMissedDropCount(uniqueChestID, cosmeticID) {
     try {
       const { rows } = await query(
         `
-        INSERT INTO player_missed_drop_counts (player_unique_chest_id, cosmetic_id, missed_drop_count)
+        INSERT INTO player_missed_drop_counts (unique_chest_id, cosmetic_id, missed_drop_count)
         VALUES ($1, $2, 1)
-        ON CONFLICT (player_unique_chest_id, cosmetic_id)
+        ON CONFLICT (unique_chest_id, cosmetic_id)
         DO UPDATE SET missed_drop_count = player_missed_drop_counts.missed_drop_count + 1
         RETURNING *`,
-        [playerChestID, cosmeticID]
+        [uniqueChestID, cosmeticID]
       );
       return rows[0];
     } catch (error) {
@@ -2120,15 +2122,15 @@ module.exports = {
     }
   },
 
-  async resetMissedDropCount(playerChestID, cosmeticID) {
+  async resetMissedDropCount(uniqueChestID, cosmeticID) {
     try {
       await query(
         `
-        INSERT INTO player_missed_drop_counts (player_unique_chest_id, cosmetic_id, missed_drop_count)
+        INSERT INTO player_missed_drop_counts (unique_chest_id, cosmetic_id, missed_drop_count)
         VALUES ($1, $2, 0)
-        ON CONFLICT (player_unique_chest_id, cosmetic_id)
+        ON CONFLICT (unique_chest_id, cosmetic_id)
         DO UPDATE SET missed_drop_count = 0`,
-        [playerChestID, cosmeticID]
+        [uniqueChestID, cosmeticID]
       );
     } catch (error) {
       throw error;
@@ -2183,7 +2185,7 @@ module.exports = {
   },
 
   getEscalatingOdds(odds, missedDropCount) {
-    const dropOdds = odds.find((odd) => odd.openingNumber === missedDropCount);
+    const dropOdds = odds.find((odd) => odd.opening_number === missedDropCount);
     if (!dropOdds) return odds[odds.length - 1].odds;
     else return dropOdds.odds;
   },
@@ -2222,23 +2224,20 @@ module.exports = {
       for (const drop of rareDrops) {
         const roll = Math.random();
         const missedDrops = await this.getMissedDropCount(
-          playerChestID,
+          uniqueChestID,
           drop.cosmetic_id
         );
         // get the escalating odds for this drop
-        const odds = this.getEscalatingOdds(
-          drop.escalatingOdds,
-          missedDrops.missed_drop_count
-        );
+        const odds = this.getEscalatingOdds(drop.escalatingOdds, missedDrops);
         if (roll < 1 / odds) {
           // we got a drop
           await this.removeUniqueChestItem(playerChestID, drop.cosmetic_id);
-          await this.resetMissedDropCount(playerChestID, drop.cosmetic_id);
+          await this.resetMissedDropCount(uniqueChestID, drop.cosmetic_id);
 
           rewardsTransaction.items[drop.cosmetic_id] = 1;
         } else {
           // we didn't get a drop
-          await this.incrementMissedDropCount(playerChestID, drop.cosmetic_id);
+          await this.incrementMissedDropCount(uniqueChestID, drop.cosmetic_id);
         }
       }
 
@@ -2292,6 +2291,12 @@ module.exports = {
       const chestDrops = await Cosmetics.getUniqueChestDropsWithOdds(
         uniqueChestID
       );
+
+      if (!chestDrops) throw new Error("This chest doesn't exist");
+
+      // this will create a new chest if the current one is empty
+      await this.getUniqueChestDropsForPlayer(steamID, uniqueChestID);
+
       const chestName = await Cosmetics.getCosmeticName(chestCosmeticID);
       const activeChest = await this.getActiveUniqueChest(
         steamID,
@@ -2304,7 +2309,7 @@ module.exports = {
         drop.opened = alreadyDropped.includes(drop.cosmetic_id);
         if (drop.escalatingOdds) {
           const missedDropCount = await this.getMissedDropCount(
-            activeChest.player_unique_chest_id,
+            uniqueChestID,
             drop.cosmetic_id
           );
           drop.odds = this.getEscalatingOdds(

@@ -391,6 +391,20 @@ module.exports = {
   },
 
   // ********** Unique Chests **********
+  async updateEscalatingOddsTable(rarity, odds) {
+    try {
+      await query(`DELETE FROM escalating_odds WHERE rarity = $1`, [rarity]);
+      for (const [index, value] of odds.entries()) {
+        await query(
+          `INSERT INTO escalating_odds (rarity, odds, opening_number) VALUES ($1, $2, $3)`,
+          [rarity, value, index]
+        );
+      }
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async createEscalatingOddsTable(rarity, odds) {
     try {
       await query(

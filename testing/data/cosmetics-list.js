@@ -1368,7 +1368,7 @@ module.exports = [
   {
     name: "finisher_fire",
     type: "Finisher",
-    coins: -1,
+    coins: 10000,
     cost_usd: -1,
     equip_group: "finisher",
     rarity: "Common",

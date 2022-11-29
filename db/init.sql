@@ -387,11 +387,11 @@ CREATE TABLE IF NOT EXISTS player_unique_chests_drops (
 
 DROP TABLE IF EXISTS player_missed_drop_counts;
 CREATE TABLE IF NOT EXISTS player_missed_drop_counts (
-  player_unique_chest_id INTEGER REFERENCES player_unique_chests (player_unique_chest_id),
+  unique_chest_id INTEGER REFERENCES unique_chests (unique_chest_id),
   cosmetic_id INTEGER REFERENCES cosmetics (cosmetic_id),
   missed_drop_count INTEGER DEFAULT 0,
 
-  CONSTRAINT player_missed_drop_counts_pkey PRIMARY KEY (player_unique_chest_id, cosmetic_id)
+  CONSTRAINT player_missed_drop_counts_pkey PRIMARY KEY (unique_chest_id, cosmetic_id)
 );
 
 --------------------------------------------------------------------------------

@@ -298,7 +298,7 @@ module.exports = {
         JOIN game_players USING (game_player_id)
         JOIN games USING (game_id)
         WHERE ability_level = 9 AND ranked = TRUE
-        AND games.created_at > NOW() - INTERVAL '24 HOURS'
+        AND games.created_at > NOW() - INTERVAL '1 MONTH'
         GROUP BY game_id, steam_id
         ORDER BY count(ability_name) DESC
         LIMIT 100;
