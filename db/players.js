@@ -2044,7 +2044,6 @@ module.exports = {
 
   async createUniqueChest(steamID, uniqueChestID) {
     try {
-      console.log("create unique chest");
       const isValidID = await Cosmetics.isValidUniqueChestID(uniqueChestID);
       if (!isValidID)
         throw new Error(`Invalid unique chest ID ${uniqueChestID}`);
