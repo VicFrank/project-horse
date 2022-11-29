@@ -120,6 +120,10 @@ async function giveEndOfSeasonRewards() {
       cosmeticName: "hat_diamond_trophy",
       amount: 1,
     },
+    {
+      cosmeticName: "streak_space",
+      amount: 1,
+    },
   ];
   const top100Rewards = [
     {
@@ -215,7 +219,26 @@ async function ladderReset() {
   }
 }
 
+async function updateGodChests() {
+  console.log("Updating god chests...");
+  try {
+    const godChestID = await Cosmetics.getCosmeticByName("chest_god")
+      .cosmetic_id;
+    const newGodChestID = await Cosmetics.getCosmeticByName(
+      "chest_god_unique_1"
+    ).cosmetic_id;
+    await query("UPDATE Players SET cosmetic_id = $2 WHERE cosmetic_id = $1", [
+      godChestID,
+      newGodChestID,
+    ]);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
 (async () => {
+  await updateGodChests();
   await giveEndOfSeasonRewards();
   await ladderReset();
 })();
