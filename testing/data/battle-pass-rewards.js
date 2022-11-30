@@ -64,7 +64,7 @@ module.exports = [
   },
   {
     level: 10,
-    cosmetics: ["emote_pack_rune_god_1"],
+    cosmetics: ["emote_pack_santa_greevil_1"],
     nextLevelXp: 200,
     free: true,
     coins: 0,
@@ -92,7 +92,7 @@ module.exports = [
   },
   {
     level: 14,
-    cosmetics: ["emote_pack_rune_god_2"],
+    cosmetics: ["emote_pack_santa_greevil_2"],
     nextLevelXp: 300,
     free: false,
     coins: 0,
@@ -127,14 +127,14 @@ module.exports = [
   },
   {
     level: 19,
-    cosmetics: ["finisher_god_rune"],
+    cosmetics: ["finisher_santa_greevil"],
     nextLevelXp: 400,
     free: false,
     coins: 0,
   },
   {
     level: 20,
-    cosmetics: ["card_chaosGod"],
+    cosmetics: ["card_chaosGodS3"],
     nextLevelXp: 400,
     free: true,
     coins: 0,
@@ -155,7 +155,7 @@ module.exports = [
   },
   {
     level: 23,
-    cosmetics: ["sfx_gaben_posh"],
+    cosmetics: ["sfx_epic"],
     nextLevelXp: 500,
     free: false,
     coins: 0,
@@ -190,7 +190,7 @@ module.exports = [
   },
   {
     level: 28,
-    cosmetics: ["chest_basic"],
+    cosmetics: ["streak_santa_greevil"],
     nextLevelXp: 600,
     free: false,
     coins: 0,
@@ -204,7 +204,7 @@ module.exports = [
   },
   {
     level: 30,
-    cosmetics: ["terrain_god_rune"],
+    cosmetics: ["terrain_xmas"],
     nextLevelXp: 600,
     free: true,
     coins: 0,
@@ -232,14 +232,14 @@ module.exports = [
   },
   {
     level: 34,
-    cosmetics: ["emote_pack_rune_god_3"],
+    cosmetics: ["emote_pack_santa_greevil_3"],
     nextLevelXp: 700,
     free: false,
     coins: 0,
   },
   {
     level: 35,
-    cosmetics: ["chest_gold"],
+    cosmetics: ["chest_god_unique_1"],
     nextLevelXp: 700,
     free: true,
     coins: 0,
@@ -267,14 +267,14 @@ module.exports = [
   },
   {
     level: 39,
-    cosmetics: ["avatar_rune_god"],
+    cosmetics: ["avatar_santa_greevil"],
     nextLevelXp: 800,
     free: false,
     coins: 0,
   },
   {
     level: 40,
-    cosmetics: ["card_runeGod"],
+    cosmetics: ["card_santaGreevil"],
     nextLevelXp: 800,
     free: true,
     coins: 0,

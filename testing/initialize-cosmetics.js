@@ -91,13 +91,161 @@ async function addCosmetics() {
   try {
     console.log("Adding cosmetics...");
     await cosmetics.bulkCreateCosmetics([
+      // {
+      //   name: "chest_god_unique_1",
+      //   type: "Chest",
+      //   coins: 10000,
+      //   cost_usd: -1,
+      //   equip_group: "",
+      //   rarity: "Immortal",
+      // },
       {
-        name: "chest_god_unique_1",
-        type: "Chest",
-        coins: 10000,
+        // Chest Drop
+        name: "hat_cat_ears",
+        type: "Avatar Hat",
+        equip_group: "avatar_hat",
+        coins: -1,
         cost_usd: -1,
-        equip_group: "",
+        rarity: "Rare",
+      },
+      {
+        // Chest Drop
+        name: "hat_elf_hat",
+        type: "Avatar Hat",
+        equip_group: "avatar_hat",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        // Chest Drop
+        name: "hat_gingerbread_hat",
+        type: "Avatar Hat",
+        equip_group: "avatar_hat",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        // Chest Drop
+        name: "hat_halo",
+        type: "Avatar Hat",
+        equip_group: "avatar_hat",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        // Chest Drop
+        name: "hat_reindeer_horns",
+        type: "Avatar Hat",
+        equip_group: "avatar_hat",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        // Chest Drop
+        name: "hat_candy_cane",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        // Chest Drop
+        name: "hat_carrot_nose",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        // Chest Drop
+        name: "hat_pipe",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        // Chest Drop
+        name: "hat_sad_eyes",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        // Chest Drop
+        name: "hat_santa_beard",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        name: "sfx_epic",
+        type: "SFX",
+        equip_group: "sfx_gaben",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Common",
+      },
+      {
+        name: "terrain_xmas",
+        type: "Terrain",
+        coins: -1,
+        cost_usd: -1,
+        equip_group: "terrain",
         rarity: "Immortal",
+      },
+      {
+        name: "emote_pack_santa_greevil_1",
+        type: "Consumable",
+        equip_group: "",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Mythical",
+      },
+      {
+        name: "emote_pack_santa_greevil_2",
+        type: "Consumable",
+        equip_group: "",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Mythical",
+      },
+      {
+        name: "emote_pack_santa_greevil_3",
+        type: "Consumable",
+        equip_group: "",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Mythical",
+      },
+      {
+        // Battle Pass Reward
+        name: "avatar_santa_greevil",
+        type: "Avatar Frame",
+        equip_group: "avatar_frame",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Arcana",
+      },
+      {
+        // Battle Pass Reward
+        name: "avatar_santa_greevil_diamond",
+        type: "Avatar Frame",
+        equip_group: "avatar_frame",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Arcana",
       },
     ]);
     console.log("Cosmetics initialized");
@@ -118,6 +266,14 @@ async function updateCosmetics() {
         cost_usd: -1,
         equip_group: "finisher",
         rarity: "Common",
+      },
+      {
+        name: "chest_god",
+        type: "Chest",
+        coins: -1,
+        cost_usd: -1,
+        equip_group: "",
+        rarity: "Immortal",
       },
     ];
     for (const c of cosmeticsToUpdate) {
@@ -280,10 +436,10 @@ async function addCosmeticsToPlayers() {
 
 (async function () {
   // await addCosmeticsToPlayers();
-  // await setChestRewards();
-  // await addCosmetics();
-  // await updateCosmetics();
+  await setChestRewards();
+  await addCosmetics();
+  await updateCosmetics();
   // await initializeEscalatingOdds();
   // await initializeUniqueChestDrops("chest_god_unique_1", chest_god_unique_1);
-  updateEscalatingOddsTable();
+  // updateEscalatingOddsTable();
 })();

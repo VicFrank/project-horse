@@ -1,12 +1,10 @@
 const dropOdds = {
   chest_basic: [
-    { odds: 25, type: "xp" },
-    { odds: 19, type: "border" },
-    { odds: 18, type: "hat" },
-    { odds: 15, type: "plus" },
-    { odds: 10, type: "finisher" },
-    { odds: 8, type: "arena" },
-    { odds: 5, type: "god_chest" },
+    { odds: 27, type: "xp" },
+    { odds: 22, type: "border" },
+    { odds: 22, type: "hat" },
+    { odds: 17, type: "finisher" },
+    { odds: 12, type: "arena" },
   ],
   chest_gold: [{ odds: 100, type: "gold" }],
   chest_god: [{ odds: 100, type: "god" }],
@@ -65,13 +63,10 @@ const typeOdds = {
     { odds: -1, item_name: "hat_confused" },
     { odds: -1, item_name: "hat_sidestare" },
     { odds: -1, item_name: "hat_tealglasses" },
-  ],
-  plus: [
-    { odds: 60, item_name: "plus_1day" },
-    { odds: 30, item_name: "plus_2day" },
-    { odds: 9, item_name: "plus_4day" },
-    { odds: 0.95, item_name: "plus_month" },
-    { odds: 0.05, item_name: "plus_year_package" },
+    { odds: -1, item_name: "hat_cat_ears" },
+    { odds: -1, item_name: "hat_halo" },
+    { odds: -1, item_name: "hat_sad_eyes" },
+    { odds: -1, item_name: "hat_pipe" },
   ],
   finisher: [
     { odds: 20, item_name: "finisher_fire" },
@@ -87,7 +82,6 @@ const typeOdds = {
     { odds: 20, item_name: "terrain_snow" },
     { odds: 20, item_name: "terrain_tropical" },
   ],
-  god_chest: [{ odds: 100, item_name: "chest_god" }],
 
   // God chest rewards
   // negative odds in this case means you have a random chance

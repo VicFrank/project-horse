@@ -1,4 +1,5 @@
 const { query } = require("./index");
+const Cosmetics = require("./cosmetics");
 
 module.exports = {
   async getQuest(questID) {
@@ -24,7 +25,10 @@ module.exports = {
   async getAllDailyQuests() {
     try {
       const { rows } = await query(
-        `SELECT * FROM quests WHERE is_achievement = FALSE AND is_weekly = FALSE`
+        `SELECT quests.*, cosmetics.cosmetic_name
+        FROM quests
+        LEFT JOIN cosmetics ON quests.cosmetic_id = cosmetics.cosmetic_id
+        WHERE is_achievement = FALSE AND is_weekly = FALSE`
       );
       return rows;
     } catch (error) {
@@ -84,16 +88,22 @@ module.exports = {
   },
 
   async createQuest(quest) {
-    const { name, coins, xp, stat, requiredAmount, description } = quest;
+    const { name, coins, xp, stat, requiredAmount, description, cosmeticName } =
+      quest;
     let { isAchievement, isWeekly, hidden } = quest;
     if (!isWeekly) isWeekly = false;
     if (!hidden) hidden = false;
     if (!isAchievement) isAchievement = false;
     try {
+      let cosmeticID = null;
+      if (cosmeticName) {
+        const cosmetic = await Cosmetics.getCosmeticByName(cosmeticName);
+        cosmeticID = cosmetic.cosmetic_id;
+      }
       const { rows } = await query(
         `INSERT INTO quests (quest_name, is_achievement, quest_description,
-          coin_reward, xp_reward, stat, required_amount, is_weekly, is_hidden)
-          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+          coin_reward, xp_reward, stat, required_amount, is_weekly, is_hidden, cosmetic_id)
+          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
         RETURNING *
         `,
         [
@@ -106,6 +116,7 @@ module.exports = {
           requiredAmount,
           isWeekly,
           hidden,
+          cosmeticID,
         ]
       );
       return rows[0];

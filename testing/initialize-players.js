@@ -222,15 +222,33 @@ async function ladderReset() {
 async function updateGodChests() {
   console.log("Updating god chests...");
   try {
-    const godChestID = await Cosmetics.getCosmeticByName("chest_god")
-      .cosmetic_id;
-    const newGodChestID = await Cosmetics.getCosmeticByName(
-      "chest_god_unique_1"
-    ).cosmetic_id;
-    await query("UPDATE Players SET cosmetic_id = $2 WHERE cosmetic_id = $1", [
-      godChestID,
-      newGodChestID,
-    ]);
+    const godChest = await Cosmetics.getCosmeticByName("chest_god");
+    const newGodChest = await Cosmetics.getCosmeticByName("chest_god_unique_1");
+    const godChestID = godChest.cosmetic_id;
+    const newGodChestID = newGodChest.cosmetic_id;
+    await query(
+      "UPDATE player_cosmetics SET cosmetic_id = $2 WHERE cosmetic_id = $1",
+      [godChestID, newGodChestID]
+    );
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}
+
+async function updateLifestealer() {
+  console.log("Updating Lifestealer cards...");
+  try {
+    const LifestealerChest = await Cosmetics.getCosmeticByName(
+      "card_lifestealer"
+    );
+    const bonelessChest = await Cosmetics.getCosmeticByName(
+      "card_bonelessAghanim"
+    );
+    await query(
+      "UPDATE player_cosmetics SET cosmetic_id = $2 WHERE cosmetic_id = $1",
+      [LifestealerChest.cosmetic_id, bonelessChest.cosmetic_id]
+    );
   } catch (error) {
     console.log(error);
     throw error;
@@ -239,6 +257,7 @@ async function updateGodChests() {
 
 (async () => {
   await updateGodChests();
+  await updateLifestealer();
   await giveEndOfSeasonRewards();
   await ladderReset();
 })();

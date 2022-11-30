@@ -28,6 +28,30 @@ module.exports = [
     cost_usd: -1,
     rarity: "Mythical",
   },
+  {
+    name: "emote_pack_santa_greevil_1",
+    type: "Consumable",
+    equip_group: "",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Mythical",
+  },
+  {
+    name: "emote_pack_santa_greevil_2",
+    type: "Consumable",
+    equip_group: "",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Mythical",
+  },
+  {
+    name: "emote_pack_santa_greevil_3",
+    type: "Consumable",
+    equip_group: "",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Mythical",
+  },
   /**
    * *************************
    * Emotes
@@ -48,6 +72,14 @@ module.exports = [
    */
   {
     name: "sfx_gaben_posh",
+    type: "SFX",
+    equip_group: "sfx_gaben",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Common",
+  },
+  {
+    name: "sfx_epic",
     type: "SFX",
     equip_group: "sfx_gaben",
     coins: -1,
@@ -88,6 +120,24 @@ module.exports = [
   {
     // Battle Pass Reward
     name: "avatar_rune_god",
+    type: "Avatar Frame",
+    equip_group: "avatar_frame",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Arcana",
+  },
+  {
+    // Battle Pass Reward
+    name: "avatar_santa_greevil",
+    type: "Avatar Frame",
+    equip_group: "avatar_frame",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Arcana",
+  },
+  {
+    // Battle Pass Reward
+    name: "avatar_santa_greevil_diamond",
     type: "Avatar Frame",
     equip_group: "avatar_frame",
     coins: -1,
@@ -373,6 +423,51 @@ module.exports = [
   },
   {
     // Chest Drop
+    name: "hat_cat_ears",
+    type: "Avatar Hat",
+    equip_group: "avatar_hat",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
+    // Chest Drop
+    name: "hat_elf_hat",
+    type: "Avatar Hat",
+    equip_group: "avatar_hat",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
+    // Chest Drop
+    name: "hat_gingerbread_hat",
+    type: "Avatar Hat",
+    equip_group: "avatar_hat",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
+    // Chest Drop
+    name: "hat_halo",
+    type: "Avatar Hat",
+    equip_group: "avatar_hat",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
+    // Chest Drop
+    name: "hat_reindeer_horns",
+    type: "Avatar Hat",
+    equip_group: "avatar_hat",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
+    // Chest Drop
     name: "hat_barb",
     type: "Avatar Accessory",
     equip_group: "avatar_accessory",
@@ -527,6 +622,51 @@ module.exports = [
   {
     // Chest Drop
     name: "hat_birthday_blower",
+    type: "Avatar Accessory",
+    equip_group: "avatar_accessory",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
+    // Chest Drop
+    name: "hat_candy_cane",
+    type: "Avatar Accessory",
+    equip_group: "avatar_accessory",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
+    // Chest Drop
+    name: "hat_carrot_nose",
+    type: "Avatar Accessory",
+    equip_group: "avatar_accessory",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
+    // Chest Drop
+    name: "hat_pipe",
+    type: "Avatar Accessory",
+    equip_group: "avatar_accessory",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
+    // Chest Drop
+    name: "hat_sad_eyes",
+    type: "Avatar Accessory",
+    equip_group: "avatar_accessory",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
+    // Chest Drop
+    name: "hat_santa_beard",
     type: "Avatar Accessory",
     equip_group: "avatar_accessory",
     coins: -1,
@@ -1081,6 +1221,14 @@ module.exports = [
     rarity: "Immortal",
   },
   {
+    name: "card_chaosGodS3",
+    type: "Card Frame",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "",
+    rarity: "Immortal",
+  },
+  {
     name: "card_santaGreevil",
     type: "Card Frame",
     coins: -1,
@@ -1345,6 +1493,14 @@ module.exports = [
     rarity: "Immortal",
   },
   {
+    name: "gold_card_chaosGodS3",
+    type: "Card Frame",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "",
+    rarity: "Immortal",
+  },
+  {
     name: "gold_card_santaGreevil",
     type: "Card Frame",
     coins: -1,
@@ -1537,6 +1693,14 @@ module.exports = [
   },
   {
     name: "terrain_god_rune",
+    type: "Terrain",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "terrain",
+    rarity: "Immortal",
+  },
+  {
+    name: "terrain_xmas",
     type: "Terrain",
     coins: -1,
     cost_usd: -1,

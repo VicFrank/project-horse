@@ -21,6 +21,33 @@ async function InitializeQuests() {
   }
 }
 
+async function AddNewQuests() {
+  try {
+    const newQuests = [
+      {
+        name: "Get 1st place",
+        xp: 0,
+        coins: 0,
+        cosmeticName: "plus_1day",
+        stat: "first_place",
+        requiredAmount: 1,
+      },
+      {
+        name: "Get top 4 six times",
+        xp: 0,
+        coins: 0,
+        cosmeticName: "plus_4day",
+        stat: "top_four",
+        requiredAmount: 6,
+      },
+    ];
+    await quests.bulkCreateQuests(newQuests);
+    console.log("Quests initialized");
+  } catch (error) {
+    throw error;
+  }
+}
+
 async function InitializeDailyQuests() {
   try {
     // delete all existing daily quests
@@ -82,4 +109,5 @@ async function InitializeWelcomeQuests() {
   // await InitializeLoginQuests();
   // await InitializeWelcomeQuests();
   // await InitializeDailyQuests();
+  await AddNewQuests();
 })();

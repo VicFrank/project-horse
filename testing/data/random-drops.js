@@ -38,6 +38,10 @@ const drops = {
     "hat_turkish",
     "hat_witch",
     "hat_wizard",
+    "hat_cat_ears",
+    "hat_halo",
+    "hat_sad_eyes",
+    "hat_pipe",
   ],
 };
 module.exports = drops;

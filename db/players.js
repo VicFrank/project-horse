@@ -1942,8 +1942,33 @@ module.exports = {
       };
 
       const isGodChest = chest.cosmetic_name === "chest_god";
+      const isBasicChest = chest.cosmetic_name === "chest_basic";
       if (isGodChest) return await handleGodOpening();
-      else return await handleNormalOpening();
+      else if (isBasicChest) {
+        const roll = Math.random();
+        let times = 1;
+
+        if (roll < 1 / 256) times = 5;
+        else if (roll < 1 / 64) times = 4;
+        else if (roll < 1 / 16) times = 3;
+        else if (roll < 1 / 4) times = 2;
+
+        const rewardsTransaction = { coins: 0, items: {} };
+        for (let i = 0; i < roll; i++) {
+          const result = await handleNormalOpening();
+          if (result.coins) rewardsTransaction.coins += result.coins;
+          if (result.items) {
+            for (const itemID in result.items) {
+              if (rewardsTransaction.items[itemID])
+                rewardsTransaction.items[itemID] += result.items[itemID];
+              else rewardsTransaction.items[itemID] = result.items[itemID];
+            }
+          }
+          if (result.missed_item)
+            rewardsTransaction.missed_item = result.missed_item;
+        }
+        return rewardsTransaction;
+      } else return await handleNormalOpening();
     } catch (error) {
       throw error;
     }
@@ -1970,12 +1995,12 @@ module.exports = {
       this.addQuestProgressByStat(steamID, "chests_opened", 1);
 
       // get the names of the rewarded items
-      const itemIDs = Object.keys(rewardsTransaction.items);
+      const itemKV = Object.entries(rewardsTransaction.items);
       const items = [];
-      for (const id of itemIDs) {
+      for (const [id, amount] of itemKV) {
         if (id !== chestID) {
           const item = await Cosmetics.getCosmetic(id);
-          items.push(item);
+          for (let i = 0; i < amount; i++) items.push(item);
         }
       }
 
@@ -2694,7 +2719,7 @@ module.exports = {
     const getQuests = async () => {
       const { rows } = await query(
         `
-        SELECT pq.*, q.*,
+        SELECT pq.*, q.*, cosmetic_name,
           LEAST(quest_progress, required_amount) as capped_quest_progress,
           quest_progress >= required_amount as quest_completed,
           (created < current_timestamp - interval '23 hours'
@@ -2704,6 +2729,7 @@ module.exports = {
         USING (quest_id)
         JOIN players p
         USING (steam_id)
+        LEFT JOIN cosmetics using (cosmetic_id)
         WHERE steam_id = $1 AND q.is_achievement = FALSE AND is_weekly = FALSE
         ORDER BY quest_index DESC
       `,

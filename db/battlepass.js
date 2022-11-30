@@ -269,7 +269,7 @@ module.exports = {
         for (let i = minLevel; i <= maxLevel; i++) {
           if (i === 100) {
             const diamondAvatar = await Cosmetics.getCosmeticByName(
-              "avatar_rune_god_diamond"
+              "avatar_santa_greevil_diamond"
             );
             cosmetics.push({
               cosmetic_id: diamondAvatar.cosmetic_id,

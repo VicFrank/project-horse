@@ -251,6 +251,7 @@ CREATE TABLE IF NOT EXISTS quests (
   quest_description TEXT,
   coin_reward INTEGER DEFAULT 0,
   xp_reward INTEGER DEFAULT 0,
+  cosmetic_id INTEGER REFERENCES cosmetics (cosmetic_id) ON UPDATE CASCADE,
   stat TEXT NOT NULL,
   auto_claim BOOLEAN DEFAULT FALSE,
   required_amount INTEGER NOT NULL

@@ -174,6 +174,8 @@ module.exports = {
       "Card Frame",
       "Finisher",
       "Terrain",
+      "Win Streak",
+      "SFX",
     ];
   },
 

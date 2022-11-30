@@ -37,6 +37,12 @@
                 >{{ quest.xp_reward }} {{ $t("common.xp") }}</span
               >
             </div>
+            <img
+                style="height: 100%; width: auto; object-fit: cover"
+                v-if="quest.cosmetic_name"
+                v-bind:src="`/images/cosmetics/${quest.cosmetic_name}.png`"
+                :alt="quest.cosmetic_name"
+              />
             <div v-else class="quest-rewards">{{ $t("common.completed") }}</div>
             <button
               v-on:click="claimQuest(quest)"
