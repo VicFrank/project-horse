@@ -91,7 +91,7 @@ export default {
       <div v-for="god of godsToShow" :key="god.id">
         <div class="PreSelectedGod">
           <img class="GodComplexity" :src="`/images/gods/god_complexity_${god.complexity}.png`">
-          <div class="GodCardContainer" :class="{ Plus: god.unlock === 'plus' }">
+          <div class="GodCardContainer" :class="{ Plus: god.unlock === 'plus', SmallPowers: god.powers.length > 2 }">
             <img class="GodCard_Avatar" :src="`/images/gods/images/${god.id}_avatar.png`">
             <img class="GodCard_Background" src="./god_card_frame_blank.png">
             <div class="GodCard_BannerContainer">
@@ -110,7 +110,7 @@ export default {
             </b-tooltip>
             <div class="GodCard_Abilities">
               <div v-for="power of god.powers" :key="power.id" :id="power.id" class="GodCard_PowerButton"
-                :class="{ SmallPowers: god.powers.length > 2, PassiveAbility: power.type === 'passive' }">
+                :class="{ PassiveAbility: power.type === 'passive' }">
                 <div class="GodCard_AbilityBackground">
                   <img class="GodCard_Ability" :src="`/images/gods/powers/power_${power.id}.png`">
                   <img class="GodCard_AbilityFrame" v-if="power.type !== 'passive'" src="./active_ability_frame.png">
@@ -363,16 +363,23 @@ export default {
   margin-bottom: 5px;
 }
 
+.SmallPowers .GodCard_AbilityBackground {
+  width: 58px;
+  height: 64px;
+}
+
 .SmallPowers .GodCard_Ability,
 .SmallPowers .GodCard_AbilityFrame {
-  width: 46px;
-  height: 46px;
+  width: 52px;
+  height: 52px;
   margin: 0 1px 6px 0;
 }
 
+/* TODO: This breaks the health and info icons, but w/o it we cover the logo a bit
 .SmallPowers .GodCard_Abilities {
   margin-bottom: 58px;
 }
+*/
 
 .SmallPowers .GodCard_AbilityContainer {
   width: 62px;
