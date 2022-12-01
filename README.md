@@ -1,35 +1,57 @@
 # project-horse
 
-Website for Sunsfan's Auto Battler Project
+Website and Backend for Ability Arena
 
-To run locally
+## Requirements
 
-- npm install at root
-- npm install in client
-- npm run dev to launch
+- Node.js and npm
+- PostgreSQL
+- Redis (optional)
+
+## DB Setup
+
+TODO
 
 init.sql will initialize the postgres database
 
-# Queries that run for each player when the game starts
+## Environment Setup
 
-Routes
+- Create `config/keys.js` and fill it with your PostgreSQL server settings as well as some empty strings for all the private keys you shouldn't have/use. Below is all the keys required to get the server running.
 
-/:steamID
-getPlayer()
+```js
+module.exports = {
+  sql: {
+    dev: {
+      user: "postgres",
+      host: "localhost",
+      database: "aadev",
+      password: "totallyNotPassword",
+      port: 5432,
+    },
+  },
+  patreon: {
+    oauth: {
+      clientID: "",
+    },
+  },
+  paypal: {
+    dev: {
+      clientID: "",
+    },
+  },
+  stripe: {
+    dev: {
+      secret: "",
+    },
+  },
+  sessionKey: "notsosecret",
+};
+```
 
-/plus_benefits
-canUseWeeklyDoubleDown()
-canClaimDailyPlusGold()
+- (optional) Disable redis by creating a `.env` file in the root and adding a line with the following: `no_redis=true`
 
-/cosmetics
-getCosmetics()
+## Running
 
-/cosmetics/unviewed_types
-getUnviewedCosmeticTypes()
-
-/gods
-getGods()
-
-There are a lot of other requests that can happen during the game, such was when a player opens the armory, it will load the battle pass/battle pass levels.
-
-Here's a couple seconds of logs from the server, to give you an idea of what endpoints are getting hit, and how long they take.
+- `npm install` at root
+- `npm install` in /client
+- `npm run dev` to launch
