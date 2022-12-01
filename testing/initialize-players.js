@@ -256,8 +256,8 @@ async function updateLifestealer() {
 }
 
 (async () => {
-  await updateGodChests();
-  await updateLifestealer();
-  await giveEndOfSeasonRewards();
+  // await updateGodChests();
+  // await updateLifestealer();
+  // await giveEndOfSeasonRewards();
   await ladderReset();
 })();
