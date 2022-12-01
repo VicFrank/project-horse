@@ -1954,7 +1954,7 @@ module.exports = {
         else if (roll < 1 / 4) times = 2;
 
         const rewardsTransaction = { coins: 0, items: {} };
-        for (let i = 0; i < roll; i++) {
+        for (let i = 0; i < times; i++) {
           const result = await handleNormalOpening();
           if (result.coins) rewardsTransaction.coins += result.coins;
           if (result.items) {
