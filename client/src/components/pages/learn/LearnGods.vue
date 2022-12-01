@@ -17,9 +17,7 @@ export default {
   methods: {
     async loadAndFilterGods() {
       const godReq = fetch(`/data/gods.json`).then((res) => res.json())
-      // TODO: Test this on the real website before merging in (CORS problems right now and I don't run the db locally)
-      //const filterReq = fetch('/api/gods').then(r => r.json()).then(gods => this.enabledGods = gods.filter(g => g.god_enabled).map(g => g.god_name));
-      const filterReq = fetch('/data/godsFilter.json').then(r => r.json()).then(gods => gods.filter(g => g.god_enabled).map(g => g.god_name));
+      const filterReq = fetch('/api/gods').then(r => r.json()).then(gods => this.enabledGods = gods.filter(g => g.god_enabled).map(g => g.god_name));
       const [allKnownGods, godFilter] = await Promise.all([godReq, filterReq])
       this.loading = false;
       this.gods = allKnownGods.filter(g => godFilter.includes(g.id))
