@@ -752,16 +752,6 @@
     "health": 200,
     "powers": [
       {
-        "id": "techiesRandomizer",
-        "name": "Techies Demolitions",
-        "values": [
-          "SHOP LEVEL TO UNLOCK: 2 / 4 / 5"
-        ],
-        "type_string": "Passive",
-        "type": "passive",
-        "desc": ""
-      },
-      {
         "id": "techiesStickyBomb",
         "name": "Squee's Sticky Bomb",
         "values": [
