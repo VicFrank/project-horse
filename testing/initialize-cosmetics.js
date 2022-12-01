@@ -436,8 +436,8 @@ async function addCosmeticsToPlayers() {
 
 (async function () {
   // await addCosmeticsToPlayers();
-  await setChestRewards();
   await addCosmetics();
+  await setChestRewards();
   await updateCosmetics();
   // await initializeEscalatingOdds();
   // await initializeUniqueChestDrops("chest_god_unique_1", chest_god_unique_1);
