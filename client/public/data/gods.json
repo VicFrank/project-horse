@@ -12,7 +12,7 @@
         "id": "sorceryForDummies",
         "name": "Sorcery for Dummies: Volume 1",
         "values": [
-          "CHANCE: 25 / 30 / 35 / 40 / 45"
+          "CHANCE: 20 / 30 / 40 / 50 / 60"
         ],
         "type_string": "Passive",
         "type": "passive",
@@ -34,11 +34,11 @@
         "name": "Greevil's Greed",
         "values": [
           "GOLD GAIN: 1",
-          "GOLD REQUIRED: 11 / 10 / 9 / 8 / 7"
+          "GOLD REQUIRED: 10 / 9 / 8 / 7 / 6"
         ],
         "type_string": "Passive",
         "type": "passive",
-        "desc": "Your gold never resets. For every 11/10/9/8/7 gold saved at the end of combat, you gain 1 additional gold. Amount of gold required depends on the level of your shop."
+        "desc": "Your gold never resets. For every 10/9/8/7/6 gold saved at the end of combat, you gain 1 additional gold. Amount of gold required depends on the level of your shop."
       },
       {
         "id": "unstableConcoction",
@@ -49,6 +49,29 @@
         "type_string": "Passive",
         "type": "passive",
         "desc": "Every round loss will gain a charge to this ability. Any win resets the charges to 0. If the charges reach 3, you will take 15% current HP in damage and the charges will reset to 0. Charges can not be less than 0."
+      }
+    ]
+  },
+  {
+    "id": "bathtimeAghanim",
+    "name": "Bathtime Aghanim",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "none",
+    "unlock_text": "Why are you even seeing this God?",
+    "health": 200,
+    "powers": [
+      {
+        "id": "sorceryVolumeFour",
+        "name": "Sorcery for Dummies: Volume 4",
+        "values": [
+          "SHOP LEVEL FOR TIER 1: 2",
+          "SHOP LEVEL FOR TIER 2: 4",
+          "SHOP LEVEL FOR TIER 3: 5"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "At the beginning of every round a random ability will be upgraded to a higher threshold temporarily. This effect will revert at the end of the round. You can have up to 3 abilities upgraded depending on the shop level. Only one spell can be upgraded per tier.\n        \n        Shop Level 2: Unlocks Tier 1 - upgrades one skill from 1-2 points to 3\n        Shop Level 3: Unlocks Tier 2 - upgrades one skill from 3-5 points to 6\n        Shop Level 4: Unlocks Tier 3 - upgrades one skill from 6-8 points to 9\n        "
       }
     ]
   },
@@ -65,7 +88,7 @@
         "id": "bloodrage",
         "name": "Blood Frenzy",
         "values": [
-          "ATTACK SPEED PER STACK: 30",
+          "ATTACK SPEED PER STACK: 40",
           "LIFESTEAL PER STACK: 25%"
         ],
         "type_string": "Active (Unit Target)",
@@ -87,11 +110,11 @@
         "id": "sorceryVolumeThree",
         "name": "Sorcery For Dummies: Volume 3",
         "values": [
-          "SHOP SPELL SLOTS: 4 / 6 / 7 / 9 / 11"
+          "SHOP SPELL SLOTS: 4 / 6 / 8 / 10 / 12"
         ],
         "type_string": "Passive",
         "type": "passive",
-        "desc": "Ultimates never enter your pool of spells. You gain an extra shop slot at shop level 3."
+        "desc": "Ultimates never enter your pool of spells. You gain extra shop slots at shop level 3."
       }
     ]
   },
@@ -144,7 +167,30 @@
         ],
         "type_string": "Active (No Target)",
         "type": "noTarget",
-        "desc": "Switch stances to provide unique buffs to your units.\n\nEarth Stance - Grants armor and magic resistance.\n\nStorm Stance - Grants evasion and bonus attack speed.\n\nFire Stance - Grants a chance to deal critical damage with attacks.\n\nVoid Stance - Grants status resistance and attack speed and movespeed slow on attacks. "
+        "desc": "\n        Switch stances to provide unique buffs to your units.\n\n        Earth Stance - Grants armor and magic resistance.\n        Storm Stance - Grants evasion and bonus attack speed.\n        Fire Stance - Grants a chance to deal critical damage with attacks.\n        Void Stance - Grants status resistance and attack speed and movespeed slow on attacks.\n    "
+      }
+    ]
+  },
+  {
+    "id": "caveJohnson",
+    "name": "Cave Johnson",
+    "universe": "portal",
+    "complexity": "easy",
+    "unlock": "none",
+    "unlock_text": "Why are you even seeing this God?",
+    "health": 200,
+    "powers": [
+      {
+        "id": "mantisRadiation",
+        "name": "Mantis Radiation",
+        "values": [
+          "BAT REDUCTION (AGI): 25%",
+          "DAMAGE REDUCTION (STR): 30%",
+          "MANACOST REDUCTION (INT): 100%"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Your heroes cannot heal, but gain a powerful mutation based on their primary attribute:\n    Strength - Reduces all damage taken by 30%.\n    Agility - Reduces base attack time by 25%.\n    Intelligence - Reduces mana cost of abilities by 100%.\n    "
       }
     ]
   },
@@ -161,8 +207,8 @@
         "id": "retaliate",
         "name": "Great Fortitude",
         "values": [
-          "HEALTH PER ROUND: 50",
-          "RETURN: 20%"
+          "HEALTH PER ROUND: 60",
+          "RETURN: 25%"
         ],
         "type_string": "Active (Unit Target)",
         "type": "unitTarget",
@@ -175,8 +221,8 @@
     "name": "Chaos God",
     "universe": "none",
     "complexity": "intermediate",
-    "unlock": "temporary",
-    "unlock_text": "This God is temporary",
+    "unlock": "none",
+    "unlock_text": "Why are you even seeing this God?",
     "health": 200,
     "powers": [
       {
@@ -189,6 +235,28 @@
         "type_string": "Passive",
         "type": "passive",
         "desc": "Magical damage per second is dealt to both allies and enemies (not lethal). This is a temporary God that will be removed from your armory after Season 2"
+      }
+    ]
+  },
+  {
+    "id": "chaosGodS3",
+    "name": "Chaos God",
+    "universe": "none",
+    "complexity": "intermediate",
+    "unlock": "battlepass",
+    "unlock_text": "God is permanently unlocked by reaching a battlepass level",
+    "health": 200,
+    "powers": [
+      {
+        "id": "questionMarkS3",
+        "name": "?",
+        "values": [
+          "FREE REROLLS PER ROUND: 1",
+          "HERO REROLL COST: 1"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "First shop re-roll is free, spells sell for full value, and your hero re-rolls cost one gold. This is a temporary God that will be removed from your armory after Season 3"
       }
     ]
   },
@@ -217,9 +285,7 @@
       {
         "id": "cheatingDeath",
         "name": "Cheating Death",
-        "values": [
-          ""
-        ],
+        "values": [],
         "type_string": "Passive",
         "type": "passive",
         "desc": "Your god will survive a death blow (goes down to 1 hp)."
@@ -271,6 +337,33 @@
     ]
   },
   {
+    "id": "glados",
+    "name": "GLaDOS",
+    "universe": "portal",
+    "complexity": "advanced",
+    "unlock": "none",
+    "unlock_text": "Why are you even seeing this God?",
+    "health": 200,
+    "powers": [
+      {
+        "id": "orangePortal",
+        "name": "Orange Portal",
+        "values": [],
+        "type_string": "Active (Unit Target)",
+        "type": "unitTarget",
+        "desc": "Target a unit with an Orange Portal. They will combine HP and Mana pools with the Blue Portal unit, and share all forms of mana and health regen."
+      },
+      {
+        "id": "bluePortal",
+        "name": "Blue Portal",
+        "values": [],
+        "type_string": "Active (Unit Target)",
+        "type": "unitTarget",
+        "desc": "Target a unit with an Blue Portal. They will combine HP and Mana pools with the Orange Portal unit, and share all forms of mana and health regen."
+      }
+    ]
+  },
+  {
     "id": "icefrog",
     "name": "Icefrog",
     "universe": "dota",
@@ -304,7 +397,7 @@
         "id": "wisdomOfTheElders",
         "name": "Wisdom of the Elders",
         "values": [
-          "COOLDOWN REDUCTION: 10% / 20% / 30% / 40% / 50%"
+          "COOLDOWN REDUCTION: 30% / 35% / 40% / 45% / 50%"
         ],
         "type_string": "Passive",
         "type": "passive",
@@ -386,14 +479,19 @@
     "health": 200,
     "powers": [
       {
-        "id": "feast",
-        "name": "Feast",
+        "id": "infest",
+        "name": "Infest",
         "values": [
-          "HEAL: 6"
+          "ATTACK INTERVAL: 1",
+          "DURATION: 0 / 1 / 2 / 3 / 4",
+          "HEALTH THRESHOLD: 50",
+          "INFEST BURST DAMAGE: 150",
+          "INFEST BURST RADIUS: 400",
+          "MAX HEALTH REGEN PER SECOND: 10%"
         ],
-        "type_string": "Passive",
-        "type": "passive",
-        "desc": "Upon winning a round, Lifestealer heals himself (can overheal with no limit)."
+        "type_string": "Active (Unit Target)",
+        "type": "unitTarget",
+        "desc": "Once selected unit is at 50% HP, they will automatically jump inside a random enemy hero for duration seconds, dealing physical attacks every second. It will also heal you for 10% of Max HP per second. Once the duration is over, the unit will pop out, dealing 150 damage in a 400 AOE."
       }
     ]
   },
@@ -409,9 +507,7 @@
       {
         "id": "teleportation",
         "name": "Nature's Prophet",
-        "values": [
-          ""
-        ],
+        "values": [],
         "type_string": "Passive",
         "type": "passive",
         "desc": "You can position your heroes anywhere on the board."
@@ -432,7 +528,7 @@
         "name": "Multicast",
         "values": [
           "CHANCE: 25 / 35 / 45 / 55 / 65",
-          "POINTS REQUIRED FOR LEVEL: 0 / 25 / 50 / 75 / 100"
+          "POINTS REQUIRED FOR LEVEL: 0 / 20 / 40 / 60 / 80"
         ],
         "type_string": "Active (Unit Target)",
         "type": "unitTarget",
@@ -453,7 +549,7 @@
         "id": "veiledPact",
         "name": "Veiled Pact",
         "values": [
-          "CRIT CHANCE: 15%",
+          "CRIT CHANCE: 20%",
           "CRIT DAMAGE: 2%",
           "DISTANCE TO INCREASE CRIT DMG: 15"
         ],
@@ -475,9 +571,7 @@
       {
         "id": "beefyBoy",
         "name": "Beefy Boy",
-        "values": [
-          ""
-        ],
+        "values": [],
         "type_string": "Passive",
         "type": "passive",
         "desc": "Your God has more starting health."
@@ -530,7 +624,7 @@
         "id": "spellSteal",
         "name": "Spell Steal",
         "values": [
-          "POINTS REQUIRED FOR LEVEL: 0 / 11 / 22 / 33 / 44 / 55 / 66 / 77 / 88"
+          "POINTS REQUIRED FOR LEVEL: 0 / 10 / 20 / 30 / 40 / 50 / 60 / 70 / 80"
         ],
         "type_string": "Active (Unit Target)",
         "type": "unitTarget",
@@ -558,7 +652,26 @@
         ],
         "type_string": "Active (Unit Target)",
         "type": "unitTarget",
-        "desc": "Selected unit gains a random rune at the beginning of battle. Each shop upgrade will give more runes.\n\nTier 4 runes: Water (procs when receiving damage), Haste. \nTier 3 runes: Invisibility (attacking out of invis deals extra damage), Regeneration (procs when spending mana).\nTier 2 runes: Bounty (gives the player extra gold for the following round), Illusion.\nTier 1 runes: Arcane, Double Damage.\n\nShop Level 1: Your bottle is empty.\nShop Level 2: Get a Tier 4 Rune.\nShop Level 3: Get a Tier 3 & 4 Rune.\nShop Level 4: Get a Tier 2 ,3 & 4 Rune.\nShop Level 5: Get a Tier 1, 2, 3 & 4 Rune."
+        "desc": "Selected unit gains a random rune at the beginning of battle. Each shop upgrade will give more runes.\n        Tier 4 runes: Water (procs when receiving damage), Haste.\n        Tier 3 runes: Invisibility (attacking out of invis deals extra damage), Regeneration (procs when spending mana).\n        Tier 2 runes: Bounty (gives the player extra gold for the following round), Illusion.\n        Tier 1 runes: Arcane, Double Damage.\n\n        Shop Level 1: Your bottle is empty.\n        Shop Level 2: Get a Tier 4 Rune.\n        Shop Level 3: Get a Tier 3 & 4 Rune.\n        Shop Level 4: Get a Tier 2 ,3 & 4 Rune.\n        Shop Level 5: Get a Tier 1, 2, 3 & 4 Rune."
+      }
+    ]
+  },
+  {
+    "id": "santaGreevil",
+    "name": "Santa Greevil",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "battlepass",
+    "unlock_text": "God is permanently unlocked by reaching a battlepass level",
+    "health": 200,
+    "powers": [
+      {
+        "id": "giftExchange",
+        "name": "Gift Exchange",
+        "values": [],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "An automatic gift exchange takes place at the beginning of every battle. The enemy player has a 5 second window to accept or decline.\n\t\n\tThe battle winner receives a Good Gift, and the loser a Bad Gift.\n\t\n\tGifts allow you to choose one of 3 random effects to apply to your lineup.\n\t\n\tSanta Greevil receives gifts even if the enemy declines the exchange. \n    "
       }
     ]
   },
@@ -630,6 +743,59 @@
     ]
   },
   {
+    "id": "techies",
+    "name": "Techies",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "free",
+    "unlock_text": "This God is free and permanently unlocked",
+    "health": 200,
+    "powers": [
+      {
+        "id": "techiesRandomizer",
+        "name": "Techies Demolitions",
+        "values": [
+          "SHOP LEVEL TO UNLOCK: 2 / 4 / 5"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": ""
+      },
+      {
+        "id": "techiesStickyBomb",
+        "name": "Squee's Sticky Bomb",
+        "values": [
+          "DAMAGE THRESHOLD: 350"
+        ],
+        "type_string": "Active (Unit Target)",
+        "type": "unitTarget",
+        "desc": "For each 500 spell damage applied an enemy unit, a level 2 Sticky Bomb is attached to them."
+      },
+      {
+        "id": "techiesReactiveTazer",
+        "name": "Spoon's Reactive Tazer",
+        "values": [
+          "TRIGGER CHANCE: 15",
+          "TRIGGER COOLDOWN: 8"
+        ],
+        "type_string": "Active (Unit Target)",
+        "type": "unitTarget",
+        "desc": "15% chance to trigger a level 1 Reactive Tazer when being attacked by enemies. Has 8 second cooldown."
+      },
+      {
+        "id": "techiesProximityMine",
+        "name": "Spleen's Proximity Mine",
+        "values": [
+          "MINE DAMAGE REDUCTION: 50",
+          "TRIGGER CHANCE: 15"
+        ],
+        "type_string": "Active (Unit Target)",
+        "type": "unitTarget",
+        "desc": "When attacking a target, there is a 15% chance to lay a level 1 Proximity Mine directly in front of you. Proximity Mine deals 50% of the original damage."
+      }
+    ]
+  },
+  {
     "id": "tinker",
     "name": "Tinker",
     "universe": "dota",
@@ -673,9 +839,7 @@
       {
         "id": "tomeOfExperience",
         "name": "Tome of Experience",
-        "values": [
-          ""
-        ],
+        "values": [],
         "type_string": "Passive",
         "type": "passive",
         "desc": "Every time you level your shop, your heroes gain an extra level."
@@ -699,17 +863,17 @@
         ],
         "type_string": "Active (Unit Target)",
         "type": "unitTarget",
-        "desc": "Once the battle begins, the selected unit cannot move and is rooted, while its attack range is set to a minimum. This root is disabled if you are the last allied hero alive or you are facing a fellow Tower God. Activating this ability will enable your Glyph of Fortification Passive.\n\nVoiced by our dear friend PyrionFlax"
+        "desc": "Once the battle begins, the selected unit cannot move and is rooted, while its attack range is set to a minimum. This root is disabled if you are the last allied hero alive or you are facing a fellow Tower God. Activating this ability will enable your Glyph of Fortification Passive.Voiced by our dear friend PyrionFlax"
       },
       {
         "id": "fortification",
         "name": "Glyph of Fortification",
         "values": [
-          "INVULNERABILITY DURATION: 1.5"
+          "INVULNERABILITY DURATION: 1.75"
         ],
         "type_string": "Passive",
         "type": "passive",
-        "desc": "When a hero dies, all remaining heroes become immune to any kind of damage temporarily. This ability is only active if you are using the Building ability, and your Building unit is alive.\n\nVoiced by our dear friend PyrionFlax"
+        "desc": "When a hero dies, all remaining heroes become immune to any kind of damage temporarily. This ability is only active if you are using the Building ability, and your Building unit is alive.Voiced by our dear friend PyrionFlax"
       }
     ]
   },
