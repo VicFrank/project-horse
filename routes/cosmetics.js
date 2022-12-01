@@ -39,4 +39,14 @@ router.post("/get_cosmetics", async (req, res) => {
   }
 });
 
+router.get("/chests/odds", async (req, res) => {
+  try {
+    const result = await cosmetics.getOddsTables();
+    res.status(201).send(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.toString() });
+  }
+});
+
 module.exports = router;

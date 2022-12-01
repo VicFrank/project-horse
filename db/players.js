@@ -2340,6 +2340,7 @@ module.exports = {
             drop.escalatingOdds,
             missedDropCount
           );
+          drop.missed_drop_count = missedDropCount;
         }
         delete drop.escalatingOdds;
       }

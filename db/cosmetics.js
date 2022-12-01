@@ -460,6 +460,22 @@ module.exports = {
     }
   },
 
+  async getOddsTables() {
+    try {
+      const { rows } = await query(
+        `SELECT DISTINCT(rarity) FROM escalating_odds`
+      );
+      const rarities = rows.map((row) => row.rarity);
+      const oddsTables = {};
+      for (const rarity of rarities) {
+        oddsTables[rarity] = await this.getEscalatingOdds(rarity);
+      }
+      return oddsTables;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async getUniqueChestID(chestCosmeticID) {
     try {
       const { rows } = await query(

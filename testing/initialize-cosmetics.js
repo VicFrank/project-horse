@@ -91,14 +91,14 @@ async function addCosmetics() {
   try {
     console.log("Adding cosmetics...");
     await cosmetics.bulkCreateCosmetics([
-      // {
-      //   name: "chest_god_unique_1",
-      //   type: "Chest",
-      //   coins: 10000,
-      //   cost_usd: -1,
-      //   equip_group: "",
-      //   rarity: "Immortal",
-      // },
+      {
+        name: "chest_god_unique_1",
+        type: "Chest",
+        coins: 10000,
+        cost_usd: -1,
+        equip_group: "",
+        rarity: "Immortal",
+      },
       {
         // Chest Drop
         name: "hat_cat_ears",
@@ -439,7 +439,7 @@ async function addCosmeticsToPlayers() {
   await addCosmetics();
   await setChestRewards();
   await updateCosmetics();
-  // await initializeEscalatingOdds();
-  // await initializeUniqueChestDrops("chest_god_unique_1", chest_god_unique_1);
+  await initializeEscalatingOdds();
+  await initializeUniqueChestDrops("chest_god_unique_1", chest_god_unique_1);
   // updateEscalatingOddsTable();
 })();
