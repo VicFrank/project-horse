@@ -43,7 +43,6 @@
                 v-bind:src="`/images/cosmetics/${quest.cosmetic_name}.png`"
                 :alt="quest.cosmetic_name"
               />
-            <div v-else class="quest-rewards">{{ $t("common.completed") }}</div>
             <button
               v-on:click="claimQuest(quest)"
               v-if="quest.quest_completed && !quest.claimed"

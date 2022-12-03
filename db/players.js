@@ -2646,7 +2646,7 @@ module.exports = {
       const { rows } = await query(
         `
         SELECT pq.quest_progress, pq.claimed, q.required_amount,
-          q.coin_reward, q.xp_reward, is_achievement,
+          q.coin_reward, q.xp_reward, is_achievement, q.cosmetic_id,
           created < current_timestamp - $3 * INTERVAL '1 HOURS' as can_reroll
         FROM player_quests pq
         JOIN quests q
@@ -2667,6 +2667,7 @@ module.exports = {
       const coins = quest.coin_reward;
       const xp = quest.xp_reward;
       const canReroll = quest.can_reroll && !quest.is_achievement;
+      const cosmeticID = quest.cosmetic_id;
 
       if (questProgress < required)
         throw new Error(`Quest is not completed, ${questProgress}/${required}`);
@@ -2674,7 +2675,6 @@ module.exports = {
       if (!this.playerHasQuest(steamID, questID))
         throw new Error("Player does not have quest");
 
-      // Log the transaction
       const questEvent = { steamID, questID, coins, xp };
       await Logs.addTransactionLog(steamID, "claim_quest", questEvent);
 
@@ -2692,7 +2692,12 @@ module.exports = {
       // Reroll if possible
       if (canReroll) await this.rerollQuest(steamID, questID);
 
-      await this.modifyCoins(steamID, coins);
+      const rewardsTransaction = {
+        coins,
+        items: [],
+      };
+      if (cosmeticID) rewardsTransaction.items[cosmeticID] = 1;
+      await this.doItemTransaction(steamID, rewardsTransaction);
       await this.addBattlePassXp(steamID, xp);
 
       return { xp, coins, success: true };

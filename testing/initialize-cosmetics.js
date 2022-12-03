@@ -262,17 +262,17 @@ async function updateCosmetics() {
       {
         name: "finisher_fire",
         type: "Finisher",
-        coins: 10000,
+        coins: -1,
         cost_usd: -1,
         equip_group: "finisher",
         rarity: "Common",
       },
       {
-        name: "chest_god",
-        type: "Chest",
-        coins: -1,
+        name: "streak_fire",
+        type: "Win Streak",
+        coins: 10000,
         cost_usd: -1,
-        equip_group: "",
+        equip_group: "streak",
         rarity: "Immortal",
       },
     ];
@@ -436,10 +436,10 @@ async function addCosmeticsToPlayers() {
 
 (async function () {
   // await addCosmeticsToPlayers();
-  await addCosmetics();
-  await setChestRewards();
+  // await addCosmetics();
+  // await setChestRewards();
   await updateCosmetics();
-  await initializeEscalatingOdds();
-  await initializeUniqueChestDrops("chest_god_unique_1", chest_god_unique_1);
+  // await initializeEscalatingOdds();
+  // await initializeUniqueChestDrops("chest_god_unique_1", chest_god_unique_1);
   // updateEscalatingOddsTable();
 })();
