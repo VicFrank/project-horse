@@ -93,6 +93,7 @@ CREATE TABLE IF NOT EXISTS game_players (
   xp_change INTEGER DEFAULT 0
 );
 CREATE UNIQUE INDEX ON game_players (game_id, steam_id);
+CREATE INDEX idx_game_players_steam_id_fkey ON game_players (steam_id);
 CREATE INDEX idx_game_players_game_id_fkey ON game_players (game_id);
 
 CREATE TABLE IF NOT EXISTS game_player_heroes (
