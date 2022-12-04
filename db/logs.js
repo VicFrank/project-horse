@@ -1,4 +1,5 @@
 const { query } = require("./index");
+const Cosmetics = require("./cosmetics");
 
 module.exports = {
   async addTransactionLog(steamID, type, transaction) {
@@ -43,6 +44,50 @@ module.exports = {
         ORDER BY log_time DESC
       `);
       return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getPaypalPurchaseBreakdown(hours) {
+    try {
+      const { rows } = await query(`
+        SELECT 
+          DISTINCT (log_data->>'cosmeticIDs') as cosmetic_ids, count(*) :: INTEGER AS count
+        FROM player_logs
+        WHERE log_event = 'paypal'
+        ${hours ? `AND log_time > NOW() - $1 * INTERVAL '1 HOUR'` : ""}
+        GROUP BY log_data->>'cosmeticIDs'
+        ORDER BY count DESC;
+      `);
+
+      const allCosmetics = await Cosmetics.getAllCosmetics();
+
+      const counter = {};
+      for (const row of rows) {
+        const cosmeticIDs = JSON.parse(row.cosmetic_ids);
+        if (!cosmeticIDs) continue;
+        for (const cosmeticID of cosmeticIDs) {
+          if (counter[cosmeticID]) counter[cosmeticID] += row.count;
+          else counter[cosmeticID] = row.count;
+        }
+      }
+
+      const breakdown = [];
+      for (const cosmeticID in counter) {
+        const cosmetic = allCosmetics.find(
+          (cosmetic) => cosmetic.cosmetic_id == cosmeticID
+        );
+        breakdown.push({
+          name: cosmetic?.cosmetic_name,
+          id: cosmetic?.cosmetic_id,
+          count: counter[cosmeticID],
+        });
+      }
+
+      breakdown.sort((a, b) => b.count - a.count);
+
+      return breakdown;
     } catch (error) {
       throw error;
     }

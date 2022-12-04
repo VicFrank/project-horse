@@ -15,7 +15,18 @@ router.get("/payments", auth.adminAuth, async (req, res) => {
       paypalPayments: paypalPayments,
       stripePayments: stripePayments,
     };
-    res.status(201).send(result);
+    res.status(200).send(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.toString() });
+  }
+});
+
+router.get("/purchase_breakdown", auth.adminAuth, async (req, res) => {
+  try {
+    const hours = parseInt(req.query.hours);
+    const breakdown = await playerLogs.getPaypalPurchaseBreakdown(hours);
+    res.status(200).send(breakdown);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: error.toString() });
@@ -26,7 +37,7 @@ router.get("/players/:steamID", auth.adminAuth, async (req, res) => {
   try {
     const steamID = req.params.steamID;
     const logs = await playerLogs.getLogsForPlayer(steamID);
-    res.status(201).send(logs);
+    res.status(200).send(logs);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: error.toString() });
