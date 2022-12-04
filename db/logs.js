@@ -92,7 +92,7 @@ module.exports = {
         });
       }
 
-      breakdown.sort((a, b) => b.count - a.count);
+      breakdown.sort((a, b) => b.dollars - a.dollars);
 
       return breakdown;
     } catch (error) {
