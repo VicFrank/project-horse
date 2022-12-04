@@ -25,6 +25,7 @@ import Game from "../components/pages/games/Game";
 
 const Gods = () => import("../components/pages/stats/Gods");
 const Abilities = () => import("../components/pages/stats/Abilities");
+const Cosmetics = () => import("../components/pages/stats/Cosmetics");
 
 const Profile = () => import("../components/pages/profile/Profile");
 const MatchHistory = () => import("../components/pages/profile/MatchHistory");
@@ -45,7 +46,7 @@ const PlayerGamesList = () =>
 const Matchmaking = () => import("../components/pages/matchmaking/Matchmaking");
 
 const Spells = () => import("../components/pages/learn/Spells");
-const LearnGods= () => import("../components/pages/learn/LearnGods");
+const LearnGods = () => import("../components/pages/learn/LearnGods");
 
 Vue.use(VueRouter);
 
@@ -73,6 +74,11 @@ const routes = [
   {
     path: "/abilities",
     component: Abilities,
+    meta: { requiresAuth: true, requiresAdmin: true },
+  },
+  {
+    path: "/cosmetics",
+    component: Cosmetics,
     meta: { requiresAuth: true, requiresAdmin: true },
   },
   { path: "/leaderboard", component: Leaderboard },

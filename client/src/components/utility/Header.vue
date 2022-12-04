@@ -153,8 +153,18 @@
           >
             {{ $t("navigation.abilities") }}
           </b-dropdown-item>
+          <b-dropdown-item
+            v-if="canSeeStats"
+            to="/cosmetics"
+            exact-active-class="active-link"
+          >
+            Economy
+          </b-dropdown-item>
         </b-nav-item-dropdown>
-        <b-nav-item-dropdown :text="$t('navigation.learn')" class="mx-2 d-none d-sm-block">
+        <b-nav-item-dropdown
+          :text="$t('navigation.learn')"
+          class="mx-2 d-none d-sm-block"
+        >
           <b-dropdown-item to="/learn/spells" exact-active-class="active-link">
             {{ $t("navigation.spells") }}
           </b-dropdown-item>

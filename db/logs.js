@@ -51,7 +51,9 @@ module.exports = {
 
   async getPaypalPurchaseBreakdown(hours) {
     try {
-      const { rows } = await query(`
+      const args = hours ? [hours] : null;
+      const { rows } = await query(
+        `
         SELECT 
           DISTINCT (log_data->>'cosmeticIDs') as cosmetic_ids, count(*) :: INTEGER AS count
         FROM player_logs
@@ -59,7 +61,9 @@ module.exports = {
         ${hours ? `AND log_time > NOW() - $1 * INTERVAL '1 HOUR'` : ""}
         GROUP BY log_data->>'cosmeticIDs'
         ORDER BY count DESC;
-      `);
+      `,
+        args
+      );
 
       const allCosmetics = await Cosmetics.getAllCosmetics();
 
@@ -82,6 +86,9 @@ module.exports = {
           name: cosmetic?.cosmetic_name,
           id: cosmetic?.cosmetic_id,
           count: counter[cosmeticID],
+          dollars: Number(
+            (counter[cosmeticID] * cosmetic?.cost_usd).toFixed(2)
+          ),
         });
       }
 
