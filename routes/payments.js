@@ -181,7 +181,7 @@ router.post("/stripe/intents", async (req, res) => {
   const paymentIntent = await stripeClient.client.paymentIntents.create({
     amount,
     currency: "usd",
-    payment_method_types: ["card"],
+    payment_method_types: ["card", "wechat_pay"],
     metadata: {
       steamID,
       cosmeticIDs: JSON.stringify(cosmeticIDs),
