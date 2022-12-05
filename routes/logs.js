@@ -25,8 +25,17 @@ router.get("/payments", auth.adminAuth, async (req, res) => {
 router.get("/purchase_breakdown", auth.adminAuth, async (req, res) => {
   try {
     const hours = parseInt(req.query.hours);
-    const breakdown = await playerLogs.getPaypalPurchaseBreakdown(hours);
-    res.status(200).send(breakdown);
+    const { start, end } = req.query;
+    if (start || end) {
+      const result = await playerLogs.getPaypalPurchaseBreakdownInRange(
+        start,
+        end
+      );
+      return res.status(200).send(result);
+    } else {
+      const result = await playerLogs.getPaypalPurchaseBreakdown(hours);
+      return res.status(200).send(result);
+    }
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: error.toString() });

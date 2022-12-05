@@ -49,22 +49,8 @@ module.exports = {
     }
   },
 
-  async getPaypalPurchaseBreakdown(hours) {
+  async parsePaymentsBreakdown(rows) {
     try {
-      const args = hours ? [hours] : null;
-      const { rows } = await query(
-        `
-        SELECT 
-          DISTINCT (log_data->>'cosmeticIDs') as cosmetic_ids, count(*) :: INTEGER AS count
-        FROM player_logs
-        WHERE log_event = 'paypal'
-        ${hours ? `AND log_time > NOW() - $1 * INTERVAL '1 HOUR'` : ""}
-        GROUP BY log_data->>'cosmeticIDs'
-        ORDER BY count DESC;
-      `,
-        args
-      );
-
       const allCosmetics = await Cosmetics.getAllCosmetics();
 
       const counter = {};
@@ -95,6 +81,53 @@ module.exports = {
       breakdown.sort((a, b) => b.dollars - a.dollars);
 
       return breakdown;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getPaypalPurchaseBreakdown(hours) {
+    try {
+      const args = hours ? [hours] : null;
+      const { rows } = await query(
+        `
+        SELECT 
+          DISTINCT (log_data->>'cosmeticIDs') as cosmetic_ids, count(*) :: INTEGER AS count
+        FROM player_logs
+        WHERE log_event = 'paypal'
+        ${hours ? `AND log_time > NOW() - $1 * INTERVAL '1 HOUR'` : ""}
+        GROUP BY log_data->>'cosmeticIDs'
+        ORDER BY count DESC;
+      `,
+        args
+      );
+
+      return await this.parsePaymentsBreakdown(rows);
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getPaypalPurchaseBreakdownInRange(start, end) {
+    try {
+      if (!start) start = new Date(0);
+      else start = new Date(start);
+      if (!end) end = new Date();
+      else end = new Date(end);
+      const { rows } = await query(
+        `
+        SELECT 
+          DISTINCT (log_data->>'cosmeticIDs') as cosmetic_ids, count(*) :: INTEGER AS count
+        FROM player_logs
+        WHERE log_event = 'paypal'
+        AND log_time BETWEEN $1 AND $2
+        GROUP BY log_data->>'cosmeticIDs'
+        ORDER BY count DESC;
+      `,
+        [start, end]
+      );
+
+      return await this.parsePaymentsBreakdown(rows);
     } catch (error) {
       throw error;
     }
