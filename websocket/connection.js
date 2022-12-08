@@ -386,26 +386,26 @@ async function runTests() {
   const player6 = steamIDs[5];
   const player7 = steamIDs[6];
   const player8 = steamIDs[7];
+  const me = "76561198030851434";
 
-  await leaveLobby(player1);
-  await leaveLobby(player2);
-  await leaveLobby(player3);
-  await leaveLobby(player4);
-  await leaveLobby(player5);
-  await leaveLobby(player6);
-  await leaveLobby(player7);
+  // await leaveLobby(player1);
+  // await leaveLobby(player2);
+  // await leaveLobby(player3);
+  // await leaveLobby(player4);
+  // await leaveLobby(player5);
+  // await leaveLobby(player6);
+  // await leaveLobby(player7);
+  // await leaveLobby(me);
 
-  const lobbyID = await makeLobby(player1, null, "US West", 0, 9999);
+  // const lobbyID = await makeLobby(player1, null, "US West", 0, 9999);
 
-  await joinLobby(player1, lobbyID, null);
-  await joinLobby(player2, lobbyID, null);
-  await joinLobby(player3, lobbyID, null);
-  await joinLobby(player4, lobbyID, null);
-  await joinLobby(player5, lobbyID, null);
-  await joinLobby(player6, lobbyID, null);
-  await joinLobby(player7, lobbyID, null);
-
-  // sendChatToLobby(player1, "hey");
+  // await joinLobby(player1, lobbyID, null);
+  // await joinLobby(player2, lobbyID, null);
+  // await joinLobby(player3, lobbyID, null);
+  // await joinLobby(player4, lobbyID, null);
+  // await joinLobby(player5, lobbyID, null);
+  // await joinLobby(player6, lobbyID, null);
+  // await joinLobby(player7, lobbyID, null);
 
   // console.log("run tests");
 }

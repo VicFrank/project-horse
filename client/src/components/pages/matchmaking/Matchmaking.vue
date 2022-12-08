@@ -47,11 +47,43 @@ export default {
     disconnected() {
       return this.$store.getters.disconnected;
     },
+    locked() {
+      return this.$store.getters.isLobbyLocked;
+    },
+    players() {
+      return this.$store.getters.lobbyPlayers;
+    },
   },
 
   methods: {
     refreshConnection() {
       this.$store.dispatch("refreshConnection");
+    },
+  },
+
+  watch: {
+    locked() {
+      if (!this.inLobby) return;
+      if (this.locked) {
+        console.log("locked");
+        const audio = new Audio(require("./sounds/ready.mp3"));
+        audio.volume = 1;
+        audio.play();
+        document.title = "Ready!";
+      }
+    },
+    players() {
+      if (!this.inLobby) return;
+      if (this.locked) {
+        document.title = "Ready!";
+      } else {
+        document.title = `Lobby - ${this.players.length}/8`;
+      }
+    },
+    inLobby() {
+      if (!this.inLobby) {
+        document.title = "Ability Arena";
+      }
     },
   },
 };

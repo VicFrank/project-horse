@@ -33,7 +33,6 @@ export default {
     interval: null,
   }),
   created() {
-    console.log("created");
     this.refreshLobbies();
 
     // Refresh the lobbies every 30 seconds
@@ -43,7 +42,6 @@ export default {
   },
   // eslint-disable-next-line vue/no-deprecated-destroyed-lifecycle
   destroyed() {
-    console.log("destroyed");
     clearInterval(this.interval);
   },
 

@@ -111,8 +111,6 @@ module.exports = {
   },
 
   async isInMMRRange(steamID, minRank, maxRank) {
-    const ladderMMR = await this.getLadderMMR(steamID);
-    if (ladderMMR < 4500) return false;
     const mmr = await this.getPlayerMMR(steamID);
     if (!mmr) return false;
     if (mmr < minRank || mmr > maxRank) return false;

@@ -53,8 +53,29 @@ export default {
       const chatBox = this.$refs.chatbox;
       this.$nextTick(() => (chatBox.scrollTop = chatBox.scrollHeight));
 
+      const audio = new Audio(
+        require("../sounds/panorama_chat_message_send_01.wav")
+      );
+      audio.volume = 0.2;
+      audio.play();
+
       // clear the message
       this.nextMessage = "";
+    },
+  },
+
+  watch: {
+    messages() {
+      const chatBox = this.$refs.chatbox;
+      this.$nextTick(() => (chatBox.scrollTop = chatBox.scrollHeight));
+      const lastMessage = this.messages[this.messages.length - 1];
+      if (lastMessage.username != this.username) {
+        const audio = new Audio(
+          require("../sounds/panorama_chat_message_rec_01.wav")
+        );
+        audio.volume = 0.2;
+        audio.play();
+      }
     },
   },
 };
