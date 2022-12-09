@@ -3,10 +3,9 @@ const games = require("./games");
 const players = require("./players");
 
 module.exports = {
-  async getGodsStats(hours = 720) {
+  async getGodsStats(hours = 720, minMMR = 0) {
     try {
-      const numGames = await games.getNumGames(hours);
-
+      let numGames = await games.getNumGames(hours);
       const { rows } = await query(
         `
         SELECT
@@ -26,11 +25,16 @@ module.exports = {
         USING (game_id)
         WHERE games.ranked = true
         AND games.created_at > NOW() - $1 * INTERVAL '1 HOUR'
+        AND game_players.mmr > $2
         GROUP BY god
         ORDER BY avg_place ASC
       `,
-        [hours]
+        [hours, minMMR]
       );
+
+      if (minMMR > 0)
+        numGames = rows.reduce((acc, row) => acc + Number(row.god_freq), 0);
+
       const gods = rows.map((row) => ({
         ...row,
         pick_rate: row.god_freq / numGames,

@@ -10,7 +10,8 @@ const cache = apicache.middleware;
 router.get("/gods", statsManAuth, cache("1 hour"), async (req, res) => {
   try {
     const hours = parseInt(req.query.hours) || 24;
-    const stats = await gods.getGodsStats(hours);
+    const minMMR = parseInt(req.query.minMMR) || 0;
+    const stats = await gods.getGodsStats(hours, minMMR);
     res.status(200).json(stats);
   } catch (error) {
     console.log(error);
