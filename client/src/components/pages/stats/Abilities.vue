@@ -101,8 +101,8 @@ export default {
     dateOptions: [
       { value: null, text: "All Time" },
       { value: 24, text: "Day" },
-      { value: 720, text: "Month" },
-      { value: -1, text: "Custom" },
+      { value: 24 * 7, text: "Week" },
+      { value: 24 * 30, text: "Month" },
     ],
     mmrOptions: [
       { value: null, text: "All MMR" },

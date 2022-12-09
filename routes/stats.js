@@ -20,7 +20,7 @@ router.get("/gods", statsManAuth, cache("1 hour"), async (req, res) => {
 
 router.get("/abilities", statsManAuth, cache("1 hour"), async (req, res) => {
   try {
-    const hours = 9999; //parseInt(req.query.hours) || 24;
+    const hours = parseInt(req.query.hours) || 24;
     const minMMR = parseInt(req.query.minMMR) || 0;
     const stats = await abilities.getAbilityStats(hours, minMMR);
     res.status(200).json(stats);
