@@ -43,7 +43,7 @@
             </tr>
             <tr>
               <td class="text-left">Season 3 Tournament</td>
-              <td class="text-left">Dec 17, 2022</td>
+              <td class="text-left">Dec 17-18, 2022</td>
               <td class="text-left">
                 <b-button
                   href="https://battlefy.com/double-edge-studios/ability-arena-3/63916e89b1a0235b899acc5b/info?infoTab=details"

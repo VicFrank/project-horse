@@ -4,6 +4,30 @@
 
     <b-tabs content-class="mt-3" style="max-width: 700px; margin: auto" lazy>
       <b-tab title="Abilities" active>
+        <div class="text-left d-flex mb-2">
+          <div>
+            <div class="mb-2">Date</div>
+            <b-form-select
+              v-model="selectedDate"
+              :options="dateOptions"
+              @change="loadAbilityStats(true)"
+              :disabled="loading"
+              style="width: 100px"
+              class="mx-auto"
+            ></b-form-select>
+          </div>
+          <div class="ml-2">
+            <div class="mb-2">MMR</div>
+            <b-form-select
+              v-model="selectedMMR"
+              :options="mmrOptions"
+              @change="loadAbilityStats(true)"
+              :disabled="loading"
+              style="width: 100px"
+              class="mx-auto"
+            ></b-form-select>
+          </div>
+        </div>
         <template v-if="abilitiesLoading">
           <div class="d-flex justify-content-center my-3">
             <b-spinner label="Loading..."></b-spinner>
@@ -72,13 +96,33 @@ export default {
     gabensLoading: true,
     supersLoading: true,
     winnerStatsLoading: true,
+    selectedDate: null,
+    selectedMMR: null,
+    dateOptions: [
+      { value: null, text: "All Time" },
+      { value: 24, text: "Day" },
+      { value: 720, text: "Month" },
+      { value: -1, text: "Custom" },
+    ],
+    mmrOptions: [
+      { value: null, text: "All MMR" },
+      { value: 1000, text: "1000+" },
+      { value: 1100, text: "1100+" },
+      { value: 1200, text: "1200+" },
+      { value: 1300, text: "1300+" },
+      { value: 1400, text: "1400+" },
+      { value: 1500, text: "1500+" },
+      { value: 1600, text: "1600+" },
+    ],
   }),
 
   methods: {
-    loadAbilityStats() {
-      if (this.abilityStats.length > 0) return;
+    loadAbilityStats(force) {
+      if (!force && this.abilityStats.length > 0) return;
       this.abilitiesLoading = true;
-      fetch(`/api/stats/abilities`)
+      fetch(
+        `/api/stats/abilities?hours=${this.selectedDate}&minMMR=${this.selectedMMR}`
+      )
         .then((res) => res.json())
         .then((abilities) => {
           this.abilityStats = abilities;

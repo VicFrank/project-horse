@@ -2,9 +2,9 @@ const { query } = require("./index");
 const games = require("./games");
 const players = require("./players");
 
-const getAbilityFreqs = async (hours, steamID) => {
+const getAbilityFreqs = async (hours, steamID, minMMR = 0) => {
   try {
-    const args = [hours];
+    const args = [hours, minMMR];
     if (steamID) args.push(steamID);
     const { rows } = await query(
       `
@@ -17,7 +17,8 @@ const getAbilityFreqs = async (hours, steamID) => {
         JOIN game_player_heroes USING (game_player_hero_id)
         JOIN game_players USING (game_player_id)
         JOIN g USING (game_id)
-        ${steamID ? `WHERE game_players.steam_id = $2` : ""}
+        WHERE game_players.mmr > $2
+        ${steamID ? `AND game_players.steam_id = $3` : ""}
         GROUP BY ability_name
         ORDER BY freq DESC;
       `,
@@ -29,9 +30,9 @@ const getAbilityFreqs = async (hours, steamID) => {
   }
 };
 
-const getWinnerAbilityFreqs = async (hours, steamID) => {
+const getWinnerAbilityFreqs = async (hours, steamID, minMMR = 0) => {
   try {
-    const args = [hours];
+    const args = [hours, minMMR];
     if (steamID) args.push(steamID);
     const { rows } = await query(
       `
@@ -45,7 +46,8 @@ const getWinnerAbilityFreqs = async (hours, steamID) => {
         JOIN game_players USING (game_player_id)
         JOIN g USING (game_id)
         WHERE game_players.place = 1
-          ${steamID ? `AND game_players.steam_id = $2` : ""}
+          ${steamID ? `AND game_players.steam_id = $3` : ""}
+          AND game_players.mmr > $2
         GROUP BY ability_name
         ORDER BY freq DESC
       `,
@@ -57,9 +59,9 @@ const getWinnerAbilityFreqs = async (hours, steamID) => {
   }
 };
 
-const getTopFourAbilityFreqs = async (hours, steamID) => {
+const getTopFourAbilityFreqs = async (hours, steamID, minMMR = 0) => {
   try {
-    const args = [hours];
+    const args = [hours, minMMR];
     if (steamID) args.push(steamID);
     const { rows } = await query(
       `
@@ -73,7 +75,8 @@ const getTopFourAbilityFreqs = async (hours, steamID) => {
         JOIN game_players USING (game_player_id)
         JOIN g USING (game_id)
         WHERE game_players.place <= 4
-          ${steamID ? `AND game_players.steam_id = $2` : ""}
+          ${steamID ? `AND game_players.steam_id = $3` : ""}
+          AND game_players.mmr > $2
         GROUP BY ability_name
         ORDER BY freq DESC
       `,
@@ -115,11 +118,19 @@ module.exports = {
   async getAbilities() {
     return getAbilities();
   },
-  async getAbilityStats(hours = 24) {
+  async getAbilityStats(hours = 24, minMMR = 0) {
     try {
-      const abilityFreqs = await getAbilityFreqs(hours);
-      const winnerAbilityFreqs = await getWinnerAbilityFreqs(hours);
-      const topFourAbilityFreqs = await getTopFourAbilityFreqs(hours);
+      const abilityFreqs = await getAbilityFreqs(hours, null, minMMR);
+      const winnerAbilityFreqs = await getWinnerAbilityFreqs(
+        hours,
+        null,
+        minMMR
+      );
+      const topFourAbilityFreqs = await getTopFourAbilityFreqs(
+        hours,
+        null,
+        minMMR
+      );
       const abilities = await this.getAbilities();
       const numGames = await games.getNumGames(hours);
 
