@@ -34,6 +34,7 @@
           </div>
         </template>
         <AbilityStats
+          :showPercentages="selectedMMR == null"
           :abilities="abilityStats"
           @created="loadAbilityStats"
         ></AbilityStats>
@@ -96,10 +97,9 @@ export default {
     gabensLoading: true,
     supersLoading: true,
     winnerStatsLoading: true,
-    selectedDate: null,
+    selectedDate: 24,
     selectedMMR: null,
     dateOptions: [
-      { value: null, text: "All Time" },
       { value: 24, text: "Day" },
       { value: 24 * 7, text: "Week" },
       { value: 24 * 30, text: "Month" },

@@ -22,12 +22,17 @@
     <template #cell(freq)="data">
       <div class="percent-td">
         <div class="text-left">
-          {{ percentage(data.item.freq / data.item.numGames, 1) }}
+          <template v-if="showPercentages">
+            {{ percentage(data.item.freq / data.item.numGames, 1) }}
+          </template>
+          <template v-else>
+            {{ data.item.freq }}
+          </template>
         </div>
         <div class="percentage-holder">
           <PercentBar
             :max="maxFreq"
-            :value="data.item.freq / data.item.numGames"
+            :value="data.item.freq / (showPercentages ? data.item.numGames : 1)"
             class="mt-1 progress-bar"
             v-b-tooltip.hover
             :title="data.item.freq"
@@ -38,12 +43,19 @@
     <template #cell(winner_freq)="data">
       <div class="percent-td">
         <div class="text-left">
-          {{ percentage(data.item.winner_freq / data.item.numGames, 1) }}
+          <template v-if="showPercentages">
+            {{ percentage(data.item.winner_freq / data.item.numGames, 1) }}
+          </template>
+          <template v-else>
+            {{ data.item.winner_freq }}
+          </template>
         </div>
         <div class="percentage-holder">
           <PercentBar
             :max="maxWinnerFreq"
-            :value="data.item.winner_freq / data.item.numGames"
+            :value="
+              data.item.winner_freq / (showPercentages ? data.item.numGames : 1)
+            "
             class="mt-1 progress-bar"
             v-b-tooltip.hover
             :title="data.item.winner_freq"
@@ -54,12 +66,20 @@
     <template #cell(top_four_freq)="data">
       <div class="percent-td">
         <div class="text-left">
-          {{ percentage(data.item.top_four_freq / data.item.numGames, 1) }}
+          <template v-if="showPercentages">
+            {{ percentage(data.item.top_four_freq / data.item.numGames, 1) }}
+          </template>
+          <template v-else>
+            {{ data.item.winner_freq }}
+          </template>
         </div>
         <div class="percentage-holder">
           <PercentBar
             :max="maxTopFourFreq"
-            :value="data.item.top_four_freq / data.item.numGames"
+            :value="
+              data.item.top_four_freq /
+              (showPercentages ? data.item.numGames : 1)
+            "
             class="mt-1 progress-bar"
             v-b-tooltip.hover
             :title="data.item.top_four_freq"
@@ -85,6 +105,10 @@ export default {
     abilities: {
       type: Array,
       required: true,
+    },
+    showPercentages: {
+      type: Boolean,
+      default: true,
     },
   },
 
@@ -130,22 +154,23 @@ export default {
   computed: {
     maxFreq() {
       return this.abilities.reduce((max, ability) => {
-        return ability.freq / ability.numGames > max
-          ? ability.freq / ability.numGames
-          : max;
+        const divisor = this.showPercentages ? ability.numGames : 1;
+        return ability.freq / divisor > max ? ability.freq / divisor : max;
       }, 0);
     },
     maxWinnerFreq() {
       return this.abilities.reduce((max, ability) => {
-        return ability.winner_freq / ability.numGames > max
-          ? ability.winner_freq / ability.numGames
+        const divisor = this.showPercentages ? ability.numGames : 1;
+        return ability.winner_freq / divisor > max
+          ? ability.winner_freq / divisor
           : max;
       }, 0);
     },
     maxTopFourFreq() {
       return this.abilities.reduce((max, ability) => {
-        return ability.top_four_freq / ability.numGames > max
-          ? ability.top_four_freq / ability.numGames
+        const divisor = this.showPercentages ? ability.numGames : 1;
+        return ability.top_four_freq / divisor > max
+          ? ability.top_four_freq / divisor
           : max;
       }, 0);
     },
