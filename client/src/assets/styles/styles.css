@@ -16,6 +16,10 @@
   background-color: #373d46 !important;
 }
 
+.toast-body {
+  color: white !important;
+}
+
 .close:hover {
   color: white !important;
 }

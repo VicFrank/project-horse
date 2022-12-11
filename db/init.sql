@@ -482,6 +482,17 @@ CREATE TABLE IF NOT EXISTS votes (
 );
 
 --------------------------------------------------------------------------------
+-- Announcements
+--------------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS announcements;
+CREATE TABLE IF NOT EXISTS announcements (
+  language TEXT PRIMARY KEY,
+  text TEXT,
+  link TEXT,
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+--------------------------------------------------------------------------------
 -- Misc
 --------------------------------------------------------------------------------
 
