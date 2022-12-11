@@ -63,7 +63,7 @@ export default {
         labels: this.data.map((item) => item.bp_level),
         datasets: [
           {
-            label: "Level",
+            label: "Players",
             data: this.data.map((item) => item.count),
             backgroundColor: "#00b5ad",
           },
