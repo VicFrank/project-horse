@@ -32,6 +32,58 @@ module.exports = {
     }
   },
 
+  async getLogsForPlayer(steamID) {
+    try {
+      const { rows } = await query(
+        `
+        SELECT * FROM player_logs
+        WHERE steam_id = $1
+        ORDER BY log_time DESC
+      `,
+        [steamID]
+      );
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getLogsOfTypeForPlayer(steamID, type) {
+    try {
+      const { rows } = await query(
+        `
+        SELECT * FROM player_logs
+        WHERE steam_id = $1 AND log_event = $2
+        ORDER BY log_time DESC
+      `,
+        [steamID, type]
+      );
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getLastLogEvent(steamID, event) {
+    try {
+      const { rows } = await query(
+        `
+        SELECT * FROM player_logs
+        WHERE steam_id = $1 AND log_event = $2
+        ORDER BY log_time DESC
+      `,
+        [steamID, event]
+      );
+      return rows[0];
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  // ------------------------------------
+  // Stripe/Paypal Payment logs
+  // ------------------------------------
+
   async getPaypalPayments() {
     try {
       const { rows } = await query(`
@@ -181,54 +233,6 @@ module.exports = {
         WHERE log_event = 'paypal'
           AND log_data->'capture'->'result'->'payment_source'->'paypal'->>'email_address' = $1`,
         [email]
-      );
-      return rows[0];
-    } catch (error) {
-      throw error;
-    }
-  },
-
-  async getLogsForPlayer(steamID) {
-    try {
-      const { rows } = await query(
-        `
-        SELECT * FROM player_logs
-        WHERE steam_id = $1
-        ORDER BY log_time DESC
-      `,
-        [steamID]
-      );
-      return rows;
-    } catch (error) {
-      throw error;
-    }
-  },
-
-  async getLogsOfTypeForPlayer(steamID, type) {
-    try {
-      const { rows } = await query(
-        `
-        SELECT * FROM player_logs
-        WHERE steam_id = $1 AND log_event = $2
-        ORDER BY log_time DESC
-      `,
-        [steamID, type]
-      );
-      return rows;
-    } catch (error) {
-      throw error;
-    }
-  },
-
-  async getLastLogEvent(steamID, event) {
-    try {
-      const { rows } = await query(
-        `
-        SELECT * FROM player_logs
-        WHERE steam_id = $1 AND log_event = $2
-        ORDER BY log_time DESC
-      `,
-        [steamID, event]
       );
       return rows[0];
     } catch (error) {

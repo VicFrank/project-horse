@@ -8,7 +8,7 @@ const cache = apicache.middleware;
 router.get("/", cache("5 minutes"), async (req, res) => {
   try {
     const battlePass = await battlePasses.getActiveBattlePass();
-    res.status(201).send(battlePass);
+    res.status(200).send(battlePass);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: error.toString() });
@@ -21,7 +21,17 @@ router.get("/levels", cache("5 minutes"), async (req, res) => {
     const levels = await battlePasses.getBattlePassLevelsAndRewards(
       battlePass.battle_pass_id
     );
-    res.status(201).send(levels);
+    res.status(200).send(levels);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.toString() });
+  }
+});
+
+router.get("/level_stats", cache("5 minutes"), async (req, res) => {
+  try {
+    const result = await battlePasses.getPlayerLevelFreqs();
+    res.status(200).send(result);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: error.toString() });

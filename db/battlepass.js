@@ -327,6 +327,23 @@ module.exports = {
     }
   },
 
+  async getPlayerLevelFreqs() {
+    try {
+      const { rows } = await query(
+        `
+        SELECT count(*) :: integer, bp_level
+        FROM player_battle_pass
+        WHERE bp_level > 1
+        GROUP BY bp_level
+        ORDER BY bp_level
+        `
+      );
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async deleteBattlePasses() {
     try {
       await tx.default(pool, async (db) => {

@@ -25,7 +25,7 @@ import Game from "../components/pages/games/Game";
 
 const Gods = () => import("../components/pages/stats/Gods");
 const Abilities = () => import("../components/pages/stats/Abilities");
-const Cosmetics = () => import("../components/pages/stats/Cosmetics");
+const Cosmetics = () => import("../components/pages/stats/cosmetics/Cosmetics");
 
 const Profile = () => import("../components/pages/profile/Profile");
 const MatchHistory = () => import("../components/pages/profile/MatchHistory");

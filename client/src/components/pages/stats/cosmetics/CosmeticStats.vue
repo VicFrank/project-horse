@@ -51,8 +51,8 @@
 </template>
 
 <script>
-import PercentBar from "../../utility/PercentBar.vue";
-import { percentage, round } from "../../../filters/filters";
+import PercentBar from "../../../utility/PercentBar.vue";
+import { percentage, round } from "../../../../filters/filters";
 
 export default {
   components: {
