@@ -59,7 +59,7 @@
           <li>
             <b>Text Color:</b> Use the
             <code>style="color: #FF0000"</code> attribute to change the color of
-            text. For example, &lt;span&gt; style="color: #FF0000"&gt;<code
+            text. For example, &lt;span style="color: #FF0000"&gt;<code
               style="color: #ff0000"
               >Red</code
             >&lt;/span&gt; will create red text.
@@ -67,7 +67,7 @@
           <li>
             <b>Text Size:</b> Use the
             <code>style="font-size: 20px"</code> attribute to change the size of
-            text. For example, &lt;span&gt; style="font-size: 20px"&gt;<code
+            text. For example, &lt;span style="font-size: 20px"&gt;<code
               style="font-size: 20px"
               >Big</code
             >&lt;/span&gt; will create big text.
