@@ -198,6 +198,21 @@ module.exports = {
     }
   },
 
+  async getPaypalPaymentsByCountry() {
+    try {
+      const { rows } = await query(`
+      SELECT log_data->'capture'->'result'->'payment_source'->'paypal'->'address'->>'country_code' AS country_code,
+        SUM((log_data->'capture'->'result'->'purchase_units'->0->'payments'->'captures'->0->'seller_receivable_breakdown'->'net_amount'->>'value') :: DECIMAL) AS net_amount
+        FROM player_logs
+        WHERE log_event = 'paypal'
+        GROUP BY log_data->'capture'->'result'->'payment_source'->'paypal'->'address'->>'country_code'
+        ORDER BY net_amount DESC;`);
+      return rows[0].amount;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async getStripePayments() {
     try {
       const { rows } = await query(`
@@ -219,6 +234,22 @@ module.exports = {
         SELECT SUM((log_data->'intent'->>'amount') :: DECIMAL * 0.01) AS amount
         FROM player_logs
         WHERE log_event = 'stripe';`);
+      return rows[0].amount;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getStripePaymentsByCountry() {
+    try {
+      // the null countries result is alipay
+      const { rows } = await query(`
+      SELECT SUM((log_data->'intent'->>'amount') :: DECIMAL * 0.01) AS amount,
+        log_data->'intent'->'charges'->'data'->0->'payment_method_details'->'card'->>'country' AS country
+      FROM player_logs
+      WHERE log_event = 'stripe'
+      GROUP BY log_data->'intent'->'charges'->'data'->0->'payment_method_details'->'card'->>'country'
+      ORDER BY amount DESC;`);
       return rows[0].amount;
     } catch (error) {
       throw error;
