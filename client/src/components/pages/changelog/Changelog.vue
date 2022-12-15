@@ -2,8 +2,50 @@
   <div style="max-width: 1200px">
     <h1 class="page-title" v-t="'changelog.page_title'"></h1>
     <div class="pl-3 change-log">
-      <h3>Featured</h3>
+      <h2>Update 3.5 12/15/2022</h2>
+      <h3>General</h3>
+      <ul>
+        <li>Matchmaking system unlocked for all ranks. Visit on our website: <a href="https://abilityarena.com/matchmaking">https://abilityarena.com/matchmaking</a></li>
+        <li>By using the website you will be gaining MMR at a higher rate. To organize play sessions, be sure to join
+          <a href="https://discord.gg/NRDjuTPNvS">our discord</a>
+        </li>
+        <li>Added Announcement Card</li>
+        <li>Many tooltips and keywords fixed</li>
+        <li>Added Pure Damage keyword</li>
+      </ul>
 
+      <h3>Gods</h3>
+      <ul>
+        <li>Added Muerta God (unlocked for Free)</li>
+        <ul>
+          <li>Ability: Phantom's Touch</li>
+          <li>Type: Active</li>
+          <li>Description: Every 8 attacks the selected unit will deal a 100% splash magic damage critical strike in a
+            500 AOE. The critical strike damage is based on how much spell damage your team has dealt to enemy heroes.
+            When the 8th attack lands, the crit percentage resets.</li>
+        </ul>
+        <li>Boneless Aghanim shop upgrades now cost 20% less</li>
+        <li>Kanna self attack speed buff from 9 per summon to 5</li>
+        <li>Kanna summon attack speed from 4.5 to 5</li>
+        <li>Selemene spell amp per mana from 0.02% to 0.015%</li>
+      </ul>
+
+      <h3>Spells</h3>
+      <ul>
+        <li>Boundless Strike cooldown fixed to be 20/16/8 again</li>
+        <li>Burrowstrike AI fixed to hit multiple targets</li>
+        <li>Chaotic Offering Gaben fixed to spawn both golems properly</li>
+        <li>Essence Shift fixed to have independent stacks</li>
+        <li>Essence Shift stack duration from 6/12/24 to 5/10/20</li>
+        <li>Leech Seed re-enabled</li>
+        <li>Lifebreak re-enabled and fixed</li>
+        <li>Nature's Call fixed to have proper HP gains</li>
+        <li>Sidekick will not longer cast on an illusion instead of the actual hero</li>
+        <li>Fixed break mechanic not working on Dragon's Blood, Essence Flux, and Essence Shift</li>
+      </ul>
+
+      <h2>Update 3.0 12/1/2022</h2>
+      <h3>Featured</h3>
       <ul>
         <li>8 brand new Gods!</li>
         <li>New Galaxy God Chest (no more duplicate Gods)</li>
@@ -404,6 +446,7 @@ p {
   font-size: 18px;
   line-height: 1.4;
 }
+
 li {
   line-height: 1.4;
 }
