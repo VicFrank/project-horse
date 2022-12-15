@@ -16,10 +16,6 @@
     <div v-if="locked" class="text-muted text-center">
       This lobby will be locked for 5 minutes while players join the Dota lobby.
     </div>
-    <div v-if="locked" class="text-muted text-center mb-2">
-      If a game starts with these 8 players within the next 10 minutes, it will
-      be counted as a matchmade game.
-    </div>
     <p v-if="lobbyPassword && isHost" class="text-muted text-center">
       As the host, it is your job to create the lobby with this password
     </p>
