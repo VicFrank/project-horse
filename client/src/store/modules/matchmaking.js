@@ -27,6 +27,8 @@ const state = {
   chatMessages: [],
   lobbyPlayers: [],
   lobbyPassword: null,
+  lobbyMinRank: null,
+  lobbyMaxRank: null,
   lobbyRegion: "",
   isLobbyLocked: false,
   timeSinceLock: null,
@@ -44,6 +46,8 @@ const getters = {
   inLobby: (state) => state.inLobby,
   isLobbyLocked: (state) => state.isLobbyLocked,
   lobbyPassword: (state) => state.lobbyPassword,
+  lobbyMinRank: (state) => state.lobbyMinRank,
+  lobbyMaxRank: (state) => state.lobbyMaxRank,
   isHost: (state) => state.isHost,
 
   lobbyPlayers: (state) => state.lobbyPlayers,
@@ -141,6 +145,8 @@ const mutations = {
       state.isHost = player.is_host;
       state.ready = player.ready;
       state.lobbyPassword = lobby.lobby_password;
+      state.lobbyMinRank = lobby.min_rank;
+      state.lobbyMaxRank = lobby.max_rank;
       state.lobbyRegion = lobby.region;
       state.isLobbyLocked = lobby.locked;
       state.timeSinceLock = lobby.time_since_lock;

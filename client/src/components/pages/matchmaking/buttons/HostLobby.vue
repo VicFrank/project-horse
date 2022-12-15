@@ -26,36 +26,32 @@
             required
           ></b-form-select>
         </b-form-group>
-        <!-- <b-form-group
-          :state="mmrMinState"
-          :invalid-feedback="`Must be lower than ${mmr}`"
-          label="Min MMR"
-          label-for="mmr-min"
+        <b-form-group
+          :state="minRankState"
+          label="Min Rank"
+          label-for="min-rank"
+          invalid-feedback="Required"
         >
-          <b-form-input
-            :max="mmr"
-            :min="0"
-            id="mmr-min"
-            v-model="mmrMin"
-            type="number"
+          <b-form-select
+            id="min-rank"
+            v-model="minRank"
+            :options="minRanks"
             required
-          ></b-form-input>
+          ></b-form-select>
         </b-form-group>
         <b-form-group
-          :state="mmrMaxState"
-          :invalid-feedback="`Must be between ${mmr} and ${mmr + 400}`"
-          label="Max MMR"
-          label-for="mmr-max"
+          :state="maxRankState"
+          label="Max Rank"
+          label-for="max-rank"
+          invalid-feedback="Required"
         >
-          <b-form-input
-            :max="mmr + 400"
-            :min="mmr"
-            id="mmr-max"
-            v-model="mmrMax"
-            type="number"
+          <b-form-select
+            id="max-rank"
+            v-model="maxRank"
+            :options="maxRanks"
             required
-          ></b-form-input> 
-        </b-form-group>-->
+          ></b-form-select>
+        </b-form-group>
       </form>
     </b-modal>
   </div>
@@ -64,16 +60,15 @@
 <script>
 export default {
   data() {
-    const mmr = this.$store.state.auth.mmr;
-    const mmrFloor = mmr ? Math.floor(mmr / 100) * 100 : 1000;
-    const mmrCeil = mmr ? Math.ceil(mmr / 100) * 100 : 1000;
+    const ladderMMR = this.$store.state.auth.ladderMMR;
+    console.log(ladderMMR < 500 && ladderMMR > 1000);
     return {
-      mmrMin: mmrFloor,
-      mmrMax: mmrCeil,
+      minRank: null,
+      maxRank: null,
       region: null,
       regionState: null,
-      mmrMinState: null,
-      mmrMaxState: null,
+      minRankState: null,
+      maxRankState: null,
       regions: [
         { text: "Select One", value: null },
         "North America",
@@ -83,29 +78,72 @@ export default {
         "South East Asia",
         "China",
       ],
+      minRanks: [
+        { text: "Select One", value: null },
+        { text: "Herald", value: 0 },
+        { text: "Guardian", value: 500, disabled: ladderMMR < 500 },
+        { text: "Crusader", value: 1000, disabled: ladderMMR < 1000 },
+        { text: "Archon", value: 1500, disabled: ladderMMR < 1500 },
+        { text: "Legend", value: 2000, disabled: ladderMMR < 2000 },
+        { text: "Ancient", value: 2500, disabled: ladderMMR < 2500 },
+        { text: "Divine", value: 3500, disabled: ladderMMR < 3500 },
+        { text: "Immortal", value: 99999, disabled: ladderMMR < 4500 },
+      ],
+      maxRanks: [
+        { text: "Select One", value: null },
+        { text: "Herald", value: 0, disabled: ladderMMR >= 500 },
+        {
+          text: "Guardian",
+          value: 500,
+          disabled: ladderMMR < 500 || ladderMMR >= 1000,
+        },
+        {
+          text: "Crusader",
+          value: 1000,
+          disabled: ladderMMR < 1000 || ladderMMR >= 1500,
+        },
+        {
+          text: "Archon",
+          value: 1500,
+          disabled: ladderMMR < 1500 || ladderMMR >= 2000,
+        },
+        {
+          text: "Legend",
+          value: 2000,
+          disabled: ladderMMR < 2000 || ladderMMR >= 2500,
+        },
+        {
+          text: "Ancient",
+          value: 2500,
+          disabled: ladderMMR < 2500 || ladderMMR >= 3500,
+        },
+        {
+          text: "Divine",
+          value: 3500,
+          disabled: ladderMMR < 3500 || ladderMMR >= 4500,
+        },
+        { text: "Immortal", value: 99999, disabled: ladderMMR < 4500 },
+      ],
     };
   },
   computed: {
-    mmr() {
-      return this.$store.state.auth.mmr;
+    ladderMMR() {
+      return this.$store.state.auth.ladderMMR;
     },
   },
   methods: {
     checkFormValidity() {
       const valid = this.$refs.form.checkValidity();
       this.regionState = this.region != null;
-      // this.mmrMinState = this.mmrMin != null && this.mmrMin <= this.mmr;
-      // this.mmrMaxState =
-      //   this.mmrMax != null &&
-      //   this.mmrMax >= this.mmr &&
-      //   this.mmrMax <= this.mmr + 200;
-      return valid;
+      this.minRankState = this.minRank != null;
+      this.maxRankState = this.minRank != null;
+      return valid && this.minRankState && this.maxRankState;
     },
     resetModal() {
       this.region = null;
       this.regionState = null;
-      this.mmrMinState = null;
-      this.mmrMaxState = null;
+      this.minRankState = null;
+      this.maxRankState = null;
     },
     handleOk(bvModalEvt) {
       // Prevent modal from closing
@@ -115,6 +153,7 @@ export default {
     },
     handleSubmit() {
       // Exit when the form isn't valid
+      console.log(this.checkFormValidity());
       if (!this.checkFormValidity()) {
         return;
       }
@@ -124,8 +163,8 @@ export default {
       });
       this.$store.dispatch("hostLobby", {
         region: this.region,
-        mmrMin: 0,
-        mmrMax: 9999,
+        mmrMin: Math.min(4500, this.minRank),
+        mmrMax: this.maxRank,
       });
     },
   },

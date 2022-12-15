@@ -41,6 +41,16 @@ export function getRankString(rank) {
       return `${rank}th`;
   }
 }
+export function mmrToRank(mmr) {
+  if (mmr < 500) return "Herald";
+  if (mmr < 1000) return "Guardian";
+  if (mmr < 1500) return "Crusader";
+  if (mmr < 2000) return "Archon";
+  if (mmr < 2500) return "Legend";
+  if (mmr < 3500) return "Ancient";
+  if (mmr < 4500) return "Divine";
+  else return "Immortal";
+}
 export function round(value, decimals) {
   {
     if (!value) {

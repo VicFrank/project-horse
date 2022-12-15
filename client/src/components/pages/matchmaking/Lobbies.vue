@@ -1,10 +1,7 @@
 <template>
   <div class="text-center">
     <h1 class="blue">Matchmaking</h1>
-    <div class="text-center" v-if="ladderMMR < 4500">
-      <p class="text-muted">You must be Immortal to join these lobbies</p>
-    </div>
-    <HostLobby v-if="ladderMMR >= 4500" class="mb-3" />
+    <HostLobby class="mb-3" />
     <LobbyList key="Lobbies" class="lobbies-list" />
   </div>
 </template>

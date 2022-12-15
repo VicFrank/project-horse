@@ -79,8 +79,10 @@ function sendError(steamID, errorMessage) {
 }
 
 async function makeLobby(steamID, avatar, region, minRank, maxRank) {
+  if (minRank == null || maxRank == null)
+    return sendError(steamID, "invalid_data");
   // check to see if the player can make this lobby
-  const isInMMRRange = await lobbyPlayers.isInMMRRange(
+  const isInMMRRange = await lobbyPlayers.isInLadderMMRRange(
     steamID,
     minRank,
     maxRank
@@ -131,7 +133,7 @@ async function joinLobby(steamID, lobbyID, avatar) {
     return;
   }
 
-  const meetsRequirements = await lobbyPlayers.isInMMRRange(
+  const meetsRequirements = await lobbyPlayers.isInLadderMMRRange(
     steamID,
     lobby.min_rank,
     lobby.max_rank
@@ -395,9 +397,10 @@ async function runTests() {
   // await leaveLobby(player5);
   // await leaveLobby(player6);
   // await leaveLobby(player7);
+  // await leaveLobby(player8);
   // await leaveLobby(me);
 
-  // const lobbyID = await makeLobby(player1, null, "US West", 0, 9999);
+  // const lobbyID = await makeLobby(player1, null, "US West", 4500, 99999);
 
   // await joinLobby(player1, lobbyID, null);
   // await joinLobby(player2, lobbyID, null);

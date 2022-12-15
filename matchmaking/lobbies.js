@@ -60,7 +60,7 @@ module.exports = {
 
   async isLobbyLocked(lobbyID) {
     const lobby = await this.getLobby(lobbyID);
-    return false;
+    return lobby.locked;
   },
 
   async lockLobby(lobbyID) {
@@ -155,7 +155,6 @@ module.exports = {
   },
 
   async deleteLobby(lobbyID) {
-    console.log(`Deleting Lobby ${lobbyID}`);
     let queryText = `DELETE FROM lobby_players WHERE lobby_id = $1`;
     await query(queryText, [lobbyID]);
     queryText = `DELETE FROM lobbies WHERE lobby_id = $1`;
