@@ -94,32 +94,32 @@ export default {
         { text: "Herald", value: 500, disabled: ladderMMR >= 500 },
         {
           text: "Guardian",
-          value: 1000,
+          value: 999,
           disabled: ladderMMR < 500 || ladderMMR >= 1000,
         },
         {
           text: "Crusader",
-          value: 1500,
+          value: 1499,
           disabled: ladderMMR < 1000 || ladderMMR >= 1500,
         },
         {
           text: "Archon",
-          value: 2000,
+          value: 1999,
           disabled: ladderMMR < 1500 || ladderMMR >= 2000,
         },
         {
           text: "Legend",
-          value: 2500,
+          value: 2499,
           disabled: ladderMMR < 2000 || ladderMMR >= 2500,
         },
         {
           text: "Ancient",
-          value: 3500,
+          value: 3499,
           disabled: ladderMMR < 2500 || ladderMMR >= 3500,
         },
         {
           text: "Divine",
-          value: 4500,
+          value: 4499,
           disabled: ladderMMR < 3500 || ladderMMR >= 4500,
         },
         { text: "Immortal", value: 99999, disabled: ladderMMR < 4500 },
