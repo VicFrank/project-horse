@@ -37,6 +37,7 @@
         <li>Chaotic Offering Gaben fixed to spawn both golems properly</li>
         <li>Essence Shift fixed to have independent stacks</li>
         <li>Essence Shift stack duration from 6/12/24 to 5/10/20</li>
+        <li>Eye of the Storm Super Lightning Rod buff from 50% values to 33%</li>
         <li>Leech Seed re-enabled</li>
         <li>Lifebreak re-enabled and fixed</li>
         <li>Nature's Call fixed to have proper HP gains</li>
