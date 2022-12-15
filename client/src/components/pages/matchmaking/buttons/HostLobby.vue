@@ -91,35 +91,35 @@ export default {
       ],
       maxRanks: [
         { text: "Select One", value: null },
-        { text: "Herald", value: 0, disabled: ladderMMR >= 500 },
+        { text: "Herald", value: 500, disabled: ladderMMR >= 500 },
         {
           text: "Guardian",
-          value: 500,
+          value: 1000,
           disabled: ladderMMR < 500 || ladderMMR >= 1000,
         },
         {
           text: "Crusader",
-          value: 1000,
+          value: 1500,
           disabled: ladderMMR < 1000 || ladderMMR >= 1500,
         },
         {
           text: "Archon",
-          value: 1500,
+          value: 2000,
           disabled: ladderMMR < 1500 || ladderMMR >= 2000,
         },
         {
           text: "Legend",
-          value: 2000,
+          value: 2500,
           disabled: ladderMMR < 2000 || ladderMMR >= 2500,
         },
         {
           text: "Ancient",
-          value: 2500,
+          value: 3500,
           disabled: ladderMMR < 2500 || ladderMMR >= 3500,
         },
         {
           text: "Divine",
-          value: 3500,
+          value: 4500,
           disabled: ladderMMR < 3500 || ladderMMR >= 4500,
         },
         { text: "Immortal", value: 99999, disabled: ladderMMR < 4500 },

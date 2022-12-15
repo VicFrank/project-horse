@@ -120,7 +120,7 @@ module.exports = {
 
   async isInLadderMMRRange(steamID, minRank, maxRank) {
     const mmr = await this.getLadderMMR(steamID);
-    if (!mmr) return false;
+    if (mmr == null) return false;
     const mmrFloor = getCurrentRankFloor(mmr);
     if (mmrFloor < minRank || mmrFloor > maxRank) return false;
     return true;
