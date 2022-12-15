@@ -81,6 +81,7 @@ const actions = {
   },
   hostLobby({ commit }, message) {
     commit("HOST_LOBBY", message);
+    commit("SET_LOBBY_RANKS", { min: message.mmrMin, max: message.mmrMax });
   },
   // this is for calling from the websocket plugin
   // to set inlobby state without side effects
@@ -186,6 +187,10 @@ const mutations = {
   SET_LOBBIES(state, lobbies) {
     state.loadingLobbies = false;
     state.lobbies = lobbies;
+  },
+  SET_LOBBY_RANKS(state, { min, max }) {
+    state.lobbyMinRank = min;
+    state.lobbyMaxRank = max;
   },
   HOSTED_LOBBY(state) {
     state.inLobby = true;

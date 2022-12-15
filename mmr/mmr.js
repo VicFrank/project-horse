@@ -122,4 +122,5 @@ module.exports = {
   getMatchLadderRatingChange,
   getRankBadge,
   getRankPips,
+  getCurrentRankFloor,
 };

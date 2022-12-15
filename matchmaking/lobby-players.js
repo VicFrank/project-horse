@@ -1,6 +1,7 @@
 const { query } = require("../db/index");
 const { LOBBY_LOCK_TIME } = require("../common/constants");
 const Players = require("../db/players");
+const { getCurrentRankFloor } = require("../mmr/mmr");
 
 module.exports = {
   async getLobby(steamID) {
@@ -120,7 +121,8 @@ module.exports = {
   async isInLadderMMRRange(steamID, minRank, maxRank) {
     const mmr = await this.getLadderMMR(steamID);
     if (!mmr) return false;
-    if (mmr < minRank || mmr > maxRank) return false;
+    const mmrFloor = getCurrentRankFloor(mmr);
+    if (mmrFloor < minRank || mmrFloor > maxRank) return false;
     return true;
   },
 };
