@@ -5,8 +5,15 @@
       <h2>Update 3.5 12/15/2022</h2>
       <h3>General</h3>
       <ul>
-        <li>Matchmaking system unlocked for all ranks. Visit on our website: <a href="https://abilityarena.com/matchmaking">https://abilityarena.com/matchmaking</a></li>
-        <li>By using the website you will be gaining MMR at a higher rate. To organize play sessions, be sure to join
+        <li>
+          Matchmaking system unlocked for all ranks. Visit on our website:
+          <a href="https://abilityarena.com/matchmaking"
+            >https://abilityarena.com/matchmaking</a
+          >
+        </li>
+        <li>
+          By using the website you will be gaining MMR at a higher rate. To
+          organize play sessions, be sure to join
           <a href="https://discord.gg/NRDjuTPNvS">our discord</a>
         </li>
         <li>Added Announcement Card</li>
@@ -20,9 +27,13 @@
         <ul>
           <li>Ability: Phantom's Touch</li>
           <li>Type: Active</li>
-          <li>Description: Every 8 attacks the selected unit will deal a 100% splash magic damage critical strike in a
-            500 AOE. The critical strike damage is based on how much spell damage your team has dealt to enemy heroes.
-            When the 8th attack lands, the crit percentage resets.</li>
+          <li>
+            Description: Every 8 attacks the selected unit will deal a 100%
+            splash magic damage critical strike in a 500 AOE. The critical
+            strike damage is based on how much spell damage your team has dealt
+            to enemy heroes. When the 8th attack lands, the crit percentage
+            resets.
+          </li>
         </ul>
         <li>Boneless Aghanim shop upgrades now cost 20% less</li>
         <li>Kanna self attack speed buff from 9 per summon to 5</li>
@@ -40,8 +51,14 @@
         <li>Leech Seed re-enabled</li>
         <li>Lifebreak re-enabled and fixed</li>
         <li>Nature's Call fixed to have proper HP gains</li>
-        <li>Sidekick will not longer cast on an illusion instead of the actual hero</li>
-        <li>Fixed break mechanic not working on Dragon's Blood, Essence Flux, and Essence Shift</li>
+        <li>
+          Sidekick will not longer cast on an illusion instead of the actual
+          hero
+        </li>
+        <li>
+          Fixed break mechanic not working on Dragon's Blood, Essence Flux, and
+          Essence Shift
+        </li>
       </ul>
 
       <h2>Update 3.0 12/1/2022</h2>
@@ -247,6 +264,9 @@
           Eye of the Storm Super additionally grants Lightning Rod: caster also
           gets hit by Eye of the Storm, gaining the opposite effects (healing
           and +armor) for half value.
+        </li>
+        <li>
+          Eye of the Storm Super Lightning Rod buff from 50% values to 33%
         </li>
         <li>Fade Bolt Super +10% damage reduction to +0% and -4s CDR to 0s</li>
         <li>Fade Bolt Gaben additionally grants -4s CDR</li>

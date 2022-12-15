@@ -8,7 +8,7 @@
           :alt="player.username"
           class="mr-2"
         />
-        <i v-if="player.is_host" class="fas fa-crown mr-1"></i>
+        <i v-if="player.is_host" class="fas fa-crown mr-1" title="Host"></i>
         {{ player.username }}
         <RankBadge
           v-if="player.badge"
