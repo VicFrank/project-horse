@@ -65,13 +65,13 @@
         "id": "sorceryVolumeFour",
         "name": "Sorcery for Dummies: Volume 4",
         "values": [
-          "SHOP LEVEL FOR TIER 1: 2",
-          "SHOP LEVEL FOR TIER 2: 4",
-          "SHOP LEVEL FOR TIER 3: 5"
+          "SHOP LEVEL TIER 1: 2",
+          "SHOP LEVEL TIER 2: 4",
+          "SHOP LEVEL TIER 3: 5"
         ],
         "type_string": "Passive",
         "type": "passive",
-        "desc": "At the beginning of every round a random ability will be upgraded to a higher threshold temporarily. This effect will revert at the end of the round. You can have up to 3 abilities upgraded depending on the shop level. Only one spell can be upgraded per tier.\n        \n        Shop Level 2: Unlocks Tier 1 - upgrades one skill from 1-2 points to 3\n        Shop Level 3: Unlocks Tier 2 - upgrades one skill from 3-5 points to 6\n        Shop Level 4: Unlocks Tier 3 - upgrades one skill from 6-8 points to 9\n        "
+        "desc": "For 1 round, a random ability will be upgraded to a higher threshold.\n\t\t\n\t\tYou can have up to 3 abilities upgraded depending on the shop level.\n        \n        Shop Level 2: Upgrades 1 skill from 1-2 points to 3\n        Shop Level 4: Upgrades 1 skill from 3-5 points to 6\n        Shop Level 5: Upgrades 1 skill from 6-8 points to 9\n        "
       }
     ]
   },
@@ -110,11 +110,12 @@
         "id": "sorceryVolumeThree",
         "name": "Sorcery For Dummies: Volume 3",
         "values": [
-          "SHOP SPELL SLOTS: 4 / 6 / 8 / 10 / 12"
+          "SHOP SPELL SLOTS: 4 / 6 / 8 / 10 / 12",
+          "SHOP UPGRADE COST REDUCTION: 20%"
         ],
         "type_string": "Passive",
         "type": "passive",
-        "desc": "Ultimates never enter your pool of spells. You gain extra shop slots at shop level 3."
+        "desc": "Ultimates never enter your pool of spells. You gain extra shop slots at shop level 3, and shop upgrades cost less."
       }
     ]
   },
@@ -213,28 +214,6 @@
         "type_string": "Active (Unit Target)",
         "type": "unitTarget",
         "desc": "Selected hero will gain HP per round. They will also return a percent of damage dealt by physical attack. When a new hero is selected, the entire HP buff moves to them."
-      }
-    ]
-  },
-  {
-    "id": "chaosGod",
-    "name": "Chaos God",
-    "universe": "none",
-    "complexity": "intermediate",
-    "unlock": "none",
-    "unlock_text": "Why are you even seeing this God?",
-    "health": 200,
-    "powers": [
-      {
-        "id": "questionMark",
-        "name": "?",
-        "values": [
-          "CURRENT HP DAMAGE: 2%",
-          "DAMAGE PER SECOND: 50"
-        ],
-        "type_string": "Passive",
-        "type": "passive",
-        "desc": "Magical damage per second is dealt to both allies and enemies (not lethal). This is a temporary God that will be removed from your armory after Season 2"
       }
     ]
   },
@@ -418,11 +397,11 @@
         "id": "preyOnTheWeak",
         "name": "Prey on the Weak",
         "values": [
-          "ATTACK SPEED PER SUMMON: 9"
+          "ATTACK SPEED PER SUMMON: 5"
         ],
         "type_string": "Active (Unit Target)",
         "type": "unitTarget",
-        "desc": "Selected hero gains 9 attack speed for each ally summon. Summons gain half of this value. You will not lose attack speed if any summons die."
+        "desc": "Selected hero gains 5 attack speed for each ally summon. Summons also gain this amount. You will not lose attack speed if any summons die."
       }
     ]
   },
@@ -492,6 +471,29 @@
         "type_string": "Active (Unit Target)",
         "type": "unitTarget",
         "desc": "Once selected unit is at 50% HP, they will automatically jump inside a random enemy hero for duration seconds, dealing physical attacks every second. It will also heal you for 10% of Max HP per second. Once the duration is over, the unit will pop out, dealing 150 damage in a 400 AOE."
+      }
+    ]
+  },
+  {
+    "id": "muerta",
+    "name": "Muerta",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "free",
+    "unlock_text": "This God is free and permanently unlocked",
+    "health": 200,
+    "powers": [
+      {
+        "id": "phantomsTouch",
+        "name": "Phantom's Touch",
+        "values": [
+          "ATTACKS TO PROC: 8",
+          "CRIT PER DAMAGE: 0.1%",
+          "RADIUS: 500"
+        ],
+        "type_string": "Active (Unit Target)",
+        "type": "unitTarget",
+        "desc": "Description: Every 8 attacks the selected unit will deal a magic damage splash critical strike. The critical strike damage is based on how much spell damage your team has dealt to enemy heroes. When the 8th attack lands, the crit percentage is reset."
       }
     ]
   },
@@ -688,11 +690,11 @@
         "id": "darkMoonBlessing",
         "name": "Dark Moon Blessing",
         "values": [
-          "SPELL AMP: 0.02%"
+          "SPELL AMP: 0.015%"
         ],
         "type_string": "Passive",
         "type": "passive",
-        "desc": "Every time an ally hero spends mana, all your heroes gains 0.02% spell amplification. Buff resets every round."
+        "desc": "Every time an ally hero spends mana, all your heroes gains 0.015% spell amplification. Buff resets every round."
       }
     ]
   },
@@ -759,7 +761,7 @@
         ],
         "type_string": "Active (Unit Target)",
         "type": "unitTarget",
-        "desc": "For each 500 spell damage applied an enemy unit, a level 2 Sticky Bomb is attached to them."
+        "desc": "For each 350 spell damage applied an enemy unit, a level 2 Sticky Bomb is attached to them."
       },
       {
         "id": "techiesReactiveTazer",
