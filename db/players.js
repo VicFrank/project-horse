@@ -1256,9 +1256,8 @@ module.exports = {
       const unclaimedLoginQuests = loginQuests.filter(
         (quest) => !quest.claimed && quest.completed
       ).length;
-      const unclaimedWelcomeQuests = welcomeQuests.filter(
-        (quest) => quest.can_claim
-      ).length;
+      const unclaimedWelcomeQuests =
+        welcomeQuests?.filter((quest) => quest.can_claim)?.length || 0;
       return (
         unclaimedDailyQuests + unclaimedLoginQuests + unclaimedWelcomeQuests
       );
@@ -2947,7 +2946,7 @@ module.exports = {
         ORDER BY day ASC`,
         [steamID]
       );
-      if (rows.length == 0) return;
+      if (rows.length == 0) return [];
       const lastCompletedQuest = rows.reverse().find((quest) => quest?.claimed);
       rows.reverse();
       if (!lastCompletedQuest && rows[0]) rows[0].can_claim = true;
