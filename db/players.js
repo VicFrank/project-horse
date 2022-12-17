@@ -2947,9 +2947,10 @@ module.exports = {
         ORDER BY day ASC`,
         [steamID]
       );
-      const lastCompletedQuest = rows.reverse().find((quest) => quest.claimed);
+      if (rows.length == 0) return;
+      const lastCompletedQuest = rows.reverse().find((quest) => quest?.claimed);
       rows.reverse();
-      if (!lastCompletedQuest && rows[0]) rows[0]?.can_claim = true;
+      if (!lastCompletedQuest && rows[0]) rows[0].can_claim = true;
       else {
         const lastCompletedQuestDate = lastCompletedQuest.claim_date;
         // check if the last completed quest is at least a day old
