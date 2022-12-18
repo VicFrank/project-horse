@@ -726,9 +726,10 @@ module.exports = {
 
   async claimBattlePassReward(steamID, level) {
     try {
-      const { unlocked, battle_pass_id } = await this.getActiveBattlePass(
-        steamID
-      );
+      const { unlocked, battle_pass_id, bp_level } =
+        await this.getActiveBattlePass(steamID);
+      if (level > bp_level)
+        throw new Error("You are not high enough level to claim this reward");
       const hasClaimed = await this.hasClaimedReward(
         steamID,
         battle_pass_id,

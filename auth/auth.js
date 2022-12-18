@@ -42,7 +42,11 @@ function checkServerKey(req) {
 }
 
 function checkUserAuth(req) {
-  if (process.env.BASE_URL === "https://vicfrank.xyz") return true;
+  if (
+    process.env.BASE_URL === "https://vicfrank.xyz" ||
+    process.env.BASE_URL === "http://localhost:8080"
+  )
+    return true;
   if (checkServerKey(req)) return true;
   if (req.user?.isAdmin) return true;
   if (req.isAuthenticated()) {
