@@ -182,6 +182,15 @@
             {{ $t("navigation.matchmaking") }}
           </a>
         </li>
+        <li class="ml-2 nav-item d-none d-sm-block">
+          <a
+            href="https://cardsmith.abilityarena.com/"
+            target="_blank"
+            class="nav-link"
+          >
+            Cardsmith
+          </a>
+        </li>
       </ul>
       <div class="d-flex align-items-center ml-auto">
         <div class="d-flex align-items-center" v-if="!loggedIn">
