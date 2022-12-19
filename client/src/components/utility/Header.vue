@@ -155,6 +155,13 @@
           </b-dropdown-item>
           <b-dropdown-item
             v-if="canSeeStats"
+            to="/bodies"
+            exact-active-class="active-link"
+          >
+            Bodies
+          </b-dropdown-item>
+          <b-dropdown-item
+            v-if="canSeeStats"
             to="/cosmetics"
             exact-active-class="active-link"
           >
