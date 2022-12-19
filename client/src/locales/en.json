@@ -692,6 +692,7 @@
   "stats": {
     "abilities": "Abilities",
     "ability_name": "Ability",
+    "hero_name": "Body",
     "pick_rate": "Pick Rate",
     "first_place_rate": "1st Rate",
     "top_four_freq": "Top 4 Rate"

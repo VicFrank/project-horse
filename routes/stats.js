@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const gods = require("../db/gods");
 const abilities = require("../db/abilities");
+const bodies = require("../db/bodies");
 const apicache = require("apicache");
 const { statsManAuth } = require("../auth/auth");
 
@@ -78,5 +79,17 @@ router.get(
     }
   }
 );
+
+router.get("/bodies", statsManAuth, cache("1 hour"), async (req, res) => {
+  try {
+    const hours = parseInt(req.query.hours) || 24;
+    const minMMR = parseInt(req.query.minMMR) || 0;
+    const stats = await bodies.getBodyStats(hours, minMMR);
+    res.status(200).json(stats);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Server Error" });
+  }
+});
 
 module.exports = router;

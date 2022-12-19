@@ -112,6 +112,7 @@ CREATE TABLE IF NOT EXISTS game_player_heroes (
 DROP INDEX IF EXISTS idx_game_player_heroes_hero_name;
 CREATE INDEX idx_game_player_heroes_hero_name ON game_player_heroes (hero_name);
 CREATE INDEX idx_game_player_heroes_game_player_id ON game_player_heroes (game_player_id);
+CREATE INDEX idx_game_player_heroes_game_hero_name ON game_player_heroes (hero_name);
 
 DROP TABLE IF EXISTS gods;
 CREATE TABLE IF NOT EXISTS gods (
