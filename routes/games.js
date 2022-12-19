@@ -6,7 +6,7 @@ const apicache = require("apicache");
 
 const cache = apicache.middleware;
 
-router.get("/", async (req, res) => {
+router.get("/", auth.adminAuth, async (req, res) => {
   try {
     const limit = parseInt(req.query.limit) || 100;
     const offset = parseInt(req.query.offset) || 0;
