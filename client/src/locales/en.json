@@ -159,6 +159,7 @@
     "Name Color": "Name Color",
     "Card Frame": "God",
     "Win Streak": "Win Streak",
+    "purchased_battle_pass": "Battle Pass",
     "SFX": "SFX"
   },
   "cosmetics": {
@@ -210,6 +211,10 @@
     "hat_sidestare": "Sidestare",
     "hat_tealglasses": "Teal Glasses",
     "hat_clown_wig": "Clown Wig",
+    "bp_s1": "Battle Pass Season 1",
+    "bp_s2": "Battle Pass Season 2",
+    "bp_s3": "Battle Pass Season 3",
+    "bp_s4": "Battle Pass Season 4",
     "buy_bp": "Upgraded Battle Pass",
     "doubledown": "Double Down",
     "plus_doubledown": "Weekly Double Down",

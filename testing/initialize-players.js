@@ -236,19 +236,38 @@ async function updateGodChests() {
   }
 }
 
-async function updateLifestealer() {
+async function addOldBattlepassIcons() {
   console.log("Updating Lifestealer cards...");
   try {
-    const LifestealerChest = await Cosmetics.getCosmeticByName(
-      "card_lifestealer"
-    );
-    const bonelessChest = await Cosmetics.getCosmeticByName(
-      "card_bonelessAghanim"
-    );
-    await query(
-      "UPDATE player_cosmetics SET cosmetic_id = $2 WHERE cosmetic_id = $1",
-      [LifestealerChest.cosmetic_id, bonelessChest.cosmetic_id]
-    );
+    const { rows } = await query(`
+      SELECT * FROM player_logs
+      WHERE log_event = 'consume_item' AND log_data->>'cosmeticName' = 'buy_bp';`);
+
+    const s1 = await Cosmetics.getCosmeticByName("bp_s1");
+    const s2 = await Cosmetics.getCosmeticByName("bp_s2");
+    const s3 = await Cosmetics.getCosmeticByName("bp_s3");
+    const s4 = await Cosmetics.getCosmeticByName("bp_s4");
+    for (const row of rows) {
+      const { steamID } = row.log_data;
+      const { log_time } = row;
+      const purchaseMonth = new Date(log_time).getMonth();
+      if (purchaseMonth === 12) {
+        await Players.giveCosmeticByName(steamID, s4.cosmetic_name);
+        console.log(`Gave player Battle Pass Season 4`);
+      }
+      if (purchaseMonth === 11) {
+        await Players.giveCosmeticByName(steamID, s3.cosmetic_name);
+        console.log(`Gave player Battle Pass Season 3`);
+      }
+      if (purchaseMonth === 10) {
+        await Players.giveCosmeticByName(steamID, s2.cosmetic_name);
+        console.log(`Gave player Battle Pass Season 2`);
+      }
+      if (purchaseMonth < 10) {
+        await Players.giveCosmeticByName(steamID, s1.cosmetic_name);
+        console.log(`Gave player Battle Pass Season 1`);
+      }
+    }
   } catch (error) {
     console.log(error);
     throw error;
@@ -257,7 +276,7 @@ async function updateLifestealer() {
 
 (async () => {
   // await updateGodChests();
-  // await updateLifestealer();
   // await giveEndOfSeasonRewards();
-  await ladderReset();
+  // await ladderReset();
+  await addOldBattlepassIcons();
 })();

@@ -818,11 +818,22 @@ module.exports = {
          WHERE steam_id = $1`,
         [steamID]
       );
-
-      return true;
     } catch (error) {
       throw error;
     }
+
+    try {
+      // give them a commemorative item, but don't worry about it if it fails
+      const item = await Cosmetics.getCosmeticByName("bp_s4");
+      await this.giveCosmeticByID(steamID, item.cosmetic_id);
+      await Logs.addTransactionLog(steamID, "add_cosmetic", {
+        steamID,
+        cosmeticName: item.cosmetic_name,
+      });
+    } catch (error) {
+      console.log("Error giving battle pass item: ", error);
+    }
+    return true;
   },
 
   /**
