@@ -1181,7 +1181,7 @@ module.exports = [
     rarity: "Immortal",
   },
   {
-    name: "card_counterStrike",
+    name: "card_terrorist",
     type: "Card Frame",
     coins: -1,
     cost_usd: -1,
@@ -1453,7 +1453,7 @@ module.exports = [
     rarity: "Immortal",
   },
   {
-    name: "gold_card_counterStrike",
+    name: "gold_card_terrorist",
     type: "Card Frame",
     coins: -1,
     cost_usd: -1,

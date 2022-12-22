@@ -27,7 +27,7 @@ const gods = {
   selemene: ["darkMoonBlessing"],
   boomer: ["bileExplosion"],
   toyPudge: [],
-  counterStrike: [],
+  terrorist: [],
   glados: [],
   bonelessAghanim: ["sorceryVolumeThree"],
   chaosGod: ["questionMark"],

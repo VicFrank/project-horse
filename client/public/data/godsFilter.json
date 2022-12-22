@@ -1,1 +1,230 @@
-[{"god_name":"aghanim","free":false,"god_enabled":true,"plus_exclusive":false},{"god_name":"alchemist","free":false,"god_enabled":true,"plus_exclusive":false},{"god_name":"bloodseeker","free":true,"god_enabled":true,"plus_exclusive":false},{"god_name":"bonelessAghanim","free":false,"god_enabled":false,"plus_exclusive":false},{"god_name":"boomer","free":true,"god_enabled":true,"plus_exclusive":false},{"god_name":"brewmaster","free":true,"god_enabled":false,"plus_exclusive":false},{"god_name":"centaur","free":true,"god_enabled":true,"plus_exclusive":false},{"god_name":"chaosGod","free":false,"god_enabled":true,"plus_exclusive":false},{"god_name":"chaosGodS3","free":false,"god_enabled":false,"plus_exclusive":false},{"god_name":"cloudGod","free":true,"god_enabled":false,"plus_exclusive":false},{"god_name":"counterStrike","free":true,"god_enabled":false,"plus_exclusive":false},{"god_name":"crystalMaiden","free":false,"god_enabled":false,"plus_exclusive":false},{"god_name":"dazzle","free":true,"god_enabled":true,"plus_exclusive":false},{"god_name":"donkeyAghanim","free":false,"god_enabled":true,"plus_exclusive":false},{"god_name":"gambler","free":false,"god_enabled":true,"plus_exclusive":true},{"god_name":"glados","free":false,"god_enabled":false,"plus_exclusive":false},{"god_name":"icefrog","free":true,"god_enabled":false,"plus_exclusive":false},{"god_name":"jmuy","free":false,"god_enabled":true,"plus_exclusive":false},{"god_name":"kanna","free":true,"god_enabled":true,"plus_exclusive":false},{"god_name":"ladyAnshu","free":false,"god_enabled":true,"plus_exclusive":false},{"god_name":"legionCommander","free":true,"god_enabled":true,"plus_exclusive":false},{"god_name":"lifestealer","free":false,"god_enabled":true,"plus_exclusive":false},{"god_name":"muerta","free":false,"god_enabled":false,"plus_exclusive":false},{"god_name":"ogreMagi","free":true,"god_enabled":true,"plus_exclusive":false},{"god_name":"phantomAssassin","free":false,"god_enabled":true,"plus_exclusive":false},{"god_name":"pudge","free":true,"god_enabled":false,"plus_exclusive":false},{"god_name":"rix","free":false,"god_enabled":true,"plus_exclusive":false},{"god_name":"rubick","free":false,"god_enabled":true,"plus_exclusive":true},{"god_name":"runeGod","free":false,"god_enabled":true,"plus_exclusive":false},{"god_name":"santaGreevil","free":false,"god_enabled":false,"plus_exclusive":false},{"god_name":"selemene","free":true,"god_enabled":true,"plus_exclusive":false},{"god_name":"shopkeeper","free":false,"god_enabled":true,"plus_exclusive":false},{"god_name":"sorlaKhan","free":false,"god_enabled":true,"plus_exclusive":false},{"god_name":"spiritBreaker","free":false,"god_enabled":false,"plus_exclusive":false},{"god_name":"tinker","free":false,"god_enabled":true,"plus_exclusive":false},{"god_name":"tomeGod","free":true,"god_enabled":false,"plus_exclusive":false},{"god_name":"towerGod","free":true,"god_enabled":true,"plus_exclusive":false},{"god_name":"toyPudge","free":false,"god_enabled":false,"plus_exclusive":false}]
+[
+  {
+    "god_name": "aghanim",
+    "free": false,
+    "god_enabled": true,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "alchemist",
+    "free": false,
+    "god_enabled": true,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "bloodseeker",
+    "free": true,
+    "god_enabled": true,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "bonelessAghanim",
+    "free": false,
+    "god_enabled": false,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "boomer",
+    "free": true,
+    "god_enabled": true,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "brewmaster",
+    "free": true,
+    "god_enabled": false,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "centaur",
+    "free": true,
+    "god_enabled": true,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "chaosGod",
+    "free": false,
+    "god_enabled": true,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "chaosGodS3",
+    "free": false,
+    "god_enabled": false,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "cloudGod",
+    "free": true,
+    "god_enabled": false,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "terrorist",
+    "free": true,
+    "god_enabled": false,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "crystalMaiden",
+    "free": false,
+    "god_enabled": false,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "dazzle",
+    "free": true,
+    "god_enabled": true,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "donkeyAghanim",
+    "free": false,
+    "god_enabled": true,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "gambler",
+    "free": false,
+    "god_enabled": true,
+    "plus_exclusive": true
+  },
+  {
+    "god_name": "glados",
+    "free": false,
+    "god_enabled": false,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "icefrog",
+    "free": true,
+    "god_enabled": false,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "jmuy",
+    "free": false,
+    "god_enabled": true,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "kanna",
+    "free": true,
+    "god_enabled": true,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "ladyAnshu",
+    "free": false,
+    "god_enabled": true,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "legionCommander",
+    "free": true,
+    "god_enabled": true,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "lifestealer",
+    "free": false,
+    "god_enabled": true,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "muerta",
+    "free": false,
+    "god_enabled": false,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "ogreMagi",
+    "free": true,
+    "god_enabled": true,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "phantomAssassin",
+    "free": false,
+    "god_enabled": true,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "pudge",
+    "free": true,
+    "god_enabled": false,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "rix",
+    "free": false,
+    "god_enabled": true,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "rubick",
+    "free": false,
+    "god_enabled": true,
+    "plus_exclusive": true
+  },
+  {
+    "god_name": "runeGod",
+    "free": false,
+    "god_enabled": true,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "santaGreevil",
+    "free": false,
+    "god_enabled": false,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "selemene",
+    "free": true,
+    "god_enabled": true,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "shopkeeper",
+    "free": false,
+    "god_enabled": true,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "sorlaKhan",
+    "free": false,
+    "god_enabled": true,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "spiritBreaker",
+    "free": false,
+    "god_enabled": false,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "tinker",
+    "free": false,
+    "god_enabled": true,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "tomeGod",
+    "free": true,
+    "god_enabled": false,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "towerGod",
+    "free": true,
+    "god_enabled": true,
+    "plus_exclusive": false
+  },
+  {
+    "god_name": "toyPudge",
+    "free": false,
+    "god_enabled": false,
+    "plus_exclusive": false
+  }
+]
