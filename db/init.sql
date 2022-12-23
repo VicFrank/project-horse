@@ -29,6 +29,7 @@ DROP TABLE IF EXISTS player_login_quest_status;
 -- ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
 -- DROP INDEX IF EXISTS IDX_session_expire;
 -- CREATE INDEX "IDX_session_expire" ON "session" ("expire");
+-- CREATE INDEX "IDX_session_sid" ON "session" ("sid");
 
 CREATE TABLE IF NOT EXISTS players (
   steam_id TEXT PRIMARY KEY,
@@ -45,6 +46,7 @@ CREATE TABLE IF NOT EXISTS players (
   created_at TIMESTAMPTZ DEFAULT Now()
 );
 CREATE INDEX ix_players_mmr ON players (mmr);
+CREATE INDEX ix_players_ladder_mmr ON players (ladder_mmr);
 
 --------------------------------------------------------------------------------
 -- Settings

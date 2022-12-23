@@ -99,30 +99,6 @@ async function addCosmetics() {
         equip_group: "",
         rarity: "Immortal",
       },
-      {
-        name: "bp_s2",
-        type: "purchased_battle_pass",
-        coins: -1,
-        cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
-      },
-      {
-        name: "bp_s3",
-        type: "purchased_battle_pass",
-        coins: -1,
-        cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
-      },
-      {
-        name: "bp_s4",
-        type: "purchased_battle_pass",
-        coins: -1,
-        cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
-      },
     ]);
     console.log("Cosmetics initialized");
   } catch (error) {
