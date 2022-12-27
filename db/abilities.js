@@ -496,7 +496,7 @@ module.exports = {
         `
         WITH g AS (
           SELECT * FROM games
-          WHERE games.created_at > NOW() - $1 * INTERVAL '9999 HOUR' AND RANKED = TRUE
+          WHERE games.created_at > NOW() - $1 * INTERVAL '1 HOUR' AND RANKED = TRUE
         )
         SELECT ability_name, count(*) :: int
         FROM g
