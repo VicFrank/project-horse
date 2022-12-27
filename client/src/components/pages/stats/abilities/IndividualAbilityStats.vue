@@ -14,9 +14,9 @@
           :small="true"
           :size="48"
         ></AbilityImage>
-        <span class="ml-2">
-          {{ $t(`abilities.${data.item.ability_name}`) }}</span
-        >
+        <router-link class="ml-2" :to="`abilities/${data.item.ability_name}`">
+          {{ $t(`abilities.${data.item.ability_name}`) }}
+        </router-link>
       </div>
     </template>
     <template #cell(freq)="data">
