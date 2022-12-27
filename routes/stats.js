@@ -33,6 +33,18 @@ router.get("/gods/:god", statsManAuth, cache("1 hour"), async (req, res) => {
   }
 });
 
+router.get("/godsRollup", statsManAuth, async (req, res) => {
+  try {
+    const startDate = req.query.startDate;
+    const endDate = req.query.endDate;
+    const ranks = req.query.ranks.split(',')
+    const stats = await gods.getGodsStatsRollup(startDate, endDate, ranks);
+    res.status(200).json(stats);
+  } catch (error) {
+    res.status(500).send({ message: "Server Error" });
+  }
+});
+
 router.get("/abilities", statsManAuth, cache("1 hour"), async (req, res) => {
   try {
     const hours = parseInt(req.query.hours) || 24;
