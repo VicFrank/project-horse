@@ -35,6 +35,7 @@
         </template>
         <AbilityStats
           :showPercentages="selectedMMR == null"
+          :linkAbilities="true"
           :abilities="abilityStats"
           @created="loadAbilityStats"
         ></AbilityStats>
@@ -77,7 +78,7 @@
 </template>
 
 <script>
-import AbilityStats from "./AbilityStats.vue";
+import AbilityStats from "./abilities/AbilityStats.vue";
 import GabenStats from "./GabenStats.vue";
 import WinnerLevelStats from "./WinnerLevelStats.vue";
 

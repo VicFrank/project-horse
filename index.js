@@ -25,6 +25,7 @@ const statsRouter = require("./routes/stats");
 const godsRouter = require("./routes/gods");
 const redemptionsRouter = require("./routes/redemption-codes");
 const announcementsRouter = require("./routes/announcements");
+const abilitiesRouter = require("./routes/abilities");
 
 const websocketHandler = require("./websocket/connection");
 
@@ -143,6 +144,7 @@ app.use("/api/stats", statsRouter);
 app.use("/api/gods", godsRouter);
 app.use("/api/redemption_codes", redemptionsRouter);
 app.use("/api/announcements", announcementsRouter);
+app.use("/api/abilities", abilitiesRouter);
 
 // Websocket stuff
 const server = http.createServer(app);

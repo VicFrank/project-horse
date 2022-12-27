@@ -88,6 +88,84 @@ const getTopFourAbilityFreqs = async (hours, steamID, minMMR = 0) => {
   }
 };
 
+const getAbilityComboFreqs = async (abilityName, hours, minMMR = 0) => {
+  try {
+    const args = [abilityName, hours, minMMR];
+    const { rows } = await query(
+      `
+      WITH g AS (
+        SELECT * FROM games
+        WHERE games.created_at > NOW() - $2 * INTERVAL '1 HOUR'
+          AND RANKED = TRUE
+      )
+      -- get the other abilities on heroes that have this ability
+      SELECT ability_name, COUNT(*) AS freq
+      FROM hero_abilities
+      JOIN game_player_heroes USING (game_player_hero_id)
+      JOIN game_players USING (game_player_id)
+      JOIN g USING (game_id)
+      WHERE game_players.mmr > $3
+        AND ability_name != $1
+        AND game_player_hero_id IN (
+          SELECT game_player_hero_id
+          FROM hero_abilities
+          JOIN game_player_heroes USING (game_player_hero_id)
+          JOIN game_players USING (game_player_id)
+          JOIN g USING (game_id)
+          WHERE game_players.mmr > $3
+            AND ability_name = $1
+        )
+      GROUP BY ability_name
+      ORDER BY freq DESC
+      `,
+      args
+    );
+    return rows;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const getWinnerAbilityComboFreqs = async (abilityName, hours, minMMR = 0) => {
+  try {
+    const args = [abilityName, hours, minMMR];
+    const { rows } = await query(
+      `
+      WITH g AS (
+        SELECT * FROM games
+        WHERE games.created_at > NOW() - $2 * INTERVAL '1 HOUR'
+          AND RANKED = TRUE
+      )
+      -- get the other abilities on heroes that have this ability
+      SELECT ability_name, COUNT(*) AS freq
+      FROM hero_abilities
+      JOIN game_player_heroes USING (game_player_hero_id)
+      JOIN game_players USING (game_player_id)
+      JOIN g USING (game_id)
+      WHERE game_players.mmr > $3
+        AND game_players.place = 1
+        AND ability_name != $1
+        AND game_player_hero_id IN (
+          SELECT game_player_hero_id
+          FROM hero_abilities
+          JOIN game_player_heroes USING (game_player_hero_id)
+          JOIN game_players USING (game_player_id)
+          JOIN g USING (game_id)
+          WHERE game_players.mmr > $3
+            AND game_players.place = 1
+            AND ability_name = $1
+        )
+      GROUP BY ability_name
+      ORDER BY freq DESC
+      `,
+      args
+    );
+    return rows;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const getAbilities = async () => {
   try {
     const { rows } = await query(
@@ -117,6 +195,17 @@ const addAbilityIcons = async (list) => {
 module.exports = {
   async getAbilities() {
     return getAbilities();
+  },
+  async getAbility(abilityName) {
+    try {
+      const { rows } = await query(
+        "SELECT * from abilities WHERE ability_name = $1",
+        [abilityName]
+      );
+      return rows[0];
+    } catch (error) {
+      throw error;
+    }
   },
   async getAbilityStats(hours = 24, minMMR = 0) {
     try {
@@ -193,6 +282,44 @@ module.exports = {
             topFourAbilityFreqs.find(
               (topFourAbility) =>
                 topFourAbility.ability_name === ability.ability_name
+            )?.freq ?? 0
+          ),
+        };
+      });
+
+      return combined;
+    } catch (error) {
+      throw error;
+    }
+  },
+  async getAbilityComboStats(abilityName, hours = 24, minMMR = 0) {
+    try {
+      const abilityComboFreqs = await getAbilityComboFreqs(
+        abilityName,
+        hours,
+        minMMR
+      );
+      const winnerAbilityComboFreqs = await getWinnerAbilityComboFreqs(
+        abilityName,
+        hours,
+        minMMR
+      );
+
+      const abilities = await this.getAbilities();
+
+      // combine the two arrays
+      const combined = abilityComboFreqs.map((abilityCombo) => {
+        const icon = abilities.find(
+          (a) => a.ability_name === abilityCombo.ability_name
+        ).icon;
+        return {
+          ability_name: abilityCombo.ability_name,
+          icon,
+          freq: Number(abilityCombo.freq),
+          winner_freq: Number(
+            winnerAbilityComboFreqs.find(
+              (winnerAbility) =>
+                winnerAbility.ability_name === abilityCombo.ability_name
             )?.freq ?? 0
           ),
         };

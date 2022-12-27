@@ -14,9 +14,16 @@
           :small="true"
           :size="48"
         ></AbilityImage>
-        <span class="ml-2">{{
-          $t(`abilities.${data.item.ability_name}`)
-        }}</span>
+        <router-link
+          class="ml-2"
+          v-if="linkAbilities"
+          :to="`abilities/${data.item.ability_name}`"
+        >
+          {{ $t(`abilities.${data.item.ability_name}`) }}
+        </router-link>
+        <span class="ml-2" v-else>
+          {{ $t(`abilities.${data.item.ability_name}`) }}</span
+        >
       </div>
     </template>
     <template #cell(freq)="data">
@@ -91,9 +98,9 @@
 </template>
 
 <script>
-import AbilityImage from "../games/components/AbilityImage.vue";
-import PercentBar from "../../utility/PercentBar.vue";
-import { percentage } from "../../../filters/filters";
+import AbilityImage from "../../games/components/AbilityImage.vue";
+import PercentBar from "../../../utility/PercentBar.vue";
+import { percentage } from "../../../../filters/filters";
 
 export default {
   components: {
@@ -109,6 +116,10 @@ export default {
     showPercentages: {
       type: Boolean,
       default: true,
+    },
+    linkAbilities: {
+      type: Boolean,
+      default: false,
     },
   },
 

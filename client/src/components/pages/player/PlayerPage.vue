@@ -56,7 +56,7 @@
 <script>
 import PlayerGamesList from "./PlayerGamesList.vue";
 import GodStats from "../stats/GodStats.vue";
-import AbilityStats from "../stats/AbilityStats.vue";
+import AbilityStats from "../stats/abilities/AbilityStats.vue";
 import PlayerStats from "../player/components/PlayerStats.vue";
 import RankBadge from "../../utility/RankBadge.vue";
 

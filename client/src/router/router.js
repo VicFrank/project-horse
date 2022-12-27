@@ -25,6 +25,8 @@ import Game from "../components/pages/games/Game";
 
 const Gods = () => import("../components/pages/stats/Gods");
 const Abilities = () => import("../components/pages/stats/Abilities");
+const IndividualAbility = () =>
+  import("../components/pages/stats/IndividualAbility");
 const Cosmetics = () => import("../components/pages/stats/cosmetics/Cosmetics");
 const Bodies = () => import("../components/pages/stats/Bodies");
 
@@ -75,6 +77,11 @@ const routes = [
   {
     path: "/abilities",
     component: Abilities,
+    meta: { requiresAuth: true, requiresAdmin: true },
+  },
+  {
+    path: "/abilities/:ability_name",
+    component: IndividualAbility,
     meta: { requiresAuth: true, requiresAdmin: true },
   },
   {
