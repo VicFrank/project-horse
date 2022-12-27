@@ -166,6 +166,59 @@ const getWinnerAbilityComboFreqs = async (abilityName, hours, minMMR = 0) => {
   }
 };
 
+const getGodAbilityFreqs = async (god, hours, minMMR = 0) => {
+  try {
+    const { rows } = await query(
+      `
+      WITH g AS (
+        SELECT * FROM games
+        WHERE games.created_at > NOW() - $2 * INTERVAL '1 HOUR' AND RANKED = TRUE        
+      )
+      SELECT ability_name, COUNT(*) AS freq
+        FROM hero_abilities
+        JOIN game_player_heroes USING (game_player_hero_id)
+        JOIN game_players USING (game_player_id)
+        JOIN g USING (game_id)
+        WHERE game_players.mmr > $3
+          AND game_players.god = $1
+        GROUP BY ability_name
+        ORDER BY freq DESC;
+      `,
+      [god, hours, minMMR]
+    );
+    return rows;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const getGodWinnerAbilityFreqs = async (god, hours, minMMR = 0) => {
+  try {
+    const { rows } = await query(
+      `
+      WITH g AS (
+        SELECT * FROM games
+        WHERE games.created_at > NOW() - $2 * INTERVAL '1 HOUR' AND RANKED = TRUE
+      )
+        SELECT ability_name, COUNT(*) AS freq
+        FROM hero_abilities
+        JOIN game_player_heroes USING (game_player_hero_id)
+        JOIN game_players USING (game_player_id)
+        JOIN g USING (game_id)
+        WHERE game_players.place = 1
+          AND game_players.mmr > $3
+          AND game_players.god = $1
+        GROUP BY ability_name
+        ORDER BY freq DESC
+      `,
+      [god, hours, minMMR]
+    );
+    return rows;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const getAbilities = async () => {
   try {
     const { rows } = await query(
@@ -320,6 +373,40 @@ module.exports = {
             winnerAbilityComboFreqs.find(
               (winnerAbility) =>
                 winnerAbility.ability_name === abilityCombo.ability_name
+            )?.freq ?? 0
+          ),
+        };
+      });
+
+      return combined;
+    } catch (error) {
+      throw error;
+    }
+  },
+  async getGodAbilityStats(god, hours = 24, minMMR = 0) {
+    try {
+      const abilityFreqs = await getGodAbilityFreqs(god, hours, minMMR);
+      const winnerAbilityFreqs = await getGodWinnerAbilityFreqs(
+        god,
+        hours,
+        minMMR
+      );
+
+      const abilities = await this.getAbilities();
+
+      // combine the two arrays
+      const combined = abilityFreqs.map((ability) => {
+        const icon = abilities.find(
+          (a) => a.ability_name === ability.ability_name
+        ).icon;
+        return {
+          ability_name: ability.ability_name,
+          icon,
+          freq: Number(ability.freq),
+          winner_freq: Number(
+            winnerAbilityFreqs.find(
+              (winnerAbility) =>
+                winnerAbility.ability_name === ability.ability_name
             )?.freq ?? 0
           ),
         };

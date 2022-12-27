@@ -20,6 +20,19 @@ router.get("/gods", statsManAuth, cache("1 hour"), async (req, res) => {
   }
 });
 
+router.get("/gods/:god", statsManAuth, cache("1 hour"), async (req, res) => {
+  try {
+    const god = req.params.god;
+    const hours = parseInt(req.query.hours) || 24;
+    const minMMR = parseInt(req.query.minMMR) || 0;
+    const stats = await abilities.getGodAbilityStats(god, hours, minMMR);
+    res.status(200).json(stats);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Server Error" });
+  }
+});
+
 router.get("/abilities", statsManAuth, cache("1 hour"), async (req, res) => {
   try {
     const hours = parseInt(req.query.hours) || 24;

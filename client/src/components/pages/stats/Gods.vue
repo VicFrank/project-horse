@@ -25,7 +25,7 @@
         ></b-form-select>
       </div>
     </div>
-    <GodStats :gods="gods"></GodStats>
+    <GodStats :gods="gods" :linkAbilities="true"></GodStats>
   </div>
 </template>
 

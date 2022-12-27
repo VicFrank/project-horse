@@ -9,7 +9,14 @@
     <template #cell(god)="data">
       <div class="text-left p-2">
         <GodImage :god="data.item.god" :height="60" class="mr-2" />
-        {{ $t(`gods.${data.item.god}`) }}
+        <router-link
+          class="ml-2"
+          v-if="linkAbilities"
+          :to="`gods/${data.item.god}`"
+        >
+          {{ $t(`gods.${data.item.god}`) }}
+        </router-link>
+        <span class="ml-2" v-else> {{ $t(`gods.${data.item.god}`) }}</span>
       </div>
     </template>
     <template #cell(pick_rate)="data">
@@ -65,6 +72,10 @@ export default {
     gods: {
       type: Array,
       required: true,
+    },
+    linkAbilities: {
+      type: Boolean,
+      default: false,
     },
   },
 
