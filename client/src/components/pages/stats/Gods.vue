@@ -28,7 +28,7 @@
         </b-dropdown>
       </div>
     </div>
-    <GodStats :gods="gods" :linkAbilities="true"></GodStats>
+    <GodStats :gods="gods" :linkAbilities="true" :loading="loading"></GodStats>
   </div>
 </template>
 

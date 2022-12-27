@@ -2,9 +2,11 @@
   <b-table
     :fields="fields"
     :items="gods"
+    :busy="loading"
     responsive
-    class="m-auto"
+    class="m-auto pb-5"
     style="max-width: 700px"
+    show-empty
   >
     <template #cell(god)="data">
       <div class="text-left p-2">
@@ -52,6 +54,16 @@
     <template #cell(placements)="data">
       <PlacemementGraph :placements="data.item.placements"></PlacemementGraph>
     </template>
+    <template #empty>
+      <div class="text-center m-5">
+        <h3>No results found, check filters</h3>
+      </div>
+    </template>
+    <template #table-busy>
+      <div class="text-center m-5">
+        <b-spinner class="align-middle p-4"></b-spinner>
+      </div>
+    </template>
   </b-table>
 </template>
 
@@ -76,6 +88,10 @@ export default {
     linkAbilities: {
       type: Boolean,
       default: false,
+    },
+    loading: {
+      type: Boolean,
+      default: true,
     },
   },
 
