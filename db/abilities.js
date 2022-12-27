@@ -465,13 +465,13 @@ module.exports = {
       throw error;
     }
   },
-  async getSuperWinStats() {
+  async getSuperWinStats(hours = 24) {
     try {
       const { rows } = await query(
         `
         WITH g AS (
           SELECT * FROM games
-          WHERE games.created_at > NOW() - 24 * INTERVAL '1 HOUR' AND RANKED = TRUE
+          WHERE games.created_at > NOW() - $1 * INTERVAL '1 HOUR' AND RANKED = TRUE
         )
         SELECT ability_name, count(*) :: int
         FROM g
@@ -481,7 +481,8 @@ module.exports = {
         WHERE place = 1 and ability_level >= 6
         GROUP BY ability_name
         ORDER BY count(*) desc;
-      `
+      `,
+        [hours]
       );
 
       return await addAbilityIcons(rows);
@@ -489,13 +490,13 @@ module.exports = {
       throw error;
     }
   },
-  async getGabenWinStats() {
+  async getGabenWinStats(hours = 24) {
     try {
       const { rows } = await query(
         `
         WITH g AS (
           SELECT * FROM games
-          WHERE games.created_at > NOW() - 24 * INTERVAL '1 HOUR' AND RANKED = TRUE
+          WHERE games.created_at > NOW() - $1 * INTERVAL '9999 HOUR' AND RANKED = TRUE
         )
         SELECT ability_name, count(*) :: int
         FROM g
@@ -505,8 +506,10 @@ module.exports = {
         WHERE place = 1 and ability_level >= 9
         GROUP BY ability_name
         ORDER BY count(*) desc;
-      `
+      `,
+        [hours]
       );
+      console.log(rows);
 
       return await addAbilityIcons(rows);
     } catch (error) {

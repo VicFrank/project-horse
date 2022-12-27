@@ -46,7 +46,7 @@ router.get("/abilities", statsManAuth, cache("1 hour"), async (req, res) => {
 });
 
 router.get(
-  "/abilities/:ability_name",
+  "/abilities/:ability_name/stats",
   statsManAuth,
   cache("1 hour"),
   async (req, res) => {

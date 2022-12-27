@@ -107,7 +107,7 @@ export default {
       if (!force && this.abilityStats.length > 0) return;
       this.abilitiesLoading = true;
       fetch(
-        `/api/stats/abilities/${this.abilityName}?hours=${this.selectedDate}&minMMR=${this.selectedMMR}`
+        `/api/stats/abilities/${this.abilityName}/stats?hours=${this.selectedDate}&minMMR=${this.selectedMMR}`
       )
         .then((res) => res.json())
         .then((abilities) => {
