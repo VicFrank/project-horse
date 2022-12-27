@@ -17,7 +17,7 @@
         <router-link
           class="ml-2"
           v-if="linkAbilities"
-          :to="`abilities/${data.item.ability_name}`"
+          :to="`/abilities/${data.item.ability_name}`"
         >
           {{ $t(`abilities.${data.item.ability_name}`) }}
         </router-link>

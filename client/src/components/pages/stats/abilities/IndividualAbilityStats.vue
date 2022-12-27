@@ -14,7 +14,7 @@
           :small="true"
           :size="48"
         ></AbilityImage>
-        <router-link class="ml-2" :to="`abilities/${data.item.ability_name}`">
+        <router-link class="ml-2" :to="`/abilities/${data.item.ability_name}`">
           {{ $t(`abilities.${data.item.ability_name}`) }}
         </router-link>
       </div>
