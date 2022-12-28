@@ -31,6 +31,10 @@ export default {
       type: Object,
       required: true,
     },
+    ranks: {
+      type: Array,
+      required: true,
+    },
     width: {
       type: Number,
       default: 400,
@@ -40,31 +44,64 @@ export default {
       default: 400,
     },
   },
-  data() {
-    return {
-      chartData: {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-        ],
-        datasets: [
-          {
-            label: "Data One",
-            backgroundColor: "#f87979",
-            data: [40, 39, 10, 40, 39, 80, 40],
+  methods: {
+    loadDailyStats() {
+      this.loaded = false;
+      fetch(
+        `/api/stats/godDaily?god=${this.god.god}&ranks=${this.ranks.join(",")}`
+      )
+        .then((res) => res.json())
+        .then((stats) => {
+          stats = stats.reverse();
+          this.chartData.labels = stats.map((ds) => ds.day.substring(0, 10));
+          this.chartData.datasets = [
+            {
+              label: "Win Rate",
+              borderColor: "#00FF00",
+              backgroundColor: "#00FF00",
+              data: stats.map((ds) => ds.win_rate),
+            },
+            {
+              label: "Top 4 Rate",
+              borderColor: "#0000FF",
+              backgroundColor: "#0000FF",
+              data: stats.map((ds) => ds.top_four_rate),
+            },
+          ];
+          this.loaded = true;
+        });
+    },
+  },
+  data: () => ({
+    loaded: false,
+    chartData: {
+      labels: [],
+      datasets: [],
+    },
+    chartOptions: {
+      responsive: true,
+      maintainAspectRatio: false,
+      color: "#cecece",
+
+      scales: {
+        y: {
+          ticks: {
+            color: "#cecece",
+            format: {
+              style: "percent",
+            },
           },
-        ],
+        },
+        x: {
+          ticks: {
+            color: "#cecece",
+          },
+        },
       },
-      chartOptions: {
-        responsive: true,
-        maintainAspectRatio: false,
-      },
-    };
+    },
+  }),
+  created() {
+    this.loadDailyStats();
   },
 };
 </script>
@@ -72,6 +109,7 @@ export default {
 <template>
   <div class="stats-container">
     <LineChart
+      v-if="loaded"
       :data="chartData"
       :options="chartOptions"
       :width="width"

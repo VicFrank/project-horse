@@ -153,6 +153,41 @@ module.exports = {
     }
   },
 
+  async getGodDailyStats(godName, ranks) {
+    try {
+      const {rows} = await query( 
+        `
+        SELECT day,
+            sum(picks)         AS picks,
+            sum(first_place)   AS first_place,
+            sum(second_place)  AS second_place,
+            sum(third_place)   AS third_place,
+            sum(fourth_place)  AS fourth_place,
+            sum(fifth_place)   AS fifth_place,
+            sum(sixth_place)   AS sixth_place,
+            sum(seventh_place) AS seventh_place,
+            sum(eighth_place)  AS eighth_place,
+            sum(place_sum)     AS place_sum
+        FROM stats_gods_rollup
+        WHERE god_name = '${godName}'
+          AND rank in ('${ranks.join("', '")}')
+        GROUP BY day
+        ORDER BY day DESC
+        LIMIT 7;
+        `
+      );
+      const dailyStats = rows.map((row) => ({
+        ...row,
+        pick_rate: row.picks / numGames,
+        win_rate: row.first_place / row.picks,
+        top_four_rate: (Number(row.first_place) + Number(row.second_place) + Number(row.third_place) + Number(row.fourth_place)) / row.picks,
+      }));
+      return dailyStats;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async getAllGods() {
     try {
       const { rows } = await query(`SELECT * FROM gods ORDER BY god_name`);
