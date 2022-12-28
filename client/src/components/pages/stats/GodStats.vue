@@ -8,6 +8,17 @@
     style="max-width: 700px"
     show-empty
   >
+  <template #cell(show_details)="row">
+      <span @click="row.toggleDetails" class="" style="cursor: pointer">
+        {{ row.detailsShowing ? '-' : '+' }}
+      </span>
+    </template>
+    <template #row-details="row">
+        <div>
+          <GodHistoricalGraph :god="row.item"/>
+          <b-button size="sm" @click="row.toggleDetails">Hide</b-button>
+        </div>
+      </template>
     <template #cell(god)="data">
       <div class="text-left p-2">
         <GodImage :god="data.item.god" :height="25" class="mr-2" />
@@ -104,12 +115,14 @@
 <script>
 import PercentBar from "../../utility/PercentBar.vue";
 import GodImage from "../games/components/GodImage.vue";
+import GodHistoricalGraph from "./components/GodHistoricalGraph.vue"
 import { percentage, round } from "../../../filters/filters";
 
 export default {
   components: {
     PercentBar,
     GodImage,
+    GodHistoricalGraph,
   },
 
   props: {
@@ -139,6 +152,11 @@ export default {
     this.$emit("created");
 
     this.fields = [
+    {
+        key: "show_details",
+        label: "",
+        sortable: false,
+      },
       {
         key: "god",
         label: this.$i18n.t("gods.god"),
