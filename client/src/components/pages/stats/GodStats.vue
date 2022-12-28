@@ -14,11 +14,21 @@
       </span>
     </template>
     <template #row-details="row">
-        <div>
-          <GodHistoricalGraph :god="row.item" :ranks="ranks"/>
-          <b-button size="sm" @click="row.toggleDetails">Hide</b-button>
+      <div class="d-flex-row p-2">
+        <h5>Explanded Statistics</h5>
+        <div class="d-flex mb-2">
+          <div class="d-flex-row" style="flex-grow: 1">
+            <span>Last 7 Days</span>
+            <GodHistoricalGraph :god="row.item" :ranks="ranks" />
+          </div>
+          <div class="d-flex-row">
+            <span>Placements</span>
+            <PlacementGraph :placements="row.item.placements" />
+          </div>
         </div>
-      </template>
+        <b-button size="sm" @click="row.toggleDetails">Hide</b-button>
+      </div>
+    </template>
     <template #cell(god)="data">
       <div class="text-left p-2">
         <GodImage :god="data.item.god" :height="25" class="mr-2" />
@@ -116,6 +126,7 @@
 import PercentBar from "../../utility/PercentBar.vue";
 import GodImage from "../games/components/GodImage.vue";
 import GodHistoricalGraph from "./components/GodHistoricalGraph.vue"
+import PlacementGraph from "./components/PlacementGraph.vue";
 import { percentage, round } from "../../../filters/filters";
 
 export default {
@@ -123,6 +134,7 @@ export default {
     PercentBar,
     GodImage,
     GodHistoricalGraph,
+    PlacementGraph,
   },
 
   props: {

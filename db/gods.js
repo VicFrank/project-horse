@@ -178,7 +178,6 @@ module.exports = {
       );
       const dailyStats = rows.map((row) => ({
         ...row,
-        pick_rate: row.picks / numGames,
         win_rate: row.first_place / row.picks,
         top_four_rate: (Number(row.first_place) + Number(row.second_place) + Number(row.third_place) + Number(row.fourth_place)) / row.picks,
       }));
