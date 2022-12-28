@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1 class="page-title">{{ $t("gods.page_title") }}</h1>
+    <h5 v-if="!loading" style="text-align: center;">Viewing stats for {{ totalGames }} games</h5>
     <div class="mx-auto d-flex mb-2" style="max-width: 700px">
       <div>
         <div class="mb-2">Date</div>
@@ -43,6 +44,7 @@ export default {
   data: () => ({
     gods: [],
     loading: true,
+    totalGames: 0,
 
     selectedDate: null,
     dateOptions: [],
@@ -88,6 +90,7 @@ export default {
         .then((res) => res.json())
         .then((gods) => {
           this.gods = gods;
+          this.totalGames = Math.round(gods.reduce((sumGames, cur) => sumGames + Number(cur.picks), 0) / 8);
           this.loading = false;
         });
     },
