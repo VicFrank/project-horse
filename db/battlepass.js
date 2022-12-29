@@ -118,60 +118,6 @@ module.exports = {
     }
   },
 
-  async getLevelsAndRewardsPast50(level) {
-    try {
-      const goldChest = await Cosmetics.getCosmeticByName("chest_gold");
-      const basicChest = await Cosmetics.getCosmeticByName("chest_basic");
-      const levels = [];
-      for (let i = 51; i <= level; i++) {
-        if (i === 100) {
-          const diamondGamblerAvatar = await Cosmetics.getCosmeticByName(
-            "avatar_gambler_diamond"
-          );
-          levels.push({
-            cosmetic_id: diamondGamblerAvatar.cosmetic_id,
-            cosmetic_name: diamondGamblerAvatar.cosmetic_name,
-            rarity: diamondGamblerAvatar.rarity,
-            free: false,
-            bp_level: i,
-            amount: 1,
-          });
-        } else if (i === 1000) {
-          const gabenAvatar = await Cosmetics.getCosmeticByName("avatar_gaben");
-          levels.push({
-            cosmetic_id: gabenAvatar.cosmetic_id,
-            cosmetic_name: gabenAvatar.cosmetic_name,
-            rarity: gabenAvatar.rarity,
-            free: false,
-            bp_level: i,
-            amount: 1,
-          });
-        } else if (i % 10 === 0) {
-          levels.push({
-            cosmetic_id: goldChest.cosmetic_id,
-            cosmetic_name: goldChest.cosmetic_name,
-            rarity: goldChest.rarity,
-            free: false,
-            bp_level: i,
-            amount: 1,
-          });
-        } else if (i % 5 === 0) {
-          levels.push({
-            cosmetic_id: basicChest.cosmetic_id,
-            cosmetic_name: basicChest.cosmetic_name,
-            rarity: basicChest.rarity,
-            free: false,
-            bp_level: i,
-            amount: 1,
-          });
-        }
-      }
-      return levels;
-    } catch {
-      throw error;
-    }
-  },
-
   /**
    * Calculates what level you would be at given a certain amount of xp.
    * @param {*} battlePassId
@@ -213,12 +159,12 @@ module.exports = {
 
       if (rows.length > 0) return rows[0];
 
-      // every level after 50 takes 1000 xp
-      const level50 = 26500;
-      const totalXp = level50 + (level - 50) * 1000;
+      // every level after 80 takes 225 xp
+      const level80 = 18000;
+      const totalXp = level80 + (level - 80) * 225;
       return {
         total_xp: totalXp,
-        next_level_xp: 1000,
+        next_level_xp: 225,
         coins_reward: 0,
       };
     } catch (error) {
@@ -227,16 +173,27 @@ module.exports = {
   },
 
   getNumClaimableRewardsAtLevel(level, unlocked) {
-    // Until level 40, there is only one reward per level for unlocked
+    // Until level 80, there is only one reward per level for unlocked
     if (unlocked) {
-      if (level <= 40) return level;
-      const remaining = level - 40;
-      // after 40, there is a reward every 5 levels
-      return 40 + Math.floor(remaining / 5);
+      if (level <= 80) return level;
+      const remaining = level - 80;
+      // after 80, there is a reward every 5 levels
+      let numRewards = 80 + Math.floor(remaining / 5);
+      // Starting at level 86 there is an additional rewards every 10 levels
+      if (level >= 86) 
+        numRewards += Math.floor((level - 76)/10)
+      // There are also special rewards at levels 100 and 1000
+      if (level >= 100)
+        numRewards++;
+      if (level >= 1000)
+        numRewards++;
     } else {
-      // there is a reward every 5 levels until level 40, when there are no more rewards
-      level = level < 40 ? level : 40;
-      return Math.floor(level / 5);
+      // there is a reward every 5 levels, forever
+      let numRewards = Math.floor(level / 5);
+      // There is a special reward at level 100
+      if (level >= 100)
+        numRewards++;
+      return numRewards;
     }
   },
 
@@ -263,31 +220,14 @@ module.exports = {
         [minLevel, maxLevel, battlePassID]
       );
 
-      if (maxLevel > 50) {
-        const goldChest = await Cosmetics.getCosmeticByName("chest_gold");
-        const basicChest = await Cosmetics.getCosmeticByName("chest_basic");
-        for (let i = minLevel; i <= maxLevel; i++) {
-          if (i === 100) {
-            const diamondAvatar = await Cosmetics.getCosmeticByName(
-              "avatar_santa_greevil_diamond"
-            );
-            cosmetics.push({
-              cosmetic_id: diamondAvatar.cosmetic_id,
-              free: false,
-              bp_level: i,
-              amount: 1,
-            });
-          } else if (i === 1000) {
-            const gabenAvatar = await Cosmetics.getCosmeticByName(
-              "avatar_gaben"
-            );
-            cosmetics.push({
-              cosmetic_id: gabenAvatar.cosmetic_id,
-              free: false,
-              bp_level: i,
-              amount: 1,
-            });
-          } else if (i % 10 === 0) {
+      const goldChest = await Cosmetics.getCosmeticByName("chest_gold");
+      const basicChest = await Cosmetics.getCosmeticByName("chest_basic");
+      const godChest = await Cosmetics.getCosmeticByName("chest_god_unique_1");
+
+      for (let i = minLevel; i <= maxLevel; i++) {
+        // After Level 80, every 5 levels alternates between a War Chest (chest_basic) and a Gold Chest
+        if (i > 80) {
+          if (i % 10 === 0) {
             cosmetics.push({
               cosmetic_id: goldChest.cosmetic_id,
               free: false,
@@ -303,8 +243,36 @@ module.exports = {
             });
           }
         }
+        // Starting at level 86, every 10 levels gives a God Chest
+        if (i > 85) {
+          if ( (i + 4) % 10 === 0){
+            cosmetics.push({
+              cosmetic_id: godChest.cosmetic_id,
+              free: false,
+              bp_level: i,
+              amount: 1,
+            });
+          }
+        }
+        // Special rewards at level 100 and 1000
+        if (i === 100) {
+          const diamondAvatar = await Cosmetics.getCosmeticByName("avatar_cs_diamond");
+          cosmetics.push({
+            cosmetic_id: diamondAvatar.cosmetic_id,
+            free: true, // This one is free
+            bp_level: i,
+            amount: 1,
+          });
+        } else if (i === 1000) {
+          const gabenAvatar = await Cosmetics.getCosmeticByName("avatar_gaben");
+          cosmetics.push({
+            cosmetic_id: gabenAvatar.cosmetic_id,
+            free: false,
+            bp_level: i,
+            amount: 1,
+          });
+        }
       }
-
       return { coins, cosmetics };
     } catch (error) {
       throw error;
