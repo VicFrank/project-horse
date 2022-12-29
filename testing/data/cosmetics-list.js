@@ -110,6 +110,14 @@ module.exports = [
     cost_usd: -1,
     rarity: "Common",
   },
+  {
+    name: "sfx_sexy",
+    type: "SFX",
+    equip_group: "sfx_sexy",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Common",
+  },
   /**
    * *************************
    * Avatars
@@ -162,6 +170,24 @@ module.exports = [
   {
     // Battle Pass Reward
     name: "avatar_santa_greevil_diamond",
+    type: "Avatar Frame",
+    equip_group: "avatar_frame",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Arcana",
+  },
+  {
+    // Battle Pass Reward
+    name: "avatar_cs",
+    type: "Avatar Frame",
+    equip_group: "avatar_frame",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Arcana",
+  },
+  {
+    // Battle Pass Reward
+    name: "avatar_cs_diamond",
     type: "Avatar Frame",
     equip_group: "avatar_frame",
     coins: -1,
@@ -1386,6 +1412,14 @@ module.exports = [
     rarity: "Immortal",
   },
   {
+    name: "card_facelessVoid",
+    type: "Card Frame",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "",
+    rarity: "Immortal",
+  },
+  {
     name: "gold_card_dazzle",
     type: "Card Frame",
     coins: -1,
@@ -1657,6 +1691,14 @@ module.exports = [
     equip_group: "",
     rarity: "Immortal",
   },
+  {
+    name: "gold_card_facelessVoid",
+    type: "Card Frame",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "",
+    rarity: "Immortal",
+  },
   /**
    * *************************
    * Finishers
@@ -1742,6 +1784,14 @@ module.exports = [
     equip_group: "finisher",
     rarity: "Immortal",
   },
+  {
+    name: "finisher_ak47",
+    type: "Finisher",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "finisher",
+    rarity: "Immortal",
+  },
   /**
    * *************************
    * Win Streaks
@@ -1765,6 +1815,14 @@ module.exports = [
   },
   {
     name: "streak_space",
+    type: "Win Streak",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "streak",
+    rarity: "Immortal",
+  },
+  {
+    name: "streak_cs",
     type: "Win Streak",
     coins: -1,
     cost_usd: -1,
@@ -1850,6 +1908,14 @@ module.exports = [
   },
   {
     name: "terrain_xmas",
+    type: "Terrain",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "terrain",
+    rarity: "Immortal",
+  },
+  {
+    name: "terrain_cs",
     type: "Terrain",
     coins: -1,
     cost_usd: -1,

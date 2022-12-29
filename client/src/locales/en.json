@@ -348,8 +348,10 @@
     "finisher_god_pa": "PA God Finisher",
     "finisher_god_rune": "Rune God Finisher",
     "finisher_santa_greevil": "Santa Greevil Finisher",
+    "finisher_ak47": "Counter-Strike Finisher",
     "streak_fire": "Fire Streak",
     "streak_santa_greevil": "Santa Streak",
+    "streak_cs": "Counter-Strike Streak",
     "streak_space": "Galaxy Streak",
     "terrain_default": "Default Terrain",
     "terrain_green": "Green Terrain",
@@ -362,6 +364,7 @@
     "terrain_god_rune": "Rune God Terrain",
     "terrain_champion": "Galaxy Brain Terrain",
     "terrain_leaderboard": "Galaxy Terrain",
+    "terrain_cs": "Counter-Strike Terrain",
     "chest_basic": "War Chest",
     "chest_gold": "Gold Chest",
     "chest_god": "God Chest",
@@ -407,7 +410,10 @@
     "emote_pack_counterstrike_3": "Counterstrike Emote Pack 3",
     "avatar_santa_greevil": "Santa Greevil Avatar",
     "avatar_santa_greevil_diamond": "Diamond Santa Greevil Avatar",
-    "sfx_gaben_posh": "Posh Gaben"
+    "avatar_cs": "Counter-Strike Avatar",
+    "avatar_cs_diamond": "Diamond Counter-Strike Avatar",
+    "sfx_gaben_posh": "Posh Gaben",
+    "sfx_sexy": "Sexy Sound Pack"
   },
   "cosmetic_descriptions": {
     "avatar_gaben": "Ancient Gaben's Avatar Frame",
@@ -637,6 +643,7 @@
     "finisher_god_pa": "PA God Finisher",
     "finisher_god_rune": "Rune God Finisher",
     "finisher_santa_greevil": "Santa Greevil Finisher",
+    "finisher_ak47": "Counter-Strike Finisher",
     "terrain_default": "Default Arena: It's just dirt",
     "terrain_spring": "Custom Arena: Spring is in the air!",
     "terrain_icelake": "Custom Arena: As cold as ice!",
@@ -648,6 +655,7 @@
     "terrain_god_rune": "Immortal Custom Arena: Rune God Themed",
     "terrain_champion": "Ultra Rare Custom Arena: Galaxy Brain. Reserved for tournament and leaderboard winners",
     "terrain_leaderboard": "Legendary Custom Arena: Galaxy. Reserved for excellent placements in tournaments and the leaderboard",
+    "terrain_cs": "Counter-Strike Arena: Dust II",
     "chest_basic": [
       "25%: Battle Pass XP",
       "19%: Avatar Border",
@@ -704,7 +712,10 @@
     "emote_pack_counterstrike_3": "Contains 2 emotes",
     "avatar_santa_greevil": "Santa Greevil's Avatar Frame",
     "avatar_santa_greevil_diamond": "Santa Greevil's Avatar Frame, but better",
-    "sfx_gaben_posh": "Changes the Gaben sound effect to a posh British accent"
+    "avatar_cs": "Counter-Strike Avatar Frame",
+    "avatar_cs_diamond": "Global Elite Counter-Strike Avatar Frame",
+    "sfx_gaben_posh": "Changes the Gaben sound effect to a posh British accent",
+    "sfx_sexy": "Changes to Gaben sound effect to a smooth, sexy voice"
   },
   "armory": {
     "page_title": "Armory",
