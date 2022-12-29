@@ -1290,6 +1290,14 @@ module.exports = [
     rarity: "Immortal",
   },
   {
+    name: "card_facelessVoid",
+    type: "Card Frame",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "",
+    rarity: "Immortal",
+  },
+  {
     name: "gold_card_dazzle",
     type: "Card Frame",
     coins: -1,
@@ -1555,6 +1563,14 @@ module.exports = [
   },
   {
     name: "gold_card_santaGreevil",
+    type: "Card Frame",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "",
+    rarity: "Immortal",
+  },
+  {
+    name: "gold_card_facelessVoid",
     type: "Card Frame",
     coins: -1,
     cost_usd: -1,
