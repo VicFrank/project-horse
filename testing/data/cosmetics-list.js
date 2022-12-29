@@ -86,6 +86,14 @@ module.exports = [
     cost_usd: -1,
     rarity: "Common",
   },
+  {
+    name: "sfx_sexy",
+    type: "SFX",
+    equip_group: "sfx_sexy",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Common",
+  },
   /**
    * *************************
    * Avatars
