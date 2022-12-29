@@ -42,6 +42,11 @@ const drops = {
     "hat_halo",
     "hat_sad_eyes",
     "hat_pipe",
+    "hat_banana_hat",
+    "hat_hamburger_hat",
+    "hat_beer",
+    "hat_hypnotized_eyes",
   ],
 };
+
 module.exports = drops;

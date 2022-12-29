@@ -67,6 +67,10 @@ const typeOdds = {
     { odds: -1, item_name: "hat_halo" },
     { odds: -1, item_name: "hat_sad_eyes" },
     { odds: -1, item_name: "hat_pipe" },
+    { odds: -1, item_name: "hat_banana_hat" },
+    { odds: -1, item_name: "hat_hamburger_hat" },
+    { odds: -1, item_name: "hat_beer" },
+    { odds: -1, item_name: "hat_hypnotized_eyes" },
   ],
   finisher: [
     { odds: 20, item_name: "finisher_fire" },
