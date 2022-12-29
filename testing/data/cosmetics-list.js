@@ -1210,6 +1210,14 @@ module.exports = [
     rarity: "Immortal",
   },
   {
+    name: "card_sideshop_man",
+    type: "Card Frame",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "",
+    rarity: "Immortal",
+  },
+  {
     name: "card_tomeGod",
     type: "Card Frame",
     coins: -1,
