@@ -8,14 +8,14 @@
     style="max-width: 700px"
     show-empty
   >
-  <template #cell(show_details)="row">
+    <template #cell(show_details)="row">
       <span @click="row.toggleDetails" class="" style="cursor: pointer">
-        {{ row.detailsShowing ? '-' : '+' }}
+        {{ row.detailsShowing ? "-" : "+" }}
       </span>
     </template>
     <template #row-details="row">
       <div class="d-flex-row p-2">
-        <h5>Explanded Statistics</h5>
+        <h5>Expanded Statistics</h5>
         <div class="d-flex mb-2">
           <div class="d-flex-row" style="flex-grow: 1">
             <span>Last 7 Days</span>
@@ -125,7 +125,7 @@
 <script>
 import PercentBar from "../../utility/PercentBar.vue";
 import GodImage from "../games/components/GodImage.vue";
-import GodHistoricalGraph from "./components/GodHistoricalGraph.vue"
+import GodHistoricalGraph from "./components/GodHistoricalGraph.vue";
 import PlacementGraph from "./components/PlacementGraph.vue";
 import { percentage, round } from "../../../filters/filters";
 
@@ -168,7 +168,7 @@ export default {
     this.$emit("created");
 
     this.fields = [
-    {
+      {
         key: "show_details",
         label: "",
         sortable: false,
@@ -211,7 +211,9 @@ export default {
       if (this.gods.length) {
         this.maxPickRate = Math.max(...this.gods.map((g) => g.pick_rate));
         this.maxWinRate = Math.max(...this.gods.map((g) => g.win_rate));
-        this.maxTopFourRate = Math.max( ...this.gods.map((g) => g.top_four_rate));
+        this.maxTopFourRate = Math.max(
+          ...this.gods.map((g) => g.top_four_rate)
+        );
         this.maxAvgPlace = Math.max(...this.gods.map((g) => g.avg_place));
       }
     },

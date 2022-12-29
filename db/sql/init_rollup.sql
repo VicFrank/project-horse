@@ -8,7 +8,7 @@
  Returns true if we acquired the lock and can proceed
  Make sure to call unlock_rollup when done or the lock never gets released
  */
-create or replace function lock_rollup_if_we_can(name text) returns bool
+CREATE OR REPLACE FUNCTION lock_rollup_if_we_can(name text) returns bool
     language plpgsql AS
 $$
 BEGIN
@@ -25,14 +25,14 @@ BEGIN
     ELSE
         INSERT INTO stats_rollup_lock VALUES (name, true, null);
     END IF;
-    return true; /* We either made a new entry or true'd an already existing entry */
+    RETURN true; /* We either made a new entry or true'd an already existing entry */
 END;
 $$;
 
 /*
  Removes the lock (if it exists) for the given name
  */
-create or replace function unlock_rollup(name text) returns void
+CREATE OR REPLACE FUNCTION unlock_rollup(name text) RETURNS void
     language plpgsql AS
 $$
 BEGIN
@@ -49,7 +49,7 @@ $$;
  Creates rollup entries in stats_gods_rollup for the given date
  Fails if something is already trying to do a god rollup or if there is any entry for the provided date
  */
-create or replace function rollup_gods(d date) RETURNS bool
+CREATE OR REPLACE FUNCTION rollup_gods(d date) RETURNS bool
     language plpgsql AS
 $$
 DECLARE
@@ -96,7 +96,7 @@ $$;
 /*
  Rolls up god stats for every day since 9/21/22 until yesterday (since there will be more games today), if there is already data for that day then it's skipped
 */
-create or replace function rollup_gods_all() RETURNS table (day date, rollup_succeeded bool)
+CREATE OR REPLACE FUNCTION rollup_gods_all() RETURNS TABLE (day date, rollup_succeeded bool)
     language plpgsql AS
 $$
 DECLARE
@@ -106,7 +106,7 @@ BEGIN
         LOOP
         day := rollup_day;
         rollup_succeeded := (select rollup_gods(rollup_day));
-        return NEXT;
+        RETURN NEXT;
         END LOOP;
 END;
 $$;

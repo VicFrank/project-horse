@@ -512,54 +512,54 @@ CREATE INDEX "IDX_player_steam_id" ON player_logs(steam_id);
 -- Ranks
 --------------------------------------------------------------------------------
 
-DROP table if exists ranks;
+DROP TABLE IF EXISTS ranks;
 CREATE TABLE ranks
 (
-    name             text,
-    mmr_floor        integer,
-    mmr_ceiling      integer,
-    game_mmr_floor   integer,
-    game_mmr_ceiling integer
+  name             TEXT,
+  mmr_floor        INTEGER,
+  mmr_ceiling      INTEGER,
+  game_mmr_floor   INTEGER,
+  game_mmr_ceiling INTEGER
 );
 /* TODO: Real mmr values are just guesses, but I think that using the ranks (and words) we already have will be helpful for end users of the stats */
-insert into ranks
-    (name, game_mmr_floor, game_mmr_ceiling, mmr_floor, mmr_ceiling)
+INSERT INTO ranks
+  (name, game_mmr_floor, game_mmr_ceiling, mmr_floor, mmr_ceiling)
 VALUES ('Herald', 0, 500, -1000, 399),
-       ('Guardian', 500, 1000, 400, 599),
-       ('Crusader', 1000, 1500, 600, 799),
-       ('Archon', 1500, 2000, 800, 999),
-       ('Legend', 2000, 2500, 1000, 1199),
-       ('Ancient', 2500, 3500, 1200, 1399),
-       ('Divine', 3500, 4500, 1400, 1499),
-       ('Immortal', 4500, 9999, 1500, 3000);
+  ('Guardian', 500, 1000, 400, 599),
+  ('Crusader', 1000, 1500, 600, 799),
+  ('Archon', 1500, 2000, 800, 999),
+  ('Legend', 2000, 2500, 1000, 1199),
+  ('Ancient', 2500, 3500, 1200, 1399),
+  ('Divine', 3500, 4500, 1400, 1499),
+  ('Immortal', 4500, 9999, 1500, 3000);
 
 --------------------------------------------------------------------------------
 -- Stats Rollup Tables
 --------------------------------------------------------------------------------
 
-CREATE TABLE if not exists stats_rollup_lock
+CREATE TABLE IF NOT EXISTS stats_rollup_lock
 (
-    rollup_name        text,
-    rollup_in_progress boolean,
-    last_finished      timestamptz
+  rollup_name        TEXT,
+  rollup_in_progress BOOLEAN,
+  last_finished      TIMESTAMPTZ
 );
 
 
-CREATE TABLE if not exists stats_gods_rollup
+CREATE TABLE if NOT EXISTS stats_gods_rollup
 (
-    day           date,
-    rank          text,
-    god_name      text,
-    picks         integer, -- Basically just the sum of each place
-    first_place   integer,
-    second_place  integer,
-    third_place   integer,
-    fourth_place  integer,
-    fifth_place   integer,
-    sixth_place   integer,
-    seventh_place integer,
-    eighth_place  integer,
-    place_sum     integer  -- Sum up the places so we can calculate averages
+  day           DATE,
+  rank          TEXT,
+  god_name      TEXT,
+  picks         INTEGER, -- Basically just the sum of each place
+  first_place   INTEGER,
+  second_place  INTEGER,
+  third_place   INTEGER,
+  fourth_place  INTEGER,
+  fifth_place   INTEGER,
+  sixth_place   INTEGER,
+  seventh_place INTEGER,
+  eighth_place  INTEGER,
+  place_sum     INTEGER  -- Sum up the places so we can calculate averages
 );
 CREATE INDEX IDX_stats_gods_rollup_day ON stats_gods_rollup (day);
 CREATE INDEX IDX_stats_gods_rollup_rank ON stats_gods_rollup (rank);
