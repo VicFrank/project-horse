@@ -354,6 +354,7 @@
     "terrain_god_rune": "Rune God Terrain",
     "terrain_champion": "Galaxy Brain Terrain",
     "terrain_leaderboard": "Galaxy Terrain",
+    "terrain_cs": "Counter-Strike Terrain",
     "chest_basic": "War Chest",
     "chest_gold": "Gold Chest",
     "chest_god": "God Chest",
@@ -629,6 +630,7 @@
     "terrain_god_rune": "Immortal Custom Arena: Rune God Themed",
     "terrain_champion": "Ultra Rare Custom Arena: Galaxy Brain. Reserved for tournament and leaderboard winners",
     "terrain_leaderboard": "Legendary Custom Arena: Galaxy. Reserved for excellent placements in tournaments and the leaderboard",
+    "terrain_cs": "Counter-Strike Arena: Dust II",
     "chest_basic": [
       "25%: Battle Pass XP",
       "19%: Avatar Border",

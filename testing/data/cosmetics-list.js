@@ -1777,6 +1777,14 @@ module.exports = [
     rarity: "Immortal",
   },
   {
+    name: "terrain_cs",
+    type: "Terrain",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "terrain",
+    rarity: "Immortal",
+  },
+  {
     // For getting top 1 in leaderboard or tournament winner
     name: "terrain_champion",
     type: "Terrain",
