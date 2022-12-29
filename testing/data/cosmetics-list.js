@@ -1638,6 +1638,14 @@ module.exports = [
     equip_group: "finisher",
     rarity: "Immortal",
   },
+  {
+    name: "finisher_ak47",
+    type: "Finisher",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "finisher",
+    rarity: "Immortal",
+  },
   /**
    * *************************
    * Win Streaks
