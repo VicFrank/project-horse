@@ -154,6 +154,24 @@ module.exports = [
   },
   {
     // Battle Pass Reward
+    name: "avatar_cs",
+    type: "Avatar Frame",
+    equip_group: "avatar_frame",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Arcana",
+  },
+  {
+    // Battle Pass Reward
+    name: "avatar_cs_diamond",
+    type: "Avatar Frame",
+    equip_group: "avatar_frame",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Arcana",
+  },
+  {
+    // Battle Pass Reward
     name: "avatar_rune_god_diamond",
     type: "Avatar Frame",
     equip_group: "avatar_frame",
