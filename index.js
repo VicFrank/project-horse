@@ -30,6 +30,7 @@ const abilitiesRouter = require("./routes/abilities");
 const websocketHandler = require("./websocket/connection");
 
 const players = require("./db/players");
+const rollup = require("./db/rollup");
 const { pool } = require("./db/index");
 
 const port = 4000;
@@ -238,3 +239,9 @@ cron.schedule("0 0 0 * * 1", async () => {
 //   console.log("Resetting login quests...");
 //   await lobbyPlayers.kickAfk();
 // });
+
+// Run stats rollup daily at 2am (must be after midnight since it rolls from today - 1)
+cron.schedule("0 2 * * *", async () => {
+  console.log("Running stats rollup");
+  await rollup.runGodRollup();
+});
