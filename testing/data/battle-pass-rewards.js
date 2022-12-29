@@ -487,7 +487,7 @@ module.exports = [
       "level": 70,
       "nextLevelXp": 255,
       "free": true,
-      "cosmetics": ["1 Month PLUS"],
+      "cosmetics": ["plus_month"],
       "coins": 0
     },
     {
