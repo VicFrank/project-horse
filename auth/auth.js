@@ -15,7 +15,7 @@ const reqMatchesKey = (req, key) => {
 
 const isTestClient = (req) => {
   const key = process.env.IS_PRODUCTION
-    ? keys.dedicatedServerKey
+    ? keys.dedicatedServerKeyV3
     : keys.toolsKey;
 
   return reqMatchesKey(req, key);
@@ -23,7 +23,7 @@ const isTestClient = (req) => {
 
 const isProdClient = (req) => {
   const key = process.env.IS_PRODUCTION
-    ? keys.prodDedicatedServerKey
+    ? keys.prodDedicatedServerKeyV3
     : keys.toolsKey;
 
   return reqMatchesKey(req, key);
@@ -31,7 +31,7 @@ const isProdClient = (req) => {
 
 const isTournamentClient = (req) => {
   const key = process.env.IS_PRODUCTION
-    ? keys.tournDedicatedServerKey
+    ? keys.tournDedicatedServerKeyV3
     : keys.toolsKey;
 
   return reqMatchesKey(req, key);
