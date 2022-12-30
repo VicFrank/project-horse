@@ -1,10 +1,10 @@
 const keys = require("../config/keys");
 
 const reqMatchesKey = (req, key) => {
-  const serverKey = req.body.server_key;
-  const serverKey2 = req.get("server_key");
-  const serverKey3 = req.params.server_key;
-  const serverKey4 = req.query.server_key;
+  const serverKey = req.body.server_key_v3;
+  const serverKey2 = req.get("server_key_v3");
+  const serverKey3 = req.params.server_key_v3;
+  const serverKey4 = req.query.server_key_v3;
   return (
     serverKey === key ||
     serverKey2 === key ||

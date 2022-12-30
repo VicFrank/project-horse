@@ -200,8 +200,8 @@ async function fixUninitializedPlayers() {
 }
 
 (async () => {
-  // await fixUninitializedPlayers();
-  // await claimRewardsForAllPlayers();
+  await fixUninitializedPlayers();
+  await claimRewardsForAllPlayers();
 
   await deleteBattlePasses();
   await initializeBattlePass();
