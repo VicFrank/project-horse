@@ -53,7 +53,7 @@ CREATE OR REPLACE FUNCTION rollup_gods(d date) RETURNS bool
     language plpgsql AS
 $$
 DECLARE
-    rank_row record;
+    mmr_option record;
 BEGIN
     IF EXISTS(select day from stats_gods_rollup where day = d)
     THEN
@@ -63,11 +63,11 @@ BEGIN
     THEN
         return false; /* Failed to lock */
     END IF;
-    for rank_row in select * from ranks
+    for mmr_option in select * from rollup_types where category = 'mmr'
         LOOP
-            insert into stats_gods_rollup (day, rank, god_name, picks, first_place, second_place, third_place, fourth_place, fifth_place, sixth_place, seventh_place, eighth_place , place_sum)
+            insert into stats_gods_rollup (day, type_id, god_name, picks, first_place, second_place, third_place, fourth_place, fifth_place, sixth_place, seventh_place, eighth_place , place_sum)
             select d                                AS day,
-                  rank_row.name                     AS rank,
+                  mmr_option.type_id                AS type_id,
                   god                               AS god_name,
                   count(*)                          AS picks,
                   count(*) FILTER (WHERE place = 1) AS first_place,
@@ -78,14 +78,14 @@ BEGIN
                   count(*) FILTER (WHERE place = 6) AS sixth_place,
                   count(*) FILTER (WHERE place = 7) AS seventh_place,
                   count(*) FILTER (WHERE place = 8) AS eighth_place,
-                  sum(place)                        as place_sum
+                  sum(place)                        AS place_sum
 
             from games
                      join game_players using (game_id)
             where ranked = true
-              and game_players.mmr between rank_row.mmr_floor and rank_row.mmr_ceiling
+              and game_players.mmr between (mmr_option.data->>'floor')::int and (mmr_option.data->>'ceiling')::int
               and created_at::date = d
-            group by god, day, rank;
+            group by god, day, type_id;
         END LOOP;
     PERFORM unlock_rollup('rollup_gods');
     return true;

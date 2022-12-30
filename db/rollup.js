@@ -7,5 +7,12 @@ module.exports = {
     } catch (error) {
       throw error;
     }
+  }, 
+  async getMmrOptions() {
+    try {
+      await query("select * from rollup_types where category = 'mmr';");
+    } catch (error) {
+      throw error;
+    }
   }
 };
