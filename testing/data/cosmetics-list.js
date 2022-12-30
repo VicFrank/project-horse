@@ -113,7 +113,7 @@ module.exports = [
   {
     name: "sfx_sexy",
     type: "SFX",
-    equip_group: "sfx_sexy",
+    equip_group: "sfx_gaben",
     coins: -1,
     cost_usd: -1,
     rarity: "Common",

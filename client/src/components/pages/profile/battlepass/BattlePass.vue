@@ -3,7 +3,7 @@
     <h1 class="page-title">{{ $t("battle_pass.page_title") }}</h1>
     <div class="timeline">
       <ul class="battlepass-timeline">
-        <li v-for="i in 50" :key="i">
+        <li v-for="i in 80" :key="i">
           <div
             class="timeline-container"
             v-bind:class="{ left: i % 2 === 0, right: i % 2 === 1 }"
