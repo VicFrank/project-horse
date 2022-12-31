@@ -2,6 +2,256 @@
   <div style="max-width: 1200px">
     <h1 class="page-title" v-t="'changelog.page_title'"></h1>
     <div class="pl-3 change-log">
+      <h2>Update 4.0 1/1/2023</h2>
+      <h3>Featured</h3>
+
+      <ul>
+        <li>Seasons are now 2 months long</li>
+        <li>Battlepass is 4x easier to level</li>
+        <li>Gods will now be introduced via the Battlepass</li>
+        <li>
+          Damage formula and timer changed to have more rounds played (without
+          making the game itself longer)
+        </li>
+        <li>5 new Gods</li>
+      </ul>
+
+      <h3>General</h3>
+
+      <ul>
+        <li>
+          Changed the damage formula
+          <ul>
+            <li>
+              <b>Old</b>: Round number + (number of remaining heroes * shop
+              level)
+            </li>
+            <li>
+              <b>New</b>: 5+(Round Number/4.5)+(Number of Units Alive * Round
+              Number/4.5)
+            </li>
+            <li>Note: This has the following implications:</li>
+            <ol>
+              <li>
+                More damage taken in early rounds and less damage taken later
+              </li>
+              <li>No longer scales based on shop level</li>
+              <li>
+                Game will last roughly 15% longer (in round amount, not overall
+                time)
+              </li>
+            </ol>
+          </ul>
+        </li>
+        <li>
+          Round buy timers lowered for every round (to account for the changes
+          above)
+        </li>
+        <li>Shop will no longer close automatically</li>
+        <li>Gold effect added when gaining extra gold with certain Gods</li>
+        <li>Added more restraints to make sure units stay inside arena</li>
+      </ul>
+
+      <h3>Gods</h3>
+
+      <ul>
+        <li>
+          Added Sideshop Man (unlocked for FREE at Battlepass Level 5. This is
+          Chaos God from the past season)
+          <ul>
+            <li>Ability: Going Out of Existence Sale</li>
+            <li>Type: Passive</li>
+            <li>
+              Description: First re-roll is always free, spells sell for full
+              value, and your hero re-rolls are one less gold.
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          Added Vacation Aghanim (unlocked at Battlepass Level 11)
+          <ul>
+            <li>Ability: Sorcery For Dummies: Volume 5</li>
+            <li>Type: Passive</li>
+            <li>
+              Description: Each spell in your shop has a 5% chance to be worth 2
+              points instead of 1. These spells will cost 5 gold.
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          Added Prellex (unlocked for FREE at Battlepass Level 15)
+          <ul>
+            <li>Ability: Bringer of the Faithful</li>
+            <li>Type: Passive</li>
+            <li>
+              Description: You are given a melee creep at the beginning of the
+              game. Each time you upgrade shop, you are given a choice of 3
+              neutral creeps. The skills of the chosen neutral will be added to
+              your creep permanently. Neutral creep choices and your melee
+              creep's stats improve which each shop level.
+            </li>
+          </ul>
+        </li>
+        <li>
+          Added Faceless Void (unlocked for FREE at Battlepass Level 60)
+          <ul>
+            <li>Ability: Time's Bond</li>
+            <li>Type: Active</li>
+            <li>
+              Description: Select a spell with this ability to individually lock
+              it. Once the round ends, the spell will cost 1 less gold. Can be
+              repeated. Charges: 0/1/2/3/4
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          Added Terrorist (unlocked for FREE at Battlepass Level 80)
+          <ul>
+            <li>Ability: Plant Bomb</li>
+            <li>Type: Passive</li>
+            <li>
+              Description: Bomb is planted at the beginning of the round on a
+              timer. If you lose before the timer runs out, the bomb is defused.
+              However, if the timer expires, the bomb will explode, dealing
+              non-lethal damage to all enemy units. Timer and explosion scale
+              with shop level. Timer: 18/16/14/12/10 seconds Explosion Damage:
+              90/80/70/60/50% current HP percentage
+            </li>
+            <li>Ability: Clutch Play</li>
+            <li>Type: Passive</li>
+            <li>
+              Description: If the bomb explodes and the Terrorist wins, they
+              gain 3 gold the following round. If the opponent defuses the bomb,
+              they gain 3 gold the following round.
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          Glados reworked
+          <ul>
+            <li>Ability: Orange & Blue Portal</li>
+            <li>Type: Active</li>
+            <li>
+              Description: Attach an Orange or Blue Portal to a unit. They will
+              gain spell lifesteal and share all healing and regen with the
+              opposite Portal unit. Spell Lifesteal 20/25/30/35/40% (half
+              against creeps)
+            </li>
+          </ul>
+        </li>
+
+        <li>Aghanim rescaled from 20/30/40/50/60 to 45/50/55/60/65</li>
+        <li>
+          Boneless ADDITIONALLY starts with 1 extra shop slot (+1 on each level)
+        </li>
+        <li>PA movement to crit from 15 to 10</li>
+        <li>Muerta crit base from 100% to 150%</li>
+        <li>
+          Ogre points required per level from 0/20/40/ 60/80 to
+          0/20/40/60/80/100
+        </li>
+        <li>
+          Ogre chance to multicast from 25/35/45/55/65 to 35/45/55/65/75/100
+        </li>
+        <li>Centaur HP per from 60 to 70</li>
+        <li>Centaur return damage from 25% to 35%</li>
+        <li>Tower God minimum range from 750 to 850</li>
+        <li>Lifestealer Infest burst damage from 150 to 0/75/150/225/300</li>
+        <li>Lifestealer attack interval from 1s to 0.75s</li>
+        <li>
+          Legion points required per level from 0/10/30/50/70/100 to
+          0/15/30/45/60/75
+        </li>
+        <li>Legion damage from 3/6/9/12/15/20 to 4/7/10/13/16/19</li>
+        <li>
+          Rubick points required per level from 0/10/20/30/40/50/60/70/80 to
+          0/5/15/25/35/45/55/65/75
+        </li>
+        <li>Techies Sticky Bomb from level 2 to level 4</li>
+        <li>Techies Proximity Mine damage reduction from 50% to 25%</li>
+      </ul>
+
+      <h3>Spells</h3>
+
+      <ul>
+        <li>Added Elder Dragon Form</li>
+        <li>
+          Added Earthshock
+          <ul>
+            <li>
+              Differences from Dota: Cooldown: 10/8/4. Damage: 75/150/300. Slows
+              attack speed by 20/40/80 Leap distance: 400.
+            </li>
+            <li>
+              Super: ( +500 radius, gains Enrage upon use for 1.5 seconds)
+            </li>
+            <li>Gaben: (Entire team Earthshocks for half values)</li>
+          </ul>
+        </li>
+        <li>Arcane Aura self bonus factor from 4 to 2</li>
+        <li>Arcane Aura ally bonus factor from 2 to 1</li>
+        <li>
+          Arcane Aura now ADDITIONALLY grants caster and team + 20/40/80 mana
+          per spell cast
+        </li>
+        <li>Arcane Aura Super REPLACED with bonus +80 mana per cast</li>
+        <li>Blink damage from 175 to 40/80/160</li>
+        <li>Blink Silence duration from 1.75s to 0.4/0.8/1.6</li>
+        <li>Brain Sap cooldown from 14/12/8 to 12/10/6</li>
+        <li>Brain Sap Super cooldown reduction from 3 to 2</li>
+        <li>Boundless Strike fixed to not stun through magic immunity</li>
+        <li>
+          Chakra Magic Gaben ADDITIONALLY allows it to work with ultimates
+        </li>
+        <li>
+          Dark Pact Gaben: Allies only cast the base ability at 50% damage (no
+          super benefits)
+        </li>
+        <li>Duel now works with castable attack modifiers</li>
+        <li>Duel duration from 5/6/7 to 5.5/6.5/7.5</li>
+        <li>Duel damage from 10/20/30 to 11/22/33</li>
+        <li>Elder Dragon Form splash AOE from 0/350/350 to 0/250/250</li>
+        <li>Elder Dragon Form Super ADDITIONALLY grants +15% splash</li>
+        <li>Elder Dragon Form Super ADDITIONALLY grants +100 splash radius</li>
+        <li>Essence Shift no longer double procs with attack modifiers</li>
+        <li>Essence Shift Super fixed to not given Gaben effect</li>
+        <li>
+          Essence Shift fixed to no longer gain stacks from killing
+          creeps/illusions
+        </li>
+        <li>Fissure Gaben Aftershock stun reduced from 0.75 to 0.4</li>
+        <li>Flame Guard now properly absorbs magic damage</li>
+        <li>Focus Fire cast range is now equal to your attack range</li>
+        <li>Fortunes End back to instant cast time</li>
+        <li>Fortunes End AOE now scales 150/200/300</li>
+        <li>
+          Ghost Ship Super Tidal Wave spawns wave at boat location, pushing
+          units hit by Boat towards your side
+        </li>
+        <li>
+          Inner Beast Gaben should spawn a Wraith Pact totem that tries to hit
+          as many enemies as possible (rather than just grant the effect)
+        </li>
+        <li>Jingu Mastery Super now ADDITIONALLY grants Echo Saber</li>
+        <li>Mana Shield damage absorb from 70% to 40/50/70%</li>
+        <li>Mana Shield drain per mana from 0.5/1/1.5/2 to 0.8/1.2/2</li>
+        <li>Meat Hook Super - remove -4s CDR & remove +120 dmg</li>
+        <li>Mystic Flare will no longer cast on allies when multicasted</li>
+        <li>Reaper's Scythe mana regen per stack from 1/2/3 to 2/4/6</li>
+        <li>Reaper's Scythe Super bonus mana regen per stack from 3 to 6</li>
+        <li>Reaper's Scythe Super +100 cast range to +500</li>
+        <li>Vampiric Spirit skeleton damage from 32 ‒ 37 to 22 - 27</li>
+      </ul>
+
+      <h3>Bodies</h3>
+      <ul>
+        <li>Hoodwink body from S to A Tier</li>
+      </ul>
+
       <h2>Update 3.5 12/15/2022</h2>
       <h3>General</h3>
       <ul>
@@ -48,7 +298,9 @@
         <li>Chaotic Offering Gaben fixed to spawn both golems properly</li>
         <li>Essence Shift fixed to have independent stacks</li>
         <li>Essence Shift stack duration from 6/12/24 to 5/10/20</li>
-        <li>Eye of the Storm Super Lightning Rod buff from 50% values to 33%</li>
+        <li>
+          Eye of the Storm Super Lightning Rod buff from 50% values to 33%
+        </li>
         <li>Leech Seed re-enabled</li>
         <li>Lifebreak re-enabled and fixed</li>
         <li>Nature's Call fixed to have proper HP gains</li>
