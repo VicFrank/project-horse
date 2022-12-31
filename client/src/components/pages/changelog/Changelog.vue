@@ -144,35 +144,36 @@
           </ul>
         </li>
 
-        <li>Aghanim rescaled from 20/30/40/50/60 to 45/50/55/60/65</li>
+        <li>Aghanim rescaled from 20/30/40/50/60 to 40/45/50/55/60%</li>
         <li>
           Boneless ADDITIONALLY starts with 1 extra shop slot (+1 on each level)
         </li>
-        <li>PA movement to crit from 15 to 10</li>
-        <li>Muerta crit base from 100% to 150%</li>
-        <li>
-          Ogre points required per level from 0/20/40/ 60/80 to
-          0/20/40/60/80/100
-        </li>
-        <li>
-          Ogre chance to multicast from 25/35/45/55/65 to 35/45/55/65/75/100
-        </li>
         <li>Centaur HP per from 60 to 70</li>
         <li>Centaur return damage from 25% to 35%</li>
-        <li>Tower God minimum range from 750 to 850</li>
-        <li>Lifestealer Infest burst damage from 150 to 0/75/150/225/300</li>
-        <li>Lifestealer attack interval from 1s to 0.75s</li>
+        <li>J'Muy cooldown reduction from 10/20/30/40/50 to 5/15/25/35/45%</li>
         <li>
           Legion points required per level from 0/10/30/50/70/100 to
           0/15/30/45/60/75
         </li>
         <li>Legion damage from 3/6/9/12/15/20 to 4/7/10/13/16/19</li>
+        <li>Lifestealer Infest burst damage from 150 to 0/75/150/225/300</li>
+        <li>Lifestealer attack interval from 1s to 0.75s</li>
+        <li>Muerta crit base from 100% to 150%</li>
+        <li>
+          Ogre points required per level from 0/20/40/60/80 to
+          0/20/40/60/80/100
+        </li>
+        <li>
+          Ogre chance to multicast from 25/35/45/55/65 to 35/45/55/65/75/100
+        </li>
+        <li>PA movement to crit from 15 to 10</li>
         <li>
           Rubick points required per level from 0/10/20/30/40/50/60/70/80 to
           0/5/15/25/35/45/55/65/75
         </li>
         <li>Techies Sticky Bomb from level 2 to level 4</li>
         <li>Techies Proximity Mine damage reduction from 50% to 25%</li>
+        <li>Tower God minimum range from 750 to 850</li>
       </ul>
 
       <h3>Spells</h3>
@@ -202,11 +203,12 @@
         <li>Blink damage from 175 to 40/80/160</li>
         <li>Blink Silence duration from 1.75s to 0.4/0.8/1.6</li>
         <li>Brain Sap cooldown from 14/12/8 to 12/10/6</li>
-        <li>Brain Sap Super cooldown reduction from 3 to 2</li>
+        <li>Brain Sap Super cooldown reduction from 3 to 0</li>
         <li>Boundless Strike fixed to not stun through magic immunity</li>
         <li>
           Chakra Magic Gaben ADDITIONALLY allows it to work with ultimates
         </li>
+        <li>Dark Pact now deals 30% self damage</li>
         <li>
           Dark Pact Gaben: Allies only cast the base ability at 50% damage (no
           super benefits)
@@ -217,6 +219,7 @@
         <li>Elder Dragon Form splash AOE from 0/350/350 to 0/250/250</li>
         <li>Elder Dragon Form Super ADDITIONALLY grants +15% splash</li>
         <li>Elder Dragon Form Super ADDITIONALLY grants +100 splash radius</li>
+        <li>Enchant Totem Super's cooldown reduction fixed to work with J'Muy</li>
         <li>Essence Shift no longer double procs with attack modifiers</li>
         <li>Essence Shift Super fixed to not given Gaben effect</li>
         <li>
@@ -232,6 +235,8 @@
           Ghost Ship Super Tidal Wave spawns wave at boat location, pushing
           units hit by Boat towards your side
         </li>
+        <li>Gust duration from 3/4/6 to 2/3/5</li>
+        <li>Gust Super CDR from -4 to -3s</li>
         <li>
           Inner Beast Gaben should spawn a Wraith Pact totem that tries to hit
           as many enemies as possible (rather than just grant the effect)
@@ -239,11 +244,16 @@
         <li>Jingu Mastery Super now ADDITIONALLY grants Echo Saber</li>
         <li>Mana Shield damage absorb from 70% to 40/50/70%</li>
         <li>Mana Shield drain per mana from 0.5/1/1.5/2 to 0.8/1.2/2</li>
+        <li>Mana Shield bonus mana from 120/180/300 to 50/100/200</li>
         <li>Meat Hook Super - remove -4s CDR & remove +120 dmg</li>
+        <li>Meat Hook Super and Gaben swapped</li>
         <li>Mystic Flare will no longer cast on allies when multicasted</li>
+        <li>Purification Super fixed to not be purgable</li>
         <li>Reaper's Scythe mana regen per stack from 1/2/3 to 2/4/6</li>
         <li>Reaper's Scythe Super bonus mana regen per stack from 3 to 6</li>
         <li>Reaper's Scythe Super +100 cast range to +500</li>
+        <li>Tricks of the Trade will no longer cast during Sleight of Fist</li>
+        <li>Tricks of the Trade Gaben fixed to actually give extra attack count</li>
         <li>Vampiric Spirit skeleton damage from 32 ‒ 37 to 22 - 27</li>
       </ul>
 
