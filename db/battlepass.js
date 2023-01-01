@@ -125,10 +125,10 @@ module.exports = {
    */
   async calculateBattlePassLevel(battlePassId, totalXP) {
     try {
-      if (totalXP > 26500) {
-        const remainingXp = totalXP - 26500;
-        const extraLevels = Math.floor(remainingXp / 1000);
-        return 50 + extraLevels;
+      if (totalXP > 18000) {
+        const remainingXp = totalXP - 18000;
+        const extraLevels = Math.floor(remainingXp / 225);
+        return 80 + extraLevels;
       }
       const battlePassLevels = await this.getBattlePassLevels(battlePassId);
       let lastLevel = 0;
@@ -180,19 +180,15 @@ module.exports = {
       // after 80, there is a reward every 5 levels
       let numRewards = 80 + Math.floor(remaining / 5);
       // Starting at level 86 there is an additional rewards every 10 levels
-      if (level >= 86) 
-        numRewards += Math.floor((level - 76)/10)
+      if (level >= 86) numRewards += Math.floor((level - 76) / 10);
       // There are also special rewards at levels 100 and 1000
-      if (level >= 100)
-        numRewards++;
-      if (level >= 1000)
-        numRewards++;
+      if (level >= 100) numRewards++;
+      if (level >= 1000) numRewards++;
     } else {
       // there is a reward every 5 levels, forever
       let numRewards = Math.floor(level / 5);
       // There is a special reward at level 100
-      if (level >= 100)
-        numRewards++;
+      if (level >= 100) numRewards++;
       return numRewards;
     }
   },
@@ -245,7 +241,7 @@ module.exports = {
         }
         // Starting at level 86, every 10 levels gives a God Chest
         if (i > 85) {
-          if ( (i + 4) % 10 === 0){
+          if ((i + 4) % 10 === 0) {
             cosmetics.push({
               cosmetic_id: godChest.cosmetic_id,
               free: false,
@@ -256,7 +252,9 @@ module.exports = {
         }
         // Special rewards at level 100 and 1000
         if (i === 100) {
-          const diamondAvatar = await Cosmetics.getCosmeticByName("avatar_cs_diamond");
+          const diamondAvatar = await Cosmetics.getCosmeticByName(
+            "avatar_cs_diamond"
+          );
           cosmetics.push({
             cosmetic_id: diamondAvatar.cosmetic_id,
             free: true, // This one is free
