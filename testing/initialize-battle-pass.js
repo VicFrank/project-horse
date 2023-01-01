@@ -45,7 +45,11 @@ async function initializeBattlePass() {
 
     console.log("Adding battle passes to existing players...");
     const steamIDs = await players.getAllSteamIDs();
+    let counter = 0;
     for (const steamID of steamIDs) {
+      counter++;
+      if (counter % 1000 == 0)
+        console.log(`Added ${counter}/${steamIDs.length} players`);
       await players.createBattlePass(steamID, battlePass.battle_pass_id);
     }
 
@@ -200,11 +204,11 @@ async function fixUninitializedPlayers() {
 }
 
 (async () => {
-  await fixUninitializedPlayers();
-  await claimRewardsForAllPlayers();
+  // await fixUninitializedPlayers();
+  // await claimRewardsForAllPlayers();
 
-  await deleteBattlePasses();
-  await initializeBattlePass();
+  // await deleteBattlePasses();
+  // await initializeBattlePass();
 
   await fixUninitializedPlayers();
 })();
