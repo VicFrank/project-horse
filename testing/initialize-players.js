@@ -275,8 +275,6 @@ async function addOldBattlepassIcons() {
 }
 
 (async () => {
-  // await updateGodChests();
-  // await giveEndOfSeasonRewards();
-  // await ladderReset();
-  await addOldBattlepassIcons();
+  await giveEndOfSeasonRewards();
+  await ladderReset();
 })();
