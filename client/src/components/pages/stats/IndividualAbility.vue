@@ -95,6 +95,14 @@ export default {
     this.loadAbilityStats();
   },
 
+  // detect route change
+  watch: {
+    $route() {
+      this.loadAbility();
+      this.loadAbilityStats(true);
+    },
+  },
+
   methods: {
     loadAbility() {
       fetch(`/api/abilities/${this.abilityName}`)
