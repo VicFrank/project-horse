@@ -31,8 +31,8 @@ export default {
       type: Object,
       required: true,
     },
-    ranks: {
-      type: Array,
+    selectedMMR: {
+      type: String,
       required: true,
     },
     width: {
@@ -48,7 +48,7 @@ export default {
     loadDailyStats() {
       this.loaded = false;
       fetch(
-        `/api/stats/godDaily?god=${this.god.god}&ranks=${this.ranks.join(",")}`
+        `/api/stats/godDaily?god=${this.god.god}&mmrOption=${this.selectedMMR}`
       )
         .then((res) => res.json())
         .then((stats) => {

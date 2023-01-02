@@ -15,21 +15,18 @@
         ></b-form-select>
       </div>
       <div class="ml-2">
-        <div class="mb-2">Rank</div>
-        <b-dropdown text="Select Ranks" variant="primary">
-          <b-dropdown-form>
-            <b-form-checkbox-group 
-              v-model="selectedRanks" 
-              :options="allRanks" 
-              @change="loadGodStats()"
-              :disabled="loading" 
-              class="mx-auto">
-            </b-form-checkbox-group>
-          </b-dropdown-form>
-        </b-dropdown>
+        <div class="mb-2">MMR</div>
+        <b-form-select
+          v-model="selectedMMR"
+          :options="mmrOptions"
+          @change="loadGodStats()"
+          :disabled="loading"
+          style="width: 100px"
+          class="mx-auto"
+        ></b-form-select>
       </div>
     </div>
-    <GodStats :gods="gods" :linkAbilities="true" :loading="loading" :ranks="selectedRanks"></GodStats>
+    <GodStats :gods="gods" :linkAbilities="true" :loading="loading" :selectedMMR="selectedMMR"></GodStats>
   </div>
 </template>
 
@@ -49,16 +46,15 @@ export default {
     selectedDate: null,
     dateOptions: [],
 
-    selectedRanks: ['Immortal'],
-    allRanks: [
-      "Herald",
-      "Guardian",
-      "Crusader",
-      "Archon",
-      "Legend",
-      "Ancient",
-      "Divine",
-      "Immortal"
+    selectedMMR: 'all_mmr',
+    mmrOptions: [
+      {value: 'all_mmr', text: 'All MMR'},
+      {value: '1000_plus', text: '1000+'},
+      {value: '1100_plus', text: '1100+'},
+      {value: '1200_plus', text: '1200+'},
+      {value: '1300_plus', text: '1300+'},
+      {value: '1400_plus', text: '1400+'},
+      {value: '1500_plus', text: '1500+'},
     ],
   }),
 
@@ -85,7 +81,7 @@ export default {
     loadGodStats() {
       this.loading = true;
       fetch(
-        `/api/stats/godsRollup?startDate=${this.selectedDate.startDate}&endDate=${this.selectedDate.endDate}&ranks=${this.selectedRanks.join(',')}`
+        `/api/stats/godsRollup?startDate=${this.selectedDate.startDate}&endDate=${this.selectedDate.endDate}&mmrOption=${this.selectedMMR}`
       )
         .then((res) => res.json())
         .then((gods) => {

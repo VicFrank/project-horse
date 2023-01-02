@@ -508,34 +508,31 @@ CREATE TABLE IF NOT EXISTS player_logs (
 );
 CREATE INDEX "IDX_player_logs_event" ON player_logs(log_event);
 CREATE INDEX "IDX_player_steam_id" ON player_logs(steam_id);
---------------------------------------------------------------------------------
--- Ranks
---------------------------------------------------------------------------------
-
-DROP TABLE IF EXISTS ranks;
-CREATE TABLE ranks
-(
-  name             TEXT,
-  mmr_floor        INTEGER,
-  mmr_ceiling      INTEGER,
-  game_mmr_floor   INTEGER,
-  game_mmr_ceiling INTEGER
-);
-/* TODO: Real mmr values are just guesses, but I think that using the ranks (and words) we already have will be helpful for end users of the stats */
-INSERT INTO ranks
-  (name, game_mmr_floor, game_mmr_ceiling, mmr_floor, mmr_ceiling)
-VALUES ('Herald', 0, 500, -1000, 399),
-  ('Guardian', 500, 1000, 400, 599),
-  ('Crusader', 1000, 1500, 600, 799),
-  ('Archon', 1500, 2000, 800, 999),
-  ('Legend', 2000, 2500, 1000, 1199),
-  ('Ancient', 2500, 3500, 1200, 1399),
-  ('Divine', 3500, 4500, 1400, 1499),
-  ('Immortal', 4500, 9999, 1500, 3000);
 
 --------------------------------------------------------------------------------
 -- Stats Rollup Tables
 --------------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS rollup_types
+(
+    type_id TEXT NOT NULL PRIMARY KEY ,
+    type_desc TEXT,
+    category TEXT,
+    data JSON
+);
+
+INSERT INTO rollup_types
+    (category, type_id, type_desc, data)
+VALUES
+    ('mmr', 'all_mmr', 'All MMR', '{"floor": 0, "ceiling": 9999}'),
+    ('mmr', '1000_plus', '1000+', '{"floor": 1000, "ceiling": 9999}'),
+    ('mmr', '1100_plus', '1100+', '{"floor": 1100, "ceiling": 9999}'),
+    ('mmr', '1200_plus', '1200+', '{"floor": 1200, "ceiling": 9999}'),
+    ('mmr', '1300_plus', '1300+', '{"floor": 1300, "ceiling": 9999}'),
+    ('mmr', '1400_plus', '1400+', '{"floor": 1400, "ceiling": 9999}'),
+    ('mmr', '1500_plus', '1500+', '{"floor": 1500, "ceiling": 9999}'),
+    ('lobby', 'immortal_lobbies', 'Immortal Only Lobbies', '{}'),
+    ('lobby', 'tourney_lobbies', 'Tournament Lobbies', '{}');
+
 
 CREATE TABLE IF NOT EXISTS stats_rollup_lock
 (
@@ -548,7 +545,7 @@ CREATE TABLE IF NOT EXISTS stats_rollup_lock
 CREATE TABLE if NOT EXISTS stats_gods_rollup
 (
   day           DATE,
-  rank          TEXT,
+  type_id       TEXT REFERENCES rollup_types(type_id),
   god_name      TEXT,
   picks         INTEGER, -- Basically just the sum of each place
   first_place   INTEGER,
@@ -562,4 +559,4 @@ CREATE TABLE if NOT EXISTS stats_gods_rollup
   place_sum     INTEGER  -- Sum up the places so we can calculate averages
 );
 CREATE INDEX IDX_stats_gods_rollup_day ON stats_gods_rollup (day);
-CREATE INDEX IDX_stats_gods_rollup_rank ON stats_gods_rollup (rank);
+CREATE INDEX IDX_stats_gods_rollup_type ON stats_gods_rollup (type_id);
