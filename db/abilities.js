@@ -451,7 +451,7 @@ module.exports = {
       const withIcons = await addAbilityIcons(rows);
       const withPlacementArray = withIcons.map((item) => {
         const placementArray = [];
-        for (let i = 1; i <= 8; i++) {
+        for (let i = 1; i <= 9; i++) {
           placementArray.push(item[`level_${i}`] / item.ability_freq);
         }
         return {
