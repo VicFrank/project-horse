@@ -208,18 +208,19 @@
       "ABILITY: Passive",
       "PIERCES SPELL IMMUNITY: Yes"
     ],
-    "description": "Gives additional mana regeneration to all friendly units on the map. This bonus is increased for the caster.",
-    "differences": "",
+    "description": "The wielder emits a burst of magic every time they cast a spell, restoring mana to all allies. Gives additional mana regeneration to all friendly units in the arena. This bonus is increased for the caster.",
+    "differences": "Arcane Aura allows the caster to restore mana to themselves and all allies each time they cast a spell.",
     "values": [
-      "ALLY BONUS FACTOR: 2",
+      "ALLY BONUS FACTOR: 1",
       "CLOSE MANA REGEN: 1.2 / 1.8 / 3",
       "MANA REGEN: 1.5 / 3 / 6",
-      "SELF BONUS FACTOR: 4",
+      "MANA RESTORED PER CAST: 20 / 40 / 80",
+      "SELF BONUS FACTOR: 2",
       "SELF MANA REGEN: 2.4 / 3.6 / 6"
     ],
     "cooldowns": [],
     "manaCost": [],
-    "superUpgrade": "Super: +6 Mana Regen. Ally bonus factor to 4x.",
+    "superUpgrade": "Super: +80 mana restored.",
     "gabenUpgrade": "Gaben: Aura now grants 25% cooldown reduction."
   },
   {
@@ -507,6 +508,7 @@
     "icon": "enigma_black_hole",
     "tags": [
       "stun",
+      "pureDamage",
       "ultimate"
     ],
     "categories": [
@@ -618,7 +620,7 @@
     "categories": [
       "ABILITY: Point Target"
     ],
-    "description": "Short distance teleportation that allows the hero to move in and out of combat, releasing a sonic boom at both the starting and ending locations, dealing 175 damage in a 300 AoE and silences for 1.75 seconds.",
+    "description": "Short distance teleportation that allows the hero to move in and out of combat, releasing a sonic boom at both the starting and ending locations, dealing 40 / 80 / 120 / 160 damage in a 300 AoE and silences for 0.4 / 0.8 / 1.2 / 1.6 seconds.",
     "differences": "The area of effect aspect of Blink is part of the base ability.",
     "values": [
       "RANGE: 1075 / 1150 / 1300"
@@ -676,6 +678,7 @@
     "icon": "bloodseeker_bloodrage",
     "tags": [
       "attackSpeed",
+      "pureDamage",
       "damageAmplification"
     ],
     "categories": [
@@ -757,9 +760,9 @@
       "STUN DURATION: 1 / 1.2 / 1.6"
     ],
     "cooldowns": [
-      28,
-      26,
-      22
+      20,
+      16,
+      8
     ],
     "manaCost": [
       100
@@ -772,7 +775,8 @@
     "id": "custom_bane_brain_sap",
     "icon": "bane_brain_sap",
     "tags": [
-      "healing"
+      "healing",
+      "pureDamage"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -785,16 +789,16 @@
       "HEAL/DAMAGE: 75 / 150 / 300"
     ],
     "cooldowns": [
-      14,
       12,
-      8
+      10,
+      6
     ],
     "manaCost": [
       100,
       120,
       160
     ],
-    "superUpgrade": "Super: Brain Sap adds extra maximum health to the caster for the duration of the round based on the amount sapped. Heal/Damage increased by +150, cooldown reduced by 3 seconds, and applies a maximum level Enfeeble on the target.",
+    "superUpgrade": "Super: Brain Sap adds extra maximum health to the caster for the duration of the round based on the amount sapped. Heal/Damage increased by +150, and applies a maximum level Enfeeble on the target.",
     "gabenUpgrade": "Gaben: Brain Sap is also cast on enemies within 550 radius of the primary target."
   },
   {
@@ -962,13 +966,16 @@
       0
     ],
     "superUpgrade": "Super: -4s reduced cooldown, and applies a basic dispel on targeted hero. Reduces ally cooldowns by an additional 2s.",
-    "gabenUpgrade": "Gaben: Grants Blinding Light."
+    "gabenUpgrade": "Gaben: Grants Blinding Light. Chakra Magic also reduces the cooldown of ultimates."
   },
   {
     "name": "Chakram",
     "id": "custom_shredder_chakram",
     "icon": "shredder_chakram",
-    "tags": [],
+    "tags": [
+      "pureDamage",
+      "ultimate"
+    ],
     "categories": [
       "ABILITY: Point Target",
       "DAMAGE TYPE: Pure",
@@ -978,7 +985,7 @@
     "description": "Transforms this hero's weapon into a saw blade and fires it at the target location where it will spin in place, dealing damage in an area around it. Enemies caught in the saw blade will move more slowly for every 5% of health missing. The blade deals damage and cuts down trees in its path when fired and retracted. While active the ability costs mana, and the hero loses their ability to attack.",
     "differences": "AI: Targets the furthest enemy from the hero",
     "values": [
-      "DAMAGE PER SECOND: 50 / 75 / 100",
+      "DAMAGE PER SECOND: 50 / 100 / 150",
       "MANA COST PER SECOND: 14 / 22 / 30",
       "PASS DAMAGE: 110 / 155 / 200",
       "RADIUS: 200",
@@ -994,7 +1001,7 @@
       125,
       175
     ],
-    "superUpgrade": "Super: Grants Throwable Flamethrower, which allows the hero to gift a Flamethrower to an ally. +20 Chakram damage per second, +4% Chakram movement slow.",
+    "superUpgrade": "Super: Grants Throwable Flamethrower, which allows the hero to gift a buffed Flamethrower to an ally. +20 Chakram damage per second, +4% Chakram movement slow.",
     "gabenUpgrade": "Gaben: Grants Second Chakram."
   },
   {
@@ -1251,7 +1258,8 @@
     "id": "custom_axe_counter_helix",
     "icon": "axe_counter_helix",
     "tags": [
-      "passive"
+      "passive",
+      "pureDamage"
     ],
     "categories": [
       "ABILITY: Passive",
@@ -1301,7 +1309,8 @@
     "id": "custom_axe_culling_blade",
     "icon": "axe_culling_blade",
     "tags": [
-      "ultimate"
+      "ultimate",
+      "pureDamage"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -1362,7 +1371,7 @@
   },
   {
     "name": "Dark Pact",
-    "id": "slark_dark_pact",
+    "id": "custom_slark_dark_pact",
     "icon": "slark_dark_pact",
     "tags": [
       "dispel",
@@ -1373,12 +1382,13 @@
       "DAMAGE TYPE: Magical",
       "PIERCES SPELL IMMUNITY: No"
     ],
-    "description": "After a short delay, Slark sacrifices some of his life blood, purging most negative debuffs and dealing damage to enemy units around him and to himself. Slark only takes 0% of the damage.\n\nDISPEL TYPE: Strong Dispel",
-    "differences": "Caster does not deal damage to himself.",
+    "description": "After a short delay, the caster purges most negative debuffs and dealing damage to enemy units around themselves. Caster takes 30% of the damage from Dark Pact. \n\nDISPEL TYPE: Strong Dispel",
+    "differences": "",
     "values": [
       "DAMAGE: 90 / 160 / 300",
       "DELAY: 1.5",
-      "RADIUS: 325"
+      "RADIUS: 325",
+      "SELF DAMAGE: 30%"
     ],
     "cooldowns": [
       9,
@@ -1389,7 +1399,7 @@
       65
     ],
     "superUpgrade": "Super: Purges buffs from enemies, +150 area of effect, +150 damage, -1s cooldown.",
-    "gabenUpgrade": "Gaben: Entire team Dark Pacts ( damage)."
+    "gabenUpgrade": "Gaben: Dark Pact also applies on allies, dealing 50% of its usual damage and without the effects of its Super."
   },
   {
     "name": "Death Pulse",
@@ -1770,11 +1780,11 @@
       "DISPELLABLE: Strong Dispels Only"
     ],
     "description": "The hero starts an epic duel against a target enemy hero, where both heroes are forced to attack each other for a short duration. Neither hero can use items or abilities. If the casting hero's opponent dies during the Duel, the hero gains permanent bonus damage.",
-    "differences": "Duel does not grant damage to enemies upon losing Duel.",
+    "differences": "Duel does not grant damage to enemies upon losing Duel.\nAttack modifiers can be used while Dueling.",
     "values": [
       "CAST RANGE: 200 / 250 / 300",
-      "DURATION: 5 / 6 / 7",
-      "REWARD DAMAGE: 10 / 20 / 30"
+      "DURATION: 5.5 / 6.5 / 7.5",
+      "REWARD DAMAGE: 11 / 22 / 33"
     ],
     "cooldowns": [
       50
@@ -1801,12 +1811,13 @@
       "PIERCES SPELL IMMUNITY: No",
       "DISPELLABLE: Yes"
     ],
-    "description": "The caster leaps forward 250 units and slams the earth, causing a powerful shock to damage and low alls enemy units in a nearby area for 4 seconds.",
+    "description": "The caster leaps forward 400 units and slams the earth, causing a powerful shock that damages and slows all enemy units in a nearby area for 4 seconds.",
     "differences": "",
     "values": [
-      "DAMAGE: 75 / 125 / 225",
-      "RADIUS: 385",
-      "SLOW: -16% / -24% / -40%"
+      "ATTACK SLOW: -20 / -40 / -80",
+      "DAMAGE: 75 / 150 / 300",
+      "MOVEMENT SLOW: -16% / -24% / -40%",
+      "RADIUS: 385"
     ],
     "cooldowns": [
       10,
@@ -1816,8 +1827,8 @@
     "manaCost": [
       85
     ],
-    "superUpgrade": "Super: Causes Earthshock to apply a 1.5 second Enrage buff on yourself. +500 radius, -s CD.",
-    "gabenUpgrade": "Gaben: Entire team Earthshocks for half values (other than duration). Affects heroes only."
+    "superUpgrade": "Super: Causes Earthshock to apply a 1.5 second Enrage buff on yourself. +500 radius.",
+    "gabenUpgrade": "Gaben: All other allied heroes perform an Earthshock that deals 50% of the original damage. Earthshocks created this way do not gain any bonuses from its Super."
   },
   {
     "name": "Elder Dragon Form",
@@ -1834,7 +1845,7 @@
       "PIERCES SPELL IMMUNITY: Allies Yes, Enemies No",
       "DISPELLABLE: Strong Dispels Only"
     ],
-    "description": "Dragon Knight takes the form of one of three powerful elder dragons, increasing his speed, and Dragon Tail's range, while granting him new powers.\nLEVEL 1 Green Dragon - Corrosive Breath: attacks deal 20 / 20 / 20 / 30 poison damage per second for 5 seconds. Works on structures.\nLEVEL 2 Red Dragon - Splash Attack: attacks damage all enemy units in a 350 radius for 60% / 60% / 60% / 100% damage, with Corrosive Breath added to the targets.\nLEVEL 3 Blue Dragon - Frost Breath: slows movement speed by 40% / 40% / 40% / 60% and attack speed by 40 / 40 / 40 / 60 of enemy units in Splash Attack range for 3 seconds, with Corrosive Breath added to the targets.",
+    "description": "Dragon Knight takes the form of one of three powerful elder dragons, increasing his speed, and Dragon Tail's range, while granting him new powers.\nLEVEL 1 Green Dragon - Corrosive Breath: attacks deal 20 / 20 / 20 / 30 poison damage per second for 5 seconds. Works on structures.\nLEVEL 2 Red Dragon - Splash Attack: attacks damage all enemy units in a 250 radius for 60% / 60% / 60% / 100% damage, with Corrosive Breath added to the targets.\nLEVEL 3 Blue Dragon - Frost Breath: slows movement speed by 40% / 40% / 40% / 60% and attack speed by 40 / 40 / 40 / 60 of enemy units in Splash Attack range for 3 seconds, with Corrosive Breath added to the targets.",
     "differences": "",
     "values": [
       "BONUS ATTACK RANGE: 0",
@@ -1849,7 +1860,7 @@
       50,
       50
     ],
-    "superUpgrade": "Super: Grants Fireball.",
+    "superUpgrade": "Super: Grants Fireball, +15% splash damage, and +100 splash radius.",
     "gabenUpgrade": "Gaben: Transforms into Black Dragon. Black Dragon deals 30 Corrosive Damage, 100% Splash Damage, 60% Slow amount, 25% increased Magic Resistance, and has free pathing."
   },
   {
@@ -1897,7 +1908,6 @@
     "description": "Empowers Earthshaker's totem, causing it to deal extra damage and have 75 bonus attack range on the next attack.",
     "differences": "",
     "values": [
-      "DAMAGE: 0 / 0 / 0",
       "BONUS: 75% / 150% / 300%"
     ],
     "cooldowns": [
@@ -1977,7 +1987,11 @@
     "name": "Essence Shift",
     "id": "custom_slark_essence_shift",
     "icon": "slark_essence_shift",
-    "tags": [],
+    "tags": [
+      "passive",
+      "stats",
+      "attackSpeed"
+    ],
     "categories": [
       "ABILITY: Passive",
       "PIERCES SPELL IMMUNITY: Yes",
@@ -1986,14 +2000,14 @@
     "description": "The hero steals the life essence of enemy heroes with their attacks, draining each of their attributes and converting them to bonus Agility.",
     "differences": "Essence Shift will not give permanent agility until its Super upgrade.",
     "values": [
-      "AGILITY GAIN: 3",
-      "ALL ATTRIBUTE LOSS: 1",
-      "STACK DURATION: 6 / 12 / 24"
+      "AGILITY GAIN: 3 / 3 / 3",
+      "ALL ATTRIBUTE LOSS: 1 / 1 / 1",
+      "STACK DURATION: 5 / 10 / 20"
     ],
     "cooldowns": [],
     "manaCost": [],
-    "superUpgrade": "Super: If the hero kills an enemy affected by Essence Shift, they permanently gain 1 agility.",
-    "gabenUpgrade": "Gaben: Essence Shift can also proc with spells, each having a 2s cooldown to affect the same unit again."
+    "superUpgrade": "Super: Permanently gains +2 agility when a unit affected by Essence Shift dies.",
+    "gabenUpgrade": "Gaben: Essence Shift can also proc with spells, each having a 1s cooldown to affect the same unit again."
   },
   {
     "name": "Eye of the Storm",
@@ -2029,7 +2043,7 @@
       150,
       200
     ],
-    "superUpgrade": "Super: Grants Lightning Rod: Eye of the Storm hits the caster as well, granting the opposite effects (for 50% value). -0.2s strike interval.",
+    "superUpgrade": "Super: Grants Lightning Rod: Eye of the Storm hits the caster as well, granting the opposite effects (for 33% value). -0.2s strike interval.",
     "gabenUpgrade": "Gaben: +2 strike targets."
   },
   {
@@ -2066,7 +2080,7 @@
       150
     ],
     "superUpgrade": "Super: Applies an instant attack on every unit hit.",
-    "gabenUpgrade": "Gaben: Fade Bolt steals attack damage. -s cooldown."
+    "gabenUpgrade": "Gaben: Fade Bolt steals attack damage. -4s cooldown."
   },
   {
     "name": "False Promise",
@@ -2113,6 +2127,7 @@
     ],
     "categories": [
       "ABILITY: Passive",
+      "DAMAGE TYPE: Physical",
       "PIERCES SPELL IMMUNITY: Yes"
     ],
     "description": "Lifestealer's attacks deal damage and provide heal for a percentage of his target's max health.",
@@ -2182,7 +2197,8 @@
     "icon": "bane_fiends_grip",
     "tags": [
       "ultimate",
-      "stun"
+      "stun",
+      "pureDamage"
     ],
     "categories": [
       "ABILITY: Channeled",
@@ -2399,7 +2415,7 @@
       90,
       110
     ],
-    "superUpgrade": "Super: +50 Damage Per Second and +280 Magic Damage Absorbed.",
+    "superUpgrade": "Super: +50 Damage Per Second, +280 Magic Damage Absorbed, and -28s cooldown.",
     "gabenUpgrade": "Gaben: Passive: Twice as powerful Radiance effect."
   },
   {
@@ -2520,11 +2536,10 @@
       "DISPELLABLE: Yes"
     ],
     "description": "Gathers the hero's power into a bolt of scouring energy that, when released, damages, roots, and purges enemies of buffs in an area around the target. If target is an ally it will only purge debuffs.\n\nDISPEL TYPE: Basic Dispel",
-    "differences": "",
+    "differences": "Fortune's End has an instant cast time with maximum power.",
     "values": [
-      "CHANNEL TIME: 2.5",
       "DAMAGE: 100 / 160 / 280",
-      "RADIUS: 300",
+      "RADIUS: 150 / 200 / 300",
       "ROOT DURATION: 2.75"
     ],
     "cooldowns": [
@@ -2743,7 +2758,7 @@
       175,
       225
     ],
-    "superUpgrade": "Super: Grants Tidal Wave. +10% damage reduction.",
+    "superUpgrade": "Super: Creates a Tidal Wave upon crashing, knocking enemies towards the enemy team. +10% damage reduction.",
     "gabenUpgrade": "Gaben: Summons 2 more ships after the first, each arriving 3.5 seconds after the previous."
   },
   {
@@ -2752,6 +2767,7 @@
     "icon": "silencer_glaives_of_wisdom",
     "tags": [
       "attackModifier",
+      "pureDamage",
       "stats"
     ],
     "categories": [
@@ -2880,7 +2896,8 @@
       "attackDamage"
     ],
     "categories": [
-      "ABILITY: Passive"
+      "ABILITY: Passive",
+      "DAMAGE TYPE: Physical"
     ],
     "description": "Tiny gains craggy mass, increasing his attack damage, and armor, and toss power while slowing his attack speed.",
     "differences": "",
@@ -2915,7 +2932,7 @@
       "CAST RANGE: 900",
       "KNOCKBACK DURATION: 0.6 / 0.7 / 0.9",
       "KNOCKBACK MAX: 450",
-      "SILENCE DURATION: 3 / 4 / 6",
+      "SILENCE DURATION: 2 / 3 / 5",
       "WIDTH: 250"
     ],
     "cooldowns": [
@@ -2926,7 +2943,7 @@
     "manaCost": [
       70
     ],
-    "superUpgrade": "Super: Increases radius by 250 and reduces the cooldown by 4.",
+    "superUpgrade": "Super: Increases radius by 250 and reduces the cooldown by 3.",
     "gabenUpgrade": "Gaben: Silence also makes enemies miss 100% of their attacks. Doubles the knockback max distance."
   },
   {
@@ -3130,6 +3147,7 @@
     "icon": "enchantress_impetus",
     "tags": [
       "attackRange",
+      "pureDamage",
       "attackModifier"
     ],
     "categories": [
@@ -3251,7 +3269,7 @@
     "cooldowns": [],
     "manaCost": [],
     "superUpgrade": "Super: Grants Vladmir's aura. Increases attack speed by 15.",
-    "gabenUpgrade": "Gaben: Grants Wraith Pact aura. Increases attack speed by 15."
+    "gabenUpgrade": "Gaben: Replaces Vladmir's aura with Wraith Pact. Increases attack speed by 15."
   },
   {
     "name": "Inner Fire",
@@ -3347,7 +3365,7 @@
       0
     ],
     "manaCost": [],
-    "superUpgrade": "Super: +130 damage.",
+    "superUpgrade": "Super: Grants Echo Sabre and +130 damage.",
     "gabenUpgrade": "Gaben: Spawns a stone soldier near you every 2.5s."
   },
   {
@@ -3370,14 +3388,16 @@
     ],
     "cooldowns": [],
     "manaCost": [],
-    "superUpgrade": "Super: Increases damage block by 40 and reduces the damage treshold by 100.",
+    "superUpgrade": "Super: Increases damage block by 40 and reduces the damage threshold by 100.",
     "gabenUpgrade": "Gaben: Grants Blademail."
   },
   {
     "name": "Laser",
     "id": "custom_tinker_laser",
     "icon": "tinker_laser",
-    "tags": [],
+    "tags": [
+      "pureDamage"
+    ],
     "categories": [
       "ABILITY: Unit Target",
       "DAMAGE TYPE: Pure",
@@ -3618,7 +3638,8 @@
     "icon": "dawnbreaker_luminosity",
     "tags": [
       "passive",
-      "healing"
+      "healing",
+      "lifesteal"
     ],
     "categories": [
       "ABILITY: Passive",
@@ -3758,17 +3779,21 @@
     "name": "Mana Shield",
     "id": "custom_medusa_mana_shield",
     "icon": "medusa_mana_shield",
-    "tags": [],
+    "tags": [
+      "magicDamage",
+      "manaRegeneration",
+      "stun"
+    ],
     "categories": [
       "ABILITY: Toggle",
       "DISPELLABLE: Strong Dispels Only"
     ],
-    "description": "Creates a shield that absorbs 70% of incoming damage in exchange for the hero's mana. Provides bonus mana capacity.",
+    "description": "Creates a shield that absorbs 40% / 50% / 60% / 70% of incoming damage in exchange for the hero's mana. Provides bonus mana capacity.",
     "differences": "",
     "values": [
-      "BONUS MANA: 120 / 180 / 300",
-      "DAMAGE ABSORBED: 70%",
-      "DAMAGE PER MANA: 0.5 / 1 / 2"
+      "BONUS MANA: 50 / 100 / 200",
+      "DAMAGE ABSORBED: 40% / 50% / 70%",
+      "DAMAGE PER MANA: 0.8 / 1.2 / 2"
     ],
     "cooldowns": [],
     "manaCost": [],
@@ -3780,7 +3805,8 @@
     "id": "custom_pudge_meat_hook",
     "icon": "pudge_meat_hook",
     "tags": [
-      "displacement"
+      "displacement",
+      "pureDamage"
     ],
     "categories": [
       "ABILITY: Point Target",
@@ -3801,8 +3827,8 @@
     "manaCost": [
       110
     ],
-    "superUpgrade": "Super: Launches two extra hooks to either side of the main one. Increases damage by 120, and reduces cooldown by 4.",
-    "gabenUpgrade": "Gaben: Units hit are max level Ruptured during hook."
+    "superUpgrade": "Super: Units hit are max level Ruptured during hook.",
+    "gabenUpgrade": "Gaben: Launches two extra hooks to either side of the main one."
   },
   {
     "name": "Mirror Image",
@@ -4096,7 +4122,7 @@
     "values": [
       "CAST RANGE: 800 / 950 / 1100",
       "DAMAGE REDUCTION DURATION: 3",
-      "DAMAGE REDUCTION: 30 / 40 / 50",
+      "DAMAGE REDUCTION: 30% / 40% / 50%",
       "DAMAGE: 50"
     ],
     "cooldowns": [
@@ -4133,7 +4159,7 @@
       "MAX DPS DURATION: 4",
       "MAX DPS: 15 / 30 / 60",
       "MIN DPS: 15 / 20 / 30",
-      "RADIUS: 400"
+      "RADIUS: 300"
     ],
     "cooldowns": [
       14
@@ -4604,6 +4630,7 @@
     "icon": "omniknight_purification",
     "tags": [
       "buff",
+      "pureDamage",
       "healing"
     ],
     "categories": [
@@ -4733,6 +4760,7 @@
     "icon": "shredder_reactive_armor",
     "tags": [
       "passive",
+      "pureDamage",
       "healing"
     ],
     "categories": [
@@ -4806,7 +4834,7 @@
     "values": [
       "DAMAGE PER MISSING HP: 0.7 / 0.8 / 0.9",
       "HP REGEN: 3 / 6 / 9",
-      "MANA REGEN: 1 / 2 / 3",
+      "MANA REGEN: 2 / 4 / 6",
       "STUN DURATION: 1.5 / 1.5 / 1.5"
     ],
     "cooldowns": [
@@ -4817,7 +4845,7 @@
       350,
       500
     ],
-    "superUpgrade": "Super: +9 HP regen per stack, +3 mana regen per stack, and +100 cast range. If the target dies under Reaper's Scythe, the caster regains health and mana equal to their current health and mana.",
+    "superUpgrade": "Super: +9 HP regen per stack, +6 mana regen per stack, and +500 cast range. If the target dies under Reaper's Scythe, the caster regains health and mana equal to their current health and mana.",
     "gabenUpgrade": "Gaben: 100% of Reaper Scythe's damage is distributed to all enemies within 400 radius."
   },
   {
@@ -4859,6 +4887,7 @@
     "icon": "void_spirit_resonant_pulse",
     "tags": [
       "magicDamage",
+      "magicImmunity",
       "silence"
     ],
     "categories": [
@@ -5149,7 +5178,7 @@
       175,
       225
     ],
-    "superUpgrade": "Super: Projectile speed and the bolt pierces through all units.",
+    "superUpgrade": "Super: The bolt pierces through all units, dealing damage to all of them.",
     "gabenUpgrade": "Gaben: Grants Hunter's Boomerang. Decreases cooldown of Sharpshooter by 20s for every unit that dies under the debuff."
   },
   {
@@ -5199,6 +5228,7 @@
     ],
     "categories": [
       "ABILITY: Unit Target",
+      "DAMAGE TYPE: Physical",
       "PIERCES SPELL IMMUNITY: Yes",
       "DISPELLABLE: Yes"
     ],
@@ -5829,7 +5859,11 @@
     "name": "Sun Ray",
     "id": "custom_phoenix_sun_ray",
     "icon": "phoenix_sun_ray",
-    "tags": [],
+    "tags": [
+      "healing",
+      "magicDamage",
+      "stun"
+    ],
     "categories": [
       "ABILITY: Point Target",
       "DAMAGE TYPE: Magical",
@@ -6174,7 +6208,11 @@
     ],
     "description": "CHANNELED - Riki phases out of the world while striking random enemy heroes from behind in an area around him.",
     "differences": "Has a greatly increased cast point.",
-    "values": [],
+    "values": [
+      "ATTACK RATE: 4",
+      "DURATION: 2",
+      "RADIUS: 450"
+    ],
     "cooldowns": [
       21,
       18,
@@ -6184,7 +6222,7 @@
       50
     ],
     "superUpgrade": "Super: Grants Battlefury. Increases cast range by 300.",
-    "gabenUpgrade": "Gaben: Increases the number of attacks by 1. Hits 1 extra target per attack."
+    "gabenUpgrade": "Gaben: Increases the number of attacks by 1, hits 1 extra target per attack, and -4s CDR."
   },
   {
     "name": "Unleash",
@@ -6301,7 +6339,7 @@
       "ABILITY: No Target"
     ],
     "description": "Restore health based on the damage the caster deals when attacking enemy units. Can be cast to summon skeletons with Vampiric Spirit. Skeletons respawn once when killed.",
-    "differences": "Always summons all the possible skeletons.",
+    "differences": "Always summons the maximum number of skeletons.",
     "values": [
       "LIFESTEAL: 10% / 18% / 34%",
       "SKELETON DURATION: 60",
@@ -6445,7 +6483,10 @@
     "name": "Warcry",
     "id": "custom_sven_warcry",
     "icon": "sven_warcry",
-    "tags": [],
+    "tags": [
+      "attackDamage",
+      "buff"
+    ],
     "categories": [
       "ABILITY: No Target",
       "PIERCES SPELL IMMUNITY: Yes",
