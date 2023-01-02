@@ -110,6 +110,10 @@ async function giveEndOfSeasonRewards() {
       cosmeticName: "hat_rainbow_trophy",
       amount: 1,
     },
+    {
+      cosmeticName: "streak_space",
+      amount: 1,
+    },
   ];
   const topTenRewards = [
     {
