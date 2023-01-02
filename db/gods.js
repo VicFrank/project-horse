@@ -106,7 +106,7 @@ module.exports = {
 
   async getGodsStatsRollup(startDate, endDate, mmrOption) {
     try {
-      const {rows} = await query(
+      const { rows } = await query(
         `
         SELECT 
           god_name,
@@ -126,7 +126,7 @@ module.exports = {
         GROUP BY god_name
         ORDER BY picks DESC;
       `,
-      [mmrOption, startDate, endDate]
+        [mmrOption, startDate, endDate]
       );
       numGames = rows.reduce((acc, row) => acc + Number(row.picks), 0);
 
@@ -135,7 +135,12 @@ module.exports = {
         god: row.god_name,
         pick_rate: row.picks / numGames,
         win_rate: row.first_place / row.picks,
-        top_four_rate: (Number(row.first_place) + Number(row.second_place) + Number(row.third_place) + Number(row.fourth_place)) / row.picks,
+        top_four_rate:
+          (Number(row.first_place) +
+            Number(row.second_place) +
+            Number(row.third_place) +
+            Number(row.fourth_place)) /
+          row.picks,
         avg_place: row.place_sum / row.picks,
         placements: [
           row.first_place / row.picks,
@@ -146,7 +151,7 @@ module.exports = {
           row.sixth_place / row.picks,
           row.seventh_place / row.picks,
           row.eighth_place / row.picks,
-        ]
+        ],
       }));
       return gods;
     } catch (error) {
@@ -156,19 +161,19 @@ module.exports = {
 
   async getGodDailyStats(godName, mmrOption) {
     try {
-      const {rows} = await query( 
+      const { rows } = await query(
         `
         SELECT day,
-            sum(picks)         AS picks,
-            sum(first_place)   AS first_place,
-            sum(second_place)  AS second_place,
-            sum(third_place)   AS third_place,
-            sum(fourth_place)  AS fourth_place,
-            sum(fifth_place)   AS fifth_place,
-            sum(sixth_place)   AS sixth_place,
-            sum(seventh_place) AS seventh_place,
-            sum(eighth_place)  AS eighth_place,
-            sum(place_sum)     AS place_sum
+          sum(picks)         AS picks,
+          sum(first_place)   AS first_place,
+          sum(second_place)  AS second_place,
+          sum(third_place)   AS third_place,
+          sum(fourth_place)  AS fourth_place,
+          sum(fifth_place)   AS fifth_place,
+          sum(sixth_place)   AS sixth_place,
+          sum(seventh_place) AS seventh_place,
+          sum(eighth_place)  AS eighth_place,
+          sum(place_sum)     AS place_sum
         FROM stats_gods_rollup join rollup_types using (type_id)
         WHERE god_name = $1
           AND type_id = $2
@@ -181,7 +186,12 @@ module.exports = {
       const dailyStats = rows.map((row) => ({
         ...row,
         win_rate: row.first_place / row.picks,
-        top_four_rate: (Number(row.first_place) + Number(row.second_place) + Number(row.third_place) + Number(row.fourth_place)) / row.picks,
+        top_four_rate:
+          (Number(row.first_place) +
+            Number(row.second_place) +
+            Number(row.third_place) +
+            Number(row.fourth_place)) /
+          row.picks,
       }));
       return dailyStats;
     } catch (error) {

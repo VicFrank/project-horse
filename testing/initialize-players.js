@@ -1,6 +1,8 @@
 const Players = require("../db/players");
 const Cosmetics = require("../db/cosmetics");
 const Logs = require("../db/logs");
+const rollup = require("./db/rollup");
+
 const { query } = require("../db/index");
 
 async function initializePlayerGods() {
@@ -279,6 +281,7 @@ async function addOldBattlepassIcons() {
 }
 
 (async () => {
-  await giveEndOfSeasonRewards();
-  await ladderReset();
+  // await giveEndOfSeasonRewards();
+  // await ladderReset();
+  await rollup.runGodRollup();
 })();
