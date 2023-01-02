@@ -27,8 +27,8 @@
               level)
             </li>
             <li>
-              <b>New</b>: 5+(Round Number/4.5)+(Number of Units Alive * Round
-              Number/4.5)
+              <b>New</b>: 3 + (Round Number / 3.8) + (Number of Heroes * Round
+              Number / 3.8)
             </li>
             <li>Note: This has the following implications:</li>
             <ol>
@@ -160,8 +160,7 @@
         <li>Lifestealer attack interval from 1s to 0.75s</li>
         <li>Muerta crit base from 100% to 150%</li>
         <li>
-          Ogre points required per level from 0/20/40/60/80 to
-          0/20/40/60/80/100
+          Ogre points required per level from 0/20/40/60/80 to 0/20/40/60/80/100
         </li>
         <li>
           Ogre chance to multicast from 25/35/45/55/65 to 35/45/55/65/75/100
@@ -219,7 +218,9 @@
         <li>Elder Dragon Form splash AOE from 0/350/350 to 0/250/250</li>
         <li>Elder Dragon Form Super ADDITIONALLY grants +15% splash</li>
         <li>Elder Dragon Form Super ADDITIONALLY grants +100 splash radius</li>
-        <li>Enchant Totem Super's cooldown reduction fixed to work with J'Muy</li>
+        <li>
+          Enchant Totem Super's cooldown reduction fixed to work with J'Muy
+        </li>
         <li>Essence Shift no longer double procs with attack modifiers</li>
         <li>Essence Shift Super fixed to not given Gaben effect</li>
         <li>
@@ -253,7 +254,9 @@
         <li>Reaper's Scythe Super bonus mana regen per stack from 3 to 6</li>
         <li>Reaper's Scythe Super +100 cast range to +500</li>
         <li>Tricks of the Trade will no longer cast during Sleight of Fist</li>
-        <li>Tricks of the Trade Gaben fixed to actually give extra attack count</li>
+        <li>
+          Tricks of the Trade Gaben fixed to actually give extra attack count
+        </li>
         <li>Vampiric Spirit skeleton damage from 32 ‒ 37 to 22 - 27</li>
       </ul>
 
@@ -445,7 +448,7 @@
         <li>Bloodseeker attack speed per stack from 30 to 40</li>
         <li>Centaur HP per round from 50 to 60</li>
         <li>Centaur retaliate damage from 20% to 25%</li>
-        <li>Jmuy cooldown reduction from 10/20/30/40/50 to 30/35/40/45/50</li>
+        <li>J'Muy cooldown reduction from 30/35/40/45/50 to 25/30/35/40/45%</li>
         <li>
           Ogre Magi spell point requirement from 0/25/50/75/100 to 0/20/40/60/80
         </li>
