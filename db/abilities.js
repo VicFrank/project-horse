@@ -435,7 +435,8 @@ module.exports = {
       count(case when ability_level = 5 then 1 end) as level_5,
       count(case when ability_level = 6 then 1 end) as level_6,
       count(case when ability_level = 7 then 1 end) as level_7,
-      count(case when ability_level = 8 then 1 end) as level_8
+      count(case when ability_level = 8 then 1 end) as level_8,
+      count(case when ability_level = 9 then 1 end) as level_9
       FROM hero_abilities
       JOIN game_player_heroes USING (game_player_hero_id)
       JOIN game_players USING (game_player_id)

@@ -46,7 +46,6 @@
         :showPercentages="selectedMMR == null"
         :linkAbilities="true"
         :abilities="abilityStats"
-        @created="loadAbilityStats"
       ></IndividualAbilityStats>
     </div>
   </div>
@@ -93,6 +92,7 @@ export default {
 
   created() {
     this.loadAbility();
+    this.loadAbilityStats();
   },
 
   methods: {
