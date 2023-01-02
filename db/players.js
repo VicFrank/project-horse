@@ -927,7 +927,8 @@ module.exports = {
         7: { xp: 10, coins: 8 },
         8: { xp: 5, coins: 4 },
       };
-      const shouldDouble = true;
+      const isSunday = new Date().getDay() === 0;
+      const shouldDouble = isSunday;
 
       const reward = rewards[placement];
       if (!reward) return { xp: 0, coins: 0 };
