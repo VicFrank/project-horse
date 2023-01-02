@@ -104,7 +104,7 @@ module.exports = {
     }
   },
 
-  async getGodsStatsRollup(startDate, endDate, ranks) {
+  async getGodsStatsRollup(startDate, endDate, mmrOption) {
     try {
       const {rows} = await query(
         `
@@ -120,12 +120,13 @@ module.exports = {
           sum(seventh_place) AS seventh_place,
           sum(eighth_place)  AS eighth_place,
           sum(place_sum)         AS place_sum
-        FROM stats_gods_rollup
-        WHERE rank in ('${ranks.join("', '")}')
-        AND day between '${startDate}' and '${endDate}'
+        FROM stats_gods_rollup join rollup_types using (type_id)
+        WHERE type_id = $1
+        AND day between $2 and $3
         GROUP BY god_name
         ORDER BY picks DESC;
-      `
+      `,
+      [mmrOption, startDate, endDate]
       );
       numGames = rows.reduce((acc, row) => acc + Number(row.picks), 0);
 
@@ -153,7 +154,7 @@ module.exports = {
     }
   },
 
-  async getGodDailyStats(godName, ranks) {
+  async getGodDailyStats(godName, mmrOption) {
     try {
       const {rows} = await query( 
         `
@@ -168,13 +169,14 @@ module.exports = {
             sum(seventh_place) AS seventh_place,
             sum(eighth_place)  AS eighth_place,
             sum(place_sum)     AS place_sum
-        FROM stats_gods_rollup
-        WHERE god_name = '${godName}'
-          AND rank in ('${ranks.join("', '")}')
+        FROM stats_gods_rollup join rollup_types using (type_id)
+        WHERE god_name = $1
+          AND type_id = $2
         GROUP BY day
         ORDER BY day DESC
         LIMIT 7;
-        `
+        `,
+        [godName, mmrOption]
       );
       const dailyStats = rows.map((row) => ({
         ...row,

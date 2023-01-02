@@ -19,7 +19,7 @@
         <div class="d-flex mb-2">
           <div class="d-flex-row" style="flex-grow: 1">
             <span>Last 7 Days</span>
-            <GodHistoricalGraph :god="row.item" :ranks="ranks" />
+            <GodHistoricalGraph :god="row.item" :selectedMMR="selectedMMR" />
           </div>
           <div class="d-flex-row">
             <span>Placements</span>
@@ -150,8 +150,8 @@ export default {
       type: Boolean,
       default: true,
     },
-    ranks: {
-      type: Array,
+    selectedMMR: {
+      type: String,
       required: true,
     },
   },
