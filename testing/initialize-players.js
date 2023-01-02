@@ -1,7 +1,7 @@
 const Players = require("../db/players");
 const Cosmetics = require("../db/cosmetics");
 const Logs = require("../db/logs");
-const rollup = require("./db/rollup");
+const rollup = require("../db/rollup");
 
 const { query } = require("../db/index");
 
