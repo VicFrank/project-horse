@@ -240,7 +240,7 @@ export default {
 
   methods: {
     validateScheduledAnnouncement(announcement) {
-      if (!announcement.day_of_week) {
+      if (announcement.day_of_week == null) {
         return false;
       }
       if (!announcement.language) {
