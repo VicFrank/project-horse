@@ -2,30 +2,60 @@
   <div>
     <h1 class="page-title">{{ $t("gods.page_title") }}</h1>
     <h5 v-if="!loading" style="text-align: center;">Viewing stats for {{ totalGames }} games</h5>
-    <div class="mx-auto d-flex mb-2" style="max-width: 700px">
-      <div>
+    <b-row class="mx-auto d-flex mb-2" style="max-width: 700px">
+      <b-col>
         <div class="mb-2">Date</div>
         <b-form-select
           v-model="selectedDate"
           :options="dateOptions"
           @change="loadGodStats()"
           :disabled="loading"
-          style="width: 100px"
-          class="mx-auto"
+          style="width: 200px"
+          class="mx-auto mb-2"
         ></b-form-select>
-      </div>
-      <div class="ml-2">
+        <div v-if="isCustomDateSelected()" class="b-flex pl-2" style="max-width: 200px;">
+          <label for="customStartDate" class="my-auto mr-2">Start Date</label>
+          <b-input-group class="mb-3">
+            <b-form-input readonly v-model="customDateStart" />
+            <b-input-group-append>
+              <b-form-datepicker 
+                id="customStartDate" 
+                button-only 
+                right 
+                v-model="customDateStart" 
+                size="sm" 
+                locale="en"
+                @context="loadGodStats()" />
+            </b-input-group-append>
+          </b-input-group>
+          <label for="customEndDate" class="my-auto mr-2">End Date</label>
+          <b-input-group class="mb-3">
+            <b-form-input readonly v-model="customDateEnd" />
+            <b-input-group-append>
+              <b-form-datepicker 
+                id="customEndDate" 
+                button-only 
+                right 
+                v-model="customDateEnd" 
+                size="sm" 
+                locale="en"
+                @context="loadGodStats()" />
+            </b-input-group-append>
+          </b-input-group>
+        </div>
+      </b-col>
+      <b-col class="ml-2">
         <div class="mb-2">MMR</div>
         <b-form-select
           v-model="selectedMMR"
           :options="mmrOptions"
           @change="loadGodStats()"
           :disabled="loading"
-          style="width: 100px"
+          style="width: 200px"
           class="mx-auto"
         ></b-form-select>
-      </div>
-    </div>
+      </b-col>
+    </b-row>
     <GodStats :gods="gods" :linkAbilities="true" :loading="loading" :selectedMMR="selectedMMR"></GodStats>
   </div>
 </template>
@@ -45,6 +75,8 @@ export default {
 
     selectedDate: null,
     dateOptions: [],
+    customDateStart: '2022-12-25',
+    customDateEnd: '2022-12-25',
 
     selectedMMR: 'all_mmr',
     mmrOptions: [
@@ -71,7 +103,10 @@ export default {
       { value: { startDate: "2022-11-01", endDate: "2022-12-01" }, text: "Season 2" },
       { value: { startDate: "2022-11-14", endDate: "2022-12-01" }, text: "Season 2.5" },
       { value: { startDate: "2022-12-01", endDate: "2023-01-01" }, text: "Season 3" },
-      { value: { startDate: "2022-12-15", endDate: "2023-01-01" }, text: "Season 3.5" }
+      { value: { startDate: "2022-12-15", endDate: "2023-01-01" }, text: "Season 3.5" },
+      { value: { startDate: "2023-01-01", endDate: "2023-03-01" }, text: "Season 4" },
+      { value: null, text: "------------", disabled: true },
+      { value: "custom", text: "Custom Range" },
     ]
     this.selectedDate = this.dateOptions.find(opt => opt.text == "Month").value;
     this.loadGodStats();
@@ -79,9 +114,15 @@ export default {
 
   methods: {
     loadGodStats() {
+      let startDate = this.selectedDate.startDate;
+      let endDate = this.selectedDate.endDate;
+      if (this.isCustomDateSelected()) {
+        startDate = this.customDateStart;
+        endDate = this.customDateEnd;
+      }
       this.loading = true;
       fetch(
-        `/api/stats/godsRollup?startDate=${this.selectedDate.startDate}&endDate=${this.selectedDate.endDate}&mmrOption=${this.selectedMMR}`
+        `/api/stats/godsRollup?startDate=${startDate}&endDate=${endDate}&mmrOption=${this.selectedMMR}`
       )
         .then((res) => res.json())
         .then((gods) => {
@@ -94,6 +135,9 @@ export default {
       const d = new Date(new Date() - days * 24 * 60 * 60 * 1000);
       // In the format 2022-01-30
       return `${d.toLocaleString('en-US', { year: 'numeric' })}-${d.toLocaleString('en-US', { month: 'numeric' })}-${d.toLocaleString('en-US', { day: 'numeric' })}`;
+    },
+    isCustomDateSelected() {
+      return this.selectedDate === "custom";
     },
   },
 };
