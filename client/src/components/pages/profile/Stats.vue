@@ -28,7 +28,10 @@
             <b-spinner label="Loading..."></b-spinner>
           </div>
         </template>
-        <GodStats :gods="godStats" @created="loadGodStats"></GodStats>
+        <PlayerGodStats
+          :gods="godStats"
+          @created="loadGodStats"
+        ></PlayerGodStats>
       </b-tab>
       <b-tab title="Abilities">
         <template v-if="abilitiesLoading">
@@ -46,14 +49,14 @@
 </template>
 
 <script>
-import GodStats from "../stats/GodStats.vue";
+import PlayerGodStats from "../stats/PlayerGodStats.vue";
 import AbilityStats from "../stats/abilities/AbilityStats.vue";
 import PlayerStats from "../player/components/PlayerStats.vue";
 import RankBadge from "../../utility/RankBadge.vue";
 
 export default {
   components: {
-    GodStats,
+    PlayerGodStats,
     AbilityStats,
     PlayerStats,
     RankBadge,
@@ -65,6 +68,8 @@ export default {
     godStats: [],
     abilityStats: [],
     loading: true,
+    godsLoading: true,
+    abilitiesLoading: true,
   }),
 
   computed: {
