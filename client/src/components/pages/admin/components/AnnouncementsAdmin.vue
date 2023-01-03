@@ -76,7 +76,11 @@
       </b-alert>
     </b-collapse>
 
-    <div v-for="announcement in announcements" :key="announcement.language">
+    <h2>Default Announcements</h2>
+    <div
+      v-for="announcement in defaultAnnouncements"
+      :key="announcement.announcement_id"
+    >
       <b-form-group
         id="input-group-2"
         :label="announcement.language"
@@ -94,7 +98,83 @@
           placeholder="Enter the image link (optional) must be 180x350"
           class="mt-1"
         ></b-form-input>
-        <!-- preview the announcement using html -->
+        <div
+          v-if="announcement.text"
+          class="p-3 mt-3"
+          style="width: 350px; background-color: #292a37; color: #b5b5b7"
+        >
+          <div
+            class="text-center"
+            style="
+              color: #a47ef8;
+              text-shadow: black 1px 2px 2px 2;
+              font-size: 20px;
+              margin-bottom: 20px;
+            "
+          >
+            ANNOUNCEMENT
+          </div>
+          <div v-html="announcement.text" class="mt-3"></div>
+          <img
+            v-if="announcement.link"
+            :src="announcement.link"
+            style="background-color: #292a37"
+          />
+        </div>
+      </b-form-group>
+    </div>
+
+    <h2>Scheduled Announcements</h2>
+    <div>
+      These announcements are scheduled to go out on specific days of the week.
+      They override the default announcment on that day.
+    </div>
+
+    <div>
+      <b-button
+        variant="primary"
+        class="mt-3"
+        @click="addScheduledAnnouncement"
+      >
+        Add Scheduled Announcement
+      </b-button>
+    </div>
+    <div
+      v-for="(announcement, index) in scheduledAnnouncements"
+      :key="announcement.announcement_id"
+    >
+      <b-form-group id="input-group-2" label-for="input-2" class="mt-3">
+        <!-- delete button -->
+        <b-button
+          variant="danger"
+          class="float-right"
+          @click="deleteScheduledAnnouncement(index)"
+        >
+          Delete
+        </b-button>
+        <b-form-select
+          v-model="announcement.day_of_week"
+          :options="days"
+          class="mt-1"
+          required
+        ></b-form-select>
+        <b-form-select
+          v-model="announcement.language"
+          :options="languages"
+          class="mt-1"
+          required
+        ></b-form-select>
+        <b-form-input
+          type="text"
+          v-model="announcement.text"
+          placeholder="Enter the announcement"
+        ></b-form-input>
+        <b-form-input
+          type="text"
+          v-model="announcement.link"
+          placeholder="Enter the image link (optional) must be 180x350"
+          class="mt-1"
+        ></b-form-input>
         <div
           v-if="announcement.text"
           class="p-3 mt-3"
@@ -135,8 +215,23 @@
 <script>
 export default {
   data: () => ({
-    announcements: [],
+    defaultAnnouncements: [],
+    scheduledAnnouncements: [],
     loading: true,
+    days: [
+      { value: 0, text: "Sunday" },
+      { value: 1, text: "Monday" },
+      { value: 2, text: "Tuesday" },
+      { value: 3, text: "Wednesday" },
+      { value: 4, text: "Thursday" },
+      { value: 5, text: "Friday" },
+      { value: 6, text: "Saturday" },
+    ],
+    languages: [
+      { value: "english", text: "English" },
+      { value: "russian", text: "Russian" },
+      { value: "schinese", text: "Chinese" },
+    ],
   }),
 
   created() {
@@ -144,28 +239,81 @@ export default {
   },
 
   methods: {
+    validateScheduledAnnouncement(announcement) {
+      if (!announcement.day_of_week) {
+        return false;
+      }
+      if (!announcement.language) {
+        return false;
+      }
+      if (!announcement.text) {
+        return false;
+      }
+      return true;
+    },
+    getValidationErrors() {
+      for (const announcement of this.scheduledAnnouncements) {
+        if (!this.validateScheduledAnnouncement(announcement)) {
+          return "Please fill out all fields for scheduled announcements";
+        }
+      }
+      // check for duplicate days with the same language
+      const days = {};
+      for (const announcement of this.scheduledAnnouncements) {
+        if (!days[announcement.day_of_week]) {
+          days[announcement.day_of_week] = {};
+        }
+        if (days[announcement.day_of_week][announcement.language]) {
+          return "You cannot have two announcements on the same day with the same language";
+        }
+        days[announcement.day_of_week][announcement.language] = true;
+      }
+      return null;
+    },
     getAnnouncements() {
       this.loading = true;
-      fetch("/api/announcements")
+      fetch("/api/announcements/all")
         .then((res) => res.json())
         .then((announcements) => {
-          this.announcements = announcements;
+          this.defaultAnnouncements = announcements.filter(
+            (announcement) => announcement.is_default
+          );
+          this.scheduledAnnouncements = announcements.filter(
+            (announcement) => !announcement.is_default
+          );
           this.loading = false;
         })
         .catch((err) => console.log(err));
     },
     saveAnnouncements() {
+      const validationError = this.getValidationErrors();
+      if (validationError) {
+        this.$bvToast.toast(validationError, {
+          title: "Error",
+          variant: "danger",
+          solid: true,
+        });
+        return;
+      }
       this.loading = true;
+      const announcements = this.defaultAnnouncements.concat(
+        this.scheduledAnnouncements
+      );
       fetch("/api/announcements", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(this.announcements),
+        body: JSON.stringify(announcements),
       })
         .then((res) => res.json())
         .then((announcements) => {
-          this.announcements = announcements;
+          this.defaultAnnouncements = announcements.filter(
+            (announcement) => announcement.is_default
+          );
+          this.scheduledAnnouncements = announcements.filter(
+            (announcement) => !announcement.is_default
+          );
           this.loading = false;
 
           this.$bvToast.toast("Announcements saved!", {
@@ -175,6 +323,26 @@ export default {
           });
         })
         .catch((err) => console.log(err));
+    },
+    addScheduledAnnouncement() {
+      this.scheduledAnnouncements.push({
+        announcement_id: null,
+        language: "english",
+        text: "",
+        link: "",
+        day_of_week: 0,
+        is_default: false,
+      });
+    },
+    deleteScheduledAnnouncement(index) {
+      const announcement = this.scheduledAnnouncements[index];
+      const announcementID = announcement.announcement_id;
+      if (announcementID) {
+        fetch(`/api/announcements/${announcementID}`, {
+          method: "DELETE",
+        });
+      }
+      this.scheduledAnnouncements.splice(index, 1);
     },
   },
 };

@@ -5,6 +5,16 @@ const announcements = require("../db/announcements");
 
 router.get("/", async (req, res) => {
   try {
+    const result = await announcements.getActiveAnnouncements();
+    res.status(200).send(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.toString() });
+  }
+});
+
+router.get("/all", async (req, res) => {
+  try {
     const result = await announcements.getAnnouncements();
     res.status(200).send(result);
   } catch (error) {
@@ -16,6 +26,18 @@ router.get("/", async (req, res) => {
 router.post("/", adminAuth, async (req, res) => {
   try {
     const result = await announcements.updateAnnouncements(req.body);
+    res.status(200).send(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.toString() });
+  }
+});
+
+router.delete("/:announcementID", adminAuth, async (req, res) => {
+  try {
+    const result = await announcements.deleteAnnouncement(
+      req.params.announcementID
+    );
     res.status(200).send(result);
   } catch (error) {
     console.log(error);

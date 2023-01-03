@@ -490,9 +490,12 @@ CREATE TABLE IF NOT EXISTS votes (
 
 DROP TABLE IF EXISTS announcements;
 CREATE TABLE IF NOT EXISTS announcements (
-  language TEXT PRIMARY KEY,
+  announcement_id SERIAL PRIMARY KEY,
+  language TEXT,
   text TEXT,
   link TEXT,
+  is_default BOOLEAN DEFAULT FALSE,
+  day_of_week INTEGER,
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 --------------------------------------------------------------------------------
