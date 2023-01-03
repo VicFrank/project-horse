@@ -12,7 +12,7 @@
         "id": "sorceryForDummies",
         "name": "Sorcery for Dummies: Volume 1",
         "values": [
-          "CHANCE: 20 / 30 / 40 / 50 / 60"
+          "CHANCE: 40 / 45 / 50 / 55 / 60"
         ],
         "type_string": "Passive",
         "type": "passive",
@@ -57,8 +57,8 @@
     "name": "Bathtime Aghanim",
     "universe": "dota",
     "complexity": "intermediate",
-    "unlock": "none",
-    "unlock_text": "Why are you even seeing this God?",
+    "unlock": "chest",
+    "unlock_text": "This God is permanently unlocked by dropping from God chests",
     "health": 200,
     "powers": [
       {
@@ -102,15 +102,15 @@
     "name": "Boneless Aghanim",
     "universe": "dota",
     "complexity": "easy",
-    "unlock": "none",
-    "unlock_text": "Why are you even seeing this God?",
+    "unlock": "plus",
+    "unlock_text": "This God is temporarily unlocked by subscribing to PLUS. They are permanently unlocked if they drop from a God chest",
     "health": 200,
     "powers": [
       {
         "id": "sorceryVolumeThree",
         "name": "Sorcery For Dummies: Volume 3",
         "values": [
-          "SHOP SPELL SLOTS: 4 / 6 / 8 / 10 / 12",
+          "SHOP SPELL SLOTS: 5 / 7 / 9 / 11 / 13",
           "SHOP UPGRADE COST REDUCTION: 20%"
         ],
         "type_string": "Passive",
@@ -177,8 +177,8 @@
     "name": "Cave Johnson",
     "universe": "portal",
     "complexity": "easy",
-    "unlock": "none",
-    "unlock_text": "Why are you even seeing this God?",
+    "unlock": "chest",
+    "unlock_text": "This God is permanently unlocked by dropping from God chests",
     "health": 200,
     "powers": [
       {
@@ -208,8 +208,8 @@
         "id": "retaliate",
         "name": "Great Fortitude",
         "values": [
-          "HEALTH PER ROUND: 60",
-          "RETURN: 25%"
+          "HEALTH PER ROUND: 70",
+          "RETURN: 35%"
         ],
         "type_string": "Active (Unit Target)",
         "type": "unitTarget",
@@ -218,9 +218,31 @@
     ]
   },
   {
-    "id": "chaosGodS3",
+    "id": "chaosGod",
     "name": "Chaos God",
     "universe": "none",
+    "complexity": "intermediate",
+    "unlock": "none",
+    "unlock_text": "Why are you even seeing this God?",
+    "health": 200,
+    "powers": [
+      {
+        "id": "questionMark",
+        "name": "?",
+        "values": [
+          "CURRENT HP DAMAGE: 2%",
+          "DAMAGE PER SECOND: 50"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Magical damage per second is dealt to both allies and enemies (not lethal). This is a temporary God that will be removed from your armory after Season 2"
+      }
+    ]
+  },
+  {
+    "id": "chaosGodS3",
+    "name": "Sideshop Man",
+    "universe": "dota",
     "complexity": "intermediate",
     "unlock": "battlepass",
     "unlock_text": "God is permanently unlocked by reaching a battlepass level",
@@ -228,14 +250,14 @@
     "powers": [
       {
         "id": "questionMarkS3",
-        "name": "?",
+        "name": "Going Out of Existence Sale",
         "values": [
           "FREE REROLLS PER ROUND: 1",
           "HERO REROLL COST: 1"
         ],
         "type_string": "Passive",
         "type": "passive",
-        "desc": "First shop re-roll is free, spells sell for full value, and your hero re-rolls cost one gold. This is a temporary God that will be removed from your armory after Season 3"
+        "desc": "First re-roll is always free, spells sell for full value, and your hero re-rolls are one less gold.Voiced by our dear friend Purge"
       }
     ]
   },
@@ -276,8 +298,8 @@
     "name": "Donkey Aghanim",
     "universe": "dota",
     "complexity": "intermediate",
-    "unlock": "chest",
-    "unlock_text": "This God is permanently unlocked by dropping from God chests",
+    "unlock": "plus",
+    "unlock_text": "This God is temporarily unlocked by subscribing to PLUS. They are permanently unlocked if they drop from a God chest",
     "health": 200,
     "powers": [
       {
@@ -294,12 +316,44 @@
     ]
   },
   {
+    "id": "facelessVoid",
+    "name": "Faceless Void",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "battlepass",
+    "unlock_text": "God is permanently unlocked by reaching a battlepass level",
+    "health": 200,
+    "powers": [
+      {
+        "id": "timesBond",
+        "name": "Time's Bond",
+        "values": [
+          "CHARGES: 0 / 1 / 1 / 2 / 2"
+        ],
+        "type_string": "Active (Ability Target)",
+        "type": "abilityTarget",
+        "desc": "Select a spell in the shop to individually lock it. You have a limited amount of locks that scale with shop level."
+      },
+      {
+        "id": "marchOfTime",
+        "name": "The March of Time",
+        "values": [
+          "CHANCE: 35%",
+          "GOLD COST REDUCTION: 1"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Every time a re-roll occurs, each spell affected by  Time's Bond has a separate chance to have its gold cost reduced."
+      }
+    ]
+  },
+  {
     "id": "gambler",
     "name": "The Gambler",
     "universe": "dota",
     "complexity": "intermediate",
-    "unlock": "plus",
-    "unlock_text": "This God is temporarily unlocked by subscribing to PLUS. They are permanently unlocked if they drop from a God chest",
+    "unlock": "chest",
+    "unlock_text": "This God is permanently unlocked by dropping from God chests",
     "health": 200,
     "powers": [
       {
@@ -320,25 +374,31 @@
     "name": "GLaDOS",
     "universe": "portal",
     "complexity": "advanced",
-    "unlock": "none",
-    "unlock_text": "Why are you even seeing this God?",
+    "unlock": "chest",
+    "unlock_text": "This God is permanently unlocked by dropping from God chests",
     "health": 200,
     "powers": [
       {
         "id": "orangePortal",
         "name": "Orange Portal",
-        "values": [],
+        "values": [
+          "SPELL LIFESTEAL (CREEP): 10% / 12.5% / 15% / 17.5% / 20%",
+          "SPELL LIFESTEAL (HERO): 20% / 25% / 30% / 35% / 40%"
+        ],
         "type_string": "Active (Unit Target)",
         "type": "unitTarget",
-        "desc": "Target a unit with an Orange Portal. They will combine HP and Mana pools with the Blue Portal unit, and share all forms of mana and health regen."
+        "desc": "Target a unit with an Orange Portal. They will gain spell lifesteal, and share all healing and regen with the Blue Portal unit. Spell lifesteal does not stack if both buffs are placed on one unit."
       },
       {
         "id": "bluePortal",
         "name": "Blue Portal",
-        "values": [],
+        "values": [
+          "SPELL LIFESTEAL (CREEP): 10% / 12.5% / 15% / 17.5% / 20%",
+          "SPELL LIFESTEAL (HERO): 20% / 25% / 30% / 35% / 40%"
+        ],
         "type_string": "Active (Unit Target)",
         "type": "unitTarget",
-        "desc": "Target a unit with an Blue Portal. They will combine HP and Mana pools with the Orange Portal unit, and share all forms of mana and health regen."
+        "desc": "Target a unit with an Blue Portal. They will gain spell lifesteal, and share all healing and regen with the Orange Portal unit. Spell lifesteal does not stack if both buffs are placed on one unit."
       }
     ]
   },
@@ -376,7 +436,7 @@
         "id": "wisdomOfTheElders",
         "name": "Wisdom of the Elders",
         "values": [
-          "COOLDOWN REDUCTION: 30% / 35% / 40% / 45% / 50%"
+          "COOLDOWN REDUCTION: 25% / 30% / 35% / 40% / 45%"
         ],
         "type_string": "Passive",
         "type": "passive",
@@ -439,8 +499,8 @@
         "id": "stonehallPike",
         "name": "Stonehall Pike",
         "values": [
-          "DAMAGE: 3 / 6 / 9 / 12 / 15 / 20",
-          "POINTS REQUIRED FOR LEVEL: 0 / 10 / 30 / 50 / 70 / 100"
+          "DAMAGE: 4 / 7 / 10 / 13 / 16 / 19",
+          "POINTS REQUIRED FOR LEVEL: 0 / 15 / 30 / 45 / 60 / 75"
         ],
         "type_string": "Active (Unit Target)",
         "type": "unitTarget",
@@ -461,10 +521,10 @@
         "id": "infest",
         "name": "Infest",
         "values": [
-          "ATTACK INTERVAL: 1",
+          "ATTACK INTERVAL: 0.75",
           "DURATION: 0 / 1 / 2 / 3 / 4",
           "HEALTH THRESHOLD: 50",
-          "INFEST BURST DAMAGE: 150",
+          "INFEST BURST DAMAGE: 0 / 75 / 150 / 225 / 300",
           "INFEST BURST RADIUS: 400",
           "MAX HEALTH REGEN PER SECOND: 10%"
         ],
@@ -488,6 +548,7 @@
         "name": "Phantom's Touch",
         "values": [
           "ATTACKS TO PROC: 8",
+          "BASE CRIT: 150%",
           "CRIT PER DAMAGE: 0.1%",
           "RADIUS: 500"
         ],
@@ -529,8 +590,8 @@
         "id": "multicast",
         "name": "Multicast",
         "values": [
-          "CHANCE: 25 / 35 / 45 / 55 / 65",
-          "POINTS REQUIRED FOR LEVEL: 0 / 20 / 40 / 60 / 80"
+          "CHANCE: 35 / 45 / 55 / 65 / 75 / 100",
+          "POINTS REQUIRED FOR LEVEL: 0 / 20 / 40 / 60 / 80 / 100"
         ],
         "type_string": "Active (Unit Target)",
         "type": "unitTarget",
@@ -553,11 +614,35 @@
         "values": [
           "CRIT CHANCE: 20%",
           "CRIT DAMAGE: 2%",
-          "DISTANCE TO INCREASE CRIT DMG: 15"
+          "DISTANCE TO INCREASE CRIT DMG: 10"
         ],
         "type_string": "Passive",
         "type": "passive",
         "desc": "Your units have a chance to deal a critical strike to enemies. They gain crit damage per number of units they travel. This buff lasts the entire round."
+      }
+    ]
+  },
+  {
+    "id": "prellex",
+    "name": "Prellex",
+    "universe": "artifact",
+    "complexity": "easy",
+    "unlock": "battlepass",
+    "unlock_text": "God is permanently unlocked by reaching a battlepass level",
+    "health": 200,
+    "powers": [
+      {
+        "id": "bringerOfTheFaithful",
+        "name": "Bringer of the Faithful",
+        "values": [
+          "DAMAGE: 25 / 50 / 75 / 100 / 125",
+          "HEALTH: 550 / 750 / 950 / 1150 / 1350",
+          "MAGIC RESISTANCE: 75%",
+          "MANA: 200 / 400 / 600 / 800 / 1000"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "You are given a melee creep at the beginning of the game. Each time you upgrade shop, you are given a choice of 3 neutral creeps. The skills of the chosen neutral will be added to your creep permanently. Neutral creep choices and your melee creep's stats improve which each shop level."
       }
     ]
   },
@@ -618,15 +703,15 @@
     "name": "Rubick",
     "universe": "dota",
     "complexity": "intermediate",
-    "unlock": "plus",
-    "unlock_text": "This God is temporarily unlocked by subscribing to PLUS. They are permanently unlocked if they drop from a God chest",
+    "unlock": "chest",
+    "unlock_text": "This God is permanently unlocked by dropping from God chests",
     "health": 200,
     "powers": [
       {
         "id": "spellSteal",
         "name": "Spell Steal",
         "values": [
-          "POINTS REQUIRED FOR LEVEL: 0 / 10 / 20 / 30 / 40 / 50 / 60 / 70 / 80"
+          "POINTS REQUIRED FOR LEVEL: 0 / 5 / 15 / 25 / 35 / 45 / 55 / 65 / 75"
         ],
         "type_string": "Active (Unit Target)",
         "type": "unitTarget",
@@ -639,8 +724,8 @@
     "name": "Rune God",
     "universe": "dota",
     "complexity": "easy",
-    "unlock": "battlepass",
-    "unlock_text": "God is permanently unlocked by reaching a battlepass level",
+    "unlock": "chest",
+    "unlock_text": "This God is permanently unlocked by dropping from God chests",
     "health": 200,
     "powers": [
       {
@@ -663,8 +748,8 @@
     "name": "Santa Greevil",
     "universe": "dota",
     "complexity": "intermediate",
-    "unlock": "battlepass",
-    "unlock_text": "God is permanently unlocked by reaching a battlepass level",
+    "unlock": "plus",
+    "unlock_text": "This God is temporarily unlocked by subscribing to PLUS. They are permanently unlocked if they drop from a God chest",
     "health": 200,
     "powers": [
       {
@@ -778,12 +863,44 @@
         "id": "techiesProximityMine",
         "name": "Spleen's Proximity Mine",
         "values": [
-          "MINE DAMAGE REDUCTION: 50",
+          "MINE DAMAGE REDUCTION: 25",
           "TRIGGER CHANCE: 15"
         ],
         "type_string": "Active (Unit Target)",
         "type": "unitTarget",
-        "desc": "When attacking a target, there is a 15% chance to lay a level 1 Proximity Mine directly in front of you. Proximity Mine deals 50% of the original damage."
+        "desc": "When attacking a target, there is a 15% chance to lay a level 1 Proximity Mine directly in front of you. Proximity Mine damage reduced by 25%."
+      }
+    ]
+  },
+  {
+    "id": "terrorist",
+    "name": "Terrorist",
+    "universe": "counterStrike",
+    "complexity": "easy",
+    "unlock": "battlepass",
+    "unlock_text": "God is permanently unlocked by reaching a battlepass level",
+    "health": 200,
+    "powers": [
+      {
+        "id": "plantBomb",
+        "name": "Plant Bomb",
+        "values": [
+          "EXPLOSION DAMAGE: 90% / 80% / 70% / 60% / 50%",
+          "TIMER: 18 / 16 / 14 / 12 / 10"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Bomb is planted at the beginning of the round on a timer. If you lose before the timer runs out, the bomb is defused. However, if the timer expires, the bomb will explode, dealing non-lethal damage to all enemy units. Timer and explosion scale with shop level."
+      },
+      {
+        "id": "clutchPlay",
+        "name": "Clutch Play",
+        "values": [
+          "GOLD GAIN: 3"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "If the bomb explodes and the Terrorist wins, they gain gold the following round. If the opponent defuses the bomb, they get gold the following round."
       }
     ]
   },
@@ -851,7 +968,7 @@
         "id": "building",
         "name": "Building",
         "values": [
-          "MINIMUM RANGE: 750"
+          "MINIMUM RANGE: 850"
         ],
         "type_string": "Active (Unit Target)",
         "type": "unitTarget",
@@ -888,6 +1005,27 @@
         "type_string": "Passive",
         "type": "passive",
         "desc": "Enemy heroes they take increased spell damage per number of units they travel. This buff lasts the entire round."
+      }
+    ]
+  },
+  {
+    "id": "vacationAghanim",
+    "name": "Vacation Aghanim",
+    "universe": "dota",
+    "complexity": "easy",
+    "unlock": "battlepass",
+    "unlock_text": "God is permanently unlocked by reaching a battlepass level",
+    "health": 200,
+    "powers": [
+      {
+        "id": "sorceryVolumeFive",
+        "name": "Sorcery For Dummies: Volume 5",
+        "values": [
+          "CHANCE: 5%"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Each spell in your shop has a chance to be worth 2 points instead of 1. These spells will cost 5 gold."
       }
     ]
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto" style="max-width: 700px">
+  <div class="mx-auto" style="">
     <h1 class="page-title">FAQ</h1>
     <h2>Basics</h2>
     <div class="question">Is there a tutorial for this game?</div>
@@ -38,16 +38,17 @@
     </div>
     <div class="question">Are the same spells in every game?</div>
     <div class="answer">
-      No. There are 150 spells in total, but 50 are banned at the start of each
-      game. No banned spells are accessible to any player. You can open the
+      No. There are more than 150 spells in total, but only 100 are available 
+      each game the rest are banned at the start of each game. 
+      No banned spells are accessible to any player. You can open the
       Spell Deck before choosing your God to see if there are spells available
       which synergize with your choice of God.
     </div>
     <div class="question">Can I equip items or select talents?</div>
     <div class="answer">
       No. Items and talents often come in the form of Super and Gaben upgrades
-      for your abilities. For example, Sleight of Fist grants a second charge at
-      Super (Ember 25 talent), and Desolator and Penta-Edged Sword at Gaben.
+      for your abilities. For example, Walrus Punch grants Silver Edge at
+      Super and 20% chance to proc at Gaben (similar to level 25 talent).
       Gaining an item includes both the stats they provide AND their
       passive/active effects.
     </div>
@@ -64,7 +65,14 @@
       Outside of the game, where can I see all the Gods and Spells?
     </div>
     <div class="answer">
-      You can’t yet, but it’s coming soon to the website!
+      God info including their powers and how to unlock them can be found 
+      <a href="https://abilityarena.com/learn/gods" target="_blank">here</a>
+      or under the Learn menu option.
+    </div>
+    <div class="answer">
+      Spell info can be found 
+      <a href="https://abilityarena.com/learn/spells" target="_blank">here</a>
+      or under the Learn menu option.
     </div>
     <div class="question">Will you continue to balance the game?</div>
     <div class="answer">YES!</div>
@@ -195,7 +203,10 @@
     </div>
     <div class="question">How is round damage determined?</div>
     <div class="answer">
-      Round number + number of remaining heroes * shop level
+      5 + (Round Number / 3.8) + (Number of Heroes * Round Number / 3.8)
+    </div>
+    <div class="answer">
+      Rounds to the closest whole number (for example 5.5 goes to 6 and 5.49 goes to 5).
     </div>
     <div class="question">Are there hotkeys in the game (ie: Re-rolling)?</div>
     <div class="answer">Yes, if you hold ALT, it will show them all.</div>
@@ -207,27 +218,31 @@
       purchased with coins.
     </div>
     <div class="answer">
-      There is also a God tied to the Battle Pass every season, which you can
-      unlock for free if you get to level 40. The rest of the Gods will drop
-      from God chests.
+      There are also Gods tied to the Battle Pass every season, which you can
+      unlock for free by playing and leveling your Battle Pass. The rest of the 
+      Gods can be obtained from God chests.
     </div>
     <div class="answer">
-      Purchasing a PLUS subscription will also give you 2 Gods that will rotate
-      each month. The PLUS Gods can drop from chests as well.
+      Purchasing a PLUS subscription will also give you a selection of Gods that 
+      will rotate each month. The PLUS Gods can drop from chests as well.
+    </div>
+    <div class="question">How do drops work from the unique god chest (Galaxy God Chest)?</div>
+    <div class="answer">
+      The chest will drop a random God that you do not own with escalating odds to drop a Rare.
+      You will not get duplicates until you own every common God.
+      Duplicate gods count as progress towards a gold card.
     </div>
     <div class="question">What will seasons look like going forward?</div>
     <div class="answer">
-      Seasons will typically be a month long. With each season the following
+      Seasons will typically be two months long. With each season the following
       will be added:
       <ul>
         <li>New spells rotating in and out</li>
         <li>
-          2 new Gods (1 tied to the Battle Pass and the other droppable from God
-          Chests)
+          New Gods
         </li>
         <li>
-          New rotation for PLUS Gods (which will include the previous month’s
-          Battle Pass God)
+          New rotation for PLUS Gods 
         </li>
         <li>
           A brand new Battle Pass themed around one of the new Gods. The Battle
@@ -266,6 +281,17 @@
     </div>
     <div class="answer">
       Yes, you will get exclusive cosmetics for this. Stay tuned for details.
+    </div>
+    <h2>Bugs</h2>
+    <div class="question">Why can't I reconnect to a game if I get disconnected?</div>
+    <div class="answer">
+      This, unfortunately, is a Valve issue that affects most custom games. We've 
+      reached out to them and are awaiting a response.
+      If you disconnect early in the game then you will be able to reconnect without issue.
+    </div>
+    <div class="question">The spell deck is showing the wrong spells or there is nothing in the banned spells list!</div>
+    <div class="answer">
+      This is a visual bug which can be fixed by disconnecting and reconnecting, make sure to only do this early in the game (see the bug above).
     </div>
   </div>
 </template>
