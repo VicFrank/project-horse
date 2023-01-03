@@ -159,11 +159,9 @@ module.exports = {
 
       if (rows.length > 0) return rows[0];
 
-      // every level after 80 takes 225 xp
-      const level80 = 18000;
-      const totalXp = level80 + (level - 80) * 225;
+      // every level takes 225 xp
       return {
-        total_xp: totalXp,
+        total_xp: level*225,
         next_level_xp: 225,
         coins_reward: 0,
       };
@@ -184,6 +182,7 @@ module.exports = {
       // There are also special rewards at levels 100 and 1000
       if (level >= 100) numRewards++;
       if (level >= 1000) numRewards++;
+      return numRewards;
     } else {
       // there is a reward every 5 levels, forever
       let numRewards = Math.floor(level / 5);
