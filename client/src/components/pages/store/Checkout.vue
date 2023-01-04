@@ -1,5 +1,5 @@
 <template>
-  <div v-if="steamID != '76561198412803411'">
+  <div v-if="steamID != '76561198412803411' && steamID != '76561198801028651'">
     <h1 class="page-title" v-t="'store.checkout_title'"></h1>
     <div class="container text-center">
       <b-alert v-model="showGeneralError" variant="danger" dismissible>{{
