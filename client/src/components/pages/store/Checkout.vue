@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="steamID != '76561198412803411'">
     <h1 class="page-title" v-t="'store.checkout_title'"></h1>
     <div class="container text-center">
       <b-alert v-model="showGeneralError" variant="danger" dismissible>{{
@@ -111,6 +111,9 @@ export default {
   },
 
   computed: {
+    steamID() {
+      return this.$store.getters.userSteamID;
+    },
     loggedIn() {
       return this.$store.getters.loggedIn;
     },
