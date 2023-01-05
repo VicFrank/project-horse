@@ -3,43 +3,26 @@
     <GodImage :god="god"></GodImage>
     <h1 class="page-title">{{ $t(`gods.${god}`) }}</h1>
 
-    <div class="mt-3 mx-auto" style="max-width: 700px">
-      <div class="text-left d-flex mb-2">
-        <div>
-          <div class="mb-2">Date</div>
-          <b-form-select
-            v-model="selectedDate"
-            :options="dateOptions"
-            @change="loadGodStats(true)"
-            :disabled="loading"
-            style="width: 100px"
-            class="mx-auto"
-          ></b-form-select>
+    <b-tabs content-class="mt-3" style="max-width: 700px; margin: auto" lazy>
+      <b-tab title="Abilities" active>
+        <div class="text-left d-flex mb-2">
+          <div>
+            <div class="mb-2">Date</div>
+            <b-form-select v-model="selectedDate" :options="dateOptions" @change="loadGodStats(true)"
+              :disabled="loading" style="width: 100px" class="mx-auto"></b-form-select>
+          </div>
+          <div class="ml-2">
+            <div class="mb-2">MMR</div>
+            <b-form-select v-model="selectedMMR" :options="mmrOptions" @change="loadGodStats(true)" :disabled="loading"
+              style="width: 100px" class="mx-auto"></b-form-select>
+          </div>
         </div>
-        <div class="ml-2">
-          <div class="mb-2">MMR</div>
-          <b-form-select
-            v-model="selectedMMR"
-            :options="mmrOptions"
-            @change="loadGodStats(true)"
-            :disabled="loading"
-            style="width: 100px"
-            class="mx-auto"
-          ></b-form-select>
-        </div>
-      </div>
-      <template v-if="loading">
-        <div class="d-flex justify-content-center my-3">
-          <b-spinner label="Loading..."></b-spinner>
-        </div>
-      </template>
-      <GodAbilityStats
-        :showPercentages="selectedMMR == null"
-        :linkAbilities="true"
-        :abilities="godStats"
-        @created="loadGodStats"
-      ></GodAbilityStats>
-    </div>
+        <GodAbilityStats :loading="loading" :showPercentages="selectedMMR == null" :linkAbilities="true" :abilities="godStats"
+          @created="loadGodStats"></GodAbilityStats>
+      </b-tab>
+      <b-tab title="Trends">
+      </b-tab>
+    </b-tabs>
   </div>
 </template>
 
@@ -100,4 +83,5 @@ export default {
 </script>
 
 <style scoped>
+
 </style>

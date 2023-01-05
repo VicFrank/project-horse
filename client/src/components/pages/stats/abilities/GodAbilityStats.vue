@@ -3,6 +3,7 @@
     :fields="fields"
     :items="abilities"
     responsive
+    :busy="loading"
     class="m-auto"
     style="max-width: 800px"
   >
@@ -51,6 +52,16 @@
         </div>
       </div>
     </template>
+    <template #empty>
+      <div class="text-center m-5">
+        <h3>No results found, check filters</h3>
+      </div>
+    </template>
+    <template #table-busy>
+      <div class="text-center m-5">
+        <b-spinner class="align-middle p-4"></b-spinner>
+      </div>
+    </template>
   </b-table>
 </template>
 
@@ -70,6 +81,10 @@ export default {
       type: Array,
       required: true,
     },
+    loading: {
+      type: Boolean,
+      required: true,
+    }
   },
 
   data: () => ({
