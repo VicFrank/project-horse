@@ -27,8 +27,8 @@ export default {
     LineChart,
   },
   props: {
-    god: {
-      type: Object,
+    godName: {
+      type: String,
       required: true,
     },
     selectedMMR: {
@@ -70,7 +70,7 @@ export default {
       }
 
       fetch(
-        `/api/stats/${endpoint}?god=${this.god.god}&mmrOption=${this.selectedMMR}`
+        `/api/stats/${endpoint}?god=${this.godName}&mmrOption=${this.selectedMMR}`
       )
         .then((res) => res.json())
         .then((stats) => {
@@ -90,7 +90,11 @@ export default {
               data: stats.map((ds) => ds.top_four_rate),
             },
           ];
+          if (this.chartData.labels.length == 0)
+            this.noData = true;
           this.loaded = true;
+        }).catch(() => {
+          this.noData = true;
         });
     },
   },
@@ -126,19 +130,19 @@ export default {
   created() {
     this.loadStats();
   },
+  watch: {
+    selectedMMR: function () { this.loadStats() },
+    selectedTimeOption: function () { this.loadStats() },
+  },
 };
 </script>
 
 <template>
-  <div class="stats-container">
-    <LineChart
-      v-if="loaded"
-      :data="chartData"
-      :options="chartOptions"
-      :width="width"
-      :height="height"
-    />
+  <div>
     <h3 v-if="noData">No data found, check filters</h3>
+    <div class="stats-container">
+      <LineChart v-if="loaded" :data="chartData" :options="chartOptions" :width="width" :height="height" />
+    </div>
   </div>
 </template>
 

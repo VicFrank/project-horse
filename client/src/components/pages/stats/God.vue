@@ -17,10 +17,11 @@
               style="width: 100px" class="mx-auto"></b-form-select>
           </div>
         </div>
-        <GodAbilityStats :loading="loading" :showPercentages="selectedMMR == null" :linkAbilities="true" :abilities="godStats"
-          @created="loadGodStats"></GodAbilityStats>
+        <GodAbilityStats :loading="loading" :showPercentages="selectedMMR == null" :linkAbilities="true"
+          :abilities="godStats" @created="loadGodStats"></GodAbilityStats>
       </b-tab>
       <b-tab title="Trends">
+        <GodHistoricalStats :godName="god" />
       </b-tab>
     </b-tabs>
   </div>
@@ -29,11 +30,13 @@
 <script>
 import GodAbilityStats from "./abilities/GodAbilityStats.vue";
 import GodImage from "../games/components/GodImage.vue";
+import GodHistoricalStats from "./components/GodHistoricalStats.vue";
 
 export default {
   components: {
     GodAbilityStats,
     GodImage,
+    GodHistoricalStats
   },
 
   data: () => ({
