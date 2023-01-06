@@ -35,6 +35,10 @@ export default {
       type: String,
       required: true,
     },
+    selectedTimeOption: {
+      type: String,
+      default: "daily"
+    },
     width: {
       type: Number,
       default: 400,
@@ -45,10 +49,28 @@ export default {
     },
   },
   methods: {
-    loadDailyStats() {
+    loadStats() {
       this.loaded = false;
+      this.noData = false;
+
+      let endpoint;
+      if (this.selectedTimeOption === "daily")
+        endpoint = 'godDaily'
+      else if (this.selectedTimeOption === "weekly")
+        endpoint = 'godWeekly'
+      else if (this.selectedTimeOption === "monthly")
+        endpoint = 'godMonthly'
+      else if (this.selectedTimeOption === "per_patch")
+        endpoint = 'godPerPatch'
+      else {
+        // Invalid selection
+        this.loaded = true;
+        this.noData = true;
+        return;
+      }
+
       fetch(
-        `/api/stats/godDaily?god=${this.god.god}&mmrOption=${this.selectedMMR}`
+        `/api/stats/${endpoint}?god=${this.god.god}&mmrOption=${this.selectedMMR}`
       )
         .then((res) => res.json())
         .then((stats) => {
@@ -74,6 +96,7 @@ export default {
   },
   data: () => ({
     loaded: false,
+    noData: false,
     chartData: {
       labels: [],
       datasets: [],
@@ -101,7 +124,7 @@ export default {
     },
   }),
   created() {
-    this.loadDailyStats();
+    this.loadStats();
   },
 };
 </script>
@@ -115,6 +138,7 @@ export default {
       :width="width"
       :height="height"
     />
+    <h3 v-if="noData">No data found, check filters</h3>
   </div>
 </template>
 
