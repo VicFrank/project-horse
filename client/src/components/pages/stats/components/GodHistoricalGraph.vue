@@ -57,14 +57,14 @@ export default {
           this.chartData.datasets = [
             {
               label: "Win Rate",
-              borderColor: "#00FF00",
-              backgroundColor: "#00FF00",
+              borderColor: "#a9cf54",
+              backgroundColor: "#a9cf54",
               data: stats.map((ds) => ds.win_rate),
             },
             {
               label: "Top 4 Rate",
-              borderColor: "#0000FF",
-              backgroundColor: "#0000FF",
+              borderColor: "#fbb829",
+              backgroundColor: "#fbb829",
               data: stats.map((ds) => ds.top_four_rate),
             },
           ];
