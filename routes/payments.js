@@ -77,6 +77,12 @@ router.post("/paypal/:steamID", auth.userAuth, async (req, res) => {
       return res.send(500);
     }
 
+    const logData = {
+      source: "paypal",
+      cosmeticIDs,
+      amount: paidAmount,
+    };
+    logs.addTransactionLog(steamID, "payment", logData);
     await addCosmeticsFromIDs(steamID, cosmeticIDs);
 
     res.status(200).send({ message: `Payment Success` });
@@ -203,6 +209,11 @@ async function stripePaymentIntentSucceeded(intent) {
     try {
       const parsedCosmeticIDs = JSON.parse(cosmeticIDs);
       await logs.addTransactionLog(steamID, "stripe", { intent });
+      const logData = {
+        source: "stripe",
+        cosmeticIDs,
+      };
+      logs.addTransactionLog(steamID, "payment", logData);
       await addCosmeticsFromIDs(steamID, parsedCosmeticIDs);
     } catch (error) {
       console.log(error);
@@ -227,6 +238,11 @@ async function stripeChargeSucceeded(intent) {
     try {
       await logs.addTransactionLog(steamID, "stripe", { intent });
       const parsedCosmeticIDs = JSON.parse(cosmeticIDs);
+      const logData = {
+        source: "stripe",
+        cosmeticIDs,
+      };
+      logs.addTransactionLog(steamID, "payment", logData);
       await addCosmeticsFromIDs(steamID, parsedCosmeticIDs);
     } catch (error) {
       console.log(error);
