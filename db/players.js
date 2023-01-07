@@ -7,7 +7,7 @@ const RedemptionCodes = require("./redemption-codes");
 const mmr = require("../mmr/mmr");
 const moment = require("moment");
 const { addTransactionLog } = require("./logs");
-const Sales = require("./Sales");
+const Sales = require("./sales");
 
 module.exports = {
   // --------------------------------------------------
