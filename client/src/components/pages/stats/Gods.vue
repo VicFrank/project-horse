@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="page-title">{{ $t("gods.page_title") }}</h1>
-    <h5 v-if="!loading" style="text-align: center;">Viewing stats for {{ totalGames }} games</h5>
+    <h5 v-if="!loading" style="text-align: center;">Viewing stats for {{ totalGames.toLocaleString() }} games</h5>
     <b-row class="mx-auto d-flex mb-2" style="max-width: 700px">
       <b-col>
         <div class="mb-2">Date</div>
