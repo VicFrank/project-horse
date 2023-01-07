@@ -17,6 +17,9 @@
             <b-tab title-link-class="tab" title="Announcements" lazy>
               <AnnouncementsAdmin />
             </b-tab>
+            <b-tab title-link-class="tab" title="Cosmetics" lazy>
+              <CosmeticsAdmin />
+            </b-tab>
           </b-tabs>
         </b-card>
       </div>
@@ -29,12 +32,14 @@ import PlayersAdmin from "./components/PlayersAdmin";
 import GodsAdmin from "./components/GodsAdmin";
 import RedemptionCodes from "./components/RedemptionCodes";
 import AnnouncementsAdmin from "./components/AnnouncementsAdmin";
+import CosmeticsAdmin from "./components/CosmeticsAdmin";
 export default {
   components: {
     PlayersAdmin,
     GodsAdmin,
     RedemptionCodes,
     AnnouncementsAdmin,
+    CosmeticsAdmin,
   },
 };
 </script>

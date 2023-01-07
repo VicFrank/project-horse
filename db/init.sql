@@ -180,6 +180,7 @@ CREATE TABLE IF NOT EXISTS cosmetics (
   equip_group TEXT,
   cost_coins INTEGER,
   cost_usd DOUBLE PRECISION,
+  is_sale BOOLEAN DEFAULT FALSE,
   rarity TEXT
 );
 

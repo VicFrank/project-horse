@@ -234,6 +234,43 @@ module.exports = {
     }
   },
 
+  async getSaleItem() {
+    try {
+      const { rows } = await query(
+        `SELECT * FROM cosmetics WHERE is_sale = true`
+      );
+      return rows[0];
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async setSaleItem(cosmeticID, costCoins) {
+    try {
+      // Remove any existing sale items
+      await query(`UPDATE cosmetics SET cost_coins = -1 WHERE is_sale = true`);
+      await query(`UPDATE cosmetics SET is_sale = false`);
+      // Set the new sale item
+      await query(
+        `UPDATE cosmetics SET (is_sale, cost_coins) = (true, $2) WHERE cosmetic_id = $1`,
+        [cosmeticID, costCoins]
+      );
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async setCoinsPrice(cosmeticID, coins) {
+    try {
+      await query(
+        `UPDATE cosmetics SET cost_coins = $1 WHERE cosmetic_id = $2`,
+        [coins, cosmeticID]
+      );
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async deleteAllCosmetics() {
     try {
       await query("DELETE FROM player_redeemed_codes");
