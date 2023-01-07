@@ -91,11 +91,13 @@ const sess = {
   },
 };
 
-// This was necessary on the old server
-// if (process.env.IS_PRODUCTION) {
-//   app.set("trust proxy", 1);
-//   sess.cookie.secure = true;
-// }
+if (
+  process.env.IS_PRODUCTION &&
+  !process.env.BASE_URL === "https://vicfrank.xyz"
+) {
+  app.set("trust proxy", 1);
+  sess.cookie.secure = true;
+}
 
 const sessionParser = session(sess);
 app.use(sessionParser);
