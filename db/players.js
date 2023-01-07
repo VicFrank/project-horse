@@ -7,7 +7,7 @@ const RedemptionCodes = require("./redemption-codes");
 const mmr = require("../mmr/mmr");
 const moment = require("moment");
 const { addTransactionLog } = require("./logs");
-const cosmetics = require("./cosmetics");
+const Sales = require("./Sales");
 
 module.exports = {
   // --------------------------------------------------
@@ -1839,10 +1839,18 @@ module.exports = {
       if (!cosmetic) throw new Error(`Invalid cosmeticID ${cosmeticID}`);
       // Make sure the player has enough coins
       const coins = await this.getCoins(steamID);
-      const price = cosmetic.cost_coins;
+      let price = cosmetic.cost_coins;
 
       if (coins < price) throw new Error("Not enough coins!");
-      if (price < 1) throw new Error("Item is not purchaseable with coins");
+      if (price < 1) {
+        // check if it's the sale item
+        const saleItem = await Sales.getSaleItem();
+        if (saleItem.cosmetic_id != cosmeticID) {
+          throw new Error("Item is not purchaseable with coins");
+        } else {
+          price = saleItem.cost_coins;
+        }
+      }
 
       // Don't allow purchasing duplicate cosmetics (with some exceptions)
       const cosmeticType = cosmetic.cosmetic_type;

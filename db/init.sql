@@ -180,8 +180,16 @@ CREATE TABLE IF NOT EXISTS cosmetics (
   equip_group TEXT,
   cost_coins INTEGER,
   cost_usd DOUBLE PRECISION,
-  is_sale BOOLEAN DEFAULT FALSE,
   rarity TEXT
+);
+
+DROP TABLE IF EXISTS sales;
+CREATE TABLE IF NOT EXISTS sales (
+  sale_id SERIAL PRIMARY KEY,
+  cosmetic_id INTEGER REFERENCES cosmetics (cosmetic_id) ON UPDATE CASCADE,
+  start_date TIMESTAMPTZ,
+  end_date TIMESTAMPTZ,
+  cost_coins INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS player_cosmetics (

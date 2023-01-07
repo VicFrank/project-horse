@@ -26,6 +26,7 @@ const godsRouter = require("./routes/gods");
 const redemptionsRouter = require("./routes/redemption-codes");
 const announcementsRouter = require("./routes/announcements");
 const abilitiesRouter = require("./routes/abilities");
+const salesRouter = require("./routes/sales");
 
 const websocketHandler = require("./websocket/connection");
 
@@ -148,6 +149,7 @@ app.use("/api/stats", statsRouter);
 app.use("/api/gods", godsRouter);
 app.use("/api/redemption_codes", redemptionsRouter);
 app.use("/api/announcements", announcementsRouter);
+app.use("/api/sales", salesRouter);
 app.use("/api/abilities", abilitiesRouter);
 
 // Websocket stuff
