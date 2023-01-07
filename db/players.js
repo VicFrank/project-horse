@@ -2203,7 +2203,7 @@ module.exports = {
 
   async getUniqueChestDropsForPlayer(steamID, uniqueChestID) {
     try {
-      const chestDrops = await cosmetics.getUniqueChestDropsWithOdds(
+      const chestDrops = await Cosmetics.getUniqueChestDropsWithOdds(
         uniqueChestID
       );
       let activeChest = await this.getActiveUniqueChest(steamID, uniqueChestID);
