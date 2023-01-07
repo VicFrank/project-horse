@@ -43,7 +43,7 @@ router.get("/rollupOptions", statsManAuth, async (req, res) => {
   }
 });
 
-router.get("/godsRollup", statsManAuth, async (req, res) => {
+router.get("/godsRollup", async (req, res) => {
   try {
     const startDate = req.query.startDate;
     const endDate = req.query.endDate;
@@ -60,6 +60,39 @@ router.get("/godDaily", statsManAuth, async (req, res) => {
     const god = req.query.god;
     const mmrOption = req.query.mmrOption
     const stats = await gods.getGodDailyStats(god, mmrOption);
+    res.status(200).json(stats);
+  } catch (error) {
+    res.status(500).send({ message: "Server Error" });
+  }
+});
+
+router.get("/godWeekly", statsManAuth, async (req, res) => {
+  try {
+    const god = req.query.god;
+    const mmrOption = req.query.mmrOption
+    const stats = await gods.getGodWeeklyStats(god, mmrOption);
+    res.status(200).json(stats);
+  } catch (error) {
+    res.status(500).send({ message: "Server Error" });
+  }
+});
+
+router.get("/godMonthly", statsManAuth, async (req, res) => {
+  try {
+    const god = req.query.god;
+    const mmrOption = req.query.mmrOption
+    const stats = await gods.getGodMonthlyStats(god, mmrOption);
+    res.status(200).json(stats);
+  } catch (error) {
+    res.status(500).send({ message: "Server Error" });
+  }
+});
+
+router.get("/godPerPatch", statsManAuth, async (req, res) => {
+  try {
+    const god = req.query.god;
+    const mmrOption = req.query.mmrOption
+    const stats = await gods.getGodPerPatchStats(god, mmrOption);
     res.status(200).json(stats);
   } catch (error) {
     res.status(500).send({ message: "Server Error" });
