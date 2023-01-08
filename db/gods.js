@@ -267,7 +267,8 @@ module.exports = {
 
   async getGodPerPatchStats(godName, mmrOption) {
     try {
-      const allPatchPromises = MAJOR_PATCHES.reverse().map(patch =>
+      const reversePatches = [...MAJOR_PATCHES].reverse();
+      const allPatchPromises = reversePatches.map(patch =>
         query(
           `
         SELECT $1            AS patch,
