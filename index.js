@@ -94,7 +94,7 @@ const sess = {
 
 if (
   process.env.IS_PRODUCTION &&
-  !process.env.BASE_URL === "https://vicfrank.xyz"
+  process.env.BASE_URL !== "https://vicfrank.xyz"
 ) {
   app.set("trust proxy", 1);
   sess.cookie.secure = true;
