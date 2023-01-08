@@ -164,7 +164,7 @@ module.exports = {
     try {
       const { rows } = await query(
         `
-        SELECT day,
+        SELECT day::date,
           sum(picks)         AS picks,
           sum(first_place)   AS first_place,
           sum(place_sum)     AS place_sum,
@@ -183,7 +183,7 @@ module.exports = {
       );
       const dailyStats = rows.map((row) => ({
         ...row,
-        label: row.day,
+        label: row.day.toLocaleDateString(),
         win_rate: row.first_place / row.picks,
         top_four_rate: row.top_four_sum / row.picks,
       }));
@@ -218,13 +218,12 @@ module.exports = {
 
       const weeklyStats = rows.map((row) => ({
         ...row,
-        label: row.start_of_week,
+        label: `Week of ${row.start_of_week.toLocaleDateString()}`,
         win_rate: row.first_place / row.picks,
         top_four_rate: row.top_four_sum / row.picks,
       }));
       return weeklyStats;
     } catch (error) {
-      console.log(error);
       throw error;
     }
   },
@@ -233,8 +232,7 @@ module.exports = {
     try {
       const { rows } = await query(
         `
-        SELECT 
-          $1                 AS patch,
+        SELECT date_trunc('month', day)::date as start_of_month,
           sum(picks)         AS picks,
           sum(first_place)   AS first_place,
           sum(place_sum)     AS place_sum,
@@ -269,7 +267,7 @@ module.exports = {
 
   async getGodPerPatchStats(godName, mmrOption) {
     try {
-      const allPatchPromises = MAJOR_PATCHES.map((patch) =>
+      const allPatchPromises = MAJOR_PATCHES.reverse().map(patch =>
         query(
           `
         SELECT $1            AS patch,
@@ -286,16 +284,16 @@ module.exports = {
           AND type_id = $3
           AND day between $4 and $5
         `,
-          [patch.text, godName, mmrOption, path.startDate, path.endDate]
+          [patch.text, godName, mmrOption, patch.startDate, patch.endDate]
         )
       );
 
       const perPatchStats = (await Promise.all(allPatchPromises)).map(
-        ({ row }) => ({
-          ...row,
-          label: row.patch,
-          win_rate: row.first_place / row.picks,
-          top_four_rate: row.top_four_sum / row.picks,
+        ({ rows }) => ({
+          ...rows[0],
+          label: rows[0].patch,
+          win_rate: rows[0].first_place / rows[0].picks,
+          top_four_rate: rows[0].top_four_sum / rows[0].picks,
         })
       );
       return perPatchStats;

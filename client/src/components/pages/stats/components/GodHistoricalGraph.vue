@@ -75,7 +75,7 @@ export default {
         .then((res) => res.json())
         .then((stats) => {
           stats = stats.reverse();
-          this.chartData.labels = stats.map((ds) => ds.day.substring(0, 10));
+          this.chartData.labels = stats.map((ds) => ds.label);
           this.chartData.datasets = [
             {
               label: "Win Rate",
