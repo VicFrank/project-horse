@@ -34,8 +34,8 @@ export default {
     selectedPeriod: "daily",
     peroidOptions: [
       { value: "daily", text: "Daily" },
-      { value: "monthly", text: "Weekly" },
-      { value: "weekly", text: "Monthly" },
+      { value: "weekly", text: "Weekly" },
+      { value: "monthly", text: "Monthly" },
       { value: "per_patch", text: "Patch" },
     ],
 
