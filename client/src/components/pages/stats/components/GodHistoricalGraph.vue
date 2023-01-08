@@ -27,13 +27,17 @@ export default {
     LineChart,
   },
   props: {
-    god: {
-      type: Object,
+    godName: {
+      type: String,
       required: true,
     },
     selectedMMR: {
       type: String,
       required: true,
+    },
+    selectedTimeOption: {
+      type: String,
+      default: "daily"
     },
     width: {
       type: Number,
@@ -45,35 +49,58 @@ export default {
     },
   },
   methods: {
-    loadDailyStats() {
+    loadStats() {
       this.loaded = false;
+      this.noData = false;
+
+      let endpoint;
+      if (this.selectedTimeOption === "daily")
+        endpoint = 'godDaily'
+      else if (this.selectedTimeOption === "weekly")
+        endpoint = 'godWeekly'
+      else if (this.selectedTimeOption === "monthly")
+        endpoint = 'godMonthly'
+      else if (this.selectedTimeOption === "per_patch")
+        endpoint = 'godPerPatch'
+      else {
+        // Invalid selection
+        this.loaded = true;
+        this.noData = true;
+        return;
+      }
+
       fetch(
-        `/api/stats/godDaily?god=${this.god.god}&mmrOption=${this.selectedMMR}`
+        `/api/stats/${endpoint}?god=${this.godName}&mmrOption=${this.selectedMMR}`
       )
         .then((res) => res.json())
         .then((stats) => {
           stats = stats.reverse();
-          this.chartData.labels = stats.map((ds) => ds.day.substring(0, 10));
+          this.chartData.labels = stats.map((ds) => ds.label);
           this.chartData.datasets = [
             {
               label: "Win Rate",
-              borderColor: "#00FF00",
-              backgroundColor: "#00FF00",
+              borderColor: "#a9cf54",
+              backgroundColor: "#a9cf54",
               data: stats.map((ds) => ds.win_rate),
             },
             {
               label: "Top 4 Rate",
-              borderColor: "#0000FF",
-              backgroundColor: "#0000FF",
+              borderColor: "#fbb829",
+              backgroundColor: "#fbb829",
               data: stats.map((ds) => ds.top_four_rate),
             },
           ];
+          if (this.chartData.labels.length == 0)
+            this.noData = true;
           this.loaded = true;
+        }).catch(() => {
+          this.noData = true;
         });
     },
   },
   data: () => ({
     loaded: false,
+    noData: false,
     chartData: {
       labels: [],
       datasets: [],
@@ -101,20 +128,21 @@ export default {
     },
   }),
   created() {
-    this.loadDailyStats();
+    this.loadStats();
+  },
+  watch: {
+    selectedMMR: function () { this.loadStats() },
+    selectedTimeOption: function () { this.loadStats() },
   },
 };
 </script>
 
 <template>
-  <div class="stats-container">
-    <LineChart
-      v-if="loaded"
-      :data="chartData"
-      :options="chartOptions"
-      :width="width"
-      :height="height"
-    />
+  <div>
+    <h3 v-if="noData">No data found, check filters</h3>
+    <div class="stats-container">
+      <LineChart v-if="loaded" :data="chartData" :options="chartOptions" :width="width" :height="height" />
+    </div>
   </div>
 </template>
 
