@@ -572,3 +572,15 @@ CREATE TABLE if NOT EXISTS stats_gods_rollup
 );
 CREATE INDEX IDX_stats_gods_rollup_day ON stats_gods_rollup (day);
 CREATE INDEX IDX_stats_gods_rollup_type ON stats_gods_rollup (type_id);
+
+CREATE TABLE IF NOT EXISTS stats_games_rollup
+(
+    day          DATE,
+    type_id      TEXT REFERENCES rollup_types (type_id),
+    games_count  INTEGER,
+    rounds_sum   INTEGER,
+    duration_sum INTEGER -- INT_MAX/(30 min average game duration) = 71 million games can be summed
+);
+
+CREATE INDEX IDX_stats_games_rollup_day ON stats_games_rollup (day);
+CREATE INDEX IDX_stats_games_rollup_type ON stats_games_rollup (type_id);

@@ -373,4 +373,25 @@ module.exports = {
       throw error;
     }
   },
+
+  async getGameStatsOverDuration(startDate, endDate) {
+    try {
+      const { rows } = await query(
+        `
+        SELECT 
+          sum(games_count) AS games_count,
+          sum(rounds_sum)/sum(games_count)::float as avg_rounds,
+          sum(duration_sum)/sum(games_count)::float as avg_duration
+        FROM stats_games_rollup
+        WHERE type_id = 'all_mmr'
+          AND day between $1 and $2
+        `,
+        [startDate, endDate]
+      );
+      return rows[0];
+    } catch (error) {
+      throw error;
+    }
+  },
+
 };
