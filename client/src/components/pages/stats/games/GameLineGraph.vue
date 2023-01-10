@@ -62,7 +62,7 @@ export default {
 
 <template>
   <div>
-    <h3 style="text-align: center;">{{ title }}</h3>
+    <h3 v-if="!loading" style="text-align: center;">{{ title }}</h3>
     <h3 v-if="!chartData.labels.length">No data found, check filters</h3>
     <div class="stats-container">
       <LineChart v-if="!loading" :data="chartData" :options="chartOptions" :height="height"/>

@@ -124,7 +124,7 @@ export default {
       { text: "Season 3.5", value: { startDate: "2022-12-15", endDate: "2023-01-01", graph: perPatchGraph } },
       { text: "Season 4", value: { startDate: "2023-01-01", endDate: "2023-03-01", graph: perPatchGraph } },
       { value: null, text: "------------", disabled: true },
-      { value: "custom", text: "Custom Range", graph: weeklyGraph },
+      { value: "custom", text: "Custom Range"},
     ]
     this.selectedDate = this.dateOptions.find(opt => opt.text == "Month").value;
 
@@ -156,48 +156,51 @@ export default {
           this.loading = false;
         });
 
-      fetch(`/api/stats${this.selectedDate.graph.endpoint}`)
-        .then((r) => r.json())
-        .then(historicalData => {
-          const baseTitle = this.selectedDate.graph.title;
-          const labels = historicalData.map(datum => datum.label);
+      if (!this.isCustomDateSelected()) {
+        fetch(`/api/stats${this.selectedDate.graph.endpoint}`)
+          .then((r) => r.json())
+          .then(historicalData => {
+            // Data from the queries is [neweset,...,oldest], but we want the charts to be oldest on the left
+            historicalData.reverse();
+            const baseTitle = this.selectedDate.graph.title;
+            const labels = historicalData.map(datum => datum.label);
 
-          this.gamesPlayedData.labels = labels;
-          this.gamesPlayedTitle = baseTitle + "Games Played";
-          this.gamesPlayedData.datasets = [
-            {
-              label: "Games Played" ,
-              borderColor: "#A9CF54",
-              backgroundColor: "#A9CF54",
-              data: historicalData.map(datum => datum.games_count)
-            },
-          ]
+            this.gamesPlayedData.labels = labels;
+            this.gamesPlayedTitle = baseTitle + "Games Played";
+            this.gamesPlayedData.datasets = [
+              {
+                label: "Games Played" ,
+                borderColor: "#A9CF54",
+                backgroundColor: "#A9CF54",
+                data: historicalData.map(datum => datum.games_count)
+              },
+            ]
 
-          this.roundsTitle = baseTitle + "Average Number of Rounds";
-          this.roundsData.labels = labels;
-          this.roundsData.datasets = [
-            {
-              label: "Average Rounds" ,
-              borderColor: "#A9CF54",
-              backgroundColor: "#A9CF54",
-              data: historicalData.map(datum => datum.avg_rounds)
-            },
-          ]
+            this.roundsTitle = baseTitle + "Average Number of Rounds";
+            this.roundsData.labels = labels;
+            this.roundsData.datasets = [
+              {
+                label: "Average Rounds" ,
+                borderColor: "#A9CF54",
+                backgroundColor: "#A9CF54",
+                data: historicalData.map(datum => datum.avg_rounds)
+              },
+            ]
 
-          this.durationTitle = baseTitle + "Average Game Duration";
-          this.durationData.labels = labels;
-          this.durationData.datasets = [
-            {
-              label: "Average Duration (minutes)" ,
-              borderColor: "#A9CF54",
-              backgroundColor: "#A9CF54",
-              data: historicalData.map(datum => datum.avg_duration/60)
-            },
-          ]
+            this.durationTitle = baseTitle + "Average Game Duration";
+            this.durationData.labels = labels;
+            this.durationData.datasets = [
+              {
+                label: "Average Duration (minutes)" ,
+                borderColor: "#A9CF54",
+                backgroundColor: "#A9CF54",
+                data: historicalData.map(datum => datum.avg_duration/60)
+              },
+            ]
 
-          this.loadingCharts = false;
-          console.log(historicalData);
-        })
+            this.loadingCharts = false;
+          })
+        }
     },
     daysAgo(days) {
       const d = new Date(new Date() - days * 24 * 60 * 60 * 1000);

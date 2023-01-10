@@ -413,7 +413,7 @@ module.exports = {
       );
       return rows.map(row => ({
         ...row,
-        label: row.day
+        label: row.day.toLocaleDateString()
       }));
     } catch (error) {
       throw error;
@@ -457,8 +457,8 @@ module.exports = {
           sum(duration_sum)/sum(games_count)::float as avg_duration
         FROM stats_games_rollup
         WHERE type_id = 'all_mmr'
-        GROUP BY start_of_week
-        ORDER BY start_of_week DESC
+        GROUP BY start_of_month
+        ORDER BY start_of_month DESC
         LIMIT $1;
         `, 
         [limit]
@@ -482,7 +482,7 @@ module.exports = {
         query(
           `
         SELECT 
-          $1 AS patch
+          $1 AS patch,
           sum(games_count) AS games_count,
           sum(rounds_sum)/sum(games_count)::float as avg_rounds,
           sum(duration_sum)/sum(games_count)::float as avg_duration
