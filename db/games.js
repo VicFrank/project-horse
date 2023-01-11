@@ -384,7 +384,7 @@ module.exports = {
           sum(rounds_sum)/sum(games_count)::float AS avg_rounds,
           sum(duration_sum)/sum(games_count)::float AS avg_duration
         FROM stats_games_rollup
-        WHERE type_id = 'all_mmr'
+        WHERE type_id = 'all'
           AND day between $1 and $2
         `,
         [startDate, endDate]
@@ -405,7 +405,7 @@ module.exports = {
           rounds_sum/games_count::float AS avg_rounds,
           duration_sum/games_count::float AS avg_duration
         FROM stats_games_rollup
-        WHERE type_id = 'all_mmr'
+        WHERE type_id = 'all'
         ORDER BY day DESC
         limit $1;
         `, 
@@ -430,7 +430,7 @@ module.exports = {
           sum(rounds_sum)/sum(games_count)::float as avg_rounds,
           sum(duration_sum)/sum(games_count)::float as avg_duration
         FROM stats_games_rollup
-        WHERE type_id = 'all_mmr'
+        WHERE type_id = 'all'
         GROUP BY start_of_week
         ORDER BY start_of_week DESC
         LIMIT $1;
@@ -456,7 +456,7 @@ module.exports = {
           sum(rounds_sum)/sum(games_count)::float as avg_rounds,
           sum(duration_sum)/sum(games_count)::float as avg_duration
         FROM stats_games_rollup
-        WHERE type_id = 'all_mmr'
+        WHERE type_id = 'all'
         GROUP BY start_of_month
         ORDER BY start_of_month DESC
         LIMIT $1;
@@ -487,7 +487,7 @@ module.exports = {
           sum(rounds_sum)/sum(games_count)::float as avg_rounds,
           sum(duration_sum)/sum(games_count)::float as avg_duration
         FROM stats_games_rollup
-        WHERE type_id = 'all_mmr'
+        WHERE type_id = 'all'
           AND day between $2 and $3
         `,
           [patch.text, patch.startDate, patch.endDate]

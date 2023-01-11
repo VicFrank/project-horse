@@ -542,6 +542,7 @@ VALUES
     ('mmr', '1300_plus', '1300+', '{"floor": 1300, "ceiling": 9999}'),
     ('mmr', '1400_plus', '1400+', '{"floor": 1400, "ceiling": 9999}'),
     ('mmr', '1500_plus', '1500+', '{"floor": 1500, "ceiling": 9999}'),
+    ('general', 'all', 'Everything', '{}'),
     ('lobby', 'immortal_lobbies', 'Immortal Only Lobbies', '{}'),
     ('lobby', 'tourney_lobbies', 'Tournament Lobbies', '{}');
 

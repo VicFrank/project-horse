@@ -129,7 +129,7 @@ BEGIN
 
     INSERT INTO stats_games_rollup (day, type_id, games_count, rounds_sum, duration_sum)
     SELECT d                  AS day,
-           'all_mmr'          AS type_id,
+           'all'              AS type_id,
            count(*)           AS games_count,
            sum(rounds)        AS round_sum,
            sum(duration)      AS duration_sum
