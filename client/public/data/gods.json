@@ -834,8 +834,8 @@
     "name": "Techies",
     "universe": "dota",
     "complexity": "intermediate",
-    "unlock": "free",
-    "unlock_text": "This God is free and permanently unlocked",
+    "unlock": "chest",
+    "unlock_text": "This God is permanently unlocked by dropping from God chests",
     "health": 200,
     "powers": [
       {
