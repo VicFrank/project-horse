@@ -146,7 +146,7 @@ END;
 $$;
 
 /*
-    Runs game data aggregation from 1/1/2022 to yeserday (since there are still games being played today)
+    Runs game data aggregation from 1/1/2022 to yesterday (since there are still games being played today)
     Any days that already have data will be skipped, days with no data will have no entries
 */
 CREATE OR REPLACE FUNCTION rollup_games_all() RETURNS TABLE (day date, rollup_succeeded bool)

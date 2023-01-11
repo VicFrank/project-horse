@@ -103,6 +103,7 @@ const routes = [
   {
     path: "/stats/games",
     component: GameStats,
+    meta: { requiresAuth: true, requiresAdmin: true },
   },
   { path: "/leaderboard", component: Leaderboard },
   {

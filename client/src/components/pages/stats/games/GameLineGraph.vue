@@ -61,7 +61,7 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div class="mt-2">
     <h3 v-if="!loading" style="text-align: center;">{{ title }}</h3>
     <h3 v-if="!chartData.labels.length">No data found, check filters</h3>
     <div class="stats-container">
