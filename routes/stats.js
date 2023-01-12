@@ -48,7 +48,7 @@ router.get("/godsRollup", async (req, res) => {
   try {
     const startDate = req.query.startDate;
     const endDate = req.query.endDate;
-    const mmrOption = req.query.mmrOption
+    const mmrOption = req.query.mmrOption;
     const stats = await gods.getGodsStatsRollup(startDate, endDate, mmrOption);
     res.status(200).json(stats);
   } catch (error) {
@@ -59,7 +59,7 @@ router.get("/godsRollup", async (req, res) => {
 router.get("/godDaily", statsManAuth, async (req, res) => {
   try {
     const god = req.query.god;
-    const mmrOption = req.query.mmrOption
+    const mmrOption = req.query.mmrOption;
     const stats = await gods.getGodDailyStats(god, mmrOption);
     res.status(200).json(stats);
   } catch (error) {
@@ -70,7 +70,7 @@ router.get("/godDaily", statsManAuth, async (req, res) => {
 router.get("/godWeekly", statsManAuth, async (req, res) => {
   try {
     const god = req.query.god;
-    const mmrOption = req.query.mmrOption
+    const mmrOption = req.query.mmrOption;
     const stats = await gods.getGodWeeklyStats(god, mmrOption);
     res.status(200).json(stats);
   } catch (error) {
@@ -81,7 +81,7 @@ router.get("/godWeekly", statsManAuth, async (req, res) => {
 router.get("/godMonthly", statsManAuth, async (req, res) => {
   try {
     const god = req.query.god;
-    const mmrOption = req.query.mmrOption
+    const mmrOption = req.query.mmrOption;
     const stats = await gods.getGodMonthlyStats(god, mmrOption);
     res.status(200).json(stats);
   } catch (error) {
@@ -92,7 +92,7 @@ router.get("/godMonthly", statsManAuth, async (req, res) => {
 router.get("/godPerPatch", statsManAuth, async (req, res) => {
   try {
     const god = req.query.god;
-    const mmrOption = req.query.mmrOption
+    const mmrOption = req.query.mmrOption;
     const stats = await gods.getGodPerPatchStats(god, mmrOption);
     res.status(200).json(stats);
   } catch (error) {
@@ -213,6 +213,7 @@ router.get("/games/daily", statsManAuth, async (req, res) => {
     res.status(500).send({ message: "Server Error" });
   }
 });
+
 router.get("/games/weekly", statsManAuth, async (req, res) => {
   try {
     const stats = await games.getGameStatsWeekly();
@@ -221,6 +222,7 @@ router.get("/games/weekly", statsManAuth, async (req, res) => {
     res.status(500).send({ message: "Server Error" });
   }
 });
+
 router.get("/games/monthly", statsManAuth, async (req, res) => {
   try {
     const stats = await games.getGameStatsMonthly();
@@ -229,6 +231,7 @@ router.get("/games/monthly", statsManAuth, async (req, res) => {
     res.status(500).send({ message: "Server Error" });
   }
 });
+
 router.get("/games/perPatch", statsManAuth, async (req, res) => {
   try {
     const stats = await games.getGameStatsPerPatch();

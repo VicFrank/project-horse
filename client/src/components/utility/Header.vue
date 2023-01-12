@@ -168,7 +168,11 @@
             Economy
           </b-dropdown-item>
         </b-nav-item-dropdown>
-        <b-nav-item-dropdown v-if="canSeeStats" text="STATS" class="mx-2 d-none d-sm-block">
+        <b-nav-item-dropdown
+          v-if="canSeeStats"
+          text="STATS"
+          class="mx-2 d-none d-sm-block"
+        >
           <b-dropdown-item
             v-if="canSeeStats"
             to="/stats/games"

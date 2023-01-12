@@ -33,15 +33,15 @@ export default {
     },
     chartData: {
       type: Object,
-      required: true
+      required: true,
     },
     loading: {
       type: Boolean,
-      default: true
+      default: true,
     },
     height: {
       type: Number,
-      default: 400
+      default: 400,
     },
   },
   data: () => ({
@@ -52,8 +52,8 @@ export default {
       color: "#CECECE",
 
       scales: {
-        y: { ticks: { color: "#CECECE", }, },
-        x: { ticks: { color: "#CECECE", }, },
+        y: { ticks: { color: "#CECECE" } },
+        x: { ticks: { color: "#CECECE" } },
       },
     },
   }),
@@ -62,10 +62,15 @@ export default {
 
 <template>
   <div class="mt-2">
-    <h3 v-if="!loading" style="text-align: center;">{{ title }}</h3>
+    <h3 v-if="!loading" style="text-align: center">{{ title }}</h3>
     <h3 v-if="!chartData.labels.length">No data found, check filters</h3>
     <div class="stats-container">
-      <LineChart v-if="!loading" :data="chartData" :options="chartOptions" :height="height"/>
+      <LineChart
+        v-if="!loading"
+        :data="chartData"
+        :options="chartOptions"
+        :height="height"
+      />
     </div>
   </div>
 </template>

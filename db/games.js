@@ -1,7 +1,7 @@
 const { query } = require("./index");
 const Players = require("./players");
 const mmr = require("../mmr/mmr");
-const {MAJOR_PATCHES} = require("../common/patches")
+const { MAJOR_PATCHES } = require("../common/patches");
 
 module.exports = {
   /**
@@ -395,7 +395,7 @@ module.exports = {
     }
   },
 
-  async getGameStatsDaily(limit=7) {
+  async getGameStatsDaily(limit = 7) {
     try {
       const { rows } = await query(
         `
@@ -408,19 +408,19 @@ module.exports = {
         WHERE type_id = 'all'
         ORDER BY day DESC
         limit $1;
-        `, 
+        `,
         [limit]
       );
-      return rows.map(row => ({
+      return rows.map((row) => ({
         ...row,
-        label: row.day.toLocaleDateString()
+        label: row.day.toLocaleDateString(),
       }));
     } catch (error) {
       throw error;
     }
   },
 
-  async getGameStatsWeekly(limit=10) {
+  async getGameStatsWeekly(limit = 10) {
     try {
       const { rows } = await query(
         `
@@ -434,19 +434,19 @@ module.exports = {
         GROUP BY start_of_week
         ORDER BY start_of_week DESC
         LIMIT $1;
-        `, 
+        `,
         [limit]
       );
-      return rows.map(row => ({
+      return rows.map((row) => ({
         ...row,
-        label: `Week of ${row.start_of_week.toLocaleDateString()}`
+        label: `Week of ${row.start_of_week.toLocaleDateString()}`,
       }));
     } catch (error) {
       throw error;
     }
   },
 
-  async getGameStatsMonthly(limit=6) {
+  async getGameStatsMonthly(limit = 6) {
     try {
       const { rows } = await query(
         `
@@ -460,7 +460,7 @@ module.exports = {
         GROUP BY start_of_month
         ORDER BY start_of_month DESC
         LIMIT $1;
-        `, 
+        `,
         [limit]
       );
       return rows.map((row) => ({

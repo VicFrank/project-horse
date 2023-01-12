@@ -248,9 +248,5 @@ cron.schedule("0 0 0 * * 1", async () => {
 // Run stats rollup daily at 2am (must be after midnight since it aggregates all days from yesterday backwards)
 cron.schedule("0 2 * * *", async () => {
   console.log("Running stats rollup");
-  await Promise.all([
-    rollup.runGodRollup(),
-    rollup.runGamesRollup(),
-  ]);
+  await Promise.all([rollup.runGodRollup(), rollup.runGamesRollup()]);
 });
-
