@@ -110,3 +110,56 @@ BEGIN
         END LOOP;
 END;
 $$;
+
+/*
+    Aggregates game data at a per day level
+*/
+CREATE OR REPLACE FUNCTION rollup_games(d date) RETURNS bool
+    language plpgsql AS
+$$
+BEGIN
+    IF EXISTS(SELECT day FROM stats_games_rollup WHERE day = d)
+    THEN
+        RETURN false; /* We already have data for the requested date */
+    END IF;
+    IF NOT (lock_rollup_if_we_can('rollup_games'))
+    THEN
+        RETURN false; /* Failed to lock */
+    END IF;
+
+    INSERT INTO stats_games_rollup (day, type_id, games_count, rounds_sum, duration_sum)
+    SELECT d                  AS day,
+           'all'              AS type_id,
+           count(*)           AS games_count,
+           sum(rounds)        AS round_sum,
+           sum(duration)      AS duration_sum
+    FROM games
+    WHERE ranked = true
+      AND rounds notnull
+      AND duration notnull
+      AND created_at::date = d
+    GROUP BY day;
+
+    PERFORM unlock_rollup('rollup_games');
+    RETURN true;
+END;
+$$;
+
+/*
+    Runs game data aggregation from 1/1/2022 to yesterday (since there are still games being played today)
+    Any days that already have data will be skipped, days with no data will have no entries
+*/
+CREATE OR REPLACE FUNCTION rollup_games_all() RETURNS TABLE (day date, rollup_succeeded bool)
+    language plpgsql AS
+$$
+DECLARE
+    rollup_day date;
+BEGIN
+    for rollup_day in select d::date from generate_series('2022-01-01', (now()- interval '1 day')::date, interval '1 day') as d
+        LOOP
+        day := rollup_day;
+        rollup_succeeded := (select rollup_games(rollup_day));
+        RETURN NEXT;
+        END LOOP;
+END;
+$$;

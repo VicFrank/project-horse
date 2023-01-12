@@ -29,6 +29,7 @@ const IndividualAbility = () =>
   import("../components/pages/stats/IndividualAbility");
 const Cosmetics = () => import("../components/pages/stats/cosmetics/Cosmetics");
 const Bodies = () => import("../components/pages/stats/Bodies");
+const GameStats = () => import("../components/pages/stats/games/GameStats.vue");
 
 const Profile = () => import("../components/pages/profile/Profile");
 const MatchHistory = () => import("../components/pages/profile/MatchHistory");
@@ -97,6 +98,11 @@ const routes = [
   {
     path: "/bodies",
     component: Bodies,
+    meta: { requiresAuth: true, requiresAdmin: true },
+  },
+  {
+    path: "/stats/games",
+    component: GameStats,
     meta: { requiresAuth: true, requiresAdmin: true },
   },
   { path: "/leaderboard", component: Leaderboard },

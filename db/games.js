@@ -1,6 +1,7 @@
 const { query } = require("./index");
 const Players = require("./players");
 const mmr = require("../mmr/mmr");
+const {MAJOR_PATCHES} = require("../common/patches")
 
 module.exports = {
   /**
@@ -369,6 +370,133 @@ module.exports = {
         players: gamePlayers,
         // rounds: rounds,
       };
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getGameStatsOverDuration(startDate, endDate) {
+    try {
+      const { rows } = await query(
+        `
+        SELECT 
+          sum(games_count) AS games_count,
+          sum(rounds_sum)/sum(games_count)::float AS avg_rounds,
+          sum(duration_sum)/sum(games_count)::float AS avg_duration
+        FROM stats_games_rollup
+        WHERE type_id = 'all'
+          AND day between $1 and $2
+        `,
+        [startDate, endDate]
+      );
+      return rows[0];
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getGameStatsDaily(limit=7) {
+    try {
+      const { rows } = await query(
+        `
+        SELECT
+          day,
+          games_count,
+          rounds_sum/games_count::float AS avg_rounds,
+          duration_sum/games_count::float AS avg_duration
+        FROM stats_games_rollup
+        WHERE type_id = 'all'
+        ORDER BY day DESC
+        limit $1;
+        `, 
+        [limit]
+      );
+      return rows.map(row => ({
+        ...row,
+        label: row.day.toLocaleDateString()
+      }));
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getGameStatsWeekly(limit=10) {
+    try {
+      const { rows } = await query(
+        `
+        SELECT
+          date_trunc('week', day)::date as start_of_week,
+          sum(games_count) AS games_count,
+          sum(rounds_sum)/sum(games_count)::float as avg_rounds,
+          sum(duration_sum)/sum(games_count)::float as avg_duration
+        FROM stats_games_rollup
+        WHERE type_id = 'all'
+        GROUP BY start_of_week
+        ORDER BY start_of_week DESC
+        LIMIT $1;
+        `, 
+        [limit]
+      );
+      return rows.map(row => ({
+        ...row,
+        label: `Week of ${row.start_of_week.toLocaleDateString()}`
+      }));
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getGameStatsMonthly(limit=6) {
+    try {
+      const { rows } = await query(
+        `
+        SELECT
+          date_trunc('month', day)::date as start_of_month,
+          sum(games_count) AS games_count,
+          sum(rounds_sum)/sum(games_count)::float as avg_rounds,
+          sum(duration_sum)/sum(games_count)::float as avg_duration
+        FROM stats_games_rollup
+        WHERE type_id = 'all'
+        GROUP BY start_of_month
+        ORDER BY start_of_month DESC
+        LIMIT $1;
+        `, 
+        [limit]
+      );
+      return rows.map((row) => ({
+        ...row,
+        label: new Date(row.start_of_month).toLocaleString("en-us", {
+          month: "short",
+          year: "numeric",
+        }),
+      }));
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getGameStatsPerPatch() {
+    try {
+      const reversePatches = [...MAJOR_PATCHES].reverse();
+      const allPatchPromises = reversePatches.map((patch) =>
+        query(
+          `
+        SELECT 
+          $1 AS patch,
+          sum(games_count) AS games_count,
+          sum(rounds_sum)/sum(games_count)::float as avg_rounds,
+          sum(duration_sum)/sum(games_count)::float as avg_duration
+        FROM stats_games_rollup
+        WHERE type_id = 'all'
+          AND day between $2 and $3
+        `,
+          [patch.text, patch.startDate, patch.endDate]
+        )
+      );
+      return (await Promise.all(allPatchPromises)).map(({ rows }) => ({
+        ...rows[0],
+        label: rows[0].patch,
+      }));
     } catch (error) {
       throw error;
     }

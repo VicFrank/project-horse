@@ -542,6 +542,7 @@ VALUES
     ('mmr', '1300_plus', '1300+', '{"floor": 1300, "ceiling": 9999}'),
     ('mmr', '1400_plus', '1400+', '{"floor": 1400, "ceiling": 9999}'),
     ('mmr', '1500_plus', '1500+', '{"floor": 1500, "ceiling": 9999}'),
+    ('general', 'all', 'Everything', '{}'),
     ('lobby', 'immortal_lobbies', 'Immortal Only Lobbies', '{}'),
     ('lobby', 'tourney_lobbies', 'Tournament Lobbies', '{}');
 
@@ -572,3 +573,15 @@ CREATE TABLE if NOT EXISTS stats_gods_rollup
 );
 CREATE INDEX IDX_stats_gods_rollup_day ON stats_gods_rollup (day);
 CREATE INDEX IDX_stats_gods_rollup_type ON stats_gods_rollup (type_id);
+
+CREATE TABLE IF NOT EXISTS stats_games_rollup
+(
+    day          DATE,
+    type_id      TEXT REFERENCES rollup_types (type_id),
+    games_count  INTEGER,
+    rounds_sum   INTEGER,
+    duration_sum INTEGER -- INT_MAX/(30 min average game duration) = 71 million games can be summed
+);
+
+CREATE INDEX IDX_stats_games_rollup_day ON stats_games_rollup (day);
+CREATE INDEX IDX_stats_games_rollup_type ON stats_games_rollup (type_id);
