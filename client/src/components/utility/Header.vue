@@ -241,6 +241,23 @@
         </li>
       </ul>
       <div class="d-flex align-items-center ml-auto">
+        <b-dropdown
+          size="sm"
+          variant="outline-secondary"
+          class="mr-2"
+          :text="$t('navigation.language')"
+        >
+          <b-dropdown-item
+            v-for="(lang, i) in langs"
+            :key="`Lang${i}`"
+            :value="lang"
+            @click="
+              $i18n.locale = lang;
+              $store.dispatch('setLanguage', lang);
+            "
+            >{{ $t(`navigation.${lang}`) }}</b-dropdown-item
+          >
+        </b-dropdown>
         <div class="d-flex align-items-center" v-if="!loggedIn">
           <div class="mr-2">
             <LoginButton></LoginButton>
@@ -368,7 +385,7 @@ export default {
     ProgressBar,
   },
 
-  data: () => ({ langs: ["en", "ru", "cn"], selected: null }),
+  data: () => ({ langs: ["en", "cn"], selected: null }),
 
   created() {
     const lang = this.$route.query.lang;
