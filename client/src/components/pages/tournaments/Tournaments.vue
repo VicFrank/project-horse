@@ -49,6 +49,18 @@
                   href="https://battlefy.com/double-edge-studios/ability-arena-3/63916e89b1a0235b899acc5b/info?infoTab=details"
                   target="_blank"
                   variant="primary"
+                  v-t="'tournaments.results'"
+                ></b-button>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-left">Season 4 Tournament</td>
+              <td class="text-left">Jan 22, 2022</td>
+              <td class="text-left">
+                <b-button
+                  href="https://battlefy.com/double-edge-studios/ability-arena-4/63c33b1efaa0b303780d8399/info?infoTab=details"
+                  target="_blank"
+                  variant="primary"
                   v-t="'tournaments.sign_up'"
                 ></b-button>
               </td>
