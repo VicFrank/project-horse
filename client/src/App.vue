@@ -43,19 +43,12 @@ export default {
     },
   },
   created() {
-    // this.unwatch = this.$store.watch(
-    //   (state, getters) => getters.bpLevel,
-    //   (newValue, oldValue) => {
-    //     if (oldValue && newValue > oldValue) {
-    //       this.$bvToast.toast(`Battle Pass leveled up to level ${newValue}!`, {
-    //         title: `Notification`,
-    //         toaster: "b-toaster-bottom-left",
-    //         solid: true,
-    //         appendToast: true,
-    //       });
-    //     }
-    //   }
-    // );
+    const chineseLocales = ["zh-CN", "zh-TW", "zh-HK", "zh"];
+    const useChinese = chineseLocales.includes(navigator.language);
+    if (useChinese) {
+      this.$i18n.locale = "cn";
+      this.$store.dispatch("setLanguage", "cn");
+    }
 
     fetch("/api/auth/steam/success", { credentials: "include" })
       .then((res) => res.json())

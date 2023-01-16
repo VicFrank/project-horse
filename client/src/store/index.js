@@ -4,6 +4,7 @@ import createPersistedState from "vuex-persistedstate";
 
 import ui from "./modules/ui";
 import auth from "./modules/auth";
+import lang from "./modules/lang";
 import matchmaking from "./modules/matchmaking";
 import matchmakingSocket from "./plugins/matchmakingSocket";
 
@@ -15,6 +16,7 @@ export default new Vuex.Store({
   modules: {
     ui,
     auth,
+    lang,
     matchmaking,
   },
   plugins: [createPersistedState(), matchmakingSocket()],
