@@ -161,7 +161,7 @@ module.exports = {
 
       // every level takes 225 xp
       return {
-        total_xp: level*225,
+        total_xp: level * 225,
         next_level_xp: 225,
         coins_reward: 0,
       };
@@ -187,7 +187,6 @@ module.exports = {
       // there is a reward every 5 levels, forever
       let numRewards = Math.floor(level / 5);
       // There is a special reward at level 100
-      if (level >= 100) numRewards++;
       return numRewards;
     }
   },

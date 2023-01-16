@@ -139,34 +139,6 @@
           <b-dropdown-item exact-active-class="active-link" to="/faq">
             {{ $t("navigation.faq") }}
           </b-dropdown-item>
-          <b-dropdown-item
-            v-if="canSeeStats"
-            to="/gods"
-            exact-active-class="active-link"
-          >
-            {{ $t("navigation.gods") }}
-          </b-dropdown-item>
-          <b-dropdown-item
-            v-if="canSeeStats"
-            to="/abilities"
-            exact-active-class="active-link"
-          >
-            {{ $t("navigation.abilities") }}
-          </b-dropdown-item>
-          <b-dropdown-item
-            v-if="canSeeStats"
-            to="/bodies"
-            exact-active-class="active-link"
-          >
-            Bodies
-          </b-dropdown-item>
-          <b-dropdown-item
-            v-if="canSeeStats"
-            to="/cosmetics"
-            exact-active-class="active-link"
-          >
-            Economy
-          </b-dropdown-item>
         </b-nav-item-dropdown>
         <b-nav-item-dropdown
           v-if="canSeeStats"
