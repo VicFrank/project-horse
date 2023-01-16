@@ -33,6 +33,29 @@ const getLadderRatingPoints = (place) => {
   }
 };
 
+const getHeraldLadderRatingPoints = (place) => {
+  switch (place) {
+    case 1:
+      return 200;
+    case 2:
+      return 150;
+    case 3:
+      return 100;
+    case 4:
+      return 75;
+    case 5:
+      return 50;
+    case 6:
+      return 25;
+    case 7:
+      return 10;
+    case 8:
+      return 0;
+    default:
+      return 0;
+  }
+};
+
 const getCurrentRankFloor = (currentMMR) => {
   if (currentMMR < 500) return 0; // herald
   if (currentMMR < 1000) return 500; // guardian
@@ -110,7 +133,10 @@ const getMatchRatingChange = (currentMMR, winners, losers) => {
 };
 
 const getMatchLadderRatingChange = (currentMMR, place) => {
-  const baseRatingChange = getLadderRatingPoints(place);
+  const shouldUseHeraldMMR = currentMMR < 1000;
+  const baseRatingChange = shouldUseHeraldMMR
+    ? getHeraldLadderRatingPoints(place)
+    : getLadderRatingPoints(place);
   // there are certain rank thresholds you cannot fall below
   const currentRankFloor = getCurrentRankFloor(currentMMR);
   const newRating = Math.max(currentMMR + baseRatingChange, currentRankFloor);
