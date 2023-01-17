@@ -125,8 +125,8 @@ module.exports = {
    */
   async calculateBattlePassLevel(battlePassId, totalXP) {
     try {
-      if (totalXP > 18000) {
-        const remainingXp = totalXP - 18000;
+      if (totalXP > 20400) {
+        const remainingXp = totalXP - 20400;
         const extraLevels = Math.floor(remainingXp / 225);
         return 80 + extraLevels;
       }

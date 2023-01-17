@@ -887,8 +887,8 @@ module.exports = {
         [steamID, currentLevel]
       );
 
-      // Auto claim rewards for every level past 40
-      if (currentLevel > 40) {
+      // Auto claim rewards for every level past 80
+      if (currentLevel > 80) {
         try {
           await this.claimBattlePassReward(steamID, currentLevel);
         } catch (error) {
