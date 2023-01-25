@@ -23,11 +23,46 @@
     >
 
     <template v-if="playerData.username">
-      <b-card
-        :title="playerData.username"
-        :sub-title="playerData.steam_id"
-        class="mt-3"
-      >
+      <b-card class="mt-3">
+        <b-card-title class="d-flex align-items-center"
+          >{{ playerData.username }}
+          <RankBadge
+            class="ml-2"
+            :badge="playerData.badge"
+            :pips="playerData.pips"
+            :rank="playerData.rank"
+            :height="40"
+          ></RankBadge>
+          <div class="d-flex align-items-center">
+            <img
+              src="/images/battlepass_logo.png"
+              alt="Battle Pass"
+              style="height: 30px"
+              :class="{ disabled: !battlePass.unlocked }"
+              v-b-tooltip.hover
+              :title="
+                battlePass.unlocked
+                  ? `Upgraded Battle Pass`
+                  : 'Has not Upgraded Battle Pass'
+              "
+            />
+          </div>
+          <img
+            src="/images/cosmetics/plus.png"
+            alt="Plus Badge"
+            v-b-tooltip.hover
+            style="height: 30px"
+            :title="
+              playerData.has_plus
+                ? `Plus Expires ${playerData.plus_expiration}`
+                : 'Does not have plus'
+            "
+            :class="{
+              disabled: !playerData.has_plus,
+            }"
+          />
+        </b-card-title>
+        <b-card-sub-title> {{ playerData.steam_id }}</b-card-sub-title>
         <b-list-group flush>
           <b-list-group-item>
             <b-button v-b-modal.modal-1 variant="success" size="sm">+</b-button>
@@ -44,34 +79,17 @@
               <b-form-input type="number" v-model="bp"></b-form-input>
             </b-modal>
           </b-list-group-item>
-          <b-list-group-item>
-            Battle Pass Level
-            <span class="text-muted">{{ battlePass.bp_level }}</span>
-          </b-list-group-item>
-          <b-list-group-item>
-            Type
-            <span class="text-muted">{{ playerData.user_type }}</span>
-          </b-list-group-item>
-          <b-list-group-item>
-            Has Plus
-            <span class="text-muted">{{
-              playerData.has_plus ? "Yes" : "No"
-            }}</span>
-          </b-list-group-item>
-          <b-list-group-item>
-            MMR
-            <span class="text-muted">{{ playerData.mmr }}</span>
-          </b-list-group-item>
-          <b-list-group-item>
-            Ladder MMR
-            <span class="text-muted">{{ playerData.ladder_mmr }}</span>
-          </b-list-group-item>
         </b-list-group>
       </b-card>
 
       <b-card title="Events">
         <b-button v-b-toggle.collapse-2 variant="primary">Events</b-button>
-        <b-collapse id="collapse-2" class="mt-2 mb-2">
+        <b-collapse
+          id="collapse-2"
+          class="mt-2 mb-2"
+          @show="isCollapseOpen = true"
+          @hidden="isCollapseOpen = false"
+        >
           <b-card>
             <b-list-group-item
               v-for="[i, transaction] in Object.entries(transactions)"
@@ -152,7 +170,13 @@
 </template>
 
 <script>
+import RankBadge from "../../../utility/RankBadge.vue";
+
 export default {
+  components: {
+    RankBadge,
+  },
+
   data: () => ({
     error: "",
     steamID: "",
@@ -170,6 +194,7 @@ export default {
     currentItem: {},
     transactions: [],
     showTransactions: false,
+    isCollapseOpen: false,
   }),
 
   created() {
