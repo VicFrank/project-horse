@@ -33,20 +33,18 @@
             :rank="playerData.rank"
             :height="40"
           ></RankBadge>
-          <div class="d-flex align-items-center">
-            <img
-              src="/images/battlepass_logo.png"
-              alt="Battle Pass"
-              style="height: 30px"
-              :class="{ disabled: !battlePass.unlocked }"
-              v-b-tooltip.hover
-              :title="
-                battlePass.unlocked
-                  ? `Upgraded Battle Pass`
-                  : 'Has not Upgraded Battle Pass'
-              "
-            />
-          </div>
+          <img
+            src="/images/battlepass_logo.png"
+            alt="Battle Pass"
+            style="height: 30px"
+            :class="{ grayscale: !battlePass.unlocked }"
+            v-b-tooltip.hover
+            :title="
+              battlePass.unlocked
+                ? `Upgraded Battle Pass`
+                : 'Has not Upgraded Battle Pass'
+            "
+          />
           <img
             src="/images/cosmetics/plus.png"
             alt="Plus Badge"
@@ -58,7 +56,7 @@
                 : 'Does not have plus'
             "
             :class="{
-              disabled: !playerData.has_plus,
+              grayscale: !playerData.has_plus,
             }"
           />
         </b-card-title>
@@ -340,5 +338,9 @@ export default {
 <style scoped>
 .add-button {
   font-size: 26px;
+}
+
+.grayscale {
+  filter: grayscale(100%);
 }
 </style>
