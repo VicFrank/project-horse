@@ -78,6 +78,19 @@ module.exports = [
   },
   /**
    * *************************
+   * Cosmetic Packs
+   * *************************
+   */
+  {
+    name: "pack_year_of_the_rabbit",
+    type: "Consumable",
+    equip_group: "",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Mythical",
+  },
+  /**
+   * *************************
    * Emotes
    * *************************
    */
@@ -112,6 +125,14 @@ module.exports = [
   },
   {
     name: "sfx_sexy",
+    type: "SFX",
+    equip_group: "sfx_gaben",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Common",
+  },
+  {
+    name: "sfx_chinese",
     type: "SFX",
     equip_group: "sfx_gaben",
     coins: -1,
@@ -1924,6 +1945,14 @@ module.exports = [
   },
   {
     name: "terrain_cs",
+    type: "Terrain",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "terrain",
+    rarity: "Immortal",
+  },
+  {
+    name: "terrain_chinese",
     type: "Terrain",
     coins: -1,
     cost_usd: -1,

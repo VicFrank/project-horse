@@ -1783,6 +1783,9 @@ module.exports = {
       if (cosmeticName.startsWith("emote_pack_")) {
         results = await this.openEmotePack(steamID, cosmeticName);
       }
+      if (cosmeticName.startsWith("pack_")) {
+        results = await this.openEmotePack(steamID, cosmeticName);
+      }
 
       // Handle random items
       if (cosmeticName === "avatar_random" || cosmeticName === "emote_random") {

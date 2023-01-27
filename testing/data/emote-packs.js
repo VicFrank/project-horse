@@ -8,5 +8,11 @@ const packs = {
   emote_pack_counterstrike_1: ["hat_knife_mustache", "hat_beret"],
   emote_pack_counterstrike_2: ["hat_smoke_grenade", "hat_chicken"],
   emote_pack_counterstrike_3: ["hat_awp", "hat_c4"],
+  pack_year_of_the_rabbit: [
+    "chest_basic",
+    "chest_basic",
+    "sfx_chinese",
+    "terrain_chinese",
+  ],
 };
 module.exports = packs;
