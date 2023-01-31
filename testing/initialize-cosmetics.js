@@ -99,22 +99,6 @@ async function addCosmetics() {
         equip_group: "terrain",
         rarity: "Immortal",
       },
-      {
-        name: "pack_year_of_the_rabbit",
-        type: "Consumable",
-        equip_group: "",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Mythical",
-      },
-      {
-        name: "sfx_chinese",
-        type: "SFX",
-        equip_group: "sfx_gaben",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Common",
-      },
     ]);
     console.log("Cosmetics initialized");
   } catch (error) {
@@ -128,11 +112,27 @@ async function updateCosmetics() {
     console.log("Updating cosmetics...");
     const cosmeticsToUpdate = [
       {
-        name: "finisher_fire",
-        type: "Finisher",
-        coins: -1,
+        name: "terrain_chinese",
+        type: "Terrain",
+        coins: 20000,
         cost_usd: -1,
-        equip_group: "finisher",
+        equip_group: "terrain",
+        rarity: "Immortal",
+      },
+      {
+        name: "pack_year_of_the_rabbit",
+        type: "Consumable",
+        equip_group: "",
+        coins: 30000,
+        cost_usd: -1,
+        rarity: "Mythical",
+      },
+      {
+        name: "sfx_chinese",
+        type: "SFX",
+        equip_group: "sfx_gaben",
+        coins: 15000,
+        cost_usd: -1,
         rarity: "Common",
       },
     ];
@@ -296,9 +296,9 @@ async function addCosmeticsToPlayers() {
 
 (async function () {
   // await addCosmeticsToPlayers();
-  await addCosmetics();
+  // await addCosmetics();
   // await setChestRewards();
-  // await updateCosmetics();
+  await updateCosmetics();
   // await initializeEscalatingOdds();
   // await initializeUniqueChestDrops("chest_god_unique_1", chest_god_unique_1);
   // updateEscalatingOddsTable();
