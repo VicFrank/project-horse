@@ -1639,7 +1639,7 @@ module.exports = {
       const items = {};
       for (const itemName of itemNames) {
         const cosmetic = await Cosmetics.getCosmeticByName(itemName);
-        items[cosmetic.cosmetic_id] = 1;
+        items[cosmetic.cosmetic_id] = items[cosmetic.cosmetic_id] + 1 || 1;
       }
       await this.doItemTransaction(steamID, { items });
       return itemNames;
