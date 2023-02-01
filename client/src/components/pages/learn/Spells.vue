@@ -29,7 +29,8 @@ export default {
   },
   methods: {
     async fetchAbilities() {
-      const data = await fetch("../../data/abilities.json");
+      const dataPath = `../../data/${this.$t("ability.dataFile")}`;
+      const data = await fetch(dataPath);
       this.abilities = await data.json();
       const res = await fetch(
         "https://double-edge-studios-llc.github.io/enabled_abilities.txt"
@@ -184,17 +185,17 @@ export default {
         </div>
         <div class="sink">
           <div class="super">
-            <span style="color: rgb(99, 117, 255)">Super: </span>
+            <span style="color: rgb(99, 117, 255)">{{ $t("ability.Super") }}</span>
             <span class="">
-              {{ ability.superUpgrade.split("Super: ")[1] }}
+              {{ ability.superUpgrade.split($t("ability.Super"))[1] }}
             </span>
           </div>
           <div class="gaben">
-            <span style="color: rgb(254, 116, 0)">Gaben: </span>
-            <span>{{ ability.gabenUpgrade.split("Gaben: ")[1] }}</span>
+            <span style="color: rgb(254, 116, 0)">{{ $t("ability.Gaben") }}</span>
+            <span>{{ ability.gabenUpgrade.split($t("ability.Gaben"))[1] }}</span>
           </div>
           <div v-if="ability.differences" class="differences">
-            <span style="color: #8e8676">Differences from Dota: </span>
+            <span style="color: #8e8676">{{$t("ability.DifferencesToBaseGame")}}: </span>
             {{ ability.differences }}
           </div>
         </div>

@@ -991,6 +991,12 @@
     "spellSteal": "Spell Steal",
     "spellSteal_Description": "Selected unit gains Spell Steal, which upgrades based on how many total spell points you have. Spell Steal does not count towards your four spell hero limit."
   },
+  "ability": {
+    "dataFile": "abilities.json",
+    "DifferencesToBaseGame": "DIFFERENCE TO DOTA",
+    "Super": "Super: ",
+    "Gaben": "Gaben: "
+  },
   "abilities": {
     "custom_abaddon_aphotic_shield": "Aphotic Shield",
     "custom_abaddon_curse_of_avernus": "Curse of Avernus",
