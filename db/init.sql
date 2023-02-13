@@ -139,6 +139,8 @@ CREATE INDEX idx_player_gods_steam_id_fkey ON player_gods (steam_id);
 CREATE TABLE IF NOT EXISTS abilities (
   ability_name TEXT PRIMARY KEY,
   icon TEXT,
+  active BOOLEAN DEFAULT FALSE,
+  deprecated BOOLEAN DEFAULT FALSE,
   is_ultimate BOOLEAN
 );
 

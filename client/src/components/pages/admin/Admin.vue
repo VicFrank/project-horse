@@ -11,6 +11,9 @@
             <b-tab title-link-class="tab" title="Gods" lazy>
               <GodsAdmin />
             </b-tab>
+            <b-tab title-link-class="tab" title="Abilities" lazy>
+              <AbilitiesAdmin />
+            </b-tab>
             <b-tab title-link-class="tab" title="Codes" lazy>
               <RedemptionCodes />
             </b-tab>
@@ -33,6 +36,7 @@ import GodsAdmin from "./components/GodsAdmin";
 import RedemptionCodes from "./components/RedemptionCodes";
 import AnnouncementsAdmin from "./components/AnnouncementsAdmin";
 import CosmeticsAdmin from "./components/CosmeticsAdmin";
+import AbilitiesAdmin from "./components/AbilitiesAdmin";
 export default {
   components: {
     PlayersAdmin,
@@ -40,6 +44,7 @@ export default {
     RedemptionCodes,
     AnnouncementsAdmin,
     CosmeticsAdmin,
+    AbilitiesAdmin,
   },
 };
 </script>

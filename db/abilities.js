@@ -246,8 +246,51 @@ const addAbilityIcons = async (list) => {
 };
 
 module.exports = {
-  async getAbilities() {
-    return getAbilities();
+  getAbilities,
+  async getActiveAbilties() {
+    try {
+      const { rows } = await query(
+        `SELECT ability_name
+        FROM abilities
+        WHERE active = TRUE AND deprecated = FALSE
+        ORDER BY ability_name ASC`
+      );
+      return rows.map((row) => row.ability_name);
+    } catch (error) {
+      throw error;
+    }
+  },
+  async addAbility(abilityName, icon, isUltimate) {
+    try {
+      const { rows } = await query(
+        `
+        INSERT INTO abilities (ability_name, icon, is_ultimate, active, deprecated)
+        VALUES ($1, $2, $3, false, false)
+        RETURNING *
+      `,
+        [abilityName, icon, isUltimate]
+      );
+      return rows[0];
+    } catch (error) {
+      throw error;
+    }
+  },
+  async updateAbility(abilityName, active, deprecated) {
+    try {
+      console.log(abilityName, active, deprecated);
+      const { rows } = await query(
+        `
+        UPDATE abilities
+        SET active = $2, deprecated = $3
+        WHERE ability_name = $1
+        RETURNING *
+      `,
+        [abilityName, active, deprecated]
+      );
+      return rows[0];
+    } catch (error) {
+      throw error;
+    }
   },
   async getAbility(abilityName) {
     try {

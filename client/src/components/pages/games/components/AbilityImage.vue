@@ -1,5 +1,5 @@
 <template>
-  <div class="ability-container">
+  <div :style="{ height: `${size}px`, width: `${size}px` }">
     <img
       :height="size"
       :width="size"
@@ -70,10 +70,6 @@ export default {
 </script>
 
 <style scoped>
-.ability-container {
-  position: relative;
-}
-
 .level-container {
   position: absolute;
   bottom: 0;
