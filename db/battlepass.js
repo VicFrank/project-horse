@@ -127,7 +127,7 @@ module.exports = {
     try {
       if (totalXP > 20400) {
         const remainingXp = totalXP - 20400;
-        const extraLevels = Math.floor(remainingXp / 225);
+        const extraLevels = Math.floor(remainingXp / 255);
         return 80 + extraLevels;
       }
       const battlePassLevels = await this.getBattlePassLevels(battlePassId);
@@ -159,10 +159,10 @@ module.exports = {
 
       if (rows.length > 0) return rows[0];
 
-      // every level takes 225 xp
+      // every level takes 255 xp
       return {
-        total_xp: level * 225,
-        next_level_xp: 225,
+        total_xp: level * 255,
+        next_level_xp: 255,
         coins_reward: 0,
       };
     } catch (error) {
