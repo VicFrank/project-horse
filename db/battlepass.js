@@ -219,8 +219,28 @@ module.exports = {
       const godChest = await Cosmetics.getCosmeticByName("chest_god_unique_1");
 
       for (let i = minLevel; i <= maxLevel; i++) {
+        // Special rewards at level 100 and 1000
+        if (i === 100) {
+          const diamondAvatar = await Cosmetics.getCosmeticByName(
+            "avatar_cs_diamond"
+          );
+          cosmetics.push({
+            cosmetic_id: diamondAvatar.cosmetic_id,
+            free: true, // This one is free
+            bp_level: i,
+            amount: 1,
+          });
+        } else if (i === 1000) {
+          const gabenAvatar = await Cosmetics.getCosmeticByName("avatar_gaben");
+          cosmetics.push({
+            cosmetic_id: gabenAvatar.cosmetic_id,
+            free: false,
+            bp_level: i,
+            amount: 1,
+          });
+        }
         // After Level 80, every 5 levels alternates between a War Chest (chest_basic) and a Gold Chest
-        if (i > 80) {
+        else if (i > 80) {
           if (i % 10 === 0) {
             cosmetics.push({
               cosmetic_id: goldChest.cosmetic_id,
@@ -247,26 +267,6 @@ module.exports = {
               amount: 1,
             });
           }
-        }
-        // Special rewards at level 100 and 1000
-        if (i === 100) {
-          const diamondAvatar = await Cosmetics.getCosmeticByName(
-            "avatar_cs_diamond"
-          );
-          cosmetics.push({
-            cosmetic_id: diamondAvatar.cosmetic_id,
-            free: true, // This one is free
-            bp_level: i,
-            amount: 1,
-          });
-        } else if (i === 1000) {
-          const gabenAvatar = await Cosmetics.getCosmeticByName("avatar_gaben");
-          cosmetics.push({
-            cosmetic_id: gabenAvatar.cosmetic_id,
-            free: false,
-            bp_level: i,
-            amount: 1,
-          });
         }
       }
       return { coins, cosmetics };
