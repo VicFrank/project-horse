@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <Bar
-      id="my-chart-id"
-      :options="chartOptions"
-      :data="chartData"
-      :style="myStyles"
-    />
-  </div>
+  <Bar
+    id="my-chart-id"
+    :options="chartOptions"
+    :data="chartData"
+    :style="myStyles"
+  />
 </template>
 
 <script>
@@ -65,7 +63,7 @@ export default {
           {
             label: "Players",
             data: this.data.map((item) => item.count),
-            backgroundColor: "#00b5ad",
+            backgroundColor: "#6248a5",
           },
         ],
       };

@@ -46,18 +46,30 @@
         >
         </BattlePassLevelStats>
       </b-tab>
+      <b-tab title="Payments">
+        <Earnings
+          :data="payments"
+          @created="fetchPayments"
+          :loading="paymentsLoading"
+        >
+        </Earnings>
+      </b-tab>
     </b-tabs>
   </div>
 </template>
 
 <script>
 import CosmeticStats from "./CosmeticStats.vue";
-import BattlePassLevelStats from "./BattlePassLevelStats.vue";
+import BattlePassLevelStats from "./BattlePassLevelsGraph.vue";
+import Earnings from "./Earnings.vue";
+
+import paymentsDummy from "./payments.js";
 
 export default {
   components: {
     CosmeticStats,
     BattlePassLevelStats,
+    Earnings,
   },
 
   data: () => ({
@@ -65,6 +77,8 @@ export default {
     battlePassStats: [],
     loading: true,
     battlePassLoading: true,
+    paymentsLoading: true,
+    payments: null,
     selected: null,
     start: null,
     end: null,
@@ -117,6 +131,11 @@ export default {
           this.battlePassStats.sort((a, b) => a.bp_level - b.bp_level);
           this.battlePassLoading = false;
         });
+    },
+    fetchPayments() {
+      this.paymentsLoading = true;
+      this.payments = paymentsDummy;
+      this.paymentsLoading = false;
     },
   },
 
