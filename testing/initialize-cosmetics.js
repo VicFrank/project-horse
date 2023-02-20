@@ -92,11 +92,19 @@ async function addCosmetics() {
     console.log("Adding cosmetics...");
     await cosmetics.bulkCreateCosmetics([
       {
-        name: "terrain_chinese",
-        type: "Terrain",
+        name: "click_dirt",
+        type: "ClickFX",
         coins: -1,
         cost_usd: -1,
-        equip_group: "terrain",
+        equip_group: "click_fx",
+        rarity: "Common",
+      },
+      {
+        name: "finisher_tf2",
+        type: "Finisher",
+        coins: -1,
+        cost_usd: -1,
+        equip_group: "finisher",
         rarity: "Immortal",
       },
     ]);
@@ -118,22 +126,6 @@ async function updateCosmetics() {
         cost_usd: -1,
         equip_group: "terrain",
         rarity: "Immortal",
-      },
-      {
-        name: "pack_year_of_the_rabbit",
-        type: "Consumable",
-        equip_group: "",
-        coins: 30000,
-        cost_usd: -1,
-        rarity: "Mythical",
-      },
-      {
-        name: "sfx_chinese",
-        type: "SFX",
-        equip_group: "sfx_gaben",
-        coins: 15000,
-        cost_usd: -1,
-        rarity: "Common",
       },
     ];
     for (const c of cosmeticsToUpdate) {
@@ -296,9 +288,9 @@ async function addCosmeticsToPlayers() {
 
 (async function () {
   // await addCosmeticsToPlayers();
-  // await addCosmetics();
+  await addCosmetics();
   // await setChestRewards();
-  await updateCosmetics();
+  // await updateCosmetics();
   // await initializeEscalatingOdds();
   // await initializeUniqueChestDrops("chest_god_unique_1", chest_god_unique_1);
   // updateEscalatingOddsTable();

@@ -1730,6 +1730,19 @@ module.exports = [
   },
   /**
    * *************************
+   * Click Effects
+   * *************************
+   */
+  {
+    name: "click_dirt",
+    type: "ClickFX",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "click_fx",
+    rarity: "Common",
+  },
+  /**
+   * *************************
    * Finishers
    * *************************
    */
@@ -1815,6 +1828,14 @@ module.exports = [
   },
   {
     name: "finisher_ak47",
+    type: "Finisher",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "finisher",
+    rarity: "Immortal",
+  },
+  {
+    name: "finisher_tf2",
     type: "Finisher",
     coins: -1,
     cost_usd: -1,
