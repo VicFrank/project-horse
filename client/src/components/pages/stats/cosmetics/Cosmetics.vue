@@ -63,8 +63,6 @@ import CosmeticStats from "./CosmeticStats.vue";
 import BattlePassLevelStats from "./BattlePassLevelsGraph.vue";
 import Earnings from "./Earnings.vue";
 
-import paymentsDummy from "./payments.js";
-
 export default {
   components: {
     CosmeticStats,
@@ -134,8 +132,12 @@ export default {
     },
     fetchPayments() {
       this.paymentsLoading = true;
-      this.payments = paymentsDummy;
-      this.paymentsLoading = false;
+      fetch("/api/logs/payments")
+        .then((res) => res.json())
+        .then((stats) => {
+          this.payments = stats;
+          this.paymentsLoading = false;
+        });
     },
   },
 
