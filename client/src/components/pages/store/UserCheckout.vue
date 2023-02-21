@@ -6,6 +6,9 @@
         generalError
       }}</b-alert>
 
+      <h3>{{ user.username }}</h3>
+      <img v-if="user.profile_picture" :src="user.profile_picture" class="avatar" />
+
       <div v-for="item in items" :key="item.cosmetic_id" class="item-card">
         <div class="item-card-img">
           <img
@@ -40,7 +43,7 @@
         <div>You have already upgraded your battle pass!</div>
       </template>
       <template v-else>
-        <template v-if="loggedIn && validPurchase">
+        <template v-if="validPurchase">
           <div v-if="loading" class="d-flex justify-content-center mb-3">
             <b-spinner label="Loading..."></b-spinner>
           </div>
@@ -48,13 +51,15 @@
             <StripePurchase
               class="my-3"
               :items="items"
+              :steamID="user.steam_id"
               v-on:purchaseSuccess="onPurchaseSuccess"
               v-on:error="onError"
             />
-            <StripeAlipay :items="items" class="mb-3" />
-            <StripeWeChatPay :items="items" class="mb-3" />
+            <StripeAlipay :items="items" :steamID="user.steam_id" class="mb-3" />
+            <StripeWeChatPay :items="items" :steamID="user.steam_id" class="mb-3" />
             <PaypalPurchase
               :items="items"
+              :steamID="user.steam_id"
               :paypalType="paypalType"
               v-on:purchaseSuccess="onPurchaseSuccess"
               v-on:purchaseError="onError"
@@ -63,11 +68,6 @@
               error
             }}</b-alert>
           </b-card>
-        </template>
-        <template v-else>
-          <template v-if="validPurchase">
-            <LoginButton class="mx-auto" style="max-width: 300px"></LoginButton>
-          </template>
         </template>
       </template>
     </div>
@@ -81,7 +81,6 @@
 </template>
 
 <script>
-import LoginButton from "../../utility/LoginButton.vue";
 import CosmeticDescription from "../cosmetics/CosmeticDescription.vue";
 import StripePurchase from "./components/StripePurchase.vue";
 import StripeAlipay from "./components/StripeAlipay.vue";
@@ -90,7 +89,6 @@ import PaypalPurchase from "./components/PaypalPurchase.vue";
 
 export default {
   components: {
-    LoginButton,
     CosmeticDescription,
     PaypalPurchase,
     StripePurchase,
@@ -100,6 +98,7 @@ export default {
 
   data() {
     return {
+      user: null,
       items: [],
       error: "",
       showError: false,
@@ -111,9 +110,6 @@ export default {
   },
 
   computed: {
-    loggedIn() {
-      return this.$store.getters.loggedIn;
-    },
     bpUpgraded() {
       return this.$store.getters.bpUpgraded;
     },
@@ -161,9 +157,25 @@ export default {
       const { cosmetic_name } = cosmetic;
       return `/images/cosmetics/${cosmetic_name}.png`;
     },
+    getPlayerInfo() {
+      const steamid = this.$route.query.steamid;
+      if (!steamid) {
+        this.$router.push({
+          name: "/",
+        });
+      }
+
+      fetch(`/api/players/${steamid}`)
+        .then((res) => res.json())
+        .then((data) => {
+          this.user = data;
+        });
+    }
   },
 
   created() {
+    this.getPlayerInfo();
+
     const cosmeticIDs = this.$route.params.item_ids.split("/");
     fetch(`/api/cosmetics/get_cosmetics`, {
       method: "POST",
@@ -231,5 +243,12 @@ export default {
 
 .text-muted {
   color: #a493d2 !important;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  margin-bottom: 20px;
 }
 </style>

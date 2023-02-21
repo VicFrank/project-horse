@@ -22,6 +22,10 @@ let card = undefined;
 export default {
   props: {
     items: [],
+    steamID: {
+      type: String,
+      required: false,
+    },
   },
 
   data: () => ({
@@ -48,6 +52,12 @@ export default {
     this.createCardForm(elements);
   },
 
+  computed: {
+    userSteamID() {
+      return this.steamID ?? this.$store.state.auth.userSteamID;
+    },
+  },
+
   methods: {
     async createIntent() {
       const url = "/api/payments/stripe/intents";
@@ -64,7 +74,7 @@ export default {
         body: JSON.stringify({
           amount,
           cosmeticIDs: this.items.map((item) => item.cosmetic_id),
-          steamID: this.$store.state.auth.userSteamID,
+          steamID: this.userSteamID,
         }),
       };
       const intent = await fetch(url, params);

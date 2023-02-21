@@ -13,6 +13,10 @@
 export default {
   props: {
     items: [],
+    steamID: {
+      type: String,
+      required: false,
+    },
   },
 
   data: () => ({
@@ -27,6 +31,12 @@ export default {
       prod: "pk_live_FlJcVm7zuiGei0k6IDXksnmy003GNNZuiw",
     },
   }),
+
+  computed: {
+    userSteamID() {
+      return this.steamID ?? this.$store.state.auth.userSteamID;
+    },
+  },
 
   created() {
     const isDev = process.env.NODE_ENV == "development";
@@ -51,7 +61,7 @@ export default {
           cosmeticIDs: JSON.stringify(
             this.items.map((item) => item.cosmetic_id)
           ),
-          steamID: this.$store.state.auth.userSteamID,
+          steamID: this.userSteamID,
         },
         redirect: {
           return_url: `${rootUrl}/alipay_payment?item_id=${itemIDs}`,

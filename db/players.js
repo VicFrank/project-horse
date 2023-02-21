@@ -1,4 +1,6 @@
 const { query } = require("./index");
+const axios = require("axios");
+const Keys = require("../config/keys");
 const Cosmetics = require("./cosmetics");
 const Logs = require("./logs");
 const Quests = require("./quests");
@@ -459,7 +461,38 @@ module.exports = {
       const existingPlayer = await this.getPlayer(steamID);
       if (!existingPlayer) return this.createPlayer(steamID, username);
       if (username != "") await this.updateUsername(steamID, username);
+
+      try {
+        // do this in the background
+        this.updatePlayerProfilePicture(
+          steamID,
+          existingPlayer.profile_picture
+        );
+      } catch (error) {
+        console.log("Error updating player profile picture: ", error);
+        // don't care if this fails, just log it
+      }
       return existingPlayer;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async updatePlayerProfilePicture(steamID, currentPicture) {
+    try {
+      console.log("Updating player profile picture: ", steamID);
+      const apiKey = Keys.steamAPIKey;
+      const response = await axios.get(
+        `http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${apiKey}&steamids=${steamID}`
+      );
+      const avatar = response.data.response.players[0].avatarfull;
+
+      if (avatar && avatar != currentPicture) {
+        await query(
+          `UPDATE players SET profile_picture = $2 WHERE steam_id = $1`,
+          [steamID, avatar]
+        );
+      }
     } catch (error) {
       throw error;
     }

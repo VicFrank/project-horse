@@ -2,6 +2,11 @@
   <div>
     <div v-if="playerFound">
       <h1 class="page-title mb-1">
+        <img
+          v-if="player.profile_picture"
+          :src="player.profile_picture"
+          class="avatar"
+          alt="avatar" />
         {{ player.username }}
       </h1>
       <RankBadge
@@ -141,5 +146,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.avatar {
+  width: 48px;
+  height: 48px;
+  margin-right: 8px;
+}
 </style>

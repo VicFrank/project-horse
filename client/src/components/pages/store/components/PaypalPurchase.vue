@@ -21,6 +21,10 @@ export default {
   props: {
     items: [],
     paypalType: String,
+    steamID: {
+      type: String,
+      required: false,
+    },
   },
 
   data() {
@@ -62,10 +66,16 @@ export default {
     document.body.appendChild(script);
   },
 
+  computed: {
+    userSteamID() {
+      return this.steamID ?? this.$store.state.auth.userSteamID;
+    },
+  },
+
   methods: {
     setLoaded() {
       // "this" doesn't work in window.paypal because javascript sucks
-      const steamID = this.$store.state.auth.userSteamID;
+      const steamID = this.userSteamID;
       const costUSD =
         Math.round(
           this.items.reduce((acc, item) => {
