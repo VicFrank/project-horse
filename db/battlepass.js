@@ -177,13 +177,10 @@ module.exports = {
       const remaining = level - 80;
       // after 80, there is a reward every 5 levels
       let numRewards = 80 + Math.floor(remaining / 5);
-      // Starting at level 86 there is an additional rewards every 10 levels
-      if (level >= 86) numRewards += Math.floor((level - 76) / 10);
       return numRewards;
     } else {
-      // there is a reward every 5 levels, forever
-      let numRewards = Math.floor(level / 5);
-      // There is a special reward at level 100
+      // there is a reward at level 1 and every 5 levels, forever
+      let numRewards = 1 + Math.floor(level / 5);
       return numRewards;
     }
   },
