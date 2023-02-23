@@ -190,6 +190,55 @@ async function addCosmetics() {
         cost_usd: -1,
         rarity: "Rare",
       },
+      {
+        name: "sfx_heavy_metal",
+        type: "SFX",
+        equip_group: "sfx_gaben",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Common",
+      },
+      {
+        // Battle Pass Reward
+        name: "avatar_tf2",
+        type: "Avatar Frame",
+        equip_group: "avatar_frame",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Arcana",
+      },
+      {
+        name: "streak_tf2",
+        type: "Win Streak",
+        coins: -1,
+        cost_usd: -1,
+        equip_group: "streak",
+        rarity: "Immortal",
+      },
+      {
+        name: "terrain_tf2",
+        type: "Terrain",
+        coins: -1,
+        cost_usd: -1,
+        equip_group: "terrain",
+        rarity: "Immortal",
+      },
+      {
+        name: "terrain_portal",
+        type: "Terrain",
+        coins: -1,
+        cost_usd: -1,
+        equip_group: "terrain",
+        rarity: "Immortal",
+      },
+      {
+        name: "terrain_gaben",
+        type: "Terrain",
+        coins: -1,
+        cost_usd: -1,
+        equip_group: "terrain",
+        rarity: "Immortal",
+      },
     ]);
     console.log("Cosmetics initialized");
   } catch (error) {
