@@ -425,5 +425,6 @@ async function addCosmeticsToPlayers() {
   // await updateCosmetics();
   // await initializeEscalatingOdds();
   // await initializeUniqueChestDrops("chest_god_unique_1", chest_god_unique_1);
+  await initializeUniqueChestDrops("chest_god_unique_2", chest_god_unique_2);
   // updateEscalatingOddsTable();
 })();

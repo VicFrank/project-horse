@@ -61,4 +61,55 @@ module.exports = {
       rarity: "ultra_rare",
     },
   ],
+
+  /*
+  Contains:
+    Sideshopman
+    Prellex
+    Santa Greevil
+    Terrorist
+    Vacation Aghanim
+    Faceless Void
+    Rare: Brewmaster
+    Very Rare: Counter-Terrorist
+    Ultra Rare: Icefrog
+*/
+  chest_god_unique_2: [
+    {
+      cosmetic: "card_chaosGodS3",
+      rarity: null,
+    },
+    {
+      cosmetic: "card_prellex",
+      rarity: null,
+    },
+    {
+      cosmetic: "card_santaGreevil",
+      rarity: null,
+    },
+    {
+      cosmetic: "card_terrorist",
+      rarity: null,
+    },
+    {
+      cosmetic: "card_vacationAghanim",
+      rarity: null,
+    },
+    {
+      cosmetic: "card_facelessVoid",
+      rarity: null,
+    },
+    {
+      cosmetic: "card_brewmaster",
+      rarity: "rare",
+    },
+    {
+      cosmetic: "card_counterTerrorist",
+      rarity: "very_rare",
+    },
+    {
+      cosmetic: "card_icefrog",
+      rarity: "ultra_rare",
+    },
+  ],
 };
