@@ -113,6 +113,7 @@ module.exports = {
     },
   ],
   /*
+  Unique Arena Chest I
   Name	Rarity
   -----------
   Spring	Common
@@ -180,6 +181,60 @@ module.exports = {
     {
       cosmetic: "terrain_leaderboard",
       rarity: "ultra_rare",
+    },
+  ],
+  /*
+  Unique Finsiher Chest 1
+
+  Name	Rarity
+  ---------------
+  Fireball	Common
+  Snowball	Common
+  Poison	Common
+  Lightning	Common
+  Rocks	Common
+  Gambler	Common
+  Rune God	Common
+  Santa Greevil	Common
+
+  AK47	Rare
+  */
+  chest_finisher_unique_1: [
+    {
+      cosmetic: "finisher_fire",
+      rarity: null,
+    },
+    {
+      cosmetic: "finisher_snow",
+      rarity: null,
+    },
+    {
+      cosmetic: "finisher_poison",
+      rarity: null,
+    },
+    {
+      cosmetic: "finisher_lightning",
+      rarity: null,
+    },
+    {
+      cosmetic: "finisher_rocks",
+      rarity: null,
+    },
+    {
+      cosmetic: "finisher_god_gambler",
+      rarity: null,
+    },
+    {
+      cosmetic: "finisher_god_rune",
+      rarity: null,
+    },
+    {
+      cosmetic: "finisher_santa_greevil",
+      rarity: null,
+    },
+    {
+      cosmetic: "finisher_ak47",
+      rarity: "rare",
     },
   ],
 };
