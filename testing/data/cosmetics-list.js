@@ -578,6 +578,62 @@ module.exports = [
     rarity: "Rare",
   },
   {
+    name: "hat_scout_hat",
+    type: "Avatar Hat",
+    equip_group: "avatar_hat",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
+    name: "hat_hard_hat",
+    type: "Avatar Hat",
+    equip_group: "avatar_hat",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
+    name: "hat_demoman_beanie",
+    type: "Avatar Hat",
+    equip_group: "avatar_hat",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
+    name: "hat_gangster_hat",
+    type: "Avatar Hat",
+    equip_group: "avatar_hat",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
+    name: "hat_super_saiyan",
+    type: "Avatar Hat",
+    equip_group: "avatar_hat",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
+    name: "hat_radish_hat",
+    type: "Avatar Hat",
+    equip_group: "avatar_hat",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
+    name: "hat_chainsaw_man",
+    type: "Avatar Hat",
+    equip_group: "avatar_hat",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
     // Chest Drop
     name: "hat_barb",
     type: "Avatar Accessory",
@@ -778,6 +834,33 @@ module.exports = [
   {
     // Chest Drop
     name: "hat_santa_beard",
+    type: "Avatar Accessory",
+    equip_group: "avatar_accessory",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
+    // Chest Drop
+    name: "hat_bullet_vest",
+    type: "Avatar Accessory",
+    equip_group: "avatar_accessory",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
+    // Chest Drop
+    name: "hat_cigarette",
+    type: "Avatar Accessory",
+    equip_group: "avatar_accessory",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
+    // Chest Drop
+    name: "hat_scout_bat",
     type: "Avatar Accessory",
     equip_group: "avatar_accessory",
     coins: -1,
