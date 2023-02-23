@@ -46,6 +46,10 @@ const drops = {
     "hat_hamburger_hat",
     "hat_beer",
     "hat_hypnotized_eyes",
+    "hat_gangster_hat",
+    "hat_super_saiyan",
+    "hat_radish_hat",
+    "hat_chainsaw_man",
   ],
 };
 

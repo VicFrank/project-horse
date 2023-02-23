@@ -76,6 +76,30 @@ module.exports = [
     cost_usd: -1,
     rarity: "Mythical",
   },
+  {
+    name: "emote_pack_tf2_1",
+    type: "Consumable",
+    equip_group: "",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Mythical",
+  },
+  {
+    name: "emote_pack_tf2_2",
+    type: "Consumable",
+    equip_group: "",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Mythical",
+  },
+  {
+    name: "emote_pack_tf2_3",
+    type: "Consumable",
+    equip_group: "",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Mythical",
+  },
   /**
    * *************************
    * Cosmetic Packs

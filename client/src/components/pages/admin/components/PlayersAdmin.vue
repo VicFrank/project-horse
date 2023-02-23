@@ -121,7 +121,7 @@
             v-model="cosmeticsFilter"
             placeholder="Search Items..."
           ></b-form-input>
-          <b-card>
+          <div style="max-height: 600px; overflow-y: auto;">
             <div
               v-for="option of filteredOptions"
               :key="option.value.cosmetic_id"
@@ -136,27 +136,29 @@
               >
               <div>{{ option.text }}</div>
             </div>
-          </b-card>
+          </div>
         </b-collapse>
         <h4 class="card-title">Inventory</h4>
-        <div
-          v-for="(cosmetic, index) in cosmetics"
-          :key="
-            cosmetic.cosmetic_id + cosmetic.created + cosmetic.equipped + index
-          "
-          class="d-flex align-items-center my-1"
-        >
-          <b-button
-            v-b-modal.delete-item
-            variant="danger"
-            size="sm"
-            class="mr-3"
-            @click="setItem(cosmetic)"
-            >x</b-button
+        <div style="max-height: 600px; overflow-y: auto;">
+          <div
+            v-for="(cosmetic, index) in cosmetics"
+            :key="
+              cosmetic.cosmetic_id + cosmetic.created + cosmetic.equipped + index
+            "
+            class="d-flex align-items-center my-1"
           >
-          {{ $t(`cosmetics.${cosmetic.cosmetic_name}`) }}
-          <span class="text-muted mx-1">{{ cosmetic.cosmetic_name }}</span>
-          <span v-if="cosmetic.equipped">: Equipped</span>
+            <b-button
+              v-b-modal.delete-item
+              variant="danger"
+              size="sm"
+              class="mr-3"
+              @click="setItem(cosmetic)"
+              >x</b-button
+            >
+            {{ $t(`cosmetics.${cosmetic.cosmetic_name}`) }}
+            <span class="text-muted mx-1">{{ cosmetic.cosmetic_name }}</span>
+            <span v-if="cosmetic.equipped">: Equipped</span>
+          </div>
         </div>
       </b-card>
       <b-modal id="delete-item" title="Delete Item" @ok="deleteItem">
