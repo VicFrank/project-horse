@@ -112,4 +112,74 @@ module.exports = {
       rarity: "ultra_rare",
     },
   ],
+  /*
+  Name	Rarity
+  -----------
+  Spring	Common
+  Snow	Common
+  Tropical	Common
+  Ice Lake	Common
+  Lava	Common
+  PA	Common
+  Year of the Rabbit	Common
+  Gambler	Common
+  Rune God	Common
+  Santa Greevil	Common
+  Dust 2	Common
+
+  Galaxy Terrain	Extremely Rare
+  */
+  chest_arena_unique_1: [
+    /*
+    // Spring terrain doesn't currently exist on the site (didn't see it in cosmetics-list.js)?
+    {
+      cosmetic: "terrain_spring",
+      rarity: null,
+    },
+    */
+    {
+      cosmetic: "terrain_snow",
+      rarity: null,
+    },
+    {
+      cosmetic: "terrain_tropical",
+      rarity: null,
+    },
+    {
+      cosmetic: "terrain_icelake",
+      rarity: null,
+    },
+    {
+      cosmetic: "terrain_lava",
+      rarity: null,
+    },
+    {
+      cosmetic: "terrain_god_pa",
+      rarity: null,
+    },
+    {
+      cosmetic: "terrain_chinese",
+      rarity: null,
+    },
+    {
+      cosmetic: "terrain_god_gambler",
+      rarity: null,
+    },
+    {
+      cosmetic: "terrain_god_rune",
+      rarity: null,
+    },
+    {
+      cosmetic: "terrain_xmas",
+      rarity: null,
+    },
+    {
+      cosmetic: "terrain_cs",
+      rarity: null,
+    },
+    {
+      cosmetic: "terrain_leaderboard",
+      rarity: "ultra_rare",
+    },
+  ],
 };
