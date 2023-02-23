@@ -294,7 +294,7 @@
     "card_jmuy": "J'muy God",
     "card_oracle": "Oracle God",
     "card_roshan": "Roshan God",
-    "card_drKleiner": "J'muy God",
+    "card_drKleiner": "Dr. Kleiner God",
     "card_medic": "Medic God",
     "card_facelessVoid": "Faceless Void God",
     "card_prellex": "Prellex God",
@@ -384,6 +384,7 @@
     "streak_santa_greevil": "Santa Streak",
     "streak_cs": "Counter-Strike Streak",
     "streak_space": "Galaxy Streak",
+    "streak_tf2": "TF2 Streak",
     "terrain_default": "Default Terrain",
     "terrain_green": "Green Terrain",
     "terrain_icelake": "Ice Lake Terrain",
@@ -396,6 +397,9 @@
     "terrain_champion": "Galaxy Brain Terrain",
     "terrain_leaderboard": "Galaxy Terrain",
     "terrain_cs": "Counter-Strike Terrain",
+    "terrain_tf2": "TF2 Terrain",
+    "terrain_portal": "Portal Terrain",
+    "terrain_gaben": "Gaben Terrain",
     "chest_basic": "War Chest",
     "chest_gold": "Gold Chest",
     "chest_god": "God Chest",
@@ -447,8 +451,10 @@
     "avatar_santa_greevil_diamond": "Diamond Santa Greevil Avatar",
     "avatar_cs": "Counter-Strike Avatar",
     "avatar_cs_diamond": "Diamond Counter-Strike Avatar",
+    "avatar_tf2": "Team Fortress 2 Avatar",
     "sfx_gaben_posh": "Posh Gaben",
-    "sfx_sexy": "Sexy Sound Pack"
+    "sfx_sexy": "Sexy Sound Pack",
+    "sfx_heavy_metal": "Heavy Metal Sound Pack"
   },
   "cosmetic_descriptions": {
     "avatar_gaben": "Ancient Gaben's Avatar Frame",
@@ -720,6 +726,9 @@
     "terrain_champion": "Ultra Rare Custom Arena: Galaxy Brain. Reserved for tournament and leaderboard winners",
     "terrain_leaderboard": "Legendary Custom Arena: Galaxy. Reserved for excellent placements in tournaments and the leaderboard",
     "terrain_cs": "Counter-Strike Arena: Dust II",
+    "terrain_tf2": "Team Fortres 2 Arena: 2Fort",
+    "terrain_portal": "Portal Arena: Aperture Labs",
+    "terrain_gaben": "Gaben Arena: Gaben's Gaze",
     "chest_basic": [
       "25%: Battle Pass XP",
       "19%: Avatar Border",
@@ -782,8 +791,10 @@
     "avatar_santa_greevil_diamond": "Santa Greevil's Avatar Frame, but better",
     "avatar_cs": "Counter-Strike Avatar Frame",
     "avatar_cs_diamond": "Global Elite Counter-Strike Avatar Frame",
+    "avatar_tf2": "Team Fortress 2 Avatar Frame",
     "sfx_gaben_posh": "Changes the Gaben sound effect to a posh British accent",
-    "sfx_sexy": "Changes to Gaben sound effect to a smooth, sexy voice"
+    "sfx_sexy": "Changes the Gaben sound effect to a smooth, sexy voice",
+    "sfx_heavy_metal": "Changes sound effects to be metal AF"
   },
   "armory": {
     "page_title": "Armory",
