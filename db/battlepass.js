@@ -210,25 +210,24 @@ module.exports = {
 
       const goldChest = await Cosmetics.getCosmeticByName("chest_gold");
       const basicChest = await Cosmetics.getCosmeticByName("chest_basic");
-      const godChest = await Cosmetics.getCosmeticByName("chest_god_unique_1");
 
       for (let i = minLevel; i <= maxLevel; i++) {
-        // Special rewards at level 100 and 1000
-        if (i === 100) {
-          const diamondAvatar = await Cosmetics.getCosmeticByName(
-            "avatar_cs_diamond"
+        // Special rewards at level 200 and 1000
+        if (i === 200) {
+          const portalArena = await Cosmetics.getCosmeticByName(
+            "terrain_portal"
           );
           cosmetics.push({
-            cosmetic_id: diamondAvatar.cosmetic_id,
-            free: true, // This one is free
+            cosmetic_id: portalArena.cosmetic_id,
+            free: true,
             bp_level: i,
             amount: 1,
           });
         } else if (i === 1000) {
-          const gabenAvatar = await Cosmetics.getCosmeticByName("avatar_gaben");
+          const gabenArena = await Cosmetics.getCosmeticByName("terrain_gaben");
           cosmetics.push({
-            cosmetic_id: gabenAvatar.cosmetic_id,
-            free: false,
+            cosmetic_id: gabenArena.cosmetic_id,
+            free: true,
             bp_level: i,
             amount: 1,
           });
@@ -238,25 +237,14 @@ module.exports = {
           if (i % 10 === 0) {
             cosmetics.push({
               cosmetic_id: goldChest.cosmetic_id,
-              free: false,
+              free: true,
               bp_level: i,
               amount: 1,
             });
           } else if (i % 5 === 0) {
             cosmetics.push({
               cosmetic_id: basicChest.cosmetic_id,
-              free: false,
-              bp_level: i,
-              amount: 1,
-            });
-          }
-        }
-        // Starting at level 86, every 10 levels gives a God Chest
-        if (i > 85) {
-          if ((i + 4) % 10 === 0) {
-            cosmetics.push({
-              cosmetic_id: godChest.cosmetic_id,
-              free: false,
+              free: true,
               bp_level: i,
               amount: 1,
             });
