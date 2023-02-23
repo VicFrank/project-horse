@@ -131,13 +131,10 @@ module.exports = {
   Galaxy Terrain	Extremely Rare
   */
   chest_arena_unique_1: [
-    /*
-    // Spring terrain doesn't currently exist on the site (didn't see it in cosmetics-list.js)?
     {
-      cosmetic: "terrain_spring",
+      cosmetic: "terrain_green",
       rarity: null,
     },
-    */
     {
       cosmetic: "terrain_snow",
       rarity: null,

@@ -6,7 +6,11 @@ const {
   veryRareOdds,
   ultraRareOdds,
 } = require("./data/escalating-odds");
-const { chest_god_unique_2, chest_arena_unique_1, chest_finisher_unique_1 } = require("./data/unique-chest-drops");
+const {
+  chest_god_unique_2,
+  chest_arena_unique_1,
+  chest_finisher_unique_1,
+} = require("./data/unique-chest-drops");
 const players = require("../db/players");
 
 async function initializeCosmetics() {
@@ -213,6 +217,8 @@ async function addCosmetics() {
         coins: -1,
         cost_usd: -1,
         rarity: "Mythical",
+      },
+      {
         name: "sfx_heavy_metal",
         type: "SFX",
         equip_group: "sfx_gaben",
@@ -260,6 +266,30 @@ async function addCosmetics() {
         cost_usd: -1,
         equip_group: "terrain",
         rarity: "Immortal",
+      },
+      {
+        name: "chest_god_unique_2",
+        type: "Chest",
+        coins: 10000,
+        cost_usd: -1,
+        equip_group: "",
+        rarity: "Immortal",
+      },
+      {
+        name: "chest_arena_unique_1",
+        type: "Consumable",
+        equip_group: "",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Common",
+      },
+      {
+        name: "chest_finisher_unique_1",
+        type: "Consumable",
+        equip_group: "",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Common",
       },
     ]);
     console.log("Cosmetics initialized");
@@ -448,7 +478,13 @@ async function addCosmeticsToPlayers() {
   // await initializeEscalatingOdds();
   // await initializeUniqueChestDrops("chest_god_unique_1", chest_god_unique_1);
   await initializeUniqueChestDrops("chest_god_unique_2", chest_god_unique_2);
-  await initializeUniqueChestDrops("chest_arena_unique_1", chest_arena_unique_1);
-  await initializeUniqueChestDrops("chest_finisher_unique_1", chest_finisher_unique_1);
+  await initializeUniqueChestDrops(
+    "chest_arena_unique_1",
+    chest_arena_unique_1
+  );
+  await initializeUniqueChestDrops(
+    "chest_finisher_unique_1",
+    chest_finisher_unique_1
+  );
   // updateEscalatingOddsTable();
 })();

@@ -128,6 +128,27 @@ module.exports = [
   },
   /**
    * *************************
+   * Other unique drops
+   * *************************
+   */
+  {
+    name: "chest_arena_unique_1",
+    type: "Consumable",
+    equip_group: "",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Common",
+  },
+  {
+    name: "chest_finisher_unique_1",
+    type: "Consumable",
+    equip_group: "",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Common",
+  },
+  /**
+   * *************************
    * SFX
    * *************************
    */
