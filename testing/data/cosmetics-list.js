@@ -139,6 +139,14 @@ module.exports = [
     cost_usd: -1,
     rarity: "Common",
   },
+  {
+    name: "sfx_heavy_metal",
+    type: "SFX",
+    equip_group: "sfx_gaben",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Common",
+  },
   /**
    * *************************
    * Avatars
@@ -209,6 +217,15 @@ module.exports = [
   {
     // Battle Pass Reward
     name: "avatar_cs_diamond",
+    type: "Avatar Frame",
+    equip_group: "avatar_frame",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Arcana",
+  },
+  {
+    // Battle Pass Reward
+    name: "avatar_tf2",
     type: "Avatar Frame",
     equip_group: "avatar_frame",
     coins: -1,
@@ -1962,6 +1979,14 @@ module.exports = [
     equip_group: "streak",
     rarity: "Immortal",
   },
+  {
+    name: "streak_tf2",
+    type: "Win Streak",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "streak",
+    rarity: "Immortal",
+  },
   /**
    * *************************
    * Terrains
@@ -2059,6 +2084,30 @@ module.exports = [
     name: "terrain_chinese",
     type: "Terrain",
     coins: 20000,
+    cost_usd: -1,
+    equip_group: "terrain",
+    rarity: "Immortal",
+  },
+  {
+    name: "terrain_tf2",
+    type: "Terrain",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "terrain",
+    rarity: "Immortal",
+  },
+  {
+    name: "terrain_portal",
+    type: "Terrain",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "terrain",
+    rarity: "Immortal",
+  },
+  {
+    name: "terrain_gaben",
+    type: "Terrain",
+    coins: -1,
     cost_usd: -1,
     equip_group: "terrain",
     rarity: "Immortal",
