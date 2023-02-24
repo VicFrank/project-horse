@@ -177,13 +177,10 @@ module.exports = {
       const remaining = level - 80;
       // after 80, there is a reward every 5 levels
       let numRewards = 80 + Math.floor(remaining / 5);
-      // Starting at level 86 there is an additional rewards every 10 levels
-      if (level >= 86) numRewards += Math.floor((level - 76) / 10);
       return numRewards;
     } else {
-      // there is a reward every 5 levels, forever
-      let numRewards = Math.floor(level / 5);
-      // There is a special reward at level 100
+      // there is a reward at level 1 and every 5 levels, forever
+      let numRewards = 1 + Math.floor(level / 5);
       return numRewards;
     }
   },
@@ -213,25 +210,24 @@ module.exports = {
 
       const goldChest = await Cosmetics.getCosmeticByName("chest_gold");
       const basicChest = await Cosmetics.getCosmeticByName("chest_basic");
-      const godChest = await Cosmetics.getCosmeticByName("chest_god_unique_1");
 
       for (let i = minLevel; i <= maxLevel; i++) {
-        // Special rewards at level 100 and 1000
-        if (i === 100) {
-          const diamondAvatar = await Cosmetics.getCosmeticByName(
-            "avatar_cs_diamond"
+        // Special rewards at level 200 and 1000
+        if (i === 200) {
+          const portalArena = await Cosmetics.getCosmeticByName(
+            "terrain_portal"
           );
           cosmetics.push({
-            cosmetic_id: diamondAvatar.cosmetic_id,
-            free: true, // This one is free
+            cosmetic_id: portalArena.cosmetic_id,
+            free: true,
             bp_level: i,
             amount: 1,
           });
         } else if (i === 1000) {
-          const gabenAvatar = await Cosmetics.getCosmeticByName("avatar_gaben");
+          const gabenArena = await Cosmetics.getCosmeticByName("terrain_gaben");
           cosmetics.push({
-            cosmetic_id: gabenAvatar.cosmetic_id,
-            free: false,
+            cosmetic_id: gabenArena.cosmetic_id,
+            free: true,
             bp_level: i,
             amount: 1,
           });
@@ -241,25 +237,14 @@ module.exports = {
           if (i % 10 === 0) {
             cosmetics.push({
               cosmetic_id: goldChest.cosmetic_id,
-              free: false,
+              free: true,
               bp_level: i,
               amount: 1,
             });
           } else if (i % 5 === 0) {
             cosmetics.push({
               cosmetic_id: basicChest.cosmetic_id,
-              free: false,
-              bp_level: i,
-              amount: 1,
-            });
-          }
-        }
-        // Starting at level 86, every 10 levels gives a God Chest
-        if (i > 85) {
-          if ((i + 4) % 10 === 0) {
-            cosmetics.push({
-              cosmetic_id: godChest.cosmetic_id,
-              free: false,
+              free: true,
               bp_level: i,
               amount: 1,
             });
