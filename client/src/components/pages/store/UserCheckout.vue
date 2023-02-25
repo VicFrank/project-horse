@@ -7,7 +7,11 @@
       }}</b-alert>
 
       <h3>{{ user.username }}</h3>
-      <img v-if="user.profile_picture" :src="user.profile_picture" class="avatar" />
+      <img
+        v-if="user.profile_picture"
+        :src="user.profile_picture"
+        class="avatar"
+      />
 
       <div v-for="item in items" :key="item.cosmetic_id" class="item-card">
         <div class="item-card-img">
@@ -55,8 +59,12 @@
               v-on:purchaseSuccess="onPurchaseSuccess"
               v-on:error="onError"
             />
-            <StripeAlipay :items="items" :steamID="user.steam_id" class="mb-3" />
-            <StripeWeChatPay :items="items" :steamID="user.steam_id" class="mb-3" />
+            <StripeAlipay
+              :items="items"
+              :steamID="user.steam_id"
+              class="mb-3"
+            />
+            <!-- <StripeWeChatPay :items="items" :steamID="user.steam_id" class="mb-3" /> -->
             <PaypalPurchase
               :items="items"
               :steamID="user.steam_id"
@@ -84,7 +92,7 @@
 import CosmeticDescription from "../cosmetics/CosmeticDescription.vue";
 import StripePurchase from "./components/StripePurchase.vue";
 import StripeAlipay from "./components/StripeAlipay.vue";
-import StripeWeChatPay from "./components/StripeWeChatPay.vue";
+// import StripeWeChatPay from "./components/StripeWeChatPay.vue";
 import PaypalPurchase from "./components/PaypalPurchase.vue";
 
 export default {
@@ -93,7 +101,7 @@ export default {
     PaypalPurchase,
     StripePurchase,
     StripeAlipay,
-    StripeWeChatPay,
+    // StripeWeChatPay,
   },
 
   data() {
@@ -170,7 +178,7 @@ export default {
         .then((data) => {
           this.user = data;
         });
-    }
+    },
   },
 
   created() {
