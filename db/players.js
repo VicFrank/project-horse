@@ -2423,6 +2423,35 @@ module.exports = {
     }
   },
 
+  async reycleGodChest(steamID, chestCosmeticID) {
+    try {
+      const recycledChest = await Cosmetics.getCosmetic(chestCosmeticID);
+      if (!recycledChest) throw new Error("This chest doesn't exist");
+      if (recycledChest.cosmetic_name !== "chest_god_unique_2")
+        throw new Error("This item can't be recycled");
+
+      const hasCosmetic = await this.hasCosmetic(steamID, chestCosmeticID);
+      if (!hasCosmetic) throw new Error("You don't own this chest");
+
+      const newChest = await Cosmetics.getCosmeticByName("chest_god_unique_1");
+
+      const transaction = {};
+      transaction.items = {
+        [chestCosmeticID]: -1,
+        [newChest.cosmetic_id]: 1,
+      };
+
+      await this.doItemTransaction(steamID, transaction);
+
+      Logs.addTransactionLog(steamID, "recycle_god_chest", {
+        steamID,
+        chestCosmeticID,
+      });
+    } catch (error) {
+      throw error;
+    }
+  },
+
   // --------------------------------------------------
   // Quests / Achievements
   // --------------------------------------------------

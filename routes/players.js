@@ -545,22 +545,39 @@ router.post(
 );
 
 router.post(
-  "/:steamID/open_chest/:chestid",
+  "/:steamID/open_chest/:chestID",
   auth.userAuth,
   async (req, res) => {
     try {
       const steamID = req.params.steamID;
-      const chestid = req.params.chestid;
-      const cosmetic = await cosmetics.getCosmetic(chestid);
+      const chestID = req.params.chestID;
+      const cosmetic = await cosmetics.getCosmetic(chestID);
       if (!cosmetic)
         return res.status(404).send({ message: "No chest found with this ID" });
       if (cosmetic.cosmetic_name.includes("unique")) {
-        const reward = await players.openUniqueChest(steamID, chestid);
+        const reward = await players.openUniqueChest(steamID, chestID);
         return res.status(200).json(reward);
       } else {
-        const reward = await players.openChest(steamID, chestid);
+        const reward = await players.openChest(steamID, chestID);
         return res.status(200).json(reward);
       }
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({ error: error.message });
+    }
+  }
+);
+
+router.post(
+  "/:steamID/recycle_chest/:chestID",
+  auth.userAuth,
+  async (req, res) => {
+    try {
+      const steamID = req.params.steamID;
+      const chestID = req.params.chestID;
+      await players.reycleGodChest(steamID, chestID);
+
+      return res.status(200).json({ message: "Chest recycled" });
     } catch (error) {
       console.log(error);
       res.status(500).send({ error: error.message });
