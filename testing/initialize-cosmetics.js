@@ -493,14 +493,14 @@ async function addCosmeticsToPlayers() {
   // await initializeEscalatingOdds();
   await addCosmetics();
   // await initializeUniqueChestDrops("chest_god_unique_1", chest_god_unique_1);
-  // await initializeUniqueChestDrops("chest_god_unique_2", chest_god_unique_2);
-  // await initializeUniqueChestDrops(
-  //   "chest_arena_unique_1",
-  //   chest_arena_unique_1
-  // );
-  // await initializeUniqueChestDrops(
-  //   "chest_finisher_unique_1",
-  //   chest_finisher_unique_1
-  // );
+  await initializeUniqueChestDrops("chest_god_unique_2", chest_god_unique_2);
+  await initializeUniqueChestDrops(
+    "chest_arena_unique_1",
+    chest_arena_unique_1
+  );
+  await initializeUniqueChestDrops(
+    "chest_finisher_unique_1",
+    chest_finisher_unique_1
+  );
   // updateEscalatingOddsTable();
 })();
