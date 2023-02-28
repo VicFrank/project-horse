@@ -2282,7 +2282,11 @@ module.exports = {
       const hasChest = await this.doesPlayerHaveItem(steamID, chestCosmeticID);
       if (!hasChest) throw new Error("You don't have this item");
 
+      const chestCosmetic = await Cosmetics.getCosmetic(chestCosmeticID);
+      const cosmeticName = chestCosmetic.cosmetic_name;
       const uniqueChestID = await Cosmetics.getUniqueChestID(chestCosmeticID);
+
+      const isGodChest = cosmeticName.startsWith("chest_god_");
 
       const drops = await this.getUniqueChestDropsForPlayer(
         steamID,
@@ -2329,24 +2333,25 @@ module.exports = {
       }
 
       const rewards = Object.entries(rewardsTransaction.items);
-      for (const [cosmeticID, count] of rewards) {
-        if (count > 0) {
-          const item = await Cosmetics.getCosmetic(cosmeticID);
-          // log that we've opened this god
-          await Logs.addTransactionLog(steamID, "god_opened", {
-            cosmeticName: item.cosmetic_name,
-          });
+      if (isGodChest) {
+        for (const [cosmeticID, count] of rewards) {
+          if (count > 0) {
+            const item = await Cosmetics.getCosmetic(cosmeticID);
+            // log that we've opened this god
+            await Logs.addTransactionLog(steamID, "god_opened", {
+              cosmeticName: item.cosmetic_name,
+            });
 
-          const alreadyHasGod = await this.hasCosmetic(steamID, cosmeticID);
+            const alreadyHasGod = await this.hasCosmetic(steamID, cosmeticID);
 
-          // add god progress if this is a duplicate
-          if (alreadyHasGod) {
-            const godName = item.cosmetic_name.substring(5);
-            this.addPlayerGodProgress(steamID, godName, 5);
+            // add god progress if this is a duplicate
+            if (alreadyHasGod) {
+              const godName = item.cosmetic_name.substring(5);
+              this.addPlayerGodProgress(steamID, godName, 5);
+            }
           }
         }
       }
-      // add the gods to the player
       await this.doItemTransaction(steamID, rewardsTransaction);
 
       Logs.addTransactionLog(steamID, "open_unique_chest", {
