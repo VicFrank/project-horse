@@ -105,7 +105,7 @@
         <li>Terrorist Plant Bomb timer from 18/16/14/12/10 to 20/18/16/14/12</li>
         <li>Terrorist Plant Bomb explosion damage from 90/80/70/60/50% to 80/70/60/50/40%</li>
       </ul>
-      </div>
+    </div>
     <div v-if="$i18n.locale == 'cn'">
       <h2>5 2023-3-1</h2>
 
