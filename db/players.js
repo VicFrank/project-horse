@@ -857,7 +857,7 @@ module.exports = {
 
     try {
       // give them a commemorative item, but don't worry about it if it fails
-      const item = await Cosmetics.getCosmeticByName("bp_s4");
+      const item = await Cosmetics.getCosmeticByName("bp_s5");
       await this.giveCosmeticByID(steamID, item.cosmetic_id);
       await Logs.addTransactionLog(steamID, "add_cosmetic", {
         steamID,

@@ -1003,6 +1003,14 @@ module.exports = [
     equip_group: "",
     rarity: "Immortal",
   },
+  {
+    name: "bp_s5",
+    type: "purchased_battle_pass",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "",
+    rarity: "Immortal",
+  },
   /**
    * *************************
    * Consumables
