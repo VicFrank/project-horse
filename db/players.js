@@ -480,7 +480,6 @@ module.exports = {
 
   async updatePlayerProfilePicture(steamID, currentPicture) {
     try {
-      console.log("Updating player profile picture: ", steamID);
       const apiKey = Keys.steamAPIKey;
       const response = await axios.get(
         `http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${apiKey}&steamids=${steamID}`
