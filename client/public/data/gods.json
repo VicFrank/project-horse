@@ -133,9 +133,9 @@
         "name": "Bile Explosion",
         "values": [
           "DAMAGE AMPLIFICATION: 20%",
-          "DAMAGE PERCENT: 20%",
+          "DAMAGE PERCENT: 25%",
           "PUDDLE DURATION: 5",
-          "RADIUS: 350"
+          "RADIUS: 375"
         ],
         "type_string": "Passive",
         "type": "passive",
@@ -147,28 +147,26 @@
     "id": "brewmaster",
     "name": "Brewmaster",
     "universe": "dota",
-    "complexity": "intermediate",
+    "complexity": "easy",
     "unlock": "none",
     "unlock_text": "Why are you even seeing this God?",
     "health": 200,
     "powers": [
       {
-        "id": "drunkenBrawler",
-        "name": "Drunken Brawler",
-        "values": [
-          "ATTACK SPEED: 10 / 20 / 30 / 40 / 50",
-          "EVASION: 3% / 6% / 9% / 12% / 15%",
-          "ARMOR: 1 / 3 / 5 / 7 / 9",
-          "MAGIC RESISTANCE: 4% / 8% / 12% / 16% / 20%",
-          "CRIT CHANCE: 20%",
-          "CRIT DAMAGE: 120% / 130% / 140% / 150% / 160%",
-          "SLOW DURATION: 2",
-          "SLOW: 10 / 20 / 30 / 40 / 50",
-          "STATUS RESITANCE: 4% / 8% / 12% / 16% / 20%"
-        ],
+        "id": "brewlingStance",
+        "name": "Brewling Stance",
+        "values": [],
         "type_string": "Active (No Target)",
         "type": "noTarget",
-        "desc": "\n        Switch stances to provide unique buffs to your units.\n\n        Earth Stance - Grants armor and magic resistance.\n        Storm Stance - Grants evasion and bonus attack speed.\n        Fire Stance - Grants a chance to deal critical damage with attacks.\n        Void Stance - Grants status resistance and attack speed and movespeed slow on attacks.\n    "
+        "desc": "Toggle between Brewling states, changing what unique abilities you possess."
+      },
+      {
+        "id": "primalSpirit",
+        "name": "Primal Spirit",
+        "values": [],
+        "type_string": "Active (Unit Target)",
+        "type": "unitTarget",
+        "desc": "Selected unit transforms into a Brewling, gaining special abilities and the Brewling's attack range. The abilities gained depend on which Brewling Stance is active."
       }
     ]
   },
@@ -252,12 +250,112 @@
         "id": "questionMarkS3",
         "name": "Going Out of Existence Sale",
         "values": [
-          "FREE REROLLS PER ROUND: 1",
-          "HERO REROLL COST: 1"
+          "FREE REROLLS PER ROUND: 1"
         ],
         "type_string": "Passive",
         "type": "passive",
-        "desc": "First re-roll is always free, spells sell for full value, and your hero re-rolls are one less gold.Voiced by our dear friend Purge"
+        "desc": "First re-roll is always free, and spells sell for full value.Voiced by our dear friend Purge"
+      }
+    ]
+  },
+  {
+    "id": "counterTerrorist",
+    "name": "Counter-Terrorist",
+    "universe": "counterStrike",
+    "complexity": "easy",
+    "unlock": "battlepass",
+    "unlock_text": "God is permanently unlocked by reaching a battlepass level",
+    "health": 200,
+    "powers": [
+      {
+        "id": "equipment",
+        "name": "Equipment",
+        "values": [
+          "SHOP LEVELS: 2 / 3 / 4"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Each time you upgrade the shop, you are presented with a choice of three pieces of equipment. The chosen piece will appear in your arena and activate its effect when the round begins. You can move the equipment by dragging and dropping it.Original concept by: Ladde"
+      },
+      {
+        "id": "decoyGrenade",
+        "name": "Decoy Grenade",
+        "values": [
+          "ILLUSION DURATION: 8",
+          "ILLUSION INCOMING DAMAGE: 200%",
+          "ILLUSION OUTGOING DAMAGE: 35%",
+          "RADIUS: 1500",
+          "TAUNT DELAY: 1",
+          "TAUNT DURATION: 2.5",
+          "TAUNT RADIUS: 450"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Creates an illusion of the closest ally or enemy hero. After a short delay, the illusion will taunt the first enemy within certain range"
+      },
+      {
+        "id": "flashbang",
+        "name": "Flashbang",
+        "values": [
+          "BLIND DURATION: 4",
+          "MISS CHANCE: 100%",
+          "RADIUS: 500",
+          "SHRAPNEL BONUS DAMAGE: 15",
+          "SHRAPNEL DURATION: 10"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Creates a flash of light at the chosen location, blinding enemies and allies to miss on attacks. It also releases shrapnel, adding a debuff that increases damage of spells. Miss chance is lowered per second."
+      },
+      {
+        "id": "heGrenade",
+        "name": "HE Grenade",
+        "values": [
+          "BASE DAMAGE: 150",
+          "KNOCKBACK DISTANCE: 425",
+          "MAX HP DAMAGE: 15%",
+          "RADIUS: 600"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Deals damage in an area and pushes units away from the center point. This affects both allies and enemies."
+      },
+      {
+        "id": "smokeGrenade",
+        "name": "Smoke Grenade",
+        "values": [
+          "DELAY: 0.5",
+          "DURATION: 4",
+          "RADIUS: 400"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Silences enemies or allies in an area."
+      },
+      {
+        "id": "incendiaryGrenade",
+        "name": "Incendiary Grenade",
+        "values": [
+          "DAMAGE PER SECOND: 50",
+          "DURATION: 6",
+          "MOVEMENT SPEED SLOW: 70%",
+          "RADIUS: 550"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Sets an area ablaze that slows and deals damage over time to both allies and enemies."
+      },
+      {
+        "id": "riotShield",
+        "name": "Riot Shield",
+        "values": [
+          "DAMAGE REDUCTION: 50%",
+          "DURATION: 5",
+          "RADIUS: 500"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Damage reduction is applied to both ally and enemy units in the area for a set duration."
       }
     ]
   },
@@ -316,10 +414,40 @@
     ]
   },
   {
+    "id": "drKleiner",
+    "name": "Dr. Kleiner",
+    "universe": "half_life",
+    "complexity": "intermediate",
+    "unlock": "battlepass",
+    "unlock_text": "God is permanently unlocked by reaching a battlepass level",
+    "health": 200,
+    "powers": [
+      {
+        "id": "research",
+        "name": "Research",
+        "values": [],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "You cannot re-roll normally. Whenever you purchase a spell, the shop is automatically re-rolled.Original concept by: Pio_Romero"
+      },
+      {
+        "id": "breakthrough",
+        "name": "Breakthrough!",
+        "values": [
+          "PERMANENT INTELLIGENCE: 3",
+          "SOLD SPELLS NEEDED: 5"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "When a certain amount of spells are sold, all your heroes gain a permanent buff to intelligence.Original concept by: Pio_Romero"
+      }
+    ]
+  },
+  {
     "id": "facelessVoid",
     "name": "Faceless Void",
     "universe": "dota",
-    "complexity": "intermediate",
+    "complexity": "advanced",
     "unlock": "battlepass",
     "unlock_text": "God is permanently unlocked by reaching a battlepass level",
     "health": 200,
@@ -338,7 +466,7 @@
         "id": "marchOfTime",
         "name": "The March of Time",
         "values": [
-          "CHANCE: 35%",
+          "CHANCE: 30%",
           "GOLD COST REDUCTION: 1"
         ],
         "type_string": "Passive",
@@ -412,14 +540,26 @@
     "health": 200,
     "powers": [
       {
+        "id": "devMode",
+        "name": "Dev Mode",
+        "values": [
+          "ABILITY POOL: 20",
+          "OFFERED ABILITIES: 5",
+          "REROLLS: 1"
+        ],
+        "type_string": "Active (No Target)",
+        "type": "noTarget",
+        "desc": "At the beginning of the game the player will be given a choice of 5 banned spells. The chosen ability will have 20 copies added to their pool of spells for the remainder of the game. Anytime this ability is purchased in the shop, it will automatically be attached to the Balance in all things ability.\n        \n        Toggling this ability will change the priority order of the chosen banned spell.Original concept by: ubRtstcl"
+      },
+      {
         "id": "balanceInAllThings",
         "name": "Balance In All Things",
         "values": [
-          "EXTRA SLOTS: 2"
+          "SHOP LEVEL: 2 / 3 / 5"
         ],
-        "type_string": "Passive",
-        "type": "passive",
-        "desc": "Get access to all banned spells. Shop contains additional slots."
+        "type_string": "Active (Unit Target)",
+        "type": "unitTarget",
+        "desc": "Selected unit will have all the purchased copies of the banned ability added as a bonus spell. This does not count towards the four spell hero limit. Upgrading the shop at certain levels will also add a point to this ability.Original concept by: ubRtstcl"
       }
     ]
   },
@@ -530,7 +670,41 @@
         ],
         "type_string": "Active (Unit Target)",
         "type": "unitTarget",
-        "desc": "Once selected unit is at 50% HP, they will automatically jump inside a random enemy hero for duration seconds, dealing physical attacks every second. It will also heal you for 10% of Max HP per second. Once the duration is over, the unit will pop out, dealing 150 damage in a 400 AOE."
+        "desc": "Once selected unit is at 50% HP, they will automatically jump inside a random enemy hero for duration seconds, dealing physical attacks every second. It will also heal you for 10% of Max HP per second. Once the duration is over, the unit will pop out, dealing 0/75/150/225/300 damage in a 400 AOE."
+      }
+    ]
+  },
+  {
+    "id": "medic",
+    "name": "Medic",
+    "universe": "teamFortress",
+    "complexity": "intermediate",
+    "unlock": "battlepass",
+    "unlock_text": "God is permanently unlocked by reaching a battlepass level",
+    "health": 200,
+    "powers": [
+      {
+        "id": "uberCharge",
+        "name": "Uber Charge",
+        "values": [
+          "BUFF DURATION: 1.5",
+          "HEAL THRESHOLD: 300"
+        ],
+        "type_string": "Passive",
+        "type": "passive",
+        "desc": "Each time a hero is healed for certain amount by the Blitzkrieg target, they will gain spell immunity temporarily."
+      },
+      {
+        "id": "blitzkrieg",
+        "name": "Blitzkrieg",
+        "values": [
+          "DAMAGE AMPLIFICATION: 6% / 7% / 8% / 9% / 10%",
+          "HEAL THRESHOLD: 300",
+          "STACK DURATION: 12"
+        ],
+        "type_string": "Active (Unit Target)",
+        "type": "unitTarget",
+        "desc": "Each time the selected unit heals their team for certain amount, the Blitzkireg target will gain a temporary stack of damage amplification. These stacks work independently from each other. Does not work on lifesteal."
       }
     ]
   },
@@ -613,7 +787,7 @@
         "name": "Veiled Pact",
         "values": [
           "CRIT CHANCE: 20%",
-          "CRIT DAMAGE: 2%",
+          "CRIT DAMAGE: 2.5%",
           "DISTANCE TO INCREASE CRIT DMG: 10"
         ],
         "type_string": "Passive",
@@ -635,14 +809,39 @@
         "id": "bringerOfTheFaithful",
         "name": "Bringer of the Faithful",
         "values": [
-          "DAMAGE: 25 / 50 / 75 / 100 / 125",
+          "DAMAGE PER ROUND: 6",
+          "DAMAGE: 15",
           "HEALTH: 550 / 750 / 950 / 1150 / 1350",
-          "MAGIC RESISTANCE: 75%",
+          "MAGIC RESISTANCE: 50%",
           "MANA: 200 / 400 / 600 / 800 / 1000"
         ],
         "type_string": "Passive",
         "type": "passive",
-        "desc": "You are given a melee creep at the beginning of the game. Each time you upgrade shop, you are given a choice of 3 neutral creeps. The skills of the chosen neutral will be added to your creep permanently. Neutral creep choices and your melee creep's stats improve which each shop level."
+        "desc": "You are given a melee creep at the beginning of the game. Each time you upgrade shop, you are given a choice of 3 neutral creeps. The skills of the chosen neutral will be added to your creep permanently. Neutral creep choices and your melee creep's stats improve which each shop level. The creep gains damage per round."
+      }
+    ]
+  },
+  {
+    "id": "primalBeast",
+    "name": "Primal Beast",
+    "universe": "dota",
+    "complexity": "easy",
+    "unlock": "battlepass",
+    "unlock_text": "God is permanently unlocked by reaching a battlepass level",
+    "health": 200,
+    "powers": [
+      {
+        "id": "onslaught",
+        "name": "Onslaught",
+        "values": [
+          "EMPTY SLOT: 30%",
+          "REDUCE COST BY ONE: 25%",
+          "REDUCE COST BY TWO: 15%",
+          "REROLL CHANCE: 30%"
+        ],
+        "type_string": "Active (No Target)",
+        "type": "noTarget",
+        "desc": "Once per round, Primal Beast can charge through the shop, disrupting spells in his ruinous wake. Spells have a chance to be rerolled, have their cost reduced, or knocked off entirely, leaving the slot empty. Each spell slot has a separate chance to be affected by one of these outcomes.Original concept by: october"
       }
     ]
   },
@@ -699,6 +898,25 @@
     ]
   },
   {
+    "id": "roshan",
+    "name": "Roshan",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "battlepass",
+    "unlock_text": "God is permanently unlocked by reaching a battlepass level",
+    "health": 200,
+    "powers": [
+      {
+        "id": "roshanTheImmortal",
+        "name": "Roshan the Immortal",
+        "values": [],
+        "type_string": "Active (Unit Target)",
+        "type": "unitTarget",
+        "desc": "Selected hero is replaced by Roshan. Roshan's stats scale as the game goes on. The unit's spells are completely replaced by Roshan's abilities. The potency of Roshan's abilities is based on the amount of spell points the unit has currently equipped in the slot that corresponds to that ability.\n        \n        Slot 1: Unlocks Spell Block\n        Slot 2: Unlocks Bash\n        Slot 3: Unlocks Slam\n        Slot 4: Unlocks Aegis of the Immortal\n\n        Level One Spell points required: pointsToLevelOne\n        Level Two Spell points required: pointsToLevelTwo\n        Level Three Spell points required: pointsToLevelThree\n     "
+      }
+    ]
+  },
+  {
     "id": "rubick",
     "name": "Rubick",
     "universe": "dota",
@@ -711,7 +929,7 @@
         "id": "spellSteal",
         "name": "Spell Steal",
         "values": [
-          "POINTS REQUIRED FOR LEVEL: 0 / 5 / 15 / 25 / 35 / 45 / 55 / 65 / 75"
+          "POINTS REQUIRED FOR LEVEL: 0 / 8 / 16 / 24 / 32 / 40 / 48 / 56 / 64"
         ],
         "type_string": "Active (Unit Target)",
         "type": "unitTarget",
@@ -885,8 +1103,8 @@
         "id": "plantBomb",
         "name": "Plant Bomb",
         "values": [
-          "EXPLOSION DAMAGE: 90% / 80% / 70% / 60% / 50%",
-          "TIMER: 18 / 16 / 14 / 12 / 10"
+          "EXPLOSION DAMAGE: 80% / 70% / 60% / 50% / 40%",
+          "TIMER: 20 / 18 / 16 / 14 / 12"
         ],
         "type_string": "Passive",
         "type": "passive",
@@ -1025,7 +1243,7 @@
         ],
         "type_string": "Passive",
         "type": "passive",
-        "desc": "Each spell in your shop has a chance to be worth 2 points instead of 1. These spells will cost 5 gold."
+        "desc": "Each spell in your shop has a chance to be worth 2 points instead of 1. These spells will cost 4 gold."
       }
     ]
   }
