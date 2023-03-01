@@ -74,6 +74,7 @@ module.exports = {
     try {
       const { rows } = await query(`
         SELECT mmr, steam_id, username from players
+        WHERE ladder_mmr >= 4500
         ORDER BY LEAST (ladder_mmr, 4500) DESC, mmr DESC
       `);
       // add index to rows

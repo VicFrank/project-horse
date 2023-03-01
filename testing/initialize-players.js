@@ -189,7 +189,7 @@ async function giveEndOfSeasonRewards() {
  */
 async function ladderReset(season) {
   console.log("Resetting ladder...");
-  await logSeasonResults(season);
+  // await logSeasonResults(season);
   try {
     await query(`UPDATE Players SET mmr = (mmr + 1000) / 2`);
     await query(`UPDATE Players SET ladder_mmr = 0 WHERE ladder_mmr < 1500`);
