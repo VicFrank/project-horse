@@ -16,7 +16,7 @@ export default {
 
   methods: {
     async loadAndFilterGods() {
-      const godReq = fetch(`/data/gods.json`).then((res) => res.json())
+      const godReq = fetch(`/data/${this.$t("gods.dataFile")}`).then((res) => res.json())
       const filterReq = fetch('/api/gods').then(r => r.json()).then(gods => this.enabledGods = gods.filter(g => g.god_enabled).map(g => g.god_name));
       const [allKnownGods, godFilter] = await Promise.all([godReq, filterReq])
       this.loading = false;

@@ -707,6 +707,7 @@
     "copyright": "© 2022 Double Edge Studios LLC"
   },
   "gods": {
+    "dataFile": "gods_cn.json",
     "page_title": "神",
     "my_gods": "我的神",
     "god": "神",

@@ -1,0 +1,1260 @@
+[
+  {
+    "id": "aghanim",
+    "name": "阿哈利姆",
+    "universe": "dota",
+    "complexity": "easy",
+    "unlock": "quest",
+    "unlock_text": "这是完成 7 天新人任务后永久解锁的免费神",
+    "health": 200,
+    "powers": [
+      {
+        "id": "sorceryForDummies",
+        "name": "假人巫术: 第一卷",
+        "values": [
+          "几率: 40 / 45 / 50 / 55 / 60"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "每回合有几率升级队伍中的一个随机技能（包括未装备的技能）。无法连续升级相同技能。几率将随着商店等级调整。"
+      }
+    ]
+  },
+  {
+    "id": "alchemist",
+    "name": "炼金术士",
+    "universe": "dota",
+    "complexity": "advanced",
+    "unlock": "chest",
+    "unlock_text": "此神将从神之宝箱中掉落且永久解锁",
+    "health": 200,
+    "powers": [
+      {
+        "id": "greevilsGreed",
+        "name": "贪魔的贪婪",
+        "values": [
+          "金币获得: 1",
+          "金币要求: 10 / 9 / 8 / 7 / 6"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "金币永远不会重置。在战斗结束时，每积攒 10/9/8/7/6 金币，你就会获得 1 金币的额外收益。所需的金币数量将取决于你的商店级别。"
+      },
+      {
+        "id": "unstableConcoction",
+        "name": "不稳定化合物",
+        "values": [
+          "生命值损失: 15%"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "每输掉一回合都将对此技能进行充能。胜利后会将充能重置为 0。如果充能达到 3，你将受到当前生命值 15% 的伤害且充能将被重置为 0。充能不会低于 0。"
+      }
+    ]
+  },
+  {
+    "id": "bathtimeAghanim",
+    "name": "沐浴阿哈利姆",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "chest",
+    "unlock_text": "此神将从神之宝箱中掉落且永久解锁",
+    "health": 200,
+    "powers": [
+      {
+        "id": "sorceryVolumeFour",
+        "name": "假人巫术: 第四卷",
+        "values": [
+          "层级 1 商店级别: 2",
+          "层级 2 商店级别: 4",
+          "层级 3 商店级别: 5"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "在第 1 回合中将有一个随机技能被升级至更高的阈值。\n\t\t\n\t\t根据商店级别，你最多可升级 3 种技能。\n        \n        商店级别 2: 将 1 个技能从 1-2 点升级至 3\n        商店级别 4: 将 1 个技能从 3-5 点升级至 6\n        商店级别 5: 将 1 个技能从 6-8 点升级至 9\n        "
+      }
+    ]
+  },
+  {
+    "id": "bloodseeker",
+    "name": "血魔",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "free",
+    "unlock_text": "此神是免费永久解锁的",
+    "health": 200,
+    "powers": [
+      {
+        "id": "bloodrage",
+        "name": "嗜血暴怒",
+        "values": [
+          "每次叠加吸血: 25%",
+          "每次叠加攻击速度: 40"
+        ],
+        "type_string": "主动（单位目标）",
+        "type": "unitTarget",
+        "desc": "每个友方英雄死亡时将使得所选单位暴怒并提升攻击速度和吸血能力。"
+      }
+    ]
+  },
+  {
+    "id": "bonelessAghanim",
+    "name": "无骨阿哈利姆",
+    "universe": "dota",
+    "complexity": "easy",
+    "unlock": "plus",
+    "unlock_text": "订阅 PLUS 后此神将临时解锁。如果其从神之宝箱中掉落则会永久解锁",
+    "health": 200,
+    "powers": [
+      {
+        "id": "sorceryVolumeThree",
+        "name": "假人巫术: 第三卷",
+        "values": [
+          "商店升级成本减免: 20%",
+          "商店法术槽: 5 / 7 / 9 / 11 / 13"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "终极技能永远不会进入你的法术池。你会在商店级别 3 时获得额外商店插槽，同时商店升级的成本会降低。"
+      }
+    ]
+  },
+  {
+    "id": "boomer",
+    "name": "爆炸波",
+    "universe": "l4d",
+    "complexity": "easy",
+    "unlock": "free",
+    "unlock_text": "此神是免费永久解锁的",
+    "health": 200,
+    "powers": [
+      {
+        "id": "bileExplosion",
+        "name": "胆汁爆炸",
+        "values": [
+          "伤害放大: 20%",
+          "毒液坑持续时间: 5",
+          "溅射伤害百分比: 25%",
+          "范围: 375"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "友方英雄将在死亡时爆炸，造成范围伤害。所造成的的伤害将是该回合所承担伤害的百分比。爆炸后地上将会残留一滩胆汁，对敌人造成额外伤害。减益将可叠加。"
+      }
+    ]
+  },
+  {
+    "id": "brewmaster",
+    "name": "酒仙",
+    "universe": "dota",
+    "complexity": "easy",
+    "unlock": "none",
+    "unlock_text": "为什么你会看到这位神？",
+    "health": 200,
+    "powers": [
+      {
+        "id": "brewlingStance",
+        "name": "酒仙姿势",
+        "values": [],
+        "type_string": "主动（无目标）",
+        "type": "noTarget",
+        "desc": "切换小酒仙状态，变换你所拥有的独特技能。"
+      },
+      {
+        "id": "primalSpirit",
+        "name": "元素分离",
+        "values": [],
+        "type_string": "主动（单位目标）",
+        "type": "unitTarget",
+        "desc": "所选单位将被转换为小酒仙，获得特殊能力与小酒仙的攻击范围。获得的能力取决于已激活的酒仙姿势。"
+      }
+    ]
+  },
+  {
+    "id": "caveJohnson",
+    "name": "凯文·约翰逊",
+    "universe": "portal",
+    "complexity": "easy",
+    "unlock": "chest",
+    "unlock_text": "此神将从神之宝箱中掉落且永久解锁",
+    "health": 200,
+    "powers": [
+      {
+        "id": "mantisRadiation",
+        "name": "螳螂辐射",
+        "values": [
+          "BAT 减免（AGI）: 25%",
+          "伤害减免（STR）: 30%",
+          "魔法消耗减免（INT）: 100%"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "你的英雄不能回复生命值，但会获得根据其主要属性确定的强力变异: \n    力量 - 降低 30% 承受的所有伤害。\n    敏捷 - 缩短 25% 的基础攻击时间。\n    智力 - 降低 100% 的技能魔法消耗。\n    "
+      }
+    ]
+  },
+  {
+    "id": "centaur",
+    "name": "半人马",
+    "universe": "dota",
+    "complexity": "easy",
+    "unlock": "free",
+    "unlock_text": "此神是免费永久解锁的",
+    "health": 200,
+    "powers": [
+      {
+        "id": "retaliate",
+        "name": "伟大毅力",
+        "values": [
+          "每回合生命值: 70",
+          "返还: 35%"
+        ],
+        "type_string": "主动（单位目标）",
+        "type": "unitTarget",
+        "desc": "选择的英雄每回合都将获得生命值。其将返还一定百分比的物理攻击伤害。在选择一个新英雄时，所有生命值增益都会移动至其身上。"
+      }
+    ]
+  },
+  {
+    "id": "chaosGod",
+    "name": "混乱神",
+    "universe": "none",
+    "complexity": "intermediate",
+    "unlock": "none",
+    "unlock_text": "为什么你会看到这位神？",
+    "health": 200,
+    "powers": [
+      {
+        "id": "questionMark",
+        "name": "？",
+        "values": [
+          "当前生命值伤害: 2%",
+          "每秒伤害: 50"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "每秒将对友方和敌人造成魔法伤害（非致命）。此神仅会暂时性存在，其将在第 2 赛季后从你的军械库中被移除"
+      }
+    ]
+  },
+  {
+    "id": "chaosGodS3",
+    "name": "旁观者",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "battlepass",
+    "unlock_text": "神将通过达到战场通行证等级而永久解锁",
+    "health": 200,
+    "powers": [
+      {
+        "id": "questionMarkS3",
+        "name": "没命大促销",
+        "values": [
+          "每回合免费重选: 1"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "首次重选免费，法术可全价出售。由亲爱的朋友 Purge 友情建议"
+      }
+    ]
+  },
+  {
+    "id": "counterTerrorist",
+    "name": "反恐精英",
+    "universe": "counterStrike",
+    "complexity": "easy",
+    "unlock": "battlepass",
+    "unlock_text": "神将通过达到战场通行证等级而永久解锁",
+    "health": 200,
+    "powers": [
+      {
+        "id": "equipment",
+        "name": "装备",
+        "values": [
+          "商店级别 2 / 3 / 4"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "每次升级商店时，你都可从三件装备中挑选一件。选择的装备将出现在竞技场中，并在回合开始时激活效果。您可以拖放操作来移动装备。最初概念: Ladde"
+      },
+      {
+        "id": "decoyGrenade",
+        "name": "诱饵手雷",
+        "values": [
+          "嘲讽延迟: 1",
+          "嘲讽持续时间: 2.5",
+          "嘲讽范围: 450",
+          "幻象传入伤害: 200%",
+          "幻象持续时间: 8",
+          "幻象输出伤害: 35%",
+          "范围: 1500"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "生成最近友方或敌方英雄的幻象。在短暂的延迟后，幻象将嘲讽一定范围内的首个敌人"
+      },
+      {
+        "id": "flashbang",
+        "name": "闪光弹",
+        "values": [
+          "榴霰弹伤害加成: 15",
+          "榴霰弹持续时间: 10",
+          "致盲时间: 4",
+          "范围: 500",
+          "落空几率: 100%"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "在选定位置生成强光，使敌人和友方致盲而无法命中。如果同时释放了榴霰弹，则还会增加一个提高法术伤害的减益。攻击丢失几率将每秒降低。"
+      },
+      {
+        "id": "heGrenade",
+        "name": "高爆手雷",
+        "values": [
+          "击退距离: 425",
+          "基础伤害: 150",
+          "最大生命值伤害: 15%",
+          "范围: 600"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "造成范围伤害并将单位推开。此效果将同时作用于友方和敌人。"
+      },
+      {
+        "id": "smokeGrenade",
+        "name": "烟雾弹",
+        "values": [
+          "延迟: 0.5",
+          "持续时间: 4",
+          "范围: 400"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "使得一个区域中的敌人或友方沉默。"
+      },
+      {
+        "id": "incendiaryGrenade",
+        "name": "燃烧弹",
+        "values": [
+          "持续时间: 6",
+          "每秒伤害: 50",
+          "移动速度减缓: 70%",
+          "范围: 550"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "将一块区域置于烈火之中，对友方和敌人造成减速和持续伤害。"
+      },
+      {
+        "id": "riotShield",
+        "name": "防暴盾",
+        "values": [
+          "伤害减免: 50%",
+          "持续时间: 5",
+          "范围: 500"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "伤害减免将在一定持续时间内同时对区域中的友方和敌人生效。"
+      }
+    ]
+  },
+  {
+    "id": "dazzle",
+    "name": "戴泽",
+    "universe": "dota",
+    "complexity": "easy",
+    "unlock": "free",
+    "unlock_text": "此神是免费永久解锁的",
+    "health": 200,
+    "powers": [
+      {
+        "id": "shallowGrave",
+        "name": "薄葬",
+        "values": [
+          "持续时间: 1 / 2 / 3 / 4 / 4",
+          "薄葬后治疗: 0 / 0 / 0 / 0 / 250",
+          "薄葬级别: 1 / 2 / 3 / 4 / 4",
+          "阈值: 20%"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "对首个生命值降低至 20% 阈值以下的友方施放薄葬。持续时间根据商店级别确定。"
+      },
+      {
+        "id": "cheatingDeath",
+        "name": "欺骗死亡",
+        "values": [],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "你的神将在致命打击中幸存（生命值降低至 1）。"
+      }
+    ]
+  },
+  {
+    "id": "donkeyAghanim",
+    "name": "驴子阿哈利姆",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "plus",
+    "unlock_text": "订阅 PLUS 后此神将临时解锁。如果其从神之宝箱中掉落则会永久解锁",
+    "health": 200,
+    "powers": [
+      {
+        "id": "sorceryVolumeTwo",
+        "name": "假人巫术: 第二卷",
+        "values": [
+          "商店升级额外费用: 20%",
+          "每个英雄的最大终极技能数: 0 / 0 / 2 / 3 / 4"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "英雄可使用多个终极技能，但商店升级将更加昂贵"
+      }
+    ]
+  },
+  {
+    "id": "drKleiner",
+    "name": "克莱纳博士",
+    "universe": "half_life",
+    "complexity": "intermediate",
+    "unlock": "battlepass",
+    "unlock_text": "神将通过达到战场通行证等级而永久解锁",
+    "health": 200,
+    "powers": [
+      {
+        "id": "research",
+        "name": "研究",
+        "values": [],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "你无法正常重选。购买法术时尚店将自动重选。最初概念: Pio_Romero"
+      },
+      {
+        "id": "breakthrough",
+        "name": "突破！",
+        "values": [
+          "永久智力: 3",
+          "需要的法术出售数: 5"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "在出售了一定数量的法术后所有英雄都将获得永久智力增益。最初概念: Pio_Romero"
+      }
+    ]
+  },
+  {
+    "id": "facelessVoid",
+    "name": "虚空假面",
+    "universe": "dota",
+    "complexity": "advanced",
+    "unlock": "battlepass",
+    "unlock_text": "神将通过达到战场通行证等级而永久解锁",
+    "health": 200,
+    "powers": [
+      {
+        "id": "timesBond",
+        "name": "时间纽带",
+        "values": [
+          "充能: 0 / 1 / 1 / 2 / 2"
+        ],
+        "type_string": "主动（技能目标）",
+        "type": "abilityTarget",
+        "desc": "选择商店中的法术以将其单独锁定。你拥有会随着商店级别调整数量但数量有限且的锁"
+      },
+      {
+        "id": "marchOfTime",
+        "name": "时间向前",
+        "values": [
+          "几率: 30%",
+          "金币消耗降低: 1"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "每次重选时，每个受到时间纽带影响的法术都将有单独的几率得到金币花费减免。"
+      }
+    ]
+  },
+  {
+    "id": "gambler",
+    "name": "赌徒",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "chest",
+    "unlock_text": "此神将从神之宝箱中掉落且永久解锁",
+    "health": 200,
+    "powers": [
+      {
+        "id": "allIn",
+        "name": "掷骰子",
+        "values": [
+          "最大金币赌注: 4 / 6 / 8 / 10 / 12",
+          "最小金币赌注: 2 / 3 / 4 / 5 / 6"
+        ],
+        "type_string": "主动（无目标）",
+        "type": "noTarget",
+        "desc": "在下次战斗前先下个注吧。如果你赢得了下一回合，则可在接下来的购买阶段获得金币。如果您输了，也会在后面的回合中获得少量金币。金币数量值的范围将根据你的商店级别确定。"
+      }
+    ]
+  },
+  {
+    "id": "glados",
+    "name": "GLaDOS",
+    "universe": "portal",
+    "complexity": "advanced",
+    "unlock": "chest",
+    "unlock_text": "此神将从神之宝箱中掉落且永久解锁",
+    "health": 200,
+    "powers": [
+      {
+        "id": "orangePortal",
+        "name": "橙色传送门",
+        "values": [
+          "法术偷取（小兵）: 10% / 12.5% / 15% / 17.5% / 20%",
+          "法术偷取（英雄）: 20% / 25% / 30% / 35% / 40%"
+        ],
+        "type_string": "主动（单位目标）",
+        "type": "unitTarget",
+        "desc": "以橙色传送门指向目标。其会获得法术偷取，且会与蓝色传送门单位共享所有治疗和回复效果。如果两种增益都被放置在同一个单位上，则法术偷取不会叠加。"
+      },
+      {
+        "id": "bluePortal",
+        "name": "蓝色传送门",
+        "values": [
+          "法术偷取（小兵）: 10% / 12.5% / 15% / 17.5% / 20%",
+          "法术偷取（英雄）: 20% / 25% / 30% / 35% / 40%"
+        ],
+        "type_string": "主动（单位目标）",
+        "type": "unitTarget",
+        "desc": "以蓝色传送门指向目标。其会获得法术偷取，且会与橙色传送门单位共享所有治疗和回复效果。如果两种增益都被放置在同一个单位上，则法术偷取不会叠加。"
+      }
+    ]
+  },
+  {
+    "id": "icefrog",
+    "name": "冰蛙",
+    "universe": "dota",
+    "complexity": "advanced",
+    "unlock": "none",
+    "unlock_text": "为什么你会看到这位神？",
+    "health": 200,
+    "powers": [
+      {
+        "id": "devMode",
+        "name": "开发人员模式",
+        "values": [
+          "技能池: 20",
+          "提供的技能: 5",
+          "重选: 1"
+        ],
+        "type_string": "主动（无目标）",
+        "type": "noTarget",
+        "desc": "游戏开始时玩家将可从 5 个禁用法术中选择一个。在游戏的剩余时间中，所选择的技能会有 20 份副本被添加至其法术池中。无论何时在商店中购买此技能，其都将被自动附加至平衡一切技能中。\n        \n        切换此技能将改变所选禁用法术的优先级顺序。最初概念: ubRtstcl"
+      },
+      {
+        "id": "balanceInAllThings",
+        "name": "平衡一切",
+        "values": [
+          "商店级别: 2 / 3 / 5"
+        ],
+        "type_string": "主动（单位目标）",
+        "type": "unitTarget",
+        "desc": "所选单位将获得所有禁用技能的已购买版本以作为额外法术。这不会计入 4 个的英雄法术数限制。在特定级别升级商店也会为此技能增加一点。最初概念: ubRtstcl"
+      }
+    ]
+  },
+  {
+    "id": "jmuy",
+    "name": "智者 J'Muy",
+    "universe": "artifact",
+    "complexity": "advanced",
+    "unlock": "chest",
+    "unlock_text": "此神将从神之宝箱中掉落且永久解锁",
+    "health": 200,
+    "powers": [
+      {
+        "id": "wisdomOfTheElders",
+        "name": "长者的智慧",
+        "values": [
+          "冷却时间缩短: 25% / 30% / 35% / 40% / 45%"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "技能冷却时间现会在回合之间暂停，但所有技能的冷却时间都有所缩短。冷却时间缩短程度将随着商店等级调整。"
+      }
+    ]
+  },
+  {
+    "id": "kanna",
+    "name": "卡娜",
+    "universe": "artifact",
+    "complexity": "intermediate",
+    "unlock": "free",
+    "unlock_text": "此神是免费永久解锁的",
+    "health": 200,
+    "powers": [
+      {
+        "id": "preyOnTheWeak",
+        "name": "猎捕弱者",
+        "values": [
+          "每召唤物攻击速度: 5"
+        ],
+        "type_string": "主动（单位目标）",
+        "type": "unitTarget",
+        "desc": "所选英雄为每个友方召唤物获得 5 攻击速度。召唤生物也会获得相同的效果。如果任何召唤物死亡，你将丢失攻击速度。"
+      }
+    ]
+  },
+  {
+    "id": "ladyAnshu",
+    "name": "安苏夫人",
+    "universe": "artifact",
+    "complexity": "intermediate",
+    "unlock": "chest",
+    "unlock_text": "此神将从神之宝箱中掉落且永久解锁",
+    "health": 200,
+    "powers": [
+      {
+        "id": "hymnOfStCrella",
+        "name": "圣克雷拉赞歌",
+        "values": [
+          "重生生命值: 15%"
+        ],
+        "type_string": "主动（单位目标）",
+        "type": "unitTarget",
+        "desc": "所选英雄死亡时会将所有阵亡的友方英雄复活，复活后的生命值会降低。"
+      }
+    ]
+  },
+  {
+    "id": "legionCommander",
+    "name": "军团指挥官",
+    "universe": "dota",
+    "complexity": "easy",
+    "unlock": "free",
+    "unlock_text": "此神是免费永久解锁的",
+    "health": 200,
+    "powers": [
+      {
+        "id": "stonehallPike",
+        "name": "石堂城长枪",
+        "values": [
+          "伤害: 4 / 7 / 10 / 13 / 16 / 19",
+          "每级别所需点数: 0 / 15 / 30 / 45 / 60 / 75"
+        ],
+        "type_string": "主动（单位目标）",
+        "type": "unitTarget",
+        "desc": "军团指挥官神每回合都会根据团队拥有的总法术点数获得伤害。所选友方英雄将获得此伤害增益。"
+      }
+    ]
+  },
+  {
+    "id": "lifestealer",
+    "name": "噬魂鬼",
+    "universe": "dota",
+    "complexity": "easy",
+    "unlock": "chest",
+    "unlock_text": "此神将从神之宝箱中掉落且永久解锁",
+    "health": 200,
+    "powers": [
+      {
+        "id": "infest",
+        "name": "感染",
+        "values": [
+          "感染爆裂伤害: 0 / 75 / 150 / 225 / 300",
+          "感染爆裂半径: 400",
+          "持续时间: 0 / 1 / 2 / 3 / 4",
+          "攻击间隔: 0.75",
+          "每秒最大生命值回复: 10%",
+          "生命值阈值: 50"
+        ],
+        "type_string": "主动（单位目标）",
+        "type": "unitTarget",
+        "desc": "在所选单位的生命值达到 50% 时，其会在 duration 秒内自动跳入一名随机敌方英雄，每秒造成物理伤害。同时还能每秒回复 10% 的最大生命值。持续时间结束后，单位将被弹出，在 400 AOE 内造成 0/75/150/225/300 伤害。"
+      }
+    ]
+  },
+  {
+    "id": "medic",
+    "name": "医务人员",
+    "universe": "teamFortress",
+    "complexity": "intermediate",
+    "unlock": "battlepass",
+    "unlock_text": "神将通过达到战场通行证等级而永久解锁",
+    "health": 200,
+    "powers": [
+      {
+        "id": "uberCharge",
+        "name": "优步充能",
+        "values": [
+          "增益持续时间: 1.5",
+          "治疗阈值: 300"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "每次一个英雄获得了闪击战目标特定治疗量后，其都将临时获得技能免疫。"
+      },
+      {
+        "id": "blitzkrieg",
+        "name": "闪击战",
+        "values": [
+          "伤害放大: 6% / 7% / 8% / 9% / 10%",
+          "叠加时间: 12",
+          "治疗阈值: 300"
+        ],
+        "type_string": "主动（单位目标）",
+        "type": "unitTarget",
+        "desc": "每次所选单位为其队伍提供一定治疗量时，闪击战目标都将获得临时性的伤害加强叠加。这些叠加将单独作用。不会在吸血上生效。"
+      }
+    ]
+  },
+  {
+    "id": "muerta",
+    "name": "穆尔塔",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "free",
+    "unlock_text": "此神是免费永久解锁的",
+    "health": 200,
+    "powers": [
+      {
+        "id": "phantomsTouch",
+        "name": "欢迎之触",
+        "values": [
+          "基础致命一击: 150%",
+          "每次伤害致命一击: 0.1%",
+          "范围: 500",
+          "触发攻击次数: 8"
+        ],
+        "type_string": "主动（单位目标）",
+        "type": "unitTarget",
+        "desc": "描述: 每 8 次攻击后，所选单位将会造成魔法伤害溅射致命一击。致命一击伤害将根据队伍对敌方英雄所造成的的法术伤害量计算。当第 8 次伤害造成时，致命伤害百分比将重置。"
+      }
+    ]
+  },
+  {
+    "id": "naturesProphet",
+    "name": "先知",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "none",
+    "unlock_text": "为什么你会看到这位神？",
+    "health": 200,
+    "powers": [
+      {
+        "id": "teleportation",
+        "name": "先知",
+        "values": [],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "你可将英雄放至在棋盘上的任何位置。"
+      }
+    ]
+  },
+  {
+    "id": "ogreMagi",
+    "name": "食人魔法师",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "free",
+    "unlock_text": "此神是免费永久解锁的",
+    "health": 200,
+    "powers": [
+      {
+        "id": "multicast",
+        "name": "多重施法",
+        "values": [
+          "几率: 35 / 45 / 55 / 65 / 75 / 100",
+          "每级别所需点数: 0 / 20 / 40 / 60 / 80 / 100"
+        ],
+        "type_string": "主动（单位目标）",
+        "type": "unitTarget",
+        "desc": "所选单位有几率多重施法。几率取决于团队所拥有的的总法术点数。"
+      }
+    ]
+  },
+  {
+    "id": "phantomAssassin",
+    "name": "幻影刺客",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "chest",
+    "unlock_text": "此神将从神之宝箱中掉落且永久解锁",
+    "health": 200,
+    "powers": [
+      {
+        "id": "veiledPact",
+        "name": "隐匿之契",
+        "values": [
+          "致命一击伤害增加距离: 10",
+          "致命一击伤害: 2.5%",
+          "致命一击几率: 20%"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "你的单位有机会对敌人造成致命一击。其将会根据前进单位数获得致命一击伤害。此增益将持续整个回合。"
+      }
+    ]
+  },
+  {
+    "id": "prellex",
+    "name": "普雷利克斯",
+    "universe": "artifact",
+    "complexity": "easy",
+    "unlock": "battlepass",
+    "unlock_text": "神将通过达到战场通行证等级而永久解锁",
+    "health": 200,
+    "powers": [
+      {
+        "id": "bringerOfTheFaithful",
+        "name": "信徒的使者",
+        "values": [
+          "伤害: 15",
+          "每回合基础伤害: 6",
+          "生命值: 550 / 750 / 950 / 1150 / 1350",
+          "魔法值: 200 / 400 / 600 / 800 / 1000",
+          "魔法抗性: 50%"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "游戏开始时你将获得 1 名近战小兵。每次升级商店时都将可从 3 名中立生物中选择 1 个。所选中立小兵的技能将被永久添加至你的小兵身上。小兵选择及你的近战小兵数据会随着商店级别的提升而改善。小兵将每回合获得伤害"
+      }
+    ]
+  },
+  {
+    "id": "primalBeast",
+    "name": "獸",
+    "universe": "dota",
+    "complexity": "easy",
+    "unlock": "battlepass",
+    "unlock_text": "神将通过达到战场通行证等级而永久解锁",
+    "health": 200,
+    "powers": [
+      {
+        "id": "onslaught",
+        "name": "突进",
+        "values": [
+          "成本降低 1: 25%",
+          "成本降低 2: 15%",
+          "空槽: 30%",
+          "重选几率: 30%"
+        ],
+        "type_string": "主动（无目标）",
+        "type": "noTarget",
+        "desc": "獸会每回合可冲过商店，以毁灭性的力量破坏法术。法术将有机会重选和降价，也有可能被完全击飞，导致卡槽中什么都不剩。每个法术槽的结果都将单独考虑。最初概念: october"
+      }
+    ]
+  },
+  {
+    "id": "pudge",
+    "name": "帕吉",
+    "universe": "dota",
+    "complexity": "easy",
+    "unlock": "free",
+    "unlock_text": "此神是免费永久解锁的",
+    "health": 260,
+    "powers": [
+      {
+        "id": "beefyBoy",
+        "name": "强壮男孩",
+        "values": [],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "你的神将有更高的起始生命值。"
+      }
+    ]
+  },
+  {
+    "id": "rix",
+    "name": "瑞克斯，誓死不渝",
+    "universe": "artifact",
+    "complexity": "intermediate",
+    "unlock": "chest",
+    "unlock_text": "此神将从神之宝箱中掉落且永久解锁",
+    "health": 200,
+    "powers": [
+      {
+        "id": "oathed",
+        "name": "誓约",
+        "values": [
+          "伤害加成: 10 / 20 / 30 / 40 / 50"
+        ],
+        "type_string": "主动（单位目标）",
+        "type": "unitTarget",
+        "desc": "所选英雄被沉默且有伤害加成。如果所选单位被成功复活，那么伤害增益将翻倍。"
+      },
+      {
+        "id": "assault",
+        "name": "出击",
+        "values": [
+          "初始重生时间: 3",
+          "重生时间惩罚: 2",
+          "重生生命值: 50%"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "在誓约影响下的英雄被击杀时，只要另一个友方英雄依然存活，其就会在一段延迟后以降低的生命值被复活。复活后将在竞技场后方生成。每次复活都会增加额外的重生时间延迟。计时器将每回合重置一次。"
+      }
+    ]
+  },
+  {
+    "id": "roshan",
+    "name": "肉山",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "battlepass",
+    "unlock_text": "神将通过达到战场通行证等级而永久解锁",
+    "health": 200,
+    "powers": [
+      {
+        "id": "roshanTheImmortal",
+        "name": "不朽肉山",
+        "values": [],
+        "type_string": "主动（单位目标）",
+        "type": "unitTarget",
+        "desc": "所选英雄被替换为肉山。肉山的数据会随着游戏的进行而变化。单位的法术完全被肉山的技能替换。肉山的技能强度根据单位当前在槽中已装备的、与该技能相关的法术点数确定。\n        \n        卡槽 1: 解锁法术抵抗\n        卡槽 2: 解锁重击\n        卡槽 3: 解锁猛击\n        卡槽 4: 解锁不朽之守护\n\n        等级 1 技能所需点数: pointsToLevelOne\n        等级 2 技能所需点数: pointsToLevelTwo\n        等级 3 技能所需点数: pointsToLevelThree\n     "
+      }
+    ]
+  },
+  {
+    "id": "rubick",
+    "name": "拉比克",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "chest",
+    "unlock_text": "此神将从神之宝箱中掉落且永久解锁",
+    "health": 200,
+    "powers": [
+      {
+        "id": "spellSteal",
+        "name": "技能窃取",
+        "values": [
+          "每级别所需点数: 0 / 8 / 16 / 24 / 32 / 40 / 48 / 56 / 64"
+        ],
+        "type_string": "主动（单位目标）",
+        "type": "unitTarget",
+        "desc": "所选单位获得法术窃取，其会根据你所拥有的的总法术点数进行升级。技能窃取不会计入 4 个的英雄法术数限制。"
+      }
+    ]
+  },
+  {
+    "id": "runeGod",
+    "name": "符文神",
+    "universe": "dota",
+    "complexity": "easy",
+    "unlock": "chest",
+    "unlock_text": "此神将从神之宝箱中掉落且永久解锁",
+    "health": 200,
+    "powers": [
+      {
+        "id": "fillBottle",
+        "name": "瓶中物",
+        "values": [
+          "回复魔法阈值: 90%",
+          "水疗阈值: 90%",
+          "符文赏金金币: 3",
+          "隐形背刺: 50"
+        ],
+        "type_string": "主动（单位目标）",
+        "type": "unitTarget",
+        "desc": "所选单位在战斗开始时获得随机符文。每次商店升级都会提供更多符文。\n        第 4 级符文: 急速之水（承受伤害时触发）。\n        第 3 级符文: 隐形（在隐形状态攻击将造成额外伤害）、再生（消耗法力时触发）。\n        第 2 级符文: 赏金（下一回合为玩家提供额外金币）、幻象。\n        第 1 级符文: 奥术、双重伤害。\n\n        商店级别 1: 瓶子是空的。\n        商店级别 2: 获得第 4 级符文。\n        商店级别 3: 获得第 3 级和第 4 级符文。\n        商店级别 4: 获得第 2 级、第 3 级和第 4 级符文。\n        商店级别 5: 获得第 1 级、第 2 级、第 3 级和第 4 级符文。"
+      }
+    ]
+  },
+  {
+    "id": "santaGreevil",
+    "name": "圣诞贪魔",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "plus",
+    "unlock_text": "订阅 PLUS 后此神将临时解锁。如果其从神之宝箱中掉落则会永久解锁",
+    "health": 200,
+    "powers": [
+      {
+        "id": "giftExchange",
+        "name": "礼物交换",
+        "values": [],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "每次战斗开始时会自动交换其礼物。敌方玩家有 5 秒窗口来接受或拒绝。\n\t\n\t战斗胜利者将获得好礼物，失败者将获得坏礼物。\n\t\n\t礼物允许你选择 3 个随机效果之一以用于自己的阵容。\n\t\n\t即使是敌人拒绝交换，圣诞贪魔也会获得礼物。 \n    "
+      }
+    ]
+  },
+  {
+    "id": "selemene",
+    "name": "月亮女神",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "free",
+    "unlock_text": "此神是免费永久解锁的",
+    "health": 200,
+    "powers": [
+      {
+        "id": "darkMoonBlessing",
+        "name": "暗月祝福",
+        "values": [
+          "技能增强: 0.015%"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "每次友方英雄消耗魔法时，你的所有英雄都会获得 0.015% 法术加强。增益每回合重置。"
+      }
+    ]
+  },
+  {
+    "id": "shopkeeper",
+    "name": "店主",
+    "universe": "dota",
+    "complexity": "advanced",
+    "unlock": "pay",
+    "unlock_text": "此神将可使用特定数量的硬币来永久解锁",
+    "health": 200,
+    "powers": [
+      {
+        "id": "letsMakeADeal",
+        "name": "讲讲价",
+        "values": [
+          "出售技能赏金: 1",
+          "商店技能成本: 2",
+          "商店空槽 2 / 3 / 4"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "你只能将商店升级至 3 级，但所有法术会消耗 2 金币（且出售价格为 1）。出现在商店中的法术数量也将降低至 2/3/4。"
+      }
+    ]
+  },
+  {
+    "id": "sorlaKhan",
+    "name": "索拉可汗",
+    "universe": "artifact",
+    "complexity": "intermediate",
+    "unlock": "chest",
+    "unlock_text": "此神将从神之宝箱中掉落且永久解锁",
+    "health": 200,
+    "powers": [
+      {
+        "id": "warmonger",
+        "name": "战争贩子",
+        "values": [
+          "伤害加成: 8%",
+          "每次叠加所需伤害: 50%",
+          "额外对神伤害: 2%"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "索拉可汗对其他神额外造成 每存活友方英雄 2% 的伤害。她每造成 50 伤害，队伍就会获得一次 8% 攻击伤害增益叠加。"
+      }
+    ]
+  },
+  {
+    "id": "techies",
+    "name": "工程师",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "chest",
+    "unlock_text": "此神将从神之宝箱中掉落且永久解锁",
+    "health": 200,
+    "powers": [
+      {
+        "id": "techiesRandomizer",
+        "name": "工程师爆破",
+        "values": [
+          "解锁的商店级别: 2 / 4 / 5"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": ""
+      },
+      {
+        "id": "techiesStickyBomb",
+        "name": "斯奎的粘性炸弹",
+        "values": [
+          "伤害阈值: 350"
+        ],
+        "type_string": "主动（单位目标）",
+        "type": "unitTarget",
+        "desc": "每对一个敌方单位在成 350 法术伤害，就会对其施加等级 2 粘性炸弹。"
+      },
+      {
+        "id": "techiesReactiveTazer",
+        "name": "斯布伦的活性电击",
+        "values": [
+          "触发冷却时间: 8",
+          "触发几率: 15"
+        ],
+        "type_string": "主动（单位目标）",
+        "type": "unitTarget",
+        "desc": "受到敌人攻击时有 15% 几率触发等级 1 活性电击。有 8 秒冷却时间。"
+      },
+      {
+        "id": "techiesProximityMine",
+        "name": "斯布林的感应地雷",
+        "values": [
+          "地雷伤害减免: 25",
+          "触发几率: 15"
+        ],
+        "type_string": "主动（单位目标）",
+        "type": "unitTarget",
+        "desc": "在攻击目标时，有 15% 的几率在你正前方放置一个等级 1 感应地雷。感应地雷伤害降低25%。"
+      }
+    ]
+  },
+  {
+    "id": "terrorist",
+    "name": "恐怖分子",
+    "universe": "counterStrike",
+    "complexity": "easy",
+    "unlock": "battlepass",
+    "unlock_text": "神将通过达到战场通行证等级而永久解锁",
+    "health": 200,
+    "powers": [
+      {
+        "id": "plantBomb",
+        "name": "放下炸弹",
+        "values": [
+          "爆炸伤害: 80% / 70% / 60% / 50% / 40%",
+          "计时器: 20 / 18 / 16 / 14 / 12"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "炸弹将在回合开始时放置且开启定时器。如果你在计时器时间结束前失败，炸弹就会被解除。不过，如果计时器时间耗尽，则炸弹会爆炸并对所有敌方单位造成非致命伤害。计时器与爆炸伤害将随商店级别进行调整。"
+      },
+      {
+        "id": "clutchPlay",
+        "name": "成败在此一举",
+        "values": [
+          "金币获得: 3"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "如果炸弹爆炸且恐怖分子获得胜利，那么他们就将在下一回合中获得金币。如果对手拆除了炸弹，那么对手将在下一回合中获得金币。"
+      }
+    ]
+  },
+  {
+    "id": "tinker",
+    "name": "修补匠",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "pay",
+    "unlock_text": "此神将可使用特定数量的硬币来永久解锁",
+    "health": 200,
+    "powers": [
+      {
+        "id": "rearm",
+        "name": "再装填",
+        "values": [
+          "重选成本: 0",
+          "重选次数: 10 / 8 / 6 / 4 / 2"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "每回合的重新选取成本下降，直至你购买物品或重选一定次数后。"
+      }
+    ]
+  },
+  {
+    "id": "tomeGod",
+    "name": "典籍神",
+    "universe": "dota",
+    "complexity": "easy",
+    "unlock": "none",
+    "unlock_text": "为什么你会看到这位神？",
+    "health": 200,
+    "powers": [
+      {
+        "id": "tomeOfKnowledge",
+        "name": "知识典籍",
+        "values": [
+          "每场游戏使用次数: 1"
+        ],
+        "type_string": "主动（无目标）",
+        "type": "noTarget",
+        "desc": "免费将你的商店升至下一级。"
+      },
+      {
+        "id": "tomeOfExperience",
+        "name": "经验典籍",
+        "values": [],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "每次升级商店时英雄都能额外升一级。"
+      }
+    ]
+  },
+  {
+    "id": "towerGod",
+    "name": "防御塔神",
+    "universe": "dota",
+    "complexity": "easy",
+    "unlock": "free",
+    "unlock_text": "此神是免费永久解锁的",
+    "health": 200,
+    "powers": [
+      {
+        "id": "building",
+        "name": "建筑物",
+        "values": [
+          "最小范围: 850"
+        ],
+        "type_string": "主动（单位目标）",
+        "type": "unitTarget",
+        "desc": "战斗开始后，所选单位将被定住且无法移动，其攻击范围也会被设置为最小值。如果你是最后一名幸存的英雄，或者面对的也是防御塔神，那么定住效果将失效。激活此技能将启用您的防御符文被动效果。由亲爱的朋友 PyrionFlax 友情建议"
+      },
+      {
+        "id": "fortification",
+        "name": "防御符文",
+        "values": [
+          "无敌持续时间: 1.75"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "英雄死亡时所有剩余英雄将暂时免疫一切类型的伤害。此技能仅会在使用建造技能且建筑物单位处于活动状态时生效。由亲爱的朋友 PyrionFlax 友情建议"
+      }
+    ]
+  },
+  {
+    "id": "toyPudge",
+    "name": "玩具帕吉",
+    "universe": "dota",
+    "complexity": "intermediate",
+    "unlock": "chest",
+    "unlock_text": "此神将从神之宝箱中掉落且永久解锁",
+    "health": 200,
+    "powers": [
+      {
+        "id": "patchworkPlague",
+        "name": "拼接瘟疫",
+        "values": [
+          "法术伤害增加距离: 12",
+          "法术伤害: 0.1%"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "敌方英雄每移动一个单位就会承担更高法术伤害。此增益将持续整个回合。"
+      }
+    ]
+  },
+  {
+    "id": "vacationAghanim",
+    "name": "假期阿哈利姆",
+    "universe": "dota",
+    "complexity": "easy",
+    "unlock": "battlepass",
+    "unlock_text": "神将通过达到战场通行证等级而永久解锁",
+    "health": 200,
+    "powers": [
+      {
+        "id": "sorceryVolumeFive",
+        "name": "假人巫术: 第五卷",
+        "values": [
+          "几率: 5%"
+        ],
+        "type_string": "被动",
+        "type": "passive",
+        "desc": "商店中的每个法术都有几率价值 2 点而不是 1 点。这些法术将花费 4 金币。"
+      }
+    ]
+  }
+]

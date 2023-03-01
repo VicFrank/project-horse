@@ -555,13 +555,13 @@
     "description": "The hero changes their attack style, switching to melee if ranged and vice versa. Melee attacks have a chance to ensnare, preventing the target from moving or using mobility spells. Berserker's Rage also grants heroes with melee attacks additional movement speed, armor, and decreases base attack time.",
     "differences": "Berserker's Rage switches the hero's attack style to melee if ranged and vice versa.",
     "values": [
-      "BONUS ARMOR: 4 / 5 / 7",
-      "BONUS MOVE SPEED: 15 / 25 / 45",
+      "BONUS ARMOR: 4 / 8 / 16",
+      "BONUS MOVE SPEED: 25 / 50 / 100",
       "ENSNARE CHANCE: 14% / 16% / 20%",
       "ENSNARE DURATION: 0.8 / 1.2 / 2",
-      "MELEE ATTACK RANGE: 150",
+      "MELEE ATTACK RANGE: 200",
       "MELEE BASE ATTACK TIME: 1.4",
-      "RANGED ATTACK RANGE: 200 / 300 / 500"
+      "RANGED ATTACK RANGE: 300 / 400 / 600"
     ],
     "cooldowns": [],
     "manaCost": [],
@@ -635,7 +635,7 @@
       90
     ],
     "superUpgrade": "Super: +80 damage per second, +75 radius, magic immunity now lasts through the entire spin.",
-    "gabenUpgrade": "Gaben: -8s cooldown, Blade Fury now increases movespeed by 100 and attacks enemies within its area of effect at 100% of power every 1 seconds."
+    "gabenUpgrade": "Gaben: -6s cooldown, Blade Fury now increases movespeed by 100 and attacks enemies within its area of effect at 100% of power every 1 seconds."
   },
   {
     "name": "Blast Off!",
@@ -914,7 +914,7 @@
       "PIERCES SPELL IMMUNITY: No",
       "DISPELLABLE: Strong Dispels Only"
     ],
-    "description": "The hero sets their weapons aflame, dealing damage over time with their regular attack. Multiple attacks will stack additional damage. Each attack drains some of thier health.",
+    "description": "The hero sets their weapons aflame, dealing damage over time with their regular attack. Multiple attacks will stack additional damage. Each attack drains some of their health.",
     "differences": "",
     "values": [
       "BURN DAMAGE PER SECOND: 5 / 10 / 20",
@@ -923,7 +923,7 @@
     ],
     "cooldowns": [],
     "manaCost": [],
-    "superUpgrade": "Super: For each attack with Burning Spears, enemies within a 400 unit radius from the hero gains stacks of Burning Spear. Does not count towards self-damage.",
+    "superUpgrade": "Super: For each attack with Burning Spears, enemies within a 400 unit radius from the attacker gains stacks of Burning Spear. Does not count towards self-damage.",
     "gabenUpgrade": "Gaben: Burning Spears now deals Pure Damage and pierces Spell Immunity."
   },
   {
@@ -1413,9 +1413,9 @@
     "description": "Night Stalker horrifies all nearby enemies, causing them to become silenced while near him. The effect lasts longer at night.",
     "differences": "Always maximum effectiveness as if it was night.",
     "values": [
-      "AURA RADIUS: 375",
-      "DAY DURATION: 3 / 4 / 6",
-      "NIGHT DURATION: 4.5 / 5 / 6"
+      "AURA RADIUS: 325",
+      "DAY DURATION: 3 / 3 / 3",
+      "NIGHT DURATION: 3 / 4 / 6"
     ],
     "cooldowns": [
       30,
@@ -1425,7 +1425,7 @@
     "manaCost": [
       50
     ],
-    "superUpgrade": "Super: 50% miss chance to affected enemies, -5 cooldown.",
+    "superUpgrade": "Super: 50% miss chance to affected enemies, -5 cooldown, and +50 radius.",
     "gabenUpgrade": "Gaben: Passively casts a level 4 Void every 4 seconds in a 550 AOE."
   },
   {
@@ -1509,7 +1509,7 @@
     "description": "The hero casts an ancient fae curse on the target. After a delay, the target and nearby enemies are stunned.",
     "differences": "",
     "values": [
-      "DELAY: 4",
+      "DELAY: 3",
       "STUN DURATION: 1.5 / 2 / 3",
       "STUN RADIUS: 360"
     ],
@@ -1873,7 +1873,7 @@
       300
     ],
     "superUpgrade": "Super: Increases damage by 30 and applies Break for the duration of Doom.",
-    "gabenUpgrade": "Gaben: Doom is now self-cast and affects all enemies within 325 units from the caster."
+    "gabenUpgrade": "Gaben: Doom is now self-cast, has 0 cast point, and affects all enemies within 325 units from the caster."
   },
   {
     "name": "Double Edge",
@@ -2943,6 +2943,39 @@
     "gabenUpgrade": "Gaben: Every 2 attacks on an enemy applies 1 stack to all other enemies."
   },
   {
+    "name": "Gaben's Strength",
+    "id": "custom_sven_gods_strength",
+    "icon": "sven_gods_strength",
+    "tags": [
+      "ultimate",
+      "attackDamage",
+      "magicImmunity",
+      "stun"
+    ],
+    "categories": [
+      "ABILITY: No Target",
+      "DISPELLABLE: Strong Dispels Only"
+    ],
+    "description": "The hero channels their rogue strength, granting bonus damage for a duration.",
+    "differences": "",
+    "values": [
+      "BONUS DAMAGE: 75% / 100% / 125%",
+      "DURATION: 35"
+    ],
+    "cooldowns": [
+      105,
+      100,
+      95
+    ],
+    "manaCost": [
+      100,
+      150,
+      200
+    ],
+    "superUpgrade": "Super: Gaben's Strength also grants spell immunity for 4 seconds.",
+    "gabenUpgrade": "Gaben: For every 500 damage accumulated from attacking while in Gaben's Strength, a Storm Bolt is hurled towards the hero's target (3s cooldown)."
+  },
+  {
     "name": "Ghostship",
     "id": "kunkka_ghostship",
     "icon": "kunkka_ghostship",
@@ -3075,39 +3108,6 @@
     ],
     "superUpgrade": "Super: Increases crit by 65 and slow duration by 1.5s. Reduces cooldown by 4s.",
     "gabenUpgrade": "Gaben: Targets are stunned for 1s and break for 1s."
-  },
-  {
-    "name": "God's Strength",
-    "id": "custom_sven_gods_strength",
-    "icon": "sven_gods_strength",
-    "tags": [
-      "ultimate",
-      "attackDamage",
-      "magicImmunity",
-      "stun"
-    ],
-    "categories": [
-      "ABILITY: No Target",
-      "DISPELLABLE: Strong Dispels Only"
-    ],
-    "description": "The hero channels their rogue strength, granting bonus damage for a duration.",
-    "differences": "",
-    "values": [
-      "BONUS DAMAGE: 120% / 160% / 200%",
-      "DURATION: 35"
-    ],
-    "cooldowns": [
-      105,
-      100,
-      95
-    ],
-    "manaCost": [
-      100,
-      150,
-      200
-    ],
-    "superUpgrade": "Super: God's Strength also grants spell immunity for 5 seconds.",
-    "gabenUpgrade": "Gaben: For every 500 damage accumulated from attacking while in God's Strength, a Storm Bolt is hurled towards the hero's target (3s cooldown)."
   },
   {
     "name": "Grave Chill",
@@ -3354,7 +3354,7 @@
     "differences": "Debuff is shorter, but damage over time is increased.",
     "values": [
       "FROSTBITTEN DAMAGE PER SECOND: 10 / 20 / 30",
-      "FROSTBITTEN DURATION: 3 / 5 / 7",
+      "FROSTBITTEN DURATION: 5 / 7 / 9",
       "IMPACT DAMAGE: 100 / 150 / 200",
       "SHATTER HEALTH THRESHOLD: 12% / 13% / 14%"
     ],
@@ -3401,7 +3401,7 @@
     "manaCost": [
       100
     ],
-    "superUpgrade": "Super: +0.5s Duration, -2.5 CD, +1000 range.",
+    "superUpgrade": "Super: +0.5s Duration, and +1000 range.",
     "gabenUpgrade": "Gaben: Creates a level 2 Macropyre on top of the Ice Path."
   },
   {
@@ -3545,7 +3545,8 @@
     "tags": [
       "passive",
       "attackSpeed",
-      "buff"
+      "buff",
+      "lifesteal"
     ],
     "categories": [
       "ABILITY: Passive",
@@ -3751,7 +3752,7 @@
       90,
       110
     ],
-    "superUpgrade": "Super: Turns into an area of effect spell where the hero spills a green puddle that leeches in a 350 unit radius. Increases movement slow by 15% and damage/heal per second by 100.",
+    "superUpgrade": "Super: Turns into an area of effect spell where the hero spills a green puddle that leeches in a 300 unit radius. Increases movement slow by 15% and damage/heal per second by 50.",
     "gabenUpgrade": "Gaben: Leech Seed lasts indefinitely."
   },
   {
@@ -4485,7 +4486,7 @@
       "MAX DPS DURATION: 4",
       "MAX DPS: 15 / 30 / 60",
       "MIN DPS: 15 / 20 / 30",
-      "RADIUS: 300"
+      "RADIUS: 400"
     ],
     "cooldowns": [
       14
@@ -4860,7 +4861,8 @@
       "healing",
       "attackSpeed",
       "dispel",
-      "magicImmunity"
+      "magicImmunity",
+      "buff"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -4915,8 +4917,8 @@
     "manaCost": [
       70
     ],
-    "superUpgrade": "Super: Grants Bloodstone.",
-    "gabenUpgrade": "Gaben: Grants Nihilism."
+    "superUpgrade": "Super: Casts level 2 Diabolic Edict while active.",
+    "gabenUpgrade": "Gaben: Grants Bloodstone."
   },
   {
     "name": "Pulverize",
@@ -5078,7 +5080,7 @@
       325
     ],
     "superUpgrade": "Super: Increases stun duration by 1s.",
-    "gabenUpgrade": "Gaben: Ravage comes back in, stunning a second time."
+    "gabenUpgrade": "Gaben: +600 radius. Ravage comes back in, stunning a second time."
   },
   {
     "name": "Reactive Armor",
@@ -5173,6 +5175,41 @@
     ],
     "superUpgrade": "Super: +9 HP regen per stack, +6 mana regen per stack, and +500 cast range. If the target dies under Reaper's Scythe, the caster regains health and mana equal to their current health and mana.",
     "gabenUpgrade": "Gaben: 100% of Reaper Scythe's damage is distributed to all enemies within 400 radius."
+  },
+  {
+    "name": "Rebound",
+    "id": "marci_companion_run",
+    "icon": "marci_companion_run",
+    "tags": [
+      "buff",
+      "stun",
+      "mobility"
+    ],
+    "categories": [
+      "ABILITY: Unit Target",
+      "DAMAGE TYPE: Magical",
+      "PIERCES SPELL IMMUNITY: No",
+      "DISPELLABLE: Cannot be dispelled"
+    ],
+    "description": "Vector targeted. Marci bounds to the targeted allied unit, choosing a direction and distance she will spring away from it. Upon reaching the unit, Marci lunges to her final destination, damaging and stunning enemies where she lands.\n\nThe ally receives 25% / 30% / 35% / 40% bonus movement speed for 5s.",
+    "differences": "AI: Targets closest ally and farthest enemy.",
+    "values": [
+      "CAST / JUMP RANGE: 450 / 550 / 750",
+      "IMPACT DAMAGE: 75 / 150 / 300",
+      "STUN DURATION: 0.9 / 1.3 / 2.1"
+    ],
+    "cooldowns": [
+      24,
+      20,
+      12
+    ],
+    "manaCost": [
+      70,
+      80,
+      100
+    ],
+    "superUpgrade": "Super: Ally affected will have their attack speed increased by 40 and armor increased by 10 for 5 seconds. +1000 Leap Distance range.",
+    "gabenUpgrade": "Gaben: Enemy units stunned will have a level 4 Dispose cast on them."
   },
   {
     "name": "Refraction",
@@ -5651,43 +5688,6 @@
     "gabenUpgrade": "Gaben: +2 charges."
   },
   {
-    "name": "Snowball",
-    "id": "custom_tusk_snowball",
-    "icon": "tusk_snowball",
-    "tags": [
-      "mobility",
-      "magicDamage",
-      "stun"
-    ],
-    "categories": [
-      "ABILITY: Unit Target",
-      "DAMAGE TYPE: Magical",
-      "PIERCES SPELL IMMUNITY: No",
-      "DISPELLABLE: Strong Dispels Only"
-    ],
-    "description": "The hero rolls into a snowball. Allies within a 200 radius are grabbed into the snowball. Any enemies caught in the snowball's path will be stunned and take damage. Each allied Hero in the snowball will add to its damage.",
-    "differences": "Snowball immediately launches after casting. AI: targets most backline unit.",
-    "values": [
-      "BASE DAMAGE: 80 / 140 / 260",
-      "BONUS DAMAGE PER ALLY: 25 / 50 / 100",
-      "GATHER RADIUS: 200",
-      "SNOWBALL SPEED: 625 / 650 / 700",
-      "STUN DURATION: 0.8 / 1 / 1.4"
-    ],
-    "cooldowns": [
-      21,
-      19,
-      15
-    ],
-    "manaCost": [
-      75,
-      75,
-      75
-    ],
-    "superUpgrade": "Super: -2s cooldown, +120 base damage. Heroes coming outside of Snowball gain 60 attack speed for 2 seconds.",
-    "gabenUpgrade": "Gaben: When Snowball finishes, it releases 8 Ice Shards around the caster, each dealing 280 magical damage."
-  },
-  {
     "name": "Soul Rip",
     "id": "custom_undying_soul_rip",
     "icon": "undying_soul_rip",
@@ -5803,8 +5803,8 @@
       "STOLEN DEBUFF AMP: 10% / 20% / 30%"
     ],
     "cooldowns": [
-      20,
       12,
+      8,
       4
     ],
     "manaCost": [
@@ -5887,7 +5887,8 @@
     "tags": [
       "lifesteal",
       "buff",
-      "stats"
+      "stats",
+      "summons"
     ],
     "categories": [
       "ABILITY: Passive"
@@ -5895,13 +5896,13 @@
     "description": "Links caster and their summons, sharing a percentage of their armor with each other, increasing the attack speed of both and causing damage dealt by the summons to heal the caster.",
     "differences": "Works with all summons on the caster with reduced attack speed and shared lifesteal.",
     "values": [
-      "BONUS ATTACK SPEED: 16 / 32 / 64",
+      "BONUS ATTACK SPEED: 14 / 28 / 56",
       "SHARED ARMOR: 8% / 12% / 20%",
-      "SHARED LIFESTEAL: 10% / 20% / 40%"
+      "SHARED LIFESTEAL: 7% / 14% / 28%"
     ],
     "cooldowns": [],
     "manaCost": [],
-    "superUpgrade": "Super: +30% shared Lifesteal, +30 attack speed.",
+    "superUpgrade": "Super: +20% shared Lifesteal, +30 attack speed.",
     "gabenUpgrade": "Gaben: Grants level 2 True Form."
   },
   {
@@ -6028,7 +6029,7 @@
     "manaCost": [
       100
     ],
-    "superUpgrade": "Super: Gains spell immunity during Starbreaker. +30 swipe damage.",
+    "superUpgrade": "Super: Gains spell immunity during Starbreaker. Grants Desolator.",
     "gabenUpgrade": "Gaben: Starbreaker now has 2 charges. +150 swipe and smash radius."
   },
   {
@@ -6121,8 +6122,8 @@
     "manaCost": [
       20
     ],
-    "superUpgrade": "Super: Attacks apply a stack of Sticky Napalm in a 375 AOE around target.",
-    "gabenUpgrade": "Gaben: Stacks infinitely."
+    "superUpgrade": "Super: Attacks apply a stack of Sticky Napalm to target.",
+    "gabenUpgrade": "Gaben: Stacks infinitely, and Sticky Napalm on attack now applies in a 375 AOE. "
   },
   {
     "name": "Stone Gaze",
@@ -6338,9 +6339,9 @@
     "values": [
       "DAMAGE PER STRIKE: 25 / 45 / 85",
       "DASH RANGE: 850",
-      "SLASH RANGE: 1000",
+      "SLASH RANGE: 850",
       "SLASH WIDTH: 125",
-      "STRIKES: 4"
+      "STRIKES: 3"
     ],
     "cooldowns": [
       20,
@@ -6352,8 +6353,8 @@
       80,
       90
     ],
-    "superUpgrade": "Super: Every 6 seconds, a Swashbuckle is automatically cast in the direction you are facing for half the number of slashes.",
-    "gabenUpgrade": "Gaben: Increases Slashes to 8 (passive component still halved)."
+    "superUpgrade": "Super: Every 6 seconds, a Swashbuckle is automatically cast in the direction you are facing for half the number of slashes (rouned up). This passive can be broken.",
+    "gabenUpgrade": "Gaben: Increases Slashes to 6 (passive component still halved)."
   },
   {
     "name": "Tag Team",
@@ -6955,7 +6956,8 @@
       "passive",
       "attackDamage",
       "spam",
-      "ultimate"
+      "ultimate",
+      "lifesteal"
     ],
     "categories": [
       "ABILITY: Passive",
@@ -7058,7 +7060,8 @@
     "values": [
       "CAST RANGE: 1500",
       "DAMAGE AMP PER STACK: 6% / 8% / 12%",
-      "DAMAGE PER AXE: 40 / 70 / 130"
+      "DAMAGE PER AXE: 40 / 70 / 130",
+      "DEBUFF DURATION: 12"
     ],
     "cooldowns": [
       8
@@ -7087,7 +7090,7 @@
       "DURATION: 1 / 2 / 4",
       "ENEMY SLOW RADIUS: 325",
       "ENEMY SLOW: -15% / -20% / -30%",
-      "EVASION: 100%",
+      "EVASION: 80%",
       "MOVE SPEED BONUS: 60%"
     ],
     "cooldowns": [
