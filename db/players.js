@@ -2350,6 +2350,24 @@ module.exports = {
             }
           }
         }
+      } else {
+        for (const [cosmeticID, count] of rewards) {
+          if (count > 0) {
+            const item = await Cosmetics.getCosmetic(cosmeticID);
+            const alreadyHasItem = await this.hasCosmetic(steamID, cosmeticID);
+
+            // refund the player with coins if they already have this item
+            if (alreadyHasItem) {
+              const refundAmounts = {
+                Finisher: 2500,
+                Terrain: 5000,
+              };
+              const refundAmount = refundAmounts[item.cosmetic_type] || 1000;
+              rewardsTransaction.coins = refundAmount;
+              rewardsTransaction[cosmeticID] = 0;
+            }
+          }
+        }
       }
       await this.doItemTransaction(steamID, rewardsTransaction);
 
