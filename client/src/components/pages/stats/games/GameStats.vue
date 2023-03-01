@@ -164,6 +164,7 @@ export default {
         },
       },
       { value: null, text: "------------", disabled: true },
+      // TODO: Pull these from common/patches.js
       {
         text: "Season 1",
         value: {
@@ -217,6 +218,22 @@ export default {
         value: {
           startDate: "2023-01-01",
           endDate: "2023-03-01",
+          graph: perPatchGraph,
+        },
+      },
+      {
+        text: "Season 4.5",
+        value: {
+          startDate: "2023-02-01",
+          endDate: "2023-03-01",
+          graph: perPatchGraph,
+        },
+      },
+      {
+        text: "Season 5",
+        value: {
+          startDate: "2023-03-01",
+          endDate: "2023-05-01",
           graph: perPatchGraph,
         },
       },

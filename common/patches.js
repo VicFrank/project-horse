@@ -7,6 +7,8 @@ module.exports = {
     { startDate: "2022-12-01", endDate: "2023-01-01", text: "Season 3" },
     { startDate: "2022-12-15", endDate: "2023-01-01", text: "Season 3.5" },
     { startDate: "2023-01-01", endDate: "2023-03-01", text: "Season 4" },
+    { startDate: "2023-02-01", endDate: "2023-03-01", text: "Season 4.5" },
+    { startDate: "2023-03-01", endDate: "2023-05-01", text: "Season 5" },
   ],
 
   MAJOR_PATCHES: [
@@ -14,5 +16,6 @@ module.exports = {
     { startDate: "2022-11-01", endDate: "2022-12-01", text: "Season 2" },
     { startDate: "2022-12-01", endDate: "2023-01-01", text: "Season 3" },
     { startDate: "2023-01-01", endDate: "2023-03-01", text: "Season 4" },
+    { startDate: "2023-03-01", endDate: "2023-05-01", text: "Season 5" },
   ],
 };

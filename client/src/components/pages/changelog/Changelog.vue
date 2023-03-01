@@ -11,7 +11,7 @@
           {{ getTime(change.timestamp * 1000) }}
         </h4>
         <ul>
-          <li v-for="line of change.lines" :key="line">{{ line }}</li>
+          <li v-for="(line, i) in change.lines" :key="change.timestamp + i">{{ line }}</li>
         </ul>
       </div>
     </div>

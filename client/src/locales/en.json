@@ -900,6 +900,7 @@
     "copyright": "© 2022 Double Edge Studios LLC"
   },
   "gods": {
+    "dataFile": "gods.json",
     "page_title": "Gods",
     "my_gods": "My Gods",
     "god": "God",

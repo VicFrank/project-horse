@@ -84,6 +84,7 @@ export default {
       { value: { startDate: this.daysAgo(30), endDate: this.daysAgo(0) }, text: "Month" },
       { value: { startDate: this.daysAgo(365), endDate: this.daysAgo(0) }, text: "Year" },
       { value: null, text: "------------", disabled: true },
+      // TODO: Pull these from common/patches.js
       { value: { startDate: "2022-07-08", endDate: "2022-11-01" }, text: "Season 1" },
       { value: { startDate: "2022-10-05", endDate: "2022-11-01" }, text: "Season 1.5" },
       { value: { startDate: "2022-11-01", endDate: "2022-12-01" }, text: "Season 2" },
@@ -91,6 +92,8 @@ export default {
       { value: { startDate: "2022-12-01", endDate: "2023-01-01" }, text: "Season 3" },
       { value: { startDate: "2022-12-15", endDate: "2023-01-01" }, text: "Season 3.5" },
       { value: { startDate: "2023-01-01", endDate: "2023-03-01" }, text: "Season 4" },
+      { value: { startDate: "2023-02-01", endDate: "2023-03-01" }, text: "Season 4.5" },
+      { value: { startDate: "2023-03-01", endDate: "2023-05-01" }, text: "Season 5" },
       { value: null, text: "------------", disabled: true },
       { value: "custom", text: "Custom Range" },
     ]
