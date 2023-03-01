@@ -11,11 +11,11 @@
           >)
         </li>
         <li><span class="name">Jenkins</span> - Game Design & Programmer</li>
-        <li><span class="name">Joel Larsson</span> - Game Design</li>
         <li><span class="name">DoctorGester</span> - Lead Programmer</li>
         <li><span class="name">bukka</span> - Lead UI Design</li>
         <li><span class="name">efe</span> - Programmer</li>
         <li><span class="name">VicFrank</span> - Programmer</li>
+        <li><span class="name">JackFlapper</span> - Programmer</li>
         <li><span class="name">Firetoad</span> - Programmer</li>
         <li><span class="name">Snoresville</span> - Programmer</li>
         <li><span class="name">Elfansoer</span> - Programmer</li>
@@ -23,8 +23,10 @@
         <li><span class="name">invalidnick</span> - Arena Design</li>
         <li><span class="name">Nibuja</span> - Particle & UI Design</li>
         <li><span class="name">Toyoka</span> - Particle Design</li>
+        <li><span class="name">Joel Larsson</span> - Game Design</li>
         <li><span class="name">T.Miles </span>- 2D Artist</li>
         <li><span class="name">KaiDraws</span> - 2D Artist</li>
+        <li><span class="name">victorcisneiros</span> - Server Administrator</li>
       </ul>
     </div>
   </div>
