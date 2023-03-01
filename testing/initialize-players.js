@@ -273,6 +273,6 @@ async function addOldBattlepassIcons() {
 
 (async () => {
   await giveEndOfSeasonRewards();
-  await ladderReset(1);
+  await ladderReset(2);
   // await rollup.runGodRollup();
 })();
