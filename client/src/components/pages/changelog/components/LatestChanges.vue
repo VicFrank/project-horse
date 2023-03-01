@@ -61,9 +61,6 @@
         <li>Starbreaker Super now additionally grants Desolator</li>
         <li>Sticky Napalm Super no longer applies Sticky Napalm in an AOE (applies only on the target hit)</li>
         <li>Sticky Napalm Gaben now additionally makes Sticky Napalms on attack apply in a 375 AOE</li>
-        <li>Swashbuckle Super passive Swashbuckle can now be broken</li>
-        <li>Swashbuckle Strikes from 4 to 3 (Super remains at 2)</li>
-        <li>Swashbuckle Gaben from 8 Slashes to 6 (Super is 3)</li>
         <li>Windrun evasion from 100% to 80%</li>
       </ul>
 
