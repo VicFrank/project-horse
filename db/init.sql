@@ -172,6 +172,15 @@ CREATE TABLE IF NOT EXISTS combat_players (
   ghost BOOLEAN
 );
 
+CREATE TABLE IF NOT EXISTS player_season_results (
+  steam_id TEXT REFERENCES players (steam_id) ON UPDATE CASCADE,
+
+  season INTEGER,
+  leaderboard_rank INTEGER,
+  mmr INTEGER
+);
+CREATE INDEX idx_player_season_results_steam_id ON player_season_results (steam_id);
+
 --------------------------------------------------------------------------------
 -- Cosmetics
 --------------------------------------------------------------------------------

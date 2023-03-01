@@ -70,6 +70,22 @@ module.exports = {
     }
   },
 
+  async getFullLeaderboard() {
+    try {
+      const { rows } = await query(`
+        SELECT mmr, steam_id, username from players
+        ORDER BY LEAST (ladder_mmr, 4500) DESC, mmr DESC
+      `);
+      // add index to rows
+      for (let i = 0; i < rows.length; i++) {
+        rows[i].rank = i + 1;
+      }
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async getPlayer(steamID) {
     try {
       const { rows } = await query(

@@ -74,30 +74,20 @@ async function giveDropRewards() {
   }
 }
 
-async function ladderReset() {
-  console.log("Resetting ladder...");
+async function logSeasonResults(season) {
   try {
-    await query(`UPDATE Players SET mmr = (mmr + 1000) / 2`);
-    await query(`UPDATE Players SET ladder_mmr = 0 WHERE ladder_mmr < 1500`);
-    await query(
-      `UPDATE Players SET ladder_mmr = 500 WHERE ladder_mmr < 2000 AND ladder_mmr >= 1500`
-    );
-    await query(
-      `UPDATE Players SET ladder_mmr = 1000 WHERE ladder_mmr < 2500 AND ladder_mmr >= 2000`
-    );
-    await query(
-      `UPDATE Players SET ladder_mmr = 1500 WHERE ladder_mmr < 3500 AND ladder_mmr >= 2500`
-    );
-    await query(
-      `UPDATE Players SET ladder_mmr = 2000 WHERE ladder_mmr < 4500 AND ladder_mmr >= 3500`
-    );
-    await query(
-      `UPDATE Players SET ladder_mmr = 2500 WHERE ladder_mmr >= 4500`
-    );
-
-    console.log("Done resetting ladder");
+    console.log("Logging season results...");
+    const leaderboard = await Players.getFullLeaderboard();
+    console.log(`Found ${leaderboard.length} players in leaderboard`);
+    for (const player of leaderboard) {
+      const { steam_id, mmr, rank } = player;
+      await query(
+        `INSERT INTO player_season_results (season, steam_id, mmr, leaderboard_rank) VALUES ($1, $2, $3, $4)`,
+        [season, steam_id, mmr, rank]
+      );
+    }
+    console.log("Done logging season results");
   } catch (error) {
-    console.log(error);
     throw error;
   }
 }
@@ -197,8 +187,9 @@ async function giveEndOfSeasonRewards() {
  * Ladder MMR is set to two ranks down
  * Normal MMR is the mean of current MMR and 1000
  */
-async function ladderReset() {
+async function ladderReset(season) {
   console.log("Resetting ladder...");
+  await logSeasonResults(season);
   try {
     await query(`UPDATE Players SET mmr = (mmr + 1000) / 2`);
     await query(`UPDATE Players SET ladder_mmr = 0 WHERE ladder_mmr < 1500`);
@@ -281,7 +272,7 @@ async function addOldBattlepassIcons() {
 }
 
 (async () => {
-  // await giveEndOfSeasonRewards();
-  // await ladderReset();
-  await rollup.runGodRollup();
+  await giveEndOfSeasonRewards();
+  await ladderReset(1);
+  // await rollup.runGodRollup();
 })();
