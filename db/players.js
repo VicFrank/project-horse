@@ -2194,9 +2194,6 @@ module.exports = {
   },
 
   async getMissedDropCount(uniqueChestID, cosmeticID, steamID) {
-    console.log(
-      `getMissedDropCount(${uniqueChestID}, ${cosmeticID}, ${steamID})`
-    );
     try {
       const { rows } = await query(
         `
