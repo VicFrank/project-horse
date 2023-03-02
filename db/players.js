@@ -2193,13 +2193,16 @@ module.exports = {
     }
   },
 
-  async getMissedDropCount(uniqueChestID, cosmeticID) {
+  async getMissedDropCount(uniqueChestID, cosmeticID, steamID) {
+    console.log(
+      `getMissedDropCount(${uniqueChestID}, ${cosmeticID}, ${steamID})`
+    );
     try {
       const { rows } = await query(
         `
         SELECT missed_drop_count FROM player_missed_drop_counts
-        WHERE unique_chest_id = $1 AND cosmetic_id = $2`,
-        [uniqueChestID, cosmeticID]
+        WHERE unique_chest_id = $1 AND cosmetic_id = $2 AND steam_id = $3`,
+        [uniqueChestID, cosmeticID, steamID]
       );
       if (rows.length === 0) return 0;
       return Number(rows[0].missed_drop_count);
@@ -2208,16 +2211,16 @@ module.exports = {
     }
   },
 
-  async incrementMissedDropCount(uniqueChestID, cosmeticID) {
+  async incrementMissedDropCount(uniqueChestID, cosmeticID, steamID) {
     try {
       const { rows } = await query(
         `
-        INSERT INTO player_missed_drop_counts (unique_chest_id, cosmetic_id, missed_drop_count)
-        VALUES ($1, $2, 1)
-        ON CONFLICT (unique_chest_id, cosmetic_id)
+        INSERT INTO player_missed_drop_counts (unique_chest_id, cosmetic_id, missed_drop_count, steam_id)
+        VALUES ($1, $2, 1, $3)
+        ON CONFLICT (unique_chest_id, cosmetic_id, steam_id)
         DO UPDATE SET missed_drop_count = player_missed_drop_counts.missed_drop_count + 1
         RETURNING *`,
-        [uniqueChestID, cosmeticID]
+        [uniqueChestID, cosmeticID, steamID]
       );
       return rows[0];
     } catch (error) {
@@ -2225,15 +2228,15 @@ module.exports = {
     }
   },
 
-  async resetMissedDropCount(uniqueChestID, cosmeticID) {
+  async resetMissedDropCount(uniqueChestID, cosmeticID, steamID) {
     try {
       await query(
         `
-        INSERT INTO player_missed_drop_counts (unique_chest_id, cosmetic_id, missed_drop_count)
-        VALUES ($1, $2, 0)
+        INSERT INTO player_missed_drop_counts (unique_chest_id, cosmetic_id, missed_drop_count, steam_id)
+        VALUES ($1, $2, 0, $3)
         ON CONFLICT (unique_chest_id, cosmetic_id)
         DO UPDATE SET missed_drop_count = 0`,
-        [uniqueChestID, cosmeticID]
+        [uniqueChestID, cosmeticID, steamID]
       );
     } catch (error) {
       throw error;
@@ -2332,19 +2335,28 @@ module.exports = {
         const roll = Math.random();
         const missedDrops = await this.getMissedDropCount(
           uniqueChestID,
-          drop.cosmetic_id
+          drop.cosmetic_id,
+          steamID
         );
         // get the escalating odds for this drop
         const odds = this.getEscalatingOdds(drop.escalatingOdds, missedDrops);
         if (roll < 1 / odds) {
           // we got a drop
           await this.removeUniqueChestItem(playerChestID, drop.cosmetic_id);
-          await this.resetMissedDropCount(uniqueChestID, drop.cosmetic_id);
+          await this.resetMissedDropCount(
+            uniqueChestID,
+            drop.cosmetic_id,
+            steamID
+          );
 
           rewardsTransaction.items[drop.cosmetic_id] = 1;
         } else {
           // we didn't get a drop
-          await this.incrementMissedDropCount(uniqueChestID, drop.cosmetic_id);
+          await this.incrementMissedDropCount(
+            uniqueChestID,
+            drop.cosmetic_id,
+            steamID
+          );
         }
       }
 
@@ -2436,7 +2448,8 @@ module.exports = {
         if (drop.escalatingOdds) {
           const missedDropCount = await this.getMissedDropCount(
             uniqueChestID,
-            drop.cosmetic_id
+            drop.cosmetic_id,
+            steamID
           );
           drop.odds = this.getEscalatingOdds(
             drop.escalatingOdds,

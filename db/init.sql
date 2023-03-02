@@ -414,10 +414,13 @@ DROP TABLE IF EXISTS player_missed_drop_counts;
 CREATE TABLE IF NOT EXISTS player_missed_drop_counts (
   unique_chest_id INTEGER REFERENCES unique_chests (unique_chest_id),
   cosmetic_id INTEGER REFERENCES cosmetics (cosmetic_id),
+  steam_id TEXT REFERENCES players (steam_id) ON UPDATE CASCADE,
   missed_drop_count INTEGER DEFAULT 0,
 
-  CONSTRAINT player_missed_drop_counts_pkey PRIMARY KEY (unique_chest_id, cosmetic_id)
+  CONSTRAINT player_missed_drop_counts_pkey PRIMARY KEY (unique_chest_id, cosmetic_id, steam_id)
 );
+CREATE INDEX "IDX_player_missed_drop_counts_steam_id" ON player_missed_drop_counts(steam_id);
+
 
 --------------------------------------------------------------------------------
 -- Reward Codes
