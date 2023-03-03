@@ -296,10 +296,9 @@ async function fixChestRewards() {
       const { steam_id: steamID, count } = row;
       console.log(`Player ${steamID} has opened ${count} chests`);
       const playerCosmetics = await Players.getCosmetics(steamID);
-      const hasBrew = playerCosmetics
-        .some
-        // (cosmetic) => cosmetic.cosmetic_name === "card_brewmaster"
-        ();
+      const hasBrew = playerCosmetics.some(
+        (cosmetic) => cosmetic.cosmetic_name === "card_brewmaster"
+      );
       const hasCT = playerCosmetics.some(
         (cosmetic) => cosmetic.cosmetic_name === "card_counterTerrorist"
       );
