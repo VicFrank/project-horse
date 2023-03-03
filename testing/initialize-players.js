@@ -373,10 +373,10 @@ async function refundChests() {
       const { rows } = await query(
         `
         SELECT steam_id, count(*) FROM player_logs
-        WHERE log_event = 'open_unique_chest' AND log_data->>'chestCosmeticID' = $1
+        WHERE log_event = 'consume_item' AND log_data->>'cosmeticName' = $1
         GROUP BY steam_id
         ORDER BY count(*) DESC;`,
-        [chest.cosmetic_id]
+        [chest.cosmetic_name]
       );
 
       for (const row of rows) {
@@ -407,6 +407,6 @@ async function refundChests() {
   // await giveEndOfSeasonRewards();
   // await ladderReset(2);
   // await rollup.runGodRollup();
-  await fixChestRewards();
+  // await fixChestRewards();
   await refundChests();
 })();
