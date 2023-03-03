@@ -2225,6 +2225,23 @@ module.exports = {
     }
   },
 
+  async setMissedDropCount(uniqueChestID, cosmeticID, steamID, count) {
+    try {
+      const { rows } = await query(
+        `
+        INSERT INTO player_missed_drop_counts (unique_chest_id, cosmetic_id, missed_drop_count, steam_id)
+        VALUES ($1, $2, $4, $3)
+        ON CONFLICT (unique_chest_id, cosmetic_id, steam_id)
+        DO UPDATE SET missed_drop_count = $4
+        RETURNING *`,
+        [uniqueChestID, cosmeticID, steamID, count]
+      );
+      return rows[0];
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async resetMissedDropCount(uniqueChestID, cosmeticID, steamID) {
     try {
       await query(
