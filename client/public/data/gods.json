@@ -102,7 +102,7 @@
     "name": "Boneless Aghanim",
     "universe": "dota",
     "complexity": "easy",
-    "unlock": "plus",
+    "unlock": "chest",
     "unlock_text": "This God is temporarily unlocked by subscribing to PLUS. They are permanently unlocked if they drop from a God chest",
     "health": 200,
     "powers": [
@@ -148,7 +148,7 @@
     "name": "Brewmaster",
     "universe": "dota",
     "complexity": "easy",
-    "unlock": "none",
+    "unlock": "chest",
     "unlock_text": "Why are you even seeing this God?",
     "health": 200,
     "powers": [
@@ -242,7 +242,7 @@
     "name": "Sideshop Man",
     "universe": "dota",
     "complexity": "intermediate",
-    "unlock": "battlepass",
+    "unlock": "chest",
     "unlock_text": "God is permanently unlocked by reaching a battlepass level",
     "health": 200,
     "powers": [
@@ -263,7 +263,7 @@
     "name": "Counter-Terrorist",
     "universe": "counterStrike",
     "complexity": "easy",
-    "unlock": "battlepass",
+    "unlock": "chest",
     "unlock_text": "God is permanently unlocked by reaching a battlepass level",
     "health": 200,
     "powers": [
@@ -396,7 +396,7 @@
     "name": "Donkey Aghanim",
     "universe": "dota",
     "complexity": "intermediate",
-    "unlock": "plus",
+    "unlock": "chest",
     "unlock_text": "This God is temporarily unlocked by subscribing to PLUS. They are permanently unlocked if they drop from a God chest",
     "health": 200,
     "powers": [
@@ -448,7 +448,7 @@
     "name": "Faceless Void",
     "universe": "dota",
     "complexity": "advanced",
-    "unlock": "battlepass",
+    "unlock": "chest",
     "unlock_text": "God is permanently unlocked by reaching a battlepass level",
     "health": 200,
     "powers": [
@@ -535,7 +535,7 @@
     "name": "Icefrog",
     "universe": "dota",
     "complexity": "advanced",
-    "unlock": "none",
+    "unlock": "chest",
     "unlock_text": "Why are you even seeing this God?",
     "health": 200,
     "powers": [
@@ -801,7 +801,7 @@
     "name": "Prellex",
     "universe": "artifact",
     "complexity": "easy",
-    "unlock": "battlepass",
+    "unlock": "plus",
     "unlock_text": "God is permanently unlocked by reaching a battlepass level",
     "health": 200,
     "powers": [
@@ -966,7 +966,7 @@
     "name": "Santa Greevil",
     "universe": "dota",
     "complexity": "intermediate",
-    "unlock": "plus",
+    "unlock": "chest",
     "unlock_text": "This God is temporarily unlocked by subscribing to PLUS. They are permanently unlocked if they drop from a God chest",
     "health": 200,
     "powers": [
@@ -1095,7 +1095,7 @@
     "name": "Terrorist",
     "universe": "counterStrike",
     "complexity": "easy",
-    "unlock": "battlepass",
+    "unlock": "plus",
     "unlock_text": "God is permanently unlocked by reaching a battlepass level",
     "health": 200,
     "powers": [
@@ -1231,7 +1231,7 @@
     "name": "Vacation Aghanim",
     "universe": "dota",
     "complexity": "easy",
-    "unlock": "battlepass",
+    "unlock": "chest",
     "unlock_text": "God is permanently unlocked by reaching a battlepass level",
     "health": 200,
     "powers": [
