@@ -2248,7 +2248,7 @@ module.exports = {
         `
         INSERT INTO player_missed_drop_counts (unique_chest_id, cosmetic_id, missed_drop_count, steam_id)
         VALUES ($1, $2, 0, $3)
-        ON CONFLICT (unique_chest_id, cosmetic_id)
+        ON CONFLICT (unique_chest_id, cosmetic_id, steam_id)
         DO UPDATE SET missed_drop_count = 0`,
         [uniqueChestID, cosmeticID, steamID]
       );
