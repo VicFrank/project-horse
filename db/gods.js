@@ -1,7 +1,7 @@
 const { query } = require("./index");
 const games = require("./games");
 const players = require("./players");
-const { MAJOR_PATCHES } = require("../common/patches")
+const { MAJOR_PATCHES } = require("../common/patches");
 
 module.exports = {
   async getGodsStats(hours = 720, minMMR = 0) {
@@ -51,6 +51,93 @@ module.exports = {
         ],
       }));
       return gods;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getGodTotalTicks() {
+    try {
+      // gets the sum of the ability level for the first place player
+      // hard coded the time range
+      const { rows } = await query(
+        `
+        with ticks AS (SELECT
+          god,
+          SUM(ability_level) AS total_ticks
+        FROM game_players
+        JOIN games USING (game_id)
+        JOIN game_player_heroes USING (game_player_id)
+        JOIN hero_abilities USING (game_player_hero_id)
+        WHERE games.ranked = true AND place = 1
+         AND games.created_at > '2023-03-01'
+        GROUP BY god
+        ORDER BY god DESC), 
+      num_games AS (
+        SELECT
+          god,
+          COUNT(*) AS num_games
+        FROM game_players
+        JOIN games USING (game_id)
+        WHERE games.ranked = true AND place = 1
+         AND games.created_at > '2023-03-01'
+        GROUP BY god
+        ORDER BY god DESC)
+      SELECT 
+        god,
+        total_ticks,
+        num_games,
+        total_ticks / num_games AS avg_ticks
+      FROM ticks
+      JOIN num_games USING (god)
+      ORDER BY avg_ticks DESC;
+      
+      `
+      );
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getGodTotalGabens() {
+    try {
+      const { rows } = await query(
+        `
+        with ticks AS (SELECT
+          god,
+          SUM(ability_level) AS total_ticks
+        FROM game_players
+        JOIN games USING (game_id)
+        JOIN game_player_heroes USING (game_player_id)
+        JOIN hero_abilities USING (game_player_hero_id)
+        WHERE games.ranked = true AND place = 1
+         AND ability_level = 9
+         AND mmr > 1300
+         AND games.created_at > '2023-03-01'
+        GROUP BY god
+        ORDER BY god DESC), 
+      num_games AS (
+        SELECT
+          god,
+          COUNT(*) AS num_games
+        FROM game_players
+        JOIN games USING (game_id)
+        WHERE games.ranked = true AND place = 1
+         AND mmr > 1300
+         AND games.created_at > '2023-03-01'
+        GROUP BY god
+        ORDER BY god DESC)
+      SELECT 
+        god,
+        total_ticks / (num_games * 9) AS gabens
+      FROM ticks
+      JOIN num_games USING (god)
+      ORDER BY gabens DESC;
+      
+      `
+      );
+      return rows;
     } catch (error) {
       throw error;
     }
@@ -268,7 +355,7 @@ module.exports = {
   async getGodPerPatchStats(godName, mmrOption) {
     try {
       const reversePatches = [...MAJOR_PATCHES].reverse();
-      const allPatchPromises = reversePatches.map(patch =>
+      const allPatchPromises = reversePatches.map((patch) =>
         query(
           `
         SELECT $1            AS patch,
