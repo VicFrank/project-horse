@@ -55,10 +55,22 @@
             </tr>
             <tr>
               <td class="text-left">Season 4 Tournament</td>
-              <td class="text-left">Jan 22, 2022</td>
+              <td class="text-left">Jan 22, 2023</td>
               <td class="text-left">
                 <b-button
                   href="https://battlefy.com/double-edge-studios/ability-arena-4/63c33b1efaa0b303780d8399/info?infoTab=details"
+                  target="_blank"
+                  variant="primary"
+                  v-t="'tournaments.results'"
+                ></b-button>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-left">Season 5 Tournament</td>
+              <td class="text-left">Mar 18, 2023</td>
+              <td class="text-left">
+                <b-button
+                  href="https://battlefy.com/double-edge-studios/ability-arena-5/640b73e43e0bbd1f08e1572a/info?infoTab=details"
                   target="_blank"
                   variant="primary"
                   v-t="'tournaments.sign_up'"
