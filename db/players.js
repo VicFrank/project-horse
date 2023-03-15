@@ -1192,7 +1192,7 @@ module.exports = {
       } else if (roll < 0.625) {
         return "chest_basic";
       } else if (roll < 0.63) {
-        return "chest_god_unique_1";
+        return "chest_god_unique_2";
       } else return false;
     };
 
@@ -1803,7 +1803,7 @@ module.exports = {
         case "plus_year_package":
           // add two god chests
           const godChest = await Cosmetics.getCosmeticByName(
-            "chest_god_unique_1"
+            "chest_god_unique_2"
           );
           const nameRainbow = await Cosmetics.getCosmeticByName("name_rainbow");
           this.doItemTransaction(steamID, {
