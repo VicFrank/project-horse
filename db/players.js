@@ -2172,19 +2172,19 @@ module.exports = {
       const numChests = await this.getUniqueChestNumber(steamID, uniqueChestID);
       if (numChests === 1) {
         // if this is their first chest of this type, we want to remove the gods they already own
-        // const ownedCosmetics = await this.getCosmetics(steamID);
-        // const chestDrops = await Cosmetics.getUniqueChestDrops(uniqueChestID);
-        // for (const drop of chestDrops) {
-        //   const hasCosmetic = ownedCosmetics.some(
-        //     (cosmetic) => cosmetic.cosmetic_id === drop.cosmetic_id
-        //   );
-        //   if (hasCosmetic) {
-        //     await this.removeUniqueChestItem(
-        //       chest.player_unique_chest_id,
-        //       drop.cosmetic_id
-        //     );
-        //   }
-        // }
+        const ownedCosmetics = await this.getCosmetics(steamID);
+        const chestDrops = await Cosmetics.getUniqueChestDrops(uniqueChestID);
+        for (const drop of chestDrops) {
+          const hasCosmetic = ownedCosmetics.some(
+            (cosmetic) => cosmetic.cosmetic_id === drop.cosmetic_id
+          );
+          if (hasCosmetic) {
+            await this.removeUniqueChestItem(
+              chest.player_unique_chest_id,
+              drop.cosmetic_id
+            );
+          }
+        }
       }
 
       return chest;
