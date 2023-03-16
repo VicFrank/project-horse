@@ -13,6 +13,7 @@
       :level="ability.ability_level"
       :small="true"
       :size="48"
+      :positionRelative="true"
     ></AbilityImage>
   </div>
 </template>

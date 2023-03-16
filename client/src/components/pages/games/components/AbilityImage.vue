@@ -1,5 +1,11 @@
 <template>
-  <div :style="{ height: `${size}px`, width: `${size}px` }">
+  <div
+    :style="{
+      height: `${size}px`,
+      width: `${size}px`,
+      position: `${positionRelative ? 'relative' : ''}`,
+    }"
+  >
     <img
       :height="size"
       :width="size"
@@ -26,6 +32,10 @@ export default {
     },
     level: Number,
     isUltimate: {
+      type: Boolean,
+      default: false,
+    },
+    positionRelative: {
       type: Boolean,
       default: false,
     },
