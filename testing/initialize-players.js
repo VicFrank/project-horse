@@ -189,7 +189,7 @@ async function giveEndOfSeasonRewards() {
  */
 async function ladderReset(season) {
   console.log("Resetting ladder...");
-  // await logSeasonResults(season);
+  await logSeasonResults(season);
   try {
     await query(`UPDATE Players SET mmr = (mmr + 1000) / 2`);
     await query(`UPDATE Players SET ladder_mmr = 0 WHERE ladder_mmr < 1500`);
@@ -233,170 +233,65 @@ async function updateGodChests() {
   }
 }
 
-async function addOldBattlepassIcons() {
-  console.log("Updating Lifestealer cards...");
+async function fillArenaFinisherChests() {
+  // This is a one time script to fill all arena/finisher chests
+  // Remove all finishers/chests that the player already owns from the chest
+  console.log("Filling arena/finisher chests...");
   try {
-    const { rows } = await query(`
-      SELECT * FROM player_logs
-      WHERE log_event = 'consume_item' AND log_data->>'cosmeticName' = 'buy_bp';`);
-
-    const s1 = await Cosmetics.getCosmeticByName("bp_s1");
-    const s2 = await Cosmetics.getCosmeticByName("bp_s2");
-    const s3 = await Cosmetics.getCosmeticByName("bp_s3");
-    const s4 = await Cosmetics.getCosmeticByName("bp_s4");
-    for (const row of rows) {
-      const { steamID } = row.log_data;
-      const { log_time } = row;
-      const purchaseMonth = new Date(log_time).getMonth();
-      if (purchaseMonth === 12) {
-        await Players.giveCosmeticByName(steamID, s4.cosmetic_name);
-        console.log(`Gave player Battle Pass Season 4`);
-      }
-      if (purchaseMonth === 11) {
-        await Players.giveCosmeticByName(steamID, s3.cosmetic_name);
-        console.log(`Gave player Battle Pass Season 3`);
-      }
-      if (purchaseMonth === 10) {
-        await Players.giveCosmeticByName(steamID, s2.cosmetic_name);
-        console.log(`Gave player Battle Pass Season 2`);
-      }
-      if (purchaseMonth < 10) {
-        await Players.giveCosmeticByName(steamID, s1.cosmetic_name);
-        console.log(`Gave player Battle Pass Season 1`);
-      }
-    }
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
-}
-
-async function fixChestRewards() {
-  console.log("Fixing chest rewards...");
-  try {
-    const uniqueChest2 = await Cosmetics.getCosmeticByName(
-      "chest_god_unique_2"
-    );
-    const uniqueChestID = await Cosmetics.getUniqueChestID(
-      uniqueChest2.cosmetic_id
-    );
-    const { rows } = await query(
-      `
-      SELECT steam_id, count(*) FROM player_logs
-      WHERE log_event = 'open_unique_chest' AND log_data->>'chestCosmeticID' = $1
-      GROUP BY steam_id
-      ORDER BY count(*) DESC;`,
-      [uniqueChest2.cosmetic_id]
-    );
-
-    const brew = await Cosmetics.getCosmeticByName("card_brewmaster");
-    const ct = await Cosmetics.getCosmeticByName("card_counterTerrorist");
-    const icefrog = await Cosmetics.getCosmeticByName("card_icefrog");
-    for (const row of rows) {
-      const { steam_id: steamID, count } = row;
-      console.log(`Player ${steamID} has opened ${count} chests`);
-      const playerCosmetics = await Players.getCosmetics(steamID);
-      const hasBrew = playerCosmetics.some(
-        (cosmetic) => cosmetic.cosmetic_name === "card_brewmaster"
-      );
-      const hasCT = playerCosmetics.some(
-        (cosmetic) => cosmetic.cosmetic_name === "card_counterTerrorist"
-      );
-      const hasIcefrog = playerCosmetics.some(
-        (cosmetic) => cosmetic.cosmetic_name === "card_icefrog"
-      );
-
-      // if the player has opened > 10, just give them new gods they're missing
-      if (count > 10) {
-        if (!hasBrew) {
-          await Players.giveCosmeticByName(steamID, brew.cosmetic_name);
-          console.log(`Gave player Brewmaster card`);
-        }
-        if (!hasCT) {
-          await Players.giveCosmeticByName(steamID, ct.cosmetic_name);
-          console.log(`Gave player counterTerrorist card`);
-        }
-        if (!hasIcefrog) {
-          await Players.giveCosmeticByName(steamID, icefrog.cosmetic_name);
-          console.log(`Gave player Icefrog card`);
-        }
-      } else {
-        // for the rest, just work to set their odds properly
-        if (!hasBrew) {
-          await Players.setMissedDropCount(
-            uniqueChestID,
-            brew.cosmetic_id,
-            steamID,
-            count
-          );
-          console.log(`Set missed drop count for Brewmaster card to ${count}`);
-        }
-        if (!hasCT) {
-          await Players.setMissedDropCount(
-            uniqueChestID,
-            ct.cosmetic_id,
-            steamID,
-            count
-          );
-          console.log(
-            `Set missed drop count for counterTerrorist card to ${count}`
-          );
-        }
-        if (!hasIcefrog) {
-          await Players.setMissedDropCount(
-            uniqueChestID,
-            icefrog.cosmetic_id,
-            steamID,
-            count
-          );
-          console.log(`Set missed drop count for Icefrog card to ${count}`);
-        }
-      }
-    }
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
-}
-
-async function refundChests() {
-  try {
-    console.log("Refunding chests...");
-    const arenaChest = await Cosmetics.getCosmeticByName(
+    const uniqueChestArena = await Cosmetics.getCosmeticByName(
       "chest_arena_unique_1"
     );
-    const finisherChest = await Cosmetics.getCosmeticByName(
+    const uniqueChestFinisher = await Cosmetics.getCosmeticByName(
       "chest_finisher_unique_1"
     );
 
-    const refundChest = async (chest) => {
-      const { rows } = await query(
-        `
-        SELECT steam_id, count(*) FROM player_logs
-        WHERE log_event = 'consume_item' AND log_data->>'cosmeticName' = $1
-        GROUP BY steam_id
-        ORDER BY count(*) DESC;`,
-        [chest.cosmetic_name]
+    const arenaUniqueChestID = await Cosmetics.getUniqueChestID(
+      uniqueChestArena.cosmetic_id
+    );
+    const finisherUniqueChestID = await Cosmetics.getUniqueChestID(
+      uniqueChestFinisher.cosmetic_id
+    );
+
+    const fillChests = async (uniqueChestID) => {
+      const chestDrops = await Cosmetics.getUniqueChestDrops(uniqueChestID);
+      const { rows: playerActiveChests } = await query(
+        `SELECT * FROM player_unique_chests WHERE unique_chest_id = $1 AND active = TRUE`,
+        [uniqueChestID]
       );
-
-      for (const row of rows) {
-        const { steam_id: steamID, count } = row;
-        console.log(
-          `Player ${steamID} has opened ${count} ${chest.cosmetic_name} chests`
+      console.log(
+        `Found ${playerActiveChests.length} active chests for ${uniqueChestID}`
+      );
+      for (const chest of playerActiveChests) {
+        const { steam_id, player_unique_chest_id } = chest;
+        const cosmetics = await Players.getCosmetics(steam_id);
+        const cosmeticIDs = cosmetics.map((cosmetic) => cosmetic.cosmetic_id);
+        const playerDrops = await Players.getChestAlreadyDroppedIDs(
+          player_unique_chest_id
         );
-
         const promises = [];
-        for (let i = 0; i < count; i++) {
-          promises.push(
-            Players.giveCosmeticByName(steamID, chest.cosmetic_name)
-          );
+        for (const drop of chestDrops) {
+          const hasDropped = playerDrops.includes(drop.cosmetic_id);
+          if (hasDropped) continue;
+          const alreadyHasCosmetic = cosmeticIDs.includes(drop.cosmetic_id);
+          if (alreadyHasCosmetic) {
+            console.log(
+              `Removing ${drop.cosmetic_id} from ${player_unique_chest_id} for ${steam_id}`
+            );
+            promises.push(
+              Players.removeUniqueChestItem(
+                player_unique_chest_id,
+                drop.cosmetic_id
+              )
+            );
+          }
         }
         await Promise.all(promises);
       }
     };
 
-    await refundChest(arenaChest);
-    await refundChest(finisherChest);
+    const promises = [];
+    promises.push(fillChests(arenaUniqueChestID));
+    promises.push(await fillChests(finisherUniqueChestID));
   } catch (error) {
     console.log(error);
     throw error;
@@ -407,6 +302,5 @@ async function refundChests() {
   // await giveEndOfSeasonRewards();
   // await ladderReset(2);
   // await rollup.runGodRollup();
-  // await fixChestRewards();
-  // await refundChests();
+  await fillArenaFinisherChests();
 })();

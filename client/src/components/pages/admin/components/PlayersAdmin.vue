@@ -9,7 +9,7 @@
     <div v-if="loading" class="d-flex justify-content-center mb-3">
       <b-spinner label="Loading..."></b-spinner>
     </div>
-    <div>Your SteamID is: {{ yourSteamID }}</div>
+    <div>Your Steam ID is: {{ yourSteamID }}</div>
     <b-form-input
       v-model="steamID"
       placeholder="Enter Steam ID..."
@@ -121,7 +121,7 @@
             v-model="cosmeticsFilter"
             placeholder="Search Items..."
           ></b-form-input>
-          <div style="max-height: 600px; overflow-y: auto;">
+          <div style="max-height: 600px; overflow-y: auto">
             <div
               v-for="option of filteredOptions"
               :key="option.value.cosmetic_id"
@@ -139,11 +139,14 @@
           </div>
         </b-collapse>
         <h4 class="card-title">Inventory</h4>
-        <div style="max-height: 600px; overflow-y: auto;">
+        <div style="max-height: 600px; overflow-y: auto">
           <div
             v-for="(cosmetic, index) in cosmetics"
             :key="
-              cosmetic.cosmetic_id + cosmetic.created + cosmetic.equipped + index
+              cosmetic.cosmetic_id +
+              cosmetic.created +
+              cosmetic.equipped +
+              index
             "
             class="d-flex align-items-center my-1"
           >
@@ -239,6 +242,7 @@ export default {
         .then((transactions) => (this.transactions = transactions));
     },
     getPlayerData(steamID) {
+      steamID = steamID.trim();
       this.transactions = [];
       fetch(`/api/players/${steamID}`)
         .then((res) => res.json())

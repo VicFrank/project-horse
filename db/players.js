@@ -486,7 +486,7 @@ module.exports = {
           existingPlayer.profile_picture
         );
       } catch (error) {
-        console.log("Error updating player profile picture: ", error);
+        console.error("Error updating player profile picture: ", error);
         // don't care if this fails, just log it
       }
       return existingPlayer;
@@ -880,7 +880,7 @@ module.exports = {
         cosmeticName: item.cosmetic_name,
       });
     } catch (error) {
-      console.log("Error giving battle pass item: ", error);
+      console.error("Error giving battle pass item: ", error);
     }
     return true;
   },
@@ -1132,10 +1132,10 @@ module.exports = {
               progress
             );
           } catch (error) {
-            console.log(
+            console.error(
               `Error adding player god ${god.god_name} for ${steamID}`
             );
-            console.log(error);
+            console.error(error);
             playerGod = {
               banned: false,
               progress: 0,
@@ -2172,19 +2172,19 @@ module.exports = {
       const numChests = await this.getUniqueChestNumber(steamID, uniqueChestID);
       if (numChests === 1) {
         // if this is their first chest of this type, we want to remove the gods they already own
-        const godCards = await this.getGodCards(steamID);
-        const chestDrops = await Cosmetics.getUniqueChestDrops(uniqueChestID);
-        for (const drop of chestDrops) {
-          const hasGod = godCards.some(
-            (card) => card.cosmetic_name === drop.cosmetic_name
-          );
-          if (hasGod) {
-            await this.removeUniqueChestItem(
-              chest.player_unique_chest_id,
-              drop.cosmetic_id
-            );
-          }
-        }
+        // const ownedCosmetics = await this.getCosmetics(steamID);
+        // const chestDrops = await Cosmetics.getUniqueChestDrops(uniqueChestID);
+        // for (const drop of chestDrops) {
+        //   const hasCosmetic = ownedCosmetics.some(
+        //     (cosmetic) => cosmetic.cosmetic_id === drop.cosmetic_id
+        //   );
+        //   if (hasCosmetic) {
+        //     await this.removeUniqueChestItem(
+        //       chest.player_unique_chest_id,
+        //       drop.cosmetic_id
+        //     );
+        //   }
+        // }
       }
 
       return chest;
