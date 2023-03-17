@@ -5,6 +5,7 @@
       width: `${size}px`,
       position: `${positionRelative ? 'relative' : ''}`,
     }"
+    v-bind:class="backgroundImage"
   >
     <img
       :height="size"
@@ -12,11 +13,12 @@
       :src="getAbilityPath(icon)"
       :alt="ability"
       class="ability-image"
-      v-bind:class="borderColor"
     />
-    <div v-if="level != null" class="level-container">
+    <div v-if="isUltimate" class="ultimate"></div>
+    <div v-if="level" class="level-container" v-bind:class="backgroundImage">
       <span class="level-icon" v-bind:class="levelColor">{{ level }}</span>
     </div>
+    <div v-if="level" v-bind:class="strokeColor"></div>
   </div>
 </template>
 
@@ -67,13 +69,21 @@ export default {
       }
       return {};
     },
-    borderColor() {
+    backgroundImage() {
       if (this.level == 9) {
-        return { "border-gaben": true };
+        return { "background-gaben": true };
       } else if (this.level >= 6) {
-        return { "border-super": true };
+        return { "background-super": true };
       }
       return {};
+    },
+    strokeColor() {
+      if (this.level == 9) {
+        return { "ability-stroke-gaben": true };
+      } else if (this.level >= 6) {
+        return { "ability-stroke-super": true };
+      }
+      return { "ability-stroke-basic": true };
     },
   },
 };
@@ -85,13 +95,21 @@ export default {
   bottom: 0;
   left: 50%;
   transform: translate(-50%, 0);
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   text-align: center;
-  font-size: 0.8em;
-  color: #fff;
-  border-radius: 50%;
-  background-color: #5a422a;
+  font-size: 12px;
+  background-image: url("./images/ability_level_circle_basic.png");
+  background-size: cover;
+}
+
+.ultimate {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  background-image: url("./images/is_ultimate.png");
 }
 
 .level-icon {
@@ -104,18 +122,48 @@ export default {
 }
 
 .super-color {
-  color: #ae82ff;
+  color: #7dc4ff;
 }
 
 .gaben-color {
-  color: #ff6126;
+  color: #ffc476;
 }
 
-.border-super {
-  border: solid 2px #8847ff;
+.background-super {
+  background-image: url("./images/ability_level_circle_super.png");
 }
 
-.border-gaben {
-  border: solid 2px #ff6126;
+.background-gaben {
+  background-image: url("./images/ability_level_circle_gaben.png");
+}
+
+.ability-stroke-basic {
+  background-image: url("./images/ability_stroke_basic.png");
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.ability-stroke-super {
+  background-image: url("./images/ability_stroke_super.png");
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.ability-stroke-gaben {
+  background-image: url("./images/ability_stroke_gaben.png");
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 </style>
