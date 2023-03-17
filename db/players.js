@@ -131,6 +131,18 @@ module.exports = {
     }
   },
 
+  async getPlayersWithName(username) {
+    try {
+      const { rows } = await query(
+        `SELECT * FROM players WHERE username = $1`,
+        [username]
+      );
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async hasPlus(steamID) {
     try {
       const { rows } = await query(
