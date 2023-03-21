@@ -6,10 +6,10 @@ const reqMatchesKey = (req, key) => {
   const serverKey3 = req.params.server_key_v3;
   const serverKey4 = req.query.server_key_v3;
   return (
-    serverKey === key ||
-    serverKey2 === key ||
-    serverKey3 === key ||
-    serverKey4 === key
+    (serverKey && serverKey === key) ||
+    (serverKey2 && serverKey2 === key) ||
+    (serverKey3 && serverKey3 === key) ||
+    (serverKey4 && serverKey4 === key)
   );
 };
 
