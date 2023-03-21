@@ -27,6 +27,7 @@
         <li><span class="name">T.Miles </span>- 2D Artist</li>
         <li><span class="name">KaiDraws</span> - 2D Artist</li>
         <li><span class="name">victorcisneiros</span> - Server Administrator</li>
+        <li><span class="name">Poptart</span> - Community Manager</li>
       </ul>
     </div>
   </div>
