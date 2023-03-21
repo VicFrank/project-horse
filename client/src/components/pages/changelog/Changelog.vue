@@ -77,6 +77,8 @@ export default {
           };
         });
 
+        // We're currently manually adding the latest changelog so skip it
+        changes.shift();
         this.changes = changes;
       })
       .catch((err) => console.error(err));
