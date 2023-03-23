@@ -11,7 +11,7 @@
           {{ getTime(change.timestamp * 1000) }}
         </h4>
         <ul>
-          <li v-for="(line, i) in change.lines" :key="change.timestamp + i">{{ line }}</li>
+          <li v-for="(line, i) in change.lines" :key="change.timestamp + i" :class="{bolded: line.isBold}">{{ line.text }}</li>
         </ul>
       </div>
     </div>
@@ -38,7 +38,7 @@ export default {
 
         changes = changes.map((change) => {
           let description = change.change_description;
-          const tags = ["[b]", "[/b]", "[*]", "[/list]"];
+          const tags = ["[b]", "[/b]", "[*]", "[/list]", "**"];
 
           for (let tag of tags) {
             description = description.replace(tag, "");
@@ -59,16 +59,17 @@ export default {
 
           lines = lines
             .map((line) => {
-              //filter out all tags
+              const isBold = line.startsWith("**");
+              // filter out all tags
               for (let tag of tags) {
-                line = line.replace(tag, "");
+                line = line.replaceAll(tag, "");
               }
-              if (line.charAt(0) === "*") {
-                return line.substring(2);
+              if (line.startsWith("- ")) {
+                line = line.substring(2);
               }
-              return line;
+              return {text: line, isBold};
             })
-            .filter((line) => line != "");
+            .filter((line) => line.text != "");
 
           return {
             ...change,
@@ -77,6 +78,8 @@ export default {
           };
         });
 
+        // We're currently manually adding the latest changelog so skip it
+        changes.shift();
         this.changes = changes;
       })
       .catch((err) => console.error(err));
@@ -107,5 +110,11 @@ li {
 
 ul {
   padding-bottom: 10px;
+}
+.bolded {
+  font-weight: bold;
+  font-size: 20px;
+  list-style-type: none;
+  color: var(--primary-color);
 }
 </style>
