@@ -23,11 +23,11 @@ const WeChatPay = () => import("../components/pages/store/WeChatPay");
 const Games = () => import("../components/pages/games/Games");
 import Game from "../components/pages/games/Game";
 
-const Gods = () => import("../components/pages/stats/Gods");
-const God = () => import("../components/pages/stats/God");
-const Abilities = () => import("../components/pages/stats/Abilities");
+const Gods = () => import("../components/pages/stats/gods/Gods");
+const God = () => import("../components/pages/stats/gods/God");
+const Abilities = () => import("../components/pages/stats/abilities/Abilities");
 const IndividualAbility = () =>
-  import("../components/pages/stats/IndividualAbility");
+  import("../components/pages/stats/abilities/IndividualAbility");
 const Cosmetics = () => import("../components/pages/stats/cosmetics/Cosmetics");
 const Bodies = () => import("../components/pages/stats/Bodies");
 const GameStats = () => import("../components/pages/stats/games/GameStats.vue");

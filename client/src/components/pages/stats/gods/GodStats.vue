@@ -19,7 +19,10 @@
         <div class="d-flex mb-2">
           <div class="d-flex-row" style="flex-grow: 1">
             <span>Last 7 Days</span>
-            <GodHistoricalGraph :godName="row.item.god" :selectedMMR="selectedMMR" />
+            <GodHistoricalGraph
+              :godName="row.item.god"
+              :selectedMMR="selectedMMR"
+            />
           </div>
           <div class="d-flex-row">
             <span>Placements</span>
@@ -123,11 +126,11 @@
 </template>
 
 <script>
-import PercentBar from "../../utility/PercentBar.vue";
-import GodImage from "../games/components/GodImage.vue";
-import GodHistoricalGraph from "./components/GodHistoricalGraph.vue";
-import PlacementGraph from "./components/PlacementGraph.vue";
-import { percentage, round } from "../../../filters/filters";
+import PercentBar from "../../../utility/PercentBar.vue";
+import GodImage from "../../games/components/GodImage.vue";
+import GodHistoricalGraph from "../components/GodHistoricalGraph.vue";
+import PlacementGraph from "../components/PlacementGraph.vue";
+import { percentage, round } from "../../../../filters/filters";
 
 export default {
   components: {

@@ -6,7 +6,8 @@
           v-if="player.profile_picture"
           :src="player.profile_picture"
           class="avatar"
-          alt="avatar" />
+          alt="avatar"
+        />
         {{ player.username }}
       </h1>
       <RankBadge
@@ -63,7 +64,7 @@
 
 <script>
 import PlayerGamesList from "./PlayerGamesList.vue";
-import PlayerGodStats from "../stats/PlayerGodStats.vue";
+import PlayerGodStats from "../stats/gods/PlayerGodStats.vue";
 import AbilityStats from "../stats/abilities/AbilityStats.vue";
 import PlayerStats from "../player/components/PlayerStats.vue";
 import RankBadge from "../../utility/RankBadge.vue";

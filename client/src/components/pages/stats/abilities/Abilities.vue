@@ -78,7 +78,7 @@
 </template>
 
 <script>
-import AbilityStats from "./abilities/AbilityStats.vue";
+import AbilityStats from "./AbilityStats.vue";
 import GabenStats from "./GabenStats.vue";
 import WinnerLevelStats from "./WinnerLevelStats.vue";
 

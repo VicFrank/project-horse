@@ -52,8 +52,8 @@
 </template>
 
 <script>
-import IndividualAbilityStats from "./abilities/IndividualAbilityStats.vue";
-import AbilityImage from "../games/components/AbilityImage.vue";
+import IndividualAbilityStats from "./IndividualAbilityStats.vue";
+import AbilityImage from "../../games/components/AbilityImage.vue";
 
 export default {
   components: {

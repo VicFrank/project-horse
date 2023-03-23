@@ -39,9 +39,9 @@
 </template>
 
 <script>
-import AbilityImage from "../games/components/AbilityImage.vue";
-import PercentBar from "../../utility/PercentBar.vue";
-import { percentage } from "../../../filters/filters";
+import AbilityImage from "../../games/components/AbilityImage.vue";
+import PercentBar from "../../../utility/PercentBar.vue";
+import { percentage } from "../../../../filters/filters";
 
 export default {
   components: {

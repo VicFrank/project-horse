@@ -49,10 +49,10 @@
 </template>
 
 <script>
-import PercentBar from "../../utility/PercentBar.vue";
-import PlacemementGraph from "./components/PlacementGraph.vue";
-import GodImage from "../games/components/GodImage.vue";
-import { percentage, round } from "../../../filters/filters";
+import PercentBar from "../../../utility/PercentBar.vue";
+import PlacemementGraph from "../components/PlacementGraph.vue";
+import GodImage from "../../games/components/GodImage.vue";
+import { percentage, round } from "../../../../filters/filters";
 
 export default {
   components: {

@@ -8,17 +8,34 @@
         <div class="text-left d-flex mb-2">
           <div>
             <div class="mb-2">Date</div>
-            <b-form-select v-model="selectedDate" :options="dateOptions" @change="loadGodStats(true)"
-              :disabled="loading" style="width: 100px" class="mx-auto"></b-form-select>
+            <b-form-select
+              v-model="selectedDate"
+              :options="dateOptions"
+              @change="loadGodStats(true)"
+              :disabled="loading"
+              style="width: 100px"
+              class="mx-auto"
+            ></b-form-select>
           </div>
           <div class="ml-2">
             <div class="mb-2">MMR</div>
-            <b-form-select v-model="selectedMMR" :options="mmrOptions" @change="loadGodStats(true)" :disabled="loading"
-              style="width: 100px" class="mx-auto"></b-form-select>
+            <b-form-select
+              v-model="selectedMMR"
+              :options="mmrOptions"
+              @change="loadGodStats(true)"
+              :disabled="loading"
+              style="width: 100px"
+              class="mx-auto"
+            ></b-form-select>
           </div>
         </div>
-        <GodAbilityStats :loading="loading" :showPercentages="selectedMMR == null" :linkAbilities="true"
-          :abilities="godStats" @created="loadGodStats"></GodAbilityStats>
+        <GodAbilityStats
+          :loading="loading"
+          :showPercentages="selectedMMR == null"
+          :linkAbilities="true"
+          :abilities="godStats"
+          @created="loadGodStats"
+        ></GodAbilityStats>
       </b-tab>
       <b-tab title="Trends">
         <GodHistoricalStats :godName="god" />
@@ -28,15 +45,15 @@
 </template>
 
 <script>
-import GodAbilityStats from "./abilities/GodAbilityStats.vue";
-import GodImage from "../games/components/GodImage.vue";
-import GodHistoricalStats from "./components/GodHistoricalStats.vue";
+import GodAbilityStats from "../abilities/GodAbilityStats.vue";
+import GodImage from "../../games/components/GodImage.vue";
+import GodHistoricalStats from "../components/GodHistoricalStats.vue";
 
 export default {
   components: {
     GodAbilityStats,
     GodImage,
-    GodHistoricalStats
+    GodHistoricalStats,
   },
 
   data: () => ({
@@ -86,5 +103,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

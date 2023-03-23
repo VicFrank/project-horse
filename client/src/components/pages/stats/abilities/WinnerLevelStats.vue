@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import AbilityImage from "../games/components/AbilityImage.vue";
-import PlacemementGraph from "./components/PlacementGraph.vue";
+import AbilityImage from "../../games/components/AbilityImage.vue";
+import PlacemementGraph from "../components/PlacementGraph.vue";
 
 export default {
   components: {

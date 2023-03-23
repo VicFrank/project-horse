@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import PlayerGodStats from "../stats/PlayerGodStats.vue";
+import PlayerGodStats from "../stats/gods/PlayerGodStats.vue";
 import AbilityStats from "../stats/abilities/AbilityStats.vue";
 import PlayerStats from "../player/components/PlayerStats.vue";
 import RankBadge from "../../utility/RankBadge.vue";
