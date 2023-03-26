@@ -1873,6 +1873,27 @@ module.exports = [
     equip_group: "click_fx",
     rarity: "Common",
   },
+  {
+    name: "click_boxing",
+    type: "ClickFX",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "click_fx",
+    rarity: "Immortal",
+  },
+  /**
+   * *************************
+   * Spawn FX
+   * *************************
+   */
+  {
+    name: "spawn_default",
+    type: "SpawnFX",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "spawn_fx",
+    rarity: "Common",
+  },
   /**
    * *************************
    * Finishers
@@ -2122,6 +2143,22 @@ module.exports = [
   },
   {
     name: "terrain_tf2",
+    type: "Terrain",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "terrain",
+    rarity: "Immortal",
+  },
+  {
+    name: "terrain_brewmaster",
+    type: "Terrain",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "terrain",
+    rarity: "Immortal",
+  },
+  {
+    name: "terrain_boxing",
     type: "Terrain",
     coins: -1,
     cost_usd: -1,
