@@ -10,8 +10,16 @@ module.exports = {
   async createGamePlayer(postGamePlayerData) {
     const { matchID, steamID, username, place, god } = postGamePlayerData;
     const { rounds, endTime, heroes, team, wins, losses } = postGamePlayerData;
-    const { players, doubledown, isProd } = postGamePlayerData;
+    const { players, doubledown, isProd, bonus } = postGamePlayerData;
     let { ranked } = postGamePlayerData;
+
+    let goldMultiplier = 1;
+    let xpMultiplier = 1;
+    let rankMultiplier = 1;
+
+    if (bonus === "gold") goldMultiplier = 1.5;
+    else if (bonus === "exp") xpMultiplier = 1.5;
+    else if (bonus === "doubledown") rankMultiplier = 1.5;
 
     if (players.length !== 8) ranked = false;
 
@@ -52,6 +60,17 @@ module.exports = {
         if (place <= 4) {
           await Players.addPlayerGodProgress(steamID, god, 1);
         }
+
+        xpChange *= xpMultiplier;
+        coinsChange *= goldMultiplier;
+        mmrChange *= rankMultiplier;
+        ladderRatingChange *= rankMultiplier;
+
+        // round all the numbers down, because we store them as ints
+        xpChange = Math.floor(xpChange);
+        coinsChange = Math.floor(coinsChange);
+        mmrChange = Math.floor(mmrChange);
+        ladderRatingChange = Math.floor(ladderRatingChange);
       }
 
       // prettier-ignore
