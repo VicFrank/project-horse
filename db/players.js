@@ -1197,33 +1197,23 @@ module.exports = {
   },
 
   async getGodsWithRewards(steamID) {
-    const getRandomReward = (type) => {
-      const roll = Math.random();
-      if (roll < 0.6) {
-        return type;
-      } else if (roll < 0.625) {
-        return "chest_basic";
-      } else if (roll < 0.63) {
-        return "chest_god_unique_2";
-      } else return false;
-    };
-
-    const addRewardToRandomGod = (gods, type) => {
-      for (const god of gods) {
-        if (god.reward) continue;
-        const reward = getRandomReward(type);
-        if (reward) {
+    const addRewardToRandomGod = (gods, reward) => {
+      const godsWithoutRewards = gods.filter((god) => !god.reward);
+      for (const god of godsWithoutRewards) {
+        const roll = Math.random();
+        if (roll < 0.6) {
           god.reward = reward;
           return;
         }
       }
+      // if we're still here, just give the reward to the first god that doesn't have one
+      godsWithoutRewards[0].reward = reward;
     };
 
     try {
       const playerGods = await this.getGods(steamID);
       const godFreqs = await this.getGodFreqs(steamID);
-      const numRewardsOfType = Math.floor(playerGods.length * 0.15);
-      const rewardTypes = ["gold", "doubledown", "xp"];
+      const rewards = ["gold", "doubledown", "exp"];
 
       for (const god of playerGods) {
         const godFreq = godFreqs.find((gf) => gf.god === god.god_name);
@@ -1234,9 +1224,13 @@ module.exports = {
         delete god.freq;
       }
 
-      for (const type of rewardTypes) {
-        for (let i = 0; i < numRewardsOfType; i++) {
-          addRewardToRandomGod(playerGods, type);
+      for (const reward of rewards) {
+        addRewardToRandomGod(playerGods, reward);
+      }
+
+      for (const god of playerGods) {
+        if (!god.reward) {
+          god.reward = "none";
         }
       }
 
