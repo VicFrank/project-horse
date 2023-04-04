@@ -96,36 +96,12 @@ async function addCosmetics() {
     console.log("Adding cosmetics...");
     await cosmetics.bulkCreateCosmetics([
       {
-        name: "terrain_brewmaster",
-        type: "Terrain",
+        name: "pack_boxing",
+        type: "Consumable",
+        equip_group: "",
         coins: -1,
         cost_usd: -1,
-        equip_group: "terrain",
-        rarity: "Immortal",
-      },
-      {
-        name: "terrain_boxing",
-        type: "Terrain",
-        coins: -1,
-        cost_usd: -1,
-        equip_group: "terrain",
-        rarity: "Immortal",
-      },
-      {
-        name: "click_boxing",
-        type: "ClickFX",
-        coins: -1,
-        cost_usd: -1,
-        equip_group: "click_fx",
-        rarity: "Immortal",
-      },
-      {
-        name: "spawn_default",
-        type: "SpawnFX",
-        coins: -1,
-        cost_usd: -1,
-        equip_group: "spawn_fx",
-        rarity: "Common",
+        rarity: "Mythical",
       },
     ]);
     console.log("Cosmetics initialized");

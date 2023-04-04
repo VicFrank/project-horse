@@ -113,6 +113,14 @@ module.exports = [
     cost_usd: -1,
     rarity: "Mythical",
   },
+  {
+    name: "pack_boxing",
+    type: "Consumable",
+    equip_group: "",
+    coins: 30000,
+    cost_usd: -1,
+    rarity: "Mythical",
+  },
   /**
    * *************************
    * Emotes

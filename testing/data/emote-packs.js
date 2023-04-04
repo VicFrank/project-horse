@@ -17,5 +17,6 @@ const packs = {
     "sfx_chinese",
     "terrain_chinese",
   ],
+  pack_boxing: ["chest_basic", "chest_basic", "terrain_boxing", "click_boxing"],
 };
 module.exports = packs;
