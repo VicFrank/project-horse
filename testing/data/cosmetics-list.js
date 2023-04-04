@@ -117,7 +117,7 @@ module.exports = [
     name: "pack_boxing",
     type: "Consumable",
     equip_group: "",
-    coins: 30000,
+    coins: 50000,
     cost_usd: -1,
     rarity: "Mythical",
   },

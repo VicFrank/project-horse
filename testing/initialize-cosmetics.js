@@ -116,20 +116,12 @@ async function updateCosmetics() {
     console.log("Updating cosmetics...");
     const cosmeticsToUpdate = [
       {
-        name: "chest_arena_unique_1",
-        type: "Chest",
+        name: "pack_boxing",
+        type: "Consumable",
         equip_group: "",
-        coins: -1,
+        coins: 50000,
         cost_usd: -1,
-        rarity: "Common",
-      },
-      {
-        name: "chest_finisher_unique_1",
-        type: "Chest",
-        equip_group: "",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Common",
+        rarity: "Mythical",
       },
     ];
     for (const c of cosmeticsToUpdate) {
@@ -293,9 +285,9 @@ async function addCosmeticsToPlayers() {
 (async function () {
   // await addCosmeticsToPlayers();
   // await setChestRewards();
-  // await updateCosmetics();
+  await updateCosmetics();
   // await initializeEscalatingOdds();
-  await addCosmetics();
+  // await addCosmetics();
   // await initializeUniqueChestDrops("chest_god_unique_1", chest_god_unique_1);
   // await initializeUniqueChestDrops("chest_god_unique_2", chest_god_unique_2);
   // await initializeUniqueChestDrops(
