@@ -4,8 +4,8 @@
     "id": "custom_alchemist_acid_spray",
     "icon": "alchemist_acid_spray",
     "tags": [
-      "magicDamage",
-      "damageAmplification"
+      "damageAmplification",
+      "magicDamage"
     ],
     "categories": [
       "ABILITY: Point Target",
@@ -48,7 +48,7 @@
     "values": [
       "BASE DAMAGE: 75%",
       "BONUS ATTACK RANGE: 125 / 200 / 350",
-      "BONUS DAMAGE: 50 / 75 / 125",
+      "BONUS DAMAGE: 50 / 80 / 140",
       "BOUNCE COUNT: 2 / 3 / 5",
       "MOVEMENT SLOW: 100%",
       "SLOW DURATION: 0.35"
@@ -64,7 +64,7 @@
       105
     ],
     "superUpgrade": "Super: +2 Acorn Shot bounces, +50% base damage.",
-    "gabenUpgrade": "Gaben: Grants Stygian Desolator: +60 damage, and attacks reduce the target's armor by 10 for 7 seconds."
+    "gabenUpgrade": "Gaben: Grants +60 base damage, attacks reduce target's armor by 10 for 7 seconds."
   },
   {
     "name": "Anchor Smash",
@@ -106,8 +106,8 @@
     "id": "custom_skywrath_mage_ancient_seal",
     "icon": "skywrath_mage_ancient_seal",
     "tags": [
-      "silence",
-      "damageAmplification"
+      "damageAmplification",
+      "silence"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -170,9 +170,10 @@
     "id": "custom_zuus_arc_lightning",
     "icon": "zuus_arc_lightning",
     "tags": [
+      "damageAmplification",
+      "lifesteal",
       "magicDamage",
-      "spam",
-      "damageAmplification"
+      "spam"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -192,17 +193,17 @@
       80
     ],
     "superUpgrade": "Super: Damage is increased by 110.",
-    "gabenUpgrade": "Gaben: Grants Timeless Relic."
+    "gabenUpgrade": "Gaben: Grants 20% spell amplification and 20% spell lifesteal."
   },
   {
     "name": "Arcane Aura",
     "id": "crystal_maiden_brilliance_aura",
     "icon": "crystal_maiden_brilliance_aura",
     "tags": [
-      "spam",
       "buff",
+      "manaRegeneration",
       "passive",
-      "manaRegeneration"
+      "spam"
     ],
     "categories": [
       "ABILITY: Passive",
@@ -220,7 +221,7 @@
     ],
     "cooldowns": [],
     "manaCost": [],
-    "superUpgrade": "Super: +80 mana restored.",
+    "superUpgrade": "Super: +80 mana restored. Also restores health equal to 25% of mana restored.",
     "gabenUpgrade": "Gaben: Aura now grants 25% cooldown reduction."
   },
   {
@@ -228,8 +229,8 @@
     "id": "custom_skywrath_mage_arcane_bolt",
     "icon": "skywrath_mage_arcane_bolt",
     "tags": [
-      "spam",
-      "magicDamage"
+      "magicDamage",
+      "spam"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -258,8 +259,8 @@
     "id": "winter_wyvern_arctic_burn",
     "icon": "winter_wyvern_arctic_burn",
     "tags": [
-      "attackRange",
-      "attackModifier"
+      "attackModifier",
+      "attackRange"
     ],
     "categories": [
       "ABILITY: No Target",
@@ -304,7 +305,7 @@
     "description": "After a short formation time, Mars summons an arena lined with the undead warriors of the Ash Legion, who block enemy attacks and movement. Enemy heroes near the inside edge of the arena will be attacked by spears, dealing damage and knocking them back.",
     "differences": "",
     "values": [
-      "DURATION: 5 / 6 / 7",
+      "DURATION: 3 / 4 / 5",
       "FORMATION TIME: 0.3",
       "RADIUS: 550",
       "SPEAR DAMAGE: 75 / 150 / 225"
@@ -318,7 +319,7 @@
       250
     ],
     "superUpgrade": "Super: Grants Team +180 HP Regen.",
-    "gabenUpgrade": "Gaben: Lava covers the Arena floor, dealing 180 magical damage per second to enemies."
+    "gabenUpgrade": "Gaben: Lava covers the Arena floor, dealing 300 magical damage per second to enemies."
   },
   {
     "name": "Astral Spirit",
@@ -367,10 +368,10 @@
     "id": "void_spirit_astral_step",
     "icon": "void_spirit_astral_step",
     "tags": [
-      "mobility",
-      "ultimate",
       "instantAttack",
-      "magicDamage"
+      "magicDamage",
+      "mobility",
+      "ultimate"
     ],
     "categories": [
       "ABILITY: Point Target",
@@ -380,7 +381,7 @@
     "description": "Void Spirit tears a rift through the astral plane to appear at the target location, attacking all enemies along the path. This attack inflicts a void mark that slows for 1.25 seconds and then detonates.",
     "differences": "",
     "values": [
-      "CHARGE RESTORE TIME: 28 / 23 / 18",
+      "BASE CHARGE RESTORE TIME: 28 / 23 / 18",
       "MAX CHARGES: 2",
       "MOVEMENT SLOW: 40% / 60% / 80%",
       "RANGE: 800 / 900 / 1000",
@@ -392,7 +393,7 @@
     "manaCost": [
       50
     ],
-    "superUpgrade": "Super: Grants Mage Slayer. Slash crits for 200% damage, and reduces charge restore time by 4s.",
+    "superUpgrade": "Super: +200% crit. Reduces charge restore time by 4s.",
     "gabenUpgrade": "Gaben: +2 Astral Step Charges"
   },
   {
@@ -400,8 +401,8 @@
     "id": "custom_abyssal_underlord_atrophy_aura",
     "icon": "abyssal_underlord_atrophy_aura",
     "tags": [
-      "passive",
-      "attackDamage"
+      "attackDamage",
+      "passive"
     ],
     "categories": [
       "ABILITY: Passive",
@@ -425,8 +426,8 @@
     "id": "custom_slardar_bash_of_the_deep",
     "icon": "slardar_bash",
     "tags": [
-      "stun",
-      "passive"
+      "passive",
+      "stun"
     ],
     "categories": [
       "ABILITY: Passive",
@@ -452,8 +453,8 @@
     "id": "custom_clockwerk_battery_assault",
     "icon": "rattletrap_battery_assault",
     "tags": [
-      "stun",
-      "magicDamage"
+      "magicDamage",
+      "stun"
     ],
     "categories": [
       "ABILITY: No Target",
@@ -485,9 +486,9 @@
     "id": "troll_warlord_battle_trance",
     "icon": "troll_warlord_battle_trance",
     "tags": [
-      "ultimate",
+      "attackSpeed",
       "lifesteal",
-      "attackSpeed"
+      "ultimate"
     ],
     "categories": [
       "ABILITY: No Target",
@@ -517,9 +518,9 @@
     "id": "huskar_berserkers_blood",
     "icon": "huskar_berserkers_blood",
     "tags": [
-      "passive",
-      "healing",
       "attackSpeed",
+      "healing",
+      "passive",
       "stats"
     ],
     "categories": [
@@ -536,16 +537,16 @@
     "cooldowns": [],
     "manaCost": [],
     "superUpgrade": "Super: +30% Berserker's Blood Regen.",
-    "gabenUpgrade": "Gaben: Grants Heart of Tarraque: Gains +45 Strength, +250 Health, and +1.6% Max HP Health Regen."
+    "gabenUpgrade": "Gaben: Grants +60 Strength."
   },
   {
     "name": "Berserker's Rage",
     "id": "custom_troll_warlord_berserkers_rage",
     "icon": "troll_warlord_berserkers_rage",
     "tags": [
-      "magicDamage",
       "attackRange",
       "dispel",
+      "magicDamage",
       "spam"
     ],
     "categories": [
@@ -573,8 +574,8 @@
     "id": "enigma_black_hole",
     "icon": "enigma_black_hole",
     "tags": [
-      "stun",
       "pureDamage",
+      "stun",
       "ultimate"
     ],
     "categories": [
@@ -600,15 +601,15 @@
       300
     ],
     "superUpgrade": "Super: +100 damage per second.",
-    "gabenUpgrade": "Gaben: Grants Refresher Orb (costs 0 mana)."
+    "gabenUpgrade": "Gaben: Refreshes all abilities upon cast (Once per round)."
   },
   {
     "name": "Blade Fury",
     "id": "custom_juggernaut_blade_fury",
     "icon": "juggernaut_blade_fury",
     "tags": [
-      "magicImmunity",
-      "magicDamage"
+      "magicDamage",
+      "magicImmunity"
     ],
     "categories": [
       "ABILITY: No Target",
@@ -679,8 +680,8 @@
     "id": "custom_queenofpain_blink",
     "icon": "queenofpain_blink",
     "tags": [
-      "mobility",
       "damageAmplification",
+      "mobility",
       "silence"
     ],
     "categories": [
@@ -744,8 +745,8 @@
     "icon": "bloodseeker_bloodrage",
     "tags": [
       "attackSpeed",
-      "pureDamage",
-      "damageAmplification"
+      "damageAmplification",
+      "pureDamage"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -776,7 +777,6 @@
     "id": "abaddon_borrowed_time",
     "icon": "abaddon_borrowed_time",
     "tags": [
-      "passive",
       "dispel",
       "ultimate"
     ],
@@ -800,7 +800,7 @@
       0,
       0
     ],
-    "superUpgrade": "Super: Reduces the cooldown by 8, +3 second duration ",
+    "superUpgrade": "Super: Reduces the cooldown by 8, +2 second duration ",
     "gabenUpgrade": "Gaben: 40% damage reduction to allies in 500 AoE, the caster heals for damage taken."
   },
   {
@@ -808,9 +808,9 @@
     "id": "custom_monkey_king_boundless_strike",
     "icon": "monkey_king_boundless_strike",
     "tags": [
-      "stun",
       "instantAttack",
-      "silence"
+      "silence",
+      "stun"
     ],
     "categories": [
       "ABILITY: Point Target",
@@ -897,7 +897,7 @@
       90
     ],
     "superUpgrade": "Super: +35% damage, +3 arrows fired.",
-    "gabenUpgrade": "Gaben: Grants Gleipnir"
+    "gabenUpgrade": "Gaben: Has 2 charges."
   },
   {
     "name": "Burning Spear",
@@ -917,8 +917,8 @@
     "description": "The hero sets their weapons aflame, dealing damage over time with their regular attack. Multiple attacks will stack additional damage. Each attack drains some of their health.",
     "differences": "",
     "values": [
-      "BURN DAMAGE PER SECOND: 5 / 10 / 20",
-      "CURRENT HEALTH COST: 3%",
+      "BURN DAMAGE PER SECOND: 7 / 14 / 28",
+      "CURRENT HEALTH COST: 1.5%",
       "DURATION: 8"
     ],
     "cooldowns": [],
@@ -965,8 +965,8 @@
     "id": "custom_beastmaster_call_of_the_wild",
     "icon": "custom_beastmaster_call_of_the_wild",
     "tags": [
-      "summons",
-      "stun"
+      "stun",
+      "summons"
     ],
     "categories": [
       "ABILITY: Point Target"
@@ -1037,8 +1037,8 @@
     "id": "keeper_of_the_light_chakra_magic",
     "icon": "keeper_of_the_light_chakra_magic",
     "tags": [
-      "manaRegeneration",
-      "buff"
+      "buff",
+      "manaRegeneration"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -1090,9 +1090,7 @@
       8
     ],
     "manaCost": [
-      75,
-      125,
-      175
+      75
     ],
     "superUpgrade": "Super: Grants Second Chakram. Grants Throwable Flamethrower, which allows the hero to gift a buffed Flamethrower to an ally.",
     "gabenUpgrade": "Gaben: Launches 10 Chakrams in a radial around caster."
@@ -1102,8 +1100,8 @@
     "id": "custom_chaos_knight_chaos_strike",
     "icon": "chaos_knight_chaos_strike",
     "tags": [
-      "passive",
-      "lifesteal"
+      "lifesteal",
+      "passive"
     ],
     "categories": [
       "ABILITY: Passive",
@@ -1127,9 +1125,9 @@
     "id": "custom_warlock_chaotic_offering",
     "icon": "warlock_rain_of_chaos",
     "tags": [
-      "ultimate",
+      "stun",
       "summons",
-      "stun"
+      "ultimate"
     ],
     "categories": [
       "ABILITY: Point Target",
@@ -1162,9 +1160,9 @@
     "id": "custom_spirit_breaker_charge_of_darkness",
     "icon": "spirit_breaker_charge_of_darkness",
     "tags": [
+      "magicImmunity",
       "mobility",
-      "stun",
-      "magicImmunity"
+      "stun"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -1193,10 +1191,10 @@
     "id": "alchemist_chemical_rage",
     "icon": "alchemist_chemical_rage",
     "tags": [
-      "ultimate",
       "attackSpeed",
       "healing",
-      "mobility"
+      "mobility",
+      "ultimate"
     ],
     "categories": [
       "ABILITY: No Target",
@@ -1220,16 +1218,16 @@
       100
     ],
     "superUpgrade": "Super: -0.1 base attack time. +50 health regeneration, +150 movement speed.",
-    "gabenUpgrade": "Gaben: Chemical Rage now lasts for the entire round. Gains Mjollnir."
+    "gabenUpgrade": "Gaben: Chemical Rage now also casts on the closest unit to you."
   },
   {
     "name": "Chronosphere",
     "id": "custom_faceless_void_chronosphere",
     "icon": "faceless_void_chronosphere",
     "tags": [
+      "attackSpeed",
       "stun",
-      "ultimate",
-      "attackSpeed"
+      "ultimate"
     ],
     "categories": [
       "ABILITY: Point Target",
@@ -1260,8 +1258,8 @@
     "id": "custom_winter_wyvern_cold_embrace",
     "icon": "winter_wyvern_cold_embrace",
     "tags": [
-      "healing",
       "buff",
+      "healing",
       "magicDamage",
       "stun"
     ],
@@ -1295,9 +1293,9 @@
     "id": "custom_slardar_amplify_damage",
     "icon": "slardar_amplify_damage",
     "tags": [
-      "ultimate",
       "damageAmplification",
-      "spam"
+      "spam",
+      "ultimate"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -1370,17 +1368,17 @@
       0.3
     ],
     "manaCost": [],
-    "superUpgrade": "Super: Grants Vanguard. Counter Helix will proc on attacks with indepedent cooldown.",
-    "gabenUpgrade": "Gaben: Grants Crimson Guard. Increases Counter Helix Chance by 10%, and damage by 120."
+    "superUpgrade": "Super: Counter Helix will proc on attacks with indepedent cooldown. +120 damage.",
+    "gabenUpgrade": "Gaben: Adds a stacking debuff to affected enemies that causes them to deal 15% less damage per stack to the hero (Max 6 stacks). Increases Counter Helix Chance by 10%."
   },
   {
     "name": "Coup de Grace",
     "id": "custom_phantom_assassin_coup_de_grace",
     "icon": "phantom_assassin_coup_de_grace",
     "tags": [
-      "ultimate",
+      "break",
       "passive",
-      "break"
+      "ultimate"
     ],
     "categories": [
       "ABILITY: Passive",
@@ -1411,7 +1409,7 @@
       "DISPELLABLE: Strong Dispels Only"
     ],
     "description": "Night Stalker horrifies all nearby enemies, causing them to become silenced while near him. The effect lasts longer at night.",
-    "differences": "Always maximum effectiveness as if it was night.",
+    "differences": "Always maximum effectiveness as if it was night. Has 0.1s cast point instead of immediate.",
     "values": [
       "AURA RADIUS: 325",
       "DAY DURATION: 3 / 3 / 3",
@@ -1433,8 +1431,8 @@
     "id": "custom_axe_culling_blade",
     "icon": "axe_culling_blade",
     "tags": [
-      "ultimate",
-      "pureDamage"
+      "pureDamage",
+      "ultimate"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -1470,9 +1468,9 @@
     "id": "custom_abaddon_curse_of_avernus",
     "icon": "abaddon_frostmourne",
     "tags": [
-      "silence",
       "attackSpeed",
-      "passive"
+      "passive",
+      "silence"
     ],
     "categories": [
       "ABILITY: Passive",
@@ -1498,8 +1496,8 @@
     "id": "custom_dark_willow_cursed_crown",
     "icon": "dark_willow_cursed_crown",
     "tags": [
-      "stun",
-      "magicDamage"
+      "magicDamage",
+      "stun"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -1511,12 +1509,12 @@
     "values": [
       "DELAY: 3",
       "STUN DURATION: 1.5 / 2 / 3",
-      "STUN RADIUS: 360"
+      "STUN RADIUS: 400"
     ],
     "cooldowns": [
-      18,
       16,
-      12
+      14,
+      10
     ],
     "manaCost": [
       80,
@@ -1628,8 +1626,8 @@
     "icon": "undying_decay",
     "tags": [
       "magicDamage",
-      "stats",
-      "spam"
+      "spam",
+      "stats"
     ],
     "categories": [
       "ABILITY: Point Target",
@@ -1651,11 +1649,9 @@
       4
     ],
     "manaCost": [
-      85,
-      90,
-      100
+      50
     ],
-    "superUpgrade": "Super: Increases strength steal by +6.",
+    "superUpgrade": "Super: Increases strength steal by +6. -1s cooldown.",
     "gabenUpgrade": "Gaben: Decay triggers 2 additional times at the targeted location 3 seconds apart."
   },
   {
@@ -1663,8 +1659,8 @@
     "id": "custom_shadow_demon_demonic_cleanse",
     "icon": "shadow_demon_demonic_cleanse",
     "tags": [
-      "healing",
       "dispel",
+      "healing",
       "ultimate"
     ],
     "categories": [
@@ -1692,10 +1688,10 @@
     "id": "custom_shadow_demon_demonic_purge",
     "icon": "shadow_demon_demonic_purge",
     "tags": [
-      "ultimate",
       "break",
+      "dispel",
       "magicDamage",
-      "dispel"
+      "ultimate"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -1749,8 +1745,8 @@
     "icon": "marci_grapple",
     "tags": [
       "displacement",
-      "stun",
-      "magicDamage"
+      "magicDamage",
+      "stun"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -1815,8 +1811,8 @@
     "id": "custom_void_spirit_dissimilate",
     "icon": "void_spirit_dissimilate",
     "tags": [
-      "mobility",
-      "magicDamage"
+      "magicDamage",
+      "mobility"
     ],
     "categories": [
       "ABILITY: No Target",
@@ -1849,8 +1845,8 @@
     "tags": [
       "break",
       "pureDamage",
-      "ultimate",
-      "silence"
+      "silence",
+      "ultimate"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -1902,7 +1898,7 @@
       0,
       0
     ],
-    "superUpgrade": "Super: Slows the movement speed and attack speed of enemies by 25% for 2s and increase caster's strength by 30% per, hero hit that lasts 15s. Duration refreshes per stack, up to a max of 5 stacks. Increases strength as damage by 0% and damage radius by 200 units.",
+    "superUpgrade": "Super: Slows the movement speed and attack speed of enemies by 25% for 2s and increase caster's strength by 30% per, hero hit that lasts 15s. Duration refreshes per stack, up to a max of 5 stacks. Increases damage radius by 200 units.",
     "gabenUpgrade": "Gaben: No longer deals self-damage. Grants 0.5% HP regen per stack."
   },
   {
@@ -1910,8 +1906,8 @@
     "id": "custom_dragon_knight_dragon_blood",
     "icon": "dragon_knight_dragon_blood",
     "tags": [
-      "passive",
-      "healing"
+      "healing",
+      "passive"
     ],
     "categories": [
       "ABILITY: Passive"
@@ -1960,9 +1956,9 @@
     "id": "custom_legion_commander_duel",
     "icon": "legion_commander_duel",
     "tags": [
-      "ultimate",
       "attackDamage",
-      "stun"
+      "stun",
+      "ultimate"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -1992,9 +1988,9 @@
     "id": "elder_titan_earth_splitter",
     "icon": "elder_titan_earth_splitter",
     "tags": [
-      "ultimate",
+      "displacement",
       "magicDamage",
-      "displacement"
+      "ultimate"
     ],
     "categories": [
       "ABILITY: Point Target",
@@ -2028,8 +2024,8 @@
     "id": "custom_ursa_earthshock",
     "icon": "ursa_earthshock",
     "tags": [
-      "mobility",
-      "magicDamage"
+      "magicDamage",
+      "mobility"
     ],
     "categories": [
       "ABILITY: No Target",
@@ -2061,9 +2057,9 @@
     "id": "dragon_knight_elder_dragon_form",
     "icon": "dragon_knight_elder_dragon_form",
     "tags": [
-      "ultimate",
+      "attackModifier",
       "attackRange",
-      "attackModifier"
+      "ultimate"
     ],
     "categories": [
       "ABILITY: No Target",
@@ -2079,7 +2075,7 @@
       "DURATION: 60"
     ],
     "cooldowns": [
-      105
+      100
     ],
     "manaCost": [
       50,
@@ -2094,8 +2090,8 @@
     "id": "custom_magnataur_empower",
     "icon": "magnataur_empower",
     "tags": [
-      "buff",
-      "attackDamage"
+      "attackDamage",
+      "buff"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -2141,15 +2137,15 @@
     ],
     "manaCost": [],
     "superUpgrade": "Super: Costs no mana and has no cast point. -1.5s cooldown.",
-    "gabenUpgrade": "Gaben: Grants Daedalus."
+    "gabenUpgrade": "Gaben: Innately grants 60 bonus base damage."
   },
   {
     "name": "Epicenter",
     "id": "custom_sandking_epicenter",
     "icon": "sandking_epicenter",
     "tags": [
-      "ultimate",
-      "magicDamage"
+      "magicDamage",
+      "ultimate"
     ],
     "categories": [
       "ABILITY: No Target",
@@ -2186,10 +2182,10 @@
     "id": "custom_obsidian_destroyer_equilibrium",
     "icon": "obsidian_destroyer_equilibrium",
     "tags": [
-      "manaRegeneration",
-      "passive",
+      "attackRange",
       "damageAmplification",
-      "attackRange"
+      "manaRegeneration",
+      "passive"
     ],
     "categories": [
       "ABILITY: Passive"
@@ -2210,9 +2206,9 @@
     "id": "custom_slark_essence_shift",
     "icon": "slark_essence_shift",
     "tags": [
+      "attackSpeed",
       "passive",
-      "stats",
-      "attackSpeed"
+      "stats"
     ],
     "categories": [
       "ABILITY: Passive",
@@ -2236,8 +2232,8 @@
     "id": "custom_razor_eye_of_the_storm",
     "icon": "razor_eye_of_the_storm",
     "tags": [
-      "ultimate",
-      "damageAmplification"
+      "damageAmplification",
+      "ultimate"
     ],
     "categories": [
       "ABILITY: No Target",
@@ -2273,9 +2269,9 @@
     "id": "rubick_fade_bolt",
     "icon": "rubick_fade_bolt",
     "tags": [
-      "magicDamage",
+      "attackDamage",
       "instantAttack",
-      "attackDamage"
+      "magicDamage"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -2309,10 +2305,10 @@
     "id": "oracle_false_promise",
     "icon": "oracle_false_promise",
     "tags": [
-      "ultimate",
-      "healing",
       "buff",
-      "lifesteal"
+      "healing",
+      "lifesteal",
+      "ultimate"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -2344,8 +2340,8 @@
     "id": "life_stealer_feast",
     "icon": "life_stealer_feast",
     "tags": [
-      "passive",
-      "lifesteal"
+      "lifesteal",
+      "passive"
     ],
     "categories": [
       "ABILITY: Passive",
@@ -2368,10 +2364,10 @@
     "id": "custom_lycan_feral_impulse",
     "icon": "lycan_feral_impulse",
     "tags": [
-      "summons",
       "attackDamage",
+      "damageAmplification",
       "passive",
-      "damageAmplification"
+      "summons"
     ],
     "categories": [
       "ABILITY: Passive"
@@ -2392,11 +2388,11 @@
     "id": "troll_warlord_fervor",
     "icon": "troll_warlord_fervor",
     "tags": [
-      "passive",
       "attackSpeed",
-      "stats",
       "dispel",
-      "lifesteal"
+      "lifesteal",
+      "passive",
+      "stats"
     ],
     "categories": [
       "ABILITY: Passive",
@@ -2410,17 +2406,17 @@
     ],
     "cooldowns": [],
     "manaCost": [],
-    "superUpgrade": "Super: +10 attack speed per stack.",
-    "gabenUpgrade": "Gaben: Grants Satanic."
+    "superUpgrade": "Super: +15 attack speed per stack.",
+    "gabenUpgrade": "Gaben: Fervor no longer resets when you switch targets."
   },
   {
     "name": "Fiend's Grip",
     "id": "custom_bane_fiends_grip",
     "icon": "bane_fiends_grip",
     "tags": [
-      "ultimate",
+      "pureDamage",
       "stun",
-      "pureDamage"
+      "ultimate"
     ],
     "categories": [
       "ABILITY: Channeled",
@@ -2432,7 +2428,6 @@
     "differences": "",
     "values": [
       "DAMAGE: 70 / 110 / 150",
-      "DURATION: 5 / 6 / 7",
       "MANA DRAIN PER SECOND: 10%"
     ],
     "cooldowns": [
@@ -2445,7 +2440,7 @@
       300,
       400
     ],
-    "superUpgrade": "Super: Allows the hero to perform other actions while channeling Fiend's Grip. Additionally steals 5% of the target's maximum health per second. +6s Fiend's Grip duration.",
+    "superUpgrade": "Super: Spawns 2 illusions that channel Fiend's Grip on the target instead, allowing the caster to perform other actions. Additionally steals 5% of the target's maximum health per second. +6s Fiend's Grip duration.",
     "gabenUpgrade": "Gaben: Cooldown reduced by 50 seconds. For every second spent channelling Fiend's Grip, cooldown is reduced by 10 seconds."
   },
   {
@@ -2464,7 +2459,7 @@
     "description": "Grants bonus attack and movement speed each time caster casts a spell. Stacks with itself. Lasts 8 seconds.",
     "differences": "Generates stacks when casting spells instead of when damaging enemies with spells.",
     "values": [
-      "ATTACK SPEED BONUS: 35 / 45 / 65",
+      "ATTACK SPEED BONUS: 20 / 30 / 50",
       "DURATION: 8",
       "MAX STACKS: 4",
       "MOVE SPEED BONUS: 4% / 5% / 7%"
@@ -2479,9 +2474,9 @@
     "id": "custom_lion_finger_of_death",
     "icon": "lion_finger_of_death",
     "tags": [
-      "ultimate",
       "magicDamage",
-      "stats"
+      "stats",
+      "ultimate"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -2506,18 +2501,18 @@
       400
     ],
     "superUpgrade": "Super: +70 Max HP and +20 more bonus damage per Finger of Death kill.",
-    "gabenUpgrade": "Gaben: 20 seconds less cooldown. 100 more base damage and is cast on all enemies in a 325 radius of the primary target."
+    "gabenUpgrade": "Gaben: -20 seconds cooldown. 100 more base damage and is cast on all enemies in a 325 radius of the primary target."
   },
   {
     "name": "Firesnap Cookie",
     "id": "custom_snapfire_firesnap_cookie",
     "icon": "snapfire_firesnap_cookie",
     "tags": [
-      "healing",
-      "stun",
       "buff",
+      "healing",
+      "magicDamage",
       "mobility",
-      "magicDamage"
+      "stun"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -2548,8 +2543,8 @@
     "id": "custom_earthshaker_fissure",
     "icon": "earthshaker_fissure",
     "tags": [
-      "stun",
-      "magicDamage"
+      "magicDamage",
+      "stun"
     ],
     "categories": [
       "ABILITY: Point Target",
@@ -2645,10 +2640,10 @@
     "id": "undying_flesh_golem",
     "icon": "undying_flesh_golem",
     "tags": [
-      "ultimate",
-      "stats",
       "damageAmplification",
-      "summons"
+      "stats",
+      "summons",
+      "ultimate"
     ],
     "categories": [
       "ABILITY: No Target",
@@ -2674,15 +2669,14 @@
       125,
       150
     ],
-    "superUpgrade": "Super: +15% damage amplification, +20% extra strength, reduces Flesh Golem Cooldown by 30s and causes caster to spawn one zombie on each attack while transformed. Spawned zombies lasts 15s.",
-    "gabenUpgrade": "Gaben: Applies Arcanist's Armor effect."
+    "superUpgrade": "Super: +10% damage amplification, +10% extra strength, reduces Flesh Golem Cooldown by 30s and causes caster to spawn one zombie on each attack while transformed. Spawned zombies lasts 15s.",
+    "gabenUpgrade": "Gaben: Gain a 10% chance to cast Soul Rip on the target on attack, and a 10% chance to cast Soul Rip on themselves when attacked."
   },
   {
     "name": "Flesh Heap",
     "id": "custom_pudge_flesh_heap",
     "icon": "pudge_flesh_heap",
     "tags": [
-      "passive",
       "stats"
     ],
     "categories": [
@@ -2708,15 +2702,15 @@
       80
     ],
     "superUpgrade": "Super: Permanently gains +2 Strength per enemy that dies in 450 range.",
-    "gabenUpgrade": "Gaben: Grants Giant's Ring."
+    "gabenUpgrade": "Gaben: 2x damage block and 2x strength gain."
   },
   {
     "name": "Focus Fire",
     "id": "custom_windrunner_focusfire",
     "icon": "windrunner_focusfire",
     "tags": [
-      "ultimate",
-      "attackSpeed"
+      "attackSpeed",
+      "ultimate"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -2747,9 +2741,9 @@
     "id": "custom_oracle_fortunes_end",
     "icon": "oracle_fortunes_end",
     "tags": [
-      "magicDamage",
       "dispel",
-      "healing"
+      "healing",
+      "magicDamage"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -2780,8 +2774,8 @@
     "id": "custom_crystal_maiden_freezing_field",
     "icon": "crystal_maiden_freezing_field",
     "tags": [
-      "ultimate",
-      "magicDamage"
+      "magicDamage",
+      "ultimate"
     ],
     "categories": [
       "ABILITY: Channeled",
@@ -2826,10 +2820,12 @@
       "PIERCES SPELL IMMUNITY: No",
       "DISPELLABLE: Yes"
     ],
-    "description": "Adds a freezing effect to the hero's attacks, slowing enemy movement and dealing bonus damage. Slow lasts 1.5 seconds.",
-    "differences": "Has no mana cost.",
+    "description": "Adds a freezing effect to the hero's attacks, slowing enemy movement, dealing bonus damage and apply Hypothermia stacks. Slow lasts 1.5 seconds.",
+    "differences": "Has no mana cost, and applies Hypothermia stacks by default.",
     "values": [
       "BONUS DAMAGE: 7.5 / 15 / 30",
+      "HYPOTHERMIA BURST DAMAGE: 30 / 40 / 60",
+      "HYPOTHERMIA REGEN REDUCTION: -2 / -3 / -5",
       "MOVEMENT SLOW: -10% / -25% / -55%"
     ],
     "cooldowns": [
@@ -2840,7 +2836,7 @@
     "manaCost": [
       0
     ],
-    "superUpgrade": "Super: +15 bonus damage, Frost Arrows now apply Hypothermia stacks. Grants Dragon Lance.",
+    "superUpgrade": "Super: +20 bonus damage, -4% Hypothermia regen reduction per stack.",
     "gabenUpgrade": "Gaben: Hero attacks now splinter up to 2 enemies within 375 radius of the main target with 50% reduced damage."
   },
   {
@@ -2878,15 +2874,15 @@
       130
     ],
     "superUpgrade": "Super: +10% damage reduction and provides +50 HP Regen.",
-    "gabenUpgrade": "Gaben: Frost Shield casts Shivas and gives Shivas Aura while active."
+    "gabenUpgrade": "Gaben: Additionally deals 6% of target hero's max HP in an AOE per pulse."
   },
   {
     "name": "Frostbite",
     "id": "crystal_maiden_frostbite",
     "icon": "crystal_maiden_frostbite",
     "tags": [
-      "magicDamage",
-      "damageAmplification"
+      "damageAmplification",
+      "magicDamage"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -2947,10 +2943,10 @@
     "id": "custom_sven_gods_strength",
     "icon": "sven_gods_strength",
     "tags": [
-      "ultimate",
       "attackDamage",
       "magicImmunity",
-      "stun"
+      "stun",
+      "ultimate"
     ],
     "categories": [
       "ABILITY: No Target",
@@ -2980,10 +2976,10 @@
     "id": "kunkka_ghostship",
     "icon": "kunkka_ghostship",
     "tags": [
-      "ultimate",
-      "stun",
+      "buff",
       "magicDamage",
-      "buff"
+      "stun",
+      "ultimate"
     ],
     "categories": [
       "ABILITY: Point Target",
@@ -3082,8 +3078,8 @@
     "id": "mars_gods_rebuke",
     "icon": "mars_gods_rebuke",
     "tags": [
-      "instantAttack",
-      "displacement"
+      "displacement",
+      "instantAttack"
     ],
     "categories": [
       "ABILITY: Point Target",
@@ -3114,9 +3110,9 @@
     "id": "custom_visage_grave_chill",
     "icon": "visage_grave_chill",
     "tags": [
-      "summons",
       "attackSpeed",
-      "mobility"
+      "mobility",
+      "summons"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -3146,9 +3142,9 @@
     "id": "tiny_grow",
     "icon": "tiny_grow",
     "tags": [
-      "ultimate",
+      "attackDamage",
       "passive",
-      "attackDamage"
+      "ultimate"
     ],
     "categories": [
       "ABILITY: Passive",
@@ -3169,12 +3165,43 @@
     "gabenUpgrade": "Gaben: Grants Belch Exterior: grants 30% status resist, and any time a unit hits hero, there is a 30% chance they get belched on, and get stunned for 2s."
   },
   {
+    "name": "Guardian Angel",
+    "id": "custom_omniknight_guardian_angel",
+    "icon": "omniknight_guardian_angel",
+    "tags": [
+      "ultimate"
+    ],
+    "categories": [
+      "ABILITY: No Target",
+      "PIERCES SPELL IMMUNITY: Yes",
+      "DISPELLABLE: Yes"
+    ],
+    "description": "The hero calls upon a Guardian Angel that grants allies immunity from physical damage.",
+    "differences": "Reduced duration.",
+    "values": [
+      "DURATION: 2 / 3 / 4",
+      "RADIUS: 700"
+    ],
+    "cooldowns": [
+      160,
+      140,
+      120
+    ],
+    "manaCost": [
+      150,
+      200,
+      250
+    ],
+    "superUpgrade": "Super: Allies gain 40 health regeneration for the duration of the buff. +1s duration, -60s cooldown. Radius becomes global.",
+    "gabenUpgrade": "Gaben: When an ally affected by Guardian Angel gets attacked, they have a 15% chance to cast a Hammer of Purity on their attacker."
+  },
+  {
     "name": "Gust",
     "id": "custom_drow_ranger_wave_of_silence",
     "icon": "drow_ranger_wave_of_silence",
     "tags": [
-      "silence",
-      "displacement"
+      "displacement",
+      "silence"
     ],
     "categories": [
       "ABILITY: Point Target",
@@ -3206,10 +3233,10 @@
     "id": "chen_hand_of_god",
     "icon": "chen_hand_of_god",
     "tags": [
-      "ultimate",
-      "healing",
       "buff",
-      "dispel"
+      "dispel",
+      "healing",
+      "ultimate"
     ],
     "categories": [
       "ABILITY: No Target",
@@ -3232,8 +3259,8 @@
       300,
       400
     ],
-    "superUpgrade": "Super: Reduces cooldown by 40s, increases heal by 280 and grants Mekansm.",
-    "gabenUpgrade": "Gaben: Mekansm becomes Greaves. When Hand of Gaben is used, it Hard Dispels your entire team."
+    "superUpgrade": "Super: Reduces cooldown by 40s, increases heal by 280 and grants +6 armor to all units affected.",
+    "gabenUpgrade": "Gaben: Hard dispels globally. When Hand of Gaben is cast, all summons gain the Martydom ability (unit suicides to cast a 50% value single target Hand of Gaben on low HP heroes)."
   },
   {
     "name": "Heavenly Grace",
@@ -3275,8 +3302,8 @@
     "id": "custom_shadow_shaman_voodoo",
     "icon": "shadow_shaman_voodoo",
     "tags": [
-      "stun",
-      "break"
+      "break",
+      "stun"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -3304,10 +3331,10 @@
     "id": "phoenix_icarus_dive",
     "icon": "phoenix_icarus_dive",
     "tags": [
-      "mobility",
-      "stun",
       "magicDamage",
-      "magicImmunity"
+      "magicImmunity",
+      "mobility",
+      "stun"
     ],
     "categories": [
       "ABILITY: Point Target",
@@ -3341,8 +3368,8 @@
     "id": "custom_ancient_apparition_ice_blast",
     "icon": "ancient_apparition_ice_blast",
     "tags": [
-      "ultimate",
-      "magicDamage"
+      "magicDamage",
+      "ultimate"
     ],
     "categories": [
       "ABILITY: Point Target",
@@ -3374,8 +3401,8 @@
     "id": "jakiro_ice_path",
     "icon": "jakiro_ice_path",
     "tags": [
-      "stun",
-      "magicDamage"
+      "magicDamage",
+      "stun"
     ],
     "categories": [
       "ABILITY: Point Target",
@@ -3390,7 +3417,7 @@
       "DAMAGE: 50",
       "FORMATION DELAY: 0.5",
       "MAX STUN DURATION: 1 / 1.5 / 2.5",
-      "PATH DURATION: 2.6 / 2.9 / 3.5",
+      "PATH DURATION: 3 / 3.5 / 4.5",
       "RADIUS: 150"
     ],
     "cooldowns": [
@@ -3437,9 +3464,9 @@
     "id": "enchantress_impetus",
     "icon": "enchantress_impetus",
     "tags": [
+      "attackModifier",
       "attackRange",
-      "pureDamage",
-      "attackModifier"
+      "pureDamage"
     ],
     "categories": [
       "ABILITY: Auto-Cast",
@@ -3467,10 +3494,10 @@
     "id": "doom_bringer_infernal_blade",
     "icon": "doom_bringer_infernal_blade",
     "tags": [
-      "magicDamage",
-      "stun",
       "attackModifier",
-      "break"
+      "break",
+      "magicDamage",
+      "stun"
     ],
     "categories": [
       "ABILITY: Auto-Cast",
@@ -3503,9 +3530,9 @@
     "icon": "grimstroke_spirit_walk",
     "tags": [
       "buff",
-      "stun",
       "healing",
-      "magicDamage"
+      "magicDamage",
+      "stun"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -3543,10 +3570,10 @@
     "id": "custom_beastmaster_inner_beast",
     "icon": "beastmaster_inner_beast",
     "tags": [
-      "passive",
       "attackSpeed",
       "buff",
-      "lifesteal"
+      "lifesteal",
+      "passive"
     ],
     "categories": [
       "ABILITY: Passive",
@@ -3560,16 +3587,16 @@
     ],
     "cooldowns": [],
     "manaCost": [],
-    "superUpgrade": "Super: Grants Vladmir's aura. Increases attack speed by 15.",
-    "gabenUpgrade": "Gaben: Replaces Vladmir's aura with Wraith Pact. Increases attack speed by 15."
+    "superUpgrade": "Super: Grants an aura that grants 20% lifesteal and 15% bonus damage. Increases attack speed by 15.",
+    "gabenUpgrade": "Gaben: Summons a Wraith Pact at the beginning of battle, which emits an aura that reduces physical damage from enemies by 30% and deals 30 damage per second. Increases attack speed by 15."
   },
   {
     "name": "Inner Fire",
     "id": "custom_huskar_inner_fire",
     "icon": "huskar_inner_fire",
     "tags": [
-      "healing",
-      "displacement"
+      "displacement",
+      "healing"
     ],
     "categories": [
       "ABILITY: No Target",
@@ -3635,9 +3662,9 @@
     "id": "custom_monkey_king_jingu_mastery",
     "icon": "monkey_king_jingu_mastery",
     "tags": [
-      "passive",
       "attackDamage",
-      "lifesteal"
+      "lifesteal",
+      "passive"
     ],
     "categories": [
       "ABILITY: Passive",
@@ -3658,7 +3685,7 @@
     ],
     "manaCost": [],
     "superUpgrade": "Super: Grants Echo Sabre and +130 damage.",
-    "gabenUpgrade": "Gaben: Spawns a stone soldier near you every 2.5s."
+    "gabenUpgrade": "Gaben: Spawns a stone soldier near you every 2s."
   },
   {
     "name": "Kraken Shell",
@@ -3681,7 +3708,7 @@
     "cooldowns": [],
     "manaCost": [],
     "superUpgrade": "Super: Increases damage block by 40 and reduces the damage threshold by 100.",
-    "gabenUpgrade": "Gaben: Grants Blademail."
+    "gabenUpgrade": "Gaben: Passively reflects 35% of all incoming damage."
   },
   {
     "name": "Laser",
@@ -3760,9 +3787,9 @@
     "id": "custom_huskar_life_break",
     "icon": "huskar_life_break",
     "tags": [
-      "ultimate",
       "magicDamage",
-      "mobility"
+      "mobility",
+      "ultimate"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -3789,15 +3816,15 @@
       0
     ],
     "superUpgrade": "Super: Deals 100% of self damage to the target enemy and all units that the hero passes through.",
-    "gabenUpgrade": "Gaben: Grants Heaven's Halberd. Life Break taunts the target for 3 seconds."
+    "gabenUpgrade": "Gaben: Life Break taunts the target for 3 seconds. Grants Gaben's Gauntlets, which has the value of 15 Gauntlets of Strength (+45 Strength)."
   },
   {
     "name": "Life Drain",
     "id": "custom_pugna_life_drain",
     "icon": "pugna_life_drain",
     "tags": [
-      "ultimate",
-      "healing"
+      "healing",
+      "ultimate"
     ],
     "categories": [
       "ABILITY: Channeled",
@@ -3814,11 +3841,11 @@
       7
     ],
     "manaCost": [
-      125,
-      175,
-      225
+      75,
+      100,
+      125
     ],
-    "superUpgrade": "Super: For every 1.5 seconds of channel, another secondary Life Drain is created targeting another random enemy hero.",
+    "superUpgrade": "Super: For every 1 seconds of channel, another secondary Life Drain is created targeting another random enemy hero.",
     "gabenUpgrade": "Gaben: Removes cooldown and increases damage by 200."
   },
   {
@@ -3854,7 +3881,7 @@
       135
     ],
     "superUpgrade": "Super: Cast range increased by 1000. Grants Nimbus. Lightning Bolt now stuns for 1 seconds.",
-    "gabenUpgrade": "Gaben: Lightning Bolt now damages all enemies within 425 radius of its cast location."
+    "gabenUpgrade": "Gaben: Grants Thundergaben's Wrath."
   },
   {
     "name": "Lil' Shredder",
@@ -3873,7 +3900,7 @@
     "differences": "",
     "values": [
       "ARMOR LOSS DURATION: 5",
-      "ARMOR LOSS PER STACK: 0.5",
+      "ARMOR LOSS PER STACK: 1",
       "BONUS ATTACK SPEED: 300",
       "BONUS RANGE: 75 / 150 / 300",
       "FIXED DAMAGE PER SHOT: 20 / 45 / 95"
@@ -3890,6 +3917,37 @@
     ],
     "superUpgrade": "Super: Uses own attack damage.",
     "gabenUpgrade": "Gaben: 3x multishot."
+  },
+  {
+    "name": "Living Armor",
+    "id": "treant_living_armor",
+    "icon": "treant_living_armor",
+    "tags": [
+      "buff",
+      "healing"
+    ],
+    "categories": [
+      "ABILITY: Unit or Point Target",
+      "PIERCES SPELL IMMUNITY: Yes",
+      "DISPELLABLE: Yes"
+    ],
+    "description": "Infuses the target hero or structure with a protective coating which heals the target and provides bonus armor.",
+    "differences": "Increased heal and reduced cooldown. AI: Prioritizes units who doesn't have the buff. The AI first targets the most frontline unit, then allies within 500 radius, then random allies.",
+    "values": [
+      "BONUS ARMOR: 4 / 6 / 10",
+      "DURATION: 15 / 20 / 30",
+      "HEAL PER SECOND: 4 / 6 / 10"
+    ],
+    "cooldowns": [
+      25,
+      20,
+      10
+    ],
+    "manaCost": [
+      50
+    ],
+    "superUpgrade": "Super: +8 bonus armor, +20 heal.",
+    "gabenUpgrade": "Gaben: Casts on entire team."
   },
   {
     "name": "Lucent Beam",
@@ -3929,9 +3987,9 @@
     "id": "custom_dawnbreaker_luminosity",
     "icon": "dawnbreaker_luminosity",
     "tags": [
-      "passive",
       "healing",
-      "lifesteal"
+      "lifesteal",
+      "passive"
     ],
     "categories": [
       "ABILITY: Passive",
@@ -3947,17 +4005,17 @@
     "cooldowns": [],
     "manaCost": [],
     "superUpgrade": "Super: Requires 1 less attack to proc. Increases by 40% the critical damage.",
-    "gabenUpgrade": "Gaben: Lifesteal increased by 200%. Grants a double attack every 5 seconds."
+    "gabenUpgrade": "Gaben: Lifesteal increased by 150%. Grants a double attack every 5 seconds."
   },
   {
     "name": "Lunar Blessing",
     "id": "luna_lunar_blessing",
     "icon": "luna_lunar_blessing",
     "tags": [
-      "buff",
       "attackDamage",
-      "passive",
-      "attackSpeed"
+      "attackSpeed",
+      "buff",
+      "passive"
     ],
     "categories": [
       "ABILITY: Passive",
@@ -3980,9 +4038,9 @@
     "id": "custom_vengefulspirit_magic_missile",
     "icon": "vengefulspirit_magic_missile",
     "tags": [
+      "break",
       "magicDamage",
-      "stun",
-      "break"
+      "stun"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -4006,7 +4064,7 @@
       110,
       130
     ],
-    "superUpgrade": "Super: Increases damage by 200, breaks for duration of stun and pierces spell immunity.",
+    "superUpgrade": "Super: Increases damage by 100, breaks for duration of stun and pierces spell immunity.",
     "gabenUpgrade": "Gaben: Bounces infinite times, but only once to each unit."
   },
   {
@@ -4014,8 +4072,8 @@
     "id": "arc_warden_magnetic_field",
     "icon": "arc_warden_magnetic_field",
     "tags": [
-      "buff",
-      "attackSpeed"
+      "attackSpeed",
+      "buff"
     ],
     "categories": [
       "ABILITY: Point Target",
@@ -4045,8 +4103,8 @@
     "id": "antimage_mana_break",
     "icon": "antimage_mana_break",
     "tags": [
-      "passive",
-      "attackModifier"
+      "attackModifier",
+      "passive"
     ],
     "categories": [
       "ABILITY: Passive",
@@ -4064,7 +4122,7 @@
     ],
     "cooldowns": [],
     "manaCost": [],
-    "superUpgrade": "Super: Grants Manta Style.",
+    "superUpgrade": "Super: Grants Blink Fragment.",
     "gabenUpgrade": "Gaben: Automatically casts Mana Void if the target is out of mana. This effect has a 5 second cooldown."
   },
   {
@@ -4072,8 +4130,8 @@
     "id": "custom_lion_mana_drain",
     "icon": "lion_mana_drain",
     "tags": [
-      "manaRegeneration",
       "magicImmunity",
+      "manaRegeneration",
       "spam"
     ],
     "categories": [
@@ -4185,7 +4243,7 @@
       85,
       115
     ],
-    "superUpgrade": "Super: Grants Diffusal Blade. Reduces cooldown by 10, and increases outgoing damage by 13%.",
+    "superUpgrade": "Super: +25 agility. Reduces cooldown by 10, and increases outgoing damage by 13%.",
     "gabenUpgrade": "Gaben: Grants Riptide: every 6 attacks (including illusions), the caster and their images will hit all nearby units with a 55 damage wave that lowers armor by 8 for 4 seconds. Increases illusion count by 1."
   },
   {
@@ -4193,10 +4251,10 @@
     "id": "custom_abaddon_death_coil",
     "icon": "abaddon_death_coil",
     "tags": [
-      "healing",
-      "instantAttack",
+      "buff",
       "damageAmplification",
-      "buff"
+      "healing",
+      "instantAttack"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -4224,8 +4282,8 @@
     "id": "legion_commander_moment_of_courage",
     "icon": "legion_commander_moment_of_courage",
     "tags": [
-      "passive",
-      "lifesteal"
+      "lifesteal",
+      "passive"
     ],
     "categories": [
       "ABILITY: Passive"
@@ -4237,9 +4295,9 @@
       "LIFESTEAL: 55% / 65% / 85%"
     ],
     "cooldowns": [
-      1.9,
-      1.5,
-      0.7
+      1,
+      0.8,
+      0.4
     ],
     "manaCost": [],
     "superUpgrade": "Super: +8% proc chance and +15% lifesteal.",
@@ -4274,9 +4332,9 @@
     "id": "custom_snapfire_mortimer_kisses",
     "icon": "snapfire_mortimer_kisses",
     "tags": [
-      "ultimate",
       "magicDamage",
-      "mobility"
+      "mobility",
+      "ultimate"
     ],
     "categories": [
       "ABILITY: Point Target",
@@ -4339,15 +4397,15 @@
       110
     ],
     "superUpgrade": "Super: +2 waves. +2 arrows per wave.",
-    "gabenUpgrade": "Gaben: Gains Eye of Skadi."
+    "gabenUpgrade": "Gaben: Grants Marksmanship."
   },
   {
     "name": "Mystic Flare",
     "id": "custom_skywrath_mage_mystic_flare",
     "icon": "skywrath_mage_mystic_flare",
     "tags": [
-      "ultimate",
-      "magicDamage"
+      "magicDamage",
+      "ultimate"
     ],
     "categories": [
       "ABILITY: Point Target",
@@ -4436,7 +4494,8 @@
     "id": "vengefulspirit_nether_swap",
     "icon": "vengefulspirit_nether_swap",
     "tags": [
-      "displacement"
+      "displacement",
+      "ultimate"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -4470,9 +4529,9 @@
     "id": "viper_nethertoxin",
     "icon": "viper_nethertoxin",
     "tags": [
-      "silence",
       "break",
-      "magicDamage"
+      "magicDamage",
+      "silence"
     ],
     "categories": [
       "ABILITY: Point Target",
@@ -4540,8 +4599,8 @@
     "tags": [
       "attackSpeed",
       "buff",
-      "healing",
-      "damageAmplification"
+      "damageAmplification",
+      "healing"
     ],
     "categories": [
       "ABILITY: No Target",
@@ -4569,13 +4628,45 @@
     "gabenUpgrade": "Gaben: Overcharge now lasts 16 seconds, and grants +2% extra HP regen."
   },
   {
+    "name": "Overgrowth",
+    "id": "treant_overgrowth",
+    "icon": "treant_overgrowth",
+    "tags": [
+      "magicDamage",
+      "ultimate"
+    ],
+    "categories": [
+      "ABILITY: No Target",
+      "DAMAGE TYPE: Magical",
+      "PIERCES SPELL IMMUNITY: Yes",
+      "DISPELLABLE: Yes"
+    ],
+    "description": "Summons an overgrowth of vines and branches around Treant that deal damage to afflicted enemies and prevent them from moving, blinking, going invisible, or attacking.",
+    "differences": "Reduced radius to 600.",
+    "values": [
+      "DAMAGE PER SECOND: 85",
+      "DURATION: 2 / 3 / 4",
+      "RADIUS: 500"
+    ],
+    "cooldowns": [
+      100
+    ],
+    "manaCost": [
+      200,
+      250,
+      300
+    ],
+    "superUpgrade": "Super: +1s duration, +100 radius, +40 damage per second.",
+    "gabenUpgrade": "Gaben: Casts 10 level 4 Radial Nature's Grasp."
+  },
+  {
     "name": "Overload",
     "id": "custom_storm_spirit_overload",
     "icon": "storm_spirit_overload",
     "tags": [
-      "spam",
       "magicDamage",
-      "passive"
+      "passive",
+      "spam"
     ],
     "categories": [
       "ABILITY: Passive",
@@ -4625,15 +4716,15 @@
       60
     ],
     "superUpgrade": "Super: +3 Overpower attacks.",
-    "gabenUpgrade": "Gaben: Gains Abyssal Blade."
+    "gabenUpgrade": "Gaben: 25% chance to bash for 1.5 seconds and 120 damage (2.3 second cooldown)."
   },
   {
     "name": "Paralyzing Cask",
     "id": "witch_doctor_paralyzing_cask",
     "icon": "witch_doctor_paralyzing_cask",
     "tags": [
-      "stun",
-      "magicDamage"
+      "magicDamage",
+      "stun"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -4666,7 +4757,9 @@
     "name": "Phantasm",
     "id": "custom_chaos_knight_phantasm",
     "icon": "chaos_knight_phantasm",
-    "tags": [],
+    "tags": [
+      "ultimate"
+    ],
     "categories": [
       "ABILITY: No Target"
     ],
@@ -4721,7 +4814,7 @@
       40,
       50
     ],
-    "superUpgrade": "Super: +3s duration.",
+    "superUpgrade": "Super: +3s duration, +25% lifesteal during Phantom Strike.",
     "gabenUpgrade": "Gaben: Each Phantom Strike casts Stifling Dagger on every unit in 1150 AOE."
   },
   {
@@ -4751,12 +4844,44 @@
     "gabenUpgrade": "Gaben: While in Phase Shift, the caster performs its Super effect every 1s."
   },
   {
+    "name": "Pierce the Veil",
+    "id": "muerta_pierce_the_veil",
+    "icon": "muerta_pierce_the_veil",
+    "tags": [
+      "ultimate"
+    ],
+    "categories": [
+      "ABILITY: No Target",
+      "DAMAGE TYPE: Magical",
+      "DISPELLABLE: Strong Dispels Only"
+    ],
+    "description": "Muerta transforms, becoming immune to physical damage. All of her attack damage is dealt as magical damage. Muerta gains bonus attack damage and phased movement.\n\nMuerta can attack ethereal units, but deals no damage to Magic Immune targets.\n\nDISPEL TYPE: Basic Dispel",
+    "differences": "Reduced bonus damage.",
+    "values": [
+      "BONUS ATTACK DAMAGE: 30 / 60 / 90",
+      "DURATION: 6 / 7 / 8",
+      "TRANSFORM DURATION: 0.35"
+    ],
+    "cooldowns": [
+      75,
+      60,
+      45
+    ],
+    "manaCost": [
+      150,
+      250,
+      350
+    ],
+    "superUpgrade": "Super: +100 bonus attack damage. Gain 200 attack range during Pierce the Veil.",
+    "gabenUpgrade": "Gaben: Gain Gunslinger."
+  },
+  {
     "name": "Plague Ward",
     "id": "custom_venomancer_plague_ward",
     "icon": "venomancer_plague_ward",
     "tags": [
-      "summons",
-      "spam"
+      "spam",
+      "summons"
     ],
     "categories": [
       "ABILITY: Point Target",
@@ -4779,7 +4904,7 @@
       22,
       26
     ],
-    "superUpgrade": "Super: Increased health and base damage by 2.5x, cooldown reduced by 1.5 seconds. Creates 2 wards per cast. ",
+    "superUpgrade": "Super: Increased health and base damage by 2.5x, -1s cooldown. Creates 2 wards per cast. ",
     "gabenUpgrade": "Gaben: Plague Wards gain the base passive effects of spells from the caster."
   },
   {
@@ -4787,8 +4912,8 @@
     "id": "razor_plasma_field",
     "icon": "razor_plasma_field",
     "tags": [
-      "magicDamage",
-      "displacement"
+      "displacement",
+      "magicDamage"
     ],
     "categories": [
       "ABILITY: No Target",
@@ -4824,9 +4949,9 @@
     "id": "custom_viper_poison_attack",
     "icon": "viper_poison_attack",
     "tags": [
+      "attackModifier",
       "attackRange",
-      "damageAmplification",
-      "attackModifier"
+      "damageAmplification"
     ],
     "categories": [
       "ABILITY: Auto-Cast",
@@ -4858,11 +4983,11 @@
     "id": "legion_commander_press_the_attack",
     "icon": "legion_commander_press_the_attack",
     "tags": [
-      "healing",
       "attackSpeed",
+      "buff",
       "dispel",
-      "magicImmunity",
-      "buff"
+      "healing",
+      "magicImmunity"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -4870,22 +4995,58 @@
       "DISPELLABLE: Yes"
     ],
     "description": "Removes debuffs and disables from the target friendly unit, and grants bonus attack speed and health regen for a short time.\n\nDISPEL TYPE: Strong Dispel",
-    "differences": "AI: casts on closest ally that falls below 80% HP.",
+    "differences": "Reduced cooldown and increased health regeneration.\nAI: casts on closest ally that falls below 80% HP.",
     "values": [
       "BONUS ATTACK SPEED: 65 / 90 / 140",
       "DURATION: 5",
-      "HP REGEN: 30 / 40 / 60"
+      "HP REGEN: 40 / 50 / 70"
     ],
     "cooldowns": [
-      16,
-      15,
-      13
+      11,
+      10,
+      8
     ],
     "manaCost": [
       110
     ],
     "superUpgrade": "Super: Also applies to all allies within a 400 unit radius from the target. The caster also gains the buff if not affected.",
     "gabenUpgrade": "Gaben: Also applies spell immunity for 2 seconds."
+  },
+  {
+    "name": "Primal Roar",
+    "id": "beastmaster_primal_roar",
+    "icon": "beastmaster_primal_roar",
+    "tags": [
+      "ultimate"
+    ],
+    "categories": [
+      "ABILITY: Unit Target",
+      "DAMAGE TYPE: Magical",
+      "PIERCES SPELL IMMUNITY: Yes",
+      "DISPELLABLE: Cannot be dispelled"
+    ],
+    "description": "Beastmaster lets loose a deafening roar that stuns, and shoves open a path to its target. All units in the path of the roar are damaged, while units shoved aside by the roar have their movement and attack speed slowed. Additionally, Beastmaster and his units gain 40% movement speed for 3 seconds.",
+    "differences": "",
+    "values": [
+      "ATTACK SLOW: -60",
+      "DAMAGE: 300 / 400 / 500",
+      "MOVEMENT SLOW: -60%",
+      "SHOUT WIDTH: 300",
+      "SLOW DURATION: 3 / 3.5 / 4",
+      "STUN DURATION: 2 / 3 / 4"
+    ],
+    "cooldowns": [
+      100,
+      80,
+      60
+    ],
+    "manaCost": [
+      150,
+      175,
+      200
+    ],
+    "superUpgrade": "Super: -40s cooldown, +200 damage, +200 cast range, +1 stun duration.",
+    "gabenUpgrade": "Gaben: Secondary targets are also stunned."
   },
   {
     "name": "Pulse Nova",
@@ -4917,17 +5078,17 @@
     "manaCost": [
       70
     ],
-    "superUpgrade": "Super: Casts level 2 Diabolic Edict while active.",
-    "gabenUpgrade": "Gaben: Grants Bloodstone."
+    "superUpgrade": "Super: Casts level 4 Diabolic Edict while active.",
+    "gabenUpgrade": "Gaben: Diabolic Edict now hits everything in AOE."
   },
   {
     "name": "Pulverize",
     "id": "primal_beast_pulverize",
     "icon": "primal_beast_pulverize",
     "tags": [
-      "ultimate",
+      "magicDamage",
       "stun",
-      "magicDamage"
+      "ultimate"
     ],
     "categories": [
       "ABILITY: Channeled",
@@ -4958,8 +5119,8 @@
     "icon": "omniknight_purification",
     "tags": [
       "buff",
-      "pureDamage",
-      "healing"
+      "healing",
+      "pureDamage"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -4983,15 +5144,15 @@
       125
     ],
     "superUpgrade": "Super: Grant's Gaben's Blessing: Target receives 2 more Purifications on the same unit, each occuring 3 seconds after the previous. +160 Heal/Damage, -2s cooldown.",
-    "gabenUpgrade": "Gaben: Target also receives 2s of Guardian Angel."
+    "gabenUpgrade": "Gaben: Purification also buffs the target, reducing incoming damage by 50% for 2 seconds."
   },
   {
     "name": "Quill Spray",
     "id": "custom_bristleback_quill_spray",
     "icon": "bristleback_quill_spray",
     "tags": [
-      "spam",
-      "magicDamage"
+      "magicDamage",
+      "spam"
     ],
     "categories": [
       "ABILITY: No Target",
@@ -5044,17 +5205,17 @@
       100,
       150
     ],
-    "superUpgrade": "Super: Increases movement speed by 20% and duration by 3s.",
-    "gabenUpgrade": "Gaben: Reduces cooldown by 11 seconds (has no downtime)."
+    "superUpgrade": "Super: Increases movement speed by 20% and duration by 2s.",
+    "gabenUpgrade": "Gaben: Reduces cooldown by 12 seconds (has no downtime)."
   },
   {
     "name": "Ravage",
     "id": "custom_tidehunter_ravage",
     "icon": "tidehunter_ravage",
     "tags": [
-      "ultimate",
       "magicDamage",
-      "stun"
+      "stun",
+      "ultimate"
     ],
     "categories": [
       "ABILITY: No Target",
@@ -5087,9 +5248,9 @@
     "id": "shredder_reactive_armor",
     "icon": "shredder_reactive_armor",
     "tags": [
+      "healing",
       "passive",
-      "pureDamage",
-      "healing"
+      "pureDamage"
     ],
     "categories": [
       "ABILITY: Passive",
@@ -5113,9 +5274,9 @@
     "id": "custom_chaos_knight_reality_rift",
     "icon": "chaos_knight_reality_rift",
     "tags": [
-      "mobility",
+      "damageAmplification",
       "displacement",
-      "damageAmplification"
+      "mobility"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -5145,11 +5306,11 @@
     "id": "custom_necrolyte_reapers_scythe",
     "icon": "necrolyte_reapers_scythe",
     "tags": [
-      "ultimate",
+      "healing",
       "magicDamage",
-      "stun",
       "manaRegeneration",
-      "healing"
+      "stun",
+      "ultimate"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -5182,8 +5343,8 @@
     "icon": "marci_companion_run",
     "tags": [
       "buff",
-      "stun",
-      "mobility"
+      "mobility",
+      "stun"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -5191,7 +5352,7 @@
       "PIERCES SPELL IMMUNITY: No",
       "DISPELLABLE: Cannot be dispelled"
     ],
-    "description": "Vector targeted. Marci bounds to the targeted allied unit, choosing a direction and distance she will spring away from it. Upon reaching the unit, Marci lunges to her final destination, damaging and stunning enemies where she lands.\n\nThe ally receives 25% / 30% / 35% / 40% bonus movement speed for 5s.",
+    "description": "Marci bounds to the targeted allied unit, choosing a direction and distance she will spring away from it. Upon reaching the unit, Marci lunges to her final destination, damaging and stunning enemies where she lands.\n\nThe ally receives 25% / 30% / 35% / 40% bonus movement speed for 5s.",
     "differences": "AI: Targets closest ally and farthest enemy.",
     "values": [
       "CAST / JUMP RANGE: 450 / 550 / 750",
@@ -5208,7 +5369,7 @@
       80,
       100
     ],
-    "superUpgrade": "Super: Ally affected will have their attack speed increased by 40 and armor increased by 10 for 5 seconds. +1000 Leap Distance range.",
+    "superUpgrade": "Super: Provides spell immunity to both target and caster for 2 seconds. +1000 Leap Distance range.",
     "gabenUpgrade": "Gaben: Enemy units stunned will have a level 4 Dispose cast on them."
   },
   {
@@ -5285,8 +5446,8 @@
     "icon": "earth_spirit_rolling_boulder",
     "tags": [
       "mobility",
-      "stun",
-      "stats"
+      "stats",
+      "stun"
     ],
     "categories": [
       "ABILITY: Point Target",
@@ -5321,11 +5482,11 @@
     "id": "custom_pangolier_rolling_thunder",
     "icon": "pangolier_gyroshell",
     "tags": [
-      "ultimate",
-      "mobility",
+      "magicDamage",
       "magicImmunity",
+      "mobility",
       "stun",
-      "magicDamage"
+      "ultimate"
     ],
     "categories": [
       "ABILITY: No Target",
@@ -5336,7 +5497,7 @@
     "description": "Caster curls into a spell-immune ball and rolls out. When rolling, he moves at an increased speed and can move through trees, but has a decreased ability to turn. Striking enemies knocks them back, inflicting damage and stunning them when they land. \n\nColliding with walls or cliffs will cause a temporary pause while caster reverses in direction.\n\nDISPEL TYPE: Basic Dispel.",
     "differences": "Reduced duration.",
     "values": [
-      "DAMAGE: 180 / 260 / 340",
+      "DAMAGE: 80 / 120 / 160",
       "DURATION: 3 / 4 / 5",
       "KNOCKBACK DISTANCE: 150",
       "RADIUS: 150",
@@ -5379,15 +5540,15 @@
     "cooldowns": [],
     "manaCost": [],
     "superUpgrade": "Super: +100 damage, +175 radius, +14% move slow, and 25% heal reduction on affected enemies.",
-    "gabenUpgrade": "Gaben: Grants Eternal Shroud."
+    "gabenUpgrade": "Gaben: Grants Level 3 Dismember (does not need to be channeled, but gets interrupted by stuns)."
   },
   {
     "name": "Sacred Arrow",
     "id": "custom_mirana_arrow",
     "icon": "mirana_arrow",
     "tags": [
-      "stun",
-      "magicDamage"
+      "magicDamage",
+      "stun"
     ],
     "categories": [
       "ABILITY: Point Target",
@@ -5451,9 +5612,9 @@
     "id": "slark_shadow_dance",
     "icon": "slark_shadow_dance",
     "tags": [
-      "ultimate",
+      "attackSpeed",
       "healing",
-      "attackSpeed"
+      "ultimate"
     ],
     "categories": [
       "ABILITY: No Target",
@@ -5515,14 +5676,43 @@
     "gabenUpgrade": "Gaben: Attacking no longer takes you out of Shadow Realm. Each attack still has bonus damage based on the duration of the buff."
   },
   {
+    "name": "Shadow Wave",
+    "id": "dazzle_shadow_wave",
+    "icon": "dazzle_shadow_wave",
+    "tags": [],
+    "categories": [
+      "ABILITY: Unit Target",
+      "DAMAGE TYPE: Physical",
+      "PIERCES SPELL IMMUNITY: Yes"
+    ],
+    "description": "Sends out a bolt of power that arcs between allies, healing them while damaging any enemy units standing nearby. Dazzle is always healed by Shadow Wave.",
+    "differences": "",
+    "values": [
+      "DAMAGE RADIUS: 235",
+      "DAMAGE: 60 / 100 / 180",
+      "HEAL ARC RADIUS: 475",
+      "MAX HEAL TARGETS: 4 / 5 / 7"
+    ],
+    "cooldowns": [
+      9,
+      8,
+      6
+    ],
+    "manaCost": [
+      90
+    ],
+    "superUpgrade": "Super: Shadow Wave hexes affected enemies for 2 seconds.",
+    "gabenUpgrade": "Gaben: Grants Bad Juju."
+  },
+  {
     "name": "Shapeshift",
     "id": "lycan_shapeshift",
     "icon": "lycan_shapeshift",
     "tags": [
-      "summons",
       "mobility",
-      "ultimate",
-      "stats"
+      "stats",
+      "summons",
+      "ultimate"
     ],
     "categories": [
       "ABILITY: No Target",
@@ -5547,7 +5737,7 @@
     "manaCost": [
       100
     ],
-    "superUpgrade": "Super: Grants Overwhelming Blink. Jumps to enemy unit closest to backline.",
+    "superUpgrade": "Super: Blinks Shapeshift unit to enemy backline (1500 range), fearing enemies in 400 AOE for 1.5 seconds.",
     "gabenUpgrade": "Gaben: Applies Wolf Bite to the closest ally in 600 radius."
   },
   {
@@ -5555,10 +5745,10 @@
     "id": "custom_hoodwink_sharpshooter",
     "icon": "hoodwink_sharpshooter",
     "tags": [
-      "ultimate",
-      "magicDamage",
       "break",
-      "damageAmplification"
+      "damageAmplification",
+      "magicDamage",
+      "ultimate"
     ],
     "categories": [
       "ABILITY: Point Target",
@@ -5625,10 +5815,10 @@
     "id": "marci_guardian",
     "icon": "marci_guardian",
     "tags": [
-      "lifesteal",
-      "magicImmunity",
+      "attackDamage",
       "buff",
-      "attackDamage"
+      "lifesteal",
+      "magicImmunity"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -5661,8 +5851,8 @@
     "id": "ember_spirit_sleight_of_fist",
     "icon": "ember_spirit_sleight_of_fist",
     "tags": [
-      "instantAttack",
-      "attackDamage"
+      "attackDamage",
+      "instantAttack"
     ],
     "categories": [
       "ABILITY: Point Target",
@@ -5686,6 +5876,43 @@
     ],
     "superUpgrade": "Super: Has +1000 extra cast range and gains True Strike.",
     "gabenUpgrade": "Gaben: +2 charges."
+  },
+  {
+    "name": "Snowball",
+    "id": "custom_tusk_snowball",
+    "icon": "tusk_snowball",
+    "tags": [
+      "magicDamage",
+      "mobility",
+      "stun"
+    ],
+    "categories": [
+      "ABILITY: Unit Target",
+      "DAMAGE TYPE: Magical",
+      "PIERCES SPELL IMMUNITY: No",
+      "DISPELLABLE: Strong Dispels Only"
+    ],
+    "description": "The hero rolls into a snowball. Allies within a 200 radius are grabbed into the snowball. Any enemies caught in the snowball's path will be stunned and take damage. Each allied Hero in the snowball will add to its damage.",
+    "differences": "Snowball immediately launches after casting. AI: targets most backline unit.",
+    "values": [
+      "BASE DAMAGE: 80 / 140 / 260",
+      "BONUS DAMAGE PER ALLY: 25 / 50 / 100",
+      "GATHER RADIUS: 200",
+      "SNOWBALL SPEED: 625 / 650 / 700",
+      "STUN DURATION: 0.8 / 1 / 1.4"
+    ],
+    "cooldowns": [
+      21,
+      19,
+      15
+    ],
+    "manaCost": [
+      75,
+      75,
+      75
+    ],
+    "superUpgrade": "Super: -2s cooldown, +120 base damage. Heroes coming outside of Snowball gain 60 attack speed for 2 seconds.",
+    "gabenUpgrade": "Gaben: When Snowball finishes, it releases 8 Ice Shards around the caster, each dealing 280 magical damage."
   },
   {
     "name": "Soul Rip",
@@ -5713,7 +5940,6 @@
     "manaCost": [
       85,
       100,
-      115,
       130
     ],
     "superUpgrade": "Super: +25 damage/heal per unit. ",
@@ -5723,7 +5949,9 @@
     "name": "Soulbind",
     "id": "custom_grimstroke_soul_bind",
     "icon": "grimstroke_soul_chain",
-    "tags": [],
+    "tags": [
+      "ultimate"
+    ],
     "categories": [
       "ABILITY: Unit Target",
       "PIERCES SPELL IMMUNITY: Yes",
@@ -5755,8 +5983,8 @@
     "icon": "mars_spear",
     "tags": [
       "displacement",
-      "stun",
-      "magicDamage"
+      "magicDamage",
+      "stun"
     ],
     "categories": [
       "ABILITY: Point Target",
@@ -5788,8 +6016,8 @@
     "id": "custom_rubick_spell_steal",
     "icon": "rubick_spell_steal",
     "tags": [
-      "ultimate",
-      "spam"
+      "spam",
+      "ultimate"
     ],
     "categories": [
       "ABILITY: Unit Target",
@@ -5831,7 +6059,7 @@
     "differences": "Has reduced stun duration.",
     "values": [
       "DAMAGE REFLECTED: 100%",
-      "REFLECT DURATION: 2",
+      "REFLECT DURATION: 1.5",
       "STUN DURATION: 0.3 / 0.7 / 1.5"
     ],
     "cooldowns": [
@@ -5878,15 +6106,16 @@
       120
     ],
     "superUpgrade": "Super: Cooldown reduced by 4 seconds, and cast range increased by 225. Spirit Lance bounces once on an enemy within 750 radius, prioritizing heroes. Increases Spirit Lance illusion damage by +40%",
-    "gabenUpgrade": "Gaben: Grants Octarine Core, +45 to base stat."
+    "gabenUpgrade": "Gaben: Grants 25% cooldown reduction and +45 to base stat."
   },
   {
     "name": "Spirit Link",
     "id": "custom_lone_druid_spirit_link",
     "icon": "lone_druid_spirit_link",
     "tags": [
-      "lifesteal",
       "buff",
+      "lifesteal",
+      "passive",
       "stats",
       "summons"
     ],
@@ -5928,7 +6157,7 @@
     "manaCost": [
       80
     ],
-    "superUpgrade": "Super: +1 max health siphoned, -20s charge replenish time, applies a 20% movement slow.",
+    "superUpgrade": "Super: Now also siphons 3.5% of the target's max health per second. -20s charge replenish time, applies a 20% movement slow.",
     "gabenUpgrade": "Gaben: +1 charges. Causes enemies continuously siphoned for 3 seconds to gain fear for 1.5 seconds."
   },
   {
@@ -5936,8 +6165,8 @@
     "id": "custom_leshrac_split_earth",
     "icon": "leshrac_split_earth",
     "tags": [
-      "stun",
-      "magicDamage"
+      "magicDamage",
+      "stun"
     ],
     "categories": [
       "ABILITY: Point Target",
@@ -6029,8 +6258,8 @@
     "manaCost": [
       100
     ],
-    "superUpgrade": "Super: Gains spell immunity during Starbreaker. Grants Desolator.",
-    "gabenUpgrade": "Gaben: Starbreaker now has 2 charges. +150 swipe and smash radius."
+    "superUpgrade": "Super: Starbreaker now has 2 charges. +150 swipe and smash radius. Gains spell immunity during Starbreaker.",
+    "gabenUpgrade": "Gaben: Each attack adds a stacking (purgable) -1 armor debuff for 5 seconds. Each stack refreshes the duration."
   },
   {
     "name": "Static Field",
@@ -6038,8 +6267,8 @@
     "icon": "zuus_static_field",
     "tags": [
       "magicDamage",
-      "spam",
-      "passive"
+      "passive",
+      "spam"
     ],
     "categories": [
       "ABILITY: Passive",
@@ -6059,23 +6288,24 @@
   },
   {
     "name": "Static Link",
-    "id": "razor_static_link",
+    "id": "custom_razor_static_link",
     "icon": "razor_static_link",
     "tags": [
-      "attackRange",
-      "attackDamage"
+      "attackDamage",
+      "attackRange"
     ],
     "categories": [
       "ABILITY: Unit Target",
       "PIERCES SPELL IMMUNITY: Yes",
       "DISPELLABLE: Strong Dispels Only"
     ],
-    "description": "Creates a charged link between Razor and an enemy Hero, stealing damage from the target and giving it to Razor. Allows Razor to attack while moving with the link active.",
-    "differences": "Increases the caster's attack range to always be able to hit while linked.",
+    "description": "Creates a charged link between the hero and an enemy Hero, stealing damage from the target and giving it to the hero. Allows the hero to attack while moving with the link active.",
+    "differences": "Static Link does not get broken if the target dies.",
     "values": [
-      "BUFF DURATION: 9 / 12 / 18",
+      "BUFF DURATION: 15 / 16 / 18",
       "DAMAGE DRAIN RATE: 7 / 12 / 22",
-      "LINK DURATION: 5 / 6 / 8"
+      "LINK DURATION: 5 / 6 / 8",
+      "MIN CAST RANGE: 550"
     ],
     "cooldowns": [
       40,
@@ -6085,7 +6315,7 @@
     "manaCost": [
       65
     ],
-    "superUpgrade": "Super: +5 damage drain rate. Link duration will last for the whole round.",
+    "superUpgrade": "Super: +5 damage drain rate.",
     "gabenUpgrade": "Gaben: Steals attack speed at the same drain rate."
   },
   {
@@ -6093,9 +6323,9 @@
     "id": "batrider_sticky_napalm",
     "icon": "batrider_sticky_napalm",
     "tags": [
-      "spam",
       "damageAmplification",
-      "magicDamage"
+      "magicDamage",
+      "spam"
     ],
     "categories": [
       "ABILITY: Point Target",
@@ -6120,7 +6350,7 @@
       3
     ],
     "manaCost": [
-      20
+      25
     ],
     "superUpgrade": "Super: Attacks apply a stack of Sticky Napalm to target.",
     "gabenUpgrade": "Gaben: Stacks infinitely, and Sticky Napalm on attack now applies in a 375 AOE. "
@@ -6130,9 +6360,9 @@
     "id": "medusa_stone_gaze",
     "icon": "medusa_stone_gaze",
     "tags": [
+      "damageAmplification",
       "stun",
-      "ultimate",
-      "damageAmplification"
+      "ultimate"
     ],
     "categories": [
       "ABILITY: No Target",
@@ -6164,10 +6394,10 @@
     "id": "custom_visage_summon_familiars",
     "icon": "visage_summon_familiars",
     "tags": [
-      "summons",
-      "ultimate",
+      "attackDamage",
       "stun",
-      "attackDamage"
+      "summons",
+      "ultimate"
     ],
     "categories": [
       "ABILITY: No Target"
@@ -6221,7 +6451,7 @@
       75
     ],
     "superUpgrade": "Super: +25 Spirit Bear Movement speed, +8 Spirit Bear Armor, 0s Entangle Cooldown, +1000 Spirit Bear Health, -0.1 Spirit Bear Attack Time.",
-    "gabenUpgrade": "Gaben: Grants Assault Cuirass, Mask of Madness and Skull Basher."
+    "gabenUpgrade": "Gaben: Grants Mjollnir, Mask of Madness and Skull Basher."
   },
   {
     "name": "Summon Wolves",
@@ -6288,7 +6518,7 @@
       110,
       130
     ],
-    "superUpgrade": "Super: +1.5% max health damage, +1.5% max health heal, grants Holy Locket",
+    "superUpgrade": "Super: +1.5% max health damage, +1.5% max health heal, +25% width.",
     "gabenUpgrade": "Gaben: Sun Ray instead spawns a Supernova that casts Sun Ray, exploding at the end of the duration."
   },
   {
@@ -6326,15 +6556,15 @@
     "id": "pangolier_swashbuckle",
     "icon": "pangolier_swashbuckle",
     "tags": [
-      "mobility",
-      "instantAttack"
+      "instantAttack",
+      "mobility"
     ],
     "categories": [
       "ABILITY: Point Target",
       "DAMAGE TYPE: Physical",
       "PIERCES SPELL IMMUNITY: Yes"
     ],
-    "description": "Vector Targeted. Pangolier dashes along the target line, then slashes all enemies in the drawn direction with several quick swipes.\n\nLucky Shot has a chance to activate from this damage.",
+    "description": "Pangolier dashes along the target line, then slashes all enemies in the drawn direction with several quick swipes.\n\nLucky Shot has a chance to activate from this damage.",
     "differences": "",
     "values": [
       "DAMAGE PER STRIKE: 25 / 45 / 85",
@@ -6361,8 +6591,8 @@
     "id": "tusk_tag_team",
     "icon": "tusk_tag_team",
     "tags": [
-      "buff",
       "attackDamage",
+      "buff",
       "stun"
     ],
     "categories": [
@@ -6397,8 +6627,8 @@
     "icon": "sniper_take_aim",
     "tags": [
       "attackRange",
-      "passive",
-      "displacement"
+      "displacement",
+      "passive"
     ],
     "categories": [
       "ABILITY: Passive"
@@ -6476,8 +6706,8 @@
     "id": "faceless_void_time_lock",
     "icon": "faceless_void_time_lock",
     "tags": [
-      "stun",
-      "passive"
+      "passive",
+      "stun"
     ],
     "categories": [
       "ABILITY: Passive",
@@ -6494,16 +6724,16 @@
     ],
     "cooldowns": [],
     "manaCost": [],
-    "superUpgrade": "Super: Increases the bonus damage by 70.",
-    "gabenUpgrade": "Gaben: Applies Time Lock in 400 AoE every 4s."
+    "superUpgrade": "Super: Increases the bonus damage by 70 and proc chance by 4%.",
+    "gabenUpgrade": "Gaben: Applies Time Lock in 450 AoE every 4s."
   },
   {
     "name": "Time Walk",
     "id": "faceless_void_time_walk",
     "icon": "faceless_void_time_walk",
     "tags": [
-      "mobility",
-      "healing"
+      "healing",
+      "mobility"
     ],
     "categories": [
       "ABILITY: Point Target",
@@ -6531,8 +6761,8 @@
     "id": "kunkka_torrent",
     "icon": "kunkka_torrent",
     "tags": [
-      "stun",
-      "magicDamage"
+      "magicDamage",
+      "stun"
     ],
     "categories": [
       "ABILITY: Point Target",
@@ -6541,10 +6771,10 @@
       "DISPELLABLE: Yes"
     ],
     "description": "Summons a rising torrent that, after a short delay, hurls enemy units into the sky, stunning, dealing damage and slowing movement speed.",
-    "differences": "",
+    "differences": "Reduced delay.",
     "values": [
       "DAMAGE: 80 / 160 / 320",
-      "DELAY: 1.6 / 1.6 / 1.6",
+      "DELAY: 1",
       "MOVE SLOW: -40%",
       "RADIUS: 225",
       "SLOW DURATION: 1 / 2 / 4",
@@ -6627,8 +6857,8 @@
       85,
       75
     ],
-    "superUpgrade": "Super: Grants Spell Immunity while in Trample. +25% attack damage multiplier, +70 damage radius, -5s cooldown.",
-    "gabenUpgrade": "Gaben: Grants Kaya and Sange. Procs attack modifiers."
+    "superUpgrade": "Super: Gain 50% magic resistance and 50% status resistance during Trample. +25% attack damage multiplier, +70 damage radius.",
+    "gabenUpgrade": "Gaben: Procs attack modifiers. Has no cooldown."
   },
   {
     "name": "Tricks of the Trade",
@@ -6656,14 +6886,16 @@
     "manaCost": [
       50
     ],
-    "superUpgrade": "Super: Grants Battlefury. Increases cast range by 300.",
-    "gabenUpgrade": "Gaben: Increases the number of attacks by 1, hits 1 extra target per attack, and -4s CDR."
+    "superUpgrade": "Super: Increases the number of attacks by 1, hits 1 extra target per attack, and -4s CDR.",
+    "gabenUpgrade": "Gaben: Casts a level 4 Smoke Screen on the ground while casting Tricks of the Trade which lasts 2s."
   },
   {
     "name": "Unleash",
     "id": "marci_unleash",
     "icon": "marci_unleash",
-    "tags": [],
+    "tags": [
+      "ultimate"
+    ],
     "categories": [
       "ABILITY: No Target",
       "DAMAGE TYPE: Magical",
@@ -6698,10 +6930,9 @@
     "id": "primal_beast_uproar",
     "icon": "primal_beast_uproar",
     "tags": [
-      "passive",
-      "dispel",
       "attackDamage",
-      "break"
+      "break",
+      "dispel"
     ],
     "categories": [
       "ABILITY: No Target",
@@ -6730,8 +6961,8 @@
     "id": "dark_seer_vacuum",
     "icon": "dark_seer_vacuum",
     "tags": [
-      "magicDamage",
       "displacement",
+      "magicDamage",
       "stun"
     ],
     "categories": [
@@ -6767,8 +6998,8 @@
     "icon": "skeleton_king_vampiric_aura",
     "tags": [
       "lifesteal",
-      "summons",
-      "stun"
+      "stun",
+      "summons"
     ],
     "categories": [
       "ABILITY: No Target"
@@ -6795,7 +7026,9 @@
     "name": "Vengeance Aura",
     "id": "vengefulspirit_command_aura",
     "icon": "vengefulspirit_command_aura",
-    "tags": [],
+    "tags": [
+      "passive"
+    ],
     "categories": [
       "ABILITY: Passive",
       "PIERCES SPELL IMMUNITY: Yes"
@@ -6859,7 +7092,7 @@
       "DISPELLABLE: Yes"
     ],
     "description": "Covers a target in snot, causing it to have reduced armor and movement speed. Multiple casts stack and refresh the duration.",
-    "differences": "Cast point removed.",
+    "differences": "Cast point removed. Increased cast range.",
     "values": [
       "ARMOR LOSS PER STACK: 1.5 / 2 / 3",
       "BASE ARMOR LOSS: 2",
@@ -6884,11 +7117,11 @@
     "id": "custom_tusk_walrus_punch",
     "icon": "tusk_walrus_punch",
     "tags": [
-      "ultimate",
-      "stun",
       "attackModifier",
+      "break",
       "stats",
-      "break"
+      "stun",
+      "ultimate"
     ],
     "categories": [
       "ABILITY: No Target",
@@ -6911,7 +7144,7 @@
     "manaCost": [
       75
     ],
-    "superUpgrade": "Super: Has no mana cost, reduces cooldown by 4 seconds, +0.4s air time, and grants Silver Edge.",
+    "superUpgrade": "Super: Breaks the target for the duration of the debuff. Has no mana cost, reduces cooldown by 4 seconds, +0.4s air time.",
     "gabenUpgrade": "Gaben: Gains a 20% chance to proc a Walrus Punch on the enemy."
   },
   {
@@ -6930,10 +7163,10 @@
     "description": "The hero's Warcry heartens their allied heroes for battle, increasing their armor and movement speed. Lasts 9 seconds.",
     "differences": "",
     "values": [
-      "BONUS ARMOR: 3 / 6 / 12",
+      "BONUS ARMOR: 4 / 8 / 16",
       "BONUS SPEED: 10% / 14% / 22%",
       "DURATION: 9",
-      "RADIUS: 800"
+      "RADIUS: 1000"
     ],
     "cooldowns": [
       32,
@@ -6945,7 +7178,7 @@
       35,
       45
     ],
-    "superUpgrade": "Super: +5 bonus armor, +3s duration, +20% movement speed, and +400 radius.",
+    "superUpgrade": "Super: +10 bonus armor, +3s duration, +20% movement speed, and +400 radius.",
     "gabenUpgrade": "Gaben: Warcry is now undispellable. Units affected by Warcry gain damage equal to 2x their armor (2x the effect on caster)."
   },
   {
@@ -6953,11 +7186,11 @@
     "id": "bristleback_warpath",
     "icon": "bristleback_warpath",
     "tags": [
-      "passive",
       "attackDamage",
+      "lifesteal",
+      "passive",
       "spam",
-      "ultimate",
-      "lifesteal"
+      "ultimate"
     ],
     "categories": [
       "ABILITY: Passive",
@@ -6974,7 +7207,7 @@
     "cooldowns": [],
     "manaCost": [],
     "superUpgrade": "Super: Grants 5% lifesteal per stack.",
-    "gabenUpgrade": "Gaben: Has infinite duration, and can stack infinitely."
+    "gabenUpgrade": "Gaben: +5 max stacks, and gains an extra Warpath stack per cast."
   },
   {
     "name": "Wave of Terror",
@@ -7045,9 +7278,9 @@
     "id": "beastmaster_wild_axes",
     "icon": "beastmaster_wild_axes",
     "tags": [
-      "spam",
       "damageAmplification",
-      "magicDamage"
+      "magicDamage",
+      "spam"
     ],
     "categories": [
       "ABILITY: Point Target",
