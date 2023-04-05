@@ -1,10 +1,10 @@
 const dropOdds = {
   chest_basic: [
-    { odds: 27, type: "xp" },
-    { odds: 22, type: "border" },
-    { odds: 22, type: "hat" },
-    { odds: 17, type: "finisher" },
-    { odds: 12, type: "arena" },
+    { odds: 20, type: "xp" },
+    { odds: 27.5, type: "border" },
+    { odds: 27.5, type: "hat" },
+    { odds: 15, type: "finisher" },
+    { odds: 10, type: "arena" },
   ],
   chest_gold: [{ odds: 100, type: "gold" }],
   chest_god: [{ odds: 100, type: "god" }],

@@ -2215,7 +2215,7 @@ module.exports = [
   {
     name: "chest_basic",
     type: "Chest",
-    coins: 1500,
+    coins: 2000,
     cost_usd: -1,
     equip_group: "",
     rarity: "Common",

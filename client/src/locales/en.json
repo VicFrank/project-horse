@@ -746,13 +746,11 @@
     "terrain_boxing": "Punch Out! Arena",
     "terrain_gaben": "Gaben Arena: Gaben's Gaze",
     "chest_basic": [
-      "25%: Battle Pass XP",
-      "19%: Avatar Border",
-      "18%: Avatar Hat",
-      "15%: Temporary PLUS Membership",
-      "10%: Finisher",
-      "8%: Custom Arena",
-      "5%: God Chest",
+      "20%: Battle Pass XP",
+      "27.5%: Avatar Border",
+      "27.5%: Avatar Hat",
+      "15%: Finisher",
+      "10%: Custom Arena",
       "Duplicate drops will result in a small refund."
     ],
     "chest_gold": "An ornate chest made out of gold. Grants a random amount of Gold. Only available from the Battle Pass.",
