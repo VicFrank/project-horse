@@ -4,7 +4,6 @@
         "id": "abaddon_borrowed_time",
         "icon": "abaddon_borrowed_time",
         "tags": [
-            "passive",
             "dispel",
             "ultimate"
         ],
@@ -12,7 +11,7 @@
             "技能: 无目标",
             "能否驱散: 仅强驱散"
         ],
-        "description": "启动后所有受到的伤害转而治疗你，启动时还将移除大部分的负面效果。只要技能不在冷却过程中，在生命值低于400点时技能会自动启动。\n\n驱散类型: 强驱散",
+        "description": "启动后所有受到的伤害转而产生治疗效果，启动时还将移除大部分的负面效果。只要技能不在冷却中，在生命值低于400点时技能会自动启动。\n\n驱散类型: 强驱散",
         "differences": "",
         "values": [
             "持续时间: 1 / 1.5 / 2",
@@ -28,7 +27,7 @@
             0,
             0
         ],
-        "superUpgrade": "超级: 降低 8 冷却时间，增加 3 秒持续时间。 ",
+        "superUpgrade": "超级: 降低 8 冷却时间，增加 2 秒持续时间。 ",
         "gabenUpgrade": "G 胖: 为 500 效果范围内的友方提供 40% 伤害减免，施法者治愈所受到的伤害。"
     },
     {
@@ -36,10 +35,10 @@
         "id": "alchemist_chemical_rage",
         "icon": "alchemist_chemical_rage",
         "tags": [
-            "ultimate",
             "attackSpeed",
             "healing",
-            "mobility"
+            "mobility",
+            "ultimate"
         ],
         "categories": [
             "技能: 无目标",
@@ -63,15 +62,15 @@
             100
         ],
         "superUpgrade": "超级: -0.1 基本攻击时间+50 生命值回复，+150 移动速度。",
-        "gabenUpgrade": "G 胖: 化学狂暴现会在整个回合中持续生效。获得雷神之锤。"
+        "gabenUpgrade": "G 胖: 化学狂暴现还会对距离你最近的单位施放。"
     },
     {
         "name": "法力损毁",
         "id": "antimage_mana_break",
         "icon": "antimage_mana_break",
         "tags": [
-            "passive",
-            "attackModifier"
+            "attackModifier",
+            "passive"
         ],
         "categories": [
             "技能: 被动",
@@ -82,14 +81,14 @@
         "differences": "",
         "values": [
             "减速持续时间: 0.75",
-            "损毁魔法值伤害百分比: 50%",
-            "每次攻击损毁最大魔法值百分比: 1% / 1.8% / 3.4%",
+            "损毁魔法值伤害系数: 50%",
+            "每次攻击损毁最大魔法值: 1% / 1.8% / 3.4%",
             "每次攻击损毁魔法: 28 / 40 / 64",
             "魔法耗尽时减速: 25% / 30% / 40%"
         ],
         "cooldowns": [],
         "manaCost": [],
-        "superUpgrade": "超级: 提供幻影斧。",
+        "superUpgrade": "超级: 提供闪烁碎片。",
         "gabenUpgrade": "G 胖: 如果目标没有魔法值则自动施放法力虚空。此效果的冷却时间为 5 秒。"
     },
     {
@@ -97,8 +96,8 @@
         "id": "arc_warden_magnetic_field",
         "icon": "arc_warden_magnetic_field",
         "tags": [
-            "buff",
-            "attackSpeed"
+            "attackSpeed",
+            "buff"
         ],
         "categories": [
             "技能: 点目标",
@@ -128,9 +127,9 @@
         "id": "batrider_sticky_napalm",
         "icon": "batrider_sticky_napalm",
         "tags": [
-            "spam",
             "damageAmplification",
-            "magicDamage"
+            "magicDamage",
+            "spam"
         ],
         "categories": [
             "技能: 点目标",
@@ -155,19 +154,55 @@
             3
         ],
         "manaCost": [
-            20
+            25
         ],
         "superUpgrade": "超级: 攻击会对目标施放一层粘性燃油。",
         "gabenUpgrade": "G 胖: 无限叠加，同时粘性燃油攻击时还会时间 375 AOE。 "
+    },
+    {
+        "name": "原始咆哮",
+        "id": "beastmaster_primal_roar",
+        "icon": "beastmaster_primal_roar",
+        "tags": [
+            "ultimate"
+        ],
+        "categories": [
+            "技能: 单位目标",
+            "伤害类型: 魔法",
+            "无视技能免疫: 是",
+            "能否驱散: 无法驱散"
+        ],
+        "description": "兽王发出震耳欲聋的咆哮，使目标敌方单位受到伤害并眩晕，同时在兽王和他的猎物之间清出一条通道。通道上的所有单位都被震开，也受到伤害并被降低移动和攻击速度。另外，兽王和他的单位获得40%移动速度提升，持续3秒。",
+        "differences": "",
+        "values": [
+            "伤害: 300 / 400 / 500",
+            "减速持续时间: 3 / 3.5 / 4",
+            "咆哮宽度: 300",
+            "攻击速度降低: -60",
+            "眩晕时间: 2 / 3 / 4",
+            "移动速度减缓: -60%"
+        ],
+        "cooldowns": [
+            100,
+            80,
+            60
+        ],
+        "manaCost": [
+            150,
+            175,
+            200
+        ],
+        "superUpgrade": "超级: -40 秒冷却时间、+200 伤害、+200 施法距离、+1 眩晕时间。",
+        "gabenUpgrade": "G 胖: 次要目标也将被眩晕。"
     },
     {
         "name": "野性之斧",
         "id": "beastmaster_wild_axes",
         "icon": "beastmaster_wild_axes",
         "tags": [
-            "spam",
             "damageAmplification",
-            "magicDamage"
+            "magicDamage",
+            "spam"
         ],
         "categories": [
             "技能: 点目标",
@@ -198,8 +233,8 @@
         "icon": "bloodseeker_bloodrage",
         "tags": [
             "attackSpeed",
-            "pureDamage",
-            "damageAmplification"
+            "damageAmplification",
+            "pureDamage"
         ],
         "categories": [
             "技能: 单位目标",
@@ -230,11 +265,11 @@
         "id": "bristleback_warpath",
         "icon": "bristleback_warpath",
         "tags": [
-            "passive",
             "attackDamage",
+            "lifesteal",
+            "passive",
             "spam",
-            "ultimate",
-            "lifesteal"
+            "ultimate"
         ],
         "categories": [
             "技能: 被动",
@@ -251,7 +286,7 @@
         "cooldowns": [],
         "manaCost": [],
         "superUpgrade": "超级: 每次叠加提供 5% 吸血。",
-        "gabenUpgrade": "G 胖: 具有无限持续时间，且会无限叠加。"
+        "gabenUpgrade": "G 胖: +5 最大叠加层数，同时每次施放获得一层战意叠加。"
     },
     {
         "name": "极度饥渴",
@@ -269,7 +304,7 @@
         "description": "对活物体液的强烈饥渴提高了育母蜘蛛的攻击力，并使她的攻击附带吸血效果。",
         "differences": "",
         "values": [
-            "吸血百分比: 40% / 60% / 100%",
+            "吸血: 40% / 60% / 100%",
             "持续时间: 8 / 10 / 14",
             "攻击力加成: 35 / 45 / 65"
         ],
@@ -313,7 +348,7 @@
             0,
             0
         ],
-        "superUpgrade": "超级: 在 2s 内使得敌方的移动速度与攻击速度降低 25%，并提高施法者每英雄命中 30% 力量，持续 15 秒。持续时间将在每次叠加时刷新，最多叠加 5 层。提高 0% 的力量至伤害与 200 单位的伤害范围。",
+        "superUpgrade": "超级: 在 2s 内使得敌方的移动速度与攻击速度降低 25%，并提高施法者每英雄命中 30% 力量，持续 15 秒。持续时间将在每次叠加时刷新，最多叠加 5 层。提高 200 单位伤害范围。",
         "gabenUpgrade": "G 胖: 不再造成自我伤害。每次叠加提供 0.5% 生命值回复。"
     },
     {
@@ -354,10 +389,10 @@
         "id": "chen_hand_of_god",
         "icon": "chen_hand_of_god",
         "tags": [
-            "ultimate",
-            "healing",
             "buff",
-            "dispel"
+            "dispel",
+            "healing",
+            "ultimate"
         ],
         "categories": [
             "技能: 无目标",
@@ -380,8 +415,8 @@
             300,
             400
         ],
-        "superUpgrade": "超级: 冷却时间缩短 40s，治疗效果增强 280 并提供梅肯斯姆。",
-        "gabenUpgrade": "G 胖: 梅肯斯姆已成为胫甲。使用 G 胖之手时会对全队进行硬驱散。"
+        "superUpgrade": "超级: 缩短 40 秒冷却时间、提高 280 治疗量并为所有受影响的单位提供 +6 护甲。",
+        "gabenUpgrade": "G 胖: 全局硬驱散。在施放 G 胖之手时，所有召唤物都将获得殉道技能（单位自杀以对低生命值英雄施放一次 50% 数值单个目标的 G 胖之手）。"
     },
     {
         "name": "灼热之箭",
@@ -442,17 +477,17 @@
             90
         ],
         "superUpgrade": "超级: +35% 伤害，+3 射出箭头。",
-        "gabenUpgrade": "G 胖: 提供缚灵索"
+        "gabenUpgrade": "G 胖: 有 2 次充能。"
     },
     {
         "name": "奥术光环",
         "id": "crystal_maiden_brilliance_aura",
         "icon": "crystal_maiden_brilliance_aura",
         "tags": [
-            "spam",
             "buff",
+            "manaRegeneration",
             "passive",
-            "manaRegeneration"
+            "spam"
         ],
         "categories": [
             "技能: 被动",
@@ -470,7 +505,7 @@
         ],
         "cooldowns": [],
         "manaCost": [],
-        "superUpgrade": "超级: +80 魔法值回复",
+        "superUpgrade": "超级: +80 魔法值回复同时回复等于 25% 已回复魔法值的生命值。",
         "gabenUpgrade": "G 胖: 光环现会提供 25% 冷却时间减少。"
     },
     {
@@ -478,8 +513,8 @@
         "id": "crystal_maiden_frostbite",
         "icon": "crystal_maiden_frostbite",
         "tags": [
-            "magicDamage",
-            "damageAmplification"
+            "damageAmplification",
+            "magicDamage"
         ],
         "categories": [
             "技能: 单位目标",
@@ -548,9 +583,9 @@
         "id": "custom_abaddon_curse_of_avernus",
         "icon": "abaddon_frostmourne",
         "tags": [
-            "silence",
             "attackSpeed",
-            "passive"
+            "passive",
+            "silence"
         ],
         "categories": [
             "技能: 被动",
@@ -576,10 +611,10 @@
         "id": "custom_abaddon_death_coil",
         "icon": "abaddon_death_coil",
         "tags": [
-            "healing",
-            "instantAttack",
+            "buff",
             "damageAmplification",
-            "buff"
+            "healing",
+            "instantAttack"
         ],
         "categories": [
             "技能: 单位目标",
@@ -607,8 +642,8 @@
         "id": "custom_abyssal_underlord_atrophy_aura",
         "icon": "abyssal_underlord_atrophy_aura",
         "tags": [
-            "passive",
-            "attackDamage"
+            "attackDamage",
+            "passive"
         ],
         "categories": [
             "技能: 被动",
@@ -632,8 +667,8 @@
         "id": "custom_alchemist_acid_spray",
         "icon": "alchemist_acid_spray",
         "tags": [
-            "magicDamage",
-            "damageAmplification"
+            "damageAmplification",
+            "magicDamage"
         ],
         "categories": [
             "技能: 点目标",
@@ -664,8 +699,8 @@
         "id": "custom_ancient_apparition_ice_blast",
         "icon": "ancient_apparition_ice_blast",
         "tags": [
-            "ultimate",
-            "magicDamage"
+            "magicDamage",
+            "ultimate"
         ],
         "categories": [
             "技能: 点目标",
@@ -716,16 +751,16 @@
             0.3
         ],
         "manaCost": [],
-        "superUpgrade": "超级: 提供先锋盾。反击螺旋将在攻击时以独立冷却时间触发。",
-        "gabenUpgrade": "G 胖: 提供赤红甲。提高 10% 反击螺旋几率与 120 伤害。"
+        "superUpgrade": "超级: 反击螺旋将在攻击时以独立冷却时间触发。+120 伤害。",
+        "gabenUpgrade": "G 胖: 在受影响的敌人身上叠加一层减益，每层叠加使其对英雄所造成的伤害减少 15%（最大 6 层叠加）。提高 10% 的反击螺旋几率。"
     },
     {
         "name": "淘汰之刃",
         "id": "custom_axe_culling_blade",
         "icon": "axe_culling_blade",
         "tags": [
-            "ultimate",
-            "pureDamage"
+            "pureDamage",
+            "ultimate"
         ],
         "categories": [
             "技能: 单位目标",
@@ -792,9 +827,9 @@
         "id": "custom_bane_fiends_grip",
         "icon": "bane_fiends_grip",
         "tags": [
-            "ultimate",
+            "pureDamage",
             "stun",
-            "pureDamage"
+            "ultimate"
         ],
         "categories": [
             "技能: 持续施法",
@@ -806,7 +841,6 @@
         "differences": "",
         "values": [
             "伤害: 70 / 110 / 150",
-            "持续时间: 5 / 6 / 7",
             "每秒法力吸取: 10%"
         ],
         "cooldowns": [
@@ -819,7 +853,7 @@
             300,
             400
         ],
-        "superUpgrade": "超级: 允许英雄在进行魔爪持续施法时进行其他操作。每秒额外偷取 5% 的目标最大生命值。+6秒魔爪持续时间。",
+        "superUpgrade": "超级: 生成 2 个幻象并对目标持续施放魔爪，允许施法者进行其他操作。每秒额外偷取 5% 的目标最大生命值。+6 秒魔爪持续时间。",
         "gabenUpgrade": "G 胖: 冷却时间缩短 50 秒。每持续施法魔爪一秒时间，冷却时间都会缩短 10 秒。"
     },
     {
@@ -827,8 +861,8 @@
         "id": "custom_beastmaster_call_of_the_wild",
         "icon": "custom_beastmaster_call_of_the_wild",
         "tags": [
-            "summons",
-            "stun"
+            "stun",
+            "summons"
         ],
         "categories": [
             "技能: 点目标"
@@ -861,10 +895,10 @@
         "id": "custom_beastmaster_inner_beast",
         "icon": "beastmaster_inner_beast",
         "tags": [
-            "passive",
             "attackSpeed",
             "buff",
-            "lifesteal"
+            "lifesteal",
+            "passive"
         ],
         "categories": [
             "技能: 被动",
@@ -878,16 +912,16 @@
         ],
         "cooldowns": [],
         "manaCost": [],
-        "superUpgrade": "超级: 提供弗拉基米尔的光环。攻击速度提高 15。",
-        "gabenUpgrade": "G 胖: 使用怨灵之契替换了弗拉迪米尔的光环。攻击速度提高 15。"
+        "superUpgrade": "超级: 提供一个带来 20% 吸血与 15% 伤害加成的光环。攻击速度提高 15。",
+        "gabenUpgrade": "G 胖: 战斗开始时召唤怨灵之契，其会释放一个降低 30% 敌方物理伤害的光环，同时每秒造成 30 伤害。攻击速度提高 15。"
     },
     {
         "name": "刺针扫射",
         "id": "custom_bristleback_quill_spray",
         "icon": "bristleback_quill_spray",
         "tags": [
-            "spam",
-            "magicDamage"
+            "magicDamage",
+            "spam"
         ],
         "categories": [
             "技能: 无目标",
@@ -927,7 +961,7 @@
             "能否驱散: 是"
         ],
         "description": "用鼻涕包裹在一个敌方单位，降低他的移动速度，减少他的护甲。多次释放效果会叠加，同时持续时间以最后一次为准。",
-        "differences": "施放点已移除。",
+        "differences": "施放点已移除。施法距离提高。",
         "values": [
             "叠加上限: 4",
             "基础护甲损失: 2",
@@ -952,8 +986,8 @@
         "id": "custom_chaos_knight_chaos_strike",
         "icon": "chaos_knight_chaos_strike",
         "tags": [
-            "passive",
-            "lifesteal"
+            "lifesteal",
+            "passive"
         ],
         "categories": [
             "技能: 被动",
@@ -976,7 +1010,9 @@
         "name": "魅影之袭",
         "id": "custom_chaos_knight_phantasm",
         "icon": "chaos_knight_phantasm",
-        "tags": [],
+        "tags": [
+            "ultimate"
+        ],
         "categories": [
             "技能: 无目标"
         ],
@@ -1004,9 +1040,9 @@
         "id": "custom_chaos_knight_reality_rift",
         "icon": "chaos_knight_reality_rift",
         "tags": [
-            "mobility",
+            "damageAmplification",
             "displacement",
-            "damageAmplification"
+            "mobility"
         ],
         "categories": [
             "技能: 单位目标",
@@ -1036,8 +1072,8 @@
         "id": "custom_clockwerk_battery_assault",
         "icon": "rattletrap_battery_assault",
         "tags": [
-            "stun",
-            "magicDamage"
+            "magicDamage",
+            "stun"
         ],
         "categories": [
             "技能: 无目标",
@@ -1069,8 +1105,8 @@
         "id": "custom_crystal_maiden_freezing_field",
         "icon": "crystal_maiden_freezing_field",
         "tags": [
-            "ultimate",
-            "magicDamage"
+            "magicDamage",
+            "ultimate"
         ],
         "categories": [
             "技能: 持续施法",
@@ -1106,8 +1142,8 @@
         "id": "custom_dark_willow_cursed_crown",
         "icon": "dark_willow_cursed_crown",
         "tags": [
-            "stun",
-            "magicDamage"
+            "magicDamage",
+            "stun"
         ],
         "categories": [
             "技能: 单位目标",
@@ -1117,14 +1153,14 @@
         "description": "英雄对目标施放远古异种诅咒。在一段时间的延迟后，目标及其附近的敌人都会被眩晕。",
         "differences": "",
         "values": [
-            "击晕半径: 360",
+            "击晕半径: 400",
             "延迟: 3",
             "眩晕持续时间: 1.5 / 2 / 3"
         ],
         "cooldowns": [
-            18,
             16,
-            12
+            14,
+            10
         ],
         "manaCost": [
             80,
@@ -1174,9 +1210,9 @@
         "id": "custom_dawnbreaker_luminosity",
         "icon": "dawnbreaker_luminosity",
         "tags": [
-            "passive",
             "healing",
-            "lifesteal"
+            "lifesteal",
+            "passive"
         ],
         "categories": [
             "技能: 被动",
@@ -1192,7 +1228,7 @@
         "cooldowns": [],
         "manaCost": [],
         "superUpgrade": "超级: 需要 1 更少攻击以触发。提高 40% 致命一击伤害。",
-        "gabenUpgrade": "G 胖: 吸血增强 200%。每 5 秒提供双重攻击。"
+        "gabenUpgrade": "G 胖: 吸血增强 150%。每 5 秒提供双重攻击。"
     },
     {
         "name": "末日",
@@ -1201,8 +1237,8 @@
         "tags": [
             "break",
             "pureDamage",
-            "ultimate",
-            "silence"
+            "silence",
+            "ultimate"
         ],
         "categories": [
             "技能: 单位目标",
@@ -1232,8 +1268,8 @@
         "id": "custom_dragon_knight_dragon_blood",
         "icon": "dragon_knight_dragon_blood",
         "tags": [
-            "passive",
-            "healing"
+            "healing",
+            "passive"
         ],
         "categories": [
             "技能: 被动"
@@ -1263,10 +1299,12 @@
             "无视技能免疫: 否",
             "能否驱散: 是"
         ],
-        "description": "英雄在箭矢中附上冰冻效果，减缓敌人的移动速度并造成额外伤害。 持续 1.5 秒。",
-        "differences": "没有魔法消耗。",
+        "description": "英雄在箭矢中附上冰冻效果，减缓敌人的移动速度，造成额外伤害并施加低温叠加。持续 1.5 秒。",
+        "differences": "没有魔法消耗，同时默认会施加低温叠加。",
         "values": [
             "伤害加成: 7.5 / 15 / 30",
+            "低温回复减免: -2 / -3 / -5",
+            "低温爆裂伤害: 30 / 40 / 60",
             "移动速度减缓: -10% / -25% / -55%"
         ],
         "cooldowns": [
@@ -1277,7 +1315,7 @@
         "manaCost": [
             0
         ],
-        "superUpgrade": "超级: +15 伤害加成，霜冻之箭现可施加低温叠加。提供魔龙枪。",
+        "superUpgrade": "超级: 每次叠加 +20 伤害加成并 -4% 低温回复减免。",
         "gabenUpgrade": "G 胖: 英雄攻击现会分裂至主目标 375 范围内的 2 敌方，造成降低 50% 后的伤害。"
     },
     {
@@ -1312,15 +1350,15 @@
             110
         ],
         "superUpgrade": "超级: +2 波。每波+2箭矢。",
-        "gabenUpgrade": "G 胖: 获得斯嘉蒂之眼。"
+        "gabenUpgrade": "G 胖: 提供射手天赋。"
     },
     {
         "name": "狂风",
         "id": "custom_drow_ranger_wave_of_silence",
         "icon": "drow_ranger_wave_of_silence",
         "tags": [
-            "silence",
-            "displacement"
+            "displacement",
+            "silence"
         ],
         "categories": [
             "技能: 点目标",
@@ -1368,15 +1406,15 @@
         ],
         "manaCost": [],
         "superUpgrade": "超级: 不会消耗魔法且没有施法前摇。-1.5s 冷却时间。",
-        "gabenUpgrade": "G 胖: 提供代达罗斯。"
+        "gabenUpgrade": "G 胖: 提供 60 基础伤害固有加成。"
     },
     {
         "name": "沟壑",
         "id": "custom_earthshaker_fissure",
         "icon": "earthshaker_fissure",
         "tags": [
-            "stun",
-            "magicDamage"
+            "magicDamage",
+            "stun"
         ],
         "categories": [
             "技能: 点目标",
@@ -1512,9 +1550,9 @@
         "id": "custom_faceless_void_chronosphere",
         "icon": "faceless_void_chronosphere",
         "tags": [
+            "attackSpeed",
             "stun",
-            "ultimate",
-            "attackSpeed"
+            "ultimate"
         ],
         "categories": [
             "技能: 点目标",
@@ -1575,9 +1613,9 @@
         "icon": "grimstroke_spirit_walk",
         "tags": [
             "buff",
-            "stun",
             "healing",
-            "magicDamage"
+            "magicDamage",
+            "stun"
         ],
         "categories": [
             "技能: 单位目标",
@@ -1607,14 +1645,16 @@
             130,
             150
         ],
-        "superUpgrade": "超级: Increases radius by 150, movement speed bonus by 16%, damage by 40% and reduces cooldown by 5s.治疗目标所承受伤害的 40%��失效后，目标将获得强驱散。",
+        "superUpgrade": "超级: 提高 150 范围、16%移动速度、40%伤害并降低 5s 冷却时间。治疗目标所承受伤害的 40%��失效后，目标将获得强驱散。",
         "gabenUpgrade": "G 胖: 提供 2 充能。"
     },
     {
         "name": "缚魂",
         "id": "custom_grimstroke_soul_bind",
         "icon": "grimstroke_soul_chain",
-        "tags": [],
+        "tags": [
+            "ultimate"
+        ],
         "categories": [
             "技能: 单位目标",
             "无视技能免疫: 是",
@@ -1645,10 +1685,10 @@
         "id": "custom_hoodwink_sharpshooter",
         "icon": "hoodwink_sharpshooter",
         "tags": [
-            "ultimate",
-            "magicDamage",
             "break",
-            "damageAmplification"
+            "damageAmplification",
+            "magicDamage",
+            "ultimate"
         ],
         "categories": [
             "技能: 点目标",
@@ -1693,9 +1733,9 @@
         "description": "英雄点燃自己的武器，使其普通攻击也能造成持续伤害。多次攻击会造成持续伤害叠加。每次攻击都将牺牲其部分生命值。",
         "differences": "",
         "values": [
-            "当前生命值消耗: 3%",
+            "当前生命值消耗: 1.5%",
             "持续时间: 8",
-            "每秒燃烧伤害: 5 / 10 / 20"
+            "每秒燃烧伤害: 7 / 14 / 28"
         ],
         "cooldowns": [],
         "manaCost": [],
@@ -1707,8 +1747,8 @@
         "id": "custom_huskar_inner_fire",
         "icon": "huskar_inner_fire",
         "tags": [
-            "healing",
-            "displacement"
+            "displacement",
+            "healing"
         ],
         "categories": [
             "技能: 无目标",
@@ -1741,9 +1781,9 @@
         "id": "custom_huskar_life_break",
         "icon": "huskar_life_break",
         "tags": [
-            "ultimate",
             "magicDamage",
-            "mobility"
+            "mobility",
+            "ultimate"
         ],
         "categories": [
             "技能: 单位目标",
@@ -1770,15 +1810,15 @@
             0
         ],
         "superUpgrade": "超级: 对目标敌人及英雄越过的所有单位造成 100% 自我伤害。",
-        "gabenUpgrade": "G 胖: 提供天堂之戟。牺牲会嘲讽单位 3 秒。"
+        "gabenUpgrade": "G 胖: 牺牲会嘲讽单位 3 秒。提供 G 胖护手，其具有 15 力量护手的数值（+45 力量）。"
     },
     {
         "name": "剑刃风暴",
         "id": "custom_juggernaut_blade_fury",
         "icon": "juggernaut_blade_fury",
         "tags": [
-            "magicImmunity",
-            "magicDamage"
+            "magicDamage",
+            "magicImmunity"
         ],
         "categories": [
             "技能: 无目标",
@@ -1812,9 +1852,9 @@
         "id": "custom_legion_commander_duel",
         "icon": "legion_commander_duel",
         "tags": [
-            "ultimate",
             "attackDamage",
-            "stun"
+            "stun",
+            "ultimate"
         ],
         "categories": [
             "技能: 单位目标",
@@ -1844,8 +1884,8 @@
         "id": "custom_leshrac_split_earth",
         "icon": "leshrac_split_earth",
         "tags": [
-            "stun",
-            "magicDamage"
+            "magicDamage",
+            "stun"
         ],
         "categories": [
             "技能: 点目标",
@@ -1939,8 +1979,8 @@
             100,
             150
         ],
-        "superUpgrade": "超级: 提高 20% 移动速度与 3s 持续时间。",
-        "gabenUpgrade": "G 胖: 缩短 11 秒冷却时间（没有恢复时间）。"
+        "superUpgrade": "超级: 提高 20% 移动速度与 2s 持续时间。",
+        "gabenUpgrade": "G 胖: 缩短 12 秒冷却时间（没有恢复时间）。"
     },
     {
         "name": "龙破斩",
@@ -1987,7 +2027,7 @@
         "differences": "施法时叠加，而不是使用技能对敌人造成伤害。",
         "values": [
             "持续时间: 8",
-            "攻击速度加成: 35 / 45 / 65",
+            "攻击速度加成: 20 / 30 / 50",
             "最大叠加: 4",
             "额外移动速度: 4% / 5% / 7%"
         ],
@@ -2001,9 +2041,9 @@
         "id": "custom_lion_finger_of_death",
         "icon": "lion_finger_of_death",
         "tags": [
-            "ultimate",
             "magicDamage",
-            "stats"
+            "stats",
+            "ultimate"
         ],
         "categories": [
             "技能: 单位目标",
@@ -2028,15 +2068,15 @@
             400
         ],
         "superUpgrade": "超级: +70 最大生命值与 20 每死亡之指击杀伤害加成。",
-        "gabenUpgrade": "G 胖: 冷却时间缩短 20 秒。100 更多基础伤害且会对主要目标附近 325 范围内的所有敌人进行施放。"
+        "gabenUpgrade": "G 胖: -20 秒冷却时间。100 更多基础伤害且会对主要目标附近 325 范围内的所有敌人进行施放。"
     },
     {
         "name": "法力吸取",
         "id": "custom_lion_mana_drain",
         "icon": "lion_mana_drain",
         "tags": [
-            "manaRegeneration",
             "magicImmunity",
+            "manaRegeneration",
             "spam"
         ],
         "categories": [
@@ -2093,15 +2133,16 @@
             75
         ],
         "superUpgrade": "超级: +25 熊灵移动速度，+8 熊灵护甲，0s 缠绕之爪冷却时间，+1000 熊灵生命值，-0.1 熊灵攻击时间。",
-        "gabenUpgrade": "G 胖: 提供强袭胸甲、疯狂面具以及碎颅锤。"
+        "gabenUpgrade": "G 胖: 提供雷神之锤、疯狂面具以及碎颅锤。"
     },
     {
         "name": "幽魂链接",
         "id": "custom_lone_druid_spirit_link",
         "icon": "lone_druid_spirit_link",
         "tags": [
-            "lifesteal",
             "buff",
+            "lifesteal",
+            "passive",
             "stats",
             "summons"
         ],
@@ -2182,10 +2223,10 @@
         "id": "custom_lycan_feral_impulse",
         "icon": "lycan_feral_impulse",
         "tags": [
-            "summons",
             "attackDamage",
+            "damageAmplification",
             "passive",
-            "damageAmplification"
+            "summons"
         ],
         "categories": [
             "技能: 被动"
@@ -2238,8 +2279,8 @@
         "id": "custom_magnataur_empower",
         "icon": "magnataur_empower",
         "tags": [
-            "buff",
-            "attackDamage"
+            "attackDamage",
+            "buff"
         ],
         "categories": [
             "技能: 单位目标",
@@ -2261,7 +2302,7 @@
             60,
             90
         ],
-        "superUpgrade": "超级: 在对友方进行施放时，英雄同时还会对自己施放授予力量。+10% cleave, +10%伤害，+10 秒持续时间，+200 分裂范围。",
+        "superUpgrade": "超级: 在对友方进行施放时，英雄同时还会对自己施放授予力量。+10%分裂, +10%伤害，+10 秒持续时间，+200 分裂范围。",
         "gabenUpgrade": "G 胖: 授予力量为全局光环。"
     },
     {
@@ -2305,8 +2346,8 @@
         "icon": "mars_spear",
         "tags": [
             "displacement",
-            "stun",
-            "magicDamage"
+            "magicDamage",
+            "stun"
         ],
         "categories": [
             "技能: 点目标",
@@ -2363,8 +2404,8 @@
         "id": "custom_mirana_arrow",
         "icon": "mirana_arrow",
         "tags": [
-            "stun",
-            "magicDamage"
+            "magicDamage",
+            "stun"
         ],
         "categories": [
             "技能: 点目标",
@@ -2399,9 +2440,9 @@
         "id": "custom_monkey_king_boundless_strike",
         "icon": "monkey_king_boundless_strike",
         "tags": [
-            "stun",
             "instantAttack",
-            "silence"
+            "silence",
+            "stun"
         ],
         "categories": [
             "技能: 点目标",
@@ -2432,9 +2473,9 @@
         "id": "custom_monkey_king_jingu_mastery",
         "icon": "monkey_king_jingu_mastery",
         "tags": [
-            "passive",
             "attackDamage",
-            "lifesteal"
+            "lifesteal",
+            "passive"
         ],
         "categories": [
             "技能: 被动",
@@ -2455,7 +2496,7 @@
         ],
         "manaCost": [],
         "superUpgrade": "超级: 提供回音战刃并 +130 伤害。",
-        "gabenUpgrade": "G 胖: 每 2.5 秒在你身边生成一个石头士兵。"
+        "gabenUpgrade": "G 胖: 每 2 秒在你身边生成一个石头士兵。"
     },
     {
         "name": "镜像",
@@ -2485,7 +2526,7 @@
             85,
             115
         ],
-        "superUpgrade": "超级: 提供净魂之刃。降低 10 冷却时间，提高 13% 输出伤害。",
+        "superUpgrade": "超级: +25 敏捷。降低 10 冷却时间，提高 13% 输出伤害。",
         "gabenUpgrade": "G 胖: 提供激流: 每 6 次攻击（包括幻象）后施法者及其镜像将会对附近单位施加 55 伤害的波，使其护甲在 4 秒内降低 8.提高 1 幻象数量。"
     },
     {
@@ -2528,11 +2569,11 @@
         "id": "custom_necrolyte_reapers_scythe",
         "icon": "necrolyte_reapers_scythe",
         "tags": [
-            "ultimate",
+            "healing",
             "magicDamage",
-            "stun",
             "manaRegeneration",
-            "healing"
+            "stun",
+            "ultimate"
         ],
         "categories": [
             "技能: 单位目标",
@@ -2564,10 +2605,10 @@
         "id": "custom_obsidian_destroyer_equilibrium",
         "icon": "obsidian_destroyer_equilibrium",
         "tags": [
-            "manaRegeneration",
-            "passive",
+            "attackRange",
             "damageAmplification",
-            "attackRange"
+            "manaRegeneration",
+            "passive"
         ],
         "categories": [
             "技能: 被动"
@@ -2582,6 +2623,37 @@
         "manaCost": [],
         "superUpgrade": "超级: +300 施法范围，+300 攻击范围。",
         "gabenUpgrade": "G 胖: 提供最高 100% 的法术加强，具体根据你当亲剩余的法力值计算。"
+    },
+    {
+        "name": "守护天使",
+        "id": "custom_omniknight_guardian_angel",
+        "icon": "omniknight_guardian_angel",
+        "tags": [
+            "ultimate"
+        ],
+        "categories": [
+            "技能: 无目标",
+            "无视技能免疫: 是",
+            "能否驱散: 是"
+        ],
+        "description": "英雄召唤守护天使并为友方提供物理伤害免疫。",
+        "differences": "持续时间缩短。",
+        "values": [
+            "持续时间: 2 / 3 / 4",
+            "范围: 700"
+        ],
+        "cooldowns": [
+            160,
+            140,
+            120
+        ],
+        "manaCost": [
+            150,
+            200,
+            250
+        ],
+        "superUpgrade": "超级: 友方在增益持续时间内获得 40 生命值回复。+1 秒持续时间、-60 秒冷却时间。全局范围。",
+        "gabenUpgrade": "G 胖: 受到守护天使影响的友方被攻击时，有 15% 几率对其攻击者施放纯洁之锤。"
     },
     {
         "name": "天国恩赐",
@@ -2623,9 +2695,9 @@
         "id": "custom_oracle_fortunes_end",
         "icon": "oracle_fortunes_end",
         "tags": [
-            "magicDamage",
             "dispel",
-            "healing"
+            "healing",
+            "magicDamage"
         ],
         "categories": [
             "技能: 单位目标",
@@ -2656,11 +2728,11 @@
         "id": "custom_pangolier_rolling_thunder",
         "icon": "pangolier_gyroshell",
         "tags": [
-            "ultimate",
-            "mobility",
+            "magicDamage",
             "magicImmunity",
+            "mobility",
             "stun",
-            "magicDamage"
+            "ultimate"
         ],
         "categories": [
             "技能: 无目标",
@@ -2671,7 +2743,7 @@
         "description": "施法者卷成一个免疫法术的球并滚出。滚动时其速度将越来越快，并且可以穿过树木，但转弯能力下降。可使敌人被击退，同时在敌人落地时造成伤害并使其眩晕。 \n\n施法者变化方向并与墙壁或悬崖碰撞时会引发暂时停顿。\n\n驱散类型: 基础驱散。",
         "differences": "持续时间缩短。",
         "values": [
-            "伤害: 180 / 260 / 340",
+            "伤害: 80 / 120 / 160",
             "击退距离: 150",
             "变形时间: 1.2",
             "持续时间: 3 / 4 / 5",
@@ -2697,9 +2769,9 @@
         "id": "custom_phantom_assassin_coup_de_grace",
         "icon": "phantom_assassin_coup_de_grace",
         "tags": [
-            "ultimate",
+            "break",
             "passive",
-            "break"
+            "ultimate"
         ],
         "categories": [
             "技能: 被动",
@@ -2747,7 +2819,7 @@
             120
         ],
         "superUpgrade": "超级: 冷却时间减少 4 秒，施法距离提高 225。灵魂之矛会在 750 范围内的敌人身上反弹一次，优先攻击英雄。提高 40%的灵魂之矛幻象伤害。",
-        "gabenUpgrade": "G 胖: 提供玲珑心，+45 的基础数据。"
+        "gabenUpgrade": "G 胖: 提供 25% 冷却时间减免并 +45 基础数据。"
     },
     {
         "name": "烈日炙烤",
@@ -2782,7 +2854,7 @@
             110,
             130
         ],
-        "superUpgrade": "超级: +1.5% 最大生命值伤害，+1.5% 最大生命值治疗，提供神圣福佑",
+        "superUpgrade": "超级: +1.5% 最大生命值伤害，+1.5% 最大生命值治疗，提供 25% 宽度。",
         "gabenUpgrade": "G 胖: 烈日炙烤转而生成施放烈日炙烤的超新星，并会在持续时间结束时爆炸。"
     },
     {
@@ -2790,7 +2862,6 @@
         "id": "custom_pudge_flesh_heap",
         "icon": "pudge_flesh_heap",
         "tags": [
-            "passive",
             "stats"
         ],
         "categories": [
@@ -2816,7 +2887,7 @@
             80
         ],
         "superUpgrade": "超级: 450 范围内死亡一个敌人即永久性获得 +2 力量。",
-        "gabenUpgrade": "G 胖: 提供巨人之戒。"
+        "gabenUpgrade": "G 胖: 2x 伤害格挡与 2x 力量增益。"
     },
     {
         "name": "肉钩",
@@ -2853,8 +2924,8 @@
         "id": "custom_pugna_life_drain",
         "icon": "pugna_life_drain",
         "tags": [
-            "ultimate",
-            "healing"
+            "healing",
+            "ultimate"
         ],
         "categories": [
             "技能: 持续施法",
@@ -2871,11 +2942,11 @@
             7
         ],
         "manaCost": [
-            125,
-            175,
-            225
+            75,
+            100,
+            125
         ],
-        "superUpgrade": "超级: 每持续施法 1.5 秒，就会对另一个随机英雄施放次级生命汲取。",
+        "superUpgrade": "超级: 每持续施法 1 秒，就会对另一个随机英雄施放次级生命汲取。",
         "gabenUpgrade": "G 胖: 移除冷却时间并增加 200 伤害。"
     },
     {
@@ -2883,8 +2954,8 @@
         "id": "custom_queenofpain_blink",
         "icon": "queenofpain_blink",
         "tags": [
-            "mobility",
             "damageAmplification",
+            "mobility",
             "silence"
         ],
         "categories": [
@@ -2913,8 +2984,8 @@
         "id": "custom_razor_eye_of_the_storm",
         "icon": "razor_eye_of_the_storm",
         "tags": [
-            "ultimate",
-            "damageAmplification"
+            "damageAmplification",
+            "ultimate"
         ],
         "categories": [
             "技能: 无目标",
@@ -2946,6 +3017,38 @@
         "gabenUpgrade": "G 胖: 提供避雷针: 风暴之眼同样会击中施法者，造成相反的效果（数值为 33%）。-0.2 秒打击间隔。"
     },
     {
+        "name": "静电连接",
+        "id": "custom_razor_static_link",
+        "icon": "razor_static_link",
+        "tags": [
+            "attackDamage",
+            "attackRange"
+        ],
+        "categories": [
+            "技能: 单位目标",
+            "无视技能免疫: 是",
+            "能否驱散: 仅强驱散"
+        ],
+        "description": "在英雄和一个敌方英雄之间创造静电连接，偷取目标的攻击力并将其转移给英雄。连接生效期间英雄可在移动中攻击。",
+        "differences": "目标死亡时静电连接不会被破坏。",
+        "values": [
+            "伤害吸取率: 7 / 12 / 22",
+            "增益持续时间: 15 / 16 / 18",
+            "最小施法距离: 550",
+            "连接持续时间: 5 / 6 / 8"
+        ],
+        "cooldowns": [
+            40,
+            35,
+            25
+        ],
+        "manaCost": [
+            65
+        ],
+        "superUpgrade": "超级: +5 伤害吸取率。",
+        "gabenUpgrade": "G 胖: 以相同吸取速率偷取攻击速度。"
+    },
+    {
         "name": "绝杀秘技",
         "id": "custom_riki_tricks_of_the_trade",
         "icon": "riki_tricks_of_the_trade",
@@ -2971,16 +3074,16 @@
         "manaCost": [
             50
         ],
-        "superUpgrade": "超级: 提供狂战斧。施法距离增加 300。",
-        "gabenUpgrade": "G 胖: 提高 1 的攻击次数，每次攻击命中 1 额外目标，且会 -4 秒 CDR。"
+        "superUpgrade": "超级: 提高 1 的攻击次数，每次攻击命中 1 额外目标，且会 -4 秒 CDR。",
+        "gabenUpgrade": "G 胖: 施放绝杀秘技时在地面上施放 4 级烟幕，持续 2 秒。"
     },
     {
         "name": "技能窃取",
         "id": "custom_rubick_spell_steal",
         "icon": "rubick_spell_steal",
         "tags": [
-            "ultimate",
-            "spam"
+            "spam",
+            "ultimate"
         ],
         "categories": [
             "技能: 单位目标",
@@ -3011,8 +3114,8 @@
         "id": "custom_sandking_epicenter",
         "icon": "sandking_epicenter",
         "tags": [
-            "ultimate",
-            "magicDamage"
+            "magicDamage",
+            "ultimate"
         ],
         "categories": [
             "技能: 无目标",
@@ -3049,8 +3152,8 @@
         "id": "custom_shadow_demon_demonic_cleanse",
         "icon": "shadow_demon_demonic_cleanse",
         "tags": [
-            "healing",
             "dispel",
+            "healing",
             "ultimate"
         ],
         "categories": [
@@ -3078,10 +3181,10 @@
         "id": "custom_shadow_demon_demonic_purge",
         "icon": "shadow_demon_demonic_purge",
         "tags": [
-            "ultimate",
             "break",
+            "dispel",
             "magicDamage",
-            "dispel"
+            "ultimate"
         ],
         "categories": [
             "技能: 单位目标",
@@ -3144,8 +3247,8 @@
         "id": "custom_shadow_shaman_voodoo",
         "icon": "shadow_shaman_voodoo",
         "tags": [
-            "stun",
-            "break"
+            "break",
+            "stun"
         ],
         "categories": [
             "技能: 单位目标",
@@ -3197,9 +3300,7 @@
             8
         ],
         "manaCost": [
-            75,
-            125,
-            175
+            75
         ],
         "superUpgrade": "超级: 提供锯齿飞轮（二）。提供可投掷的喷火装置，允许英雄将增强的喷火装置作为礼物送给友方。",
         "gabenUpgrade": "G 胖: 在施法者周围投掷一圈 10 锯齿飞轮。"
@@ -3271,8 +3372,8 @@
         "icon": "skeleton_king_vampiric_aura",
         "tags": [
             "lifesteal",
-            "summons",
-            "stun"
+            "stun",
+            "summons"
         ],
         "categories": [
             "技能: 无目标"
@@ -3300,8 +3401,8 @@
         "id": "custom_skywrath_mage_ancient_seal",
         "icon": "skywrath_mage_ancient_seal",
         "tags": [
-            "silence",
-            "damageAmplification"
+            "damageAmplification",
+            "silence"
         ],
         "categories": [
             "技能: 单位目标",
@@ -3330,8 +3431,8 @@
         "id": "custom_skywrath_mage_arcane_bolt",
         "icon": "skywrath_mage_arcane_bolt",
         "tags": [
-            "spam",
-            "magicDamage"
+            "magicDamage",
+            "spam"
         ],
         "categories": [
             "技能: 单位目标",
@@ -3360,8 +3461,8 @@
         "id": "custom_skywrath_mage_mystic_flare",
         "icon": "skywrath_mage_mystic_flare",
         "tags": [
-            "ultimate",
-            "magicDamage"
+            "magicDamage",
+            "ultimate"
         ],
         "categories": [
             "技能: 点目标",
@@ -3393,9 +3494,9 @@
         "id": "custom_slardar_amplify_damage",
         "icon": "slardar_amplify_damage",
         "tags": [
-            "ultimate",
             "damageAmplification",
-            "spam"
+            "spam",
+            "ultimate"
         ],
         "categories": [
             "技能: 单位目标",
@@ -3422,8 +3523,8 @@
         "id": "custom_slardar_bash_of_the_deep",
         "icon": "slardar_bash",
         "tags": [
-            "stun",
-            "passive"
+            "passive",
+            "stun"
         ],
         "categories": [
             "技能: 被动",
@@ -3481,9 +3582,9 @@
         "id": "custom_slark_essence_shift",
         "icon": "slark_essence_shift",
         "tags": [
+            "attackSpeed",
             "passive",
-            "stats",
-            "attackSpeed"
+            "stats"
         ],
         "categories": [
             "技能: 被动",
@@ -3507,11 +3608,11 @@
         "id": "custom_snapfire_firesnap_cookie",
         "icon": "snapfire_firesnap_cookie",
         "tags": [
-            "healing",
-            "stun",
             "buff",
+            "healing",
+            "magicDamage",
             "mobility",
-            "magicDamage"
+            "stun"
         ],
         "categories": [
             "技能: 单位目标",
@@ -3554,7 +3655,7 @@
         "differences": "",
         "values": [
             "护甲损失持续时间: 5",
-            "每叠加护甲损失: 0.5",
+            "每叠加护甲损失: 1",
             "每次射击固定伤害: 20 / 45 / 95",
             "距离加成: 75 / 150 / 300",
             "额外攻击速度: 300"
@@ -3577,9 +3678,9 @@
         "id": "custom_snapfire_mortimer_kisses",
         "icon": "snapfire_mortimer_kisses",
         "tags": [
-            "ultimate",
             "magicDamage",
-            "mobility"
+            "mobility",
+            "ultimate"
         ],
         "categories": [
             "技能: 点目标",
@@ -3616,8 +3717,8 @@
         "icon": "sniper_take_aim",
         "tags": [
             "attackRange",
-            "passive",
-            "displacement"
+            "displacement",
+            "passive"
         ],
         "categories": [
             "技能: 被动"
@@ -3660,9 +3761,9 @@
         "id": "custom_spirit_breaker_charge_of_darkness",
         "icon": "spirit_breaker_charge_of_darkness",
         "tags": [
+            "magicImmunity",
             "mobility",
-            "stun",
-            "magicImmunity"
+            "stun"
         ],
         "categories": [
             "技能: 单位目标",
@@ -3691,9 +3792,9 @@
         "id": "custom_storm_spirit_overload",
         "icon": "storm_spirit_overload",
         "tags": [
-            "spam",
             "magicDamage",
-            "passive"
+            "passive",
+            "spam"
         ],
         "categories": [
             "技能: 被动",
@@ -3719,10 +3820,10 @@
         "id": "custom_sven_gods_strength",
         "icon": "sven_gods_strength",
         "tags": [
-            "ultimate",
             "attackDamage",
             "magicImmunity",
-            "stun"
+            "stun",
+            "ultimate"
         ],
         "categories": [
             "技能: 无目标",
@@ -3763,9 +3864,9 @@
         "description": "英雄的战吼激励着同伴作战，提升他们的护甲和移动速度。持续 9 秒。",
         "differences": "",
         "values": [
-            "护甲加成: 3 / 6 / 12",
+            "护甲加成: 4 / 8 / 16",
             "持续时间: 9",
-            "范围: 800",
+            "范围: 1000",
             "速度加成: 10% / 14% / 22%"
         ],
         "cooldowns": [
@@ -3778,7 +3879,7 @@
             35,
             45
         ],
-        "superUpgrade": "超级: +5 护甲加成，+3 秒持续时间，+20% 移动速度，以及 +400 范围。",
+        "superUpgrade": "超级: +10 护甲加成，+3 秒持续时间，+20% 移动速度，以及 +400 范围。",
         "gabenUpgrade": "G 胖: 战吼不可驱散。受到战吼影响的单位会获得等于 2x 护甲的伤害值（对于施法者的效果为 2x）。"
     },
     {
@@ -3786,9 +3887,9 @@
         "id": "custom_tidehunter_ravage",
         "icon": "tidehunter_ravage",
         "tags": [
-            "ultimate",
             "magicDamage",
-            "stun"
+            "stun",
+            "ultimate"
         ],
         "categories": [
             "技能: 无目标",
@@ -3926,9 +4027,9 @@
         "id": "custom_troll_warlord_berserkers_rage",
         "icon": "troll_warlord_berserkers_rage",
         "tags": [
-            "magicDamage",
             "attackRange",
             "dispel",
+            "magicDamage",
             "spam"
         ],
         "categories": [
@@ -3980,15 +4081,52 @@
         "gabenUpgrade": "G 胖: 当冰晶处于活动生效状态时会对整个竞技场的每秒伤害与移动速度产生影响。"
     },
     {
+        "name": "雪球",
+        "id": "custom_tusk_snowball",
+        "icon": "tusk_snowball",
+        "tags": [
+            "magicDamage",
+            "mobility",
+            "stun"
+        ],
+        "categories": [
+            "技能: 单位目标",
+            "伤害类型: 魔法",
+            "无视技能免疫: 否",
+            "能否驱散: 仅强驱散"
+        ],
+        "description": "英雄滚入雪球。200 范围内的友方将被带入雪球。雪球路径上的任意敌人都将被眩晕且承受伤害。雪球中的每个友方英雄都将获得伤害值提升。",
+        "differences": "施放后立即发出雪球。AI: 多以后防线单位为目标。",
+        "values": [
+            "基础伤害: 80 / 140 / 260",
+            "每友方伤害加成: 25 / 50 / 100",
+            "眩晕持续时间: 0.8 / 1 / 1.4",
+            "聚集半径: 200",
+            "雪球速度: 625 / 650 / 700"
+        ],
+        "cooldowns": [
+            21,
+            19,
+            15
+        ],
+        "manaCost": [
+            75,
+            75,
+            75
+        ],
+        "superUpgrade": "超级: -2 秒冷却时间，+120 基础伤害。离开雪球的英雄获得 60 攻击速度，持续 2 秒。",
+        "gabenUpgrade": "G 胖: 雪球融化时在施法者周围施放 8 个冰晶，每个冰晶造成 280 魔法伤害。"
+    },
+    {
         "name": "海象神拳！",
         "id": "custom_tusk_walrus_punch",
         "icon": "tusk_walrus_punch",
         "tags": [
-            "ultimate",
-            "stun",
             "attackModifier",
+            "break",
             "stats",
-            "break"
+            "stun",
+            "ultimate"
         ],
         "categories": [
             "技能: 无目标",
@@ -4011,7 +4149,7 @@
         "manaCost": [
             75
         ],
-        "superUpgrade": "超级: 无魔法消耗，降低 4 的冷却时间，+0.4 秒滞空时间，提供白银之锋。",
+        "superUpgrade": "超级: 减益持续期间对目标造成破坏效果。无魔法消耗，降低 4 的冷却时间，+0.4 秒滞空时间。",
         "gabenUpgrade": "G 胖: 获得 20% 几率在敌人身上触发海象神拳。"
     },
     {
@@ -4020,8 +4158,8 @@
         "icon": "undying_decay",
         "tags": [
             "magicDamage",
-            "stats",
-            "spam"
+            "spam",
+            "stats"
         ],
         "categories": [
             "技能: 点目标",
@@ -4043,11 +4181,9 @@
             4
         ],
         "manaCost": [
-            85,
-            90,
-            100
+            50
         ],
-        "superUpgrade": "超级: 提高 6 窃取力量。",
+        "superUpgrade": "超级: 提高 6 窃取力量。-1s 冷却时间。",
         "gabenUpgrade": "G 胖: 腐朽在目标位置间隔 3 秒额外触发 2 次。"
     },
     {
@@ -4076,7 +4212,6 @@
         "manaCost": [
             85,
             100,
-            115,
             130
         ],
         "superUpgrade": "超级: +25 每单位伤害/治疗。 ",
@@ -4087,8 +4222,8 @@
         "id": "custom_ursa_earthshock",
         "icon": "ursa_earthshock",
         "tags": [
-            "mobility",
-            "magicDamage"
+            "magicDamage",
+            "mobility"
         ],
         "categories": [
             "技能: 无目标",
@@ -4120,9 +4255,9 @@
         "id": "custom_vengefulspirit_magic_missile",
         "icon": "vengefulspirit_magic_missile",
         "tags": [
+            "break",
             "magicDamage",
-            "stun",
-            "break"
+            "stun"
         ],
         "categories": [
             "技能: 单位目标",
@@ -4146,7 +4281,7 @@
             110,
             130
         ],
-        "superUpgrade": "超级: 提高 200 伤害，并在眩晕持续时间内造成破坏且穿透法术免疫。",
+        "superUpgrade": "超级: 提高 100 伤害，并在眩晕持续时间内造成破坏且穿透法术免疫。",
         "gabenUpgrade": "G 胖: 反弹无限次，但仅会在每个单位上反弹一次。"
     },
     {
@@ -4154,8 +4289,8 @@
         "id": "custom_venomancer_plague_ward",
         "icon": "venomancer_plague_ward",
         "tags": [
-            "summons",
-            "spam"
+            "spam",
+            "summons"
         ],
         "categories": [
             "技能: 点目标",
@@ -4178,7 +4313,7 @@
             22,
             26
         ],
-        "superUpgrade": "超级: 提高 2.5x 的生命值和基础伤害，冷却时间降低 1.5 秒。每次施放生成 2 守卫。 ",
+        "superUpgrade": "超级: 提高 2.5 x 生命值与基础伤害，-1 秒冷却时间。每次施放生成 2 守卫。 ",
         "gabenUpgrade": "G 胖: 瘟疫守卫获得施法者法术的基本被动效果。"
     },
     {
@@ -4186,9 +4321,9 @@
         "id": "custom_viper_poison_attack",
         "icon": "viper_poison_attack",
         "tags": [
+            "attackModifier",
             "attackRange",
-            "damageAmplification",
-            "attackModifier"
+            "damageAmplification"
         ],
         "categories": [
             "技能: 自动施放",
@@ -4220,9 +4355,9 @@
         "id": "custom_visage_grave_chill",
         "icon": "visage_grave_chill",
         "tags": [
-            "summons",
             "attackSpeed",
-            "mobility"
+            "mobility",
+            "summons"
         ],
         "categories": [
             "技能: 单位目标",
@@ -4252,10 +4387,10 @@
         "id": "custom_visage_summon_familiars",
         "icon": "visage_summon_familiars",
         "tags": [
-            "summons",
-            "ultimate",
+            "attackDamage",
             "stun",
-            "attackDamage"
+            "summons",
+            "ultimate"
         ],
         "categories": [
             "技能: 无目标"
@@ -4286,8 +4421,8 @@
         "id": "custom_void_spirit_dissimilate",
         "icon": "void_spirit_dissimilate",
         "tags": [
-            "mobility",
-            "magicDamage"
+            "magicDamage",
+            "mobility"
         ],
         "categories": [
             "技能: 无目标",
@@ -4318,9 +4453,9 @@
         "id": "custom_warlock_chaotic_offering",
         "icon": "warlock_rain_of_chaos",
         "tags": [
-            "ultimate",
+            "stun",
             "summons",
-            "stun"
+            "ultimate"
         ],
         "categories": [
             "技能: 点目标",
@@ -4353,8 +4488,8 @@
         "id": "custom_windrunner_focusfire",
         "icon": "windrunner_focusfire",
         "tags": [
-            "ultimate",
-            "attackSpeed"
+            "attackSpeed",
+            "ultimate"
         ],
         "categories": [
             "技能: 单位目标",
@@ -4417,8 +4552,8 @@
         "id": "custom_winter_wyvern_cold_embrace",
         "icon": "winter_wyvern_cold_embrace",
         "tags": [
-            "healing",
             "buff",
+            "healing",
             "magicDamage",
             "stun"
         ],
@@ -4481,9 +4616,10 @@
         "id": "custom_zuus_arc_lightning",
         "icon": "zuus_arc_lightning",
         "tags": [
+            "damageAmplification",
+            "lifesteal",
             "magicDamage",
-            "spam",
-            "damageAmplification"
+            "spam"
         ],
         "categories": [
             "技能: 单位目标",
@@ -4503,7 +4639,7 @@
             80
         ],
         "superUpgrade": "超级: 伤害提高 110。",
-        "gabenUpgrade": "G 胖: 提供永恒遗物。"
+        "gabenUpgrade": "G 胖: 提供 20% 法术加强与 20% 法术吸血。"
     },
     {
         "name": "静电场",
@@ -4511,8 +4647,8 @@
         "icon": "zuus_static_field",
         "tags": [
             "magicDamage",
-            "spam",
-            "passive"
+            "passive",
+            "spam"
         ],
         "categories": [
             "技能: 被动",
@@ -4535,8 +4671,8 @@
         "id": "dark_seer_vacuum",
         "icon": "dark_seer_vacuum",
         "tags": [
-            "magicDamage",
             "displacement",
+            "magicDamage",
             "stun"
         ],
         "categories": [
@@ -4596,8 +4732,37 @@
         "manaCost": [
             100
         ],
-        "superUpgrade": "超级: 在星破天惊期间获得法术免疫。提供黯灭。",
-        "gabenUpgrade": "G 胖: 星破天惊现有 2 充能。+150 挥击和撞击范围。"
+        "superUpgrade": "超级: 星破天惊现有 2 充能。+150 挥击和撞击范围。在星破天惊期间获得法术免疫。",
+        "gabenUpgrade": "G 胖: 每次攻击增加一层持续 5 秒的 -1 护甲减益叠加（可净化）。每次叠加均会刷新持续时间。"
+    },
+    {
+        "name": "暗影波",
+        "id": "dazzle_shadow_wave",
+        "icon": "dazzle_shadow_wave",
+        "tags": [],
+        "categories": [
+            "技能: 单位目标",
+            "伤害类型: 物理",
+            "无视技能免疫: 是"
+        ],
+        "description": "放出一道能量弧，可以瞬间跳跃至目标附近的队友，治疗的同时还将对附近的敌方单位造成伤害。施放暗影波时戴泽必定会享受到治疗效果。",
+        "differences": "",
+        "values": [
+            "伤害范围: 235",
+            "伤害: 60 / 100 / 180",
+            "最大治疗目标数: 4 / 5 / 7",
+            "能量弧跳跃范围: 475"
+        ],
+        "cooldowns": [
+            9,
+            8,
+            6
+        ],
+        "manaCost": [
+            90
+        ],
+        "superUpgrade": "超级: 暗影波妖术会对敌人造成 2 秒影响。",
+        "gabenUpgrade": "G 胖: 提供邪能。"
     },
     {
         "name": "吸魂巫术",
@@ -4622,7 +4787,7 @@
         "manaCost": [
             80
         ],
-        "superUpgrade": "超级: +1 最大生命值虹吸，-20s 充能更新时间，施加 20% 移动速度减缓。",
+        "superUpgrade": "超级: 现在还会每秒汲取 3.5% 目标最大生命值。-20s 充能更新时间，施加 20% 移动速度减缓。",
         "gabenUpgrade": "G 胖: +1 充能。使得敌人被持续虹吸 3 秒并在 1.5 秒内处于恐惧状态。"
     },
     {
@@ -4630,10 +4795,10 @@
         "id": "doom_bringer_infernal_blade",
         "icon": "doom_bringer_infernal_blade",
         "tags": [
-            "magicDamage",
-            "stun",
             "attackModifier",
-            "break"
+            "break",
+            "magicDamage",
+            "stun"
         ],
         "categories": [
             "技能: 自动施放",
@@ -4645,7 +4810,7 @@
         "differences": "默认施加 %break_duration% 秒的破坏效果。",
         "values": [
             "基础烧灼伤害: 20 / 30 / 50",
-            "最大生命值伤害百分比: 1% / 2% / 4%",
+            "最大生命值伤害: 1% / 2% / 4%",
             "烧灼持续时间: 4",
             "眩晕持续时间: 0.6"
         ],
@@ -4665,9 +4830,9 @@
         "id": "dragon_knight_elder_dragon_form",
         "icon": "dragon_knight_elder_dragon_form",
         "tags": [
-            "ultimate",
+            "attackModifier",
             "attackRange",
-            "attackModifier"
+            "ultimate"
         ],
         "categories": [
             "技能: 无目标",
@@ -4683,7 +4848,7 @@
             "额外攻击距离: 0"
         ],
         "cooldowns": [
-            105
+            100
         ],
         "manaCost": [
             50,
@@ -4691,7 +4856,7 @@
             50
         ],
         "superUpgrade": "超级: 提供火球、+15% 溅射伤害且 +100 溅射范围。",
-        "gabenUpgrade": "G 胖: 变身为黑龙。黑龙造成 30 腐蚀伤害，100% Splash Damage, 60 魔法抗性提高且无视地形。"
+        "gabenUpgrade": "G 胖: 变身为黑龙。黑龙造成 30 腐蚀伤害、100% 溅射伤害、60 魔法抗性提高且无视地形。"
     },
     {
         "name": "巨石翻滚",
@@ -4699,8 +4864,8 @@
         "icon": "earth_spirit_rolling_boulder",
         "tags": [
             "mobility",
-            "stun",
-            "stats"
+            "stats",
+            "stun"
         ],
         "categories": [
             "技能: 点目标",
@@ -4735,9 +4900,9 @@
         "id": "elder_titan_earth_splitter",
         "icon": "elder_titan_earth_splitter",
         "tags": [
-            "ultimate",
+            "displacement",
             "magicDamage",
-            "displacement"
+            "ultimate"
         ],
         "categories": [
             "技能: 点目标",
@@ -4749,7 +4914,7 @@
         "differences": "伤害与效果宽度削弱。",
         "values": [
             "减速持续时间: 3 / 4 / 5",
-            "最大生命值伤害百分比: 20% / 30% / 40%",
+            "最大生命值伤害: 20% / 30% / 40%",
             "移动速度减缓: 30% / 40% / 50%",
             "裂地延迟: 2.718",
             "裂地长度: 2400",
@@ -4771,8 +4936,8 @@
         "id": "ember_spirit_sleight_of_fist",
         "icon": "ember_spirit_sleight_of_fist",
         "tags": [
-            "instantAttack",
-            "attackDamage"
+            "attackDamage",
+            "instantAttack"
         ],
         "categories": [
             "技能: 点目标",
@@ -4802,9 +4967,9 @@
         "id": "enchantress_impetus",
         "icon": "enchantress_impetus",
         "tags": [
+            "attackModifier",
             "attackRange",
-            "pureDamage",
-            "attackModifier"
+            "pureDamage"
         ],
         "categories": [
             "技能: 自动施放",
@@ -4832,8 +4997,8 @@
         "id": "enigma_black_hole",
         "icon": "enigma_black_hole",
         "tags": [
-            "stun",
             "pureDamage",
+            "stun",
             "ultimate"
         ],
         "categories": [
@@ -4859,15 +5024,15 @@
             300
         ],
         "superUpgrade": "超级: +100 每秒伤害。",
-        "gabenUpgrade": "G 胖: 提供刷新球（消耗 0 魔法）。"
+        "gabenUpgrade": "G 胖: 施放时刷新所有技能（每回合一次）。"
     },
     {
         "name": "时间锁定",
         "id": "faceless_void_time_lock",
         "icon": "faceless_void_time_lock",
         "tags": [
-            "stun",
-            "passive"
+            "passive",
+            "stun"
         ],
         "categories": [
             "技能: 被动",
@@ -4884,16 +5049,16 @@
         ],
         "cooldowns": [],
         "manaCost": [],
-        "superUpgrade": "超级: 提高 70 伤害加成。",
-        "gabenUpgrade": "G 胖: 每 4s 在 400 AoE 中施加时间锁定。"
+        "superUpgrade": "超级: 提高 70 伤害加成与 4% 触发几率。",
+        "gabenUpgrade": "G 胖: 每 4s 在 450 AoE 中施加时间锁定。"
     },
     {
         "name": "时间漫游",
         "id": "faceless_void_time_walk",
         "icon": "faceless_void_time_walk",
         "tags": [
-            "mobility",
-            "healing"
+            "healing",
+            "mobility"
         ],
         "categories": [
             "技能: 点目标",
@@ -4929,7 +5094,7 @@
             "无视技能免疫: 是",
             "能否驱散: 仅强驱散"
         ],
-        "description": "矮人直升机的攻击会击中目标周围一定范围内的所有敌人，持续一定次数的攻击。只有主要目标会受到致命一击等攻击特效。持续10秒或攻击次数用完。",
+        "description": "矮人直升机的攻击会击中目标周围一定范围内的所有敌人，持续一定次数的攻击。只有主要目标会受到致命一击等攻击特效。持续10秒或攻击次数耗尽。",
         "differences": "",
         "values": [
             "作用范围: 1000",
@@ -4963,10 +5128,10 @@
         "values": [
             "减速持续时间: 0.35",
             "基础攻击力: 75%",
-            "基础攻击距离: 125 / 200 / 350",
             "弹射次数: 2 / 3 / 5",
             "移动速度减缓: 100%",
-            "额外伤害: 50 / 75 / 125"
+            "额外伤害: 50 / 80 / 140",
+            "额外攻击距离: 125 / 200 / 350"
         ],
         "cooldowns": [
             16,
@@ -4979,16 +5144,16 @@
             105
         ],
         "superUpgrade": "超级: +2 爆栗出击弹射，+50% 基础伤害。",
-        "gabenUpgrade": "G 胖: 提供寂灭: +60 伤害，攻击在 7 秒内降低 10 的目标护甲。"
+        "gabenUpgrade": "G 胖: 提供+60 基础伤害，攻击在 7 秒内降低 10 的目标护甲。"
     },
     {
         "name": "狂战士之血",
         "id": "huskar_berserkers_blood",
         "icon": "huskar_berserkers_blood",
         "tags": [
-            "passive",
-            "healing",
             "attackSpeed",
+            "healing",
+            "passive",
             "stats"
         ],
         "categories": [
@@ -5005,15 +5170,15 @@
         "cooldowns": [],
         "manaCost": [],
         "superUpgrade": "超级: +30% 狂战士血液回复。",
-        "gabenUpgrade": "G 胖: 提供魔龙之心: 获得 +45 力量，+250 生命值，以及 +1.6% 最大生命值治疗回复。"
+        "gabenUpgrade": "G 胖: 提供 +60 力量。"
     },
     {
         "name": "冰封路径",
         "id": "jakiro_ice_path",
         "icon": "jakiro_ice_path",
         "tags": [
-            "stun",
-            "magicDamage"
+            "magicDamage",
+            "stun"
         ],
         "categories": [
             "技能: 点目标",
@@ -5029,7 +5194,7 @@
             "作用范围: 150",
             "冻结延迟: 0.5",
             "最大眩晕时间: 1 / 1.5 / 2.5",
-            "路径持续时间: 2.6 / 2.9 / 3.5"
+            "路径持续时间: 3 / 3.5 / 4.5"
         ],
         "cooldowns": [
             18,
@@ -5083,8 +5248,8 @@
         "id": "keeper_of_the_light_chakra_magic",
         "icon": "keeper_of_the_light_chakra_magic",
         "tags": [
-            "manaRegeneration",
-            "buff"
+            "buff",
+            "manaRegeneration"
         ],
         "categories": [
             "技能: 单位目标",
@@ -5112,10 +5277,10 @@
         "id": "kunkka_ghostship",
         "icon": "kunkka_ghostship",
         "tags": [
-            "ultimate",
-            "stun",
+            "buff",
             "magicDamage",
-            "buff"
+            "stun",
+            "ultimate"
         ],
         "categories": [
             "技能: 点目标",
@@ -5182,8 +5347,8 @@
         "id": "kunkka_torrent",
         "icon": "kunkka_torrent",
         "tags": [
-            "stun",
-            "magicDamage"
+            "magicDamage",
+            "stun"
         ],
         "categories": [
             "技能: 点目标",
@@ -5192,12 +5357,12 @@
             "能否驱散: 是"
         ],
         "description": "召唤喷涌的洪流，短暂延迟后，将敌人冲上天，造成伤害、眩晕和减速。",
-        "differences": "",
+        "differences": "延迟缩短。",
         "values": [
             "伤害: 80 / 160 / 320",
             "作用范围: 225",
             "减速持续时间: 1 / 2 / 4",
-            "延迟: 1.6 / 1.6 / 1.6",
+            "延迟: 1",
             "眩晕时间: 1.6",
             "移速减缓: -40%"
         ],
@@ -5217,8 +5382,8 @@
         "id": "legion_commander_moment_of_courage",
         "icon": "legion_commander_moment_of_courage",
         "tags": [
-            "passive",
-            "lifesteal"
+            "lifesteal",
+            "passive"
         ],
         "categories": [
             "技能: 被动"
@@ -5227,12 +5392,12 @@
         "differences": "",
         "values": [
             "反击概率: 25%",
-            "吸血百分比: 55% / 65% / 85%"
+            "吸血: 55% / 65% / 85%"
         ],
         "cooldowns": [
-            1.9,
-            1.5,
-            0.7
+            1,
+            0.8,
+            0.4
         ],
         "manaCost": [],
         "superUpgrade": "超级: +8% 触发几率与 15% 吸血。",
@@ -5243,28 +5408,28 @@
         "id": "legion_commander_press_the_attack",
         "icon": "legion_commander_press_the_attack",
         "tags": [
-            "healing",
             "attackSpeed",
+            "buff",
             "dispel",
-            "magicImmunity",
-            "buff"
+            "healing",
+            "magicImmunity"
         ],
         "categories": [
             "技能: 单位目标",
             "无视技能免疫: 否",
             "能否驱散: 是"
         ],
-        "description": "解除指定友方单位的一切负面效果和控制技能，并提升其攻击速度和生命恢复，持续一定时间。\n\n驱散类型: 强驱散",
-        "differences": "AI: 对生命值在 80% 以下的最近友方施放。",
+        "description": "移除友方目标单位的负面效果和控制技能，并提升其攻击速度和生命恢复，持续一定时间。\n\n驱散类型: 强驱散",
+        "differences": "冷却时间缩短且生命值回复增加。\nAI: 对生命值在 80% 以下的最近友方施放。",
         "values": [
             "持续时间: 5",
             "攻击速度加成: 65 / 90 / 140",
-            "生命恢复: 30 / 40 / 60"
+            "生命恢复: 40 / 50 / 70"
         ],
         "cooldowns": [
-            16,
-            15,
-            13
+            11,
+            10,
+            8
         ],
         "manaCost": [
             110
@@ -5302,8 +5467,8 @@
         "manaCost": [
             70
         ],
-        "superUpgrade": "超级: 生效时施放级别 2 恶魔敕令。",
-        "gabenUpgrade": "G 胖: 提供血精石。"
+        "superUpgrade": "超级: 生效时施放级别 4 恶魔敕令。",
+        "gabenUpgrade": "G 胖: 恶魔敕令现会命中 AOE 中的所有目标。"
     },
     {
         "name": "冰霜魔盾",
@@ -5320,7 +5485,7 @@
             "无视技能免疫: 对友无视，对敌无效",
             "能否驱散: 是"
         ],
-        "description": "施加一个冰霜魔盾环绕目标，减少受到的普通攻击伤害。魔盾开启时，每1秒都会对附近的敌方单位放出冰霜魔法，造成少量伤害和减速。",
+        "description": "施加一个冰霜魔盾环绕目标，减少受到的普通攻击伤害。魔盾生效时，每1秒都会对附近的敌方单位放出冰霜魔法，造成少量伤害和减速。",
         "differences": "",
         "values": [
             "伤害降低: 30% / 40% / 60%",
@@ -5340,15 +5505,15 @@
             130
         ],
         "superUpgrade": "超级: +10%伤害减免并提供+50生命值回复。",
-        "gabenUpgrade": "G 胖: 冰霜魔盾施放希瓦并在生效时提供希瓦光环。"
+        "gabenUpgrade": "G 胖: 每次脉冲在 AOE 内额外造成 6% 目标英雄最大生命的伤害。"
     },
     {
         "name": "盛宴",
         "id": "life_stealer_feast",
         "icon": "life_stealer_feast",
         "tags": [
-            "passive",
-            "lifesteal"
+            "lifesteal",
+            "passive"
         ],
         "categories": [
             "技能: 被动",
@@ -5359,11 +5524,11 @@
         "differences": "",
         "values": [
             "最大生命值伤害: 1.6% / 2.2% / 3.4%",
-            "最大生命值回复百分比: 1.6% / 2.2% / 3.4%"
+            "最大生命值回复: 1.6% / 2.2% / 3.4%"
         ],
         "cooldowns": [],
         "manaCost": [],
-        "superUpgrade": "超级: Grants Open Wounds: rends an enemy unit, granting 50% lifesteal to units attacking that target, and dealing 2% of the target's max health per attack from real heroes.在目标受到 500 伤害后，撕裂伤口将会消退并传染至附近 700 范围内的一名随机敌人身上。",
+        "superUpgrade": "超级: 提供撕裂伤口: 撕裂敌方单位，为攻击此目标的单位提供 50% 的吸血，同时每次攻击造成来自真实英雄的目标最大生命值 2% 伤害。在目标受到 500 伤害后，撕裂伤口将会消退并传染至附近 700 范围内的一名随机敌人身上。",
         "gabenUpgrade": "G 胖: 变成全局光环。"
     },
     {
@@ -5371,10 +5536,10 @@
         "id": "luna_lunar_blessing",
         "icon": "luna_lunar_blessing",
         "tags": [
-            "buff",
             "attackDamage",
-            "passive",
-            "attackSpeed"
+            "attackSpeed",
+            "buff",
+            "passive"
         ],
         "categories": [
             "技能: 被动",
@@ -5397,10 +5562,10 @@
         "id": "lycan_shapeshift",
         "icon": "lycan_shapeshift",
         "tags": [
-            "summons",
             "mobility",
-            "ultimate",
-            "stats"
+            "stats",
+            "summons",
+            "ultimate"
         ],
         "categories": [
             "技能: 无目标",
@@ -5425,7 +5590,7 @@
         "manaCost": [
             100
         ],
-        "superUpgrade": "超级: 提供盛势闪光。跳跃至最靠近后防线的敌方单位。",
+        "superUpgrade": "超级: 将变身单位闪烁至地方后防线（1500 范围），使得 400 AOE 内的敌人在 1.5 秒内陷入恐惧状态。",
         "gabenUpgrade": "G 胖: 对其 600 范围内最近的友方施加饿狼撕咬。"
     },
     {
@@ -5434,8 +5599,8 @@
         "icon": "marci_companion_run",
         "tags": [
             "buff",
-            "stun",
-            "mobility"
+            "mobility",
+            "stun"
         ],
         "categories": [
             "技能: 单位目标",
@@ -5443,7 +5608,7 @@
             "无视技能免疫: 否",
             "能否驱散: 无法驱散"
         ],
-        "description": "以矢量为目标。玛西跃向友方目标单位，选好她要弹离的方向和距离。到达目标后玛西冲向最终的目的地，对区域内敌人造成伤害和眩晕。\n\n友军将获得25% / 30% / 35% / 40%移动速度加成，持续5秒。",
+        "description": "玛西跃向友方目标单位，选好她要弹离的方向和距离。到达目标后玛西冲向最终的目的地，对区域内敌人造成伤害和眩晕。\n\n友军将获得25% / 30% / 35% / 40%移动速度加成，持续5秒。",
         "differences": "AI: 以最近的友方和最远的敌人为目标。",
         "values": [
             "撞击伤害: 75 / 150 / 300",
@@ -5460,7 +5625,7 @@
             80,
             100
         ],
-        "superUpgrade": "超级: 受影响的友方会在 5 秒内提高 40 攻击速度与 10 护甲。+1000 跳跃距离范围。",
+        "superUpgrade": "超级: 为目标和施法者提供 2 秒的技能免疫。+1000 跳跃距离范围。",
         "gabenUpgrade": "G 胖: 被眩晕的敌方单位将被施加 4 级过肩摔。"
     },
     {
@@ -5469,8 +5634,8 @@
         "icon": "marci_grapple",
         "tags": [
             "displacement",
-            "stun",
-            "magicDamage"
+            "magicDamage",
+            "stun"
         ],
         "categories": [
             "技能: 单位目标",
@@ -5502,10 +5667,10 @@
         "id": "marci_guardian",
         "icon": "marci_guardian",
         "tags": [
-            "lifesteal",
-            "magicImmunity",
+            "attackDamage",
             "buff",
-            "attackDamage"
+            "lifesteal",
+            "magicImmunity"
         ],
         "categories": [
             "技能: 单位目标",
@@ -5537,7 +5702,9 @@
         "name": "怒拳破",
         "id": "marci_unleash",
         "icon": "marci_unleash",
-        "tags": [],
+        "tags": [
+            "ultimate"
+        ],
         "categories": [
             "技能: 无目标",
             "伤害类型: 魔法",
@@ -5580,13 +5747,13 @@
             "伤害类型: 魔法",
             "无视技能免疫: 否"
         ],
-        "description": "经过短暂的列队时间，玛尔斯召唤出环绕着战士的竞技场，战士们将阻挡敌人的攻击和动向。竞技场内和接近边缘的敌方英雄将被战矛攻击，受到伤害并被击退。",
+        "description": "经过短暂的列队时间，玛尔斯召唤出环绕着战士的竞技场，战士们将阻挡敌人的攻击和动向。竞技场内的敌方英雄靠近边缘时将被战矛攻击，受到伤害并被击退。",
         "differences": "",
         "values": [
             "作用范围: 550",
             "列队时间: 0.3",
             "战矛伤害: 75 / 150 / 225",
-            "持续时间: 5 / 6 / 7"
+            "持续时间: 3 / 4 / 5"
         ],
         "cooldowns": [
             90
@@ -5597,15 +5764,15 @@
             250
         ],
         "superUpgrade": "超级: 为团队提供 +180 生命值回复。",
-        "gabenUpgrade": "G 胖: 岩浆淌满竞技场的地面，每秒对敌人造成 180 魔法伤害。"
+        "gabenUpgrade": "G 胖: 岩浆淌满竞技场的地面，每秒对敌人造成 300 魔法伤害。"
     },
     {
         "name": "神之谴戒",
         "id": "mars_gods_rebuke",
         "icon": "mars_gods_rebuke",
         "tags": [
-            "instantAttack",
-            "displacement"
+            "displacement",
+            "instantAttack"
         ],
         "categories": [
             "技能: 点目标",
@@ -5636,9 +5803,9 @@
         "id": "medusa_stone_gaze",
         "icon": "medusa_stone_gaze",
         "tags": [
+            "damageAmplification",
             "stun",
-            "ultimate",
-            "damageAmplification"
+            "ultimate"
         ],
         "categories": [
             "技能: 无目标",
@@ -5697,6 +5864,38 @@
         "gabenUpgrade": "G 胖: 波浪形态攻击目标。"
     },
     {
+        "name": "越界",
+        "id": "muerta_pierce_the_veil",
+        "icon": "muerta_pierce_the_veil",
+        "tags": [
+            "ultimate"
+        ],
+        "categories": [
+            "技能: 无目标",
+            "伤害类型: 魔法",
+            "能否驱散: 仅强驱散"
+        ],
+        "description": "琼英碧灵变身，对物理伤害免疫。所有攻击伤害均为魔法伤害。琼英碧灵获得攻击力加成和相位移动状态。\n\n琼英碧灵可以攻击虚无状态下的单位，但对技能免疫单位不会造成伤害。\n\n驱散类型: 弱驱散",
+        "differences": "伤害加成降低。",
+        "values": [
+            "变身所需时间: 0.35",
+            "持续时间: 6 / 7 / 8",
+            "攻击力加成: 30 / 60 / 90"
+        ],
+        "cooldowns": [
+            75,
+            60,
+            45
+        ],
+        "manaCost": [
+            150,
+            250,
+            350
+        ],
+        "superUpgrade": "超级: +100 攻击伤害加成。越界期间获得 200 攻击距离。",
+        "gabenUpgrade": "G 胖: 获得神枪在手。"
+    },
+    {
         "name": "伤残恐惧",
         "id": "night_stalker_crippling_fear",
         "icon": "night_stalker_crippling_fear",
@@ -5710,7 +5909,7 @@
             "能否驱散: 仅强驱散"
         ],
         "description": "暗夜魔王恐吓附近所有敌人，使他们被沉默。效果在夜晚持续更久。",
-        "differences": "总是会向在夜间一样最大化效果。",
+        "differences": "总是会向在夜间一样最大化效果。有 0.1 秒施法前摇而不是立即施放。",
         "values": [
             "光环作用范围: 325",
             "夜晚持续时间: 3 / 4 / 6",
@@ -5743,7 +5942,7 @@
         "differences": "眩晕时间缩短。",
         "values": [
             "反弹伤害: 100%",
-            "反弹持续时间: 2",
+            "反弹持续时间: 1.5",
             "眩晕时间: 0.3 / 0.7 / 1.5"
         ],
         "cooldowns": [
@@ -5799,8 +5998,8 @@
         "icon": "omniknight_purification",
         "tags": [
             "buff",
-            "pureDamage",
-            "healing"
+            "healing",
+            "pureDamage"
         ],
         "categories": [
             "技能: 单位目标",
@@ -5824,17 +6023,17 @@
             125
         ],
         "superUpgrade": "超级: 提供 G 胖的福佑: 目标在同一单位上获得 2 更多洗礼，每次洗礼将会在前一次之后的 3 秒发生。+160 生命值/伤害，-2s 冷却时间。",
-        "gabenUpgrade": "G 胖: 目标还会获得 2s 的守护天使。"
+        "gabenUpgrade": "G 胖: 洗礼还会为目标提供增益，在 2 秒内降低 50% 的传入伤害。"
     },
     {
         "name": "虚妄之诺",
         "id": "oracle_false_promise",
         "icon": "oracle_false_promise",
         "tags": [
-            "ultimate",
-            "healing",
             "buff",
-            "lifesteal"
+            "healing",
+            "lifesteal",
+            "ultimate"
         ],
         "categories": [
             "技能: 单位目标",
@@ -5866,15 +6065,15 @@
         "id": "pangolier_swashbuckle",
         "icon": "pangolier_swashbuckle",
         "tags": [
-            "mobility",
-            "instantAttack"
+            "instantAttack",
+            "mobility"
         ],
         "categories": [
             "技能: 点目标",
             "伤害类型: 物理",
             "无视技能免疫: 是"
         ],
-        "description": "以矢量为目标。石鳞剑士先冲向目标地点，再向指示方向上的所有敌人刺出数剑。\n\n刺剑有几率触发幸运一击。",
+        "description": "石鳞剑士先冲向目标地点，再向指示方向上的所有敌人刺出数剑。\n\n刺剑有几率触发幸运一击。",
         "differences": "",
         "values": [
             "冲刺距离: 850",
@@ -5928,7 +6127,7 @@
             40,
             50
         ],
-        "superUpgrade": "超级: +3s 持续时间。",
+        "superUpgrade": "超级: +3 秒持续时间，幻影突袭期间 +25% 吸血。",
         "gabenUpgrade": "G 胖: 每次幻影突袭都会对 1150 AOE 中的每个单位施放窒碍短匕。"
     },
     {
@@ -5936,10 +6135,10 @@
         "id": "phoenix_icarus_dive",
         "icon": "phoenix_icarus_dive",
         "tags": [
-            "mobility",
-            "stun",
             "magicDamage",
-            "magicImmunity"
+            "magicImmunity",
+            "mobility",
+            "stun"
         ],
         "categories": [
             "技能: 点目标",
@@ -5973,9 +6172,9 @@
         "id": "primal_beast_pulverize",
         "icon": "primal_beast_pulverize",
         "tags": [
-            "ultimate",
+            "magicDamage",
             "stun",
-            "magicDamage"
+            "ultimate"
         ],
         "categories": [
             "技能: 持续施法",
@@ -6033,18 +6232,17 @@
             85,
             75
         ],
-        "superUpgrade": "超级: 踏发动期间提供技能免疫。+25% 攻击伤害乘数，+70 伤害范围，-5 秒冷却时间。",
-        "gabenUpgrade": "G 胖: 提供慧光和散华。触发攻击效果。"
+        "superUpgrade": "超级: 踏期间获得 50% 魔法抗性与 50% 状态抗性。+25% 攻击伤害乘数，+70 伤害范围。",
+        "gabenUpgrade": "G 胖: 触发攻击效果。没有冷却时间。"
     },
     {
         "name": "咤",
         "id": "primal_beast_uproar",
         "icon": "primal_beast_uproar",
         "tags": [
-            "passive",
-            "dispel",
             "attackDamage",
-            "break"
+            "break",
+            "dispel"
         ],
         "categories": [
             "技能: 无目标",
@@ -6116,15 +6314,15 @@
         "cooldowns": [],
         "manaCost": [],
         "superUpgrade": "超级: +100 伤害，+175 范围，+14% 移动减速，还有被影响敌人的 25% 生命值削弱。",
-        "gabenUpgrade": "G 胖: 提供永世法衣。"
+        "gabenUpgrade": "G 胖: 提供 3 级肢解（无需持续施法，但会被眩晕打断）。"
     },
     {
         "name": "等离子场",
         "id": "razor_plasma_field",
         "icon": "razor_plasma_field",
         "tags": [
-            "magicDamage",
-            "displacement"
+            "displacement",
+            "magicDamage"
         ],
         "categories": [
             "技能: 无目标",
@@ -6156,44 +6354,13 @@
         "gabenUpgrade": "G 胖: 扩张时总是造成最大伤害且将敌人推出 40% 的最大距离。"
     },
     {
-        "name": "静电连接",
-        "id": "razor_static_link",
-        "icon": "razor_static_link",
-        "tags": [
-            "attackRange",
-            "attackDamage"
-        ],
-        "categories": [
-            "技能: 单位目标",
-            "无视技能免疫: 是",
-            "能否驱散: 仅强驱散"
-        ],
-        "description": "在雷泽和敌方英雄之间创造静电连接，偷取目标的攻击力并转移给雷泽。雷泽在连接生效时可以边移动边攻击。",
-        "differences": "提高施法者的攻击范围，以使其始终能够在链接中命中目标。",
-        "values": [
-            "攻击力加成持续时间: 9 / 12 / 18",
-            "每秒攻击力吸取: 7 / 12 / 22",
-            "连接持续时间: 5 / 6 / 8"
-        ],
-        "cooldowns": [
-            40,
-            35,
-            25
-        ],
-        "manaCost": [
-            65
-        ],
-        "superUpgrade": "超级: +5 伤害吸取率。链接持续时间为整个回合。",
-        "gabenUpgrade": "G 胖: 以相同吸取速率偷取攻击速度。"
-    },
-    {
         "name": "弱化能流",
         "id": "rubick_fade_bolt",
         "icon": "rubick_fade_bolt",
         "tags": [
-            "magicDamage",
+            "attackDamage",
             "instantAttack",
-            "attackDamage"
+            "magicDamage"
         ],
         "categories": [
             "技能: 单位目标",
@@ -6220,7 +6387,7 @@
             150
         ],
         "superUpgrade": "超级: 对每个被击中的单位施放即时攻击。",
-        "gabenUpgrade": "G 胖: 弱化能流偷取攻击伤害。-4s 冷却时间。"
+        "gabenUpgrade": "G 胖: 弱化能流偷取攻击伤害。-4 秒冷却时间。"
     },
     {
         "name": "掘地穿刺",
@@ -6261,9 +6428,9 @@
         "id": "shredder_reactive_armor",
         "icon": "shredder_reactive_armor",
         "tags": [
+            "healing",
             "passive",
-            "pureDamage",
-            "healing"
+            "pureDamage"
         ],
         "categories": [
             "技能: 被动",
@@ -6287,9 +6454,9 @@
         "id": "slark_shadow_dance",
         "icon": "slark_shadow_dance",
         "tags": [
-            "ultimate",
+            "attackSpeed",
             "healing",
-            "attackSpeed"
+            "ultimate"
         ],
         "categories": [
             "技能: 无目标",
@@ -6447,7 +6614,7 @@
             50,
             70
         ],
-        "superUpgrade": "超级: Increases damage reduction by 20%, damage by 100 and decreases cooldown by 1 second. ",
+        "superUpgrade": "超级: 提高 20%伤害减免、100 伤害并降低 1 秒冷却时间。",
         "gabenUpgrade": "G 胖: 提供 40%几率以在攻击时施放锚击。"
     },
     {
@@ -6471,16 +6638,16 @@
         "cooldowns": [],
         "manaCost": [],
         "superUpgrade": "超级: 提高 40 伤害格挡并降低 100 的伤害阈值。",
-        "gabenUpgrade": "G 胖: 提供刃甲。"
+        "gabenUpgrade": "G 胖: 被动反射 35% 传入伤害。"
     },
     {
         "name": "长大",
         "id": "tiny_grow",
         "icon": "tiny_grow",
         "tags": [
-            "ultimate",
+            "attackDamage",
             "passive",
-            "attackDamage"
+            "ultimate"
         ],
         "categories": [
             "技能: 被动",
@@ -6501,13 +6668,76 @@
         "gabenUpgrade": "G 胖: 提供打嗝外壳: 提供 30% 状态抗性，如果击中英雄则会有 30% 几率使其打嗝并眩晕 2s。"
     },
     {
+        "name": "活体护甲",
+        "id": "treant_living_armor",
+        "icon": "treant_living_armor",
+        "tags": [
+            "buff",
+            "healing"
+        ],
+        "categories": [
+            "技能: 点目标",
+            "无视技能免疫: 是",
+            "能否驱散: 是"
+        ],
+        "description": "将目标英雄或建筑笼罩在保护性外壳中，治疗目标并提供护甲加成。",
+        "differences": "治疗量增加，冷却时间缩短。AI: 优先针对没有增益的目标施放。AI 会首先以最前线的单位为目标，然后是 500 范围内的友方，然后是随机友方。",
+        "values": [
+            "护甲加成: 4 / 6 / 10",
+            "持续时间: 15 / 20 / 30",
+            "每秒治疗量: 4 / 6 / 10"
+        ],
+        "cooldowns": [
+            25,
+            20,
+            10
+        ],
+        "manaCost": [
+            50
+        ],
+        "superUpgrade": "超级: +8 护甲加成，+20 治疗。",
+        "gabenUpgrade": "G 胖: 对全队施放。"
+    },
+    {
+        "name": "疯狂生长",
+        "id": "treant_overgrowth",
+        "icon": "treant_overgrowth",
+        "tags": [
+            "magicDamage",
+            "ultimate"
+        ],
+        "categories": [
+            "技能: 无目标",
+            "伤害类型: 魔法",
+            "无视技能免疫: 是",
+            "能否驱散: 是"
+        ],
+        "description": "在树精卫士周围召唤出疯狂生长的伤害性藤条和枝干，造成伤害并且阻止被缠绕的敌人移动、闪烁、进入隐身或攻击。",
+        "differences": "范围降低至 600。",
+        "values": [
+            "作用范围: 500",
+            "持续时间: 2 / 3 / 4",
+            "每秒伤害: 85"
+        ],
+        "cooldowns": [
+            100
+        ],
+        "manaCost": [
+            200,
+            250,
+            300
+        ],
+        "superUpgrade": "超级: +1 秒持续时间，+100 范围，+100 每秒伤害。",
+        "gabenUpgrade": "G 胖: 施放 10 次 4 级径向自然卷握。"
+    },
+    {
         "name": "战斗专注",
         "id": "troll_warlord_battle_trance",
         "icon": "troll_warlord_battle_trance",
         "tags": [
-            "ultimate",
+            "attackSpeed",
             "lifesteal",
-            "attackSpeed"
+            "ultimate"
         ],
         "categories": [
             "技能: 无目标",
@@ -6537,11 +6767,11 @@
         "id": "troll_warlord_fervor",
         "icon": "troll_warlord_fervor",
         "tags": [
-            "passive",
             "attackSpeed",
-            "stats",
             "dispel",
-            "lifesteal"
+            "lifesteal",
+            "passive",
+            "stats"
         ],
         "categories": [
             "技能: 被动",
@@ -6555,16 +6785,16 @@
         ],
         "cooldowns": [],
         "manaCost": [],
-        "superUpgrade": "超级: 每次叠加 +10 攻击速度。",
-        "gabenUpgrade": "G 胖: 提供撒旦之邪力。"
+        "superUpgrade": "超级: 每次叠加 +15 攻击速度。",
+        "gabenUpgrade": "G 胖: 切换目标时热血战魂不再重置。"
     },
     {
         "name": "摔角行家",
         "id": "tusk_tag_team",
         "icon": "tusk_tag_team",
         "tags": [
-            "buff",
             "attackDamage",
+            "buff",
             "stun"
         ],
         "categories": [
@@ -6598,10 +6828,10 @@
         "id": "undying_flesh_golem",
         "icon": "undying_flesh_golem",
         "tags": [
-            "ultimate",
-            "stats",
             "damageAmplification",
-            "summons"
+            "stats",
+            "summons",
+            "ultimate"
         ],
         "categories": [
             "技能: 无目标",
@@ -6627,8 +6857,8 @@
             125,
             150
         ],
-        "superUpgrade": "超级: +15% 伤害加强，+20% 额外力量，降低 30 秒的血肉傀儡冷却时间，并让施法者在转变期间每次攻击都会生成一个僵尸。生成的僵尸持续 15s。",
-        "gabenUpgrade": "G 胖: 施加秘术师铠甲效果。"
+        "superUpgrade": "超级: +10% 伤害加强，+10% 额外力量，降低 30 秒的血肉傀儡冷却时间，并让施法者在转变期间每次攻击都会生成一个僵尸。生成的僵尸持续 15s。",
+        "gabenUpgrade": "G 胖: 获得 10% 几率在攻击时对目标施放噬魂，且有 10% 几率在受到攻击时对自己施放噬魂。"
     },
     {
         "name": "怒意狂击",
@@ -6685,13 +6915,15 @@
             60
         ],
         "superUpgrade": "超级: +3 超强力量攻击。",
-        "gabenUpgrade": "G 胖: 获得深渊之刃。"
+        "gabenUpgrade": "G 胖: 25% 几率重击 1.5 秒并造成 120 伤害（2.3 秒冷却时间）。"
     },
     {
         "name": "复仇光环",
         "id": "vengefulspirit_command_aura",
         "icon": "vengefulspirit_command_aura",
-        "tags": [],
+        "tags": [
+            "passive"
+        ],
         "categories": [
             "技能: 被动",
             "无视技能免疫: 是"
@@ -6712,7 +6944,8 @@
         "id": "vengefulspirit_nether_swap",
         "icon": "vengefulspirit_nether_swap",
         "tags": [
-            "displacement"
+            "displacement",
+            "ultimate"
         ],
         "categories": [
             "技能: 单位目标",
@@ -6840,16 +7073,16 @@
         "id": "viper_nethertoxin",
         "icon": "viper_nethertoxin",
         "tags": [
-            "silence",
             "break",
-            "magicDamage"
+            "magicDamage",
+            "silence"
         ],
         "categories": [
             "技能: 点目标",
             "伤害类型: 魔法",
             "无视技能免疫: 否"
         ],
-        "description": "冥界亚龙向目标区域施放幽冥剧毒。范围内敌人持续受到伤害，在区域内停留的时间越长，受到的伤害也越高，并且他们的被动技能无效。",
+        "description": "冥界亚龙向目标区域释放幽冥剧毒。范围内敌人持续受到伤害，在区域内停留的时间越长，受到的伤害也越高，并且他们的被动技能无效。",
         "differences": "具有缩短的持续时间。",
         "values": [
             "作用范围: 400",
@@ -6872,10 +7105,10 @@
         "id": "void_spirit_astral_step",
         "icon": "void_spirit_astral_step",
         "tags": [
-            "mobility",
-            "ultimate",
             "instantAttack",
-            "magicDamage"
+            "magicDamage",
+            "mobility",
+            "ultimate"
         ],
         "categories": [
             "技能: 点目标",
@@ -6885,7 +7118,7 @@
         "description": "虚无之灵撕裂现实进入精神位面，再出现在目标地点，对沿途的所有敌人造成伤害。此次攻击将施加一个太虚印记，造成1.25秒减速，然后引爆。",
         "differences": "",
         "values": [
-            "充能时间: 28 / 23 / 18",
+            "基础充能时间: 28 / 23 / 18",
             "太虚印记伤害: 150 / 250 / 350",
             "最大能量点数: 2",
             "移动速度减缓: 40% / 60% / 80%",
@@ -6897,7 +7130,7 @@
         "manaCost": [
             50
         ],
-        "superUpgrade": "超级: 提供法师克星。斩击致命一击有 200% 伤害，且会降低 4 秒的充能恢复时间。",
+        "superUpgrade": "超级: +200% 致命一击几率。降低 4 秒充能恢复时间。",
         "gabenUpgrade": "G 胖: +2 太虚之径充能"
     },
     {
@@ -6940,8 +7173,8 @@
         "id": "winter_wyvern_arctic_burn",
         "icon": "winter_wyvern_arctic_burn",
         "tags": [
-            "attackRange",
-            "attackModifier"
+            "attackModifier",
+            "attackRange"
         ],
         "categories": [
             "技能: 无目标",
@@ -6955,7 +7188,7 @@
             "夜晚视野范围加成: 400",
             "攻击射程加成: 350 / 400 / 500",
             "烧灼持续时间: 5",
-            "生命值烧灼百分比: 6% / 7% / 9%",
+            "生命值烧灼: 6% / 7% / 9%",
             "移动速度减缓: 16% / 24% / 40%",
             "飞行持续时间: 7 / 8 / 10"
         ],
@@ -6977,8 +7210,8 @@
         "tags": [
             "attackSpeed",
             "buff",
-            "healing",
-            "damageAmplification"
+            "damageAmplification",
+            "healing"
         ],
         "categories": [
             "技能: 无目标",
@@ -6990,7 +7223,7 @@
             "技能增强: 8% / 10% / 14%",
             "持续时间: 10",
             "攻击速度: 35 / 60 / 110",
-            "最大生命值恢复百分比: 0.5% / 1% / 2%"
+            "最大生命值恢复: 0.5% / 1% / 2%"
         ],
         "cooldowns": [
             25,
@@ -7020,7 +7253,7 @@
         "values": [
             "对敌移动/攻击速度降低: 15% / 25% / 45%",
             "最远连接距离: 1000",
-            "生命/魔法恢复传递: 60 / 80 / 120",
+            "生命/魔法恢复传递: 60% / 80% / 120%",
             "移动速度提升: 6% / 8% / 12%"
         ],
         "cooldowns": [
@@ -7039,8 +7272,8 @@
         "id": "witch_doctor_paralyzing_cask",
         "icon": "witch_doctor_paralyzing_cask",
         "tags": [
-            "stun",
-            "magicDamage"
+            "magicDamage",
+            "stun"
         ],
         "categories": [
             "技能: 单位目标",
@@ -7048,7 +7281,7 @@
             "无视技能免疫: 否",
             "能否驱散: 无法驱散"
         ],
-        "description": "抛出一个装满麻痹粉末的木桶，在敌方单位之间弹跳，眩晕击中的敌人并造成伤害。每次弹跳造成的伤害将会递增。对非英雄单位造成200%伤害。",
+        "description": "抛出一个装满麻痹粉末的药剂，在敌方单位之间弹跳，眩晕击中的敌人并造成伤害。每次弹跳造成的伤害将会递增。对非英雄单位造成200%伤害。",
         "differences": "具有缩短的眩晕持续时间。",
         "values": [
             "基础伤害: 40",
@@ -7102,6 +7335,6 @@
             135
         ],
         "superUpgrade": "超级: 施法距离提高 1000。提供雷云。雷击现会施加 1 秒眩晕。",
-        "gabenUpgrade": "G 胖: 雷击现会对其施放位置附近 425 范围内的所有敌人造成伤害。"
+        "gabenUpgrade": "G 胖: 提供雷霆 G 胖之怒。"
     }
 ]
