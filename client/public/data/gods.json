@@ -103,7 +103,7 @@
     "universe": "dota",
     "complexity": "easy",
     "unlock": "chest",
-    "unlock_text": "This God is temporarily unlocked by subscribing to PLUS. They are permanently unlocked if they drop from a God chest",
+    "unlock_text": "This God is permanently unlocked by dropping from God chests",
     "health": 200,
     "powers": [
       {
@@ -149,7 +149,7 @@
     "universe": "dota",
     "complexity": "easy",
     "unlock": "chest",
-    "unlock_text": "Why are you even seeing this God?",
+    "unlock_text": "This God is permanently unlocked by dropping from God chests",
     "health": 200,
     "powers": [
       {
@@ -243,7 +243,7 @@
     "universe": "dota",
     "complexity": "intermediate",
     "unlock": "chest",
-    "unlock_text": "God is permanently unlocked by reaching a battlepass level",
+    "unlock_text": "This God is permanently unlocked by dropping from God chests",
     "health": 200,
     "powers": [
       {
@@ -264,7 +264,7 @@
     "universe": "counterStrike",
     "complexity": "easy",
     "unlock": "chest",
-    "unlock_text": "God is permanently unlocked by reaching a battlepass level",
+    "unlock_text": "This God is permanently unlocked by dropping from God chests",
     "health": 200,
     "powers": [
       {
@@ -397,7 +397,7 @@
     "universe": "dota",
     "complexity": "intermediate",
     "unlock": "chest",
-    "unlock_text": "This God is temporarily unlocked by subscribing to PLUS. They are permanently unlocked if they drop from a God chest",
+    "unlock_text": "This God is permanently unlocked by dropping from God chests",
     "health": 200,
     "powers": [
       {
@@ -425,10 +425,12 @@
       {
         "id": "research",
         "name": "Research",
-        "values": [],
+        "values": [
+          "SPELLS TO RE-ROLL: 2"
+        ],
         "type_string": "Passive",
         "type": "passive",
-        "desc": "You cannot re-roll normally. Whenever you purchase a spell, the shop is automatically re-rolled.Original concept by: Pio_Romero"
+        "desc": "You cannot re-roll normally. Whenever you purchase a certain amount of spells, the shop is automatically re-rolled.Original concept by: Pio_Romero"
       },
       {
         "id": "breakthrough",
@@ -449,7 +451,7 @@
     "universe": "dota",
     "complexity": "advanced",
     "unlock": "chest",
-    "unlock_text": "God is permanently unlocked by reaching a battlepass level",
+    "unlock_text": "This God is permanently unlocked by dropping from God chests",
     "health": 200,
     "powers": [
       {
@@ -536,7 +538,7 @@
     "universe": "dota",
     "complexity": "advanced",
     "unlock": "chest",
-    "unlock_text": "Why are you even seeing this God?",
+    "unlock_text": "This God is permanently unlocked by dropping from God chests",
     "health": 200,
     "powers": [
       {
@@ -544,12 +546,12 @@
         "name": "Dev Mode",
         "values": [
           "ABILITY POOL: 20",
-          "OFFERED ABILITIES: 5",
+          "OFFERED ABILITIES: 4",
           "REROLLS: 1"
         ],
         "type_string": "Active (No Target)",
         "type": "noTarget",
-        "desc": "At the beginning of the game the player will be given a choice of 5 banned spells. The chosen ability will have 20 copies added to their pool of spells for the remainder of the game. Anytime this ability is purchased in the shop, it will automatically be attached to the Balance in all things ability.\n        \n        Toggling this ability will change the priority order of the chosen banned spell.Original concept by: ubRtstcl"
+        "desc": "At the beginning of the game the player will be given a choice of 4 banned spells. The chosen ability will have 20 copies added to their pool of spells for the remainder of the game. Anytime this ability is purchased in the shop, it will automatically be attached to the Balance in all things ability.\n        \n        Toggling this ability will change the priority order of the chosen banned spell.Original concept by: ubRtstcl"
       },
       {
         "id": "balanceInAllThings",
@@ -802,7 +804,7 @@
     "universe": "artifact",
     "complexity": "easy",
     "unlock": "plus",
-    "unlock_text": "God is permanently unlocked by reaching a battlepass level",
+    "unlock_text": "This God is temporarily unlocked by subscribing to PLUS. They are permanently unlocked if they drop from a God chest",
     "health": 200,
     "powers": [
       {
@@ -909,10 +911,25 @@
       {
         "id": "roshanTheImmortal",
         "name": "Roshan the Immortal",
-        "values": [],
+        "values": [
+          "BASE ARMOR: 0",
+          "BASE ATTACK SPEED: 100",
+          "BASE ATTACK TIME: 1.8",
+          "BASE DAMAGE: 50",
+          "BASE HEALTH: 600",
+          "BASE MOVESPEED: 270",
+          "EXTRA ARMOR PER ROUND: 1",
+          "EXTRA ATTACK SPEED PER ROUND: 5",
+          "EXTRA DAMAGE PER ROUND: 8",
+          "EXTRA HP PER ROUND: 200",
+          "EXTRA MOVESPEED PER ROUND: 10",
+          "POINTS TO LEVEL ONE: 1",
+          "POINTS TO LEVEL THREE: 7",
+          "POINTS TO LEVEL TWO: 4"
+        ],
         "type_string": "Active (Unit Target)",
         "type": "unitTarget",
-        "desc": "Selected hero is replaced by Roshan. Roshan's stats scale as the game goes on. The unit's spells are completely replaced by Roshan's abilities. The potency of Roshan's abilities is based on the amount of spell points the unit has currently equipped in the slot that corresponds to that ability.\n        \n        Slot 1: Unlocks Spell Block\n        Slot 2: Unlocks Bash\n        Slot 3: Unlocks Slam\n        Slot 4: Unlocks Aegis of the Immortal\n\n        Level One Spell points required: pointsToLevelOne\n        Level Two Spell points required: pointsToLevelTwo\n        Level Three Spell points required: pointsToLevelThree\n     "
+        "desc": "Selected hero is replaced by Roshan. Roshan's stats scale as the game goes on. The unit's spells are completely replaced by Roshan's abilities. The potency of Roshan's abilities is based on the amount of spell points the unit has currently equipped in the slot that corresponds to that ability.\n        \n        Slot 1: Unlocks Spell Block\n        Slot 2: Unlocks Bash\n        Slot 3: Unlocks Slam\n        Slot 4: Unlocks Aegis of the Immortal\n\n        Level One Spell points required: 1\n        Level Two Spell points required: 4\n        Level Three Spell points required: 7\n     "
       }
     ]
   },
@@ -957,7 +974,7 @@
         ],
         "type_string": "Active (Unit Target)",
         "type": "unitTarget",
-        "desc": "Selected unit gains a random rune at the beginning of battle. Each shop upgrade will give more runes.\n        Tier 4 runes: Water (procs when receiving damage), Haste.\n        Tier 3 runes: Invisibility (attacking out of invis deals extra damage), Regeneration (procs when spending mana).\n        Tier 2 runes: Bounty (gives the player extra gold for the following round), Illusion.\n        Tier 1 runes: Arcane, Double Damage.\n\n        Shop Level 1: Your bottle is empty.\n        Shop Level 2: Get a Tier 4 Rune.\n        Shop Level 3: Get a Tier 3 & 4 Rune.\n        Shop Level 4: Get a Tier 2 ,3 & 4 Rune.\n        Shop Level 5: Get a Tier 1, 2, 3 & 4 Rune."
+        "desc": "Selected unit gains a random rune at the beginning of battle. Each shop upgrade will give more runes.\n        Tier 4 runes: , .\n        Tier 3 runes: , .\n        Tier 2 runes: , .\n        Tier 1 runes: , .\n\n        * Water rune procs when receiving damage\n        * Invisibility grants backstab damage.\n        * Regeneration procs when spending mana.\n        * Bounty provides extra gold for the next round\n\n        Shop Level 1: Your bottle is empty.\n        Shop Level 2: Get a Tier 4 Rune.\n        Shop Level 3: Get a Tier 3 & 4 Rune.\n        Shop Level 4: Get a Tier 2 ,3 & 4 Rune.\n        Shop Level 5: Get a Tier 1, 2, 3 & 4 Rune."
       }
     ]
   },
@@ -967,13 +984,27 @@
     "universe": "dota",
     "complexity": "intermediate",
     "unlock": "chest",
-    "unlock_text": "This God is temporarily unlocked by subscribing to PLUS. They are permanently unlocked if they drop from a God chest",
+    "unlock_text": "This God is permanently unlocked by dropping from God chests",
     "health": 200,
     "powers": [
       {
         "id": "giftExchange",
         "name": "Gift Exchange",
-        "values": [],
+        "values": [
+          "#Powers_giftExchange_armor 0.8",
+          "#Powers_giftExchange_attackSpeed 8",
+          "#Powers_giftExchange_cooldownReductionPct 3",
+          "#Powers_giftExchange_damage 6",
+          "#Powers_giftExchange_healthDegen 6",
+          "#Powers_giftExchange_healthPoints 10",
+          "#Powers_giftExchange_healthRegeneration 6",
+          "#Powers_giftExchange_lifestealPct 5",
+          "#Powers_giftExchange_magicResistPct 3",
+          "#Powers_giftExchange_manaRegenerationPct 20",
+          "#Powers_giftExchange_physicalRetaliatePct 5",
+          "#Powers_giftExchange_spellDamagePct 4",
+          "#Powers_giftExchange_spellLifestealPct 6"
+        ],
         "type_string": "Passive",
         "type": "passive",
         "desc": "An automatic gift exchange takes place at the beginning of every battle. The enemy player has a 5 second window to accept or decline.\n\t\n\tThe battle winner receives a Good Gift, and the loser a Bad Gift.\n\t\n\tGifts allow you to choose one of 3 random effects to apply to your lineup.\n\t\n\tSanta Greevil receives gifts even if the enemy declines the exchange. \n    "
@@ -1016,11 +1047,11 @@
         "values": [
           "SELL ABILITY BOUNTY: 1",
           "SHOP ABILITY COST: 2",
-          "SHOP SLOTS: 2 / 3 / 4"
+          "SHOP SLOTS: 2 / 3 / 5"
         ],
         "type_string": "Passive",
         "type": "passive",
-        "desc": "You can only upgrade your shop to level 3, but all spells cost 2 gold (and sell for 1). The amount of spells that appear in your shop is also reduced to 2/3/4."
+        "desc": "You can only upgrade your shop to level 3, but all spells cost 2 gold (and sell for 1). The amount of spells that appear in your shop is also reduced to 2/3/5."
       }
     ]
   },
@@ -1096,7 +1127,7 @@
     "universe": "counterStrike",
     "complexity": "easy",
     "unlock": "plus",
-    "unlock_text": "God is permanently unlocked by reaching a battlepass level",
+    "unlock_text": "This God is temporarily unlocked by subscribing to PLUS. They are permanently unlocked if they drop from a God chest",
     "health": 200,
     "powers": [
       {
@@ -1232,14 +1263,14 @@
     "universe": "dota",
     "complexity": "easy",
     "unlock": "chest",
-    "unlock_text": "God is permanently unlocked by reaching a battlepass level",
+    "unlock_text": "This God is permanently unlocked by dropping from God chests",
     "health": 200,
     "powers": [
       {
         "id": "sorceryVolumeFive",
         "name": "Sorcery For Dummies: Volume 5",
         "values": [
-          "CHANCE: 5%"
+          "CHANCE: 7%"
         ],
         "type_string": "Passive",
         "type": "passive",

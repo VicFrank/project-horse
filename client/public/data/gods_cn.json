@@ -102,8 +102,8 @@
     "name": "无骨阿哈利姆",
     "universe": "dota",
     "complexity": "easy",
-    "unlock": "plus",
-    "unlock_text": "订阅 PLUS 后此神将临时解锁。如果其从神之宝箱中掉落则会永久解锁",
+    "unlock": "chest",
+    "unlock_text": "此神将从神之宝箱中掉落且永久解锁",
     "health": 200,
     "powers": [
       {
@@ -148,8 +148,8 @@
     "name": "酒仙",
     "universe": "dota",
     "complexity": "easy",
-    "unlock": "none",
-    "unlock_text": "为什么你会看到这位神？",
+    "unlock": "chest",
+    "unlock_text": "此神将从神之宝箱中掉落且永久解锁",
     "health": 200,
     "powers": [
       {
@@ -242,8 +242,8 @@
     "name": "旁观者",
     "universe": "dota",
     "complexity": "intermediate",
-    "unlock": "battlepass",
-    "unlock_text": "神将通过达到战场通行证等级而永久解锁",
+    "unlock": "chest",
+    "unlock_text": "此神将从神之宝箱中掉落且永久解锁",
     "health": 200,
     "powers": [
       {
@@ -263,8 +263,8 @@
     "name": "反恐精英",
     "universe": "counterStrike",
     "complexity": "easy",
-    "unlock": "battlepass",
-    "unlock_text": "神将通过达到战场通行证等级而永久解锁",
+    "unlock": "chest",
+    "unlock_text": "此神将从神之宝箱中掉落且永久解锁",
     "health": 200,
     "powers": [
       {
@@ -396,8 +396,8 @@
     "name": "驴子阿哈利姆",
     "universe": "dota",
     "complexity": "intermediate",
-    "unlock": "plus",
-    "unlock_text": "订阅 PLUS 后此神将临时解锁。如果其从神之宝箱中掉落则会永久解锁",
+    "unlock": "chest",
+    "unlock_text": "此神将从神之宝箱中掉落且永久解锁",
     "health": 200,
     "powers": [
       {
@@ -425,10 +425,12 @@
       {
         "id": "research",
         "name": "研究",
-        "values": [],
+        "values": [
+          "重选法术数量: 2"
+        ],
         "type_string": "被动",
         "type": "passive",
-        "desc": "你无法正常重选。购买法术时尚店将自动重选。最初概念: Pio_Romero"
+        "desc": "你无法正常重选。购买一定数量的法术后商店将自动重选。最初概念: Pio_Romero"
       },
       {
         "id": "breakthrough",
@@ -448,8 +450,8 @@
     "name": "虚空假面",
     "universe": "dota",
     "complexity": "advanced",
-    "unlock": "battlepass",
-    "unlock_text": "神将通过达到战场通行证等级而永久解锁",
+    "unlock": "chest",
+    "unlock_text": "此神将从神之宝箱中掉落且永久解锁",
     "health": 200,
     "powers": [
       {
@@ -535,8 +537,8 @@
     "name": "冰蛙",
     "universe": "dota",
     "complexity": "advanced",
-    "unlock": "none",
-    "unlock_text": "为什么你会看到这位神？",
+    "unlock": "chest",
+    "unlock_text": "此神将从神之宝箱中掉落且永久解锁",
     "health": 200,
     "powers": [
       {
@@ -544,12 +546,12 @@
         "name": "开发人员模式",
         "values": [
           "技能池: 20",
-          "提供的技能: 5",
+          "提供的技能: 4",
           "重选: 1"
         ],
         "type_string": "主动（无目标）",
         "type": "noTarget",
-        "desc": "游戏开始时玩家将可从 5 个禁用法术中选择一个。在游戏的剩余时间中，所选择的技能会有 20 份副本被添加至其法术池中。无论何时在商店中购买此技能，其都将被自动附加至平衡一切技能中。\n        \n        切换此技能将改变所选禁用法术的优先级顺序。最初概念: ubRtstcl"
+        "desc": "游戏开始时玩家将可从 4 个禁用法术中选择一个。在游戏的剩余时间中，所选择的技能会有 20 份副本被添加至其法术池中。无论何时在商店中购买此技能，其都将被自动附加至平衡一切技能中。\n        \n        切换此技能将改变所选禁用法术的优先级顺序。最初概念: ubRtstcl"
       },
       {
         "id": "balanceInAllThings",
@@ -801,8 +803,8 @@
     "name": "普雷利克斯",
     "universe": "artifact",
     "complexity": "easy",
-    "unlock": "battlepass",
-    "unlock_text": "神将通过达到战场通行证等级而永久解锁",
+    "unlock": "plus",
+    "unlock_text": "订阅 PLUS 后此神将临时解锁。如果其从神之宝箱中掉落则会永久解锁",
     "health": 200,
     "powers": [
       {
@@ -909,10 +911,25 @@
       {
         "id": "roshanTheImmortal",
         "name": "不朽肉山",
-        "values": [],
+        "values": [
+          "基础伤害: 50",
+          "基础护甲: 0",
+          "基础攻击时间: 1.8",
+          "基础攻击速度: 100",
+          "基础生命值: 600",
+          "基础移动速度: 270",
+          "每回合额外伤害: 8",
+          "每回合额外护甲: 1",
+          "每回合额外攻击速度: 5",
+          "每回合额外生命值: 200",
+          "每回合额外移动速度: 10",
+          "等级 1 点数: 1",
+          "等级 2 点数: 4",
+          "等级 3 点数: 7"
+        ],
         "type_string": "主动（单位目标）",
         "type": "unitTarget",
-        "desc": "所选英雄被替换为肉山。肉山的数据会随着游戏的进行而变化。单位的法术完全被肉山的技能替换。肉山的技能强度根据单位当前在槽中已装备的、与该技能相关的法术点数确定。\n        \n        卡槽 1: 解锁法术抵抗\n        卡槽 2: 解锁重击\n        卡槽 3: 解锁猛击\n        卡槽 4: 解锁不朽之守护\n\n        等级 1 技能所需点数: pointsToLevelOne\n        等级 2 技能所需点数: pointsToLevelTwo\n        等级 3 技能所需点数: pointsToLevelThree\n     "
+        "desc": "所选英雄被替换为肉山。肉山的数据会随着游戏的进行而变化。单位的法术完全被肉山的技能替换。肉山的技能强度根据单位当前在槽中已装备的、与该技能相关的法术点数确定。\n        \n        卡槽 1: 解锁法术抵抗\n        卡槽 2: 解锁重击\n        卡槽 3: 解锁猛击\n        卡槽 4: 解锁不朽之守护\n\n        等级 1 技能所需点数: 1\n        等级 2 技能所需点数: 4\n        等级 3 技能所需点数: 7\n     "
       }
     ]
   },
@@ -957,7 +974,7 @@
         ],
         "type_string": "主动（单位目标）",
         "type": "unitTarget",
-        "desc": "所选单位在战斗开始时获得随机符文。每次商店升级都会提供更多符文。\n        第 4 级符文: 急速之水（承受伤害时触发）。\n        第 3 级符文: 隐形（在隐形状态攻击将造成额外伤害）、再生（消耗法力时触发）。\n        第 2 级符文: 赏金（下一回合为玩家提供额外金币）、幻象。\n        第 1 级符文: 奥术、双重伤害。\n\n        商店级别 1: 瓶子是空的。\n        商店级别 2: 获得第 4 级符文。\n        商店级别 3: 获得第 3 级和第 4 级符文。\n        商店级别 4: 获得第 2 级、第 3 级和第 4 级符文。\n        商店级别 5: 获得第 1 级、第 2 级、第 3 级和第 4 级符文。"
+        "desc": "所选单位在战斗开始时获得随机符文。每次商店升级都会提供更多符文。\n        4 级符文: , 。\n        3 级符文: , 。\n        2 级符文: , 。\n        1 级符文: , 。\n\n        * 承受伤害时触发水之符文\n        * 隐身提供背刺伤害。\n        * 消耗魔法时触发回复。\n        * 赏金将在下一回合提供额外金币\n\n        商店级别 1: 瓶子是空的。\n        商店级别 2: 获得第 4 级符文。\n        商店级别 3: 获得第 3 级和第 4 级符文。\n        商店级别 4: 获得第 2 级、第 3 级和第 4 级符文。\n        商店级别 5: 获得第 1 级、第 2 级、第 3 级和第 4 级符文。"
       }
     ]
   },
@@ -966,14 +983,28 @@
     "name": "圣诞贪魔",
     "universe": "dota",
     "complexity": "intermediate",
-    "unlock": "plus",
-    "unlock_text": "订阅 PLUS 后此神将临时解锁。如果其从神之宝箱中掉落则会永久解锁",
+    "unlock": "chest",
+    "unlock_text": "此神将从神之宝箱中掉落且永久解锁",
     "health": 200,
     "powers": [
       {
         "id": "giftExchange",
         "name": "礼物交换",
-        "values": [],
+        "values": [
+          "#Powers_giftExchange_armor 0.8",
+          "#Powers_giftExchange_attackSpeed 8",
+          "#Powers_giftExchange_cooldownReductionPct 3",
+          "#Powers_giftExchange_damage 6",
+          "#Powers_giftExchange_healthDegen 6",
+          "#Powers_giftExchange_healthPoints 10",
+          "#Powers_giftExchange_healthRegeneration 6",
+          "#Powers_giftExchange_lifestealPct 5",
+          "#Powers_giftExchange_magicResistPct 3",
+          "#Powers_giftExchange_manaRegenerationPct 20",
+          "#Powers_giftExchange_physicalRetaliatePct 5",
+          "#Powers_giftExchange_spellDamagePct 4",
+          "#Powers_giftExchange_spellLifestealPct 6"
+        ],
         "type_string": "被动",
         "type": "passive",
         "desc": "每次战斗开始时会自动交换其礼物。敌方玩家有 5 秒窗口来接受或拒绝。\n\t\n\t战斗胜利者将获得好礼物，失败者将获得坏礼物。\n\t\n\t礼物允许你选择 3 个随机效果之一以用于自己的阵容。\n\t\n\t即使是敌人拒绝交换，圣诞贪魔也会获得礼物。 \n    "
@@ -1016,11 +1047,11 @@
         "values": [
           "出售技能赏金: 1",
           "商店技能成本: 2",
-          "商店空槽 2 / 3 / 4"
+          "商店空槽 2 / 3 / 5"
         ],
         "type_string": "被动",
         "type": "passive",
-        "desc": "你只能将商店升级至 3 级，但所有法术会消耗 2 金币（且出售价格为 1）。出现在商店中的法术数量也将降低至 2/3/4。"
+        "desc": "你只能将商店升级至 3 级，但所有法术会消耗 2 金币（且出售价格为 1）。出现在商店中的法术数量也将降低至 2/3/5。"
       }
     ]
   },
@@ -1056,16 +1087,6 @@
     "unlock_text": "此神将从神之宝箱中掉落且永久解锁",
     "health": 200,
     "powers": [
-      {
-        "id": "techiesRandomizer",
-        "name": "工程师爆破",
-        "values": [
-          "解锁的商店级别: 2 / 4 / 5"
-        ],
-        "type_string": "被动",
-        "type": "passive",
-        "desc": ""
-      },
       {
         "id": "techiesStickyBomb",
         "name": "斯奎的粘性炸弹",
@@ -1105,8 +1126,8 @@
     "name": "恐怖分子",
     "universe": "counterStrike",
     "complexity": "easy",
-    "unlock": "battlepass",
-    "unlock_text": "神将通过达到战场通行证等级而永久解锁",
+    "unlock": "plus",
+    "unlock_text": "订阅 PLUS 后此神将临时解锁。如果其从神之宝箱中掉落则会永久解锁",
     "health": 200,
     "powers": [
       {
@@ -1241,15 +1262,15 @@
     "name": "假期阿哈利姆",
     "universe": "dota",
     "complexity": "easy",
-    "unlock": "battlepass",
-    "unlock_text": "神将通过达到战场通行证等级而永久解锁",
+    "unlock": "chest",
+    "unlock_text": "此神将从神之宝箱中掉落且永久解锁",
     "health": 200,
     "powers": [
       {
         "id": "sorceryVolumeFive",
         "name": "假人巫术: 第五卷",
         "values": [
-          "几率: 5%"
+          "几率: 7%"
         ],
         "type_string": "被动",
         "type": "passive",
