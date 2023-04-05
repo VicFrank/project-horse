@@ -2,8 +2,8 @@
   <div style="max-width: 1200px">
     <h1 class="page-title" v-t="'changelog.page_title'"></h1>
     <div class="pl-3 change-log">
-      <LatestChanges/>
-      <h2>Older Updates</h2>
+      <LatestChanges />
+      <!-- <h2>Older Updates</h2>
       <div v-for="change of changes" :key="change.timestamp">
         <h3 v-if="change.title">{{ change.title }}</h3>
         <h4>
@@ -13,16 +13,16 @@
         <ul>
           <li v-for="(line, i) in change.lines" :key="change.timestamp + i" :class="{bolded: line.isBold}">{{ line.text }}</li>
         </ul>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script>
-import LatestChanges from './components/LatestChanges.vue';
+import LatestChanges from "./components/LatestChanges.vue";
 
 export default {
-  components : {
+  components: {
     LatestChanges,
   },
   data: () => ({
@@ -67,7 +67,7 @@ export default {
               if (line.startsWith("- ")) {
                 line = line.substring(2);
               }
-              return {text: line, isBold};
+              return { text: line, isBold };
             })
             .filter((line) => line.text != "");
 
