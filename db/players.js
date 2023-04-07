@@ -513,7 +513,7 @@ module.exports = {
       const response = await axios.get(
         `http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${apiKey}&steamids=${steamID}`
       );
-      const avatar = response.data.response.players[0].avatarfull;
+      const avatar = response.data.response.players[0]?.avatarfull;
 
       if (avatar && avatar != currentPicture) {
         await query(
