@@ -968,9 +968,9 @@ module.exports = {
    *
    * @param {string} steamID
    * @param {number} placement
-   * @param {number} bonusMultiplier
+   * @param {string} bonus
    */
-  async givePostGameRewards(steamID, placement) {
+  async givePostGameRewards(steamID, placement, bonus) {
     try {
       let hasPlus;
       try {
@@ -989,16 +989,28 @@ module.exports = {
         8: { xp: 5, coins: 4 },
       };
       const isSunday = new Date().getDay() === 0;
-      const shouldDouble = isSunday;
+
+      let goldMultiplier = 1;
+      let xpMultiplier = 1;
+
+      if (bonus === "gold") goldMultiplier = 1.5;
+      else if (bonus === "exp") xpMultiplier = 1.5;
+
+      if (isSunday) {
+        goldMultiplier *= 2;
+        xpMultiplier *= 2;
+      }
+
+      if (hasPlus) {
+        goldMultiplier *= 2;
+      }
 
       const reward = rewards[placement];
       if (!reward) return { xp: 0, coins: 0 };
       let { coins, xp } = reward;
-      if (hasPlus) coins *= 2;
-      if (shouldDouble) {
-        coins *= 2;
-        xp *= 2;
-      }
+
+      coins = Math.round(coins * goldMultiplier);
+      xp = Math.round(xp * xpMultiplier);
 
       await Logs.addTransactionLog(steamID, "game_xp", {
         placement,

@@ -13,14 +13,9 @@ module.exports = {
     const { players, doubledown, isProd, bonus } = postGamePlayerData;
     let { ranked } = postGamePlayerData;
 
-    let goldMultiplier = 1;
-    let xpMultiplier = 1;
     let rankMultiplier = 1;
 
-    if (bonus === "gold") goldMultiplier = 1.5;
-    else if (bonus === "exp") xpMultiplier = 1.5;
-    else if (bonus === "doubledown") rankMultiplier = 1.5;
-
+    if (bonus === "doubledown") rankMultiplier = 1.5;
     if (players.length !== 8) ranked = false;
 
     try {
@@ -29,9 +24,9 @@ module.exports = {
       const currentMMR = player.mmr;
       const currentLadderMMR = player.ladder_mmr;
       let mmrChange = 0;
+      let ladderRatingChange = 0;
       let xpChange = 0;
       let coinsChange = 0;
-      let ladderRatingChange = 0;
 
       if (ranked && players) {
         const winners = players.filter(
@@ -52,7 +47,11 @@ module.exports = {
       }
 
       if (ranked) {
-        const { xp, coins } = await Players.givePostGameRewards(steamID, place);
+        const { xp, coins } = await Players.givePostGameRewards(
+          steamID,
+          place,
+          bonus
+        );
         xpChange = xp;
         coinsChange = coins;
         await Players.addGameQuestProgress(postGamePlayerData);
@@ -61,14 +60,10 @@ module.exports = {
           await Players.addPlayerGodProgress(steamID, god, 1);
         }
 
-        xpChange *= xpMultiplier;
-        coinsChange *= goldMultiplier;
         mmrChange *= rankMultiplier;
         ladderRatingChange *= rankMultiplier;
 
         // round all the numbers down, because we store them as ints
-        xpChange = Math.floor(xpChange);
-        coinsChange = Math.floor(coinsChange);
         mmrChange = Math.floor(mmrChange);
         ladderRatingChange = Math.floor(ladderRatingChange);
       }
