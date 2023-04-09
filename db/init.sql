@@ -97,10 +97,12 @@ CREATE TABLE IF NOT EXISTS game_players (
 CREATE UNIQUE INDEX ON game_players (game_id, steam_id);
 CREATE INDEX idx_game_players_steam_id_fkey ON game_players (steam_id);
 CREATE INDEX idx_game_players_game_id_fkey ON game_players (game_id);
+CREATE INDEX idx_game_players_gods ON game_players (god);
 
 CREATE TABLE IF NOT EXISTS game_player_heroes (
   game_player_hero_id SERIAL PRIMARY KEY,
   game_player_id INTEGER REFERENCES game_players (game_player_id) ON UPDATE CASCADE,
+  pantheon_item_name TEXT REFERENCES items (item_name) ON UPDATE CASCADE,
 
   hero_name TEXT NOT NULL,
   tier INTEGER NOT NULL,
@@ -115,6 +117,7 @@ DROP INDEX IF EXISTS idx_game_player_heroes_hero_name;
 CREATE INDEX idx_game_player_heroes_hero_name ON game_player_heroes (hero_name);
 CREATE INDEX idx_game_player_heroes_game_player_id ON game_player_heroes (game_player_id);
 CREATE INDEX idx_game_player_heroes_game_hero_name ON game_player_heroes (hero_name);
+CREATE INDEX idx_game_player_heroes_pantheon_item_name ON game_player_heroes (pantheon_item_name);
 
 DROP TABLE IF EXISTS gods;
 CREATE TABLE IF NOT EXISTS gods (
@@ -143,6 +146,19 @@ CREATE TABLE IF NOT EXISTS abilities (
   deprecated BOOLEAN DEFAULT FALSE,
   is_ultimate BOOLEAN
 );
+
+CREATE TABLE IF NOT EXISTS items (
+  item_name TEXT PRIMARY KEY,
+  icon TEXT,
+  tier TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS game_player_pantheon_items (
+  game_player_id INTEGER REFERENCES game_players (game_player_id) ON UPDATE CASCADE,
+  item_name TEXT REFERENCES items (item_name) ON UPDATE CASCADE,
+  pick INTEGER
+);
+CREATE INDEX idx_game_player_pantheon_items_game_player_id_fkey ON game_player_pantheon_items (game_player_id);
 
 CREATE TABLE IF NOT EXISTS hero_abilities (
   game_player_hero_id INTEGER REFERENCES game_player_heroes (game_player_hero_id) ON UPDATE CASCADE,

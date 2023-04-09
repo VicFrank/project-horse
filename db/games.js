@@ -11,6 +11,7 @@ module.exports = {
     const { matchID, steamID, username, place, god } = postGamePlayerData;
     const { rounds, endTime, heroes, team, wins, losses } = postGamePlayerData;
     const { players, doubledown, isProd, bonus } = postGamePlayerData;
+    const { pantheonPicks } = postGamePlayerData;
     let { ranked } = postGamePlayerData;
 
     let rankMultiplier = 1;
@@ -84,12 +85,32 @@ module.exports = {
       await Players.modifyMMR(steamID, mmrChange);
       await Players.modifyLadderRating(steamID, ladderRatingChange);
 
+      if (pantheonPicks) {
+        for (const pantheonPick of pantheonPicks) {
+          const { pick, name, tier, icon } = pantheonPick;
+          await this.upsertItem(name, icon, tier);
+          await query(
+            `INSERT INTO game_player_pantheon_items(game_player_id, item_name, pick)
+             VALUES ($1, $2, $3)`,
+            [gamePlayerId, name, pick]
+          );
+        }
+      }
+
       for (const hero of heroes) {
+        let pantheonItemName = null;
+        if (hero.items?.length > 0) {
+          // just assuming the first item is the pantheon item for now
+          const item = hero.items[0];
+          const { name, tier, icon } = item;
+          await this.upsertItem(name, icon, tier);
+          pantheonItemName = name;
+        }
         const { rows: heroRows } = await query(
-          `INSERT INTO game_player_heroes(game_player_id, hero_name, tier)
-           VALUES ($1, $2, $3)
+          `INSERT INTO game_player_heroes(game_player_id, hero_name, tier, pantheon_item_name)
+           VALUES ($1, $2, $3, $4)
            RETURNING *`,
-          [gamePlayerId, hero.name, hero.tier]
+          [gamePlayerId, hero.name, hero.tier, pantheonItemName]
         );
         const heroId = heroRows[0].game_player_hero_id;
 
@@ -213,6 +234,22 @@ module.exports = {
          DO UPDATE SET (is_ultimate, icon) = ($2, $3)
          RETURNING *`,
         [abilityName, isUltimate, icon]
+      );
+      return rows[0];
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async upsertItem(itemName, icon, tier) {
+    try {
+      const { rows } = await query(
+        `INSERT INTO items(item_name, icon, tier)
+         VALUES ($1, $2, $3)
+         ON CONFLICT(item_name)
+         DO UPDATE SET (icon, tier) = ($2, $3)
+         RETURNING *`,
+        [itemName, icon, tier]
       );
       return rows[0];
     } catch (error) {
