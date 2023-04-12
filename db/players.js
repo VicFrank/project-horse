@@ -24,6 +24,7 @@ module.exports = {
         FROM players as p
         JOIN game_players as gp
         USING (steam_id)
+        WHERE hide_data = FALSE
         GROUP BY p.steam_id
         ORDER BY games DESC
         LIMIT $1 OFFSET $2
@@ -46,10 +47,24 @@ module.exports = {
     }
   },
 
+  async getShouldTrackData(steamID) {
+    try {
+      const { rows } = await query(
+        `SELECT hide_data from players WHERE steam_id = $1`,
+        [steamID]
+      );
+      return !rows[0]?.hide_data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async getLeaderboard() {
     try {
       const { rows } = await query(`
-        SELECT mmr, steam_id, username, ladder_mmr from players
+        SELECT mmr, steam_id, username, ladder_mmr
+        FROM players
+        WHERE hide_data = FALSE
         ORDER BY LEAST (ladder_mmr, 4500) DESC, mmr DESC
         LIMIT 100
       `);
@@ -74,7 +89,7 @@ module.exports = {
     try {
       const { rows } = await query(`
         SELECT mmr, steam_id, username from players
-        WHERE ladder_mmr >= 4500
+        WHERE ladder_mmr >= 4500 AND hide_data = FALSE
         ORDER BY LEAST (ladder_mmr, 4500) DESC, mmr DESC
       `);
       // add index to rows

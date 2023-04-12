@@ -8,16 +8,21 @@ module.exports = {
    * When a player is eliminated/wins, upsert the game and add their stats
    */
   async createGamePlayer(postGamePlayerData) {
-    const { matchID, steamID, username, place, god } = postGamePlayerData;
+    let { steamID, username, ranked } = postGamePlayerData;
+    const { matchID, place, god, pantheonPicks } = postGamePlayerData;
     const { rounds, endTime, heroes, team, wins, losses } = postGamePlayerData;
     const { players, doubledown, isProd, bonus } = postGamePlayerData;
-    const { pantheonPicks } = postGamePlayerData;
-    let { ranked } = postGamePlayerData;
 
     let rankMultiplier = 1;
 
     if (bonus === "doubledown") rankMultiplier = 1.5;
     if (players.length !== 8) ranked = false;
+
+    const shouldTrack = await Players.getShouldTrackData(steamID);
+    if (!shouldTrack) {
+      steamID = "donottrack";
+      username = "Do Not Track";
+    }
 
     try {
       await this.upsertGame(matchID, ranked, isProd);
@@ -279,7 +284,8 @@ module.exports = {
             count(game_players.game_player_id) as players
             FROM g
             JOIN game_players USING (game_id)
-            GROUP BY g.created_at, g.duration, g.game_id, g.ranked, g.rounds;`,
+            GROUP BY g.created_at, g.duration, g.game_id, g.ranked, g.rounds
+            ORDER BY created_at DESC`,
         args
       );
       return rows;

@@ -17,7 +17,7 @@
           :badge="player.badge"
           :pips="player.pips"
           :rank="player.rank"
-        />
+        /> 
       </div>
     </template>
     <template v-else>

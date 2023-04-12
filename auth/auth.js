@@ -1,4 +1,5 @@
 const keys = require("../config/keys");
+const Players = require("../db/players");
 
 const reqMatchesKey = (req, key) => {
   const serverKey = req.body.server_key_v3;
@@ -109,5 +110,21 @@ module.exports = {
       return next();
     }
     res.status(401).send({ message: "Not Authorized" });
+  },
+  checkDoNotTrack: async function (req, res, next) {
+    try {
+      const steamID = req.params.steamID;
+      if (!steamID) next();
+      const shouldTrack = await Players.getShouldTrackData(steamID);
+      if (!shouldTrack) {
+        res.status(404).send({ message: "Not Found" });
+        return;
+      }
+      return next();
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({ message: "Error checking Do Not Track" });
+      return;
+    }
   },
 };
