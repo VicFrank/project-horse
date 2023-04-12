@@ -1238,7 +1238,9 @@ module.exports = {
     };
 
     try {
-      const playerGods = await this.getGods(steamID);
+      const playerGods = (await this.getGods(steamID)).filter(
+        (god) => god.owned
+      );
       const godFreqs = await this.getGodFreqs(steamID);
       const rewards = ["gold", "doubledown", "exp"];
 
