@@ -1246,7 +1246,7 @@ module.exports = {
         const godFreq = godFreqs.find((gf) => gf.god === god.god_name);
         god.freq = godFreq ? godFreq.freq : 0;
       }
-      playerGods.sort((a, b) => b.freq - a.freq);
+      playerGods.sort((a, b) => a.freq - b.freq);
       for (const god of playerGods) {
         delete god.freq;
       }
