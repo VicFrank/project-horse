@@ -92,7 +92,8 @@ module.exports = {
 
       if (pantheonPicks) {
         for (const pantheonPick of pantheonPicks) {
-          const { pick, name, tier, icon } = pantheonPick;
+          const { pick, item } = pantheonPick;
+          const { name, tier, icon } = item;
           await this.upsertItem(name, icon, tier);
           await query(
             `INSERT INTO game_player_pantheon_items(game_player_id, item_name, pick)
