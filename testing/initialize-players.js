@@ -299,8 +299,7 @@ async function fillArenaFinisherChests() {
 }
 
 (async () => {
-  // await giveEndOfSeasonRewards();
-  // await ladderReset(2);
-  // await rollup.runGodRollup();
-  await fillArenaFinisherChests();
+  await giveEndOfSeasonRewards();
+  await ladderReset(3);
+  // await fillArenaFinisherChests();
 })();
