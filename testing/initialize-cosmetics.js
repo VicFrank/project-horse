@@ -151,6 +151,14 @@ async function addCosmetics() {
         cost_usd: -1,
         rarity: "Rare",
       },
+      // {
+      //   name: "chest_god_unique_3",
+      //   type: "Chest",
+      //   coins: 10000,
+      //   cost_usd: -1,
+      //   equip_group: "",
+      //   rarity: "Immortal",
+      // },
     ]);
     console.log("Cosmetics initialized");
   } catch (error) {

@@ -113,6 +113,56 @@ module.exports = {
     },
   ],
   /*
+  Contains:
+    Dr Kleiner
+    Medic
+    Primal Beast
+    Axe
+    Keeper of the Light
+    Necrophos
+    Rare: Roshan
+    Very Rare: Spirit Breaker
+    Ultra Rare: Arc Warden
+*/
+  chest_god_unique_3: [
+    {
+      cosmetic: "card_drKleiner",
+      rarity: null,
+    },
+    {
+      cosmetic: "card_medic",
+      rarity: null,
+    },
+    {
+      cosmetic: "card_primalBeast",
+      rarity: null,
+    },
+    {
+      cosmetic: "card_axe",
+      rarity: null,
+    },
+    {
+      cosmetic: "card_keeperOfTheLight",
+      rarity: null,
+    },
+    {
+      cosmetic: "card_necrophos",
+      rarity: null,
+    },
+    {
+      cosmetic: "card_roshan",
+      rarity: "rare",
+    },
+    {
+      cosmetic: "card_spiritBreaker",
+      rarity: "very_rare",
+    },
+    {
+      cosmetic: "card_arcWarden",
+      rarity: "ultra_rare",
+    },
+  ],
+  /*
   Unique Arena Chest I
   Name	Rarity
   -----------

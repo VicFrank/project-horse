@@ -2309,6 +2309,14 @@ module.exports = [
     equip_group: "",
     rarity: "Immortal",
   },
+  {
+    name: "chest_god_unique_3",
+    type: "Chest",
+    coins: 10000,
+    cost_usd: -1,
+    equip_group: "",
+    rarity: "Immortal",
+  },
   /**
    * *************************
    * Other unique drops
