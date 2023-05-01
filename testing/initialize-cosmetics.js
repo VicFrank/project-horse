@@ -96,12 +96,60 @@ async function addCosmetics() {
     console.log("Adding cosmetics...");
     await cosmetics.bulkCreateCosmetics([
       {
-        name: "pack_boxing",
-        type: "Consumable",
-        equip_group: "",
-        coins: 50000,
+        name: "hat_racoon",
+        type: "Avatar Hat",
+        equip_group: "avatar_hat",
+        coins: -1,
         cost_usd: -1,
-        rarity: "Mythical",
+        rarity: "Rare",
+      },
+      {
+        name: "hat_top_hat1",
+        type: "Avatar Hat",
+        equip_group: "avatar_hat",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        name: "hat_top_hat2",
+        type: "Avatar Hat",
+        equip_group: "avatar_hat",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        name: "hat_beak",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        name: "hat_chopsticks",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        name: "hat_tiger_mouth",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        name: "hat_udders",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
       },
     ]);
     console.log("Cosmetics initialized");
@@ -285,9 +333,9 @@ async function addCosmeticsToPlayers() {
 (async function () {
   // await addCosmeticsToPlayers();
   // await setChestRewards();
-  await updateCosmetics();
+  // await updateCosmetics();
   // await initializeEscalatingOdds();
-  // await addCosmetics();
+  await addCosmetics();
   // await initializeUniqueChestDrops("chest_god_unique_1", chest_god_unique_1);
   // await initializeUniqueChestDrops("chest_god_unique_2", chest_god_unique_2);
   // await initializeUniqueChestDrops(
