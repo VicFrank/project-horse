@@ -100,6 +100,30 @@ module.exports = [
     cost_usd: -1,
     rarity: "Mythical",
   },
+  {
+    name: "emote_pack_bp6_1",
+    type: "Consumable",
+    equip_group: "",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Mythical",
+  },
+  {
+    name: "emote_pack_bp6_2",
+    type: "Consumable",
+    equip_group: "",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Mythical",
+  },
+  {
+    name: "emote_pack_bp6_3",
+    type: "Consumable",
+    equip_group: "",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Mythical",
+  },
   /**
    * *************************
    * Cosmetic Packs
@@ -173,6 +197,22 @@ module.exports = [
   },
   {
     name: "sfx_heavy_metal",
+    type: "SFX",
+    equip_group: "sfx_gaben",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Common",
+  },
+  {
+    name: "sfx_opera",
+    type: "SFX",
+    equip_group: "sfx_gaben",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Common",
+  },
+  {
+    name: "sfx_old_wizard",
     type: "SFX",
     equip_group: "sfx_gaben",
     coins: -1,
@@ -258,6 +298,15 @@ module.exports = [
   {
     // Battle Pass Reward
     name: "avatar_tf2",
+    type: "Avatar Frame",
+    equip_group: "avatar_frame",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Arcana",
+  },
+  {
+    // Battle Pass Reward
+    name: "avatar_nature",
     type: "Avatar Frame",
     equip_group: "avatar_frame",
     coins: -1,
@@ -1024,6 +1073,22 @@ module.exports = [
   },
   {
     name: "hat_udders",
+    type: "Avatar Accessory",
+    equip_group: "avatar_accessory",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
+    name: "hat_pothead",
+    type: "Avatar Accessory",
+    equip_group: "avatar_accessory",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
+    name: "hat_bong_hands",
     type: "Avatar Accessory",
     equip_group: "avatar_accessory",
     coins: -1,
@@ -1945,6 +2010,14 @@ module.exports = [
     equip_group: "click_fx",
     rarity: "Immortal",
   },
+  {
+    name: "click_cat",
+    type: "ClickFX",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "click_fx",
+    rarity: "Immortal",
+  },
   /**
    * *************************
    * Spawn FX
@@ -1957,6 +2030,22 @@ module.exports = [
     cost_usd: -1,
     equip_group: "spawn_fx",
     rarity: "Common",
+  },
+  {
+    name: "spawn_nature",
+    type: "SpawnFX",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "spawn_fx",
+    rarity: "Immortal",
+  },
+  {
+    name: "spawn_arcane",
+    type: "SpawnFX",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "spawn_fx",
+    rarity: "Immortal",
   },
   /**
    * *************************
@@ -2239,6 +2328,14 @@ module.exports = [
   },
   {
     name: "terrain_gaben",
+    type: "Terrain",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "terrain",
+    rarity: "Immortal",
+  },
+  {
+    name: "terrain_gambit",
     type: "Terrain",
     coins: -1,
     cost_usd: -1,

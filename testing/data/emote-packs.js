@@ -11,6 +11,9 @@ const packs = {
   emote_pack_tf2_1: ["hat_cigarette", "hat_hard_hat"],
   emote_pack_tf2_2: ["hat_bullet_vest", "hat_scout_hat"],
   emote_pack_tf2_3: ["hat_scout_bat", "hat_demoman_beanie"],
+  emote_pack_bp6_1: ["hat_pothead", "hat_udders"],
+  emote_pack_bp6_2: ["hat_pineapple", "hat_tiger_mouth"],
+  emote_pack_bp6_3: ["hat_bong_hands", "hat_raccoon"],
   pack_year_of_the_rabbit: [
     "chest_basic",
     "chest_basic",
