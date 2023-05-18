@@ -179,6 +179,22 @@ module.exports = [
     cost_usd: -1,
     rarity: "Common",
   },
+  {
+    name: "sfx_opera",
+    type: "SFX",
+    equip_group: "sfx_gaben",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Common",
+  },
+  {
+    name: "sfx_old_wizard",
+    type: "SFX",
+    equip_group: "sfx_gaben",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Common",
+  },
   /**
    * *************************
    * Avatars
@@ -1945,6 +1961,14 @@ module.exports = [
     equip_group: "click_fx",
     rarity: "Immortal",
   },
+  {
+    name: "click_cat",
+    type: "ClickFX",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "click_fx",
+    rarity: "Immortal",
+  },
   /**
    * *************************
    * Spawn FX
@@ -1952,6 +1976,22 @@ module.exports = [
    */
   {
     name: "spawn_default",
+    type: "SpawnFX",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "spawn_fx",
+    rarity: "Common",
+  },
+  {
+    name: "spawn_test",
+    type: "SpawnFX",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "spawn_fx",
+    rarity: "Common",
+  },
+  {
+    name: "spawn_nature",
     type: "SpawnFX",
     coins: -1,
     cost_usd: -1,
