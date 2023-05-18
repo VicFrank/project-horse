@@ -1088,6 +1088,14 @@ module.exports = [
     rarity: "Rare",
   },
   {
+    name: "hat_pineapple",
+    type: "Avatar Accessory",
+    equip_group: "avatar_accessory",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
     name: "hat_bong_hands",
     type: "Avatar Accessory",
     equip_group: "avatar_accessory",
