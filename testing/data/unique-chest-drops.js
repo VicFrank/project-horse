@@ -138,6 +138,10 @@ module.exports = {
       rarity: null,
     },
     {
+      cosmetic: "card_roshan",
+      rarity: null,
+    },
+    {
       cosmetic: "card_axe",
       rarity: null,
     },
@@ -150,15 +154,15 @@ module.exports = {
       rarity: null,
     },
     {
-      cosmetic: "card_roshan",
+      cosmetic: "card_spiritBreaker",
       rarity: "rare",
     },
     {
-      cosmetic: "card_spiritBreaker",
+      cosmetic: "card_arcWarden",
       rarity: "very_rare",
     },
     {
-      cosmetic: "card_arcWarden",
+      cosmetic: "card_invoker",
       rarity: "ultra_rare",
     },
   ],

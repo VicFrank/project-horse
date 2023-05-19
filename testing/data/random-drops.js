@@ -50,6 +50,9 @@ const drops = {
     "hat_super_saiyan",
     "hat_radish_hat",
     "hat_chainsaw_man",
+    "hat_top_hat2",
+    "hat_chopsticks",
+    "hat_pirate_hat",
   ],
 };
 

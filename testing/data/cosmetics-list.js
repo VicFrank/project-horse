@@ -444,6 +444,14 @@ module.exports = [
     rarity: "Rare",
   },
   {
+    name: "hat_pirate_hat",
+    type: "Avatar Hat",
+    equip_group: "avatar_hat",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
     // Chest Drop
     name: "hat_birthday",
     type: "Avatar Hat",
@@ -1142,6 +1150,14 @@ module.exports = [
   },
   {
     name: "bp_s5",
+    type: "purchased_battle_pass",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "",
+    rarity: "Immortal",
+  },
+  {
+    name: "bp_s6",
     type: "purchased_battle_pass",
     coins: -1,
     cost_usd: -1,

@@ -13,7 +13,7 @@ const packs = {
   emote_pack_tf2_3: ["hat_scout_bat", "hat_demoman_beanie"],
   emote_pack_bp6_1: ["hat_pothead", "hat_udders"],
   emote_pack_bp6_2: ["hat_pineapple", "hat_tiger_mouth"],
-  emote_pack_bp6_3: ["hat_bong_hands", "hat_raccoon"],
+  emote_pack_bp6_3: ["hat_beak", "hat_raccoon"],
   pack_year_of_the_rabbit: [
     "chest_basic",
     "chest_basic",
