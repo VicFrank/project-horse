@@ -208,17 +208,17 @@ module.exports = {
         [minLevel, maxLevel, battlePassID]
       );
 
-      const goldChest = await Cosmetics.getCosmeticByName("chest_gold");
+      const doubledown = await Cosmetics.getCosmeticByName("doubledown");
       const basicChest = await Cosmetics.getCosmeticByName("chest_basic");
 
       for (let i = minLevel; i <= maxLevel; i++) {
         // Special rewards at level 200 and 1000
         if (i === 200) {
-          const portalArena = await Cosmetics.getCosmeticByName(
-            "terrain_portal"
+          const chessArena = await Cosmetics.getCosmeticByName(
+            "terrain_gambit"
           );
           cosmetics.push({
-            cosmetic_id: portalArena.cosmetic_id,
+            cosmetic_id: chessArena.cosmetic_id,
             free: true,
             bp_level: i,
             amount: 1,
@@ -232,11 +232,11 @@ module.exports = {
             amount: 1,
           });
         }
-        // After Level 80, every 5 levels alternates between a War Chest (chest_basic) and a Gold Chest
+        // After Level 80, every 5 levels alternates between a War Chest (chest_basic) and a doubledown
         else if (i > 80) {
           if (i % 10 === 0) {
             cosmetics.push({
-              cosmetic_id: goldChest.cosmetic_id,
+              cosmetic_id: doubledown.cosmetic_id,
               free: true,
               bp_level: i,
               amount: 1,

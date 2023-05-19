@@ -100,6 +100,30 @@ module.exports = [
     cost_usd: -1,
     rarity: "Mythical",
   },
+  {
+    name: "emote_pack_bp6_1",
+    type: "Consumable",
+    equip_group: "",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Mythical",
+  },
+  {
+    name: "emote_pack_bp6_2",
+    type: "Consumable",
+    equip_group: "",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Mythical",
+  },
+  {
+    name: "emote_pack_bp6_3",
+    type: "Consumable",
+    equip_group: "",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Mythical",
+  },
   /**
    * *************************
    * Cosmetic Packs
@@ -274,6 +298,15 @@ module.exports = [
   {
     // Battle Pass Reward
     name: "avatar_tf2",
+    type: "Avatar Frame",
+    equip_group: "avatar_frame",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Arcana",
+  },
+  {
+    // Battle Pass Reward
+    name: "avatar_nature",
     type: "Avatar Frame",
     equip_group: "avatar_frame",
     coins: -1,
@@ -1040,6 +1073,30 @@ module.exports = [
   },
   {
     name: "hat_udders",
+    type: "Avatar Accessory",
+    equip_group: "avatar_accessory",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
+    name: "hat_pothead",
+    type: "Avatar Accessory",
+    equip_group: "avatar_accessory",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
+    name: "hat_pineapple",
+    type: "Avatar Accessory",
+    equip_group: "avatar_accessory",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
+    name: "hat_bong_hands",
     type: "Avatar Accessory",
     equip_group: "avatar_accessory",
     coins: -1,
@@ -1983,7 +2040,7 @@ module.exports = [
     rarity: "Common",
   },
   {
-    name: "spawn_test",
+    name: "spawn_default",
     type: "SpawnFX",
     coins: -1,
     cost_usd: -1,
@@ -1992,6 +2049,14 @@ module.exports = [
   },
   {
     name: "spawn_nature",
+    type: "SpawnFX",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "spawn_fx",
+    rarity: "Common",
+  },
+  {
+    name: "spawn_arcane",
     type: "SpawnFX",
     coins: -1,
     cost_usd: -1,
@@ -2279,6 +2344,14 @@ module.exports = [
   },
   {
     name: "terrain_gaben",
+    type: "Terrain",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "terrain",
+    rarity: "Immortal",
+  },
+  {
+    name: "terrain_gambit",
     type: "Terrain",
     coins: -1,
     cost_usd: -1,
