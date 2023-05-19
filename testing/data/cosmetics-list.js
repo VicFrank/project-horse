@@ -2040,12 +2040,20 @@ module.exports = [
     rarity: "Common",
   },
   {
+    name: "spawn_default",
+    type: "SpawnFX",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "spawn_fx",
+    rarity: "Common",
+  },
+  {
     name: "spawn_nature",
     type: "SpawnFX",
     coins: -1,
     cost_usd: -1,
     equip_group: "spawn_fx",
-    rarity: "Immortal",
+    rarity: "Common",
   },
   {
     name: "spawn_arcane",
@@ -2053,7 +2061,7 @@ module.exports = [
     coins: -1,
     cost_usd: -1,
     equip_group: "spawn_fx",
-    rarity: "Immortal",
+    rarity: "Common",
   },
   /**
    * *************************
