@@ -505,7 +505,7 @@
     "sfx_sexy": "Sexy Sound Pack",
     "sfx_heavy_metal": "Heavy Metal Sound Pack",
     "sfx_opera": "Opera Sound Pack",
-    "sfx_old_wizard": "Old Wizard Sound Pack"
+    "sfx_old_wizard": "Scottish Bastard Sound Pack"
   },
   "cosmetic_descriptions": {
     "avatar_gaben": "Ancient Gaben's Avatar Frame",
@@ -519,6 +519,17 @@
     "avatar_pink": "Rare Pink Avatar Frame",
     "avatar_black": "Rare Black Avatar Frame",
     "avatar_bronze": "Rare Bronze Avatar Frame",
+    "hat_pirate_hat": "Pirate Hat",
+    "hat_beak": "Beak",
+    "hat_chopsticks": "Chopsticks",
+    "hat_racoon": "Racoon",
+    "hat_bong_hands": "Bong Hands",
+    "hat_tiger_mouth": "Tiger Mouth",
+    "hat_pineapple": "Pineapple Hat",
+    "hat_top_hat1": "Purple Top Hat",
+    "hat_top_hat2": "Black Top Hat",
+    "hat_udders": "Udders",
+    "hat_pothead": "Pothead",
     "hat_birthday": "Birthday",
     "hat_bucket": "Bucket",
     "hat_cone": "Cone",
@@ -585,6 +596,7 @@
       "Free Daily Gold bonus",
       "Double Post Game Gold",
       "1 extra Double-down (weekly cooldown)",
+      "The ability to mute enemy SFX",
       "Higher gold per day cap",
       "Along with the yearly subscription, you also get:",
       "2 God Chest 2!",
@@ -598,6 +610,7 @@
       "Free Daily Gold bonus",
       "Double Post Game Gold",
       "1 extra Double-down (weekly cooldown)",
+      "The ability to mute enemy SFX",
       "Higher gold per day cap",
       "You can also gain even more rewards with a yearly subscription!"
     ],
@@ -609,6 +622,7 @@
       "Free Daily Gold bonus",
       "Double Post Game Gold",
       "1 extra Double-down (weekly cooldown)",
+      "The ability to mute enemy SFX",
       "Higher gold per day cap",
       "You can also gain even more rewards with a yearly subscription!"
     ],
@@ -620,6 +634,7 @@
       "Free Daily Gold bonus",
       "Double Post Game Gold",
       "1 extra Double-down (weekly cooldown)",
+      "The ability to mute enemy SFX",
       "Higher gold per day cap",
       "You can also gain even more rewards with a yearly subscription!"
     ],
@@ -631,6 +646,7 @@
       "Free Daily Gold bonus",
       "Double Post Game Gold",
       "1 extra Double-down (weekly cooldown)",
+      "The ability to mute enemy SFX",
       "Higher gold per day cap",
       "You can also gain even more rewards with a yearly subscription!"
     ],
@@ -880,7 +896,7 @@
     "sfx_sexy": "Changes the Gaben sound effect to a smooth, sexy voice",
     "sfx_heavy_metal": "Changes sound effects to be metal AF",
     "sfx_opera": "Changes sound effects to be operatic",
-    "sfx_old_wizard": "Changes sound effects to be from a wizend wizard"
+    "sfx_old_wizard": "Changes sound effects to be from a rude scotsman"
   },
   "armory": {
     "page_title": "Armory",

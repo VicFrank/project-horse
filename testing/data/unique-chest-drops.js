@@ -120,9 +120,10 @@ module.exports = {
     Axe
     Keeper of the Light
     Necrophos
-    Rare: Roshan
-    Very Rare: Spirit Breaker
-    Ultra Rare: Arc Warden
+    Roshan
+    Rare: Spirit Breaker
+    Very Rare: Arc Warden
+    Ultra Rare: Invoker
 */
   chest_god_unique_3: [
     {

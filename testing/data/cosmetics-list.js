@@ -452,6 +452,20 @@ module.exports = [
     rarity: "Rare",
   },
   {
+    name: "hat_pothead",
+    type: "Avatar Hat",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
+    name: "hat_pineapple",
+    equip_group: "avatar_hat",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
     // Chest Drop
     name: "hat_birthday",
     type: "Avatar Hat",
@@ -1081,30 +1095,6 @@ module.exports = [
   },
   {
     name: "hat_udders",
-    type: "Avatar Accessory",
-    equip_group: "avatar_accessory",
-    coins: -1,
-    cost_usd: -1,
-    rarity: "Rare",
-  },
-  {
-    name: "hat_pothead",
-    type: "Avatar Accessory",
-    equip_group: "avatar_accessory",
-    coins: -1,
-    cost_usd: -1,
-    rarity: "Rare",
-  },
-  {
-    name: "hat_pineapple",
-    type: "Avatar Accessory",
-    equip_group: "avatar_accessory",
-    coins: -1,
-    cost_usd: -1,
-    rarity: "Rare",
-  },
-  {
-    name: "hat_bong_hands",
     type: "Avatar Accessory",
     equip_group: "avatar_accessory",
     coins: -1,
