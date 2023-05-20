@@ -1,327 +1,244 @@
 <template>
   <div>
     <div v-if="$i18n.locale == 'en'">
-      <h2>Update 5.5 4/5/2023</h2>
-
+      <h2>Update 5/20/2023</h2>
       <h3>Featured</h3>
       <ul>
-        <li>
-          Introducing Pantheon Trials, which provide items for players to equip
-        </li>
-        <li>Added 9 new spells</li>
-        <li>Redesigned Pick screens for Gods and Arenas</li>
-        <li>Click FX can now be seen by all players</li>
-        <li>Gaben’s actual voice is now in the game</li>
+        <li>Season 6 Battlepass released</li>
+        <li>8 New Gods</li>
+        <li>15 additional spells</li>
+        <li>Click FX now emit sounds for all players viewing in the area</li>
+        <li>Mute functionality available through PLUS</li>
+        <li>God & Spell Balance</li>
       </ul>
-
+      <h3>General</h3>
+      <ul>
+        <li>Click FXs now emit sound for all players</li>
+        <li>
+          Reworked player avatars. Removed player rank badge. Now when you hover
+          over the player avatars, they will show:
+        </li>
+        <ul>
+          <li>The selected god abilities</li>
+          <li>
+            Specific information about the God abilities (i.e: spell selected
+            with Icefrog)
+          </li>
+          <li>Player rank badge</li>
+          <li>
+            Player’s Battlepass Level and whether they have purchased the pass
+          </li>
+          <li>Whether the Player has PLUS enabled</li>
+          <li>
+            A button to mute sounds from each player (click FX and Gaben
+            notifications). This is only available with PLUS
+          </li>
+        </ul>
+        <li>
+          Universal Heroes now show up for the attribute they have the highest
+          stat gain in (Bane is random)
+        </li>
+        <li>
+          Fixed a bug that broke hotkeys after choosing items after a pantheon
+          trial
+        </li>
+      </ul>
       <h3>Pantheon Trials</h3>
       <ul>
         <li>
-          At the beginning of the game, 3 elements are randomly selected. On
-          rounds 8, 16, and 24 a Pantheon Trial will occur. Every player will
-          have a choice of 1 hero to send to the Pantheon where they will fight
-          to the death. Players that have higher HP will spawn first. The
-          elements will alter the game state in some way during these rounds,
-          whether it be negative or positive effects for all units. If the round
-          goes on too long, all units will take massive damage per second. Once
-          the round ends, players will select an item that can be equipped to 1
-          hero. The order of selection is based on the results of the Pantheon
-          round. The items available to pick are improved with each Trial. God
-          abilities will NOT work during the Pantheon Trials. Gods will NOT take
-          any damage from these trials.
+          The shopping phase before the Pantheon Round now provides only half
+          gold
         </li>
+        <li>
+          The following spells now have half duration during Pantheon Trials:
+        </li>
+        <ul>
+          <li>Omnislash</li>
+          <li>Pierce the Veil</li>
+          <li>Shadow Dance</li>
+          <li>Tricks of the Trade</li>
+        </ul>
+        <li>Added Dandelion Amulet as a B Tier item</li>
+        <li>Added Defiant Shell as a B Tier item</li>
+        <li>Added Eternal Shroud as an A Tier item</li>
+        <li>Added Harpoon as an A Tier item</li>
+        <li>Added Martyr's Plate as an A Tier item</li>
+        <li>Added Pavise as a B Tier item</li>
+        <li>Added Phylactery as a B Tier item</li>
+        <li>Added Orb of Destruction as B Tier item</li>
+        <li>Added Vampire Fangs as a B Tier item</li>
+        <li>Added Vindicators Axe as a B Tier item</li>
+        <li>Removed Hood of Defiance</li>
+        <li>Ascetic Cap HP regen from 20 to 25</li>
+        <li>Ascetic Cap bonus HP from 250 to 400</li>
+        <li>Blast Rig cooldown from 20s to 8s</li>
+        <li>Eternal Shroud mana restored from 25% to 50%</li>
+        <li>Eternal Shroud Strength from 14 to 18</li>
+        <li>Stormcrafter cooldown from 3s to 2s</li>
       </ul>
-
-      <h3>General</h3>
-      <ul>
-        <li>
-          New God Pick screen includes a chance for Gods to give extra gold, XP,
-          or MMR. The chances that it is a God you don’t pick often is higher.
-          If you random your God, you will receive a free shop re-roll at the
-          beginning of the game.
-        </li>
-        <li>
-          New God Pick screen includes the ability to filter via search (just
-          type like in the Dota client)
-        </li>
-        <li>Reworked Loading screen to include Tips, socials, credits etc.</li>
-        <li>
-          Damage formula changed from 5 + (RoundNumber/3.8) +
-          (NumberOfUnits*RoundNumber/3.8) to 6 + (RoundNumber/3.6) +
-          (NumberOfUnits*RoundNumber/3.6)
-        </li>
-        <li>Gaben model size increased and now has an idle animation</li>
-        <li>Top UI has been slightly reworked</li>
-      </ul>
-
-      <h3>Store</h3>
-      <ul>
-        <li>
-          Added Punch Out! Bundle which includes the new Punch Out Arena, Punch
-          Out Click FX and 2 War Chests. This Bundle will be available for 2
-          weeks.
-        </li>
-        <li>Click FX can now be seen by all players</li>
-        <li>
-          Added a new cosmetic type called Spawn FX that creates a particle
-          effect/sound when units are spawning on the board. A basic spawn
-          effect has been instituted for all players.
-        </li>
-        <li>Added Darkness Spawn FX to Store</li>
-        <li>War Chests cost from 1500 to 2000 gold</li>
-        <li>
-          War Chests odds changed: (XP from 27% to 20%, Avatar Border and Hats
-          from 22% to 27.5% each, Finisher FX from 17% to 15%, Arena from 12% to
-          10%)
-        </li>
-        <li>
-          Fixed the long standing bug where the game technically started on
-          round 2. First 3 bodies have been moved up a round to compensate
-        </li>
-        <li>Fixed Ctrl+Click selling from breaking hotkeys</li>
-      </ul>
-
-      <h3>Spells</h3>
-      <router-link to="/learn/spells">View all Spells</router-link>
-      <ul>
-        <li>Added Rebound</li>
-        <li>Added Frost Arrows</li>
-        <li>Added Guardian Angel</li>
-        <li>Added Living Armor</li>
-        <li>Added Overgrowth</li>
-        <li>Added Pierce the Veil</li>
-        <li>Added Primal Roar</li>
-        <li>Added Spirit Siphon</li>
-        <li>Added Shadow Wave</li>
-        <li>Benched Tricks of the Trade</li>
-        <li>Benched Shadow Dance</li>
-        <li>Benched Crippling Fear</li>
-        <li>Benched Ice Path</li>
-        <li>Benched Charge of Darkness</li>
-        <li>Benched Boundless Strike</li>
-        <li>Benched Chaos Strike</li>
-        <li>Benched Searing Arrows</li>
-        <li>Benched Insatiable Hunger</li>
-        <li>Removed items from most abilities</li>
-        <li>
-          Acorn Shot Gaben replaced with: grants +60 base damage, attacks reduce
-          target's armor by 10 for 7 seconds
-        </li>
-        <li>
-          Arc Lightning Gaben replaced with: grants 20% spell amp, and 20% spell
-          lifesteal
-        </li>
-        <li>Arcane Aura Super now also heals team for 25% of mana restored</li>
-        <li>Astral Step Super no longer grants Mage Slayer</li>
-        <li>Berserker's Blood Gaben replaced with: grants 60 strength</li>
-        <li>
-          Blackhole Gaben replaced with: all abilities reset after casting
-          Blackhole (once per round)
-        </li>
-        <li>Blast Off! cast time from 1s to 0.5s</li>
-        <li>Borrowed Time Super from +3s to +2s</li>
-        <li>Burning Barrage Gaben replaced with: grants 2 charges</li>
-        <li>Burning Spear current health cost from 3% to 1.5%</li>
-        <li>Burning Spear damage from 5/10/20 to 7/14/28</li>
-        <li>
-          Chakra Magic Gaben cast range on Blinding Light from 600 to 1000
-        </li>
-        <li>Chakram manacost from 75/125/175 to 75</li>
-        <li>
-          Chemical Rage Gaben replaced with: Chemical Rage now also casts on the
-          closest unit to you
-        </li>
-        <li>
-          Counter Helix Super replaced with: Counter Helix will proc on attacks
-          with independent cooldown; +120 spin damage
-        </li>
-        <li>
-          Counter Helix Gaben replaced with: Counter Helix now applies a
-          stacking debuff to enemies hit by it that causes them to deal 15% less
-          total attack damage to Axe (6s duration). Increases Counter Helix
-          Chance by 10%.
-        </li>
-        <li>Cursed Crown stun radius from 360 to 400</li>
-        <li>Cursed Crown cast range from 600/625/675 to 750</li>
-        <li>Cursed Crown cooldown from 18/16/12 to 16/14/10</li>
-        <li>Decay Super now also grants -1s CDR</li>
-        <li>Decay manacost from 85/90/100 to 50</li>
-        <li>Enchant Totem Gaben replaced with: grants +60 base damage</li>
-        <li>Fervor Super attack speed bonus from 10 to 15</li>
-        <li>
-          Fervor Gaben replaced with: Fervor no longer resets when you switch
-          targets
-        </li>
-        <li>Fiery Soul attack speed from 35/45/65 to 20/30/50</li>
-        <li>Fiend's Grip cast range from 625 to 800</li>
-        <li>
-          Fiends Grip Super now also spawns 2 illusions channeling Fiend's Grip,
-          and Fiend's Grip only stops channeling if both of those are stunned or
-          killed
-        </li>
-        <li>Flesh Golem Super bonus strength amp from 20% to 10%</li>
-        <li>Flesh Golem Super bonus damage amp from 15% to 10%</li>
-        <li>
-          Flesh Golem Gaben replaced with: 10% chance to cast level 4 Soul Rip
-          on target upon attack, and 10% chance to cast level 4 Soul Rip on self
-          upon attack
-        </li>
-        <li>Flesh Heap Gaben replaced with: 2x Strength and 2x damage block</li>
-        <li>
-          Frost Arrows now grants Hypothermia (the Aghs Shard) by default, with
-          the following scaling: burst damage per stack: 30/40/60. Health regen
-          reduction per stack 2/3/5%
-        </li>
-        <li>
-          Frost Arrows Super replaced with regen reduction per stack increased
-          by 4%. +20 base damage
-        </li>
-        <li>
-          Frost Shield Gaben replaced with: deals 6% of target hero's max HP in
-          an AOE per pulse
-        </li>
-        <li>
-          Hand of Gaben Super replaced with: Reduces cooldown by 40s, increases
-          heal by 280 and grants +6 armor to all units affected
-        </li>
-        <li>
-          Hand of Gaben Gaben replaced with: Hard dispels globally. When Hand of
-          Gaben is cast, all summons gain the Martydom ability (unit suicides to
-          cast a 50% value single target Hand of Gaben on low HP heroes)
-        </li>
-        <li>Ice Blast path radius from 275 to 475</li>
-        <li>Ice Blast radius minimum from 375 to 475</li>
-        <li>
-          Inner Beast Super replaced with: grants +20% lifesteal and 15% attack
-          damage bonus to all units
-        </li>
-        <li>
-          Inner Beast Gaben no longer replaces Vlad's Aura with Wraith Pact --
-          instead, it simply summons a Wraith Pact totem
-        </li>
-        <li>
-          Jingu Mastery Gaben soldiers spawn every 2s rather than every 2.5s
-        </li>
-        <li>
-          Kraken Shell Gaben replaced with: passively reflects 35% damage taken
-        </li>
-        <li>
-          Life Break Gaben replaced with: Life Break taunts for 3 seconds. Also
-          grants Gaben's Gauntlets (has the value of 15 Gauntlets of Strength)
-        </li>
-        <li>
-          Life Drain Super channel time to start draining an additional target
-          from 1.5 to 1.0s
-        </li>
-        <li>Life Drain manacost from 125/175/225 to 75/100/125</li>
-        <li>
-          Lightning Bolt Gaben replaced with: Grants Thunder Gaben's Wrath
-          (level 3)
-        </li>
-        <li>Lil Shredder armor reduction per stack from 0.5 to 1</li>
-        <li>Luminosity Gaben lifesteal bonus reduced from 200% to 150%</li>
-        <li>Magic Missile Super bonus damage from 200 to 100</li>
-        <li>Mana Break Super replaced with: Grants Blink Fragment</li>
-        <li>Mirror Image Super replaced with: grants +25 agility</li>
-        <li>Moment of Courage cooldown from 1.9/1.5/0.7 to 1.0/0.8/0.4</li>
-        <li>Multishot Gaben replaced with: Grants level 3 Marksmanship</li>
-        <li>
-          Overpower Gaben replaced with: 25% chance to bash for 1.5 seconds and
-          120 damage (2.3 second cooldown)
-        </li>
-        <li>Phantom Strike Super now also grants +25% bonus lifesteal</li>
-        <li>Plague Wards Super cooldown reduction from 1.5s to 1.0</li>
-        <li>Press the Attack heal from 30/40/60 to 40/50/70</li>
-        <li>Press the Attack cooldown from 16/15/13 to 11/10/8</li>
-        <li>Press the Attack cast range from 700 to 800</li>
-        <li>
-          Pulse Nova Super now grants level 4 Diabolic Edict instead of level 2
-        </li>
-        <li>
-          Pulse Nova Gaben replaced with: Diabolic Edict now hits everything in
-          AOE
-        </li>
-        <li>
-          Purification Gaben replaced with: grants 50% damage reduction for 2s
-        </li>
-        <li>Rage Super bonus duration from 3s to 2s</li>
-        <li>Rage Gaben cooldown reduction from -11s to -12s</li>
-        <li>Rolling Thunder damage from 180/260/340 to 80/120/160</li>
-        <li>
-          Rot Gaben replaced with: Grants level 3 Dismember (does not need to be
-          channeled, but gets interrupted by stuns)
-        </li>
-        <li>
-          Shapeshift Super replaced with: blinks Shapeshift unit to enemy
-          backline (1500 range), fearing enemies in 400 AOE for 1.5 seconds
-        </li>
-        <li>Spear of Mars spear collision size from 125 to 150</li>
-        <li>Spiked Carapace reflect duration from 2 to 1.5s</li>
-        <li>Spirit Bear Gaben Assault Cuirass replaced with Mjolnir</li>
-        <li>
-          Spirit Lance Gaben replaced with: grants 25% CDR and +50 base stat
-        </li>
-        <li>
-          Starbreaker Super replaced with: Starbreaker now has 2 charges. +150
-          swipe and smash radius. Gains spell immunity during Starbreaker.
-        </li>
-        <li>
-          Starbreaker Gaben replaced with: each attack adds a stacking
-          (dispellable) -1 armor debuff for 5 seconds. Each stack refreshes the
-          duration.
-        </li>
-        <li>Static Link continues draining after units die</li>
-        <li>
-          Static Link cast range equal to at least the unit's attack range (or
-          550, if they're lower than 550 attack range)
-        </li>
-        <li>Static Link buff duration from 9/12/18 to 15/16/18</li>
-        <li>Static Link Super no longer grants infinite drain duration</li>
-        <li>
-          Sunray Super replaced with: +1.5% max HP damage, +1.5% max health
-          heal, +25% width to Sunray
-        </li>
-        <li>Time Lock Super now additionally grants +4% proc chance</li>
-        <li>Time Lock Gaben AOE from 400 to 450</li>
-        <li>Torrent delay from 1.6s to 1s</li>
-        <li>
-          Trample Super no longer grants any cooldown reduction or magic
-          immunity
-        </li>
-        <li>
-          Trample Super now additionally grants +50% magic resistance and +50%
-          status resistance during Trample
-        </li>
-        <li>
-          Trample Gaben replaced with: procs attack modifiers and has no
-          cooldown
-        </li>
-        <li>Viscous Nasal Goo cast range from 600 to 800</li>
-        <li>
-          Walrus Punch Super replaced with: Has no mana cost, reduces cooldown
-          by 4s, +0.4s air time, breaks the target for its duration
-        </li>
-        <li>Warcry Armor from 3/6/12 to 4/8/16</li>
-        <li>Warcry Super bonus armor from 5 to 10</li>
-        <li>Warcry AOE from 800 to 1000</li>
-        <li>
-          Warpath Gaben replaced with: +5 to max stacks, and every cast now
-          grants 2 stacks of Warpath
-        </li>
-      </ul>
-
       <h3>Gods</h3>
-      <router-link to="/learn/gods">View all Gods</router-link>
       <ul>
-        <li>Fixed a game crashing bug with Prellex</li>
         <li>
-          Brewmaster Storm Brewling Invis is no longer considered a passive
+          Counter Terrorist Decoy Grenade damage from 35% to 0/30/40/50/60%
         </li>
-        <li>Dr. Kleiner's shop will now auto-reroll at the end of rounds</li>
         <li>
-          Gods like Brewmaster and Roshan now have their skills viewable in the
-          bottom right during shop phase
+          Counter Terrorist Flashbang Shrapnel bonus damage from 15 to
+          0/16/18/20/22
         </li>
+        <li>
+          Counter Terrorist HE Grenade knockback distance from 400 to
+          0/450/500/550/600
+        </li>
+        <li>Counter Terrorist Smoke Grenade from 4 to 0/4/4.5/5/5.5</li>
+        <li>
+          Counter Terrorist Incendiary Grenade DPS from 50 to 0/60/70/80/90
+        </li>
+        <li>
+          Counter Terrorist Riot Shield damage reduction from 50% to
+          0/45/50/55/60%
+        </li>
+        <li>Dr Kleiner permanent int from 3 to 3/3/4/4/5</li>
+        <li>Medic magic immunity buff duration from 1.5 to 1.25s</li>
+        <li>Roshan Slam is now instant cast</li>
+        <li>Roshan Spell Block status resistance from 0/50/50% to 40/60/80%</li>
+        <li>
+          Terrorist Plant Bomb timer from 20/18/16/14/12 to 19/17/15/13/11
+        </li>
+        <li>
+          Terrorist Plant Bomb explosion damage from 80/70/60/50/40% to
+          82/74/66/58/50%
+        </li>
+        <li>Tower God immunity duration from 1.75 to 1.5s</li>
+        <li>
+          Rubick added a new power, Arcane Transference, to change the priority
+          of the spell
+        </li>
+      </ul>
+      <h3>Spells</h3>
+      <ul>
+        <li>
+          There are now 190 total spells in the game (Up from 175. Still
+          filtered to 100 per game)
+        </li>
+        <li>Added Arctic Burn</li>
+        <li>Added Atrophy Aura</li>
+        <li>Added Chaos Strike</li>
+        <li>Added Corrosive Haze</li>
+        <li>Added Coup De Grace</li>
+        <li>Added Feral Impulse</li>
+        <li>Added Grave Chill</li>
+        <li>Added Ice Path</li>
+        <li>Added Insatiable Hunger</li>
+        <li>Added Omnislash</li>
+        <li>Added Poison Attack</li>
+        <li>Added Shadow Dance</li>
+        <li>Added Tricks of the Trade</li>
+        <li>Added Unleash</li>
+        <li>Added Waveform</li>
+        <li>Arctic Burn no longer grants flying movement</li>
+        <li>
+          Arctic Burn Super now additionally causes the Arctic Burn debuff to
+          splash in a 500 AOE
+        </li>
+        <li>
+          Arctic Burn Super now additionally causes caster to heal from all
+          damage dealt by Arctic Burn
+        </li>
+        <li>
+          Arctic Burn Gaben now also grants Arctic Burn to the closest allied
+          unit
+        </li>
+        <li>Blackhole radius from 350 to 380</li>
+        <li>Blackhole Super no longer grants +100 DPS</li>
+        <li>Blackhole Super drops a level 4 Midnight Pulse in the center</li>
+        <li>Blackhole damage from 20/60/100 to 50/100/150</li>
+        <li>Blast Off! no longer silences</li>
+        <li>Blast Off! now stuns for 0.8/1/1.4 seconds</li>
+        <li>Blast Off! Super no longer stuns</li>
+        <li>Blast Off! Super now additionally silences for 4.4 seconds</li>
+        <li>Blast Off! AI now targets most backline unit in range</li>
+        <li>Brain Sap Super no longer applies Enfeeble</li>
+        <li>
+          Brain Sap Gaben now additionally applies a level 2 Enfeeble to all
+          units hit
+        </li>
+        <li>Brain Sap Gaben AOE from 550 to 500</li>
+        <li>Chakra Magic Super CDR from -4s to -3s</li>
+        <li>Chaos Strike lifesteal from 24/36/60 to 20/40/80</li>
+        <li>
+          Corrosive Haze Super replaced with: casts Slithereen Crush in 325 AOE
+          around target, applying Corrosive Haze to every unit hit
+        </li>
+        <li>
+          Corrosive Haze Gaben replaced with: spawns a 600 radius puddle around
+          target, granting 15 armor, 40% status resistance, and 30 HP regen to
+          any allies standing in it
+        </li>
+        <li>
+          Counter Helix changed from 20% proc chance to procs every 4 hits
+        </li>
+        <li>Counter Helix Super now procs every 4 auto attacks as well</li>
+        <li>Counter Helix Gaben no longer grants 10% proc chance</li>
+        <li>
+          Counter Helix Gaben now additionally grants: procs every 3 hits
+          instead of 4
+        </li>
+        <li>Doom Gaben AOE from 325 to 300</li>
+        <li>Doom duration from 7/9/11 to 6/8/10</li>
+        <li>Grave Chill movespeed bonus from 30/40/60 to 25/50/100</li>
+        <li>Grave Chill Super no longer reduces cooldown or disarms</li>
+        <li>Grave Chill Super now grants +5s duration</li>
+        <li>Ice Path stun duration from 1.0/1.5/2.5 to 0.7/1.1/1.9</li>
+        <li>Ice Path path duration from 4.5 to 3</li>
+        <li>
+          Insatiable Hunger Super now replaced with: +30% base damage, +2s
+          duration
+        </li>
+        <li>
+          Insatiable Hunger Gaben now additionally grants you 1.4 BAT (unless
+          caster's is already faster)
+        </li>
+        <li>Kraken Shell damage threshold from 600/550/450 to 600</li>
+        <li>Kraken Shell damage threshold timer from 7s to 5s</li>
+        <li>
+          Life Break Gaben now additionally grants you Spell Immunity for the
+          duration of the taunt
+        </li>
+        <li>Magic Missile Super no longer pierces Spell Immunity</li>
+        <li>Mystic Flare Super now additionally reduces cooldown by 10s</li>
+        <li>Overgrowth radius from 500 to 600</li>
+        <li>Overgrowth Super +1s duration to +2s duration</li>
+        <li>Pierce the Veil duration from 6/7/8 to 4/5/6</li>
+        <li>Pierce the Veil Super now additionally grants +2s duration</li>
+        <li>Plague Wards Super no longer grants 2 wards</li>
+        <li>Plague Wards Super no longer grants CDR</li>
+        <li>Plague Wards Super grants 4x HP and damage instead of 2.5x</li>
+        <li>Press the Attack HP regen from 40/50/70 to 40/60/100</li>
+        <li>Press the Attack movespeed from 10/14/22% to 10/20/40%</li>
+        <li>Press the Attack Super now additionally grants +2s duration</li>
+        <li>Press the Attack Gaben spell immunity from 2s to 3s</li>
+        <li>Primal Roar Gaben replaced with: grants Drums of Slom</li>
+        <li>Reality Rift Super Chaos Bolt no longer pierces Spell Immunity</li>
+        <li>Reality Rift Gaben no longer grants 2x armor reduction</li>
+        <li>Shadow Dance duration from 4/4.25/4.5 to 2/3/4</li>
+        <li>Shadow Dance Super +80 attack speed to +100 attack speed</li>
+        <li>Shadow Dance Gaben no longer grants Depth Shroud</li>
+        <li>
+          Shadow Dance Gaben now grants all Shadow Dance buffs even while not in
+          Shadow Dance
+        </li>
+        <li>
+          Sun Ray Gaben now spawns a level 1 Supernova instead of a level 3
+          Supernova
+        </li>
+        <li>Trample from 35% damage to 40% damage</li>
+        <li>Trample Super from 25% damage to 30%</li>
+        <li>
+          Vampiric Spirit Gaben skeletons stop respawning when caster dies
+        </li>
+        <li>Wave of Terror Super 20% armor and base damage steal to 30%</li>
+        <li>Wave of Terror range from 1400 to 1600</li>
+        <li>Wave of Terror radius from 325 to 40</li>
       </ul>
     </div>
     <div v-if="$i18n.locale == 'cn'">
