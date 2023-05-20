@@ -152,6 +152,10 @@ export default {
       const reward = this.getRewards(level)?.cosmetic_name;
       return reward;
     },
+    getRewardCoins(level) {
+      const reward = this.getRewards(level)?.coins_reward;
+      return reward;
+    },
     getTranslatedItemName(level) {
       const name = this.getRewards(level)?.cosmetic_name;
       const translationString = `cosmetics.${name}`;
@@ -188,7 +192,9 @@ export default {
     },
     getItemImage(level) {
       const cosmeticName = this.getRewardItem(level);
-      if (!cosmeticName) return require("./images/bp_placeholder.png");
+      const coins = this.getRewardCoins(level);
+      if (!cosmeticName && coins) return `/images/cosmetics/drop_gold_200.png`;
+      else if (!cosmeticName) return require("./images/bp_placeholder.png");
       return `/images/cosmetics/${cosmeticName}.png`;
     },
   },

@@ -6,11 +6,7 @@ const {
   veryRareOdds,
   ultraRareOdds,
 } = require("./data/escalating-odds");
-const {
-  chest_god_unique_2,
-  chest_arena_unique_1,
-  chest_finisher_unique_1,
-} = require("./data/unique-chest-drops");
+const { chest_god_unique_3 } = require("./data/unique-chest-drops");
 const players = require("../db/players");
 
 async function initializeCosmetics() {
@@ -456,9 +452,10 @@ async function addCosmeticsToPlayers() {
   // await setChestRewards();
   // await updateCosmetics();
   // await initializeEscalatingOdds();
-  await addCosmetics();
+  // await addCosmetics();
   // await initializeUniqueChestDrops("chest_god_unique_1", chest_god_unique_1);
   // await initializeUniqueChestDrops("chest_god_unique_2", chest_god_unique_2);
+  await initializeUniqueChestDrops("chest_god_unique_3", chest_god_unique_3);
   // await initializeUniqueChestDrops(
   //   "chest_arena_unique_1",
   //   chest_arena_unique_1

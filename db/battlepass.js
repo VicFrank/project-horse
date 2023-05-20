@@ -101,17 +101,19 @@ module.exports = {
         `
         SELECT
           battle_pass_levels.next_level_xp, battle_pass_levels.total_xp, battle_pass_levels.bp_level,
+          battle_pass_levels.coins_reward,
           battle_pass_cosmetic_rewards.amount, battle_pass_cosmetic_rewards.free,
           cosmetics.cosmetic_id, cosmetics.cosmetic_name, cosmetics.rarity
         FROM battle_pass_levels
         LEFT JOIN battle_pass_cosmetic_rewards
         USING (battle_pass_id, bp_level)
-        JOIN cosmetics
+        LEFT JOIN cosmetics
         USING (cosmetic_id)
         WHERE battle_pass_id = $1
         ORDER BY bp_level`,
         [battlePassID]
       );
+      console.log(rows.length);
       return rows;
     } catch (error) {
       throw error;
