@@ -91,62 +91,62 @@ async function addCosmetics() {
   try {
     console.log("Adding cosmetics...");
     await cosmetics.bulkCreateCosmetics([
-      // {
-      //   name: "hat_racoon",
-      //   type: "Avatar Hat",
-      //   equip_group: "avatar_hat",
-      //   coins: -1,
-      //   cost_usd: -1,
-      //   rarity: "Rare",
-      // },
-      // {
-      //   name: "hat_top_hat1",
-      //   type: "Avatar Hat",
-      //   equip_group: "avatar_hat",
-      //   coins: -1,
-      //   cost_usd: -1,
-      //   rarity: "Rare",
-      // },
-      // {
-      //   name: "hat_top_hat2",
-      //   type: "Avatar Hat",
-      //   equip_group: "avatar_hat",
-      //   coins: -1,
-      //   cost_usd: -1,
-      //   rarity: "Rare",
-      // },
-      // {
-      //   name: "hat_beak",
-      //   type: "Avatar Accessory",
-      //   equip_group: "avatar_accessory",
-      //   coins: -1,
-      //   cost_usd: -1,
-      //   rarity: "Rare",
-      // },
-      // {
-      //   name: "hat_chopsticks",
-      //   type: "Avatar Accessory",
-      //   equip_group: "avatar_accessory",
-      //   coins: -1,
-      //   cost_usd: -1,
-      //   rarity: "Rare",
-      // },
-      // {
-      //   name: "hat_tiger_mouth",
-      //   type: "Avatar Accessory",
-      //   equip_group: "avatar_accessory",
-      //   coins: -1,
-      //   cost_usd: -1,
-      //   rarity: "Rare",
-      // },
-      // {
-      //   name: "hat_udders",
-      //   type: "Avatar Accessory",
-      //   equip_group: "avatar_accessory",
-      //   coins: -1,
-      //   cost_usd: -1,
-      //   rarity: "Rare",
-      // },
+      {
+        name: "hat_racoon",
+        type: "Avatar Hat",
+        equip_group: "avatar_hat",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        name: "hat_top_hat1",
+        type: "Avatar Hat",
+        equip_group: "avatar_hat",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        name: "hat_top_hat2",
+        type: "Avatar Hat",
+        equip_group: "avatar_hat",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        name: "hat_beak",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        name: "hat_chopsticks",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        name: "hat_tiger_mouth",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
+      {
+        name: "hat_udders",
+        type: "Avatar Accessory",
+        equip_group: "avatar_accessory",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Rare",
+      },
       {
         name: "hat_pothead",
         type: "Avatar Hat",
@@ -187,16 +187,15 @@ async function addCosmetics() {
         cost_usd: -1,
         rarity: "Mythical",
       },
-      // {
-      //   name: "click_cat",
-      //   type: "ClickFX",
-      //   coins: -1,
-      //   cost_usd: -1,
-      //   equip_group: "click_fx",
-      //   rarity: "Immortal",
-      // },
       {
-        // Battle Pass Reward
+        name: "click_cat",
+        type: "ClickFX",
+        coins: -1,
+        cost_usd: -1,
+        equip_group: "click_fx",
+        rarity: "Immortal",
+      },
+      {
         name: "avatar_nature",
         type: "Avatar Frame",
         equip_group: "avatar_frame",
@@ -204,22 +203,22 @@ async function addCosmetics() {
         cost_usd: -1,
         rarity: "Arcana",
       },
-      // {
-      //   name: "sfx_opera",
-      //   type: "SFX",
-      //   equip_group: "sfx_gaben",
-      //   coins: -1,
-      //   cost_usd: -1,
-      //   rarity: "Common",
-      // },
-      // {
-      //   name: "sfx_old_wizard",
-      //   type: "SFX",
-      //   equip_group: "sfx_gaben",
-      //   coins: -1,
-      //   cost_usd: -1,
-      //   rarity: "Common",
-      // },
+      {
+        name: "sfx_opera",
+        type: "SFX",
+        equip_group: "sfx_gaben",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Common",
+      },
+      {
+        name: "sfx_old_wizard",
+        type: "SFX",
+        equip_group: "sfx_gaben",
+        coins: -1,
+        cost_usd: -1,
+        rarity: "Common",
+      },
       {
         name: "terrain_gambit",
         type: "Terrain",
@@ -228,14 +227,14 @@ async function addCosmetics() {
         equip_group: "terrain",
         rarity: "Immortal",
       },
-      // {
-      //   name: "spawn_nature",
-      //   type: "SpawnFX",
-      //   coins: -1,
-      //   cost_usd: -1,
-      //   equip_group: "spawn_fx",
-      //   rarity: "Immortal",
-      // },
+      {
+        name: "spawn_nature",
+        type: "SpawnFX",
+        coins: -1,
+        cost_usd: -1,
+        equip_group: "spawn_fx",
+        rarity: "Immortal",
+      },
       {
         name: "spawn_arcane",
         type: "SpawnFX",
@@ -452,7 +451,7 @@ async function addCosmeticsToPlayers() {
   // await setChestRewards();
   // await updateCosmetics();
   // await initializeEscalatingOdds();
-  // await addCosmetics();
+  await addCosmetics();
   // await initializeUniqueChestDrops("chest_god_unique_1", chest_god_unique_1);
   // await initializeUniqueChestDrops("chest_god_unique_2", chest_god_unique_2);
   await initializeUniqueChestDrops("chest_god_unique_3", chest_god_unique_3);
