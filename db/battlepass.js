@@ -113,7 +113,6 @@ module.exports = {
         ORDER BY bp_level`,
         [battlePassID]
       );
-      console.log(rows.length);
       return rows;
     } catch (error) {
       throw error;

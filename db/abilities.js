@@ -277,7 +277,6 @@ module.exports = {
   },
   async updateAbility(abilityName, active, deprecated) {
     try {
-      console.log(abilityName, active, deprecated);
       const { rows } = await query(
         `
         UPDATE abilities
@@ -553,7 +552,6 @@ module.exports = {
       `,
         [hours]
       );
-      console.log(rows);
 
       return await addAbilityIcons(rows);
     } catch (error) {

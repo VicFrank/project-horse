@@ -813,21 +813,25 @@ module.exports = {
       );
       if (hasClaimed) throw new Error("You have already claimed this reward.");
 
-      const { cosmetics } = await BattlePasses.getRewardsFromRange(
+      const { cosmetics, coins } = await BattlePasses.getRewardsFromRange(
         level,
         level,
         battle_pass_id
       );
-      if (cosmetics.length === 0)
-        throw new Error("No cosmetics to claim at this level.");
+      if (cosmetics.length === 0 && !coins)
+        throw new Error("No rewards to claim at this level.");
 
-      const { cosmetic_id, free } = cosmetics[0];
-      if (!free) {
-        if (!unlocked)
-          throw new Error(
-            "You must upgrade your Battle Pass to claim this reward."
-          );
+      if (cosmetics.length > 1) {
+        const { cosmetic_id, free } = cosmetics[0];
+        if (!free) {
+          if (!unlocked)
+            throw new Error(
+              "You must upgrade your Battle Pass to claim this reward."
+            );
+        }
+        await this.giveCosmeticByID(steamID, cosmetic_id);
       }
+      await this.modifyCoins(steamID, coins);
 
       const activeBattlePass = await BattlePasses.getActiveBattlePass();
       await this.addPlayerClaimedRewardRow(
@@ -836,7 +840,6 @@ module.exports = {
         level
       );
 
-      await this.giveCosmeticByID(steamID, cosmetic_id);
       return true;
     } catch (error) {
       throw error;
