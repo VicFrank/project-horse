@@ -813,25 +813,31 @@ module.exports = {
       );
       if (hasClaimed) throw new Error("You have already claimed this reward.");
 
-      const { cosmetics, coins } = await BattlePasses.getRewardsFromRange(
+      const { cosmetics, coinRewards } = await BattlePasses.getRewardsFromRange(
         level,
         level,
         battle_pass_id
       );
-      if (cosmetics.length === 0 && !coins)
+      if (cosmetics.length === 0 && coinRewards.length === 0)
         throw new Error("No rewards to claim at this level.");
 
       if (cosmetics.length > 1) {
         const { cosmetic_id, free } = cosmetics[0];
-        if (!free) {
-          if (!unlocked)
+        if (!free && !unlocked) {
             throw new Error(
-              "You must upgrade your Battle Pass to claim this reward."
-            );
+              "You must upgrade your Battle Pass to claim this reward.");
         }
         await this.giveCosmeticByID(steamID, cosmetic_id);
       }
-      await this.modifyCoins(steamID, coins);
+      if (coinRewards.length > 0) {
+        const { coins, free } = coinRewards[0];
+        if (!free && !unlocked) {
+          throw new Error(
+            "You must upgrade your Battle Pass to claim this reward."
+          );
+        }
+        await this.modifyCoins(steamID, coins);
+      }
 
       const activeBattlePass = await BattlePasses.getActiveBattlePass();
       await this.addPlayerClaimedRewardRow(
@@ -852,7 +858,7 @@ module.exports = {
       const { unlocked, battle_pass_id } = await this.getActiveBattlePass(
         steamID
       );
-      const { cosmetics } = await BattlePasses.getRewardsFromRange(
+      const { cosmetics, coinRewards } = await BattlePasses.getRewardsFromRange(
         0,
         battlePass.bp_level,
         battle_pass_id
@@ -878,6 +884,24 @@ module.exports = {
         );
         await this.giveCosmeticByID(steamID, cosmetic_id);
         claimedCosmetics.push(cosmetic);
+      }
+
+      for (const reward of coinRewards) {
+        const { coins, bp_level, free } = reward;
+        if (!free && !unlocked) continue;
+        const hasClaimed = claimedRewards.some(
+          (reward) => reward.bp_level === bp_level
+        );
+        console.log(`hasClaimed: ${hasClaimed}`)
+        if (hasClaimed) continue;
+
+
+        await this.addPlayerClaimedRewardRow(
+          steamID,
+          battlePass.battle_pass_id,
+          bp_level
+        );
+        await this.modifyCoins(steamID, coins);
       }
 
       return claimedCosmetics;

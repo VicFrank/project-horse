@@ -193,13 +193,20 @@ module.exports = {
         battlePassID = activeBattlePass.battle_pass_id;
       }
       const { rows } = await query(
-        `SELECT coins_reward FROM battle_pass_levels
-         WHERE bp_level >= $1 AND bp_level <= $2 AND battle_pass_id = $3`,
+        `SELECT coins_reward, bp_level FROM battle_pass_levels
+         WHERE bp_level >= $1 AND bp_level <= $2 AND battle_pass_id = $3 AND coins_reward > 0`,
         [minLevel, maxLevel, battlePassID]
       );
-      let coins = rows.reduce((acc, cur) => {
-        return acc + cur.coins_reward;
-      }, 0);
+      const coinRewards = []
+      for (const level of rows) {
+        if (level.coins_reward > 0) {
+          coinRewards.push({
+            coins: level.coins_reward,
+            bp_level: level.bp_level,
+            free: level % 5 === 0,
+          })
+        }
+      }
 
       let { rows: cosmetics } = await query(
         `
@@ -210,7 +217,7 @@ module.exports = {
       );
 
       const doubledown = await Cosmetics.getCosmeticByName("doubledown");
-      const basicChest = await Cosmetics.getCosmeticByName("chest_basic");
+      const basicChest = await Cosmetics.getCosmeticByName("chest_basic"); 
 
       for (let i = minLevel; i <= maxLevel; i++) {
         // Special rewards at level 200 and 1000
@@ -252,7 +259,7 @@ module.exports = {
           }
         }
       }
-      return { coins, cosmetics };
+      return { coinRewards, cosmetics };
     } catch (error) {
       throw error;
     }
