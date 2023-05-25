@@ -821,12 +821,13 @@ module.exports = {
       if (cosmetics.length === 0 && coinRewards.length === 0)
         throw new Error("No rewards to claim at this level.");
 
-      if (cosmetics.length > 1) {
+      if (cosmetics.length > 0) {
         const { cosmetic_id, free } = cosmetics[0];
         if (!free && !unlocked) {
             throw new Error(
               "You must upgrade your Battle Pass to claim this reward.");
         }
+        console.log(steamID, cosmetic_id)
         await this.giveCosmeticByID(steamID, cosmetic_id);
       }
       if (coinRewards.length > 0) {
@@ -892,7 +893,6 @@ module.exports = {
         const hasClaimed = claimedRewards.some(
           (reward) => reward.bp_level === bp_level
         );
-        console.log(`hasClaimed: ${hasClaimed}`)
         if (hasClaimed) continue;
 
 
