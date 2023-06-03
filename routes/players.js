@@ -787,6 +787,36 @@ router.post(
   }
 );
 
+router.get("/:steamID/settings", auth.userAuth, async (req, res) => {
+  try {
+    const steamID = req.params.steamID;
+
+    const result = await players.getSettings(steamID);
+    res.status(200).send(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ error: error.message });
+  }
+});
+
+router.post(
+  "/:steamID/settings",
+  auth.userAuth,
+  auth.checkDoNotTrack,
+  async (req, res) => {
+    try {
+      const steamID = req.params.steamID;
+      const settings = JSON.parse(req.body.data);
+
+      const result = await players.setSettings(steamID, settings);
+      res.status(200).send(result);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({ error: error.message });
+    }
+  }
+);
+
 router.get(
   "/leaderboard",
   cache("5 minutes"),

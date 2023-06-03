@@ -824,10 +824,11 @@ module.exports = {
       if (cosmetics.length > 0) {
         const { cosmetic_id, free } = cosmetics[0];
         if (!free && !unlocked) {
-            throw new Error(
-              "You must upgrade your Battle Pass to claim this reward.");
+          throw new Error(
+            "You must upgrade your Battle Pass to claim this reward."
+          );
         }
-        console.log(steamID, cosmetic_id)
+        console.log(steamID, cosmetic_id);
         await this.giveCosmeticByID(steamID, cosmetic_id);
       }
       if (coinRewards.length > 0) {
@@ -894,7 +895,6 @@ module.exports = {
           (reward) => reward.bp_level === bp_level
         );
         if (hasClaimed) continue;
-
 
         await this.addPlayerClaimedRewardRow(
           steamID,
@@ -3374,6 +3374,40 @@ module.exports = {
       );
 
       return true;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getSettings(steamID) {
+    try {
+      const { rows } = await query(
+        `
+        SELECT on_steam_deck FROM players
+        WHERE steam_id = $1
+        `,
+        [steamID]
+      );
+      return rows[0];
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async setSettings(steamID, settings) {
+    try {
+      const { on_steam_deck } = settings;
+      const { rows } = await query(
+        `
+        UPDATE players
+        SET on_steam_deck = $1
+        WHERE steam_id = $2
+        returning on_steam_deck
+        `,
+        [on_steam_deck, steamID]
+      );
+
+      return rows[0];
     } catch (error) {
       throw error;
     }

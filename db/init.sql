@@ -44,6 +44,10 @@ CREATE TABLE IF NOT EXISTS players (
   last_login_quest_claimed TIMESTAMPTZ,
   last_ping TIMESTAMPTZ,
   hide_data BOOLEAN DEFAULT FALSE,
+
+  -- Player Settings
+  on_steam_deck BOOLEAN DEFAULT FALSE,
+
   created_at TIMESTAMPTZ DEFAULT Now()
 );
 CREATE INDEX ix_players_mmr ON players (mmr);
