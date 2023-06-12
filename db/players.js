@@ -508,10 +508,10 @@ module.exports = {
 
       try {
         // do this in the background
-        this.updatePlayerProfilePicture(
-          steamID,
-          existingPlayer.profile_picture
-        );
+        // this.updatePlayerProfilePicture(
+        //   steamID,
+        //   existingPlayer.profile_picture
+        // );
       } catch (error) {
         console.error("Error updating player profile picture: ", error);
         // don't care if this fails, just log it
