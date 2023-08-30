@@ -1,11 +1,6 @@
 <template>
   <footer class="d-flex justify-content-end align-items-center">
     <div class="d-none d-md-flex">
-      <!-- <a
-        href="https://www.youtube.com/user/DotaCinema"
-        target="_blank"
-        class="fa fa-youtube mr-3"
-      ></a> -->
       <a
         href="https://www.twitch.tv/sunsfantv"
         target="_blank"
@@ -31,8 +26,8 @@
         class="fa fa-reddit mr-3"
       ></a>
     </div>
-    {{ $t("credits.copyright") }}
-    <router-link to="/credits" class="float-right ml-3 mr-5">{{
+    <router-link to="/privacy" class="float-right mr-3">Privacy</router-link>
+    <router-link to="/credits" class="float-right mr-5">{{
       $t("credits.our_team")
     }}</router-link>
   </footer>

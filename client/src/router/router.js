@@ -14,11 +14,11 @@ const Tournaments = () => import("../components/pages/tournaments/Tournaments");
 const Admin = () => import("../components/pages/admin/Admin");
 
 const Store = () => import("../components/pages/store/Store");
-const Checkout = () => import("../components/pages/store/Checkout");
-const UserCheckout = () => import("../components/pages/store/UserCheckout");
-const PaymentSuccess = () => import("../components/pages/store/PaymentSuccess");
-const AlipayPayment = () => import("../components/pages/store/AlipayPayment");
-const WeChatPay = () => import("../components/pages/store/WeChatPay");
+// const Checkout = () => import("../components/pages/store/Checkout");
+// const UserCheckout = () => import("../components/pages/store/UserCheckout");
+// const PaymentSuccess = () => import("../components/pages/store/PaymentSuccess");
+// const AlipayPayment = () => import("../components/pages/store/AlipayPayment");
+// const WeChatPay = () => import("../components/pages/store/WeChatPay");
 
 const Games = () => import("../components/pages/games/Games");
 import Game from "../components/pages/games/Game";
@@ -44,6 +44,7 @@ const MyGods = () => import("../components/pages/profile/MyGods");
 const RedemptionCode = () => import("../components/pages/codes/RedemptionCode");
 
 const Leaderboard = () => import("../components/pages/leaderboard/Leaderboard");
+const GDPR = () => import("../components/pages/gdpr/GDPR");
 const PlayerPage = () => import("../components/pages/player/PlayerPage");
 const PlayerGamesList = () =>
   import("../components/pages/player/PlayerGamesList");
@@ -107,6 +108,7 @@ const routes = [
     meta: { requiresAuth: true, requiresAdmin: true },
   },
   { path: "/leaderboard", component: Leaderboard },
+  { path: "/privacy", component: GDPR },
   {
     path: "/redeem_code",
     component: RedemptionCode,
@@ -121,29 +123,29 @@ const routes = [
   { path: "/players/:steam_id/games", component: PlayerGamesList },
 
   { path: "/store", component: Store },
-  { path: "/checkout/:item_ids+", component: Checkout },
-  { path: "/user_checkout/:item_ids+", component: UserCheckout },
-  { path: "/payment_success/", component: PaymentSuccess },
-  {
-    path: "/alipay_payment/",
-    component: AlipayPayment,
-    props: (route) => ({
-      source: route.query.source,
-      livemode: route.query.livemode,
-      clientSecret: route.query.client_secret,
-      itemID: route.query.item_id,
-    }),
-  },
-  {
-    path: "/wechat_payment/",
-    component: WeChatPay,
-    props: (route) => ({
-      source: route.query.source,
-      livemode: route.query.livemode,
-      clientSecret: route.query.client_secret,
-      itemID: route.query.item_id,
-    }),
-  },
+  // { path: "/checkout/:item_ids+", component: Checkout },
+  // { path: "/user_checkout/:item_ids+", component: UserCheckout },
+  // { path: "/payment_success/", component: PaymentSuccess },
+  // {
+  //   path: "/alipay_payment/",
+  //   component: AlipayPayment,
+  //   props: (route) => ({
+  //     source: route.query.source,
+  //     livemode: route.query.livemode,
+  //     clientSecret: route.query.client_secret,
+  //     itemID: route.query.item_id,
+  //   }),
+  // },
+  // {
+  //   path: "/wechat_payment/",
+  //   component: WeChatPay,
+  //   props: (route) => ({
+  //     source: route.query.source,
+  //     livemode: route.query.livemode,
+  //     clientSecret: route.query.client_secret,
+  //     itemID: route.query.item_id,
+  //   }),
+  // },
 
   { path: "/profile", component: Profile, meta: { requiresAuth: true } },
   {
