@@ -21,5 +21,14 @@ const packs = {
     "terrain_chinese",
   ],
   pack_boxing: ["chest_basic", "chest_basic", "terrain_boxing", "click_boxing"],
+  pack_welcome_back_2023: ["gold_25000", "chest_god_unique_3", "chest_basic"],
+  pack_gaimin: [
+    "gold_75000",
+    "chest_god_unique_3",
+    "chest_basic",
+    "chest_basic",
+    "chest_finisher_unique_1",
+    "chest_arena_unique_1",
+  ],
 };
 module.exports = packs;

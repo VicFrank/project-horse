@@ -162,12 +162,24 @@ module.exports = {
     try {
       const { rows } = await query(
         `SELECT
-          plus_expiration IS NOT NULL AND plus_expiration > NOW() as has_plus
+          gaimin_connected OR
+          (plus_expiration IS NOT NULL AND plus_expiration > NOW()) as has_plus
          FROM players WHERE steam_id = $1`,
         [steamID]
       );
       const player = rows[0];
       return player?.has_plus ?? false;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async setGaiminConnected(steamID) {
+    try {
+      await query(
+        `UPDATE players SET gaimin_connected = TRUE WHERE steam_id = $1`,
+        [steamID]
+      );
     } catch (error) {
       throw error;
     }
@@ -1857,6 +1869,12 @@ module.exports = {
           break;
         case "drop_gold_10000":
           gold = 10000;
+          break;
+        case "gold_25000":
+          gold = 25000;
+          break;
+        case "gold_75000":
+          gold = 75000;
           break;
       }
 

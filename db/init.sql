@@ -44,6 +44,7 @@ CREATE TABLE IF NOT EXISTS players (
   last_login_quest_claimed TIMESTAMPTZ,
   last_ping TIMESTAMPTZ,
   hide_data BOOLEAN DEFAULT FALSE,
+  gaimin_connected BOOLEAN DEFAULT FALSE,
 
   -- Player Settings
   on_steam_deck BOOLEAN DEFAULT FALSE,

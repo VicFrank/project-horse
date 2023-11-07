@@ -2,7 +2,7 @@
   <div>
     <h1 class="page-title" v-t="'store.page_title'"></h1>
     <div class="container">
-      <div class="row" v-if="!$route.query.type">
+      <!-- <div class="row" v-if="!$route.query.type">
         <div class="sale">
           <router-link
             v-if="cosmetics.length > 0"
@@ -33,7 +33,7 @@
             <h3 v-t="'cosmetics.plus_year_package'"></h3>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="row">
         <b-alert
           v-model="showError"
@@ -221,9 +221,7 @@ export default {
                 return true;
             }
           })
-          .filter(
-            (cosmetic) => cosmetic.cost_coins > 0 || cosmetic.cost_usd > 0
-          )
+          .filter((cosmetic) => cosmetic.cost_coins > 0)
           .sort((c1, c2) => {
             // order as battlepass, plus, gods, chests
             const c1Type = this.sortPriorities[c1.cosmetic_type] || 3;

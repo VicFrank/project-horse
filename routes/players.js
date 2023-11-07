@@ -90,6 +90,34 @@ router.get("/:steamID/plus_benefits", async (req, res) => {
 });
 
 router.post(
+  "/:steamID/connect_gaimin",
+  auth.userAuth,
+  auth.checkDoNotTrack,
+  async (req, res) => {
+    try {
+      const steamID = req.params.steamID;
+      const player = await players.getPlayer(steamID);
+      if (player.gaimin_connected) {
+        return res
+          .status(400)
+          .send({ message: "You already have a Gaimin account connected" });
+      }
+
+      const isValid = false;
+      if (!isValid) {
+        return res.status(400).send({ message: "Invalid" });
+      }
+
+      await players.setGaiminConnected(steamID);
+      return res.status(200).send({ message: "Connected" });
+    } catch (error) {
+      console.log(error);
+      res.status(500).send({ message: "Server Error" });
+    }
+  }
+);
+
+router.post(
   "/:steamID/claim_daily_gold",
   auth.userAuth,
   auth.checkDoNotTrack,

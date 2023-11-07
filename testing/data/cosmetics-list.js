@@ -145,6 +145,22 @@ module.exports = [
     cost_usd: -1,
     rarity: "Mythical",
   },
+  {
+    name: "pack_welcome_back_2023",
+    type: "Consumable",
+    equip_group: "",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Mythical",
+  },
+  {
+    name: "pack_gaimin",
+    type: "Consumable",
+    equip_group: "",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Mythical",
+  },
   /**
    * *************************
    * Emotes
@@ -1402,6 +1418,22 @@ module.exports = [
     type: "Consumable",
     coins: -1,
     cost_usd: 79.99,
+    equip_group: "",
+    rarity: "Legendary",
+  },
+  {
+    name: "gold_25000",
+    type: "Consumable",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "",
+    rarity: "Legendary",
+  },
+  {
+    name: "gold_75000",
+    type: "Consumable",
+    coins: -1,
+    cost_usd: -1,
     equip_group: "",
     rarity: "Legendary",
   },

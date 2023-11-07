@@ -42,6 +42,7 @@ const BattlePass = () =>
 const MyGods = () => import("../components/pages/profile/MyGods");
 
 const RedemptionCode = () => import("../components/pages/codes/RedemptionCode");
+const GaiminCode = () => import("../components/pages/codes/GaiminCode");
 
 const Leaderboard = () => import("../components/pages/leaderboard/Leaderboard");
 const GDPR = () => import("../components/pages/gdpr/GDPR");
@@ -113,6 +114,11 @@ const routes = [
     path: "/redeem_code",
     component: RedemptionCode,
     meta: { requiresAuth: true },
+  },
+  {
+    path: "/connect_gaimin",
+    component: GaiminCode,
+    meta: { requiresAuth: false },
   },
   {
     path: "/matchmaking",
