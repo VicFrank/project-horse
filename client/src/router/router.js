@@ -43,6 +43,8 @@ const MyGods = () => import("../components/pages/profile/MyGods");
 
 const RedemptionCode = () => import("../components/pages/codes/RedemptionCode");
 const GaiminCode = () => import("../components/pages/codes/GaiminCode");
+const RedeemGaiminCode = () =>
+  import("../components/pages/codes/RedeemGaiminCode");
 
 const Leaderboard = () => import("../components/pages/leaderboard/Leaderboard");
 const GDPR = () => import("../components/pages/gdpr/GDPR");
@@ -118,6 +120,11 @@ const routes = [
   {
     path: "/connect_gaimin",
     component: GaiminCode,
+    meta: { requiresAuth: false },
+  },
+  {
+    path: "/gaimin",
+    component: RedeemGaiminCode,
     meta: { requiresAuth: false },
   },
   {

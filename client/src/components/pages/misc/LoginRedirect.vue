@@ -25,7 +25,8 @@ export default {
           if (returnTo) {
             this.$router.push(returnTo);
           } else {
-            this.$router.push("/profile");
+            // For some reason, this gets called twice, and the second time throws an error
+            this.$router.push("/profile").catch(() => true);
           }
         } else {
           this.$store.commit({

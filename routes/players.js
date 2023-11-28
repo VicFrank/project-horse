@@ -5,6 +5,7 @@ const abilities = require("../db/abilities");
 const cosmetics = require("../db/cosmetics");
 const gods = require("../db/gods");
 const quests = require("../db/quests");
+const gaimin = require("../db/gaimin");
 const auth = require("../auth/auth");
 const apicache = require("apicache");
 
@@ -99,17 +100,21 @@ router.post(
       const player = await players.getPlayer(steamID);
       if (player.gaimin_connected) {
         return res
-          .status(400)
-          .send({ message: "You already have a Gaimin account connected" });
+          .status(200)
+          .send({
+            message: "You already have a Gaimin account connected",
+            connected: true,
+          });
       }
 
-      const isValid = false;
+      const isValid = await gaimin.checkCode(req.body.code);
       if (!isValid) {
-        return res.status(400).send({ message: "Invalid" });
+        return res.status(400).send({ message: "Invalid", connected: false });
       }
 
       await players.setGaiminConnected(steamID);
-      return res.status(200).send({ message: "Connected" });
+      await gaimin.deleteCode(req.body.code);
+      return res.status(200).send({ message: "Connected", connected: true });
     } catch (error) {
       console.log(error);
       res.status(500).send({ message: "Server Error" });
