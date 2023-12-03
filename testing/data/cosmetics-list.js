@@ -1724,6 +1724,14 @@ module.exports = [
     rarity: "Immortal",
   },
   {
+    name: "card_wraithKing",
+    type: "Card Frame",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "",
+    rarity: "Immortal",
+  },
+  {
     name: "card_chaosGod",
     type: "Card Frame",
     coins: -1,
@@ -1997,6 +2005,14 @@ module.exports = [
   },
   {
     name: "gold_card_glados",
+    type: "Card Frame",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "",
+    rarity: "Immortal",
+  },
+  {
+    name: "gold_card_wraithKing",
     type: "Card Frame",
     coins: -1,
     cost_usd: -1,

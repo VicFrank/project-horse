@@ -96,6 +96,12 @@
     "plus_exclusive": false
   },
   {
+    "god_name": "wraithKing",
+    "free": false,
+    "god_enabled": false,
+    "plus_exclusive": false
+  },
+  {
     "god_name": "icefrog",
     "free": true,
     "god_enabled": false,
