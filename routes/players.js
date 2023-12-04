@@ -99,12 +99,10 @@ router.post(
       const steamID = req.params.steamID;
       const player = await players.getPlayer(steamID);
       if (player.gaimin_connected) {
-        return res
-          .status(200)
-          .send({
-            message: "You already have a Gaimin account connected",
-            connected: true,
-          });
+        return res.status(200).send({
+          message: "You already have a Gaimin account connected",
+          connected: true,
+        });
       }
 
       const isValid = await gaimin.checkCode(req.body.code);

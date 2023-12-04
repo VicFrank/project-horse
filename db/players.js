@@ -3397,6 +3397,21 @@ module.exports = {
     }
   },
 
+  async tryGiveComebackReward(steamID) {
+    try {
+      const logs = await Logs.getLogsOfTypeForPlayer(
+        steamID,
+        "comeback_reward"
+      );
+      if (logs.length > 0) return false;
+
+      await this.giveCosmeticByName(steamID, "pack_welcome_back_2023");
+      await Logs.addTransactionLog(steamID, "comeback_reward", {});
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async getSettings(steamID) {
     try {
       const { rows } = await query(
