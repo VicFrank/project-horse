@@ -137,7 +137,7 @@ module.exports = {
       // async but we don't need to await
       Players.tryCompleteLoginQuest(steamID);
 
-      // Players.tryGiveComebackReward(steamID);
+      Players.tryGiveComebackReward(steamID);
 
       const oldPips = mmr.getRankPips(currentLadderMMR);
       const newPips = mmr.getRankPips(currentLadderMMR + ladderRatingChange);
