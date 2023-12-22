@@ -347,7 +347,8 @@ module.exports = {
         JOIN game_player_heroes as gph USING (game_player_id)
         JOIN hero_abilities AS ha USING (game_player_hero_id)
         JOIN abilities AS a USING (ability_name)
-        WHERE game_id = $1;
+        WHERE game_id = $1
+        ORDER BY ha.slot_index ASC
         `,
         [gameID]
       );
