@@ -300,6 +300,6 @@ async function fillArenaFinisherChests() {
 
 (async () => {
   await giveEndOfSeasonRewards();
-  await ladderReset(4);
+  await ladderReset(5);
   // await fillArenaFinisherChests();
 })();
