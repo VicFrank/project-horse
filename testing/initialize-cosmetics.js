@@ -136,12 +136,28 @@ async function updateCosmetics() {
     console.log("Updating cosmetics...");
     const cosmeticsToUpdate = [
       {
-        name: "chest_basic",
+        name: "chest_god_unique_1",
         type: "Chest",
-        coins: 2000,
+        coins: -1,
         cost_usd: -1,
         equip_group: "",
-        rarity: "Common",
+        rarity: "Immortal",
+      },
+      {
+        name: "chest_god_unique_2",
+        type: "Chest",
+        coins: -1,
+        cost_usd: -1,
+        equip_group: "",
+        rarity: "Immortal",
+      },
+      {
+        name: "chest_god_unique_3",
+        type: "Chest",
+        coins: -1,
+        cost_usd: -1,
+        equip_group: "",
+        rarity: "Immortal",
       },
     ];
     for (const c of cosmeticsToUpdate) {
@@ -305,9 +321,9 @@ async function addCosmeticsToPlayers() {
 (async function () {
   // await addCosmeticsToPlayers();
   // await setChestRewards();
-  // await updateCosmetics();
+  await updateCosmetics();
   // await initializeEscalatingOdds();
-  await addCosmetics();
+  // await addCosmetics();
   // await initializeUniqueChestDrops("chest_god_unique_1", chest_god_unique_1);
   // await initializeUniqueChestDrops("chest_god_unique_2", chest_god_unique_2);
   // await initializeUniqueChestDrops("chest_god_unique_3", chest_god_unique_3);

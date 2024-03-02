@@ -127,9 +127,7 @@ module.exports = {
       player.pips = mmr.getRankPips(player.ladder_mmr);
 
       const unopened_chests = await this.getNumUnopenedChests(steamID);
-      const unclaimed_bp_rewards = await this.getNumUnclaimedBattlepassRewards(
-        steamID
-      );
+      const unclaimed_bp_rewards = 0;
       const unclaimed_quests = await this.getNumUnclaimedQuests(steamID);
 
       return {
@@ -1072,7 +1070,8 @@ module.exports = {
         xp,
       });
 
-      await this.addBattlePassXp(steamID, xp);
+      // Removed gaining battle pass xp along with the removal of the battle pass
+      // await this.addBattlePassXp(steamID, xp);
       await this.modifyCoins(steamID, coins);
 
       return { xp, coins };

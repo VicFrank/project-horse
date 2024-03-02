@@ -2463,7 +2463,7 @@ module.exports = [
   {
     name: "chest_god_unique_1",
     type: "Chest",
-    coins: 10000,
+    coins: -1,
     cost_usd: -1,
     equip_group: "",
     rarity: "Immortal",
@@ -2471,7 +2471,7 @@ module.exports = [
   {
     name: "chest_god_unique_2",
     type: "Chest",
-    coins: 10000,
+    coins: -1,
     cost_usd: -1,
     equip_group: "",
     rarity: "Immortal",
@@ -2479,7 +2479,7 @@ module.exports = [
   {
     name: "chest_god_unique_3",
     type: "Chest",
-    coins: 10000,
+    coins: -1,
     cost_usd: -1,
     equip_group: "",
     rarity: "Immortal",

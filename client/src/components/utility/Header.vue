@@ -46,7 +46,7 @@
               <span class="sr-only">Unclaimed Quests</span>
             </b-badge>
           </b-dropdown-item>
-          <b-dropdown-item
+          <!-- <b-dropdown-item
             to="/profile/battlepass"
             exact-active-class="active-link"
           >
@@ -60,7 +60,7 @@
               {{ unclaimedBPRewards }}
               <span class="sr-only">Unclaimed Battle Pass Rewards</span>
             </b-badge>
-          </b-dropdown-item>
+          </b-dropdown-item> -->
           <b-dropdown-item
             to="/profile/armory"
             exact-active-class="active-link"
@@ -249,15 +249,15 @@
         </div>
         <div class="d-flex" style="list-style: none" v-if="loggedIn">
           <div class="d-none d-lg-block mr-2">
-            <div class="d-flex align-items-center">
-              <div class="d-flex flex-column">
+            <div class="d-flex align-items-center" style="height: 100%">
+              <!-- <div class="d-flex flex-column">
                 <img
                   src="/images/battlepass_logo.png"
                   alt="Battle Pass"
                   :class="{ 'profile-image': true, disabled: !bpUpgraded }"
                 />
                 <span class="custom-badge text-center">{{ bpLevel }}</span>
-              </div>
+              </div> -->
               <img
                 src="/images/cosmetics/plus.png"
                 alt="Plus Badge"
@@ -292,13 +292,13 @@
                 class="d-flex justify-content-center align-items-center mx-auto"
                 style="width: 75%"
               >
-                <div class="d-flex align-items-center">
+                <!-- <div class="d-flex align-items-center">
                   <img
                     src="/images/battlepass_logo.png"
                     alt="Battle Pass"
                     :class="{ 'profile-image': true, disabled: !bpUpgraded }"
                   />
-                </div>
+                </div> -->
                 <img
                   src="/images/cosmetics/plus.png"
                   alt="Plus Badge"
