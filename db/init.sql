@@ -45,6 +45,7 @@ CREATE TABLE IF NOT EXISTS players (
   last_ping TIMESTAMPTZ,
   hide_data BOOLEAN DEFAULT FALSE,
   gaimin_connected BOOLEAN DEFAULT FALSE,
+  gaimin_userid TEXT,
 
   -- Player Settings
   on_steam_deck BOOLEAN DEFAULT FALSE,

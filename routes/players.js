@@ -5,9 +5,9 @@ const abilities = require("../db/abilities");
 const cosmetics = require("../db/cosmetics");
 const gods = require("../db/gods");
 const quests = require("../db/quests");
-const gaimin = require("../db/gaimin");
 const auth = require("../auth/auth");
 const apicache = require("apicache");
+const axios = require("axios");
 
 const cache = apicache.middleware;
 
@@ -96,6 +96,7 @@ router.post(
   auth.checkDoNotTrack,
   async (req, res) => {
     try {
+      const playerToken = req.body.playerToken;
       const steamID = req.params.steamID;
       const player = await players.getPlayer(steamID);
       if (player.gaimin_connected) {
@@ -105,13 +106,28 @@ router.post(
         });
       }
 
-      const isValid = await gaimin.checkCode(req.body.code);
-      if (!isValid) {
-        return res.status(400).send({ message: "Invalid", connected: false });
-      }
+      // call this api to check if the code is valid
+      // https://api.gaimin.gg/api/public/v1/player/details?playerToken=
+      const request = await axios.get(
+        `https://api.gaimin.gg/api/public/v1/player/details?playerToken=${playerToken}`
+      );
+      const requestData = request.data;
+      const { data, success } = requestData;
 
-      await players.setGaiminConnected(steamID);
-      await gaimin.deleteCode(req.body.code);
+      if (!success)
+        return res
+          .status(400)
+          .send({ message: "Invalid Token", connected: false });
+
+      const gaiminId = data.userId;
+      const tokenIsTaken = await players.isGaiminIdTaken(gaiminId);
+      if (tokenIsTaken)
+        return res.status(400).send({
+          message: "Gaimin ID is already taken",
+          connected: false,
+        });
+
+      await players.setGaiminConnected(steamID, gaiminId);
       return res.status(200).send({ message: "Connected", connected: true });
     } catch (error) {
       console.log(error);

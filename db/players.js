@@ -172,11 +172,23 @@ module.exports = {
     }
   },
 
-  async setGaiminConnected(steamID) {
+  async isGaiminIdTaken(gaiminID) {
+    try {
+      const { rows } = await query(
+        `SELECT * FROM players WHERE gaimin_userid = $1`,
+        [gaiminID]
+      );
+      return rows.length > 0;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async setGaiminConnected(steamID, gaiminID) {
     try {
       await query(
-        `UPDATE players SET gaimin_connected = TRUE WHERE steam_id = $1`,
-        [steamID]
+        `UPDATE players SET (gaimin_connected, gaimin_userid) = (TRUE, $2) WHERE steam_id = $1`,
+        [steamID, gaiminID]
       );
     } catch (error) {
       throw error;
