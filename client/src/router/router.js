@@ -22,6 +22,7 @@ const Store = () => import("../components/pages/store/Store");
 
 const Games = () => import("../components/pages/games/Games");
 import Game from "../components/pages/games/Game";
+import ConnectGaimin from "../components/pages/codes/ConnectGaimin.vue";
 
 const Gods = () => import("../components/pages/stats/gods/Gods");
 const God = () => import("../components/pages/stats/gods/God");
@@ -42,7 +43,6 @@ const BattlePass = () =>
 const MyGods = () => import("../components/pages/profile/MyGods");
 
 const RedemptionCode = () => import("../components/pages/codes/RedemptionCode");
-const GaiminCode = () => import("../components/pages/codes/GaiminCode");
 const RedeemGaiminCode = () =>
   import("../components/pages/codes/RedeemGaiminCode");
 
@@ -119,7 +119,7 @@ const routes = [
   },
   {
     path: "/connect_gaimin",
-    component: GaiminCode,
+    component: ConnectGaimin,
     meta: { requiresAuth: false },
   },
   {
