@@ -1,5 +1,5 @@
 <template>
-  <a href="/api/auth/steam" class="sign-in-button">
+  <a href="/api/auth/steam" @click="storeCurrentRoute()" class="sign-in-button">
     <img
       src="/images/site/steam_icon.png"
       class="steam-icon mr-1"
@@ -10,7 +10,15 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    storeCurrentRoute() {
+      // store the current route in the session storage so we can redirect to it when we get back
+      console.log("storing current route");
+      sessionStorage.setItem("returnTo", this.$route.fullPath);
+    },
+  },
+};
 </script>
 
 <style scoped>

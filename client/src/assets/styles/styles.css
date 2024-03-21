@@ -70,17 +70,6 @@ select {
   color: white !important;
 }
 
-.custom-select {
-  color: white;
-  border: 1px solid #2b1e49;
-  background: #fff url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%23ffffff' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e) no-repeat right 0.75rem center/8px 10px;
-}
-
-.custom-select:focus {
-  border-color: #2b1e49 !important;
-  box-shadow: 0 0 0 0.2rem rgba(139, 0, 252, 0.253) !important;
-}
-
 .nav-item {
   color: var(--secondary-color) !important;
 }
@@ -158,11 +147,13 @@ a:hover {
   transition: 0.2s ease;
 }
 
-.my-profile-dropdown > a > span, .my-profile-dropdown > a:after {
+.my-profile-dropdown > a > span,
+.my-profile-dropdown > a:after {
   color: #ca56c4 !important;
 }
 
-.username-dropdown > a > span, .username-dropdown > a:after {
+.username-dropdown > a > span,
+.username-dropdown > a:after {
   color: #aeaeaf !important;
 }
 
@@ -225,10 +216,11 @@ a:hover {
 }
 
 .dropdown-item:hover {
-  filter: brightness(1.2)
+  filter: brightness(1.2);
 }
 
-.dropdown-item:focus,.dropdown-item:hover {
+.dropdown-item:focus,
+.dropdown-item:hover {
   background-color: #1b182f;
 }
 

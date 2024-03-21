@@ -20,10 +20,10 @@ export default {
             userType,
           });
 
-          const returnTo = this.$route.query.return;
+          const returnTo = sessionStorage.getItem("returnTo");
 
           if (returnTo) {
-            this.$router.push(returnTo);
+            this.$router.push(returnTo).catch(() => true);
           } else {
             // For some reason, this gets called twice, and the second time throws an error
             this.$router.push("/profile").catch(() => true);
