@@ -1288,8 +1288,9 @@ module.exports = {
     };
 
     try {
-      const allGods = await this.getGods(steamID);
-      const playerGods = allGods.filter((god) => god.owned);
+      const playerGods = (await this.getGods(steamID)).filter(
+        (god) => god.owned
+      );
       const godFreqs = await this.getGodFreqs(steamID);
       const rewards = ["gold", "doubledown", "exp"];
 
@@ -1306,13 +1307,13 @@ module.exports = {
         addRewardToRandomGod(playerGods, reward);
       }
 
-      for (const god of allGods) {
+      for (const god of playerGods) {
         if (!god.reward) {
           god.reward = "none";
         }
       }
 
-      return allGods;
+      return playerGods;
     } catch (error) {
       throw error;
     }
