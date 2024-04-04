@@ -107,7 +107,7 @@ module.exports = {
       const { rows } = await query(
         `SELECT
           players.*,
-          plus_expiration IS NOT NULL AND plus_expiration > NOW() as has_plus
+          (plus_expiration IS NOT NULL AND plus_expiration > NOW()) OR gaimin_connected as has_plus
          FROM players WHERE steam_id = $1`,
         [steamID]
       );
@@ -161,7 +161,7 @@ module.exports = {
       const { rows } = await query(
         `SELECT
           gaimin_connected OR
-          (plus_expiration IS NOT NULL AND plus_expiration > NOW()) as has_plus
+          (plus_expiration IS NOT NULL AND plus_expiration > NOW()) OR gaimin_connected as has_plus
          FROM players WHERE steam_id = $1`,
         [steamID]
       );

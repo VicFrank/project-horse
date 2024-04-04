@@ -9,7 +9,7 @@
               PARTNERSHIP WITH GAIMIN.GG
             </p>
             <p class="text-muted">
-              We have partenered with Gaimin.GG to continue supporting this map.
+              We have partnered with Gaimin.GG to continue supporting this map.
               Part of this partnership includes bringing back monthly
               tournaments. So we are excited to announce the return of community
               tournaments.
