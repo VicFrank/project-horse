@@ -23,6 +23,7 @@ const Store = () => import("../components/pages/store/Store");
 const Games = () => import("../components/pages/games/Games");
 import Game from "../components/pages/games/Game";
 import ConnectGaimin from "../components/pages/codes/ConnectGaimin.vue";
+import GaiminCheck from "../components/pages/tournament/GaiminCheck.vue";
 
 const Gods = () => import("../components/pages/stats/gods/Gods");
 const God = () => import("../components/pages/stats/gods/God");
@@ -125,6 +126,11 @@ const routes = [
   {
     path: "/gaimin",
     component: RedeemGaiminCode,
+    meta: { requiresAuth: false },
+  },
+  {
+    path: "/tournaments/check_gaimin",
+    component: GaiminCheck,
     meta: { requiresAuth: false },
   },
   {

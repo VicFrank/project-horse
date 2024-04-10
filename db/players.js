@@ -3455,4 +3455,27 @@ module.exports = {
       throw error;
     }
   },
+
+  async checkGaimin(steamIDs) {
+    try {
+      const results = [];
+      for (const steamID of steamIDs) {
+        const { rows } = await query(
+          `SELECT gaimin_connected, username FROM players WHERE steam_id = $1`,
+          [steamID]
+        );
+        if (rows.length == 0) {
+          results.push({ steamID, notFound: true });
+        } else {
+          const player = rows[0];
+          const connected = player.gaimin_connected ? true : false;
+          const username = player.username;
+          results.push({ steamID, username, connected });
+        }
+      }
+      return results;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
