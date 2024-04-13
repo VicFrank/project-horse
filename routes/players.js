@@ -881,7 +881,6 @@ router.get(
 
 router.post("/gaimin/check", auth.userAuth, async (req, res) => {
   try {
-    console.log(req.body);
     const steamIDs = req.body.steamIDs;
     const results = await players.checkGaimin(steamIDs);
     res.status(200).json(results);
