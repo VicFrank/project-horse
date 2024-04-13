@@ -26,6 +26,14 @@
             :items="results"
             :fields="['steamID', 'username', 'connected']"
           >
+            <template #cell(steamID)="data">
+              <a
+                :href="'https://steamcommunity.com/profiles/' + data.value"
+                target="_blank"
+              >
+                {{ data.value }}
+              </a>
+            </template>
             <template #cell(username)="data">
               <template v-if="data.item.notFound">
                 <b-badge variant="danger">Not Found</b-badge>

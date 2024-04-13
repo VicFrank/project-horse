@@ -2,8 +2,8 @@
   <div>
     <h1 class="page-title" v-t="'store.page_title'"></h1>
     <div class="container">
-      <!-- <div class="row" v-if="!$route.query.type">
-        <div class="sale">
+      <div class="row" v-if="!$route.query.type">
+        <!-- <div class="sale">
           <router-link
             v-if="cosmetics.length > 0"
             :to="getCheckoutLink('buy_bp')"
@@ -17,23 +17,20 @@
           <div class="overlay">
             <h3 v-t="'cosmetics.buy_bp'"></h3>
           </div>
-        </div>
+        </div> -->
         <div class="sale">
-          <router-link
-            v-if="cosmetics.length > 0"
-            :to="getCheckoutLink('plus_year_package')"
-          >
+          <router-link v-if="cosmetics.length > 0" to="/connect_gaimin">
             <img
-              src="/images/cosmetics/plus_year_package.png"
+              src="/images/cosmetics/plus.png"
               alt="Buy Plus Year Package"
               class="promoted"
             />
           </router-link>
           <div class="overlay">
-            <h3 v-t="'cosmetics.plus_year_package'"></h3>
+            <h3>Plus</h3>
           </div>
         </div>
-      </div> -->
+      </div>
       <div class="row">
         <b-alert
           v-model="showError"
