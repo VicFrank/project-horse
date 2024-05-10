@@ -73,6 +73,30 @@
                   href="https://battlefy.com/double-edge-studios/ability-arena-5/640b73e43e0bbd1f08e1572a/info?infoTab=details"
                   target="_blank"
                   variant="primary"
+                  v-t="'tournaments.results'"
+                ></b-button>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-left">Gaimin Tournament 1</td>
+              <td class="text-left">April 13, 2024</td>
+              <td class="text-left">
+                <b-button
+                  href="https://battlefy.com/double-edge-games/ability-arena-x-gaimin-1st-1000-monthly-tournament/6615cc26baff35146c22c020/info?infoTab=details"
+                  target="_blank"
+                  variant="primary"
+                  v-t="'tournaments.results'"
+                ></b-button>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-left">Gaimin Tournament 2</td>
+              <td class="text-left">May 18, 2024</td>
+              <td class="text-left">
+                <b-button
+                  href="https://battlefy.com/double-edge-games/ability-arena-x-gaimin-monthly-tournament-2/663737493a2aa70bc97aeb23/info"
+                  target="_blank"
+                  variant="primary"
                   v-t="'tournaments.sign_up'"
                 ></b-button>
               </td>
@@ -82,11 +106,10 @@
       </div>
     </div>
   </div>
-</template> 
+</template>
 
 <script>
 export default {};
 </script>
 
-<style>
-</style>
+<style></style>
