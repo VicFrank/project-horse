@@ -18,7 +18,7 @@
         <div
           class="mt-3 mx-auto"
           v-if="gaiminResults.length > 0"
-          style="max-width: 600px"
+          style="max-width: 400px"
         >
           <b-table
             striped

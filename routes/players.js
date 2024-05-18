@@ -879,7 +879,7 @@ router.get(
   }
 );
 
-router.post("/gaimin/check", auth.userAuth, async (req, res) => {
+router.post("/gaimin/check", async (req, res) => {
   try {
     const steamIDs = req.body.steamIDs;
     const results = await players.checkGaiminFromUsernames(steamIDs);
@@ -890,7 +890,7 @@ router.post("/gaimin/check", auth.userAuth, async (req, res) => {
   }
 });
 
-router.post("/tournaments/checkMMRs", auth.userAuth, async (req, res) => {
+router.post("/tournaments/checkMMRs", async (req, res) => {
   try {
     const usernames = req.body.usernames;
     const results = await players.checkMMRs(usernames);
