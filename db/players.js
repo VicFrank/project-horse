@@ -3478,4 +3478,40 @@ module.exports = {
       throw error;
     }
   },
+
+  async checkGaiminFromUsernames(usernames) {
+    try {
+      const results = [];
+      for (const username of usernames) {
+        const { rows } = await query(
+          `SELECT gaimin_connected, username FROM players WHERE username = $1`,
+          [username]
+        );
+        if (rows.length == 0) {
+          results.push({ username, notFound: true });
+        } else {
+          const connected = rows.some((row) => row.gaimin_connected);
+          results.push({ username, connected });
+        }
+      }
+      return results;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async checkMMRs(usernames) {
+    try {
+      const results = [];
+      for (const username of usernames) {
+        const players = await this.getPlayersWithName(username);
+        const mmrs = players.map((row) => row.mmr);
+        const mmrString = mmrs.length > 0 ? mmrs.join(", ") : "null";
+        results.push(`${username}, ${mmrString}`);
+      }
+      return results;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
