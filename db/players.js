@@ -3514,4 +3514,19 @@ module.exports = {
       throw error;
     }
   },
+
+  async getUniqueMonthlyPlayers() {
+    try {
+      // number of unique players that have played in the past month
+      const { rows } = await query(
+        `SELECT COUNT(DISTINCT steam_id)
+        FROM game_players
+        JOIN games USING (game_id)
+        WHERE created_at > NOW() - INTERVAL '1 month';`
+      );
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
