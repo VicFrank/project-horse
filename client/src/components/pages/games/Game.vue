@@ -3,9 +3,18 @@
     <h1 v-if="error">{{ error }}</h1>
     <div v-else>
       <div v-if="!loading" class="text-center">
-        <h3>
-          {{ dateFromNow(game.created_at) }}
-        </h3>
+        <div class="d-flex align-items-center justify-content-center">
+          <h3>
+            {{ dateFromNow(game.created_at) }}
+          </h3>
+          <b-icon-download
+            v-if="isAdmin"
+            @click="copyGameToClipboard(game)"
+            style="cursor: pointer"
+            class="ml-2"
+            icon="download"
+          ></b-icon-download>
+        </div>
         <h4 class="text-muted">{{ hhmmss(game.duration) }}</h4>
       </div>
       <div v-if="loading" class="text-center" style="height: 70px">
@@ -54,10 +63,12 @@
 <script>
 import GamePlayerRow from "./components/GamePlayerRow.vue";
 import { hhmmss, dateFromNow } from "../../../filters/filters";
+import { BIconDownload } from "bootstrap-vue";
 
 export default {
   components: {
     GamePlayerRow,
+    BIconDownload,
   },
 
   data: () => ({
@@ -66,6 +77,12 @@ export default {
     showMMR: false,
     loading: true,
   }),
+
+  computed: {
+    isAdmin() {
+      return this.$store.getters.isAdmin;
+    },
+  },
 
   mounted() {
     fetch(`/api/games/${this.$route.params.game_id}`)
@@ -88,6 +105,26 @@ export default {
   methods: {
     hhmmss,
     dateFromNow,
+    copyGameToClipboard(game) {
+      const exportData = game.players.map((player) => ({
+        playerId: player.place - 1,
+        god: player.god,
+        heroes: player.heroes.map((hero) => ({
+          name: hero.hero_name,
+          abilities: hero.abilities.map((ability) => ({
+            name: ability.ability_name,
+            level: ability.ability_level,
+          })),
+        })),
+      }));
+      navigator.clipboard.writeText(JSON.stringify(exportData, null, 2));
+      // show a toast
+      this.$bvToast.toast("Game data copied to clipboard", {
+        title: "Success",
+        variant: "success",
+        solid: true,
+      });
+    },
   },
 };
 </script>
