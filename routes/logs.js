@@ -68,7 +68,7 @@ router.post("/:gameID", auth.keyAuth, async (req, res) => {
   }
 });
 
-router.post("/test", async (req, res) => {
+router.post("/test/rohan", async (req, res) => {
   try {
     console.log(req.body);
   } catch (error) {
