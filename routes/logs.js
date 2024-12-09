@@ -71,6 +71,7 @@ router.post("/:gameID", auth.keyAuth, async (req, res) => {
 router.post("/test/rohan", async (req, res) => {
   try {
     console.log(req.body);
+    res.status(200).send("thanks rohan");
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: error.toString() });
