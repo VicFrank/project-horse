@@ -567,7 +567,7 @@ module.exports = {
     try {
       const { rows } = await query(
         `
-        select god, steam_id, place, game_id from game_players
+        select god, steam_id, place, game_id, mmr from game_players
         join games using (game_id)
         join players using (steam_id)
         where games.created_at > '2025-01-01';
