@@ -1476,6 +1476,22 @@ module.exports = [
     rarity: "Immortal",
   },
   {
+    name: "card_gman",
+    type: "Card Frame",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "",
+    rarity: "Immortal",
+  },
+  {
+    name: "card_undying",
+    type: "Card Frame",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "",
+    rarity: "Immortal",
+  },
+  {
     name: "card_brewmaster",
     type: "Card Frame",
     coins: -1,
@@ -1788,6 +1804,22 @@ module.exports = [
     rarity: "Immortal",
   },
   {
+    name: "gold_card_gman",
+    type: "Card Frame",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "",
+    rarity: "Immortal",
+  },
+  {
+    name: "gold_card_undying",
+    type: "Card Frame",
+    coins: -1,
+    cost_usd: -1,
+    equip_group: "",
+    rarity: "Immortal",
+  },
+  {
     name: "gold_card_brewmaster",
     type: "Card Frame",
     coins: -1,
@@ -2085,14 +2117,6 @@ module.exports = [
    * Spawn FX
    * *************************
    */
-  {
-    name: "spawn_default",
-    type: "SpawnFX",
-    coins: -1,
-    cost_usd: -1,
-    equip_group: "spawn_fx",
-    rarity: "Common",
-  },
   {
     name: "spawn_default",
     type: "SpawnFX",

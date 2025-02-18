@@ -78,4 +78,14 @@ router.post("/test/rohan", async (req, res) => {
   }
 });
 
+router.get("/test/games", async (req, res) => {
+  try {
+    const games = await playerLogs.getGames();
+    res.status(200).send(games);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.toString() });
+  }
+});
+
 module.exports = router;

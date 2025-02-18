@@ -562,4 +562,20 @@ module.exports = {
       throw error;
     }
   },
+
+  async getGamesThisYear() {
+    try {
+      const { rows } = await query(
+        `
+        select god, steam_id, place, game_id from game_players
+        join games using (game_id)
+        join players using (steam_id)
+        where games.created_at > '2025-01-01';
+        `
+      );
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
 };

@@ -54,4 +54,6 @@ async function InitializeGods() {
   }
 }
 
-(async function () {})();
+(async function () {
+  // InitializeGods();
+})();

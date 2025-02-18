@@ -106,6 +106,12 @@ CREATE INDEX idx_game_players_steam_id_fkey ON game_players (steam_id);
 CREATE INDEX idx_game_players_game_id_fkey ON game_players (game_id);
 CREATE INDEX idx_game_players_gods ON game_players (god);
 
+CREATE TABLE IF NOT EXISTS items (
+  item_name TEXT PRIMARY KEY,
+  icon TEXT,
+  tier TEXT NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS game_player_heroes (
   game_player_hero_id SERIAL PRIMARY KEY,
   game_player_id INTEGER REFERENCES game_players (game_player_id) ON UPDATE CASCADE,
@@ -152,12 +158,6 @@ CREATE TABLE IF NOT EXISTS abilities (
   active BOOLEAN DEFAULT FALSE,
   deprecated BOOLEAN DEFAULT FALSE,
   is_ultimate BOOLEAN
-);
-
-CREATE TABLE IF NOT EXISTS items (
-  item_name TEXT PRIMARY KEY,
-  icon TEXT,
-  tier TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS game_player_pantheon_items (
