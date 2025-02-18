@@ -78,9 +78,10 @@ router.post("/test/rohan", async (req, res) => {
   }
 });
 
-router.get("/test/games", async (req, res) => {
+const Games = require("../db/games");
+router.get("/test/games", auth.keyAuth, async (req, res) => {
   try {
-    const games = await playerLogs.getGames();
+    const games = await Games.getGamesThisYear();
     res.status(200).send(games);
   } catch (error) {
     console.log(error);
