@@ -436,6 +436,23 @@ module.exports = {
     }
   },
 
+  async getNumPlayersToday(date) {
+    try {
+      const { rows } = await query(
+        `
+        SELECT COUNT(DISTINCT steam_id) as players
+        FROM game_players
+        JOIN games USING (game_id)
+        WHERE created_at::date = $1;
+        `,
+        [date]
+      );
+      return rows[0].players;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   async getGameStatsOverDuration(startDate, endDate) {
     try {
       const { rows } = await query(

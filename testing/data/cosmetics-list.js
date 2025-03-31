@@ -183,7 +183,7 @@ module.exports = [
     name: "sfx_gaben_posh",
     type: "SFX",
     equip_group: "sfx_gaben",
-    coins: -1,
+    coins: 15000,
     cost_usd: -1,
     rarity: "Common",
   },
@@ -191,7 +191,7 @@ module.exports = [
     name: "sfx_epic",
     type: "SFX",
     equip_group: "sfx_gaben",
-    coins: -1,
+    coins: 15000,
     cost_usd: -1,
     rarity: "Common",
   },
@@ -215,7 +215,7 @@ module.exports = [
     name: "sfx_heavy_metal",
     type: "SFX",
     equip_group: "sfx_gaben",
-    coins: -1,
+    coins: 15000,
     cost_usd: -1,
     rarity: "Common",
   },
@@ -223,7 +223,7 @@ module.exports = [
     name: "sfx_opera",
     type: "SFX",
     equip_group: "sfx_gaben",
-    coins: -1,
+    coins: 15000,
     cost_usd: -1,
     rarity: "Common",
   },
@@ -231,7 +231,7 @@ module.exports = [
     name: "sfx_old_wizard",
     type: "SFX",
     equip_group: "sfx_gaben",
-    coins: -1,
+    coins: 15000,
     cost_usd: -1,
     rarity: "Common",
   },
@@ -2099,7 +2099,7 @@ module.exports = [
   {
     name: "click_boxing",
     type: "ClickFX",
-    coins: -1,
+    coins: 20000,
     cost_usd: -1,
     equip_group: "click_fx",
     rarity: "Immortal",
@@ -2107,7 +2107,7 @@ module.exports = [
   {
     name: "click_cat",
     type: "ClickFX",
-    coins: -1,
+    coins: 20000,
     cost_usd: -1,
     equip_group: "click_fx",
     rarity: "Immortal",
@@ -2128,7 +2128,7 @@ module.exports = [
   {
     name: "spawn_nature",
     type: "SpawnFX",
-    coins: -1,
+    coins: 20000,
     cost_usd: -1,
     equip_group: "spawn_fx",
     rarity: "Common",
@@ -2136,7 +2136,7 @@ module.exports = [
   {
     name: "spawn_arcane",
     type: "SpawnFX",
-    coins: -1,
+    coins: 20000,
     cost_usd: -1,
     equip_group: "spawn_fx",
     rarity: "Common",
@@ -2165,7 +2165,7 @@ module.exports = [
   {
     name: "finisher_lightning",
     type: "Finisher",
-    coins: -1,
+    coins: 10000,
     cost_usd: -1,
     equip_group: "finisher",
     rarity: "Common",
@@ -2173,7 +2173,7 @@ module.exports = [
   {
     name: "finisher_poison",
     type: "Finisher",
-    coins: -1,
+    coins: 10000,
     cost_usd: -1,
     equip_group: "finisher",
     rarity: "Common",
@@ -2181,7 +2181,7 @@ module.exports = [
   {
     name: "finisher_rocks",
     type: "Finisher",
-    coins: -1,
+    coins: 10000,
     cost_usd: -1,
     equip_group: "finisher",
     rarity: "Common",
@@ -2189,7 +2189,7 @@ module.exports = [
   {
     name: "finisher_snow",
     type: "Finisher",
-    coins: -1,
+    coins: 10000,
     cost_usd: -1,
     equip_group: "finisher",
     rarity: "Common",
@@ -2197,7 +2197,7 @@ module.exports = [
   {
     name: "finisher_god_gambler",
     type: "Finisher",
-    coins: -1,
+    coins: 10000,
     cost_usd: -1,
     equip_group: "finisher",
     rarity: "Immortal",
@@ -2205,7 +2205,7 @@ module.exports = [
   {
     name: "finisher_god_pa",
     type: "Finisher",
-    coins: -1,
+    coins: 10000,
     cost_usd: -1,
     equip_group: "finisher",
     rarity: "Immortal",
@@ -2213,7 +2213,7 @@ module.exports = [
   {
     name: "finisher_god_rune",
     type: "Finisher",
-    coins: -1,
+    coins: 10000,
     cost_usd: -1,
     equip_group: "finisher",
     rarity: "Immortal",
@@ -2221,7 +2221,7 @@ module.exports = [
   {
     name: "finisher_santa_greevil",
     type: "Finisher",
-    coins: -1,
+    coins: 10000,
     cost_usd: -1,
     equip_group: "finisher",
     rarity: "Immortal",
@@ -2229,7 +2229,7 @@ module.exports = [
   {
     name: "finisher_ak47",
     type: "Finisher",
-    coins: -1,
+    coins: 10000,
     cost_usd: -1,
     equip_group: "finisher",
     rarity: "Immortal",
@@ -2237,7 +2237,7 @@ module.exports = [
   {
     name: "finisher_tf2",
     type: "Finisher",
-    coins: -1,
+    coins: 10000,
     cost_usd: -1,
     equip_group: "finisher",
     rarity: "Immortal",
@@ -2250,7 +2250,7 @@ module.exports = [
   {
     name: "streak_fire",
     type: "Win Streak",
-    coins: -1,
+    coins: 10000,
     cost_usd: -1,
     equip_group: "streak",
     rarity: "Immortal",
@@ -2258,7 +2258,7 @@ module.exports = [
   {
     name: "streak_santa_greevil",
     type: "Win Streak",
-    coins: -1,
+    coins: 10000,
     cost_usd: -1,
     equip_group: "streak",
     rarity: "Immortal",
@@ -2274,7 +2274,7 @@ module.exports = [
   {
     name: "streak_cs",
     type: "Win Streak",
-    coins: -1,
+    coins: 10000,
     cost_usd: -1,
     equip_group: "streak",
     rarity: "Immortal",
@@ -2282,7 +2282,7 @@ module.exports = [
   {
     name: "streak_tf2",
     type: "Win Streak",
-    coins: -1,
+    coins: 10000,
     cost_usd: -1,
     equip_group: "streak",
     rarity: "Immortal",
@@ -2303,7 +2303,7 @@ module.exports = [
   {
     name: "terrain_green",
     type: "Terrain",
-    coins: -1,
+    coins: 20000,
     cost_usd: -1,
     equip_group: "terrain",
     rarity: "Common",
@@ -2311,7 +2311,7 @@ module.exports = [
   {
     name: "terrain_icelake",
     type: "Terrain",
-    coins: -1,
+    coins: 20000,
     cost_usd: -1,
     equip_group: "terrain",
     rarity: "Common",
@@ -2319,7 +2319,7 @@ module.exports = [
   {
     name: "terrain_lava",
     type: "Terrain",
-    coins: -1,
+    coins: 20000,
     cost_usd: -1,
     equip_group: "terrain",
     rarity: "Common",
@@ -2327,7 +2327,7 @@ module.exports = [
   {
     name: "terrain_snow",
     type: "Terrain",
-    coins: -1,
+    coins: 20000,
     cost_usd: -1,
     equip_group: "terrain",
     rarity: "Common",
@@ -2335,7 +2335,7 @@ module.exports = [
   {
     name: "terrain_tropical",
     type: "Terrain",
-    coins: -1,
+    coins: 20000,
     cost_usd: -1,
     equip_group: "terrain",
     rarity: "Common",
@@ -2343,7 +2343,7 @@ module.exports = [
   {
     name: "terrain_god_gambler",
     type: "Terrain",
-    coins: -1,
+    coins: 20000,
     cost_usd: -1,
     equip_group: "terrain",
     rarity: "Immortal",
@@ -2359,7 +2359,7 @@ module.exports = [
   {
     name: "terrain_god_rune",
     type: "Terrain",
-    coins: -1,
+    coins: 20000,
     cost_usd: -1,
     equip_group: "terrain",
     rarity: "Immortal",
@@ -2367,7 +2367,7 @@ module.exports = [
   {
     name: "terrain_xmas",
     type: "Terrain",
-    coins: -1,
+    coins: 20000,
     cost_usd: -1,
     equip_group: "terrain",
     rarity: "Immortal",
@@ -2375,7 +2375,7 @@ module.exports = [
   {
     name: "terrain_cs",
     type: "Terrain",
-    coins: -1,
+    coins: 20000,
     cost_usd: -1,
     equip_group: "terrain",
     rarity: "Immortal",
@@ -2391,7 +2391,7 @@ module.exports = [
   {
     name: "terrain_tf2",
     type: "Terrain",
-    coins: -1,
+    coins: 20000,
     cost_usd: -1,
     equip_group: "terrain",
     rarity: "Immortal",
@@ -2399,7 +2399,7 @@ module.exports = [
   {
     name: "terrain_brewmaster",
     type: "Terrain",
-    coins: -1,
+    coins: 20000,
     cost_usd: -1,
     equip_group: "terrain",
     rarity: "Immortal",
@@ -2407,7 +2407,7 @@ module.exports = [
   {
     name: "terrain_boxing",
     type: "Terrain",
-    coins: -1,
+    coins: 20000,
     cost_usd: -1,
     equip_group: "terrain",
     rarity: "Immortal",
@@ -2415,7 +2415,7 @@ module.exports = [
   {
     name: "terrain_portal",
     type: "Terrain",
-    coins: -1,
+    coins: 20000,
     cost_usd: -1,
     equip_group: "terrain",
     rarity: "Immortal",
@@ -2431,7 +2431,7 @@ module.exports = [
   {
     name: "terrain_gambit",
     type: "Terrain",
-    coins: -1,
+    coins: 20000,
     cost_usd: -1,
     equip_group: "terrain",
     rarity: "Immortal",
