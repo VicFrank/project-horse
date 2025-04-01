@@ -194,19 +194,19 @@ async function ladderReset(season) {
     await query(`UPDATE Players SET mmr = (mmr + 1000) / 2`);
     await query(`UPDATE Players SET ladder_mmr = 0 WHERE ladder_mmr < 1500`);
     await query(
-      `UPDATE Players SET ladder_mmr = 500 WHERE ladder_mmr < 2000 AND ladder_mmr >= 1500`
+      `UPDATE Players SET ladder_mmr = 1000 WHERE ladder_mmr < 2000 AND ladder_mmr >= 1500`
     );
     await query(
-      `UPDATE Players SET ladder_mmr = 1000 WHERE ladder_mmr < 2500 AND ladder_mmr >= 2000`
+      `UPDATE Players SET ladder_mmr = 1500 WHERE ladder_mmr < 2500 AND ladder_mmr >= 2000`
     );
     await query(
-      `UPDATE Players SET ladder_mmr = 1500 WHERE ladder_mmr < 3500 AND ladder_mmr >= 2500`
+      `UPDATE Players SET ladder_mmr = 2000 WHERE ladder_mmr < 3500 AND ladder_mmr >= 2500`
     );
     await query(
-      `UPDATE Players SET ladder_mmr = 2000 WHERE ladder_mmr < 4500 AND ladder_mmr >= 3500`
+      `UPDATE Players SET ladder_mmr = 2500 WHERE ladder_mmr < 4500 AND ladder_mmr >= 3500`
     );
     await query(
-      `UPDATE Players SET ladder_mmr = 2500 WHERE ladder_mmr >= 4500`
+      `UPDATE Players SET ladder_mmr = 3500 WHERE ladder_mmr >= 4500`
     );
 
     console.log("Done resetting ladder");
@@ -300,6 +300,6 @@ async function fillArenaFinisherChests() {
 
 (async () => {
   await giveEndOfSeasonRewards();
-  await ladderReset(9);
+  await ladderReset(10);
   // await fillArenaFinisherChests();
 })();
