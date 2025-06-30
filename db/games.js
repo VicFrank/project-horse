@@ -5,6 +5,42 @@ const { MAJOR_PATCHES } = require("../common/patches");
 
 module.exports = {
   /**
+   * Update a player's god MMR based on match performance
+   */
+  async updatePlayerGodMMR(steamID, god, winners, losers) {
+    try {
+      // Get current god MMR or default to 1000
+      const { rows: godRows } = await query(
+        `SELECT mmr FROM player_gods WHERE steam_id = $1 AND god_name = $2`,
+        [steamID, god]
+      );
+
+      const currentGodMMR = godRows.length > 0 ? godRows[0].mmr : 1000;
+
+      const godMMRChange = mmr.getMatchRatingChange(
+        currentGodMMR,
+        winners,
+        losers
+      );
+      const newGodMMR = currentGodMMR + godMMRChange;
+
+      // Upsert the player_gods record with new MMR
+      await query(
+        `INSERT INTO player_gods (steam_id, god_name, mmr)
+         VALUES ($1, $2, $3)
+         ON CONFLICT (steam_id, god_name) 
+         DO UPDATE SET mmr = $3`,
+        [steamID, god, newGodMMR]
+      );
+
+      return { currentGodMMR, godMMRChange, newGodMMR };
+    } catch (error) {
+      console.error("Error updating player god MMR:", error);
+      // log the error, but don't throw for now
+    }
+  },
+
+  /**
    * When a player is eliminated/wins, upsert the game and add their stats
    */
   async createGamePlayer(postGamePlayerData) {
@@ -50,6 +86,8 @@ module.exports = {
           mmrChange *= 2;
           ladderRatingChange *= 2;
         }
+
+        await this.updatePlayerGodMMR(steamID, god, winners, losers);
       }
 
       if (ranked) {

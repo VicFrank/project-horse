@@ -4,9 +4,17 @@ const data = require("./games");
 
 async function initializeGodRanks() {
   try {
+    const { rows } = await query(`
+      SELECT god, players.steam_id, place, games.game_id, game_players.mmr
+        FROM games
+        JOIN game_players USING (game_id)
+        JOIN players USING (steam_id)
+        WHERE ranked = TRUE and games.created_at > '2025-01-01'
+        ORDER BY games.created_at ASC`);
+
     // rating for each player/god combo, initialized to 1000 mmr
     const godRatings = {};
-    const games = data.reduce((acc, row) => {
+    const games = rows.reduce((acc, row) => {
       if (!acc[row.game_id]) {
         acc[row.game_id] = [];
       }
@@ -34,17 +42,28 @@ async function initializeGodRanks() {
       }
     }
 
-    // turn god ratings into an array and select the 100 highest results
-    const ratings = Object.entries(godRatings).map(([key, rating]) => {
+    // update player_gods table with the new ratings
+    Object.entries(godRatings).map(([key, rating]) => {
       const [steam_id, god] = key.split("_");
-      return { steam_id, god, rating };
+      return query(
+        `INSERT INTO player_gods (steam_id, god_name, mmr)
+         VALUES ($1, $2, $3)
+         ON CONFLICT (steam_id, god_name) DO UPDATE SET mmr = $3`,
+        [steam_id, god, rating]
+      );
     });
-    const top100 = ratings
-      .filter((r) => r.god === "gman")
-      .sort((a, b) => b.rating - a.rating)
-      .slice(0, 1)
-      .map((r, i) => ({ ...r, rank: i + 1 }));
-    console.log(top100);
+
+    // turn god ratings into an array and select the 100 highest results
+    // const ratings = Object.entries(godRatings).map(([key, rating]) => {
+    //   const [steam_id, god] = key.split("_");
+    //   return { steam_id, god, rating };
+    // });
+    // const top100 = ratings
+    //   .filter((r) => r.god === "lifestealer")
+    //   .sort((a, b) => b.rating - a.rating)
+    //   .slice(0, 1)
+    //   .map((r, i) => ({ ...r, rank: i + 1 }));
+    // console.log(top100);
   } catch (error) {
     console.log(error);
     throw error;

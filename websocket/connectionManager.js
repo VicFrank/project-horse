@@ -4,6 +4,8 @@ const lobbies = require("../matchmaking/lobbies");
 
 let connections = {};
 
+return;
+
 if (process.env.no_redis) {
   console.log("Redis disabled, some functionality will not work");
   return;
