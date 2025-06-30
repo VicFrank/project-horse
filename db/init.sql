@@ -152,6 +152,8 @@ CREATE TABLE IF NOT EXISTS player_gods (
   CONSTRAINT player_gods_pkey PRIMARY KEY (god_name, steam_id)
 );
 CREATE INDEX idx_player_gods_steam_id_fkey ON player_gods (steam_id);
+CREATE INDEX idx_player_gods_mmr ON player_gods (mmr);
+CREATE INDEX idx_player_gods_god_name_mmr_desc ON player_gods (god_name, mmr DESC);
 
 CREATE TABLE IF NOT EXISTS abilities (
   ability_name TEXT PRIMARY KEY,

@@ -43,15 +43,15 @@ async function initializeGodRanks() {
     }
 
     // update player_gods table with the new ratings
-    Object.entries(godRatings).map(([key, rating]) => {
+    for (const [key, rating] of Object.entries(godRatings)) {
       const [steam_id, god] = key.split("_");
-      return query(
+      await query(
         `INSERT INTO player_gods (steam_id, god_name, mmr)
          VALUES ($1, $2, $3)
          ON CONFLICT (steam_id, god_name) DO UPDATE SET mmr = $3`,
         [steam_id, god, rating]
       );
-    });
+    }
 
     // turn god ratings into an array and select the 100 highest results
     // const ratings = Object.entries(godRatings).map(([key, rating]) => {
