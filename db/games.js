@@ -87,7 +87,7 @@ module.exports = {
           ladderRatingChange *= 2;
         }
 
-        // await this.updatePlayerGodMMR(steamID, god, winners, losers);
+        await this.updatePlayerGodMMR(steamID, god, winners, losers);
       }
 
       if (ranked) {
