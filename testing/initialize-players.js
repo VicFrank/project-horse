@@ -18,7 +18,7 @@ async function initializePlayerGods() {
       const { steam_id } = player;
       const loggedGods = await Logs.getLogsOfTypeForPlayer(
         steam_id,
-        "god_opened"
+        "god_opened",
       );
       const distinctGods = new Set();
       for (const god of loggedGods) {
@@ -27,17 +27,17 @@ async function initializePlayerGods() {
       for (const cosmeticName of distinctGods) {
         const godName = cosmeticName.split("_")[1];
         const numOpened = loggedGods.filter(
-          (log) => log.log_data.cosmeticName === cosmeticName
+          (log) => log.log_data.cosmeticName === cosmeticName,
         ).length;
         if (numOpened > 1) {
           const numTops = await Players.getNumTopsWithGod(steam_id, godName);
           console.log(
-            `Initializing ${steam_id} with ${numOpened} ${godName} and ${numTops} tops`
+            `Initializing ${steam_id} with ${numOpened} ${godName} and ${numTops} tops`,
           );
           await Players.addPlayerGod(
             steam_id,
             godName,
-            numTops + (numOpened - 1) * 10
+            numTops + (numOpened - 1) * 10,
           );
         }
       }
@@ -83,7 +83,7 @@ async function logSeasonResults(season) {
       const { steam_id, mmr, rank } = player;
       await query(
         `INSERT INTO player_season_results (season, steam_id, mmr, leaderboard_rank) VALUES ($1, $2, $3, $4)`,
-        [season, steam_id, mmr, rank]
+        [season, steam_id, mmr, rank],
       );
     }
     console.log("Done logging season results");
@@ -132,7 +132,7 @@ async function giveEndOfSeasonRewards() {
     const transaction = { items: {} };
     for (const cosmetic of rewards) {
       const dbComsetic = await Cosmetics.getCosmeticByName(
-        cosmetic.cosmeticName
+        cosmetic.cosmeticName,
       );
       transaction.items[dbComsetic.cosmetic_id] = cosmetic.amount;
     }
@@ -142,7 +142,7 @@ async function giveEndOfSeasonRewards() {
         const playerTransaction = { ...transaction };
         try {
           console.log(
-            `Giving rewards to ${steamID} {${JSON.stringify(rewards)}}`
+            `Giving rewards to ${steamID} {${JSON.stringify(rewards)}}`,
           );
           await Players.doItemTransaction(steamID, playerTransaction);
         } catch (error) {
@@ -168,11 +168,11 @@ async function giveEndOfSeasonRewards() {
     await giveRewardsToPlayers([firstPlace.steam_id], firstRewards);
     await giveRewardsToPlayers(
       topTen.map((player) => player.steam_id),
-      topTenRewards
+      topTenRewards,
     );
     await giveRewardsToPlayers(
       top100.map((player) => player.steam_id),
-      top100Rewards
+      top100Rewards,
     );
 
     console.log("Rewards added to players");
@@ -194,19 +194,19 @@ async function ladderReset(season) {
     await query(`UPDATE Players SET mmr = (mmr + 1000) / 2`);
     await query(`UPDATE Players SET ladder_mmr = 0 WHERE ladder_mmr < 1500`);
     await query(
-      `UPDATE Players SET ladder_mmr = 1000 WHERE ladder_mmr < 2000 AND ladder_mmr >= 1500`
+      `UPDATE Players SET ladder_mmr = 1000 WHERE ladder_mmr < 2000 AND ladder_mmr >= 1500`,
     );
     await query(
-      `UPDATE Players SET ladder_mmr = 1500 WHERE ladder_mmr < 2500 AND ladder_mmr >= 2000`
+      `UPDATE Players SET ladder_mmr = 1500 WHERE ladder_mmr < 2500 AND ladder_mmr >= 2000`,
     );
     await query(
-      `UPDATE Players SET ladder_mmr = 2000 WHERE ladder_mmr < 3500 AND ladder_mmr >= 2500`
+      `UPDATE Players SET ladder_mmr = 2000 WHERE ladder_mmr < 3500 AND ladder_mmr >= 2500`,
     );
     await query(
-      `UPDATE Players SET ladder_mmr = 2500 WHERE ladder_mmr < 4500 AND ladder_mmr >= 3500`
+      `UPDATE Players SET ladder_mmr = 2500 WHERE ladder_mmr < 4500 AND ladder_mmr >= 3500`,
     );
     await query(
-      `UPDATE Players SET ladder_mmr = 3500 WHERE ladder_mmr >= 4500`
+      `UPDATE Players SET ladder_mmr = 3500 WHERE ladder_mmr >= 4500`,
     );
 
     console.log("Done resetting ladder");
@@ -225,7 +225,7 @@ async function updateGodChests() {
     const newGodChestID = newGodChest.cosmetic_id;
     await query(
       "UPDATE player_cosmetics SET cosmetic_id = $2 WHERE cosmetic_id = $1",
-      [godChestID, newGodChestID]
+      [godChestID, newGodChestID],
     );
   } catch (error) {
     console.log(error);
@@ -239,34 +239,34 @@ async function fillArenaFinisherChests() {
   console.log("Filling arena/finisher chests...");
   try {
     const uniqueChestArena = await Cosmetics.getCosmeticByName(
-      "chest_arena_unique_1"
+      "chest_arena_unique_1",
     );
     const uniqueChestFinisher = await Cosmetics.getCosmeticByName(
-      "chest_finisher_unique_1"
+      "chest_finisher_unique_1",
     );
 
     const arenaUniqueChestID = await Cosmetics.getUniqueChestID(
-      uniqueChestArena.cosmetic_id
+      uniqueChestArena.cosmetic_id,
     );
     const finisherUniqueChestID = await Cosmetics.getUniqueChestID(
-      uniqueChestFinisher.cosmetic_id
+      uniqueChestFinisher.cosmetic_id,
     );
 
     const fillChests = async (uniqueChestID) => {
       const chestDrops = await Cosmetics.getUniqueChestDrops(uniqueChestID);
       const { rows: playerActiveChests } = await query(
         `SELECT * FROM player_unique_chests WHERE unique_chest_id = $1 AND active = TRUE`,
-        [uniqueChestID]
+        [uniqueChestID],
       );
       console.log(
-        `Found ${playerActiveChests.length} active chests for ${uniqueChestID}`
+        `Found ${playerActiveChests.length} active chests for ${uniqueChestID}`,
       );
       for (const chest of playerActiveChests) {
         const { steam_id, player_unique_chest_id } = chest;
         const cosmetics = await Players.getCosmetics(steam_id);
         const cosmeticIDs = cosmetics.map((cosmetic) => cosmetic.cosmetic_id);
         const playerDrops = await Players.getChestAlreadyDroppedIDs(
-          player_unique_chest_id
+          player_unique_chest_id,
         );
         const promises = [];
         for (const drop of chestDrops) {
@@ -275,13 +275,13 @@ async function fillArenaFinisherChests() {
           const alreadyHasCosmetic = cosmeticIDs.includes(drop.cosmetic_id);
           if (alreadyHasCosmetic) {
             console.log(
-              `Removing ${drop.cosmetic_id} from ${player_unique_chest_id} for ${steam_id}`
+              `Removing ${drop.cosmetic_id} from ${player_unique_chest_id} for ${steam_id}`,
             );
             promises.push(
               Players.removeUniqueChestItem(
                 player_unique_chest_id,
-                drop.cosmetic_id
-              )
+                drop.cosmetic_id,
+              ),
             );
           }
         }
@@ -300,6 +300,6 @@ async function fillArenaFinisherChests() {
 
 (async () => {
   await giveEndOfSeasonRewards();
-  await ladderReset(13);
+  await ladderReset(14);
   // await fillArenaFinisherChests();
 })();
