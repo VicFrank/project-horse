@@ -33,6 +33,7 @@ const IndividualAbility = () =>
 const Cosmetics = () => import("../components/pages/stats/cosmetics/Cosmetics");
 const Bodies = () => import("../components/pages/stats/Bodies");
 const HeroStats = () => import("../components/pages/stats/video/HeroStats.vue");
+const CampStats = () => import("../components/pages/stats/video/CampStats.vue");
 const GameStats = () => import("../components/pages/stats/games/GameStats.vue");
 
 const Profile = () => import("../components/pages/profile/Profile");
@@ -115,6 +116,11 @@ const routes = [
   {
     path: "/stats/heroes",
     component: HeroStats,
+    meta: { requiresAuth: true, requiresAdmin: true },
+  },
+  {
+    path: "/stats/camps",
+    component: CampStats,
     meta: { requiresAuth: true, requiresAdmin: true },
   },
   { path: "/leaderboard", component: Leaderboard },
