@@ -444,15 +444,15 @@ export default {
 }
 
 .camp-icon {
-  width: 42px;
-  height: 42px;
+  width: 72px;
+  height: 41px;
   border-radius: 4px;
   object-fit: cover;
   border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .camp-icon-sm {
-  width: 36px;
+  width: 64px;
   height: 36px;
   border-radius: 3px;
   object-fit: cover;
@@ -460,7 +460,7 @@ export default {
 }
 
 .camp-icon-xs {
-  width: 36px;
+  width: 64px;
   height: 36px;
   border-radius: 4px;
   object-fit: cover;

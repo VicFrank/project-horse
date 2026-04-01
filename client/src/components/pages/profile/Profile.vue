@@ -22,6 +22,27 @@
       :loading="gamesLoading"
       :placeholderRows="3"
     ></PlayerGamesList>
+
+    <b-tabs class="mt-5" style="max-width: 700px; margin: auto">
+      <b-tab title="Gods" lazy>
+        <template v-if="godsLoading">
+          <div class="d-flex justify-content-center my-3">
+            <b-spinner label="Loading..."></b-spinner>
+          </div>
+        </template>
+        <PlayerGodStats
+          :gods="godStats"
+          @created="loadGodStats"
+        ></PlayerGodStats>
+      </b-tab>
+      <b-tab title="Seasons" lazy>
+        <PlayerSeasonResults
+          :results="seasonResults"
+          :loading="seasonsLoading"
+          @created="loadSeasonResults"
+        ></PlayerSeasonResults>
+      </b-tab>
+    </b-tabs>
   </div>
 </template>
 
@@ -30,6 +51,8 @@ import DailyQuests from "../quests/DailyQuests.vue";
 import LoginQuests from "../quests/LoginQuests.vue";
 import WelcomeQuests from "../quests/WelcomeQuests.vue";
 import PlayerGamesList from "../player/PlayerGamesList.vue";
+import PlayerGodStats from "../stats/gods/PlayerGodStats.vue";
+import PlayerSeasonResults from "../player/components/PlayerSeasonResults.vue";
 
 export default {
   components: {
@@ -37,14 +60,20 @@ export default {
     LoginQuests,
     WelcomeQuests,
     PlayerGamesList,
+    PlayerGodStats,
+    PlayerSeasonResults,
   },
 
   data: () => ({
     error: "",
     games: [],
+    godStats: [],
+    seasonResults: [],
     playerStats: {},
     plusBenefits: {},
     gamesLoading: true,
+    godsLoading: true,
+    seasonsLoading: true,
     secondsUntilReset: 0,
   }),
 
@@ -66,6 +95,26 @@ export default {
         .then((res) => res.json())
         .then((plusBenefits) => {
           this.plusBenefits = plusBenefits;
+        });
+    },
+
+    loadGodStats() {
+      if (this.godStats.length > 0) return;
+      fetch(`/api/players/${this.steamID}/god_stats`)
+        .then((res) => res.json())
+        .then((godStats) => {
+          this.godsLoading = false;
+          this.godStats = godStats;
+        });
+    },
+
+    loadSeasonResults() {
+      if (this.seasonResults.length > 0) return;
+      fetch(`/api/players/${this.steamID}/season_results`)
+        .then((res) => res.json())
+        .then((results) => {
+          this.seasonsLoading = false;
+          this.seasonResults = results;
         });
     },
     // claimDailyGold() {
@@ -106,5 +155,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

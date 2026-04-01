@@ -7,7 +7,7 @@ const retakes = require("./fight-report-retakes.json");
 
 // Camps to recalculate MMR for
 const RECALCULATE_MMR_CAMPS = [
-  "Harpy", // SMALL_HARPY
+  "Harpy (Active)", // SMALL_HARPY
   "Froglet", // MEDIUM_FROGLET
   "Frog", // LARGE_FROG
   "Ancient Frog", // ANCIENT_ANCIENT_FROG

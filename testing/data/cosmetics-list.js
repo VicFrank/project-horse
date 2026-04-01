@@ -1046,6 +1046,15 @@ module.exports = [
     rarity: "Rare",
   },
   {
+    // Chest Drop
+    name: "hat_rainbow_trophy",
+    type: "Avatar Accessory",
+    equip_group: "avatar_hat",
+    coins: -1,
+    cost_usd: -1,
+    rarity: "Rare",
+  },
+  {
     name: "hat_awp",
     type: "Avatar Accessory",
     equip_group: "avatar_accessory",

@@ -30,7 +30,7 @@ module.exports = {
         GROUP BY god
         ORDER BY avg_place ASC
       `,
-        [hours, minMMR]
+        [hours, minMMR],
       );
 
       if (minMMR > 0)
@@ -92,7 +92,7 @@ module.exports = {
       JOIN num_games USING (god)
       ORDER BY avg_ticks DESC;
       
-      `
+      `,
       );
       return rows;
     } catch (error) {
@@ -135,7 +135,7 @@ module.exports = {
       JOIN num_games USING (god)
       ORDER BY gabens DESC;
       
-      `
+      `,
       );
       return rows;
     } catch (error) {
@@ -151,7 +151,7 @@ module.exports = {
         `
         SELECT
           count(*) AS god_freq,
-          god,
+          gp.god,
           count(*) FILTER (WHERE place = 1) AS first_place,
           count(*) FILTER (WHERE place = 2) AS second_place,
           count(*) FILTER (WHERE place = 3) AS third_place,
@@ -160,17 +160,19 @@ module.exports = {
           count(*) FILTER (WHERE place = 6) AS sixth_place,
           count(*) FILTER (WHERE place = 7) AS seventh_place,
           count(*) FILTER (WHERE place = 8) AS eighth_place,
-          TRUNC (SUM(place)::decimal / count(*)::decimal, 2) AS avg_place
-        FROM game_players
+          TRUNC (SUM(place)::decimal / count(*)::decimal, 2) AS avg_place,
+          pg.mmr AS god_mmr
+        FROM game_players gp
         JOIN games
         USING (game_id)
+        LEFT JOIN player_gods pg ON pg.steam_id = gp.steam_id AND pg.god_name = gp.god
         WHERE games.ranked = true
           AND games.created_at > NOW() - $1 * INTERVAL '1 HOUR'
-          AND steam_id = $2
-        GROUP BY god
+          AND gp.steam_id = $2
+        GROUP BY gp.god, pg.mmr
         ORDER BY avg_place ASC
       `,
-        [hours, steamID]
+        [hours, steamID],
       );
       const gods = rows.map((row) => ({
         ...row,
@@ -219,7 +221,7 @@ module.exports = {
         GROUP BY god_name
         ORDER BY picks DESC;
       `,
-        [mmrOption, startDate, endDate]
+        [mmrOption, startDate, endDate],
       );
       numGames = rows.reduce((acc, row) => acc + Number(row.picks), 0);
 
@@ -266,7 +268,7 @@ module.exports = {
         ORDER BY day DESC
         LIMIT $3;
         `,
-        [godName, mmrOption, limit]
+        [godName, mmrOption, limit],
       );
       const dailyStats = rows.map((row) => ({
         ...row,
@@ -300,7 +302,7 @@ module.exports = {
         ORDER BY start_of_week DESC
         LIMIT $3;
         `,
-        [godName, mmrOption, limit]
+        [godName, mmrOption, limit],
       );
 
       const weeklyStats = rows.map((row) => ({
@@ -335,7 +337,7 @@ module.exports = {
         ORDER BY start_of_month DESC
         LIMIT $3;
         `,
-        [godName, mmrOption, limit]
+        [godName, mmrOption, limit],
       );
       const monthlyStats = rows.map((row) => ({
         ...row,
@@ -372,8 +374,8 @@ module.exports = {
           AND type_id = $3
           AND day between $4 and $5
         `,
-          [patch.text, godName, mmrOption, patch.startDate, patch.endDate]
-        )
+          [patch.text, godName, mmrOption, patch.startDate, patch.endDate],
+        ),
       );
 
       const perPatchStats = (await Promise.all(allPatchPromises)).map(
@@ -382,7 +384,7 @@ module.exports = {
           label: rows[0].patch,
           win_rate: rows[0].first_place / rows[0].picks,
           top_four_rate: rows[0].top_four_sum / rows[0].picks,
-        })
+        }),
       );
       return perPatchStats;
     } catch (error) {
@@ -414,7 +416,7 @@ module.exports = {
     try {
       const { rows } = await query(
         `UPDATE gods SET god_enabled = $2 WHERE god_name = $1 returning *`,
-        [name, enabled]
+        [name, enabled],
       );
       return rows[0];
     } catch (error) {
@@ -426,7 +428,7 @@ module.exports = {
     try {
       const { rows } = await query(
         `UPDATE gods SET free = $1 WHERE god_name = $2 returning *`,
-        [isFree, name]
+        [isFree, name],
       );
       return rows[0];
     } catch (error) {
@@ -438,7 +440,7 @@ module.exports = {
     try {
       const { rows } = await query(
         `UPDATE gods SET plus_exclusive = $1 WHERE god_name = $2 returning *`,
-        [isPlus, name]
+        [isPlus, name],
       );
       return rows[0];
     } catch (error) {

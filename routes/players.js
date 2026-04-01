@@ -246,6 +246,17 @@ router.get("/:steamID/games", auth.checkDoNotTrack, async (req, res) => {
   }
 });
 
+router.get("/:steamID/season_results", auth.checkDoNotTrack, async (req, res) => {
+  try {
+    const steamID = req.params.steamID;
+    const results = await players.getSeasonResults(steamID);
+    res.status(200).json(results);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Server Error" });
+  }
+});
+
 router.get("/:steamID/daily_quests", auth.userAuth, async (req, res) => {
   try {
     const steamID = req.params.steamID;

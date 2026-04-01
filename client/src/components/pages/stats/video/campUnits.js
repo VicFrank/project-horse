@@ -38,7 +38,7 @@ export const campUnits = {
       "npc_dota_neutral_fel_beast",
     ],
   },
-  Harpy: {
+  "Harpy (Active)": {
     units: [
       "npc_dota_neutral_harpy_scout",
       "npc_dota_neutral_harpy_scout",
@@ -90,6 +90,9 @@ export const campUnits = {
   "Golem (Passive)": {
     units: ["npc_dota_neutral_mud_golem", "npc_dota_neutral_mud_golem"],
   },
+  "Golem (Active)": {
+    units: ["npc_dota_neutral_mud_golem", "npc_dota_neutral_mud_golem"],
+  },
   Froglet: {
     units: [
       "npc_dota_neutral_froglet",
@@ -104,7 +107,7 @@ export const campUnits = {
       "npc_dota_neutral_centaur_khan",
     ],
   },
-  "Large Satyr": {
+  "Large Satyr (Passive)": {
     units: [
       "npc_dota_neutral_satyr_trickster",
       "npc_dota_neutral_satyr_soulstealer",
@@ -133,9 +136,9 @@ export const campUnits = {
   },
   Troll: {
     units: [
+      "npc_dota_neutral_dark_troll",
+      "npc_dota_neutral_dark_troll",
       "npc_dota_neutral_dark_troll_warlord",
-      "npc_dota_neutral_dark_troll",
-      "npc_dota_neutral_dark_troll",
     ],
   },
   Warpine: {

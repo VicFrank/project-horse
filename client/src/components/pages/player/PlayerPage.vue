@@ -42,6 +42,13 @@
             @created="loadGodStats"
           ></PlayerGodStats>
         </b-tab>
+        <b-tab title="Seasons" lazy>
+          <PlayerSeasonResults
+            :results="seasonResults"
+            :loading="seasonsLoading"
+            @created="loadSeasonResults"
+          ></PlayerSeasonResults>
+        </b-tab>
         <!-- Only load abilities once this tab is clicked -->
         <b-tab title="Abilities" lazy>
           <template v-if="abilitiesLoading">
@@ -68,6 +75,7 @@ import PlayerGodStats from "../stats/gods/PlayerGodStats.vue";
 import AbilityStats from "../stats/abilities/AbilityStats.vue";
 import PlayerStats from "../player/components/PlayerStats.vue";
 import RankBadge from "../../utility/RankBadge.vue";
+import PlayerSeasonResults from "./components/PlayerSeasonResults.vue";
 
 export default {
   components: {
@@ -76,6 +84,7 @@ export default {
     AbilityStats,
     PlayerStats,
     RankBadge,
+    PlayerSeasonResults,
   },
 
   data: () => ({
@@ -86,10 +95,12 @@ export default {
     plusBenefits: {},
     abilityStats: [],
     godStats: [],
+    seasonResults: [],
     gamesLoading: true,
     statsLoading: true,
     godsLoading: true,
     abilitiesLoading: true,
+    seasonsLoading: true,
     playerFound: true,
   }),
 
@@ -117,6 +128,16 @@ export default {
         .then((abilityStats) => {
           this.abilitiesLoading = false;
           this.abilityStats = abilityStats;
+        });
+    },
+
+    loadSeasonResults() {
+      if (this.seasonResults.length > 0) return;
+      fetch(`/api/players/${this.steamID}/season_results`)
+        .then((res) => res.json())
+        .then((results) => {
+          this.seasonsLoading = false;
+          this.seasonResults = results;
         });
     },
   },

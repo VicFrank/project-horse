@@ -3529,4 +3529,19 @@ module.exports = {
       throw error;
     }
   },
+
+  async getSeasonResults(steamID) {
+    try {
+      const { rows } = await query(
+        `SELECT season, leaderboard_rank, mmr
+         FROM player_season_results
+         WHERE steam_id = $1
+         ORDER BY season DESC`,
+        [steamID]
+      );
+      return rows;
+    } catch (error) {
+      throw error;
+    }
+  },
 };

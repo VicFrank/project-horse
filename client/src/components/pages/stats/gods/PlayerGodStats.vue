@@ -42,6 +42,11 @@
         </div>
       </div>
     </template>
+    <template #cell(god_mmr)="data">
+      <div class="text-left p-2">
+        {{ data.item.god_mmr != null ? data.item.god_mmr : '—' }}
+      </div>
+    </template>
     <template #cell(placements)="data">
       <PlacemementGraph :placements="data.item.placements"></PlacemementGraph>
     </template>
@@ -91,6 +96,12 @@ export default {
       {
         key: "avg_place",
         label: this.$i18n.t("gods.avg_place"),
+        thClass: "table-head",
+        sortable: true,
+      },
+      {
+        key: "god_mmr",
+        label: "MMR",
         thClass: "table-head",
         sortable: true,
       },

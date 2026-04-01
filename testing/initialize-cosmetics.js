@@ -98,20 +98,13 @@ async function addCosmetics() {
     console.log("Adding cosmetics...");
     await cosmetics.bulkCreateCosmetics([
       {
-        name: "card_undying",
-        type: "Card Frame",
+        // Chest Drop
+        name: "hat_rainbow_trophy",
+        type: "Avatar Accessory",
+        equip_group: "avatar_hat",
         coins: -1,
         cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
-      },
-      {
-        name: "gold_card_undying",
-        type: "Card Frame",
-        coins: -1,
-        cost_usd: -1,
-        equip_group: "",
-        rarity: "Immortal",
+        rarity: "Rare",
       },
     ]);
     console.log("Cosmetics initialized");
@@ -126,340 +119,13 @@ async function updateCosmetics() {
     console.log("Updating cosmetics...");
     const cosmeticsToUpdate = [
       {
-        name: "terrain_green",
-        type: "Terrain",
-        coins: 20000,
-        cost_usd: -1,
-        equip_group: "terrain",
-        rarity: "Common",
-      },
-      {
-        name: "terrain_icelake",
-        type: "Terrain",
-        coins: 20000,
-        cost_usd: -1,
-        equip_group: "terrain",
-        rarity: "Common",
-      },
-      {
-        name: "terrain_lava",
-        type: "Terrain",
-        coins: 20000,
-        cost_usd: -1,
-        equip_group: "terrain",
-        rarity: "Common",
-      },
-      {
-        name: "terrain_snow",
-        type: "Terrain",
-        coins: 20000,
-        cost_usd: -1,
-        equip_group: "terrain",
-        rarity: "Common",
-      },
-      {
-        name: "terrain_tropical",
-        type: "Terrain",
-        coins: 20000,
-        cost_usd: -1,
-        equip_group: "terrain",
-        rarity: "Common",
-      },
-      {
-        name: "terrain_god_gambler",
-        type: "Terrain",
-        coins: 20000,
-        cost_usd: -1,
-        equip_group: "terrain",
-        rarity: "Immortal",
-      },
-      {
-        name: "terrain_god_pa",
-        type: "Terrain",
-        coins: 20000,
-        cost_usd: -1,
-        equip_group: "terrain",
-        rarity: "Immortal",
-      },
-      {
-        name: "terrain_god_rune",
-        type: "Terrain",
-        coins: 20000,
-        cost_usd: -1,
-        equip_group: "terrain",
-        rarity: "Immortal",
-      },
-      {
-        name: "terrain_xmas",
-        type: "Terrain",
-        coins: 20000,
-        cost_usd: -1,
-        equip_group: "terrain",
-        rarity: "Immortal",
-      },
-      {
-        name: "terrain_cs",
-        type: "Terrain",
-        coins: 20000,
-        cost_usd: -1,
-        equip_group: "terrain",
-        rarity: "Immortal",
-      },
-      {
-        name: "terrain_chinese",
-        type: "Terrain",
-        coins: 20000,
-        cost_usd: -1,
-        equip_group: "terrain",
-        rarity: "Immortal",
-      },
-      {
-        name: "terrain_tf2",
-        type: "Terrain",
-        coins: 20000,
-        cost_usd: -1,
-        equip_group: "terrain",
-        rarity: "Immortal",
-      },
-      {
-        name: "terrain_brewmaster",
-        type: "Terrain",
-        coins: 20000,
-        cost_usd: -1,
-        equip_group: "terrain",
-        rarity: "Immortal",
-      },
-      {
-        name: "terrain_boxing",
-        type: "Terrain",
-        coins: 20000,
-        cost_usd: -1,
-        equip_group: "terrain",
-        rarity: "Immortal",
-      },
-      {
-        name: "terrain_portal",
-        type: "Terrain",
-        coins: 20000,
-        cost_usd: -1,
-        equip_group: "terrain",
-        rarity: "Immortal",
-      },
-      {
-        name: "terrain_gaben",
-        type: "Terrain",
+        // Chest Drop
+        name: "hat_rainbow_trophy",
+        type: "Avatar Accessory",
+        equip_group: "avatar_hat",
         coins: -1,
         cost_usd: -1,
-        equip_group: "terrain",
-        rarity: "Immortal",
-      },
-      {
-        name: "terrain_gambit",
-        type: "Terrain",
-        coins: 20000,
-        cost_usd: -1,
-        equip_group: "terrain",
-        rarity: "Immortal",
-      },
-      {
-        name: "streak_fire",
-        type: "Win Streak",
-        coins: 10000,
-        cost_usd: -1,
-        equip_group: "streak",
-        rarity: "Immortal",
-      },
-      {
-        name: "streak_santa_greevil",
-        type: "Win Streak",
-        coins: 10000,
-        cost_usd: -1,
-        equip_group: "streak",
-        rarity: "Immortal",
-      },
-      {
-        name: "streak_cs",
-        type: "Win Streak",
-        coins: 10000,
-        cost_usd: -1,
-        equip_group: "streak",
-        rarity: "Immortal",
-      },
-      {
-        name: "streak_tf2",
-        type: "Win Streak",
-        coins: 10000,
-        cost_usd: -1,
-        equip_group: "streak",
-        rarity: "Immortal",
-      },
-      {
-        name: "finisher_lightning",
-        type: "Finisher",
-        coins: 10000,
-        cost_usd: -1,
-        equip_group: "finisher",
-        rarity: "Common",
-      },
-      {
-        name: "finisher_poison",
-        type: "Finisher",
-        coins: 10000,
-        cost_usd: -1,
-        equip_group: "finisher",
-        rarity: "Common",
-      },
-      {
-        name: "finisher_rocks",
-        type: "Finisher",
-        coins: 10000,
-        cost_usd: -1,
-        equip_group: "finisher",
-        rarity: "Common",
-      },
-      {
-        name: "finisher_snow",
-        type: "Finisher",
-        coins: 10000,
-        cost_usd: -1,
-        equip_group: "finisher",
-        rarity: "Common",
-      },
-      {
-        name: "finisher_god_gambler",
-        type: "Finisher",
-        coins: 10000,
-        cost_usd: -1,
-        equip_group: "finisher",
-        rarity: "Immortal",
-      },
-      {
-        name: "finisher_god_pa",
-        type: "Finisher",
-        coins: 10000,
-        cost_usd: -1,
-        equip_group: "finisher",
-        rarity: "Immortal",
-      },
-      {
-        name: "finisher_god_rune",
-        type: "Finisher",
-        coins: 10000,
-        cost_usd: -1,
-        equip_group: "finisher",
-        rarity: "Immortal",
-      },
-      {
-        name: "finisher_santa_greevil",
-        type: "Finisher",
-        coins: 10000,
-        cost_usd: -1,
-        equip_group: "finisher",
-        rarity: "Immortal",
-      },
-      {
-        name: "finisher_ak47",
-        type: "Finisher",
-        coins: 10000,
-        cost_usd: -1,
-        equip_group: "finisher",
-        rarity: "Immortal",
-      },
-      {
-        name: "finisher_tf2",
-        type: "Finisher",
-        coins: 10000,
-        cost_usd: -1,
-        equip_group: "finisher",
-        rarity: "Immortal",
-      },
-      {
-        name: "spawn_nature",
-        type: "SpawnFX",
-        coins: 20000,
-        cost_usd: -1,
-        equip_group: "spawn_fx",
-        rarity: "Common",
-      },
-      {
-        name: "spawn_arcane",
-        type: "SpawnFX",
-        coins: 20000,
-        cost_usd: -1,
-        equip_group: "spawn_fx",
-        rarity: "Common",
-      },
-      {
-        name: "click_boxing",
-        type: "ClickFX",
-        coins: 20000,
-        cost_usd: -1,
-        equip_group: "click_fx",
-        rarity: "Immortal",
-      },
-      {
-        name: "click_cat",
-        type: "ClickFX",
-        coins: 20000,
-        cost_usd: -1,
-        equip_group: "click_fx",
-        rarity: "Immortal",
-      },
-      {
-        name: "sfx_gaben_posh",
-        type: "SFX",
-        equip_group: "sfx_gaben",
-        coins: 15000,
-        cost_usd: -1,
-        rarity: "Common",
-      },
-      {
-        name: "sfx_epic",
-        type: "SFX",
-        equip_group: "sfx_gaben",
-        coins: 15000,
-        cost_usd: -1,
-        rarity: "Common",
-      },
-      {
-        name: "sfx_sexy",
-        type: "SFX",
-        equip_group: "sfx_gaben",
-        coins: -1,
-        cost_usd: -1,
-        rarity: "Common",
-      },
-      {
-        name: "sfx_chinese",
-        type: "SFX",
-        equip_group: "sfx_gaben",
-        coins: 15000,
-        cost_usd: -1,
-        rarity: "Common",
-      },
-      {
-        name: "sfx_heavy_metal",
-        type: "SFX",
-        equip_group: "sfx_gaben",
-        coins: 15000,
-        cost_usd: -1,
-        rarity: "Common",
-      },
-      {
-        name: "sfx_opera",
-        type: "SFX",
-        equip_group: "sfx_gaben",
-        coins: 15000,
-        cost_usd: -1,
-        rarity: "Common",
-      },
-      {
-        name: "sfx_old_wizard",
-        type: "SFX",
-        equip_group: "sfx_gaben",
-        coins: 15000,
-        cost_usd: -1,
-        rarity: "Common",
+        rarity: "Rare",
       },
     ];
     for (const c of cosmeticsToUpdate) {
@@ -472,7 +138,7 @@ async function updateCosmetics() {
         c.equip_group,
         c.coins,
         c.cost_usd,
-        c.rarity
+        c.rarity,
       );
       console.log(`Updated cosmetic ${c.name}`);
     }
@@ -529,7 +195,7 @@ async function addDefaultCosmeticsToAllPlayers() {
       for (const cosmetic of defaultCosmetics) {
         const hasCosmetic = await players.hasCosmetic(
           steamID,
-          cosmetic.cosmetic_id
+          cosmetic.cosmetic_id,
         );
         if (!hasCosmetic) {
           await players.giveCosmeticByName(steamID, cosmetic.cosmetic_name);
@@ -583,7 +249,7 @@ async function addCosmeticsToPlayers() {
     const transaction = { items: {} };
     for (const cosmetic of cosmeticsToGive) {
       const dbComsetic = await cosmetics.getCosmeticByName(
-        cosmetic.cosmeticName
+        cosmetic.cosmeticName,
       );
       transaction.items[dbComsetic.cosmetic_id] = cosmetic.amount;
     }
@@ -624,7 +290,7 @@ async function addCosmeticsToPlayers() {
   // await initializeCosmetics();
   // await addCosmeticsToPlayers();
   // await setChestRewards();
-  await updateCosmetics();
+  // await updateCosmetics();
   // await initializeEscalatingOdds();
   // await addCosmetics();
   // await initializeUniqueChestDrops("chest_god_unique_1", chest_god_unique_1);
