@@ -2,6 +2,20 @@ const express = require("express");
 const router = express.Router();
 const auth = require("../auth/auth");
 const Gods = require("../db/gods");
+const apicache = require("apicache");
+
+const cache = apicache.middleware;
+
+router.get("/leaderboard", cache("5 minutes"), async (req, res) => {
+  try {
+    const limit = parseInt(req.query.limit) || 10;
+    const leaderboard = await Gods.getGodLeaderboard(limit);
+    res.status(200).json(leaderboard);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ message: "Server Error" });
+  }
+});
 
 router.get("/", async (req, res) => {
   try {

@@ -20,7 +20,14 @@
 
       <div v-if="!player.username" style="height: 48px"></div>
 
-      <PlayerStats :stats="playerStats" :loading="statsLoading"></PlayerStats>
+      <PlayerStats
+        :stats="playerStats"
+        :loading="statsLoading"
+        :godStats="godStats"
+        :godStatsLoading="godsLoading"
+        :seasonResults="seasonResults"
+        :seasonStatsLoading="seasonsLoading"
+      ></PlayerStats>
       <b-tabs style="max-width: 700px; margin: auto">
         <b-tab title="Games" active>
           <PlayerGamesList
@@ -157,6 +164,9 @@ export default {
         this.playerStats = player;
         this.statsLoading = false;
       });
+
+    this.loadGodStats();
+    this.loadSeasonResults();
 
     fetch(`/api/players/${this.steamID}`)
       .then((res) => res.json())

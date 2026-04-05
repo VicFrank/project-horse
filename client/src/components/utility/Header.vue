@@ -130,6 +130,9 @@
           <b-dropdown-item to="/leaderboard" exact-active-class="active-link">
             {{ $t("navigation.leaderboard") }}
           </b-dropdown-item>
+          <b-dropdown-item to="/god_leaderboard" exact-active-class="active-link">
+            {{ $t("navigation.god_leaderboard") }}
+          </b-dropdown-item>
           <b-dropdown-item exact-active-class="active-link" to="/tournaments">
             {{ $t("navigation.tournaments") }}
           </b-dropdown-item>

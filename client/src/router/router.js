@@ -50,6 +50,8 @@ const RedeemGaiminCode = () =>
   import("../components/pages/codes/RedeemGaiminCode");
 
 const Leaderboard = () => import("../components/pages/leaderboard/Leaderboard");
+const GodLeaderboard = () =>
+  import("../components/pages/leaderboard/GodLeaderboard");
 const GDPR = () => import("../components/pages/gdpr/GDPR");
 const PlayerPage = () => import("../components/pages/player/PlayerPage");
 const PlayerGamesList = () =>
@@ -124,6 +126,7 @@ const routes = [
     meta: { requiresAuth: true, requiresAdmin: true },
   },
   { path: "/leaderboard", component: Leaderboard },
+  { path: "/god_leaderboard", component: GodLeaderboard },
   { path: "/privacy", component: GDPR },
   {
     path: "/redeem_code",
