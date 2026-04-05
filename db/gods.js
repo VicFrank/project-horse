@@ -397,26 +397,32 @@ module.exports = {
       const { rows } = await query(
         `
         SELECT
-          pg.god_name,
-          pg.steam_id,
-          p.username,
-          pg.mmr,
-          RANK() OVER (PARTITION BY pg.god_name ORDER BY pg.mmr DESC) AS rank
-        FROM player_gods pg
-        JOIN players p ON p.steam_id = pg.steam_id
-        WHERE pg.mmr IS NOT NULL
-          AND p.hide_data IS NOT TRUE
-        ORDER BY pg.god_name, pg.mmr DESC
+          g.god_name,
+          top.steam_id,
+          top.username,
+          top.mmr,
+          ROW_NUMBER() OVER (PARTITION BY g.god_name ORDER BY top.mmr DESC) AS rank
+        FROM gods g
+        CROSS JOIN LATERAL (
+          SELECT pg.steam_id, p.username, pg.mmr
+          FROM player_gods pg
+          JOIN players p ON p.steam_id = pg.steam_id
+          WHERE pg.god_name = g.god_name
+            AND pg.mmr IS NOT NULL
+            AND pg.mmr > 1000
+            AND p.hide_data IS NOT TRUE
+          ORDER BY pg.mmr DESC
+          LIMIT $1
+        ) top
+        ORDER BY g.god_name, top.mmr DESC
         `,
+        [limit],
       );
 
-      // Group by god and keep only top N per god
       const byGod = {};
       for (const row of rows) {
         if (!byGod[row.god_name]) byGod[row.god_name] = [];
-        if (byGod[row.god_name].length < limit) {
-          byGod[row.god_name].push(row);
-        }
+        byGod[row.god_name].push(row);
       }
       return byGod;
     } catch (error) {
