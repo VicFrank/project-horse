@@ -1,0 +1,152 @@
+import { getHeroStats } from "./heroStats.js";
+
+/**
+ * Non-hero selectable units for the DPS calculator.
+ * noInnateBlock  — suppresses the automatic melee hero block passive
+ * damageReduction — fraction of incoming physical attack damage negated (e.g. 0.5 for towers)
+ */
+export const SPECIAL_UNITS = [
+  {
+    id: "_special_dummy",
+    dname: "Dummy Target",
+    primaryAttr: "strength",
+    totalStr: 0,
+    totalAgi: 0,
+    totalInt: 0,
+    avgBaseDamage: 0,
+    minBaseDamage: 0,
+    maxBaseDamage: 0,
+    baseAttackSpeed: 0,
+    baseIAS: 0,
+    effectiveArmor: 0,
+    maxHP: 1500,
+    bat: 1.0,
+    magicResist: 0,
+    moveSpeed: 0,
+    isMelee: false,
+    attackRange: 0,
+    noInnateBlock: true,
+  },
+  {
+    id: "_special_melee_creep",
+    dname: "Melee Creep",
+    primaryAttr: "agility",
+    totalStr: 0,
+    totalAgi: 0,
+    totalInt: 0,
+    avgBaseDamage: 25.5,
+    minBaseDamage: 23,
+    maxBaseDamage: 28,
+    baseAttackSpeed: 100,
+    baseIAS: 100,
+    effectiveArmor: 2,
+    maxHP: 700,
+    bat: 1.0,
+    magicResist: 0,
+    moveSpeed: 325,
+    isMelee: true,
+    attackRange: 100,
+    noInnateBlock: true,
+  },
+  {
+    id: "_special_ranged_creep",
+    dname: "Ranged Creep",
+    primaryAttr: "agility",
+    totalStr: 0,
+    totalAgi: 0,
+    totalInt: 0,
+    avgBaseDamage: 22.5,
+    minBaseDamage: 20,
+    maxBaseDamage: 25,
+    baseAttackSpeed: 100,
+    baseIAS: 100,
+    effectiveArmor: 2,
+    maxHP: 500,
+    bat: 1.0,
+    magicResist: 0,
+    moveSpeed: 325,
+    isMelee: false,
+    attackRange: 500,
+    noInnateBlock: true,
+  },
+  {
+    id: "_special_t1_tower",
+    dname: "Tier 1 Tower",
+    primaryAttr: null,
+    totalStr: 0,
+    totalAgi: 0,
+    totalInt: 0,
+    avgBaseDamage: 125,
+    minBaseDamage: 100,
+    maxBaseDamage: 150,
+    baseAttackSpeed: 100,
+    baseIAS: 100,
+    effectiveArmor: 17,
+    maxHP: 1800,
+    bat: 1.0,
+    magicResist: 0,
+    moveSpeed: 0,
+    isMelee: false,
+    attackRange: 700,
+    noInnateBlock: true,
+    damageReduction: 0.5, // reinforced armor: takes 50% damage from heroes
+  },
+  {
+    id: "_special_t2_tower",
+    dname: "Tier 2 Tower",
+    primaryAttr: null,
+    totalStr: 0,
+    totalAgi: 0,
+    totalInt: 0,
+    avgBaseDamage: 150,
+    minBaseDamage: 125,
+    maxBaseDamage: 175,
+    baseAttackSpeed: 100,
+    baseIAS: 100,
+    effectiveArmor: 20,
+    maxHP: 2500,
+    bat: 1.0,
+    magicResist: 0,
+    moveSpeed: 0,
+    isMelee: false,
+    attackRange: 700,
+    noInnateBlock: true,
+    damageReduction: 0.5,
+  },
+  {
+    id: "_special_t3_tower",
+    dname: "Tier 3 Tower",
+    primaryAttr: null,
+    totalStr: 0,
+    totalAgi: 0,
+    totalInt: 0,
+    avgBaseDamage: 175,
+    minBaseDamage: 150,
+    maxBaseDamage: 200,
+    baseAttackSpeed: 100,
+    baseIAS: 100,
+    effectiveArmor: 22,
+    maxHP: 3200,
+    bat: 1.0,
+    magicResist: 0,
+    moveSpeed: 0,
+    isMelee: false,
+    attackRange: 700,
+    noInnateBlock: true,
+    damageReduction: 0.5,
+  },
+];
+
+export const SPECIAL_UNITS_MAP = Object.fromEntries(
+  SPECIAL_UNITS.map((u) => [u.id, u]),
+);
+
+/**
+ * Returns stat block for any unit — hero or special.
+ * For heroes, delegates to getHeroStats (level-scaled).
+ * For special units, returns a shallow copy of the constant block.
+ */
+export function getUnitStats(id, level) {
+  if (SPECIAL_UNITS_MAP[id]) return { ...SPECIAL_UNITS_MAP[id] };
+  return getHeroStats(id, level);
+}

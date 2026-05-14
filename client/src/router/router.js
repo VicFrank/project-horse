@@ -35,6 +35,10 @@ const Bodies = () => import("../components/pages/stats/Bodies");
 const HeroStats = () => import("../components/pages/stats/video/HeroStats.vue");
 const CampStats = () => import("../components/pages/stats/video/CampStats.vue");
 const GameStats = () => import("../components/pages/stats/games/GameStats.vue");
+const ItemEfficiency = () =>
+  import("../components/pages/stats/items/ItemEfficiency.vue");
+const DpsCalculator = () =>
+  import("../components/pages/stats/dps/DpsCalculator.vue");
 
 const Profile = () => import("../components/pages/profile/Profile");
 const MatchHistory = () => import("../components/pages/profile/MatchHistory");
@@ -63,6 +67,8 @@ const Spells = () => import("../components/pages/learn/Spells");
 const LearnGods = () => import("../components/pages/learn/LearnGods");
 
 Vue.use(VueRouter);
+
+export const STANDALONE_PATHS = ["/dps"];
 
 const routes = [
   { path: "/404", alias: "*", component: NotFound },
@@ -124,6 +130,21 @@ const routes = [
     path: "/stats/camps",
     component: CampStats,
     meta: { requiresAuth: true, requiresAdmin: true },
+  },
+  {
+    path: "/stats/items",
+    component: ItemEfficiency,
+    meta: { requiresAuth: true, requiresAdmin: true },
+  },
+  {
+    path: "/stats/dps",
+    component: DpsCalculator,
+    meta: { requiresAuth: true, requiresAdmin: true },
+  },
+  {
+    path: "/dps",
+    component: DpsCalculator,
+    meta: { standalone: true },
   },
   { path: "/leaderboard", component: Leaderboard },
   { path: "/god_leaderboard", component: GodLeaderboard },

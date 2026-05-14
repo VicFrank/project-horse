@@ -1,33 +1,47 @@
 <template>
   <div id="app">
-    <Header />
-    <div class="main-layout" :key="loggedIn">
-      <div class="sidebar-open neutral-div">
-        <div class="main-content">
-          <div class="main-layout__content">
-            <div class="content">
-              <router-view class="container" style="overflow-x: auto" />
+    <template v-if="isStandalone">
+      <router-view />
+    </template>
+    <template v-else>
+      <Header />
+      <div class="main-layout" :key="loggedIn">
+        <div class="sidebar-open neutral-div">
+          <div class="main-content">
+            <div class="main-layout__content">
+              <div class="content">
+                <router-view class="container" style="overflow-x: auto" />
+              </div>
             </div>
           </div>
+          <Footer />
         </div>
-        <Footer />
       </div>
-    </div>
+    </template>
   </div>
 </template>
 
 <script>
 import Header from "./components/utility/Header.vue";
 import Footer from "./components/utility/Footer.vue";
+import { STANDALONE_PATHS } from "./router/router.js";
 export default {
   name: "App",
   components: {
     Header,
     Footer,
   },
+  data() {
+    return {
+      initiallyStandalone: STANDALONE_PATHS.includes(window.location.pathname),
+    };
+  },
   computed: {
     isRoot() {
       return this.$route.path === "/";
+    },
+    isStandalone() {
+      return this.initiallyStandalone || !!this.$route.meta?.standalone;
     },
     sidebarOpen() {
       return this.$store.state.ui.sidebarOpen;
