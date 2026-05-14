@@ -8,7 +8,7 @@
     "server": "nodemon index.js",
     "client": "cd client && npm run serve",
     "start": "node index.js",
-    "postbuild": "cd client && npm install && npm run build"
+    "postbuild": "cd client && npm install && cross-env NODE_OPTIONS=--max-old-space-size=4096 npm run build"
   },
   "author": "",
   "license": "ISC",
@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "concurrently": "^6.5.1",
+    "cross-env": "^10.1.0",
     "jest": "^29.4.3",
     "nodemon": "^2.0.15",
     "puppeteer": "^24.37.5"
