@@ -8,7 +8,7 @@
     "server": "nodemon index.js",
     "client": "cd client && npm run serve",
     "start": "node index.js",
-    "postbuild": "cd client && npm install && cross-env NODE_OPTIONS=--max-old-space-size=4096 npm run build"
+    "postbuild": "cd client && npm install && NODE_OPTIONS=--max-old-space-size=4096 npm run build"
   },
   "author": "",
   "license": "ISC",
