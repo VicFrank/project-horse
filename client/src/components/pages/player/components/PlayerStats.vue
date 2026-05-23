@@ -27,33 +27,15 @@
         </tr>
       </tbody>
     </table>
-
-    <div style="max-width: 700px; margin: auto">
-      <h5 class="text-center mt-4 mb-2">God Stats</h5>
-      <div v-if="godStatsLoading" class="d-flex justify-content-center my-3">
-        <b-spinner label="Loading..."></b-spinner>
-      </div>
-      <PlayerGodStats v-else :gods="godStats"></PlayerGodStats>
-
-      <h5 class="text-center mt-4 mb-2">Season Stats</h5>
-      <PlayerSeasonResults
-        :results="seasonResults"
-        :loading="seasonStatsLoading"
-      ></PlayerSeasonResults>
-    </div>
   </div>
 </template>
 
 <script>
 import PlacemementGraph from "../../stats/components/PlacementGraph.vue";
-import PlayerGodStats from "../../stats/gods/PlayerGodStats.vue";
-import PlayerSeasonResults from "./PlayerSeasonResults.vue";
 
 export default {
   components: {
     PlacemementGraph,
-    PlayerGodStats,
-    PlayerSeasonResults,
   },
 
   props: {

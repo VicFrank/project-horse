@@ -1,11 +1,7 @@
 <template>
   <div>
     <h1 class="page-title" v-t="'navigation.my_stats'"></h1>
-    <div v-if="loading" class="d-flex justify-content-center mb-3">
-      <b-spinner label="Loading..."></b-spinner>
-    </div>
     <RankBadge
-      v-if="!loading"
       class="text-center mb-2"
       :badge="playerStats.badge"
       :pips="playerStats.pips"
@@ -15,14 +11,13 @@
       :stats="playerStats"
       :loading="loading"
       :isUser="true"
+      :godStats="godStats"
+      :godStatsLoading="godsLoading"
+      :seasonResults="seasonResults"
+      :seasonStatsLoading="seasonsLoading"
     ></PlayerStats>
-    <b-tabs
-      v-if="!loading"
-      content-class="mt-3"
-      style="max-width: 700px; margin: auto"
-      lazy
-    >
-      <b-tab title="Gods" active>
+    <b-tabs style="max-width: 700px; margin: auto">
+      <b-tab title="Gods" active lazy>
         <template v-if="godsLoading">
           <div class="d-flex justify-content-center my-3">
             <b-spinner label="Loading..."></b-spinner>
@@ -33,7 +28,14 @@
           @created="loadGodStats"
         ></PlayerGodStats>
       </b-tab>
-      <b-tab title="Abilities">
+      <b-tab title="Seasons" lazy>
+        <PlayerSeasonResults
+          :results="seasonResults"
+          :loading="seasonsLoading"
+          @created="loadSeasonResults"
+        ></PlayerSeasonResults>
+      </b-tab>
+      <b-tab title="Abilities" lazy>
         <template v-if="abilitiesLoading">
           <div class="d-flex justify-content-center my-3">
             <b-spinner label="Loading..."></b-spinner>
@@ -52,6 +54,7 @@
 import PlayerGodStats from "../stats/gods/PlayerGodStats.vue";
 import AbilityStats from "../stats/abilities/AbilityStats.vue";
 import PlayerStats from "../player/components/PlayerStats.vue";
+import PlayerSeasonResults from "../player/components/PlayerSeasonResults.vue";
 import RankBadge from "../../utility/RankBadge.vue";
 
 export default {
@@ -59,17 +62,19 @@ export default {
     PlayerGodStats,
     AbilityStats,
     PlayerStats,
+    PlayerSeasonResults,
     RankBadge,
   },
 
   data: () => ({
-    error: "",
     playerStats: {},
     godStats: [],
     abilityStats: [],
+    seasonResults: [],
     loading: true,
     godsLoading: true,
     abilitiesLoading: true,
+    seasonsLoading: true,
   }),
 
   computed: {
@@ -98,6 +103,16 @@ export default {
           this.abilityStats = abilityStats;
         });
     },
+
+    loadSeasonResults() {
+      if (this.seasonResults.length > 0) return;
+      fetch(`/api/players/${this.steamID}/season_results`)
+        .then((res) => res.json())
+        .then((results) => {
+          this.seasonsLoading = false;
+          this.seasonResults = results;
+        });
+    },
   },
 
   created() {
@@ -107,6 +122,9 @@ export default {
         this.loading = false;
         this.playerStats = playerStats;
       });
+
+    this.loadGodStats();
+    this.loadSeasonResults();
   },
 };
 </script>

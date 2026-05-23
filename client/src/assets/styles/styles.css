@@ -123,7 +123,7 @@ a:hover {
 }
 
 #main-nav {
-  height: 64px;
+  min-height: 64px;
   box-shadow: 0 2px 4px rgb(11, 134, 196, 0.2);
   position: fixed;
   width: 100%;

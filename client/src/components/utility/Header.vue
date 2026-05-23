@@ -7,17 +7,17 @@
     "
   >
     <nav class="navbar navbar-expand-lg">
-      <div class="d-flex align-items-center">
-        <router-link to="/" class="navbar-brand">
-          <img
-            style="height: 40px"
-            class="ml-2"
-            src="/images/site/ability_arena_logo_nav.png"
-            alt="Ability Arena"
-          />
-        </router-link>
-      </div>
-      <ul class="navbar-nav flex-row d-flex text-uppercase mt-2">
+      <router-link to="/" class="navbar-brand">
+        <img
+          style="height: 40px"
+          class="ml-2"
+          src="/images/site/ability_arena_logo_nav.png"
+          alt="Ability Arena"
+        />
+      </router-link>
+      <ul
+        class="navbar-nav flex-row d-none d-lg-flex text-uppercase mt-2 align-items-center"
+      >
         <b-nav-item-dropdown
           :text="$t('navigation.my_profile')"
           class="mx-2 my-profile-dropdown"
@@ -113,7 +113,7 @@
             {{ $t("navigation.admin") }}
           </b-dropdown-item>
         </b-nav-item-dropdown>
-        <li class="nav-item mr-2 d-none d-sm-block">
+        <li class="nav-item mr-2">
           <router-link
             class="nav-link d-flex"
             to="/store"
@@ -123,7 +123,7 @@
             {{ $t("navigation.store") }}
           </router-link>
         </li>
-        <b-nav-item-dropdown text="GAME" class="mx-2 d-none d-sm-block">
+        <b-nav-item-dropdown text="GAME" class="mx-2">
           <!-- <b-dropdown-item exact-active-class="active-link" to="/games">
             {{ $t("navigation.matches") }}
           </b-dropdown-item> -->
@@ -146,11 +146,7 @@
             {{ $t("navigation.faq") }}
           </b-dropdown-item>
         </b-nav-item-dropdown>
-        <b-nav-item-dropdown
-          v-if="canSeeStats"
-          text="STATS"
-          class="mx-2 d-none d-sm-block"
-        >
+        <b-nav-item-dropdown v-if="canSeeStats" text="STATS" class="mx-2">
           <b-dropdown-item
             v-if="canSeeStats"
             to="/stats/games"
@@ -187,10 +183,7 @@
             Economy
           </b-dropdown-item>
         </b-nav-item-dropdown>
-        <b-nav-item-dropdown
-          :text="$t('navigation.learn')"
-          class="mx-2 d-none d-sm-block"
-        >
+        <b-nav-item-dropdown :text="$t('navigation.learn')" class="mx-2">
           <b-dropdown-item to="/learn/spells" exact-active-class="active-link">
             {{ $t("navigation.spells") }}
           </b-dropdown-item>
@@ -198,17 +191,17 @@
             {{ $t("navigation.gods") }}
           </b-dropdown-item>
         </b-nav-item-dropdown>
-        <li class="mr-2 nav-item d-none d-sm-block">
+        <li class="mr-2 nav-item">
           <a href="https://news.abilityarena.com/" class="nav-link">
             {{ $t("navigation.news") }}
           </a>
         </li>
-        <li class="nav-item d-none d-sm-block">
+        <li class="nav-item">
           <a href="/matchmaking" class="nav-link">
             {{ $t("navigation.matchmaking") }}
           </a>
         </li>
-        <li class="ml-2 nav-item d-none d-sm-block">
+        <li class="ml-2 nav-item">
           <a
             href="https://cardsmith.abilityarena.com/"
             target="_blank"
@@ -222,7 +215,7 @@
         <b-dropdown
           size="sm"
           variant="outline-secondary"
-          class="mr-2"
+          class="mr-2 d-none d-lg-block"
           :text="$t('navigation.language')"
         >
           <b-dropdown-item
@@ -291,7 +284,7 @@
                 :src="profilePicture"
                 class="profile-picture"
                 alt="Profile Picture"
-              />{{ username }}
+              /><span class="d-none d-sm-inline">{{ username }}</span>
             </template>
             <div class="d-lg-none">
               <div
@@ -344,8 +337,230 @@
             ></a>
           </b-nav-item-dropdown>
         </div>
+        <button
+          class="navbar-toggler d-lg-none ml-2"
+          type="button"
+          @click="mobileMenuOpen = !mobileMenuOpen"
+          :aria-expanded="String(mobileMenuOpen)"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
       </div>
     </nav>
+
+    <!-- Mobile Navigation -->
+    <transition name="slide-down">
+      <div v-if="mobileMenuOpen" class="mobile-nav d-lg-none">
+        <ul class="list-unstyled mb-0">
+          <template v-if="loggedIn">
+            <li class="mobile-nav-header">{{ $t("navigation.my_profile") }}</li>
+            <li>
+              <router-link
+                class="mobile-nav-link"
+                to="/profile"
+                @click="mobileMenuOpen = false"
+              >
+                {{ $t("navigation.profile") }}
+                <b-badge
+                  v-if="numQuests > 0"
+                  style="background-color: #523c88"
+                  class="ml-1"
+                  >{{ numQuests }}</b-badge
+                >
+              </router-link>
+            </li>
+            <li>
+              <router-link
+                class="mobile-nav-link"
+                to="/profile/armory"
+                @click="mobileMenuOpen = false"
+              >
+                {{ $t("navigation.armory") }}
+                <b-badge
+                  v-if="unopenedChests > 0"
+                  style="background-color: #523c88"
+                  class="ml-1"
+                  >{{ unopenedChests }}</b-badge
+                >
+              </router-link>
+            </li>
+            <li>
+              <router-link
+                class="mobile-nav-link"
+                to="/profile/gods"
+                @click="mobileMenuOpen = false"
+                >{{ $t("navigation.gods") }}</router-link
+              >
+            </li>
+            <li>
+              <router-link
+                class="mobile-nav-link"
+                to="/profile/games"
+                @click="mobileMenuOpen = false"
+                >{{ $t("navigation.match_history") }}</router-link
+              >
+            </li>
+            <li>
+              <router-link
+                class="mobile-nav-link"
+                to="/profile/stats"
+                @click="mobileMenuOpen = false"
+                >{{ $t("navigation.my_stats") }}</router-link
+              >
+            </li>
+            <li v-if="isAdmin">
+              <router-link
+                class="mobile-nav-link"
+                to="/admin"
+                @click="mobileMenuOpen = false"
+                >{{ $t("navigation.admin") }}</router-link
+              >
+            </li>
+          </template>
+          <li>
+            <router-link
+              class="mobile-nav-link"
+              to="/store"
+              @click="mobileMenuOpen = false"
+              >{{ $t("navigation.store") }}</router-link
+            >
+          </li>
+          <li class="mobile-nav-header">GAME</li>
+          <li>
+            <router-link
+              class="mobile-nav-link"
+              to="/leaderboard"
+              @click="mobileMenuOpen = false"
+              >{{ $t("navigation.leaderboard") }}</router-link
+            >
+          </li>
+          <li>
+            <router-link
+              class="mobile-nav-link"
+              to="/god_leaderboard"
+              @click="mobileMenuOpen = false"
+              >{{ $t("navigation.god_leaderboard") }}</router-link
+            >
+          </li>
+          <li>
+            <router-link
+              class="mobile-nav-link"
+              to="/tournaments"
+              @click="mobileMenuOpen = false"
+              >{{ $t("navigation.tournaments") }}</router-link
+            >
+          </li>
+          <li>
+            <router-link
+              class="mobile-nav-link"
+              to="/changelog"
+              @click="mobileMenuOpen = false"
+              >{{ $t("navigation.change_log") }}</router-link
+            >
+          </li>
+          <li>
+            <router-link
+              class="mobile-nav-link"
+              to="/faq"
+              @click="mobileMenuOpen = false"
+              >{{ $t("navigation.faq") }}</router-link
+            >
+          </li>
+          <template v-if="canSeeStats">
+            <li class="mobile-nav-header">STATS</li>
+            <li>
+              <router-link
+                class="mobile-nav-link"
+                to="/stats/games"
+                @click="mobileMenuOpen = false"
+                >Games</router-link
+              >
+            </li>
+            <li>
+              <router-link
+                class="mobile-nav-link"
+                to="/gods"
+                @click="mobileMenuOpen = false"
+                >{{ $t("navigation.gods") }}</router-link
+              >
+            </li>
+            <li>
+              <router-link
+                class="mobile-nav-link"
+                to="/abilities"
+                @click="mobileMenuOpen = false"
+                >{{ $t("navigation.abilities") }}</router-link
+              >
+            </li>
+            <li>
+              <router-link
+                class="mobile-nav-link"
+                to="/bodies"
+                @click="mobileMenuOpen = false"
+                >Bodies</router-link
+              >
+            </li>
+            <li>
+              <router-link
+                class="mobile-nav-link"
+                to="/cosmetics"
+                @click="mobileMenuOpen = false"
+                >Economy</router-link
+              >
+            </li>
+          </template>
+          <li class="mobile-nav-header">{{ $t("navigation.learn") }}</li>
+          <li>
+            <router-link
+              class="mobile-nav-link"
+              to="/learn/spells"
+              @click="mobileMenuOpen = false"
+              >{{ $t("navigation.spells") }}</router-link
+            >
+          </li>
+          <li>
+            <router-link
+              class="mobile-nav-link"
+              to="/learn/gods"
+              @click="mobileMenuOpen = false"
+              >{{ $t("navigation.gods") }}</router-link
+            >
+          </li>
+          <li>
+            <a class="mobile-nav-link" href="https://news.abilityarena.com/">{{
+              $t("navigation.news")
+            }}</a>
+          </li>
+          <li>
+            <a class="mobile-nav-link" href="/matchmaking">{{
+              $t("navigation.matchmaking")
+            }}</a>
+          </li>
+          <li>
+            <a
+              class="mobile-nav-link"
+              href="https://cardsmith.abilityarena.com/"
+              target="_blank"
+              >Cardsmith</a
+            >
+          </li>
+          <li class="mobile-nav-header">{{ $t("navigation.language") }}</li>
+          <li v-for="(lang, i) in langs" :key="`MobileLang${i}`">
+            <a
+              class="mobile-nav-link"
+              href="#"
+              @click.prevent="
+                $i18n.locale = lang;
+                $store.dispatch('setLanguage', lang);
+                mobileMenuOpen = false;
+              "
+              >{{ $t(`navigation.${lang}`) }}</a
+            >
+          </li>
+        </ul>
+      </div>
+    </transition>
   </header>
 </template>
 
@@ -363,7 +578,13 @@ export default {
     ProgressBar,
   },
 
-  data: () => ({ langs: ["en", "cn"], selected: null }),
+  data: () => ({ langs: ["en", "cn"], selected: null, mobileMenuOpen: false }),
+
+  watch: {
+    $route() {
+      this.mobileMenuOpen = false;
+    },
+  },
 
   created() {
     const lang = this.$route.query.lang;
@@ -491,5 +712,75 @@ export default {
 
 .disabled {
   filter: grayscale(100%);
+}
+
+.navbar {
+  flex-wrap: nowrap;
+}
+
+.navbar-toggler {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0.25rem 0.5rem;
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.navbar-toggler-icon {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: middle;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.mobile-nav {
+  background: rgba(10, 5, 20, 0.97);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 0 1rem;
+  max-height: calc(100dvh - 64px);
+  overflow-y: auto;
+}
+
+.mobile-nav-header {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 0.75rem 1.25rem 0.2rem;
+  text-transform: uppercase;
+}
+
+.mobile-nav-link {
+  display: block;
+  color: rgba(255, 255, 255, 0.85);
+  padding: 0.55rem 1.75rem;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link:focus {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  text-decoration: none;
+}
+
+.slide-down-enter-active,
+.slide-down-leave-active {
+  transition: max-height 0.3s ease, opacity 0.25s ease;
+  max-height: 600px;
+  overflow: hidden;
+}
+
+.slide-down-enter,
+.slide-down-leave-to {
+  max-height: 0;
+  opacity: 0;
 }
 </style>
