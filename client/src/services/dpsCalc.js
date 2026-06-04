@@ -298,9 +298,11 @@ export function resolveItemStats(itemKeys, primaryAttr, activeItemKeys = []) {
       const unholyDmg = getAttr(item, "unholy_bonus_damage");
       const unholyStr = getAttr(item, "unholy_bonus_strength");
       const unholyArmor = getAttr(item, "unholy_bonus_armor");
+      const unholyDrain = getAttr(item, "unholy_health_drain_per_second");
       if (unholyDmg) bonusDamage += unholyDmg;
       if (unholyStr) bonusStr += unholyStr;
       if (unholyArmor) bonusArmor += unholyArmor;
+      if (unholyDrain) healthRegen -= unholyDrain;
 
       // Mask of Madness (Berserk)
       const berserkIAS = getAttr(item, "berserk_bonus_attack_speed");
@@ -413,6 +415,9 @@ export function calcDps(
   // ── Towers: on-hit procs (MKB magic damage, bash, mana burn) don't work ──
   const defIsStructure = !!defenderHero.damageReduction;
 
+  // Crits do not apply to structures
+  const effectiveCritMult = defIsStructure ? 1 : critMult;
+
   // ── Evasion — raw miss chance before accounting for MKB ──
   const rawMissChance = compoundEvasion(defenderItems.evasions);
   const hitChance = 1 - rawMissChance;
@@ -428,14 +433,20 @@ export function calcDps(
     const procHitDPS =
       p *
       aps *
-      (baseDamagePerHit * critMult * physMult +
+      (baseDamagePerHit * effectiveCritMult * physMult +
         attackerItems.mkb.damage * magicMult);
     // Normal hits: subject to evasion
     const normalHitDPS =
-      (1 - p) * aps * baseDamagePerHit * critMult * physMult * hitChance;
+      (1 - p) *
+      aps *
+      baseDamagePerHit *
+      effectiveCritMult *
+      physMult *
+      hitChance;
     effectiveDPS = procHitDPS + normalHitDPS;
   } else {
-    effectiveDPS = baseDamagePerHit * aps * critMult * physMult * hitChance;
+    effectiveDPS =
+      baseDamagePerHit * aps * effectiveCritMult * physMult * hitChance;
   }
 
   // ── Bash bonus DPS (Skull Basher / Abyssal Blade) ──
@@ -509,7 +520,7 @@ export function calcDps(
     aps,
     rawIAS,
     totalDamage,
-    critMult,
+    critMult: effectiveCritMult,
     effectiveArmor: defenderArmor,
     missChance,
   };
@@ -715,6 +726,8 @@ export function calcItemTable(
     const newEhp = calcEhp(attackerHero, newItemStats);
     const ehpPhysGain = newEhp.ehpPhys - baseEhp.ehpPhys;
     const ehpMagGain = newEhp.ehpMag - baseEhp.ehpMag;
+    const lifestealGain =
+      (newItemStats.lifesteal || 0) - (baseAttackerItems.lifesteal || 0);
 
     const dpsGain = effectiveDPS - baseDPS;
     const procGain = procDPS - baseProcDPS;
@@ -769,9 +782,11 @@ export function calcItemTable(
           : null,
       ehpPhysGain,
       ehpMagGain,
+      lifestealGain,
       statEhpPhys: newEhp.ehpPhys,
       statEhpMag: newEhp.ehpMag,
       statTotalHP: newEhp.totalHP,
+      statAtkArmor: newEhp.totalArmor,
     });
 
     // ── Upgrade variant: if attacker has a component, show as upgrade ──
@@ -817,6 +832,8 @@ export function calcItemTable(
         const upEhp = calcEhp(attackerHero, upgradeStats);
         const upEhpPhysGain = upEhp.ehpPhys - baseEhp.ehpPhys;
         const upEhpMagGain = upEhp.ehpMag - baseEhp.ehpMag;
+        const upLifestealGain =
+          (upgradeStats.lifesteal || 0) - (baseAttackerItems.lifesteal || 0);
 
         const upgradeCost = item.cost - (compItem.cost || 0);
         const upDpsGain = upDPS - baseDPS;
@@ -877,9 +894,11 @@ export function calcItemTable(
               : null,
           ehpPhysGain: upEhpPhysGain,
           ehpMagGain: upEhpMagGain,
+          lifestealGain: upLifestealGain,
           statEhpPhys: upEhp.ehpPhys,
           statEhpMag: upEhp.ehpMag,
           statTotalHP: upEhp.totalHP,
+          statAtkArmor: upEhp.totalArmor,
         });
       }
     }
@@ -919,6 +938,8 @@ export function calcItemTable(
     const activeEhp = calcEhp(attackerHero, activeItemStats);
     const activeEhpPhysGain = activeEhp.ehpPhys - baseEhp.ehpPhys;
     const activeEhpMagGain = activeEhp.ehpMag - baseEhp.ehpMag;
+    const activeLifestealGain =
+      (activeItemStats.lifesteal || 0) - (baseAttackerItems.lifesteal || 0);
 
     const baseItem = itemData[activeKey];
     const cost = alreadyEquipped ? 0 : baseItem?.cost || 0;
@@ -951,9 +972,11 @@ export function calcItemTable(
       statManaBurn: activeItemStats.manaBurn || null,
       ehpPhysGain: activeEhpPhysGain,
       ehpMagGain: activeEhpMagGain,
+      lifestealGain: activeLifestealGain,
       statEhpPhys: activeEhp.ehpPhys,
       statEhpMag: activeEhp.ehpMag,
       statTotalHP: activeEhp.totalHP,
+      statAtkArmor: activeEhp.totalArmor,
     });
   }
 

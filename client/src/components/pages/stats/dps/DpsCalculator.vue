@@ -485,7 +485,6 @@
       small
       responsive
       class="dps-table"
-      sort-icon-left
       :sort-by="sortBy"
       style="cursor: pointer"
       @row-clicked="onRowClicked"
@@ -582,7 +581,7 @@
               color: efficiencyColor(item.dpsPerGold, efficiencyRange),
             }"
           >
-            {{ item.dpsPerGold > 0 ? item.dpsPerGold.toFixed(4) : "—" }}
+            {{ item.dpsPerGold > 0 ? (item.dpsPerGold * 100).toFixed(2) : "—" }}
           </span>
           <b-progress
             v-if="item.dpsPerGold > 0 && item.dpsPerGold !== Infinity"
@@ -605,7 +604,7 @@
               color: efficiencyColor(item.ehpPerGold, ehpEfficiencyRange),
             }"
           >
-            {{ item.ehpPerGold > 0 ? item.ehpPerGold.toFixed(4) : "—" }}
+            {{ item.ehpPerGold > 0 ? (item.ehpPerGold * 100).toFixed(2) : "—" }}
           </span>
           <b-progress
             v-if="item.ehpPerGold > 0"
@@ -631,7 +630,9 @@
         >
           <span :class="dpsGainClass(item.fightGain || 0)">
             {{ item.fightGain > 0 ? "+" : ""
-            }}{{ item.fightGain != null ? item.fightGain.toFixed(3) : "0.000" }}
+            }}{{
+              item.fightGain != null ? (item.fightGain * 100).toFixed(1) : "0.0"
+            }}
           </span>
           <span
             v-if="item.fightOutcome === 'win'"
@@ -657,7 +658,9 @@
               color: efficiencyColor(item.fightPerGold, fightEfficiencyRange),
             }"
           >
-            {{ item.fightPerGold > 0 ? item.fightPerGold.toFixed(4) : "—" }}
+            {{
+              item.fightPerGold > 0 ? (item.fightPerGold * 100).toFixed(2) : "—"
+            }}
           </span>
           <b-progress
             v-if="item.fightPerGold > 0"
@@ -688,6 +691,7 @@
 
 <script>
 import HeroPanel from "./HeroPanel.vue";
+import itemData from "../../../../data/items.json";
 import { getHeroById } from "../../../../services/heroStats.js";
 import { getUnitStats, SPECIAL_UNITS_MAP } from "../../../../services/units.js";
 import {
@@ -699,6 +703,33 @@ import {
   armorToPhysMult,
   runFightSimulation,
 } from "../../../../services/dpsCalc.js";
+
+function getAttrVal(item, key) {
+  const KEY_ALIASES = {
+    bonus_str: "bonus_strength",
+    strength: "bonus_strength",
+    bonus_agi: "bonus_agility",
+    agility: "bonus_agility",
+    bonus_int: "bonus_intellect",
+    bonus_intelligence: "bonus_intellect",
+    all_stats: "bonus_all_stats",
+    bonus_stats: "bonus_all_stats",
+    armor_bonus: "bonus_armor",
+    armor: "bonus_armor",
+    attack_speed_bonus: "bonus_attack_speed",
+    bonus_speed: "bonus_attack_speed",
+    damage: "bonus_damage",
+    bonus_damage_melee: "bonus_damage",
+    evasion: "bonus_evasion",
+    lifesteal: "bonus_lifesteal",
+    attack_lifesteal: "bonus_lifesteal",
+    lifesteal_percent: "bonus_lifesteal",
+  };
+  const a = (item.attrib || []).find(
+    (a) => (KEY_ALIASES[a.key] || a.key) === key,
+  );
+  return a ? parseFloat(a.value) : null;
+}
 
 const EMPTY_ITEMS = [null, null, null, null, null, null];
 
@@ -891,17 +922,23 @@ export default {
       return {
         blockedByDef,
         blockedByAtk,
-        atkRegen: this.attackerItemStats.healthRegen || 0,
-        defRegen: this.defenderItemStats.healthRegen || 0,
+        atkRegen:
+          (this.attackerItemStats.healthRegen || 0) +
+          ((this.attackerItemStats.lifesteal || 0) / 100) *
+            (this.currentResult.effectiveDPS || 0),
+        defRegen:
+          (this.defenderItemStats.healthRegen || 0) +
+          ((this.defenderItemStats.lifesteal || 0) / 100) *
+            (this.counterResult.effectiveDPS || 0),
       };
     },
 
     fightResult() {
       const atkDPS = this.currentResult.effectiveDPS;
       const defDPS = this.counterResult.effectiveDPS;
-      const atkEHP = this.attackerEhp.ehpPhys;
-      const defEHP = this.defenderEhp.ehpPhys;
-      if (!atkDPS || !defDPS || !atkEHP || !defEHP) return {};
+      const atkHP = this.attackerEhp.totalHP;
+      const defHP = this.defenderEhp.totalHP;
+      if (!atkDPS || !defDPS || !atkHP || !defHP) return {};
 
       const { blockedByDef, blockedByAtk, atkRegen, defRegen } =
         this.fightConstants;
@@ -909,8 +946,8 @@ export default {
       const effectiveAtkDPS = Math.max(0, atkDPS - blockedByDef - defRegen);
       const effectiveDefDPS = Math.max(0, defDPS - blockedByAtk - atkRegen);
 
-      const ttkAtk = defEHP / effectiveAtkDPS;
-      const ttkDef = atkEHP / effectiveDefDPS;
+      const ttkAtk = defHP / effectiveAtkDPS;
+      const ttkDef = atkHP / effectiveDefDPS;
 
       const atkName =
         SPECIAL_UNITS_MAP[this.attacker.heroId]?.dname ||
@@ -971,7 +1008,13 @@ export default {
     displayRows() {
       let rows = this.tableRows;
       // Always hide items with negligible DPS and EHP gain
-      rows = rows.filter((r) => r.dpsGain > 0.005 || (r.ehpPhysGain || 0) > 5);
+      rows = rows.filter(
+        (r) =>
+          r.dpsGain > 0.005 ||
+          (r.ehpPhysGain || 0) > 5 ||
+          (r.ehpMagGain || 0) > 5 ||
+          (r.lifestealGain || 0) > 0,
+      );
       // Hide active-item synthetic rows unless toggled on
       if (!this.showActives) {
         rows = rows.filter((r) => !r.key.endsWith("_active"));
@@ -983,8 +1026,9 @@ export default {
       // Compute display fields based on ehpMode
       const atkDPS = this.currentResult.effectiveDPS || 0;
       const defDPS = this.counterResult.effectiveDPS || 0;
-      const atkEHP = this.attackerEhp.ehpPhys || 0;
-      const defEHP = this.defenderEhp.ehpPhys || 0;
+      const atkHP = this.attackerEhp.totalHP || 0;
+      const defHP = this.defenderEhp.totalHP || 0;
+      const baseAtkEhpPhys = this.attackerEhp.ehpPhys || 1;
 
       // Use the same block/regen constants as fightResult so fightGain is consistent.
       const { blockedByDef, blockedByAtk, atkRegen, defRegen } =
@@ -994,12 +1038,8 @@ export default {
       // effectiveDefDPS doesn't change per row (defender items are fixed).
       const effectiveDefDPS = Math.max(0, defDPS - blockedByAtk - atkRegen);
 
-      // Base TTK values for the current loadout.
-      const effectiveAtkDPS = Math.max(0, atkDPS - blockedByDef - defRegen);
-      const baseTtkAtk =
-        effectiveAtkDPS > 0 ? defEHP / effectiveAtkDPS : Infinity;
       const baseTtkDef =
-        effectiveDefDPS > 0 ? atkEHP / effectiveDefDPS : Infinity;
+        effectiveDefDPS > 0 ? atkHP / effectiveDefDPS : Infinity;
 
       for (const row of rows) {
         const ehpGain =
@@ -1009,29 +1049,45 @@ export default {
         row.ehpGainDisplay = ehpGain;
         row.ehpPerGold = row.cost > 0 ? ehpGain / row.cost : 0;
 
-        // Fight gain: use same TTK formula as fightResult.
-        // blockedByDef and defRegen don't change (defender items are fixed).
-        // atkRegen may change if the item has regen, but we don't have that delta per row;
-        // effectiveDefDPS is kept fixed as a reasonable approximation.
+        // Fight gain: additive proportional gains in DPS and EHP.
+        //
+        //   fightGain = ΔDPS / DPS + ΔEHP / EHP
+        //
+        // Why additive and not multiplicative/log:
+        //  • Multiplicative (A × B − 1) introduces a quadratic cross-term that
+        //    inflates large all-stats items (Skadi +35 stats) vs small ones
+        //    (Crown +4 stats) far beyond their real per-gold advantage.
+        //  • Log (ln A + ln B) is concave, so it compresses larger absolute
+        //    gains and can rank a cheap small-crit item above a more efficient
+        //    large-crit item (e.g. Crystalys > Daedalus despite Daedalus having
+        //    more DPS per gold).
+        //  • Additive is linear in each dimension independently: twice the
+        //    proportional stat gain = twice the F/100g.  For pure DPS items the
+        //    ranking collapses to ΔDPS / cost (correct); for pure EHP items to
+        //    ΔEHP / cost (correct); for mixed items the two terms add without
+        //    a synergy bonus.
+        //
+        // DPS denominator = raw atkDPS (pre-block, pre-regen).  effectiveAtkDPS
+        // can approach zero when block/regen nearly cancels damage output, which
+        // would artificially inflate any DPS item's proportional contribution.
+        const newAtkEhpPhys = row.statEhpPhys || baseAtkEhpPhys;
         const newAtkDPS = atkDPS + (row.dpsGain || 0);
-        const newAtkEHP = atkEHP + ehpGain;
         const newEffectiveAtkDPS = Math.max(
           0,
           newAtkDPS - blockedByDef - defRegen,
         );
-        const newTtkAtk =
-          newEffectiveAtkDPS > 0 ? defEHP / newEffectiveAtkDPS : Infinity;
-        const newTtkDef =
-          effectiveDefDPS > 0 ? newAtkEHP / effectiveDefDPS : Infinity;
+        const dpsPropGain = atkDPS > 0 ? (row.dpsGain || 0) / atkDPS : 0;
+        const ehpPropGain =
+          baseAtkEhpPhys > 0
+            ? (newAtkEhpPhys - baseAtkEhpPhys) / baseAtkEhpPhys
+            : 0;
+        row.fightGain = dpsPropGain + ehpPropGain;
+        row.fightPerGold = row.cost > 0 ? (row.fightGain * 100) / row.cost : 0;
 
-        // fightGain > 0 means the attacker's position improved.
-        // Represent it as improvement in the ttkDef/ttkAtk ratio (higher = better for attacker).
-        const baseRatio =
-          baseTtkDef > 0 && baseTtkDef < Infinity ? baseTtkAtk / baseTtkDef : 1;
-        const newRatio =
-          newTtkDef > 0 && newTtkDef < Infinity ? newTtkAtk / newTtkDef : 1;
-        row.fightGain = baseRatio - newRatio; // lower ttkAtk/ttkDef = better
-        row.fightPerGold = row.cost > 0 ? row.fightGain / row.cost : 0;
+        // Win/loss outcome still uses the TTK ratio for accuracy.
+        const newTtkAtk =
+          newEffectiveAtkDPS > 0 ? defHP / newEffectiveAtkDPS : Infinity;
+        const newTtkDef = (newAtkEhpPhys / baseAtkEhpPhys) * baseTtkDef;
         const newWinRatio =
           newTtkDef > 0 && newTtkAtk < Infinity
             ? newTtkDef / newTtkAtk
@@ -1066,14 +1122,14 @@ export default {
         },
         { key: "fightGain", label: "Fight Gain", sortable: true, ...num },
         { key: "procGain", label: "Procs", sortable: false },
-        { key: "dpsPerGold", label: "DPS/Gold", sortable: true, ...num },
+        { key: "dpsPerGold", label: "DPS/100g", sortable: true, ...num },
         {
           key: "ehpPerGold",
-          label: this.defenderItemStats.damageBlock ? "EHP*/Gold" : "EHP/Gold",
+          label: this.defenderItemStats.damageBlock ? "EHP*/100g" : "EHP/100g",
           sortable: true,
           ...num,
         },
-        { key: "fightPerGold", label: "F/Gold", sortable: true, ...num },
+        { key: "fightPerGold", label: "F/100g", sortable: true, ...num },
       ];
     },
   },
@@ -1282,7 +1338,7 @@ export default {
         `Current DPS,${(r.effectiveDPS || 0).toFixed(1)}`,
         `APS,${(r.aps || 0).toFixed(2)}`,
         `,`,
-        `Item,Key,Cost,DPS Gain,EHP Gain,Fight Gain,Procs,DPS/Gold,EHP/Gold,F/Gold,Attacker NW`,
+        `Item,Key,Cost,DPS Gain,EHP Gain,Fight Gain,Procs,DPS/100g,EHP/100g,F/100g,Attacker NW`,
       ];
 
       const dataRows = this.displayRows.map((row) => {
@@ -1292,7 +1348,7 @@ export default {
           row.dpsPerGold === Infinity
             ? "∞"
             : row.dpsPerGold > 0
-            ? row.dpsPerGold.toFixed(4)
+            ? (row.dpsPerGold * 100).toFixed(2)
             : "—";
 
         let procStr = "—";
@@ -1317,10 +1373,11 @@ export default {
         const ehpGain =
           row.ehpGainDisplay != null ? Math.round(row.ehpGainDisplay) : "—";
         const fightGain =
-          row.fightGain != null ? row.fightGain.toFixed(3) : "—";
-        const ehpGold = row.ehpPerGold > 0 ? row.ehpPerGold.toFixed(4) : "—";
+          row.fightGain != null ? (row.fightGain * 100).toFixed(1) : "—";
+        const ehpGold =
+          row.ehpPerGold > 0 ? (row.ehpPerGold * 100).toFixed(2) : "—";
         const fightGold =
-          row.fightPerGold > 0 ? row.fightPerGold.toFixed(4) : "—";
+          row.fightPerGold > 0 ? (row.fightPerGold * 100).toFixed(2) : "—";
         return `${name},${itemKey},${cost},${dpsGain},${ehpGain},${fightGain},${procStr},${dpsPerGold},${ehpGold},${fightGold},${nw}`;
       });
 
@@ -1338,81 +1395,155 @@ export default {
     },
 
     itemTooltip(row) {
-      const f1 = (v) => (v != null ? Number(v).toFixed(1) : "—");
-      const f2 = (v) => (v != null ? Number(v).toFixed(2) : "—");
-      const f3 = (v) => (v != null ? Number(v).toFixed(3) : "—");
-      const ias = Math.round(row.statIAS ?? 0);
-      const dmgStr =
-        row.statFlatDmg > 0 ? `+${f1(row.statFlatDmg)}` : f1(row.statFlatDmg);
-      const iasStr = ias > 0 ? `+${ias}` : `${ias}`;
+      const itemKey = row.key.replace(/_active$/, "");
+      const item = itemData[itemKey];
+      if (!item) return "";
+      const isActive =
+        row.key.endsWith("_active") ||
+        (this.attacker.activeItems || []).includes(itemKey);
+      const primaryAttr = this.attackerHero?.primaryAttr || "agility";
+      const isMelee = this.attackerHero?.isMelee !== false;
+      const f1 = (v) => Number(v).toFixed(1);
+      const g = (k) => getAttrVal(item, k);
+
       const lines = [
-        `<div style='font-size:0.8rem;line-height:1.7;min-width:170px'>`,
-        `<b style='font-size:0.88rem'>${row.dname}</b><br>`,
-        `<span style='color:#9ca3af'>ATK DMG</span> <b>${dmgStr}</b>` +
-          `&ensp;<span style='color:#9ca3af'>ATK SPD</span> <b>${iasStr}</b>` +
-          `&ensp;<span style='color:#9ca3af'>APS</span> <b>${f2(
-            row.statAps,
-          )}</b>` +
-          `&ensp;<span style='color:#9ca3af'>ARMOR</span> <b>${f1(
-            row.statArmor,
-          )}</b><br>`,
+        `<div style='font-size:0.8rem;line-height:1.7;min-width:220px;text-align:left;padding:6px'>`,
+        `<div style='display:flex;justify-content:space-between;align-items:baseline;font-size:0.88rem'>` +
+          `<b>${item.dname}${
+            isActive ? " <span style='color:#f59e0b'>(Active)</span>" : ""
+          }</b>` +
+          `<span style='color:#daa520'>${item.cost}g</span>` +
+          `</div><br>`,
       ];
 
-      // Crit — only show if meaningfully > 1
-      if (row.statCrit > 1.001) {
+      // Active bonuses for Armlet
+      if (isActive && itemKey === "armlet") {
+        const unholyDmg = g("unholy_bonus_damage");
+        const unholyStr = g("unholy_bonus_strength");
+        const unholyArmor = g("unholy_bonus_armor");
+        if (unholyDmg)
+          lines.push(
+            `<span style='color:#f59e0b'>Active ATK DMG</span> <b>+${unholyDmg}</b><br>`,
+          );
+        if (unholyStr)
+          lines.push(
+            `<span style='color:#f59e0b'>Active STR</span> <b>+${unholyStr}</b><br>`,
+          );
+        if (unholyArmor)
+          lines.push(
+            `<span style='color:#f59e0b'>Active Armor</span> <b>+${unholyArmor}</b><br>`,
+          );
+      }
+
+      // Active bonuses for Mask of Madness
+      if (isActive && itemKey === "mask_of_madness") {
+        const berserkIAS = g("berserk_bonus_attack_speed");
+        const berserkArmor = g("berserk_armor_reduction");
+        if (berserkIAS)
+          lines.push(
+            `<span style='color:#f59e0b'>Active ATK SPEED</span> <b>+${berserkIAS}</b><br>`,
+          );
+        if (berserkArmor)
+          lines.push(
+            `<span style='color:#f59e0b'>Active Armor</span> <b>-${berserkArmor}</b><br>`,
+          );
+      }
+
+      // Flat damage (direct + attr-scaled)
+      let dmg = g("bonus_damage") || 0;
+      const str = g("bonus_strength") || g("bonus_all_stats") || 0;
+      const agi = g("bonus_agility") || g("bonus_all_stats") || 0;
+      const intl = g("bonus_intellect") || g("bonus_all_stats") || 0;
+      const scale = primaryAttr === "universal" ? 0.7 : 1.0;
+      if (primaryAttr === "strength") dmg += str * scale;
+      else if (primaryAttr === "agility") dmg += agi * scale;
+      else if (primaryAttr === "intellect") dmg += intl * scale;
+      else dmg += (str + agi + intl) * scale;
+      const ias = (g("bonus_attack_speed") || 0) + (agi || 0);
+      const armor = (g("bonus_armor") || 0) + (agi || 0) / 6;
+      const bonusHp =
+        (g("bonus_health") || g("bonus_hp") || 0) + (str || 0) * 22;
+
+      if (dmg)
         lines.push(
-          `<span style='color:#9ca3af'>Crit×</span> <b>${f3(
-            row.statCrit,
+          `<span style='color:#9ca3af'>ATK DMG</span> <b>+${f1(dmg)}</b><br>`,
+        );
+      if (ias)
+        lines.push(
+          `<span style='color:#9ca3af'>ATK SPEED</span> <b>+${Math.round(
+            ias,
           )}</b><br>`,
         );
+      if (armor)
+        lines.push(
+          `<span style='color:#9ca3af'>ARMOR</span> <b style='color:#f59e0b'>+${f1(
+            armor,
+          )}</b><br>`,
+        );
+      if (bonusHp)
+        lines.push(
+          `<span style='color:#9ca3af'>HP</span> <b style='color:#4ade80'>+${Math.round(
+            bonusHp,
+          )}</b><br>`,
+        );
+
+      // Crit
+      const critChance = g("crit_chance");
+      const critMult = g("crit_multiplier");
+      if (critChance)
+        lines.push(
+          `<span style='color:#fde68a'>Crit</span> ${critChance}% × ${
+            critMult || 200
+          }%<br>`,
+        );
+
+      // Chain
+      const chainChance = g("chain_chance");
+      const chainDmg = g("chain_damage");
+      if (chainChance)
+        lines.push(
+          `<span style='color:#67e8f9'>Chain</span> ${chainChance}% × <b>${chainDmg}</b> dmg<br>`,
+        );
+
+      // MKB
+      const mkbChance = g("bonus_chance");
+      const mkbDmg = g("bonus_chance_damage");
+      if (mkbChance)
+        lines.push(
+          `<span style='color:#c084fc'>MKB proc</span> ${mkbChance}% × <b>${mkbDmg}</b> dmg<br>`,
+        );
+
+      // Bash
+      const bashChanceM = g("bash_chance_melee");
+      const bashChanceR = g("bash_chance_ranged");
+      const bashDmg = g("bonus_chance_damage");
+      if (bashChanceM != null) {
+        const bc = isMelee ? bashChanceM : bashChanceR ?? bashChanceM;
+        lines.push(
+          `<span style='color:#c084fc'>Bash</span> ${bc}% × <b>${bashDmg}</b> dmg<br>`,
+        );
       }
 
-      // Procs — show absolute values
-      if (row.statChain) {
-        lines.push(
-          `<span style='color:#67e8f9'>Chain</span> ${row.statChain.chance}% × <b>${row.statChain.damage}</b> dmg<br>`,
-        );
-      }
-      if (row.statMkb) {
-        lines.push(
-          `<span style='color:#c084fc'>MKB proc</span> ${row.statMkb.chance}% × <b>${row.statMkb.damage}</b> dmg<br>`,
-        );
-      }
-      if (row.statBash) {
-        const bashChance = this.attackerHero.isMelee
-          ? row.statBash.chanceM
-          : row.statBash.chanceR;
-        lines.push(
-          `<span style='color:#c084fc'>Bash</span> ${bashChance}% × <b>${row.statBash.damage}</b> dmg<br>`,
-        );
-      }
-      if (row.statManaBurn) {
+      // Mana burn
+      const manaBurn = g("feedback_mana_burn");
+      const dmgPerBurn = g("damage_per_burn") ?? 1;
+      if (manaBurn)
         lines.push(
           `<span style='color:#2dd4bf'>Mana burn</span> <b>${f1(
-            row.statManaBurn.dmgPerHit,
+            manaBurn * dmgPerBurn,
           )}</b>/hit<br>`,
         );
-      }
 
-      // DPS gain + efficiency
+      // DPS / EHP gain section
+      lines.push(`<hr style='border-color:#374151;margin:4px 0'>`);
       const gainCol = row.dpsGain > 0 ? "#4ade80" : "#9ca3af";
-      const effStr =
-        row.dpsPerGold === Infinity
-          ? `<span style='color:#fbbf24'>∞</span>`
-          : row.dpsPerGold > 0
-          ? row.dpsPerGold.toFixed(4)
-          : "—";
       lines.push(
         `<span style='color:#9ca3af'>DPS gain</span> <span style='color:${gainCol}'><b>${
           row.dpsGain > 0 ? "+" : ""
-        }${f1(row.dpsGain)}</b></span>` +
-          `&ensp;<span style='color:#9ca3af'>DPS/Gold</span> ${effStr}` +
+        }${Number(row.dpsGain).toFixed(1)}</b></span>` +
           `<br><span style='color:#9ca3af'>EHP gain</span> <b>${
             row.ehpGainDisplay > 0 ? "+" : ""
-          }${Math.round(row.ehpGainDisplay || 0).toLocaleString()}</b>` +
-          `&ensp;<span style='color:#9ca3af'>EHP</span> <b>${Math.round(
-            row.statEhpPhys || 0,
-          ).toLocaleString()}</b>`,
+          }${Math.round(row.ehpGainDisplay || 0).toLocaleString()}</b>`,
       );
 
       lines.push(`</div>`);

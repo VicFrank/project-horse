@@ -152,6 +152,12 @@
         <span class="stat-label">LS</span>
         <span class="stat-value">{{ heroStats.lifesteal }}%</span>
       </span>
+      <span class="stat-badge" title="Total item cost">
+        <span class="stat-label">GOLD</span>
+        <span class="stat-value" style="color: #daa520">{{
+          fmt0(heroStats.networth)
+        }}</span>
+      </span>
     </div>
 
     <!-- Active bonus summaries -->
@@ -297,7 +303,29 @@ import {
 } from "../../../../services/units.js";
 
 function getAttrVal(item, key) {
-  const a = (item.attrib || []).find((a) => a.key === key);
+  const KEY_ALIASES = {
+    bonus_str: "bonus_strength",
+    strength: "bonus_strength",
+    bonus_agi: "bonus_agility",
+    agility: "bonus_agility",
+    bonus_int: "bonus_intellect",
+    bonus_intelligence: "bonus_intellect",
+    all_stats: "bonus_all_stats",
+    bonus_stats: "bonus_all_stats",
+    armor_bonus: "bonus_armor",
+    armor: "bonus_armor",
+    attack_speed_bonus: "bonus_attack_speed",
+    bonus_speed: "bonus_attack_speed",
+    damage: "bonus_damage",
+    bonus_damage_melee: "bonus_damage",
+    evasion: "bonus_evasion",
+    lifesteal: "bonus_lifesteal",
+    attack_lifesteal: "bonus_lifesteal",
+    lifesteal_percent: "bonus_lifesteal",
+  };
+  const a = (item.attrib || []).find(
+    (a) => (KEY_ALIASES[a.key] || a.key) === key,
+  );
   return a ? parseFloat(a.value) : null;
 }
 
@@ -492,6 +520,7 @@ export default {
         healthRegen: base.totalStr * 0.1 + (items.healthRegen || 0),
         primaryAttr: base.primaryAttr,
         isMelee: base.isMelee,
+        networth: items.networth || 0,
       };
     },
   },
@@ -510,13 +539,13 @@ export default {
       const g = (k) => getAttrVal(item, k);
 
       const lines = [
-        `<div style='font-size:0.8rem;line-height:1.7;min-width:150px;text-align:left;padding:0 6px'>`,
-        `<div style='display:flex;justify-content:space-between;align-items:baseline;font-size:0.88rem'>` +
+        `<div style='font-size:0.8rem;line-height:1.7;min-width:220px;text-align:left;padding:6px'>`,
+        `<div style='display:flex;justify-content:space-between;align-items:baseline;font-size:0.88rem;margin-bottom: 4px'>` +
           `<b>${item.dname}${
             active ? " <span style='color:#f59e0b'>(Active)</span>" : ""
           }</b>` +
           `<span style='color:#daa520'>${item.cost}g</span>` +
-          `</div><br>`,
+          `</div>`,
       ];
 
       // Active bonuses for Armlet
@@ -870,9 +899,9 @@ export default {
   background: rgba(0, 0, 0, 0.75);
   border: none;
   color: #f87171;
-  font-size: 0.8rem;
+  font-size: 1.1rem;
   line-height: 1;
-  padding: 0 3px 1px;
+  padding: 0 4px 1px;
   border-radius: 2px;
   cursor: pointer;
   display: none;
