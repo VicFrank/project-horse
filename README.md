@@ -4,9 +4,22 @@ Website and Backend for Ability Arena
 
 ## Requirements
 
-- Node.js 24.22.1 or newer (see `.nvmrc`) and npm
+- Node.js 24.22.1 or newer (see `.nvmrc` / `.node-version`) and npm
 - PostgreSQL
 - Redis (optional)
+
+`engines` is enforced (`engine-strict=true` in `.npmrc`), so installs on an older
+Node fail immediately instead of breaking partway through. Build/deploy hosts must
+run Node 24.22.1 or newer — older releases (e.g. Node 12) cannot read
+`lockfileVersion: 3` and crash in dependency `postinstall` scripts. On a Debian/Ubuntu
+host:
+
+```sh
+curl -fsSL https://deb.nodesource.com/setup_24.x | bash -
+apt-get install -y nodejs
+node -v   # v24.x
+npm ci
+```
 
 ## DB Setup
 
