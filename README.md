@@ -4,7 +4,7 @@ Website and Backend for Ability Arena
 
 ## Requirements
 
-- Node.js and npm
+- Node.js 24.22.1 or newer (see `.nvmrc`) and npm
 - PostgreSQL
 - Redis (optional)
 

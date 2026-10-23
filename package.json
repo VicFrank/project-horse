@@ -12,6 +12,9 @@
   },
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": ">=24.22.1"
+  },
   "dependencies": {
     "@paypal/checkout-server-sdk": "^1.0.3",
     "apicache": "^1.6.3",
